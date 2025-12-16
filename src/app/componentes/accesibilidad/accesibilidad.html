@@ -1,0 +1,24 @@
+<div class="accessibility-wrapper" [class.open]="menuOpen">
+  <!-- Botón para abrir/cerrar -->
+  <button class="toggle-btn" (click)="toggleMenu()">
+    ☰
+  </button>
+
+  <div class="barra-accesibilidad-govco">
+      <button id="botoncontraste" class="icon-contraste" (click)="cambiarContexto()">
+        <span id="titlecontraste">Contraste</span>
+      </button>
+
+      <button id="botondisminuir" class="icon-reducir" (click)="disminuirTamanio()">
+        <span id="titledisminuir">Reducir letra</span>
+      </button>
+
+      <button id="botonaumentar" class="icon-aumentar" (click)="aumentarTamanio()">
+        <span id="titleaumentar">Aumentar letra</span>
+      </button>
+
+      <button id="lecturaPantalla" class="icon-multimedia govco-assistive-listening-systems"  (click)="screenLecture()">
+        <span id="titleLecturaPantalla" class="govco-assistive-listening-systems">Leer Pantalla</span>
+      </button>
+    </div>
+  </div>

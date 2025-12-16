@@ -1,0 +1,339 @@
+/*
+ * Gov.co (https://www.gov.co) - Gobierno de Colombia
+ *  - Componente: barra accesibilidad
+ *  - Version: 4.0.0
+ */
+
+.accessibility-wrapper {
+  position: fixed;
+  top: 50%;
+  right: -180px;
+  transform: translateY(-50%);
+  transition: all 0.3s ease;
+  z-index: 9999;
+}
+
+.accessibility-wrapper.open {
+  right: 0;
+}
+
+.toggle-btn {
+  position: absolute;
+  left: -40px;
+  top: 0;
+  width: 40px;
+  height: 40px;
+  background: #004884;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+/* Fuente iconografica */
+@font-face {
+  font-family: "govco-font";
+  src: url("../../shared/assets/icons/fonts/govco-font-icons.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* WorkSans-SemiBold */
+@font-face {
+  font-family: 'WorkSans-Medium';
+  src: url('../../shared/assets/fonts/Work_Sans/static/WorkSans-Medium.ttf');
+}
+
+/* WorkSans-Regular */
+@font-face {
+  font-family: 'WorkSans-Regular';
+  src: url('../../shared/assets/fonts/Work_Sans/static/WorkSans-Regular.ttf');
+}
+
+/* WorkSans-SemiBold */
+@font-face {
+  font-family: 'WorkSans-SemiBold';
+  src: url('../../shared/assets/fonts/Work_Sans/static/WorkSans-SemiBold.ttf');
+}
+
+/* Montserrat-SemiBold */
+@font-face {
+  font-family: 'Montserrat-SemiBold';
+  src: url('../../shared/assets/fonts/Montserrat/Montserrat-SemiBold.ttf');
+}
+
+.content-example-barra {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.barra-accesibilidad-letra {
+  width: 100%;
+  align-items: center;
+  text-align: center;
+}
+
+.barra-accesibilidad-letra .titulo-barra-accesibilidad {
+  color: #000;
+  font-family: Montserrat-SemiBold;
+  font-size: 20px;
+  margin: 0px;
+}
+
+.barra-accesibilidad-letra .descripcion-barra-accesibilidad {
+  color: #4B4B4B;
+  font-family: WorkSans-Regular;
+  font-size: 16px;
+  margin: 0px;
+}
+
+.barra-accesibilidad-govco {
+  height: 143px;
+  width: 48px;
+  position: fixed;
+  right: 0;
+  top: 35%;
+  background-color: #004884 !important;
+  border-radius: 10px 0px 0px 10px;
+  opacity: 1;
+  padding-left: 0px;
+  padding-right: 0px;
+  padding-top: 12px;
+  padding-bottom: 20px;
+  align-items: center;
+}
+
+.barra-accesibilidad-govco button {
+  line-height: inherit;
+  position: relative;
+  overflow: visible;
+}
+
+/* === LECTURA DE PANTALLA === */
+
+.barra-accesibilidad-govco .icon-multimedia {
+  background: #004884;
+  width: 48px;
+  height: 40px;
+  border: none;
+  outline: none;
+  text-decoration: none;
+}
+
+.barra-accesibilidad-govco .icon-multimedia::after {
+  background: #fff;
+  content: '\25B2';
+  font-family: "govco-font";
+  height: 24px;
+  width: 24px;
+  color: #004884;
+  padding: 4px;
+  border-radius: 5px;
+  opacity: 1;
+  position: relative;
+}
+
+.icon-multimedia .govco-assistive-listening-systems {
+  background-image: url(../../shared/assets/icons/assistive-listening-systems.svg);
+  min-width: 1rem;
+  min-height: 1rem;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-size: 1rem 1rem;
+}
+
+.barra-accesibilidad-govco #titleLecturaPantalla {
+  background-image: "../../shared/assets/icons/microphone-alt.svg";
+  text-align: left;
+  position: absolute;
+  background: #3366CC;
+  color: #fff;
+  line-height: normal !important;
+  font-family: WorkSans-Medium !important;
+  font-size: 14px;
+  margin-top: -8px;
+  opacity: 0;
+  width: 172px;
+  height: 40px;
+  border-radius: 10px 0px 0px 10px;
+  padding: 10px;
+}
+
+.barra-accesibilidad-govco button:hover #titleLecturaPantalla {
+  opacity: 1;
+  visibility: visible;
+  right: 55px;
+  left: auto;
+}
+
+.govco-microphone-alt {
+  background-image: url(../../shared/assets/icons/microphone-alt.svg);
+  min-width: 1rem;
+  min-height: 1rem;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-size: 1rem 1rem;
+}
+
+/* === CONTRASTE === */
+
+.barra-accesibilidad-govco .icon-contraste {
+  background: #004884;
+  width: 48px;
+  height: 40px;
+  border: none;
+  outline: none;
+  text-decoration: none;
+}
+
+.barra-accesibilidad-govco .icon-contraste::after {
+  background: #fff;
+  content: "\e803";
+  font-family: "govco-font";
+  height: 24px;
+  width: 24px;
+  color: #004884;
+  padding: 4px;
+  border-radius: 5px;
+  opacity: 1;
+  position: relative;
+}
+
+.barra-accesibilidad-govco #titlecontraste {
+  text-align: left;
+  position: absolute;
+  background: #3366CC;
+  color: #fff;
+  line-height: normal !important;
+  font-family: WorkSans-Medium !important;
+  font-size: 14px;
+  margin-top: -8px;
+  opacity: 0;
+  width: 172px;
+  height: 40px;
+  border-radius: 10px 0px 0px 10px;
+  padding: 10px;
+}
+
+.barra-accesibilidad-govco button:hover #titlecontraste {
+  opacity: 1;
+  visibility: visible;
+  right: 55px;
+  left: auto;
+}
+
+/* === REDUCIR LETRA === */
+
+.barra-accesibilidad-govco .icon-reducir {
+  background: #004884;
+  width: 48px;
+  height: 40px;
+  border: none;
+  text-align: center;
+}
+
+.barra-accesibilidad-govco .icon-reducir::after {
+  background: #fff;
+  content: "\ec2a";
+  font-family: "govco-font";
+  height: 24px;
+  width: 24px;
+  color: #004884;
+  padding: 4px;
+  border-radius: 5px;
+  opacity: 1;
+  position: relative;
+}
+
+.barra-accesibilidad-govco #titledisminuir {
+  text-align: left;
+  position: absolute;
+  background: #3366CC;
+  color: #fff;
+  line-height: normal !important;
+  font-family: WorkSans-Medium !important;
+  font-size: 14px;
+  margin-top: -8px;
+  opacity: 0;
+  width: 172px;
+  height: 40px;
+  border-radius: 10px 0 0 10px;
+  padding: 10px;
+}
+
+.barra-accesibilidad-govco button:hover #titledisminuir {
+  opacity: 1;
+  visibility: visible;
+  right: 55px;
+  left: auto;
+}
+
+/* === AUMENTAR LETRA === */
+
+.barra-accesibilidad-govco .icon-aumentar {
+  background: #004884;
+  width: 48px;
+  height: 40px;
+  border: none;
+  text-align: center;
+}
+
+.barra-accesibilidad-govco .icon-aumentar::after {
+  background: #fff;
+  content: "\ec29";
+  font-family: "govco-font";
+  height: 24px;
+  width: 24px;
+  color: #004884;
+  padding: 4px;
+  border-radius: 5px;
+  opacity: 1;
+  position: relative;
+}
+
+.barra-accesibilidad-govco #titleaumentar {
+  text-align: left;
+  position: absolute;
+  background: #3366CC;
+  color: #fff;
+  line-height: normal !important;
+  font-family: WorkSans-Medium !important;
+  font-size: 14px;
+  margin-top: -8px;
+  opacity: 0;
+  width: 172px;
+  height: 40px;
+  border-radius: 10px 0 0 10px;
+  padding: 10px;
+}
+
+.barra-accesibilidad-govco button:hover #titleaumentar {
+  opacity: 1;
+  visibility: visible;
+  right: 55px;
+  left: auto;
+}
+
+/* === ESTILOS MODO OSCURO Y CLARO === */
+
+.active-barra-accesibilidad-govco {
+  background-color: #3366CC !important;
+}
+
+.active-barra-accesibilidad-govco.icon-aumentar::after,
+.active-barra-accesibilidad-govco.icon-reducir::after,
+.active-barra-accesibilidad-govco.icon-contraste::after {
+  background: #fff;
+  color: #3366CC;
+}
+
+.modo_oscuro-govco {
+  background-color: #000;
+  color: #fff;
+  text-align: center;
+}
+
+.modo_claro-govco {
+  background-color: #fff;
+  text-align: center;
+}
+
