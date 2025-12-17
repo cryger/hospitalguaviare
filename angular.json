@@ -2,7 +2,8 @@
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "cli": {
-    "packageManager": "npm"
+    "packageManager": "npm",
+    "analytics": "e833e5b1-4ef4-4527-9eb4-f85706a20644"
   },
   "newProjectRoot": "projects",
   "projects": {
@@ -16,6 +17,14 @@
         "build": {
           "builder": "@angular/build:application",
           "options": {
+            "scripts": [
+              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
+              "src/app/shared/assets/js/topbar.js",
+              "src/app/shared/assets/js/accesibilidad.js",
+              "src/app/shared/assets/js/navbar.js",
+              "src/app/shared/assets/js/cabecera.js",
+              "src/app/shared/assets/js/navbar.js"
+            ],
             "browser": "src/main.ts",
             "tsConfig": "tsconfig.app.json",
             "assets": [
