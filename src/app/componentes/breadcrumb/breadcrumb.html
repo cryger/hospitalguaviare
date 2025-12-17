@@ -1,7 +1,18 @@
-<nav aria-label="Miga de pan predeterminada de tres niveles">
-  <ul class="breadcrumb-govco">
-    <li class="breadcrumb-item-govco"><a href="#">Inicio</a></li>
-    <li class="breadcrumb-item-govco"><a href="#">Miga sección anterior</a></li>
-    <li class="breadcrumb-item-govco active" aria-current="page">Sección actual</li>
-  </ul>
+<nav aria-label="breadcrumb" class="breadcrumb-govco">
+  <ol class="breadcrumb">
+    <li
+      class="breadcrumb-item"
+      *ngFor="let breadcrumb of breadcrumbs; let last = last"
+      [class.active]="last">
+
+      <a *ngIf="!last" [routerLink]="breadcrumb.url">
+        {{ breadcrumb.label }}
+      </a>
+
+      <span *ngIf="last">
+        {{ breadcrumb.label }}
+      </span>
+
+    </li>
+  </ol>
 </nav>
