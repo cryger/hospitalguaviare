@@ -3,5 +3,5 @@
   publish = "dist/hospitalguaviare/browser"
 
 [build.environment]
-  NODE_VERSION = "20.11.1"
+  NODE_VERSION = "22.12.0"
   NPM_CONFIG_LEGACY_PEER_DEPS = "true"
