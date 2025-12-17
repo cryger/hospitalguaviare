@@ -1,13 +1,24 @@
 <div class="container-navbar-menu-govco blue-menu-govco">
-  <nav class="navbar navbar-expand-lg navbar-menu-govco"
+  <nav class="navbar navbar-menu-govco"
        role="navigation"
        aria-label="Menú principal">
 
-    <div class="collapse navbar-collapse navbar-collapse-menu-govco show">
+    <!-- BOTÓN HAMBURGUESA -->
+    <button
+      class="menu-toggle-govco"
+      (click)="menuAbierto = !menuAbierto"
+      aria-label="Abrir menú">
+      ☰
+    </button>
+
+    <!-- MENÚ -->
+    <div class="navbar-collapse-menu-govco"
+         [class.menu-open]="menuAbierto">
+
       <ul class="navbar-nav navbar-nav-menu-govco mx-auto">
 
         <li class="nav-item">
-          <a class="nav-link active" routerLink="/" routerLinkActive="active" >
+          <a class="nav-link active" routerLink="/">
             <span class="text-item-menu-govco">Inicio</span>
           </a>
         </li>
@@ -33,34 +44,38 @@
             <span class="text-item-menu-govco">Participa</span>
           </a>
         </li>
+
         <li class="nav-item">
           <a class="nav-link" routerLink="/nuestro-hospital">
-            <span class ="text-item-menu-govco">Nuesto Hospital</span>
+            <span class="text-item-menu-govco">Nuestro Hospital</span>
           </a>
         </li>
+
         <li class="nav-item">
           <a class="nav-link" routerLink="/normatividad">
-            <span class ="text-item-menu-govco">Normatividad</span>
+            <span class="text-item-menu-govco">Normatividad</span>
           </a>
         </li>
+
         <li class="nav-item">
           <a class="nav-link" routerLink="/cotizaciones-propuestas">
-            <span class ="text-item-menu-govco">Cotizaciones y Propuestas</span>
+            <span class="text-item-menu-govco">Cotizaciones y Propuestas</span>
           </a>
         </li>
+
         <li class="nav-item">
           <a class="nav-link" routerLink="/trabaja-nosotros">
-            <span class ="text-item-menu-govco">Trabaja con Nosotros</span>
+            <span class="text-item-menu-govco">Trabaja con Nosotros</span>
           </a>
         </li>
+
         <li class="nav-item">
           <a class="nav-link" routerLink="/pqrsf">
-            <span class ="text-item-menu-govco">PQRSF</span>
+            <span class="text-item-menu-govco">PQRSF</span>
           </a>
         </li>
 
       </ul>
     </div>
-
   </nav>
 </div>

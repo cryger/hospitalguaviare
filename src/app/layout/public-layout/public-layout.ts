@@ -7,14 +7,14 @@ import { Cabecera } from '../../componentes/cabecera/cabecera';
 import { Breadcrumb } from '../../componentes/breadcrumb/breadcrumb';
 import { Footer } from '../../componentes/footer/footer';
 import { Accesibilidad } from '../../componentes/accesibilidad/accesibilidad';
-
+import { VolverArriba } from '../../componentes/volver-arriba/volver-arriba';
 import { NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 
 @Component({
   selector: 'app-public-layout',
-  imports: [RouterOutlet, Navbar, Topbar, Footer, Accesibilidad, CommonModule, NgbAlertModule, Cabecera,Breadcrumb],
+  imports: [RouterOutlet, Navbar, Topbar, Footer, Accesibilidad, CommonModule, NgbAlertModule, Cabecera,Breadcrumb,VolverArriba],
   templateUrl: './public-layout.html',
   styleUrl: './public-layout.css',
 })
