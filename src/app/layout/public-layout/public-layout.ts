@@ -7,6 +7,7 @@ import { Cabecera } from '../../componentes/cabecera/cabecera';
 import { Breadcrumb } from '../../componentes/breadcrumb/breadcrumb';
 import { Footer } from '../../componentes/footer/footer';
 import { Accesibilidad } from '../../componentes/accesibilidad/accesibilidad';
+
 import { NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
 
 

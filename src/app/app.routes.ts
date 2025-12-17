@@ -9,6 +9,7 @@ import { CotizacionesPropuestas } from './pages/cotizaciones-propuestas/cotizaci
 import { TrabajaNosotros} from './pages/trabaja-nosotros/trabaja-nosotros';
 import { Pqrsf } from './pages/pqrsf/pqrsf';
 import { Normatividad } from './pages/normatividad/normatividad';
+import { Servicios } from './pages/servicios/servicios';
 
 export const routes: Routes = [
   {
@@ -25,7 +26,8 @@ export const routes: Routes = [
       { path: 'cotizaciones-propuestas', component: CotizacionesPropuestas, data: { breadcrumb: 'Cotizaciones y Propuestas' } },
       { path: 'trabaja-nosotros', component: TrabajaNosotros, data: { breadcrumb: 'Trabaja con Nosotros' } },
       { path: 'pqrsf', component: Pqrsf, data: { breadcrumb: 'PQRSF' } },
-      { path: 'normatividad', component: Normatividad, data: { breadcrumb: 'Normatividad' } }
+      { path: 'normatividad', component: Normatividad, data: { breadcrumb: 'Normatividad' } },
+      { path: 'servicios', component: Servicios, data: { breadcrumb: 'Servicios' } }
     ]
   },
 {path: '**', redirectTo: ''}
