@@ -33,6 +33,7 @@ html {
   width: 100%;
   min-height: 3.75rem;
   max-height: 4.5rem;
+  position: relative;
 }
 
 .container-navbar-menu-govco.blue-menu-govco,
@@ -703,6 +704,93 @@ html {
     white-space: normal;
   }
 }
+@media (max-width: 991px) {
+
+  .navbar-collapse-menu-govco {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: #ffffff;
+    z-index: 999;
+    border-top: 2px solid #004884;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+  }
+
+}
+
+/* cambios para solucionar collapse en movil
+*/
+@media (max-width: 991px) {
+
+  .navbar-nav-menu-govco {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+  }
+
+  .navbar-nav-menu-govco li {
+    width: 100%;
+    border-bottom: 1px solid #e6e6e6;
+  }
+
+  .navbar-nav-menu-govco li a {
+    display: block;
+    width: 100%;
+    padding: 1rem;
+    color: #004884;
+    font-size: 1rem;
+    font-weight: 500;
+    text-decoration: underline;
+  }
+
+}
+
+/* Valida el funcionamiento del menu cuando esta abierto*/
+@media (max-width: 991px) {
+
+  .navbar-nav-menu-govco li.active a {
+    background-color: #004884;
+    color: #ffffff;
+    text-decoration: none;
+  }
+
+}
+
+/** fix para ocupar todo el ancho en los enlaces del menu en movil */
+@media (max-width: 991px) {
+
+  /* El li ocupa todo */
+  .navbar-nav-menu-govco li {
+    width: 100%;
+  }
+
+  /* EL FIX REAL: el enlace ocupa todo el ancho */
+  .navbar-nav-menu-govco li > a {
+    display: flex;              /* no block */
+    width: 100%;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 1rem 1.25rem;
+    box-sizing: border-box;
+  }
+
+}
+@media (max-width: 991px) {
+
+  .navbar-nav-menu-govco li.active > a {
+    background-color: #004884;
+    color: #ffffff;
+    width: 100%;
+  }
+
+}
+
+
+
+
 
 
 

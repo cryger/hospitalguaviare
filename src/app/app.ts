@@ -2,6 +2,7 @@ import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { NgbPaginationModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbAlert } from '@ng-bootstrap/ng-bootstrap';
+
       import { NgbPagination,
 	NgbPaginationEllipsis,
 	NgbPaginationFirst,
