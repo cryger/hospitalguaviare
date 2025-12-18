@@ -78,3 +78,21 @@ html {
 
 
 }
+
+@media (min-width: 768px) and (max-width: 900px) {
+  .navbar-nav {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .navbar-nav .nav-item {
+    margin: 4px 8px;
+  }
+
+  .navbar-nav .nav-link {
+    font-size: 0.9rem;
+    text-align: center;
+    white-space: normal;
+  }
+}
+

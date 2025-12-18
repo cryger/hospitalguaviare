@@ -5,3 +5,103 @@ html, body {
   width: 100%;
   overflow-x: hidden;
 }
+
+/* ===== FIX TABLETS (800px aprox) ===== */
+@media (min-width: 768px) and (max-width: 900px) {
+
+  /* Evita el encajonamiento */
+  html, body {
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  app-root,
+  app-topbar,
+  app-footer,
+  main,
+  section {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+  }
+
+  /* Topbar GOV.CO */
+  .topbar-govco {
+    width: 100vw;
+    margin: 0;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  /* Navbar / menú principal */
+  .navbar,
+  .menu-principal,
+  .govco-menu {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .navbar a,
+  .menu-principal a {
+    font-size: 0.9rem;
+    white-space: normal;
+    text-align: center;
+  }
+
+  /* Contenedores internos */
+  .container,
+  .container-fluid {
+    max-width: 100%;
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  /* Slider */
+  .carrusel-govco {
+    width: 100%;
+    overflow: hidden;
+  }
+
+  /* Footer */
+  footer {
+    width: 100%;
+    margin: 0;
+  }
+}
+
+/* ===== FIX MENU TABLET / LAPTOP PEQUEÑO ===== */
+@media (max-width: 1200px) {
+
+  /* Contenedor del menú */
+  .navbar-nav-menu-govco {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 0.5rem 1rem;
+  }
+
+  /* Cada item */
+  .navbar-nav-menu-govco .nav-item {
+    flex: 0 0 auto;
+    text-align: center;
+    max-width: 160px;
+  }
+
+  /* Links */
+  .navbar-nav-menu-govco .nav-link {
+    padding: 0.5rem 0.25rem;
+    font-size: 0.9rem;
+    line-height: 1.2;
+    white-space: normal;
+  }
+
+  /* Texto interno */
+  .navbar-nav-menu-govco .text-item-menu-govco {
+    display: block;
+    word-break: break-word;
+    text-align: center;
+  }
+}
+/* ===== FIX FOOTER TABLET / LAPTOP PEQUEÑO ===== */
