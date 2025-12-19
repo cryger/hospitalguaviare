@@ -1,1 +1,52 @@
-<p>noticias works!</p>
+<section class="govco-noticias">
+
+  <!-- BARRA SUPERIOR DE FILTROS -->
+  <div class="govco-noticias-header">
+
+    <div class="ordenar">
+      <label>Ordenar por:</label>
+      <select [(ngModel)]="orden">
+        <option value="recientes">Recientes</option>
+        <option value="antiguas">Antiguas</option>
+      </select>
+    </div>
+
+    <div class="filtrar-fecha">
+      <label>Filtrar por fecha</label>
+      <input type="date" [(ngModel)]="fechaFiltro">
+    </div>
+
+  </div>
+
+  <!-- GRID DE NOTICIAS -->
+  <div class="govco-noticias-grid">
+
+    <article
+      class="noticia-card"
+      *ngFor="let noticia of noticiasFiltradas | slice:0:4">
+
+      <div class="noticia-imagen">
+        <img [src]="noticia.imagen" [alt]="noticia.titulo">
+      </div>
+
+      <div class="noticia-contenido">
+        <span class="categoria">{{ noticia.categoria }}</span>
+
+        <p class="fecha">
+          {{ noticia.fecha | date:'dd MMMM yyyy, h:mm a' }}
+        </p>
+
+        <h3>{{ noticia.titulo }}</h3>
+
+        <p class="resumen">
+          {{ noticia.resumen }}
+        </p>
+
+        <button class="btn-govco">PARTICIPA</button>
+      </div>
+
+    </article>
+
+  </div>
+
+</section>

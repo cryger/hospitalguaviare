@@ -1,0 +1,42 @@
+/* ==============================
+   CONTENEDOR PRINCIPAL GOV.CO
+============================== */
+
+.govco-content-wrapper {
+  width: 100%;
+  background-color: #F6F8F9; /* mismo tono GOV.CO */
+  padding: 2rem 1rem;
+}
+
+/* CAJÓN BLANCO */
+.govco-content-container {
+  background-color: #FFFFFF;
+  max-width: 1200px;   /* iguala visualmente al footer */
+  margin: 0 auto;
+  padding: 2rem 2.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+/* ==============================
+   RESPONSIVE
+============================== */
+
+/* Tablet */
+@media (max-width: 991px) {
+  .govco-content-container {
+    padding: 1.5rem 1.5rem;
+  }
+}
+
+/* Mobile */
+@media (max-width: 576px) {
+  .govco-content-wrapper {
+    padding: 1rem 0.75rem;
+  }
+
+  .govco-content-container {
+    padding: 1.25rem 1rem;
+    border-radius: 6px;
+  }
+}
