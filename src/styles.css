@@ -105,3 +105,17 @@ html, body {
   }
 }
 /* ===== FIX FOOTER TABLET / LAPTOP PEQUEÑO ===== */
+
+/* ========CONTENEDOR PRINCIPAL GOV.CO============  */
+/* ===============================
+   CONTENEDOR MAESTRO GOV.CO
+   =============================== */
+
+.govco-container {
+  max-width: 1140px;        /* ancho institucional */
+  margin: 0 auto;           /* centrado */
+  padding-left: 1rem;
+  padding-right: 1rem;
+  width: 100%;
+}
+
