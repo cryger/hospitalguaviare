@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { SliderGovcoComponent } from '../slider-home/slider-home';
+import { SliderHomeComponent } from '../slider-home/slider-home';
 import { Noticias } from '../../pages/noticias/noticias';
 
 @Component({
   selector: 'app-home',
-  imports: [SliderGovcoComponent, Noticias],
+  imports: [SliderHomeComponent, Noticias],
   templateUrl: './home.html',
   styleUrl: './home.css',
 })
