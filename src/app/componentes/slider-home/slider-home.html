@@ -1,45 +1,95 @@
-<section class="slider-govco" aria-label="Información destacada">
-  <div class="slider-wrapper">
+<div
+  id="carouselExampleGovco1"
+  class="carousel slide carousel-fade carrusel-govco"
+  data-bs-ride="carousel"
+  data-bs-pause="false"
+>
 
-    <div
-      class="slide"
-      *ngFor="let slide of slides; let i = index"
-      [class.active]="i === currentIndex"
-      role="group"
-      aria-roledescription="slide"
-      [attr.aria-label]="'Diapositiva ' + (i + 1) + ' de ' + slides.length"
-    >
-      <img
-        [src]="slide.image"
-        [alt]="slide.alt"
-        loading="lazy"
-      />
+  <div class="carousel-inner">
 
-      <div class="slide-content">
-        <h2>{{ slide.title }}</h2>
-        <p>{{ slide.description }}</p>
-
-        <a
-          *ngIf="slide.link"
-          [routerLink]="slide.link"
-          class="btn-slider-govco"
-        >
-          {{ slide.linkText }}
-        </a>
-      </div>
+    <!-- SLIDE 1 -->
+    <div class="carousel-item active" data-bs-interval="2000">
+      <a href="#" tabindex="0">
+        <img
+          src="assets/img/slider/BANNER_PLATAFORMA-2025.jpg"
+          alt="Plataforma estratégica Hospital San José del Guaviare"
+          class="d-block w-100"
+        />
+      </a>
     </div>
 
-    <!-- Controles -->
-    <button
-      class="control prev"
-      (click)="prev()"
-      aria-label="Imagen anterior"
-    ></button>
+    <!-- SLIDE 2 -->
+    <div class="carousel-item" data-bs-interval="2000">
+      <a href="#" tabindex="-1">
+        <img
+          src="assets/img/slider/vacunacion.jpg"
+          alt="Jornada de vacunación Hospital San José del Guaviare"
+          class="d-block w-100"
+        />
+      </a>
+    </div>
 
-    <button
-      class="control next"
-      (click)="next()"
-      aria-label="Imagen siguiente"
-    ></button>
+    <!-- SLIDE 3 -->
+    <div class="carousel-item" data-bs-interval="2000">
+      <a href="#" tabindex="-1">
+        <img
+          src="assets/img/slider/pqrsf.jpg"
+          alt="PQRSF Hospital San José del Guaviare"
+          class="d-block w-100"
+        />
+      </a>
+    </div>
+
+    <!-- SLIDE 4 -->
+    <div class="carousel-item" data-bs-interval="2000">
+      <a href="#" tabindex="-1">
+        <img
+          src="assets/img/slider/BANNER_PLATAFORMA-2025.jpg"
+          alt="Servicios Hospital San José del Guaviare"
+          class="d-block w-100"
+        />
+      </a>
+    </div>
+
   </div>
-</section>
+
+  <!-- CONTROLES -->
+  <button
+    class="carousel-control-prev"
+    type="button"
+    data-bs-target="#carouselExampleGovco1"
+    data-bs-slide="prev"
+  >
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Imagen anterior</span>
+  </button>
+
+  <button
+    class="carousel-control-next"
+    type="button"
+    data-bs-target="#carouselExampleGovco1"
+    data-bs-slide="next"
+  >
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Imagen siguiente</span>
+  </button>
+
+  <!-- PLAY / PAUSE -->
+  <div class="control-start-pause">
+    <button class="controls start" type="button">
+      <span>Reproducir</span>
+    </button>
+    <button class="controls pause active" type="button">
+      <span>Pausar</span>
+    </button>
+  </div>
+
+  <!-- INDICADORES -->
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carouselExampleGovco1" data-bs-slide-to="0" class="active" aria-current="true"></button>
+    <button type="button" data-bs-target="#carouselExampleGovco1" data-bs-slide-to="1"></button>
+    <button type="button" data-bs-target="#carouselExampleGovco1" data-bs-slide-to="2"></button>
+    <button type="button" data-bs-target="#carouselExampleGovco1" data-bs-slide-to="3"></button>
+  </div>
+
+</div>

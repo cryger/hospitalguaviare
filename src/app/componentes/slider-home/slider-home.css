@@ -1,165 +1,196 @@
-.slider-govco {
+/* ==============================
+   FUENTES
+============================== */
+@font-face {
+  font-family: "govco-font";
+  src: url("../../shared/assets/icons/fonts/govco-font-icons.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'WorkSans-Regular';
+  src: url('../../shared/assets/fonts/Work_Sans/static/WorkSans-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'Montserrat-SemiBold';
+  src: url('../../shared/assets/fonts/Montserrat/Montserrat-SemiBold.ttf');
+}
+
+@font-face {
+  font-family: 'Montserrat-Regular';
+  src: url('../../shared/assets/fonts/Montserrat/Montserrat-Regular.ttf');
+}
+
+/* ==============================
+   BASE
+============================== */
+html {
+  font-size: 100%;
+}
+
+/* ==============================
+   CONTENEDOR PRINCIPAL
+============================== */
+.carrusel-govco {
+  position: relative;
   width: 100%;
-  position: relative;
-  overflow: hidden;
-  background: #f2f2f2;
-}
-
-.slider-wrapper {
-  position: relative;
   height: 420px;
+  overflow: hidden;
 }
 
-.slide {
-  position: absolute;
-  inset: 0;
-  opacity: 0;
-  transition: opacity 0.6s ease-in-out;
+/* ==============================
+   ESTRUCTURA BOOTSTRAP
+============================== */
+.carrusel-govco.carousel-fade .carousel-inner {
+  height: 100%;
 }
 
-.slide.active {
-  opacity: 1;
-  z-index: 1;
+.carrusel-govco .carousel-inner {
+  height: 100%;
 }
 
-.slide img {
+.carrusel-govco .carousel-inner .carousel-item {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.carrusel-govco .carousel-inner .carousel-item > a {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* ==============================
+   IMÁGENES (CLAVE)
+============================== */
+.carrusel-govco .carousel-inner .carousel-item img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  display: block;
 }
 
-.slide-content {
-  position: absolute;
-  bottom: 2rem;
-  left: 2rem;
-  max-width: 480px;
-  background: rgba(0, 72, 132, 0.85);
-  color: #fff;
-  padding: 1.5rem;
-  border-radius: 0.5rem;
+/* ==============================
+   INDICADORES
+============================== */
+.carrusel-govco .carousel-indicators {
+  margin-bottom: 1.5rem;
+  z-index: 5;
 }
 
-.slide-content h2 {
-  font-family: WorkSans-SemiBold;
-  font-size: 1.5rem;
-  margin-bottom: 0.5rem;
+.carrusel-govco .carousel-indicators button {
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 50%;
+  background-color: #FFFFFF;
+  border: 0;
+  margin: 0.25rem;
 }
 
-.slide-content p {
-  font-family: WorkSans-Regular;
-  margin-bottom: 1rem;
+.carrusel-govco .carousel-indicators button:not(.active) {
+  background-color: rgba(255, 255, 255, 0.4);
 }
 
-.btn-slider-govco {
-  background: #fad118;
-  color: #000;
-  padding: 0.5rem 1rem;
-  text-decoration: none;
-  border-radius: 0.25rem;
-  font-family: WorkSans-SemiBold;
-}
-
-.control {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 2.5rem;
-  height: 2.5rem;
-  background: rgba(0,0,0,0.5);
-  border: none;
-  cursor: pointer;
-}
-
-.control.prev { left: 1rem; }
-.control.next { right: 1rem; }
-
-@media (max-width: 768px) {
-  .slider-wrapper {
-    height: 300px;
-  }
-
-  .slide-content {
-    left: 1rem;
-    right: 1rem;
-    bottom: 1rem;
-    max-width: unset;
-  }
-}
-
-.slider-img {
-  height: 420px;
-  object-fit: cover;
-}
-
-.carousel-caption {
-  position: absolute;
-  bottom: 20%;
-  left: 10%;
-  right: 10%;
-  z-index: 10;
-  background: rgba(0, 0, 0, 0.45);
-  padding: 1.5rem;
-  border-radius: 0.5rem;
-  text-align: left;
-}
-
-.carousel-caption h2,
-.carousel-caption p {
-  color: #fff;
-}
-
-.carousel-caption .btn {
-  margin-top: 0.5rem;
-}
-
-.slider-img {
-  height: 420px;
-  object-fit: cover;
-}
-
-.carousel-caption {
-  background: rgba(0,0,0,0.45);
-  padding: 1rem;
-  border-radius: 8px;
-}
-
-.slider-container {
-  position: relative;
-  height: 420px;
-  overflow: hidden;
-}
-
-.slide {
-  position: absolute;
-  inset: 0;
-  opacity: 0;
-  transition: opacity 0.6s ease;
-}
-
-.slide.active {
+/* ==============================
+   CONTROLES PREV / NEXT
+============================== */
+.carrusel-govco .carousel-control-prev,
+.carrusel-govco .carousel-control-next {
+  width: 5%;
   opacity: 1;
-  z-index: 1;
 }
 
-.slide img {
-  width: 100%;
-  height: 420px;
-  object-fit: cover;
+.carrusel-govco .carousel-control-prev-icon,
+.carrusel-govco .carousel-control-next-icon {
+  background-image: none;
 }
 
-.control {
+.carrusel-govco .carousel-control-prev-icon::after,
+.carrusel-govco .carousel-control-next-icon::after {
+  font-family: "govco-font";
+  font-size: 2.625rem;
+  color: #FFFFFF;
+}
+
+.carrusel-govco .carousel-control-prev-icon::after {
+  content: '\e811';
+}
+
+.carrusel-govco .carousel-control-next-icon::after {
+  content: '\e812';
+}
+
+/* ==============================
+   PLAY / PAUSE
+============================== */
+.carrusel-govco .control-start-pause {
   position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: rgba(0,0,0,0.5);
-  color: white;
-  border: none;
-  font-size: 2rem;
-  cursor: pointer;
-  padding: 0.5rem 1rem;
+  bottom: 1.5rem;
+  left: 7%;
+  z-index: 5;
 }
 
-.prev { left: 10px; }
-.next { right: 10px; }
+.carrusel-govco .control-start-pause button {
+  background: none;
+  border: 0;
+  color: #FFFFFF;
+  font-family: WorkSans-Regular;
+  font-size: 0.875rem;
+  cursor: pointer;
+}
 
+.carrusel-govco .control-start-pause button:not(.active) {
+  display: none;
+}
 
+.carrusel-govco .control-start-pause button::before {
+  font-family: "govco-font";
+  font-size: 1rem;
+  margin-right: 0.5rem;
+}
+
+.carrusel-govco .control-start-pause .start::before {
+  content: "\ea95";
+}
+
+.carrusel-govco .control-start-pause .pause::before {
+  content: "\ea75";
+}
+
+/* ==============================
+   RESPONSIVE
+============================== */
+
+/* Tablets */
+@media (max-width: 1024px) {
+  .carrusel-govco {
+    height: 360px;
+  }
+}
+
+/* Móviles */
+@media (max-width: 768px) {
+  .carrusel-govco {
+    height: 280px;
+  }
+
+  .carrusel-govco .carousel-control-prev-icon::after,
+  .carrusel-govco .carousel-control-next-icon::after {
+    font-size: 2rem;
+  }
+
+  .carrusel-govco .carousel-indicators button {
+    width: 0.5rem;
+    height: 0.5rem;
+  }
+}
+
+/* Pantallas grandes / TV */
+@media (min-width: 1600px) {
+  .carrusel-govco {
+    height: 520px;
+  }
+}
