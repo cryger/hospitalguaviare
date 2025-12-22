@@ -40,3 +40,24 @@
     border-radius: 6px;
   }
 }
+/* =========================================
+   PANTALLAS GRANDES / TV / ULTRAWIDE
+   ========================================= */
+@media screen and (min-width: 1440px) {
+  .govco-content-container {
+    max-width: 1490px;
+  }
+}
+@media screen and (min-width: 1600px) {
+  .govco-content-container {
+    max-width: 1400px;
+  }
+}
+@media screen and (min-width: 1920px) {
+  .govco-content-container {
+    max-width: 1920px;
+  }
+}
+/* ==============================
+   ESTILOS ADICIONALES
+============================== */
