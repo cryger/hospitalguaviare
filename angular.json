@@ -23,7 +23,8 @@
               "src/app/shared/assets/js/accesibilidad.js",
               "src/app/shared/assets/js/navbar.js",
               "src/app/shared/assets/js/cabecera.js",
-              "src/app/shared/assets/js/navbar.js"
+              "src/app/shared/assets/js/navbar.js",
+              "src/app/shared/assets/js/swiper.js"
             ],
             "browser": "src/main.ts",
             "tsConfig": "tsconfig.app.json",

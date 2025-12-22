@@ -1,8 +1,6 @@
 import { AfterViewInit, Component } from '@angular/core';
-import Swiper from 'swiper';
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
+
+declare const Swiper: any; // 👈 CLAVE para usar CDN
 
 @Component({
   selector: 'app-slider-home',
@@ -13,21 +11,31 @@ import 'swiper/css/pagination';
 export class SliderHomeComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
-    new Swiper('.swiper', {
-      direction: 'horizontal', // 🔑 CLAVE
-      loop: true,
-      autoplay: {
-        delay: 5000,
-        disableOnInteraction: false
-      },
-      pagination: {
-        el: '.swiper-pagination',
-        clickable: true
-      },
-      navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev'
-      }
-    });
+    // Espera un ciclo para asegurar que el DOM esté listo
+    setTimeout(() => {
+      new Swiper('.swiper', {
+        direction: 'horizontal', // ✅ horizontal
+        loop: true,
+
+        autoplay: {
+          delay: 5000,
+          disableOnInteraction: false
+        },
+
+        pagination: {
+          el: '.swiper-pagination',
+          clickable: true
+        },
+
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev'
+        },
+
+        a11y: {
+          enabled: true
+        }
+      });
+    }, 0);
   }
 }
