@@ -14,3 +14,132 @@
   height: 100%;
   object-fit: cover;
 }
+
+/* Estilos para la leyenda del slide */
+
+/* CONTENEDOR GENERAL */
+.slider-govco {
+  width: 100%;
+  background-color: #000;
+}
+
+/* SWIPER */
+.slider-govco-container {
+  width: 100%;
+  height: 420px;
+  position: relative;
+}
+
+/* SLIDE */
+.swiper-slide {
+  position: relative;
+}
+
+.swiper-slide img {
+  width: 100%;
+  height: 420px;
+  object-fit: cover;
+}
+
+/* CAPTION */
+.slide-caption {
+  position: absolute;
+  bottom: 2rem;
+  left: 2rem;
+
+  background: rgba(0, 0, 0, 0.323);
+  backdrop-filter: blur(2px);
+
+  padding: 1rem 1.25rem;
+  border-radius: 6px;
+
+  max-width: 600px;
+  color: #ffffff;
+
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+
+.slide-caption h2 {
+  font-size: 2.2rem;
+  margin-bottom: 0.75rem;
+  font-weight: 700;
+}
+
+.slide-caption p {
+  font-size: 1.2rem;
+  margin-bottom: 1.25rem;
+}
+
+/* BOTÓN GOV.CO */
+.btn-govco {
+  background-color: #3366CC;
+  color: #ffffff;
+  padding: 0.6rem 1.2rem;
+  width: fit-content;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.btn-govco:hover {
+  background-color: #004884;
+}
+
+/* FLECHAS */
+.swiper-button-next,
+.swiper-button-prev {
+  color: #ffffff;
+}
+
+/* PAGINACIÓN */
+.swiper-pagination-bullet {
+  background: #ffffff;
+  opacity: 0.6;
+}
+.swiper-pagination-bullet-active {
+  opacity: 1;
+}
+
+/* =====================
+   RESPONSIVE
+===================== */
+
+@media (max-width: 992px) {
+  .slider-govco-container,
+  .swiper-slide img {
+    height: 320px;
+  }
+
+  .slide-caption {
+    max-width: 75%;
+    padding-left: 5%;
+  }
+
+  .slide-caption h2 {
+    font-size: 1.6rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .slider-govco-container,
+  .swiper-slide img {
+    height: 260px;
+  }
+
+  .slide-caption {
+    max-width: 90%;
+    padding-left: 4%;
+  }
+
+  .slide-caption h2 {
+    font-size: 1.3rem;
+  }
+
+  .slide-caption p {
+    font-size: 1rem;
+  }
+}
+
