@@ -19,14 +19,14 @@ export class Noticias {
       titulo: 'Garantías, deberes y lineamientos para la convivencia',
       resumen: 'Garantías, deberes y lineamientos para la convivencia y prestación segura de los servicios de salud.',
       fecha: new Date('2025-11-24T16:14:00'),
-      imagen: 'assets/noticias/noticia1.jpg'
+      imagen: 'assets/noticias/noticias_1.jpg'
     },
     {
       categoria: 'Convocatorias',
       titulo: 'Convocatoria Pública No.001 de 2025',
       resumen: 'Proceso de selección y designación del revisor fiscal.',
       fecha: new Date('2025-11-22T09:30:00'),
-      imagen: 'assets/noticias/noticia2.jpg'
+      imagen: 'assets/noticias/noticias_2.jpg'
     },
     {
       categoria: 'Noticias',
