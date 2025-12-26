@@ -1,148 +1,25 @@
-<section class="govco-page">
-  <div class="govco-container">
-    <div class="govco-login-box">
-      <div class="card">
-  <div class="card-body" style="background-color:#F6F8F9;">
-    <section class="inicio-sesion-govco" role="form" aria-labelledby="titulo-login">
+<div class="login-container">
+  <div class="login-card">
+    <h2>Iniciar sesión</h2>
 
-      <h2 id="titulo-login">Inicio de sesión</h2>
-
-      <!-- TIPO DE PERSONA -->
-      <fieldset class="container-radio-login-govco mt-4">
-        <legend class="sr-only">Tipo de persona</legend>
-
-        <div class="row">
-          <div class="radio-seleccion-govco col-6">
-            <input type="radio"
-                   id="personaNatural"
-                   name="tipoPersona"
-                   value="natural"
-                   [(ngModel)]="tipoPersona"
-                   (change)="onTipoPersonaChange()">
-            <label for="personaNatural">Persona natural</label>
-          </div>
-
-          <div class="radio-seleccion-govco col-6">
-            <input type="radio"
-                   id="personaJuridica"
-                   name="tipoPersona"
-                   value="juridica"
-                   [(ngModel)]="tipoPersona"
-                   (change)="onTipoPersonaChange()">
-            <label for="personaJuridica">Persona jurídica</label>
-          </div>
-        </div>
-      </fieldset>
-
-      <!-- ALERTA JURIDICA -->
-      <div class="container-login-alerta-juridica-govco"
-           *ngIf="tipoPersona === 'juridica'">
-        <div class="icon-informacion-login-govco"></div>
-        <p>
-          Para realizar trámites, debes estar registrado con tu número de documento
-          y ser representante legal de la empresa.
-        </p>
+    <form [formGroup]="loginForm" (ngSubmit)="login()">
+      <div class="form-group">
+        <label>Usuario</label>
+        <input type="text" formControlName="username" />
       </div>
 
-      <!-- CAMPOS OBLIGATORIOS -->
-      <p class="login-label-govco mt-3">
-        <strong>
-          Los campos marcados con <span aria-required="true">*</span> son obligatorios
-        </strong>
+      <div class="form-group">
+        <label>Contraseña</label>
+        <input type="password" formControlName="password" />
+      </div>
+
+      <button type="submit" [disabled]="loginForm.invalid">
+        Entrar
+      </button>
+
+      <p class="error" *ngIf="error">
+        {{ error }}
       </p>
-
-      <!-- PERSONA NATURAL -->
-      <section *ngIf="tipoPersona === 'natural'">
-
-        <label for="tipoAccesoNatural" class="label-desplegable-govco">
-          Tipo de acceso <span aria-required="true">*</span>
-        </label>
-
-        <div class="desplegable-govco mt-2">
-          <select id="tipoAccesoNatural"
-                  [(ngModel)]="tipoAccesoNatural"
-                  (change)="onTipoAccesoChange()">
-            <option value="" disabled selected>Escoger</option>
-            <option value="email">Correo electrónico</option>
-            <option value="cc">Cédula de ciudadanía</option>
-            <option value="ce">Cédula de extranjería</option>
-            <option value="ti">Tarjeta de identidad</option>
-            <option value="pep">Permiso especial de permanencia</option>
-          </select>
-        </div>
-
-        <div class="mt-4" *ngIf="tipoAccesoNatural">
-          <label>{{ labelAcceso }}</label>
-          <div class="container-input-texto-govco">
-            <input type="text"
-                   [(ngModel)]="valorAcceso"
-                   aria-required="true">
-          </div>
-        </div>
-
-      </section>
-
-      <!-- PERSONA JURIDICA -->
-      <section *ngIf="tipoPersona === 'juridica'">
-
-        <label for="tipoAccesoJuridica" class="label-desplegable-govco">
-          Tipo de acceso <span aria-required="true">*</span>
-        </label>
-
-        <div class="desplegable-govco mt-2">
-          <select id="tipoAccesoJuridica"
-                  [(ngModel)]="tipoAccesoJuridica">
-            <option value="" disabled selected>Escoger</option>
-            <option value="cc">Cédula de ciudadanía</option>
-            <option value="ce">Cédula de extranjería</option>
-          </select>
-        </div>
-
-        <div class="mt-4" *ngIf="tipoAccesoJuridica">
-          <label>Documento</label>
-          <div class="container-input-texto-govco">
-            <input type="text"
-                   [(ngModel)]="documentoJuridico"
-                   aria-required="true">
-          </div>
-        </div>
-
-        <div class="mt-4">
-          <label>Número de NIT <span aria-required="true">*</span></label>
-          <div class="nit-num-juridica-inicio-sesion-govco">
-            <input type="text"
-                   maxlength="9"
-                   [(ngModel)]="nit">
-            <span class="icon-minus-login-govco"></span>
-            <input type="text"
-                   maxlength="1"
-                   [(ngModel)]="dv">
-          </div>
-        </div>
-
-      </section>
-
-      <!-- BOTON -->
-      <div class="mt-4">
-        <button class="btn-govco fill-btn-govco"
-                [disabled]="!formValido()">
-          Continuar
-        </button>
-      </div>
-
-      <!-- LINKS -->
-      <div class="container-options-login-govco mt-3">
-        <a href="#">Olvidé mi contraseña</a>
-        <p>¿No tienes cuenta?
-          <a href="#">Regístrate aquí</a>
-        </p>
-      </div>
-
-    </section>
+    </form>
   </div>
 </div>
-
-    </div>
-  </div>
-
-</section>

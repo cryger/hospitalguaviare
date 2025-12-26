@@ -1,65 +1,40 @@
 import { Component } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+import { Auth } from '../../shared/services/auth/auth';
+import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
-    imports: [CommonModule, FormsModule],
   templateUrl: './login.html',
+  imports: [CommonModule, ReactiveFormsModule],
   styleUrls: ['./login.css']
 })
 export class Login {
 
-  tipoPersona: 'natural' | 'juridica' = 'natural';
+  error = '';
 
-  // Persona natural
-  tipoAccesoNatural = '';
-  valorAcceso = '';
-  labelAcceso = '';
+  loginForm;
 
-  // Persona juridica
-  tipoAccesoJuridica = '';
-  documentoJuridico = '';
-  nit = '';
-  dv = '';
-
-  onTipoPersonaChange(): void {
-    this.resetForm();
+  constructor(
+    private fb: FormBuilder,
+    private auth: Auth,
+    private router: Router
+  ) {
+    this.loginForm = this.fb.group({
+      username: ['', Validators.required],
+      password: ['', Validators.required]
+    });
   }
 
-  onTipoAccesoChange(): void {
-    const labels: any = {
-      email: 'Correo electrónico',
-      cc: 'Cédula de ciudadanía',
-      ce: 'Cédula de extranjería',
-      ti: 'Tarjeta de identidad',
-      pep: 'Permiso especial de permanencia'
-    };
-    this.labelAcceso = labels[this.tipoAccesoNatural] || '';
-    this.valorAcceso = '';
-  }
+  login() {
+    const { username, password } = this.loginForm.value;
 
-  resetForm(): void {
-    this.tipoAccesoNatural = '';
-    this.valorAcceso = '';
-    this.tipoAccesoJuridica = '';
-    this.documentoJuridico = '';
-    this.nit = '';
-    this.dv = '';
-  }
-
-  formValido(): boolean {
-    if (this.tipoPersona === 'natural') {
-      return !!this.tipoAccesoNatural && !!this.valorAcceso;
+    if (this.auth.login(username!, password!)) {
+      this.router.navigate(['/dashboard']);
+    } else {
+      this.error = 'Credenciales inválidas';
     }
-
-    if (this.tipoPersona === 'juridica') {
-      return !!this.tipoAccesoJuridica &&
-             !!this.documentoJuridico &&
-             this.nit.length === 9 &&
-             this.dv.length === 1;
-    }
-
-    return false;
   }
 }

@@ -787,3 +787,27 @@ html {
   }
 }
 
+/*================================
+    CSS ADICIONAL PARA LOGIN COMPONENT
+=================================*/
+.login-container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f4f6f9;
+}
+
+.login-card {
+  width: 360px;
+  padding: 2rem;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.1);
+}
+
+button {
+  width: 100%;
+  margin-top: 1rem;
+}
+

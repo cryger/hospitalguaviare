@@ -19,6 +19,7 @@ import { Usuarios } from './pages/admin/usuarios/usuarios';
 import { Configuacion } from './pages/admin/configuracion/configuracion';
 import { Pqrsf as AdminPqrsf } from './pages/admin/pqrsf/pqrsf';
 import { Transparencia as AdminTransparencia } from './pages/admin/transparencia/transparencia';
+import { AuthGuard } from './shared/guards/auth/auth-guard';
 
 export const routes: Routes = [
   {
