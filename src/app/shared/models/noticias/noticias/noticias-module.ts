@@ -10,3 +10,14 @@ import { CommonModule } from '@angular/common';
   ]
 })
 export class NoticiasModule { }
+
+export interface Noticia {
+  id: number;
+  titulo: string;
+  resumen: string;
+  contenido: string;
+  fechaPublicacion: Date;
+  autor: string;
+  imagenUrl?: string;
+  estado: 'borrador' | 'publicada' | 'archivada';
+}
