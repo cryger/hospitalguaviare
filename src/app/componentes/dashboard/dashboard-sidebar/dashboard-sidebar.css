@@ -1,0 +1,24 @@
+.dashboard-sidebar {
+  width: 260px;
+  background: #0b457f;
+  color: white;
+  padding: 20px;
+}
+
+.dashboard-sidebar .logo {
+  margin-bottom: 30px;
+}
+
+.dashboard-sidebar nav a {
+  display: block;
+  color: white;
+  padding: 10px 12px;
+  border-radius: 4px;
+  text-decoration: none;
+  margin-bottom: 6px;
+}
+
+.dashboard-sidebar nav a.active,
+.dashboard-sidebar nav a:hover {
+  background: rgba(255,255,255,0.15);
+}

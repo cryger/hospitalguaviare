@@ -1,0 +1,29 @@
+<h1 class="dashboard-title">Panel de control</h1>
+
+<div class="dashboard-cards">
+
+  <div class="card">
+    <h3>Total noticias</h3>
+    <p>{{ stats.totalNoticias }}</p>
+  </div>
+
+  <div class="card">
+    <h3>Publicadas</h3>
+    <p>{{ stats.publicadas }}</p>
+  </div>
+
+  <div class="card">
+    <h3>Borradores</h3>
+    <p>{{ stats.borradores }}</p>
+  </div>
+
+  <div class="card">
+    <h3>PQRS pendientes</h3>
+    <p>{{ stats.pqrsPendientes }}</p>
+  </div>
+
+</div>
+
+<div class="dashboard-footer-info">
+  Última actualización: {{ stats.ultimaActualizacion }}
+</div>

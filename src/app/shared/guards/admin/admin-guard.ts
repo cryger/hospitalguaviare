@@ -1,5 +1,23 @@
-import { CanActivateFn } from '@angular/router';
+import { Injectable } from '@angular/core';
+import { CanActivate, Router } from '@angular/router';
 
-export const adminGuard: CanActivateFn = (route, state) => {
-  return true;
-};
+@Injectable({ providedIn: 'root' })
+export class AdminGuard implements CanActivate {
+
+  constructor(private router: Router) {}
+
+  canActivate(): boolean {
+    const isAdmin = localStorage.getItem('admin_logged') === 'true';
+
+
+    if (!isAdmin) {
+      this.router.navigate(['/login']);
+      return false;
+    }else{
+      console.log('Acceso concedido al área de administración.');
+
+    }
+
+    return true;
+  }
+}
