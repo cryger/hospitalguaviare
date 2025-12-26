@@ -13,11 +13,7 @@ export class AdminGuard implements CanActivate {
     if (!isAdmin) {
       this.router.navigate(['/login']);
       return false;
-    }else{
-      console.log('Acceso concedido al área de administración.');
-
     }
-
     return true;
   }
 }

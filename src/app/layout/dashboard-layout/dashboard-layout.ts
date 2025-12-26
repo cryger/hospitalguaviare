@@ -6,7 +6,7 @@ import { DashboardTable } from '../../componentes/dashboard/dashboard-table/dash
 
 @Component({
   selector: 'app-dashboard-layout',
-  imports: [DashboardSidebar, DashboardTopbar, DashboardCards, DashboardTable],
+  imports: [DashboardSidebar, DashboardTopbar],
   templateUrl: './dashboard-layout.html',
   styleUrl: './dashboard-layout.css',
 })
