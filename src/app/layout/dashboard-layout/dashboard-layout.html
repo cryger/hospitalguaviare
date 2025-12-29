@@ -1,8 +1,8 @@
-<div class="dashboard-wrapper">
-  <app-dashboard-sidebar></app-dashboard-sidebar>
+<div class="dashboard-wrapper" [class.sidebar-collapsed]="isSidebarCollapsed">
+  <app-dashboard-sidebar [collapsed]="isSidebarCollapsed"></app-dashboard-sidebar>
 
-  <div class="dashboard-main">
-    <app-dashboard-topbar></app-dashboard-topbar>
+  <div class="dashboard-main" >
+    <app-dashboard-topbar (toggleSidebar)="toggleSidebar()"></app-dashboard-topbar>
 
     <main class="dashboard-content">
       <router-outlet></router-outlet>

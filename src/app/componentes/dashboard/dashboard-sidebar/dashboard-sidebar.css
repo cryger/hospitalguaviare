@@ -1,13 +1,97 @@
+/* ================================
+   SIDEBAR
+================================ */
+
 .dashboard-sidebar {
   width: 260px;
+  height: 100vh;
   background: #0b457f;
   color: white;
-  padding: 20px;
-  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+
+  transition: width 0.25s ease;
+  overflow: hidden;
 }
 
-.dashboard-sidebar .logo {
-  margin-bottom: 30px;
+/* SIDEBAR COLAPSADO */
+.dashboard-sidebar.collapsed {
+  width: 80px;
+}
+
+/* ================================
+   LOGO
+================================ */
+
+.sidebar-logo-wrapper {
+  width: 100%;
+  height: 160px;
+  padding: 1rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  box-sizing: border-box;
+  overflow: hidden;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.sidebar-logo-wrapper img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+/* ================================
+   TEXTO + USUARIO
+================================ */
+
+.logo {
+  padding: 0.75rem 1rem;
+  text-align: center;
+  font-size: 0.85rem;
+  transition: opacity 0.2s ease;
+}
+
+/* OCULTAR TEXTO CUANDO COLAPSA */
+.dashboard-sidebar.collapsed .logo {
+  display: none;
+}
+
+/* ================================
+   BOTÓN CERRAR SESIÓN
+================================ */
+
+.btn-cerrarSesion {
+  margin-top: 0.75rem;
+  width: 100%;
+  background: #dc2727;
+  color: white;
+  border: none;
+  padding: 0.45rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  cursor: pointer;
+}
+
+/* OCULTAR BOTÓN EN COLLAPSE */
+.dashboard-sidebar.collapsed .btn-cerrarSesion {
+  display: none;
+}
+
+/* ================================
+   NAVEGACIÓN
+================================ */
+
+.dashboard-sidebar nav {
+  margin-top: 1rem;
+  padding: 0 12px;
+  display: flex;
+  flex-direction: column;
 }
 
 .dashboard-sidebar nav a {
@@ -17,69 +101,26 @@
   border-radius: 4px;
   text-decoration: none;
   margin-bottom: 6px;
+  font-size: 0.9rem;
+  white-space: nowrap;
+  transition: background 0.2s ease;
 }
 
 .dashboard-sidebar nav a.active,
 .dashboard-sidebar nav a:hover {
-  background: rgba(255,255,255,0.15);
+  background: rgba(255, 255, 255, 0.15);
 }
 
-.btn-cerrarSesion{
-  color: white;
-  background: #dc2727;
+/* TEXTO OCULTO EN COLLAPSE */
+.dashboard-sidebar.collapsed nav a {
+  font-size: 0;
+  padding: 12px 0;
+  text-align: center;
 }
 
-/* CONTENEDOR DEL LOGO */
-.sidebar-logo {
-  width: 100%;
-  padding: 1.5rem 1rem;
-  margin-left: 4.5rem;
-  margin-right: 4.5rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-  box-sizing: border-box;
-}
-
-/* IMAGEN */
-.sidebar-logo img {
-  max-width: 100%;
-  max-height: 140px;
-  object-fit: contain;
-  display: block;
-}
-
-/*estilos para LOGO*/
-/* CONTENEDOR DEL LOGO */
-.sidebar-logo-wrapper {
-  width: 100%;
-  height: 180px;
-  padding: 1rem;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  box-sizing: border-box;
-  overflow: hidden;
-}
-
-/* IMAGEN */
-.sidebar-logo-wrapper img {
-  max-width: 100%;
-  max-height: 100%;
-
-  width: auto;
-  height: auto;
-
-  object-fit: contain;
-
-  display: block;
-}
-
-
-/* estilos para el modal*/
+/* ================================
+   MODAL LOGOUT
+================================ */
 
 /* Fondo oscuro */
 .modal-backdrop {
@@ -99,18 +140,18 @@
   width: 100%;
   max-width: 380px;
   border-radius: 6px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
   text-align: center;
 }
 
 .modal h2 {
   font-size: 1.1rem;
   color: #004884;
-  margin-bottom: .5rem;
+  margin-bottom: 0.5rem;
 }
 
 .modal p {
-  font-size: .9rem;
+  font-size: 0.9rem;
   color: #374151;
   margin-bottom: 1.5rem;
 }
@@ -118,14 +159,14 @@
 .modal-actions {
   display: flex;
   justify-content: space-between;
-  gap: .75rem;
+  gap: 0.75rem;
 }
 
 .btn-cancel {
   flex: 1;
   background: #e5e7eb;
   border: none;
-  padding: .5rem;
+  padding: 0.5rem;
   border-radius: 4px;
   cursor: pointer;
 }
@@ -135,8 +176,7 @@
   background: #004884;
   color: white;
   border: none;
-  padding: .5rem;
+  padding: 0.5rem;
   border-radius: 4px;
   cursor: pointer;
 }
-

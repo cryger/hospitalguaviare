@@ -14,4 +14,10 @@ import { Route } from '@angular/router';
 })
 export class DashboardLayout {
 
+  isSidebarCollapsed = false;
+
+  toggleSidebar(): void {
+    this.isSidebarCollapsed = !this.isSidebarCollapsed;
+  }
+
 }

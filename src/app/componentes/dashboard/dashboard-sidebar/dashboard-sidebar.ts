@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { AuthGuard } from '../../../shared/guards/auth/auth-guard';
 import { CommonModule } from '@angular/common';
 
@@ -10,6 +10,7 @@ import { CommonModule } from '@angular/common';
 })
 export class DashboardSidebar {
 
+  @Input() collapsed = false;
   showLogoutModal = false;
 
   constructor(private authGuard: AuthGuard){}
