@@ -13,6 +13,9 @@ export class AdminGuard implements CanActivate {
     if (!isAdmin) {
       this.router.navigate(['/login']);
       return false;
+    }else{
+      // Si es admin → admin
+    this.router.navigate(['/admin']);
     }
     return true;
   }

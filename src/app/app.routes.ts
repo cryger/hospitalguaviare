@@ -22,38 +22,42 @@ import { Transparencia as AdminTransparencia } from './pages/admin/transparencia
 import { AuthGuard } from './shared/guards/auth/auth-guard';
 
 export const routes: Routes = [
+
+  // 🌍 SITIO PÚBLICO
   {
     path: '',
     component: PublicLayout,
-    children:
-    [
+    children: [
       { path: '', component: Home, data: { breadcrumb: 'Inicio' } },
-      { path: 'home', component: Home, data: { breadcrumb: 'home' } },
-      { path: 'transparencia', component: Transparencia, data: { breadcrumb: 'Transparencia' } },
-      { path: 'participa', component: Participa, data: { breadcrumb: 'Participa' } },
-      { path: 'nuestro-hospital', component: NuestroHospital, data: { breadcrumb: 'Nuestro Hospital' } },
-      { path: 'atencion-ciudadano', component: AtencionCiudadano, data: { breadcrumb: 'Atención al Ciudadano' } },
-      { path: 'cotizaciones-propuestas', component: CotizacionesPropuestas, data: { breadcrumb: 'Cotizaciones y Propuestas' } },
-      { path: 'trabaja-nosotros', component: TrabajaNosotros, data: { breadcrumb: 'Trabaja con Nosotros' } },
-      { path: 'pqrsf', component: Pqrsf, data: { breadcrumb: 'PQRSF' } },
-      { path: 'normatividad', component: Normatividad, data: { breadcrumb: 'Normatividad' } },
-      { path: 'servicios', component: Servicios, data: { breadcrumb: 'Servicios' } },
-      { path: 'login', component: Login, data: { breadcrumb: 'Iniciar Sesión' } },
+      { path: 'home', component: Home },
+      { path: 'transparencia', component: Transparencia },
+      { path: 'participa', component: Participa },
+      { path: 'nuestro-hospital', component: NuestroHospital },
+      { path: 'atencion-ciudadano', component: AtencionCiudadano },
+      { path: 'cotizaciones-propuestas', component: CotizacionesPropuestas },
+      { path: 'trabaja-nosotros', component: TrabajaNosotros },
+      { path: 'pqrsf', component: Pqrsf },
+      { path: 'normatividad', component: Normatividad },
+      { path: 'servicios', component: Servicios },
+      { path: 'login', component: Login },
     ]
   },
-{
-  path: '',
-  component: DashboardLayout,
-  canActivate: [AdminGuard],
-  children: [
-    { path: '', component: Home, data: { breadcrumb: 'Inicio' } },
-    { path: 'admin', component: DashboardHome, data: { breadcrumb: 'Dashboard' } },
-    { path: 'admin-noticias',component: Noticias, data: { breadcrumb: 'Noticias' }},
-    { path: 'admin-transparencia', component: AdminTransparencia, data: { breadcrumb: 'Transparencia' } },
-    { path: 'admin-pqrsf', component: AdminPqrsf, data: { breadcrumb: 'PQRSF' } },
-    { path: 'admin-usuarios', component: Usuarios, data: { breadcrumb: 'Usuarios' } },
-  ]
 
-},
-{path: '**', redirectTo: ''},
+  // 🔐 DASHBOARD ADMIN
+  {
+    path: 'admin',
+    component: DashboardLayout,
+    canActivate: [AuthGuard],
+    children: [
+      { path: '', component: DashboardHome, data: { breadcrumb: 'Dashboard' } },
+      { path: 'noticias', component: Noticias },
+      { path: 'transparencia', component: AdminTransparencia },
+      { path: 'pqrsf', component: AdminPqrsf },
+      { path: 'usuarios', component: Usuarios },
+    ]
+  },
+
+  // 🚫 FALLBACK
+  { path: '**', redirectTo: '' }
 ];
+

@@ -1,25 +1,24 @@
 import { Component } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
-import { Auth } from '../../shared/services/auth/auth';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthGuard } from '../../shared/guards/auth/auth-guard';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.html',
-  imports: [CommonModule, ReactiveFormsModule],
+  imports:[ReactiveFormsModule,CommonModule],
   styleUrls: ['./login.css']
 })
 export class Login {
 
+  loginForm!: FormGroup;
   error = '';
-
-  loginForm;
 
   constructor(
     private fb: FormBuilder,
-    private auth: Auth,
+    private authGuard: AuthGuard,
     private router: Router
   ) {
     this.loginForm = this.fb.group({
@@ -28,13 +27,15 @@ export class Login {
     });
   }
 
-  login() {
+  login(): void {
+    if (this.loginForm.invalid) return;
+
     const { username, password } = this.loginForm.value;
 
-    if (this.auth.login(username!, password!)) {
-      this.router.navigate(['/dashboard']);
+    if (this.authGuard.login(username, password)) {
+      this.router.navigate(['/admin']); // 👈 TU DASHBOARD
     } else {
-      this.error = 'Credenciales inválidas';
+      this.error = 'Usuario o contraseña incorrectos';
     }
   }
 }
