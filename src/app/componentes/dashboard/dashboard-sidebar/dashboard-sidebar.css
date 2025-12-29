@@ -78,6 +78,7 @@
   cursor: pointer;
 }
 
+
 /* OCULTAR BOTÓN EN COLLAPSE */
 .dashboard-sidebar.collapsed .btn-cerrarSesion {
   display: none;
