@@ -84,3 +84,9 @@ button {
   text-align: center;
   color: #b91c1c;
 }
+
+.logo-centered{
+  margin-left: 5.5rem;
+  margin-right: 5.5rem;
+
+}
