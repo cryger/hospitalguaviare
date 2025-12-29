@@ -1,9 +1,18 @@
 <aside class="dashboard-sidebar">
-  <div class="logo">
+  <div class="sidebar-logo-wrapper">
+    <img  src="HSJG-LOGO_POSITIVO.png" alt="Logo Hospital">
+
+    </div>
+    <div class="logo">
     <strong>ESE Guaviare</strong>
     <br>
     <span>Administrador</span>
-    <a href="logout()">Cerrar Sesion</a>
+    <br>
+
+    <button class="btn-cerrarSesion" type="button" (click)="openLogoutModal()">
+      Cerrar sesión
+    </button>
+
   </div>
 
   <nav>
@@ -16,3 +25,23 @@
     <a routerLink="/dashboard/configuracion">Configuración</a>
   </nav>
 </aside>
+
+<!-- MODAL -->
+<div class="modal-backdrop" *ngIf="showLogoutModal">
+  <div class="modal">
+
+    <h2>Confirmar cierre de sesión</h2>
+    <p>¿Está seguro de que desea cerrar la sesión?</p>
+
+    <div class="modal-actions">
+      <button class="btn-cancel" (click)="closeLogoutModal()">
+        Cancelar
+      </button>
+
+      <button class="btn-confirm" (click)="confirmLogout()">
+        Cerrar sesión
+      </button>
+    </div>
+
+  </div>
+</div>
