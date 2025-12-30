@@ -29,17 +29,17 @@ export const routes: Routes = [
     component: PublicLayout,
     children: [
       { path: '', component: Home, data: { breadcrumb: 'Inicio' } },
-      { path: 'home', component: Home },
-      { path: 'transparencia', component: Transparencia },
-      { path: 'participa', component: Participa },
-      { path: 'nuestro-hospital', component: NuestroHospital },
-      { path: 'atencion-ciudadano', component: AtencionCiudadano },
-      { path: 'cotizaciones-propuestas', component: CotizacionesPropuestas },
-      { path: 'trabaja-nosotros', component: TrabajaNosotros },
-      { path: 'pqrsf', component: Pqrsf },
-      { path: 'normatividad', component: Normatividad },
-      { path: 'servicios', component: Servicios },
-      { path: 'login', component: Login },
+      { path: 'home', component: Home,data: { breadcrumb: 'Inicio' } },
+      { path: 'transparencia', component: Transparencia,data: { breadcrumb: 'Transparencia' } },
+      { path: 'participa', component: Participa,data: { breadcrumb: 'Participa' } },
+      { path: 'nuestro-hospital', component: NuestroHospital,data: { breadcrumb: 'Nuesto Hospital' } },
+      { path: 'atencion-ciudadano', component: AtencionCiudadano,data: { breadcrumb: 'Atencion al Usuario' } },
+      { path: 'cotizaciones-propuestas', component: CotizacionesPropuestas, data: { breadcrumb: 'Cotizaciones y Propuestas' } },
+      { path: 'trabaja-nosotros', component: TrabajaNosotros, data: { breadcrumb: 'Trabaja con Nosotros' } },
+      { path: 'pqrsf', component: Pqrsf, data: { breadcrumb: 'PQRSF' } },
+      { path: 'normatividad', component: Normatividad, data: { breadcrumb: 'Normatividad' } },
+      { path: 'servicios', component: Servicios, data: { breadcrumb: 'Servicios' } },
+      { path: 'login', component: Login, data: { breadcrumb: 'Login' } },
     ]
   },
 
@@ -50,10 +50,10 @@ export const routes: Routes = [
     canActivate: [AuthGuard],
     children: [
       { path: '', component: DashboardHome, data: { breadcrumb: 'Dashboard' } },
-      { path: 'noticias', component: Noticias },
-      { path: 'transparencia', component: AdminTransparencia },
-      { path: 'pqrsf', component: AdminPqrsf },
-      { path: 'usuarios', component: Usuarios },
+      { path: 'noticias', component: Noticias, data: { breadcrumb: 'Administrar Noticias' }},
+      { path: 'transparencia', component: AdminTransparencia, data: { breadcrumb: 'Administrar Transparencia' } },
+      { path: 'pqrsf', component: AdminPqrsf, data: { breadcrumb: 'Administrar PQRSF' } },
+      { path: 'usuarios', component: Usuarios, data: { breadcrumb: 'Administrar Usuarios' } },
     ]
   },
 

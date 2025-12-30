@@ -8,10 +8,11 @@ import { Route } from '@angular/router';
 import { Accesibilidad } from '../../componentes/accesibilidad/accesibilidad';
 import { CommonModule } from '@angular/common';
 import { IdleService } from '../../shared/services/idle-service/idle-service';
+import { Breadcrumb } from '../../componentes/breadcrumb/breadcrumb';
 
 @Component({
   selector: 'app-dashboard-layout',
-  imports: [DashboardSidebar, DashboardTopbar, RouterOutlet,Accesibilidad,CommonModule],
+  imports: [DashboardSidebar, DashboardTopbar, RouterOutlet,Accesibilidad,CommonModule,Breadcrumb],
   templateUrl: './dashboard-layout.html',
   styleUrl: './dashboard-layout.css',
 })

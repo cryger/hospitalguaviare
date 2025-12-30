@@ -34,11 +34,16 @@
   <!-- ACCESIBILIDAD -->
   <app-accesibilidad></app-accesibilidad>
 
+
+
   <!-- CONTENIDO PRINCIPAL -->
   <div class="dashboard-main">
     <app-dashboard-topbar
       (toggleSidebar)="toggleSidebar()">
     </app-dashboard-topbar>
+
+    <!-- MIGAS DE PAN -->
+    <app-breadcrumb></app-breadcrumb>
 
     <main class="dashboard-content">
       <router-outlet></router-outlet>
