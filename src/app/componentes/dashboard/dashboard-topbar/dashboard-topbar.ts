@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component,Output, EventEmitter } from '@angular/core';
+
 
 @Component({
   selector: 'app-dashboard-topbar',
@@ -7,5 +8,11 @@ import { Component } from '@angular/core';
   styleUrl: './dashboard-topbar.css',
 })
 export class DashboardTopbar {
+
+  @Output() toggleSidebar = new EventEmitter<void>();
+
+  toggle():void{
+    this.toggleSidebar.emit();
+  }
 
 }
