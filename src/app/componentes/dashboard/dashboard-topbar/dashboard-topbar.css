@@ -10,3 +10,7 @@
 .toggle-menu{
   background-color: #ddd;
 }
+
+.titulo-topbar{
+  align-items: first baseline;
+}

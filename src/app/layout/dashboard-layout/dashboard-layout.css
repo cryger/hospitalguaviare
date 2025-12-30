@@ -13,3 +13,32 @@
 .dashboard-content {
   padding: 24px;
 }
+.dashboard-wrapper {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* MOBILE */
+@media (max-width: 991px) {
+
+  .dashboard-wrapper {
+    display: block;
+  }
+
+  .mobile-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 260px;
+    height: 100vh;
+    z-index: 10000;
+    background: #0b457f;
+  }
+
+  .mobile-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    z-index: 9999;
+  }
+}

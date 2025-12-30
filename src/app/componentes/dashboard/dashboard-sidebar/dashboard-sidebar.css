@@ -181,3 +181,74 @@
   border-radius: 4px;
   cursor: pointer;
 }
+
+
+/* ==============================
+    iconografia para el dashboard
+================================= */
+
+/* CONTENEDOR DEL MENÚ */
+.sidebar-nav a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* ICONO */
+.sidebar-nav .icon {
+  font-size: 1.2rem;
+  min-width: 24px;
+  text-align: center;
+}
+
+/* TEXTO */
+.sidebar-nav .text {
+  white-space: nowrap;
+}
+
+/* ===== SIDEBAR COLAPSADO ===== */
+.dashboard-sidebar.collapsed .sidebar-nav .text {
+  display: none; /* 👈 solo iconos */
+}
+
+.dashboard-sidebar.collapsed .sidebar-nav a {
+  justify-content: center;
+  padding: 12px 0;
+}
+
+/* ================================
+   TOOLTIP REAL (FUNCIONA CON OVERFLOW)
+================================ */
+
+.dashboard-sidebar.collapsed .sidebar-nav a {
+  position: relative;
+}
+
+/* Tooltip */
+.dashboard-sidebar.collapsed .sidebar-nav a::after {
+  content: attr(data-tooltip);
+
+  position: fixed; /* 🔴 CLAVE */
+  left: 90px;      /* ancho sidebar colapsado + margen */
+  transform: translateY(-50%);
+
+  background: #004884;
+  color: #ffffff;
+  padding: 6px 10px;
+  border-radius: 4px;
+
+  font-size: 0.75rem;
+  white-space: nowrap;
+
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease;
+
+  z-index: 9999;
+}
+
+/* Mostrar tooltip */
+.dashboard-sidebar.collapsed .sidebar-nav a:hover::after {
+  opacity: 1;
+}
+
