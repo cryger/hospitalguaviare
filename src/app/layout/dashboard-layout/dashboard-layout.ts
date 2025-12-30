@@ -7,6 +7,7 @@ import { RouterOutlet } from "@angular/router";
 import { Route } from '@angular/router';
 import { Accesibilidad } from '../../componentes/accesibilidad/accesibilidad';
 import { CommonModule } from '@angular/common';
+import { IdleService } from '../../shared/services/idle-service/idle-service';
 
 @Component({
   selector: 'app-dashboard-layout',
@@ -16,6 +17,7 @@ import { CommonModule } from '@angular/common';
 })
 export class DashboardLayout {
 
+  constructor(private idleService: IdleService){}
   isSidebarCollapsed = false;
   isSidebarOpenMobile = false;       // Mobile
   isMobile = false;
@@ -24,8 +26,9 @@ export class DashboardLayout {
     // 🔐 Recupera el estado guardado
     const savedState = localStorage.getItem('sidebar-collapsed');
     this.isSidebarCollapsed = savedState === 'true';
+    this.idleService.startWatching();
 
-    this.checkScreen();
+
   }
 
 
