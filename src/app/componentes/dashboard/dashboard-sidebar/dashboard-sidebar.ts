@@ -1,10 +1,11 @@
 import { Component,Input } from '@angular/core';
 import { AuthGuard } from '../../../shared/guards/auth/auth-guard';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard-sidebar',
-  imports:[CommonModule],
+  imports:[CommonModule,RouterModule],
   templateUrl: './dashboard-sidebar.html',
   styleUrl: './dashboard-sidebar.css',
 })

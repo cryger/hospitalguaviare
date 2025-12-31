@@ -16,37 +16,37 @@
   </div>
 
   <nav class="sidebar-nav">
-      <a routerLink="/dashboard" routerLinkActive="active" data-tooltip="Inicio">
+      <a routerLink="/admin" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" data-tooltip="Inicio">
     <span class="icon">🏠</span>
     <span class="text"> Inicio</span>
   </a>
 
-  <a routerLink="/dashboard/noticias" data-tooltip="Noticias">
+  <a routerLink="/admin/noticias" data-tooltip="Noticias">
     <span class="icon">📰</span>
     <span class="text"> Noticias</span>
   </a>
 
-  <a routerLink="/dashboard/transparencia" data-tooltip="Transparencia">
+  <a routerLink="/admin/transparencia" data-tooltip="Transparencia">
     <span class="icon">📄</span>
     <span class="text"> Transparencia</span>
   </a>
 
-  <a routerLink="/dashboard/pqrsf" data-tooltip="PQRSF">
+  <a routerLink="/admin/pqrsf" data-tooltip="PQRSF">
     <span class="icon">📬</span>
     <span class="text"> PQRSF</span>
   </a>
 
-  <a routerLink="/dashboard/ofertas" data-tooltip="Ofertas">
+  <a routerLink="/admin/cotizaciones" data-tooltip="Ofertas">
     <span class="icon">💼</span>
-    <span class="text"> Ofertas</span>
+    <span class="text"> Cotizaciones y Propuestas</span>
   </a>
 
-  <a routerLink="/dashboard/usuarios" data-tooltip="Usuarios">
+  <a routerLink="/admin/usuarios" data-tooltip="Usuarios">
     <span class="icon">👥</span>
     <span class="text"> Usuarios</span>
   </a>
 
-  <a routerLink="/dashboard/configuracion" data-tooltip="Configuracion">
+  <a routerLink="/admin/configuracion" data-tooltip="Configuracion">
     <span class="icon">⚙️</span>
     <span class="text"> Configuración</span>
   </a>
