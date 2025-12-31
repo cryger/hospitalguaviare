@@ -13,7 +13,7 @@ import { Normatividad } from './pages/normatividad/normatividad';
 import { Servicios } from './pages/servicios/servicios';
 import { Login } from './pages/login/login';
 import { AdminGuard } from './shared/guards/admin/admin-guard';
-import { DashboardHome } from './pages/dashboardhome/dashboardhome';
+import { DashboardHomeComponent } from './pages/dashboardhome/dashboardhome';
 import { NoticiasAdminComponent } from './pages/admin/noticias/noticias';
 import { Usuarios } from './pages/admin/usuarios/usuarios';
 import { Configuacion } from './pages/admin/configuracion/configuracion';
@@ -50,7 +50,7 @@ export const routes: Routes = [
     component: DashboardLayout,
     canActivate: [AuthGuard],
     children: [
-      { path: '', component: DashboardHome, data: { breadcrumb: 'Dashboard' } },
+      { path: '', component: DashboardHomeComponent, data: { breadcrumb: 'Dashboard' } },
       { path: 'noticias', component: NoticiasAdminComponent, data: { breadcrumb: 'Administrar Noticias' }},
       { path: 'transparencia', component: AdminTransparencia, data: { breadcrumb: 'Administrar Transparencia' } },
       { path: 'pqrsf', component: AdminPqrsf, data: { breadcrumb: 'Administrar PQRSF' } },

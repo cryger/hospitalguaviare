@@ -7,10 +7,10 @@ import { Noticia } from '../../shared/models/noticias/noticias/noticias-module';
   selector: 'app-dashboard-home',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './DashboardHome.html',
-  styleUrls: ['./DashboardHome.css']
+  templateUrl: './dashboardhome.html',
+  styleUrls: ['./dashboardhome.css']
 })
-export class DashboardHome implements OnInit {
+export class DashboardHomeComponent implements OnInit {
 
   // CONTADORES
   totalNoticias = 0;
