@@ -1,55 +1,47 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { NoticiasService } from '../../shared/services/noticias/noticias';
+import { Noticia } from '../../shared/models/noticias/noticias/noticias-module';
 
 @Component({
   selector: 'app-noticias',
+  standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './noticias.html',
   styleUrls: ['./noticias.css']
 })
-export class NoticiasPublicComponent {
+export class NoticiasPublicComponent implements OnInit {
 
   orden: 'recientes' | 'antiguas' = 'recientes';
   fechaFiltro: string | null = null;
 
-  noticias = [
-    {
-      categoria: 'Noticias',
-      titulo: 'Garantías, deberes y lineamientos para la convivencia',
-      resumen: 'Garantías, deberes y lineamientos para la convivencia y prestación segura de los servicios de salud.',
-      fecha: new Date('2025-11-24T16:14:00'),
-      imagen: 'assets/noticias/noticias_1.jpg'
-    },
-    {
-      categoria: 'Convocatorias',
-      titulo: 'Convocatoria Pública No.001 de 2025',
-      resumen: 'Proceso de selección y designación del revisor fiscal.',
-      fecha: new Date('2025-11-22T09:30:00'),
-      imagen: 'assets/noticias/noticias_2.jpg'
-    },
-    {
-      categoria: 'Noticias',
-      titulo: 'Octubre Rosa Unidos en la Lucha contra el Cáncer de Mama',
-      resumen: 'Reafirmamos nuestro compromiso con la detección temprana.',
-      fecha: new Date('2025-10-21T09:36:00'),
-      imagen: 'assets/noticias/noticia3.jpg'
-    },
-    {
-      categoria: 'Noticias',
-      titulo: 'Jornada de vacunación',
-      resumen: 'Campaña de vacunación para la comunidad.',
-      fecha: new Date('2025-09-22T12:33:00'),
-      imagen: 'assets/noticias/noticia4.jpg'
-    },
-    {
-      categoria: 'Noticias',
-      titulo: 'Esta no se mostrará',
-      resumen: 'Es la quinta noticia.',
-      fecha: new Date(),
-      imagen: 'assets/noticias/noticia5.jpg'
-    }
-  ];
+  noticias: {
+    categoria: string;
+    titulo: string;
+    resumen: string;
+    fecha: Date;
+    imagen: string;
+  }[] = [];
+
+  constructor(private noticiasService: NoticiasService) {}
+
+  ngOnInit(): void {
+    this.cargarNoticias();
+  }
+
+  private cargarNoticias(): void {
+    const publicadas = this.noticiasService.getPublicadas();
+
+    // 🔄 Adaptamos al formato que YA usa tu vista
+    this.noticias = publicadas.map((n: Noticia) => ({
+      categoria: 'Noticias', // o puedes mapear según lógica futura
+      titulo: n.titulo,
+      resumen: n.resumen,
+      fecha: new Date(n.fechaPublicacion),
+      imagen: n.imagenUrl || 'assets/noticias/default.jpg'
+    }));
+  }
 
   get noticiasFiltradas() {
     let resultado = [...this.noticias];
@@ -69,4 +61,3 @@ export class NoticiasPublicComponent {
     return resultado;
   }
 }
-
