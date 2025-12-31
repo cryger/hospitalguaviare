@@ -1,29 +1,67 @@
 <h1 class="dashboard-title">Panel de control</h1>
 
+<!-- TARJETAS -->
 <div class="dashboard-cards">
 
   <div class="card">
     <h3>Total noticias</h3>
-    <p>{{ stats.totalNoticias }}</p>
+    <strong>{{ totalNoticias }}</strong>
   </div>
 
   <div class="card">
     <h3>Publicadas</h3>
-    <p>{{ stats.publicadas }}</p>
+    <strong>{{ publicadas }}</strong>
   </div>
 
   <div class="card">
     <h3>Borradores</h3>
-    <p>{{ stats.borradores }}</p>
+    <strong>{{ borradores }}</strong>
   </div>
 
   <div class="card">
     <h3>PQRS pendientes</h3>
-    <p>{{ stats.pqrsPendientes }}</p>
+    <strong>0</strong>
   </div>
 
 </div>
 
-<div class="dashboard-footer-info">
-  Última actualización: {{ stats.ultimaActualizacion }}
+<!-- LISTADOS -->
+<div class="dashboard-lists">
+
+  <!-- TOTAL -->
+  <section class="list">
+    <h4>Últimas noticias</h4>
+    <ul>
+      <li *ngFor="let n of ultimasNoticias">
+        {{ n.titulo }}
+      </li>
+    </ul>
+  </section>
+
+  <!-- PUBLICADAS -->
+  <section class="list">
+    <h4>Publicadas</h4>
+    <ul>
+      <li *ngFor="let n of ultimasPublicadas">
+        {{ n.titulo }}
+      </li>
+    </ul>
+  </section>
+
+  <!-- BORRADORES -->
+  <section class="list">
+    <h4>Borradores</h4>
+    <ul>
+      <li *ngFor="let n of ultimosBorradores">
+        {{ n.titulo }}
+      </li>
+    </ul>
+  </section>
+
+  <!-- PQRS -->
+  <section class="list">
+    <h4>PQRS pendientes</h4>
+    <p class="muted">Sin implementar</p>
+  </section>
+
 </div>
