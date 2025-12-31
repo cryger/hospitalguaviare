@@ -8,7 +8,7 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './noticias.html',
   styleUrls: ['./noticias.css']
 })
-export class Noticias {
+export class NoticiasPublicComponent {
 
   orden: 'recientes' | 'antiguas' = 'recientes';
   fechaFiltro: string | null = null;

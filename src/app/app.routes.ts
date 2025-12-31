@@ -14,7 +14,7 @@ import { Servicios } from './pages/servicios/servicios';
 import { Login } from './pages/login/login';
 import { AdminGuard } from './shared/guards/admin/admin-guard';
 import { DashboardHome } from './pages/dashboardhome/dashboardhome';
-import { Noticias } from './pages/admin/noticias/noticias';
+import { NoticiasAdminComponent } from './pages/admin/noticias/noticias';
 import { Usuarios } from './pages/admin/usuarios/usuarios';
 import { Configuacion } from './pages/admin/configuracion/configuracion';
 import { Pqrsf as AdminPqrsf } from './pages/admin/pqrsf/pqrsf';
@@ -51,7 +51,7 @@ export const routes: Routes = [
     canActivate: [AuthGuard],
     children: [
       { path: '', component: DashboardHome, data: { breadcrumb: 'Dashboard' } },
-      { path: 'noticias', component: Noticias, data: { breadcrumb: 'Administrar Noticias' }},
+      { path: 'noticias', component: NoticiasAdminComponent, data: { breadcrumb: 'Administrar Noticias' }},
       { path: 'transparencia', component: AdminTransparencia, data: { breadcrumb: 'Administrar Transparencia' } },
       { path: 'pqrsf', component: AdminPqrsf, data: { breadcrumb: 'Administrar PQRSF' } },
       { path: 'cotizaciones', component: CotizacionesPropuestas, data: {Breadcrumb: 'Cotizaciones y Propuestas'}},

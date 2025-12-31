@@ -4,38 +4,50 @@ import { Noticia } from '../../models/noticias/noticias/noticias-module';
 @Injectable({ providedIn: 'root' })
 export class NoticiasService {
 
-  private noticias: Noticia[] = [
-    {
-      id: 1,
-      titulo: 'Jornada de vacunación',
-      resumen: 'Vacunación para niños y adultos mayores',
-      contenido: 'Texto completo de la noticia...',
-      fechaPublicacion: new Date(2025, 0, 5),
-      autor: 'Admin',
-      imagenUrl: 'assets/images/vacunacion.jpg',
-      estado: 'publicada'
-    }
-  ];
+  private storageKey = 'noticias-data';
+  private noticias: Noticia[] = [];
+
+  constructor() {
+    const saved = localStorage.getItem(this.storageKey);
+    this.noticias = saved ? JSON.parse(saved) : [];
+  }
+
+  private save(): void {
+    localStorage.setItem(this.storageKey, JSON.stringify(this.noticias));
+  }
+
+  /* ===== ADMIN ===== */
 
   getAll(): Noticia[] {
     return [...this.noticias];
   }
 
-  getById(id: number): Noticia | undefined {
-    return this.noticias.find(n => n.id === id);
+  crear(data: Omit<Noticia, 'id' | 'fechaPublicacion'>): void {
+    const nueva: Noticia = {
+      ...data,
+      id: Date.now(),
+      fechaPublicacion: new Date()
+    };
+    this.noticias.unshift(nueva);
+    this.save();
   }
 
-  create(noticia: Noticia): void {
-    noticia.id = Date.now();
-    this.noticias.push(noticia);
+  cambiarEstado(id: number, estado: Noticia['estado']): void {
+    const n = this.noticias.find(x => x.id === id);
+    if (n) {
+      n.estado = estado;
+      this.save();
+    }
   }
 
-  update(noticia: Noticia): void {
-    const index = this.noticias.findIndex(n => n.id === noticia.id);
-    if (index !== -1) this.noticias[index] = noticia;
-  }
-
-  delete(id: number): void {
+  eliminar(id: number): void {
     this.noticias = this.noticias.filter(n => n.id !== id);
+    this.save();
+  }
+
+  /* ===== PÚBLICO ===== */
+
+  getPublicadas(): Noticia[] {
+    return this.noticias.filter(n => n.estado === 'publicada');
   }
 }
