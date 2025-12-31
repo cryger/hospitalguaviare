@@ -76,13 +76,13 @@
 }
 
 /* ============================
-   MODAL GOV - FIX DEFINITIVO
+   MODAL GOBIERNO DIGITAL
 ============================ */
 
 .gov-modal-backdrop {
   position: fixed !important;
   inset: 0;
-  background: rgba(0, 0, 0, 0.45);
+  background: rgba(17, 24, 39, 0.45);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -95,7 +95,84 @@
   max-width: 720px;
   max-height: 90vh;
   overflow-y: auto;
-  border-radius: 6px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+  border-radius: 8px;
+  box-shadow: 0 20px 30px rgba(0,0,0,0.2);
 }
+
+/* HEADER */
+
+.gov-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.gov-modal-header h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #111827;
+}
+
+/* BODY */
+
+.gov-modal-body {
+  padding: 1.5rem 1.25rem;
+}
+
+.preview-image {
+  width: 100%;
+  max-height: 280px;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+}
+
+.preview-meta {
+  display: block;
+  font-size: 0.75rem;
+  color: #6b7280;
+  margin-bottom: 0.75rem;
+}
+
+.preview-resumen {
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+  color: #111827;
+}
+
+.preview-contenido {
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: #374151;
+  white-space: pre-line;
+}
+
+/* FOOTER */
+
+.gov-modal-footer {
+  padding: 0.75rem 1.25rem;
+  border-top: 1px solid #e5e7eb;
+  text-align: right;
+}
+
+/* BOTONES */
+
+.gov-btn-secondary {
+  background-color: #e5e7eb;
+  color: #111827;
+  border: none;
+  padding: 0.5rem 1.25rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.gov-btn-secondary:hover {
+  background-color: #d1d5db;
+}
+
 
