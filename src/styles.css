@@ -132,7 +132,7 @@ body.high-contrast {
 /* TEXTO GENERAL */
 body.high-contrast * {
   background-color: transparent !important;
-  color: #ffffff !important;
+  color: #ffff00 !important;
   border-color: #ffffff !important;
 }
 
@@ -171,4 +171,72 @@ body.high-contrast i {
   fill: #ffff00 !important;
   color: #ffff00 !important;
 }
+
+/* ============================
+   PROTECCIÓN HEADER GOV.CO
+============================ */
+
+/* Contenedor principal del menú */
+body.high-contrast .container-navbar-menu-govco,
+body.high-contrast .blue-menu-govco {
+  background-color: #000000 !important;
+  color: #ffff00 !important;
+
+}
+
+/* Restablecer estilos internos del menú GOV */
+body.high-contrast .container-navbar-menu-govco *,
+body.high-contrast .blue-menu-govco * {
+  background-color: initial !important;
+  color: inherit !important;
+  border-color: inherit !important;
+  box-shadow: none !important;
+}
+
+/* ============================
+   ALTO CONTRASTE CONTENIDO
+============================ */
+
+body.high-contrast main,
+body.high-contrast .dashboard-content,
+body.high-contrast .dashboard-main {
+  background-color: #000000 !important;
+  color: #ffff00 !important;
+}
+
+/* TEXTO */
+body.high-contrast h1,
+body.high-contrast h2,
+body.high-contrast h3,
+body.high-contrast h4,
+body.high-contrast p,
+body.high-contrast span,
+body.high-contrast li,
+body.high-contrast label {
+  color: #ffff00 !important;
+}
+
+/* LINKS */
+body.high-contrast a {
+  color: #ffff00 !important;
+  text-decoration: underline;
+}
+
+/* INPUTS */
+body.high-contrast input,
+body.high-contrast textarea,
+body.high-contrast select {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+}
+
+/* BOTONES */
+body.high-contrast button {
+  background-color: #000000 !important;
+  color: #ffff00 !important;
+  border: 2px solid #ffff00 !important;
+}
+
+
 
