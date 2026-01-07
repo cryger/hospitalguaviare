@@ -3,8 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import { NgbPaginationModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbAlert } from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule } from '@angular/forms';
-
-      import { NgbPagination,
+import { NgbPagination,
 	NgbPaginationEllipsis,
 	NgbPaginationFirst,
 	NgbPaginationLast,

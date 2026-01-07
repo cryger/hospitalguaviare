@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { Accessibility } from '../../shared/services/accessibility/accessibility';
+import { ScreenReaderService } from '../../shared/services/accessibility/screen-reader.service';
+
 
 
 @Component({
@@ -7,6 +9,7 @@ import { Accessibility } from '../../shared/services/accessibility/accessibility
   standalone: true,
   templateUrl: './accesibilidad.html',
   styleUrls: ['./accesibilidad.css'],
+  imports: [],
 })
 export class Accesibilidad {
 
@@ -14,7 +17,7 @@ export class Accesibilidad {
   fontSize: number = 16; // tamaño base
   private contrast_key = 'high-contrast';
 
-  constructor(private accessiblity:Accessibility){}
+  constructor(private accessiblity:Accessibility, private screenReader:ScreenReaderService){}
 
   // Abrir/cerrar menú
   toggleMenu(): void {
@@ -52,5 +55,6 @@ export class Accesibilidad {
     const texto = document.body.innerText;
     const speech = new SpeechSynthesisUtterance(texto);
     window.speechSynthesis.speak(speech);
+
   }
 }

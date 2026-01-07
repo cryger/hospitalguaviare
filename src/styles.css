@@ -283,6 +283,83 @@ body.high-contrast .logo-contraste {
   display: inline-block !important;
 }
 
+/* ============================
+   TOPBAR - ALTO CONTRASTE
+============================ */
+
+body.high-contrast .barra-superior-govco {
+  background-color: #ffdd00 !important; /* AMARILLO */
+  color: #000000 !important;
+  border-bottom: 2px solid #000000;
+}
+
+/* Texto e iconos del topbar */
+body.high-contrast .barra-superior-govco *,
+body.high-contrast .barra-superior-govco i,
+body.high-contrast .barra-superior-govco svg {
+  color: #000000 !important;
+  fill: #000000 !important;
+}
+
+/* ============================
+   FOOTER - ALTO CONTRASTE
+============================ */
+
+body.high-contrast footer,
+body.high-contrast .govco-footer-logo {
+  background-color: #ffdd00 !important;
+  color: #000000 !important;
+  border-top: 2px solid #000000;
+}
+
+/* Texto del footer */
+body.high-contrast footer *,
+body.high-contrast .govco-footer-logo * {
+  color: #000000 !important;
+}
+
+/* ============================
+   BARRA DE ACCESIBILIDAD
+   ALTO CONTRASTE
+============================ */
+
+body.high-contrast .accessibility-wrapper,
+body.high-contrast .accessibility-bar,
+body.high-contrast .accessibility-container {
+  background-color: #ffff00 !important; /* AMARILLO */
+  border: 2px solid #000000;
+}
+
+/** ====================================
+          BOTONES E ICONOS DE LA BARRA
+========================================**/
+
+body.high-contrast .accessibility-wrapper button,
+body.high-contrast .accessibility-bar button,
+body.high-contrast .accessibility-container button {
+  background-color: #ffff00 !important;
+  color: #000000 !important;
+  border: 2px solid #000000 !important;
+}
+
+/** ====================================
+      HOVER BARRA DE ACCESIBILIDAD
+=======================================**/
+body.high-contrast .accessibility-wrapper button:hover,
+body.high-contrast .accessibility-bar button:hover,
+body.high-contrast .accessibility-container button:hover {
+  background-color: #000000 !important;
+  color: #ffff00 !important;
+}
+
+body.high-contrast .accessibility-wrapper button:focus,
+body.high-contrast .accessibility-bar button:focus,
+body.high-contrast .accessibility-container button:focus {
+  outline: 3px solid #000000 !important;
+  outline-offset: 2px;
+}
+
+
 
 
 
