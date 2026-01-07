@@ -261,6 +261,32 @@ body.high-contrast textarea {
   caret-color: #ffffff !important;
 }
 
+/* ============================
+   LOGO - ALTO CONTRASTE GOV
+============================ */
+
+/* Por defecto */
+.logo-contraste {
+  display: none;
+}
+
+.logo-normal {
+  display: inline-block;
+}
+
+/* Cuando alto contraste está activo */
+body.high-contrast .logo-normal {
+  display: none !important;
+}
+
+body.high-contrast .logo-contraste {
+  display: inline-block !important;
+}
+
+
+
+
+
 
 
 
