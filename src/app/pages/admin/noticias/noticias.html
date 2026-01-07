@@ -1,162 +1,293 @@
 <h2 class="gov-title">Gestión de Noticias</h2>
 
-<form
-  [formGroup]="form"
-  (ngSubmit)="guardar()"
-  class="gov-form"
-  novalidate
->
-
-  <!-- TÍTULO -->
-  <div class="gov-field">
-    <label for="titulo">Título de la noticia</label>
-    <input
-      id="titulo"
-      type="text"
-      formControlName="titulo"
-      aria-describedby="tituloHelp"
-    />
-    <small id="tituloHelp">
-      Escriba un título claro y descriptivo.
-    </small>
-  </div>
-
-  <!-- RESUMEN -->
-  <div class="gov-field">
-    <label for="resumen">Resumen</label>
-    <textarea
-      id="resumen"
-      rows="3"
-      formControlName="resumen"
-    ></textarea>
-    <small>
-      Máximo 2 líneas. Se mostrará en la vista pública.
-    </small>
-  </div>
-
-  <!-- CONTENIDO -->
-  <div class="gov-field">
-    <label for="contenido">Contenido completo</label>
-    <textarea
-      id="contenido"
-      rows="6"
-      formControlName="contenido"
-    ></textarea>
-  </div>
-
-  <!-- AUTOR -->
-  <div class="gov-field">
-    <label for="autor">Autor</label>
-    <input
-      id="autor"
-      type="text"
-      formControlName="autor"
-    />
-  </div>
-
-  <!-- IMAGEN -->
-  <div class="gov-field">
-    <label for="imagenUrl">URL de imagen</label>
-    <input
-      id="imagenUrl"
-      type="text"
-      formControlName="imagenUrl"
-      placeholder="https://"
-    />
-    <small>
-      Opcional. Imagen representativa de la noticia.
-    </small>
-  </div>
-
-  <!-- ESTADO -->
-  <div class="gov-field">
-    <label for="estado">Estado de publicación</label>
-    <select id="estado" formControlName="estado">
-      <option value="publicada">Publicada</option>
-      <option value="borrador">Borrador</option>
-    </select>
-  </div>
-
-  <!-- BOTONES -->
-
-  <div class="gov-actions">
+<!-- =========================
+     HEADER + ACCIÓN
+========================== -->
+<div class="noticias-header">
   <button
+    class="gov-btn-primary"
     type="button"
-    class="gov-btn-secondary"
-    (click)="abrirPreview()"
-    [disabled]="form.invalid"
+    (click)="abrirModalCrear()"
   >
-    Vista previa
+    ➕ Agregar noticia
   </button>
 </div>
-  <div class="gov-actions">
-    <button
-      type="submit"
-      class="gov-btn-primary"
-      [disabled]="form.invalid"
-    >
-      Guardar noticia
-    </button>
-  </div>
-
-</form>
 
 <!-- =========================
-     MODAL VISTA PREVIA
+     RESUMEN (KPIs simples)
 ========================== -->
-<div class="gov-modal-backdrop" *ngIf="previewOpen">
+<div class="noticias-kpis">
+  <div class="kpi-card">
+    <span>Total noticias</span>
+    <strong>{{ noticias.length }}</strong>
+  </div>
+
+  <div class="kpi-card">
+    <span>Publicadas</span>
+    <strong>{{ totalPublicadas }}</strong>
+  </div>
+
+  <div class="kpi-card">
+    <span>Borradores</span>
+    <strong>{{ totalBorradores }}</strong>
+  </div>
+</div>
+
+<!-- =========================
+     LISTADO
+========================== -->
+<div class="noticias-listado">
+
+  <input
+    type="text"
+    placeholder="Buscar noticia..."
+    [(ngModel)]="filtro"
+    aria-label="Buscar noticia"
+  />
+
+  <table>
+    <thead>
+      <tr>
+        <th>Título</th>
+        <th>Autor</th>
+        <th>Fecha</th>
+        <th>Estado</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let n of noticiasFiltradas">
+        <td>{{ n.titulo }}</td>
+        <td>{{ n.autor }}</td>
+        <td>{{ n.fechaPublicacion | date }}</td>
+        <td>{{ n.estado }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
+
+<!-- =========================
+     MODAL CREAR NOTICIA
+========================== -->
+<div class="gov-modal-backdrop" *ngIf="crearOpen">
+
+  <div class="gov-modal" role="dialog" aria-modal="true">
+
+    <header class="gov-modal-header">
+      <h3>Crear noticia</h3>
+      <button
+        type="button"
+        class="gov-modal-close"
+        aria-label="Cerrar"
+        (click)="cerrarModalCrear()"
+      >
+        ✕
+      </button>
+    </header>
+
+    <section class="gov-modal-body">
+
+      <!-- 🔽 AQUÍ VA TU FORMULARIO ACTUAL SIN CAMBIOS -->
+      <form
+        [formGroup]="form"
+        (ngSubmit)="guardar()"
+        class="gov-form"
+        novalidate
+      >
+
+        <!-- TÍTULO -->
+        <div class="gov-field">
+          <label for="titulo">Título</label>
+          <input id="titulo" type="text" formControlName="titulo" />
+        </div>
+
+        <!-- RESUMEN -->
+        <div class="gov-field">
+          <label for="resumen">Resumen</label>
+          <textarea rows="3" formControlName="resumen"></textarea>
+        </div>
+
+        <!-- CONTENIDO -->
+        <div class="gov-field">
+          <label for="contenido">Contenido</label>
+          <textarea rows="6" formControlName="contenido"></textarea>
+        </div>
+
+        <!-- AUTOR -->
+        <div class="gov-field">
+          <label for="autor">Autor</label>
+          <input type="text" formControlName="autor" />
+        </div>
+
+        <!-- IMAGEN -->
+        <div class="gov-field">
+          <label>URL imagen</label>
+          <input type="text" formControlName="imagenUrl" />
+        </div>
+
+        <!-- ESTADO -->
+        <div class="gov-field">
+          <label>Estado</label>
+          <select formControlName="estado">
+            <option value="publicada">Publicada</option>
+            <option value="borrador">Borrador</option>
+          </select>
+        </div>
+
+        <div class="gov-actions">
+          <button
+            type="button"
+            class="gov-btn-secondary"
+            (click)="abrirPreview()"
+            [disabled]="form.invalid"
+          >
+            Vista previa
+          </button>
+
+          <button
+            type="submit"
+            class="gov-btn-primary"
+            [disabled]="form.invalid"
+          >
+            Guardar noticia
+          </button>
+        </div>
+
+      </form>
+
+    </section>
+
+  </div>
+</div>
+
+<!-- =========================
+     MODAL CREAR NOTICIA
+========================== -->
+<div class="gov-modal-backdrop" *ngIf="crearOpen">
 
   <div class="gov-modal" role="dialog" aria-modal="true">
 
     <!-- HEADER -->
     <header class="gov-modal-header">
-      <h3>Vista previa de la noticia</h3>
+      <div>
+        <h3>Crear noticia</h3>
+        <p class="gov-modal-subtitle">
+          Complete la información para registrar una nueva noticia institucional.
+        </p>
+      </div>
+
       <button
         type="button"
         class="gov-modal-close"
-        aria-label="Cerrar vista previa"
-        (click)="cerrarPreview()"
+        aria-label="Cerrar"
+        (click)="cerrarModalCrear()"
       >
         ✕
       </button>
     </header>
 
     <!-- BODY -->
-    <section class="gov-modal-body" *ngIf="previewData">
+    <section class="gov-modal-body">
 
-      <img
-        class="preview-image"
-        [src]="previewData.imagen"
-        alt="Imagen de la noticia"
-      />
+      <form
+        [formGroup]="form"
+        (ngSubmit)="guardar()"
+        class="gov-form"
+        novalidate
+      >
 
-      <h2>{{ previewData.titulo }}</h2>
+        <!-- TÍTULO -->
+        <div class="gov-field">
+          <label for="titulo">Título de la noticia</label>
+          <input
+            id="titulo"
+            type="text"
+            formControlName="titulo"
+          />
+        </div>
 
-      <small class="preview-meta">
-        {{ previewData.fecha | date:'longDate' }} — {{ previewData.autor }}
-      </small>
+        <!-- RESUMEN -->
+        <div class="gov-field">
+          <label for="resumen">Resumen</label>
+          <textarea
+            id="resumen"
+            rows="3"
+            formControlName="resumen"
+          ></textarea>
+        </div>
 
-      <p class="preview-resumen">
-        {{ previewData.resumen }}
-      </p>
+        <!-- CONTENIDO -->
+        <div class="gov-field">
+          <label for="contenido">Contenido completo</label>
+          <textarea
+            id="contenido"
+            rows="6"
+            formControlName="contenido"
+          ></textarea>
+        </div>
 
-      <div class="preview-contenido">
-        {{ previewData.contenido }}
-      </div>
+        <!-- GRID -->
+        <div class="gov-form-grid">
+
+          <div class="gov-field">
+            <label for="autor">Autor</label>
+            <input
+              id="autor"
+              type="text"
+              formControlName="autor"
+            />
+          </div>
+
+          <div class="gov-field">
+            <label for="estado">Estado</label>
+            <select
+              id="estado"
+              formControlName="estado"
+            >
+              <option value="publicada">Publicada</option>
+              <option value="borrador">Borrador</option>
+            </select>
+          </div>
+
+        </div>
+
+        <!-- IMAGEN -->
+        <div class="gov-field">
+          <label for="imagenUrl">URL de imagen</label>
+          <input
+            id="imagenUrl"
+            type="text"
+            formControlName="imagenUrl"
+            placeholder="https://"
+          />
+          <small>Opcional. Imagen representativa de la noticia.</small>
+        </div>
+
+        <!-- ACCIONES -->
+        <footer class="gov-modal-actions">
+          <button
+            type="button"
+            class="gov-btn-secondary"
+            (click)="cerrarModalCrear()"
+          >
+            Cancelar
+          </button>
+
+          <button
+            type="submit"
+            class="gov-btn-primary"
+            [disabled]="form.invalid"
+          >
+            Guardar noticia
+          </button>
+        </footer>
+
+      </form>
 
     </section>
 
-    <!-- FOOTER -->
-    <footer class="gov-modal-footer">
-      <button
-        type="button"
-        class="gov-btn-secondary"
-        (click)="cerrarPreview()"
-      >
-        Cerrar
-      </button>
-    </footer>
-
   </div>
 </div>
+
 

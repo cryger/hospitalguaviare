@@ -1,33 +1,135 @@
-/* ============================
-   FORMULARIOS GOV.CO
-============================ */
+/* =========================================================
+   ESTRUCTURA GENERAL
+========================================================= */
 
-.gov-title {
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: #111827;
+.noticias-header {
+  display: flex;
+  justify-content: flex-end;
   margin-bottom: 1.5rem;
 }
 
-.gov-form {
-  max-width: 100%;
+.noticias-listado {
   background: #ffffff;
-  padding: 24px;
-  border-radius: 6px;
   border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  padding: 1.25rem;
+  margin-top: 2rem;
+}
+
+/* =========================================================
+   KPIs (TARJETAS RESUMEN)
+========================================================= */
+
+.noticias-kpis {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.kpi-card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  padding: 1.25rem;
+}
+
+.kpi-card span {
+  display: block;
+  font-size: 0.75rem;
+  color: #374151;
+  margin-bottom: 0.25rem;
+}
+
+.kpi-card strong {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #004884; /* Color institucional GOV */
+}
+
+/* =========================================================
+   BUSCADOR
+========================================================= */
+
+.noticias-listado input[type="text"] {
+  width: 100%;
+  max-width: 320px;
+  padding: 0.5rem 0.75rem;
+  margin-bottom: 1rem;
+  font-size: 0.875rem;
+  border-radius: 4px;
+  border: 1px solid #9ca3af;
+}
+
+.noticias-listado input:focus {
+  outline: none;
+  border-color: #004884;
+}
+
+/* =========================================================
+   TABLA
+========================================================= */
+
+.noticias-listado table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.noticias-listado th {
+  text-align: left;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: #374151;
+  border-bottom: 2px solid #e5e7eb;
+  padding: 0.75rem;
+}
+
+.noticias-listado td {
+  padding: 0.75rem;
+  font-size: 0.875rem;
+  color: #111827;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.noticias-listado tr:hover {
+  background: #f9fafb;
+}
+
+/* =========================================================
+   ESTADOS
+========================================================= */
+
+.estado {
+  font-weight: 600;
+  font-size: 0.75rem;
+  text-transform: capitalize;
+}
+
+.estado.publicada {
+  color: #065f46;
+}
+
+.estado.borrador {
+  color: #92400e;
+}
+
+/* =========================================================
+   FORMULARIO GOV.CO (SE CONSERVA)
+========================================================= */
+
+.gov-form {
+  background: #ffffff;
+  padding: 0;
 }
 
 .gov-field {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 1.25rem;
+  margin-bottom: 1rem;
 }
 
 .gov-field label {
-  font-size: 0.875rem;
+  font-size: 0.75rem;
   font-weight: 600;
   color: #111827;
-  margin-bottom: 0.25rem;
 }
 
 .gov-field input,
@@ -37,7 +139,6 @@
   font-size: 0.875rem;
   border-radius: 4px;
   border: 1px solid #9ca3af;
-  background: #ffffff;
 }
 
 .gov-field input:focus,
@@ -47,15 +148,14 @@
   border-color: #004884;
 }
 
-.gov-field small {
-  font-size: 0.75rem;
-  color: #4b5563;
-  margin-top: 0.25rem;
-}
-
-/* BOTONES */
+/* =========================================================
+   BOTONES GOV
+========================================================= */
 
 .gov-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
   margin-top: 1.5rem;
 }
 
@@ -75,91 +175,6 @@
   cursor: not-allowed;
 }
 
-/* ============================
-   MODAL GOBIERNO DIGITAL
-============================ */
-
-.gov-modal-backdrop {
-  position: fixed !important;
-  inset: 0;
-  background: rgba(17, 24, 39, 0.45);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 99999;
-}
-
-.gov-modal {
-  background: #ffffff;
-  width: 100%;
-  max-width: 720px;
-  max-height: 90vh;
-  overflow-y: auto;
-  border-radius: 8px;
-  box-shadow: 0 20px 30px rgba(0,0,0,0.2);
-}
-
-/* HEADER */
-
-.gov-modal-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1rem 1.25rem;
-  border-bottom: 1px solid #e5e7eb;
-}
-
-.gov-modal-header h3 {
-  font-size: 1rem;
-  font-weight: 600;
-  color: #111827;
-}
-
-/* BODY */
-
-.gov-modal-body {
-  padding: 1.5rem 1.25rem;
-}
-
-.preview-image {
-  width: 100%;
-  max-height: 280px;
-  object-fit: cover;
-  border-radius: 6px;
-  margin-bottom: 1rem;
-}
-
-.preview-meta {
-  display: block;
-  font-size: 0.75rem;
-  color: #6b7280;
-  margin-bottom: 0.75rem;
-}
-
-.preview-resumen {
-  font-size: 0.9rem;
-  font-weight: 500;
-  margin-bottom: 1rem;
-  color: #111827;
-}
-
-.preview-contenido {
-  font-size: 0.875rem;
-  line-height: 1.6;
-  color: #374151;
-  white-space: pre-line;
-}
-
-/* FOOTER */
-
-.gov-modal-footer {
-  padding: 0.75rem 1.25rem;
-  border-top: 1px solid #e5e7eb;
-  text-align: right;
-}
-
-/* BOTONES */
-
 .gov-btn-secondary {
   background-color: #e5e7eb;
   color: #111827;
@@ -171,8 +186,181 @@
   cursor: pointer;
 }
 
-.gov-btn-secondary:hover {
-  background-color: #d1d5db;
+/* =========================================================
+   MODAL GOBIERNO DIGITAL
+========================================================= */
+
+.gov-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(17, 24, 39, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999;
+}
+
+.gov-modal {
+  background: #ffffff;
+  width: 100%;
+  max-width: 820px;
+  max-height: 90vh;
+  overflow-y: auto;
+  border-radius: 8px;
+  box-shadow: 0 25px 40px rgba(0,0,0,0.25);
 }
 
 
+.gov-modal-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.gov-modal-header h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #111827;
+}
+.gov-modal-body {
+  padding: 1.75rem 1.5rem;
+}
+
+
+
+/*=========================================================
+  NUEVOS CAMBIOS A MODAL
+  ======================================================*/
+ .gov-modal-subtitle {
+  font-size: 0.85rem;
+  color: #6b7280;
+  margin-top: 0.25rem;
+  max-width: 90%;
+}
+
+
+.gov-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.gov-field {
+  display: flex;
+  flex-direction: column;
+}
+
+.gov-field label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 0.35rem;
+}
+
+.gov-field input,
+.gov-field textarea,
+.gov-field select {
+  width: 96%;
+  padding: 0.65rem 0.75rem;
+  font-size: 0.875rem;
+  border-radius: 4px;
+  border: 1px solid #9ca3af;
+  background: #ffffff;
+}
+
+.gov-field textarea {
+  resize: vertical;
+  min-height: 90px;
+}
+
+.gov-field textarea#contenido {
+  min-height: 160px;
+}
+
+.gov-form-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 1.25rem;
+}
+
+.gov-field small {
+  font-size: 0.75rem;
+  color: #6b7280;
+  margin-top: 0.25rem;
+}
+
+.gov-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #e5e7eb;
+}
+
+.gov-btn-primary {
+  min-width: 160px;
+}
+
+.gov-btn-secondary {
+  min-width: 120px;
+}
+
+
+@media (max-width: 640px) {
+  .gov-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .gov-modal {
+    margin: 1rem;
+  }
+}
+
+
+
+/* =========================================================
+   PREVIEW
+========================================================= */
+
+.preview-image {
+  width: 100%;
+  max-height: 280px;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+}
+
+.preview-meta {
+  font-size: 0.75rem;
+  color: #6b7280;
+  margin-bottom: 0.75rem;
+}
+
+.preview-resumen {
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+
+.preview-contenido {
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: #374151;
+  white-space: pre-line;
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 768px) {
+  .noticias-kpis {
+    grid-template-columns: 1fr;
+  }
+
+  .gov-modal {
+    margin: 1rem;
+  }
+}
