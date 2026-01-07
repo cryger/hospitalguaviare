@@ -133,7 +133,7 @@ body.high-contrast {
 body.high-contrast * {
   background-color: transparent !important;
   color: #ffff00 !important;
-  border-color: #ffffff !important;
+  border-color: #ffff00 !important;
 }
 
 /* LINKS */
@@ -154,7 +154,7 @@ body.high-contrast input,
 body.high-contrast textarea,
 body.high-contrast select {
   background: #000000 !important;
-  color: #ffffff !important;
+  color: #ffff00 !important;
   border: 2px solid #ffffff !important;
 }
 
@@ -237,6 +237,30 @@ body.high-contrast button {
   color: #ffff00 !important;
   border: 2px solid #ffff00 !important;
 }
+
+/* ============================
+   MENÚ GOV.CO - ALTO CONTRASTE
+============================ */
+
+body.high-contrast .text-item-menu-govco {
+  color: #ffff00 !important; /* AMARILLO */
+}
+
+/* Iconos del menú si existen */
+body.high-contrast .text-item-menu-govco svg,
+body.high-contrast .text-item-menu-govco i {
+  color: #ffff00 !important;
+  fill: #ffff00 !important;
+}
+/* ============================
+   CURSOR / CARET
+============================ */
+
+body.high-contrast input,
+body.high-contrast textarea {
+  caret-color: #ffffff !important;
+}
+
 
 
 
