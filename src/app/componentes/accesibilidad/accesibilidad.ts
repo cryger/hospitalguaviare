@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Accessibility } from '../../shared/services/accessibility/accessibility';
 
 
 @Component({
@@ -11,6 +12,9 @@ export class Accesibilidad {
 
   menuOpen: boolean = true;
   fontSize: number = 16; // tamaño base
+  private contrast_key = 'high-contrast';
+
+  constructor(private accessiblity:Accessibility){}
 
   // Abrir/cerrar menú
   toggleMenu(): void {
@@ -19,7 +23,12 @@ export class Accesibilidad {
 
   // Alterna contraste alto
   cambiarContexto(): void {
-    document.body.classList.toggle('alto-contraste');
+
+    this.accessiblity.toggleContrast();
+    console.log('Se cambio el contraste a un color govco');
+
+    /*document.body.classList.toggle('alto-contraste');*/
+
   }
 
   // Reduce la letra suavemente

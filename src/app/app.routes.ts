@@ -21,6 +21,7 @@ import { Pqrsf as AdminPqrsf } from './pages/admin/pqrsf/pqrsf';
 import { Transparencia as AdminTransparencia } from './pages/admin/transparencia/transparencia';
 import { AuthGuard } from './shared/guards/auth/auth-guard';
 import { Breadcrumb } from './componentes/breadcrumb/breadcrumb';
+import { NoticiasListAdmin } from './pages/admin/noticias/noticias-list-admin/noticias-list-admin';
 
 export const routes: Routes = [
 
@@ -58,6 +59,24 @@ export const routes: Routes = [
       { path: 'usuarios', component: Usuarios, data: { breadcrumb: 'Administrar Usuarios' } },
       { path: 'configuracion', component: Configuacion, data: {Breadcrumb: 'Configuracion'}}
     ]
+  },
+
+  // NOTICIAS RUTAS
+  {
+    path: 'admin/noticias',
+    children:[
+      {
+        path: '',
+        component: NoticiasListAdmin,
+        data: {Breadcrumb: 'Noticias'}
+      },
+      {
+      path: 'crear',
+      component: NoticiasAdminComponent,
+      data: { breadcrumb: 'Agregar noticia' }
+    }
+    ]
+
   },
 
   // 🚫 FALLBACK

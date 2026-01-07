@@ -119,3 +119,56 @@ html, body {
   width: 100%;
 }
 
+
+/* ============================
+   ALTO CONTRASTE - GOV.CO
+============================ */
+
+body.high-contrast {
+  background: #000000 !important;
+  color: #ffffff !important;
+}
+
+/* TEXTO GENERAL */
+body.high-contrast * {
+  background-color: transparent !important;
+  color: #ffffff !important;
+  border-color: #ffffff !important;
+}
+
+/* LINKS */
+body.high-contrast a {
+  color: #ffff00 !important;
+  text-decoration: underline;
+}
+
+/* BOTONES */
+body.high-contrast button {
+  background: #000000 !important;
+  color: #ffff00 !important;
+  border: 2px solid #ffff00 !important;
+}
+
+/* INPUTS */
+body.high-contrast input,
+body.high-contrast textarea,
+body.high-contrast select {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+}
+
+/* TARJETAS / MODALES */
+body.high-contrast .card,
+body.high-contrast .gov-modal,
+body.high-contrast .dashboard-sidebar {
+  background: #000000 !important;
+}
+
+/* ICONOS */
+body.high-contrast svg,
+body.high-contrast i {
+  fill: #ffff00 !important;
+  color: #ffff00 !important;
+}
+
