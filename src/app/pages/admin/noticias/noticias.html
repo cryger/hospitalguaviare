@@ -63,7 +63,7 @@
         <td>{{ n.fechaPublicacion | date }}</td>
         <td>{{ n.estado }}</td>
         <!-- 🔴 ACCIONES -->
-      <td class="acciones">
+      <td class="acciones" style="align-items: center;">
         <button
           type="button"
           class="btn-action btn-edit"
@@ -74,7 +74,7 @@
         <button
           type="button"
           class="btn-action btn-delete"
-          (click)="eliminar(n.id)">
+          (click)="eliminarNoticia(n.id)">
           Eliminar
         </button>
       </td>
@@ -214,5 +214,56 @@
 
   </div>
 </div>
+
+<!-- =========================
+     MODAL CONFIRMAR ELIMINACIÓN
+========================== -->
+<div class="gov-modal-backdrop" *ngIf="eliminarOpen">
+
+  <div class="gov-modal gov-modal-sm" role="dialog" aria-modal="true">
+
+    <header class="gov-modal-header">
+      <h3>Confirmar eliminación</h3>
+
+      <button
+        type="button"
+        class="gov-modal-close"
+        aria-label="Cerrar"
+        (click)="cerrarModalEliminar()"
+      >
+        ✕
+      </button>
+    </header>
+
+    <section class="gov-modal-body">
+      <p>
+        ¿Está seguro de que desea eliminar esta noticia?
+      </p>
+      <p class="gov-muted">
+        Esta acción no se puede deshacer.
+      </p>
+    </section>
+
+    <footer class="gov-modal-actions">
+      <button
+        type="button"
+        class="gov-btn-secondary"
+        (click)="cerrarModalEliminar()"
+      >
+        Cancelar
+      </button>
+
+      <button
+        type="button"
+        class="gov-btn-danger"
+        (click)="confirmarEliminacion()"
+      >
+        Eliminar
+      </button>
+    </footer>
+
+  </div>
+</div>
+
 
 

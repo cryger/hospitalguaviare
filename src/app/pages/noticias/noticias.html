@@ -19,11 +19,11 @@
   </div>
 
   <!-- GRID DE NOTICIAS -->
-  <div class="govco-noticias-grid">
+  <section class="govco-noticias-grid">
 
     <article
       class="noticia-card"
-      *ngFor="let noticia of noticiasFiltradas | slice:0:4">
+      *ngFor="let noticia of noticiasPaginadas">
 
       <div class="noticia-imagen">
         <img [src]="noticia.imagen" [alt]="noticia.titulo">
@@ -47,7 +47,16 @@
 
     </article>
 
-  </div>
+  </section>
+  <button
+  *ngFor="let p of paginas"
+  class="gov-page-number"
+  [class.active]="paginaActual === p"
+  (click)="irPagina(p)"
+>
+  {{ p }}
+</button>
+
 
 </section>
 

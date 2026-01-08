@@ -30,8 +30,9 @@
 
 .govco-noticias-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 1.5rem;
+  padding: 1rem 0;
 }
 
 /* ================= CARD ================= */
@@ -39,15 +40,30 @@
 .noticia-card {
   border: 1px solid #E0E0E0;
   border-radius: 6px;
+  border: 1px solid #e5e7eb;
   background-color: #FFFFFF;
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  height: 100%;
+  transition: box-shadow 0.2s ease;
+}
+
+.noticia-card:hover{
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+}
+
+.noticia-imagen {
+  width: 100%;
+  height: 160px; /* 🔴 CLAVE */
+  overflow: hidden;
+  background: #f3f4f6;
 }
 
 .noticia-imagen img {
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: cover;
   display: block;
 }
 
@@ -90,10 +106,127 @@
   cursor: pointer;
 }
 
+/*==========================================
+    Noticia contenido - Estilos
+    ===================================*/
+
+  .noticia-body {
+  padding: 0.75rem 0.85rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.noticia-categoria {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  color: #004884;
+  font-weight: 600;
+}
+
+.noticia-titulo {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #111827;
+  line-height: 1.25;
+  margin: 0;
+}
+
+.noticia-resumen {
+  font-size: 0.85rem;
+  color: #374151;
+  line-height: 1.4;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* 🔴 máximo 3 líneas */
+  -webkit-box-orient: vertical;
+}
+
+.noticia-fecha {
+  margin-top: auto;
+  font-size: 0.75rem;
+  color: #6b7280;
+}
+
+/*===============================
+  PAGINACION ESTILOS
+===============================*/
+.gov-pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.35rem;
+  margin: 2rem 0 1rem;
+  flex-wrap: wrap;
+}
+
+/* Botones anterior / siguiente */
+.gov-page-btn {
+  background: #e5e7eb;
+  border: 1px solid #d1d5db;
+  color: #111827;
+  padding: 0.35rem 0.75rem;
+  font-size: 0.85rem;
+  border-radius: 4px;
+  cursor: pointer;
+  align-items: center;
+}
+
+.gov-page-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Números */
+.gov-page-number {
+  background: #ffffff;
+  border: 1px solid #d1d5db;
+  color: #004884;
+  min-width: 34px;
+  height: 34px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  border-radius: 4px;
+  cursor: pointer;
+  align-items: center;
+}
+
+/* Activo */
+.gov-page-number.active {
+  background: #004884;
+  color: #ffffff;
+  border-color: #004884;
+}
+
+/* Hover */
+.gov-page-number:hover:not(.active),
+.gov-page-btn:hover:not(:disabled) {
+  background: #f3f4f6;
+}
+
+
 /* ================= RESPONSIVE ================= */
 
 @media (max-width: 991px) {
   .govco-noticias-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 1200px) {
+  .noticias-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .noticias-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .noticias-grid {
     grid-template-columns: 1fr;
   }
 }

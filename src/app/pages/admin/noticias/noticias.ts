@@ -35,6 +35,9 @@ export class NoticiasAdminComponent implements OnInit {
   modoEdicion = false;
   noticiaEditandoId: number | null = null;
 
+  eliminarOpen = false;
+  noticiaEliminarId: number | null = null;
+
   constructor(
     private fb: FormBuilder,
     private noticiasService: NoticiasService
@@ -121,23 +124,25 @@ export class NoticiasAdminComponent implements OnInit {
   this.noticiaEditandoId = null;
 }
 
-  eliminarNoticia(id:number):void{
-    const confirmar = confirm('¿Está seguro de eliminar esta noticia?');
+  eliminarNoticia(id: number): void {
+  this.noticiaEliminarId = id;
+  this.eliminarOpen = true;
+}
 
-    if (!confirmar) {
-      return;
-    }
+confirmarEliminacion(): void {
+  if (this.noticiaEliminarId === null) return;
 
-    console.log('[ELIMINAR] Noticia ID:', id);
+  this.noticiasService.eliminar(this.noticiaEliminarId);
+  this.cargar();
 
-    // 🔜 FUTURO (API real)
-    // this.noticiasService.eliminar(id).subscribe(() => {
-    //   this.cargarNoticias();
-    // });
+  this.cerrarModalEliminar();
+}
 
-    // 🔹 TEMPORAL (local)
-    this.noticias = this.noticias.filter(n => n.id !== id);
-  }
+cerrarModalEliminar(): void {
+  this.eliminarOpen = false;
+  this.noticiaEliminarId = null;
+}
+
 
   /* =========================
      FILTRO LISTADO
