@@ -30,7 +30,10 @@ export class NoticiasAdminComponent implements OnInit {
   crearOpen = false;
   previewOpen = false;
   filtro = '';
-Noticia: any;
+  Noticia: any;
+
+  modoEdicion = false;
+  noticiaEditandoId: number | null = null;
 
   constructor(
     private fb: FormBuilder,
@@ -59,13 +62,23 @@ Noticia: any;
   }
 
   guardar(): void {
-    if (this.form.invalid) return;
+  if (this.form.invalid) return;
 
+  if (this.modoEdicion && this.noticiaEditandoId !== null) {
+    // 🔄 ACTUALIZAR
+    this.noticiasService.actualizar(
+      this.noticiaEditandoId,
+      this.form.value
+    );
+  } else {
+    // ➕ CREAR
     this.noticiasService.crear(this.form.value);
-    this.form.reset({ estado: 'publicada' });
-    this.cerrarModalCrear();
-    this.cargar();
   }
+
+  this.resetFormulario();
+  this.cargar();
+}
+
 
   cambiarEstado(id: number, estado: Noticia['estado']): void {
     this.noticiasService.cambiarEstado(id, estado);
@@ -82,12 +95,32 @@ Noticia: any;
     =======================*/
 
   editarNoticia(id:number):void{
-      // 🔜 FUTURO (API / Routing)
-  // this.router.navigate(['/admin/noticias/editar', id]);
+    const noticia = this.noticias.find(n => n.id === id);
 
-  console.log('[EDITAR] Noticia ID:', id);
+    if (!noticia) return;
 
+    this.modoEdicion = true;
+    this.noticiaEditandoId = id;
+
+    this.form.patchValue({
+      titulo: noticia.titulo,
+      resumen: noticia.resumen,
+      contenido: noticia.contenido,
+      autor: noticia.autor,
+      imagenUrl: noticia.imagenUrl,
+      estado: noticia.estado
+    });
+
+    this.crearOpen = true; // abre el modal
   }
+
+  resetFormulario(): void {
+  this.form.reset({ estado: 'publicada' });
+  this.crearOpen = false;
+  this.modoEdicion = false;
+  this.noticiaEditandoId = null;
+}
+
   eliminarNoticia(id:number):void{
     const confirmar = confirm('¿Está seguro de eliminar esta noticia?');
 
@@ -142,6 +175,7 @@ get totalBorradores(): number {
   cerrarModalCrear(): void {
     this.crearOpen = false;
     this.form.reset({ estado: 'publicada' });
+    this.resetFormulario();
   }
 
   /* =========================

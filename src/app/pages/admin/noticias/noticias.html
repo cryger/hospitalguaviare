@@ -84,101 +84,7 @@
 
 </div>
 
-<!-- =========================
-     MODAL CREAR NOTICIA
-========================== -->
-<div class="gov-modal-backdrop" *ngIf="crearOpen">
 
-  <div class="gov-modal" role="dialog" aria-modal="true">
-
-    <header class="gov-modal-header">
-      <h3>Crear noticia</h3>
-      <button
-        type="button"
-        class="gov-modal-close"
-        aria-label="Cerrar"
-        (click)="cerrarModalCrear()"
-      >
-        ✕
-      </button>
-    </header>
-
-    <section class="gov-modal-body">
-
-      <!-- 🔽 AQUÍ VA TU FORMULARIO ACTUAL SIN CAMBIOS -->
-      <form
-        [formGroup]="form"
-        (ngSubmit)="guardar()"
-        class="gov-form"
-        novalidate
-      >
-
-        <!-- TÍTULO -->
-        <div class="gov-field">
-          <label for="titulo">Título</label>
-          <input id="titulo" type="text" formControlName="titulo" />
-        </div>
-
-        <!-- RESUMEN -->
-        <div class="gov-field">
-          <label for="resumen">Resumen</label>
-          <textarea rows="3" formControlName="resumen"></textarea>
-        </div>
-
-        <!-- CONTENIDO -->
-        <div class="gov-field">
-          <label for="contenido">Contenido</label>
-          <textarea rows="6" formControlName="contenido"></textarea>
-        </div>
-
-        <!-- AUTOR -->
-        <div class="gov-field">
-          <label for="autor">Autor</label>
-          <input type="text" formControlName="autor" />
-        </div>
-
-        <!-- IMAGEN -->
-        <div class="gov-field">
-          <label>URL imagen</label>
-          <input type="text" formControlName="imagenUrl" />
-        </div>
-
-        <!-- ESTADO -->
-        <div class="gov-field">
-          <label>Estado</label>
-          <select formControlName="estado">
-            <option value="publicada">Publicada</option>
-            <option value="borrador">Borrador</option>
-          </select>
-        </div>
-
-
-
-        <div class="gov-actions">
-          <button
-            type="button"
-            class="gov-btn-secondary"
-            (click)="abrirPreview()"
-            [disabled]="form.invalid"
-          >
-            Vista previa
-          </button>
-
-          <button
-            type="submit"
-            class="gov-btn-primary"
-            [disabled]="form.invalid"
-          >
-            Guardar noticia
-          </button>
-        </div>
-
-      </form>
-
-    </section>
-
-  </div>
-</div>
 
 <!-- =========================
      MODAL CREAR NOTICIA
@@ -190,7 +96,7 @@
     <!-- HEADER -->
     <header class="gov-modal-header">
       <div>
-        <h3>Crear noticia</h3>
+        <h3>{{ modoEdicion ? 'Editar noticia' : 'Crear noticia' }}</h3>
         <p class="gov-modal-subtitle">
           Complete la información para registrar una nueva noticia institucional.
         </p>
@@ -298,7 +204,7 @@
             class="gov-btn-primary"
             [disabled]="form.invalid"
           >
-            Guardar noticia
+            {{ modoEdicion ? 'Actualizar noticia' : 'Guardar noticia' }}
           </button>
         </footer>
 

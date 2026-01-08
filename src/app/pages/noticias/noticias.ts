@@ -27,7 +27,9 @@ export class NoticiasPublicComponent implements OnInit {
   constructor(private noticiasService: NoticiasService) {}
 
   ngOnInit(): void {
+    this.noticiasService.noticias$.subscribe(() => {
     this.cargarNoticias();
+  });
   }
 
   private cargarNoticias(): void {
