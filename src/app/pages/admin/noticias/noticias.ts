@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NoticiasService } from '../../../shared/services/noticias/noticias';
-import { Noticia } from '../../../shared/models/noticias/noticias/noticias-module';
+import { Noticia} from '../../../shared/models/noticias/noticias/noticias-module';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -30,6 +30,7 @@ export class NoticiasAdminComponent implements OnInit {
   crearOpen = false;
   previewOpen = false;
   filtro = '';
+Noticia: any;
 
   constructor(
     private fb: FormBuilder,
@@ -74,6 +75,35 @@ export class NoticiasAdminComponent implements OnInit {
   eliminar(id: number): void {
     this.noticiasService.eliminar(id);
     this.cargar();
+  }
+
+  /*==========================
+    acciones sobre la noticia
+    =======================*/
+
+  editarNoticia(id:number):void{
+      // 🔜 FUTURO (API / Routing)
+  // this.router.navigate(['/admin/noticias/editar', id]);
+
+  console.log('[EDITAR] Noticia ID:', id);
+
+  }
+  eliminarNoticia(id:number):void{
+    const confirmar = confirm('¿Está seguro de eliminar esta noticia?');
+
+    if (!confirmar) {
+      return;
+    }
+
+    console.log('[ELIMINAR] Noticia ID:', id);
+
+    // 🔜 FUTURO (API real)
+    // this.noticiasService.eliminar(id).subscribe(() => {
+    //   this.cargarNoticias();
+    // });
+
+    // 🔹 TEMPORAL (local)
+    this.noticias = this.noticias.filter(n => n.id !== id);
   }
 
   /* =========================

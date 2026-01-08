@@ -52,6 +52,7 @@
         <th>Autor</th>
         <th>Fecha</th>
         <th>Estado</th>
+        <th>Acciones</th>
       </tr>
     </thead>
 
@@ -61,6 +62,22 @@
         <td>{{ n.autor }}</td>
         <td>{{ n.fechaPublicacion | date }}</td>
         <td>{{ n.estado }}</td>
+        <!-- 🔴 ACCIONES -->
+      <td class="acciones">
+        <button
+          type="button"
+          class="btn-action btn-edit"
+          (click)="editarNoticia(n.id)">
+          Editar
+        </button>
+
+        <button
+          type="button"
+          class="btn-action btn-delete"
+          (click)="eliminar(n.id)">
+          Eliminar
+        </button>
+      </td>
       </tr>
     </tbody>
   </table>
@@ -134,6 +151,8 @@
             <option value="borrador">Borrador</option>
           </select>
         </div>
+
+
 
         <div class="gov-actions">
           <button
