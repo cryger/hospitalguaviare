@@ -1,0 +1,223 @@
+:host {
+  display: block;
+  padding: 1rem;
+}
+
+
+.gov-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.gov-table thead {
+  background-color: #f8fafc;
+}
+
+.gov-table th {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #374151;
+  text-align: left;
+  padding: 0.75rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.gov-table td {
+  font-size: 0.85rem;
+  color: #111827;
+  padding: 0.75rem;
+  border-bottom: 1px solid #e5e7eb;
+  vertical-align: middle;
+  align-items: left;
+}
+
+.gov-table tbody tr:hover {
+  background-color: #f9fafb;
+}
+
+.gov-table td:last-child {
+  text-align: left;
+}
+
+/*==============================
+  ESTILOS PARA HEADER DE BOTONES
+==============================*/
+.gov-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.gov-modal-header h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #004884;
+  margin: 0;
+}
+
+.gov-modal-close {
+  background: transparent;
+  border: none;
+  font-size: 1.25rem;
+  color: #374151;
+  cursor: pointer;
+}
+
+.admin-header {
+  display: flex;
+  justify-content: flex-end; /* 🔴 derecha */
+  align-items: center;
+  margin-bottom: 1.25rem;
+}
+
+.acciones {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+
+
+/*==================================
+  ESTILOS PARA BOTONES DE ACCIONES
+  ================================*/
+  .gov-btn-primary {
+  background-color: #004884;
+  color: #ffffff;
+  border: none;
+  padding: 0.45rem 1.1rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.gov-btn-warning {
+  background-color: #ffdd00;
+  color: #ffffff;
+  border: none;
+  padding: 0.45rem 1.1rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.gov-btn-primary:hover {
+  background-color: #003a6d;
+}
+
+.gov-btn-secondary {
+  background-color: #e5e7eb;
+  color: #111827;
+  border: none;
+  padding: 0.45rem 1.1rem;
+  font-size: 0.85rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.gov-btn-secondary:hover {
+  background-color: #d1d5db;
+}
+
+.gov-btn-danger {
+  background-color: #c62828;
+  color: #ffffff;
+  border: none;
+  padding: 0.4rem 0.9rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.gov-btn-danger:hover {
+  background-color: #b71c1c;
+}
+/*================================
+  ESTILOS PARA MODAL
+  ===============================*/
+.gov-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.gov-modal {
+  background: #ffffff;
+  width: 100%;
+  max-width: 520px;
+  border-radius: 6px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
+.gov-modal-body {
+  padding: 1.25rem;
+}
+
+.gov-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.gov-field label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 0.25rem;
+}
+
+.gov-field input,
+.gov-field textarea,
+.gov-field select {
+  width: 100%;
+  font-size: 0.85rem;
+  padding: 0.45rem 0.5rem;
+  border-radius: 4px;
+  border: 1px solid #d1d5db;
+}
+
+.gov-field textarea {
+  resize: vertical;
+}
+
+.gov-field small {
+  font-size: 0.75rem;
+  color: #6b7280;
+}
+
+.gov-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+/*=================================
+            RESPONSIVE
+=================================*/
+
+@media (max-width: 768px) {
+  .gov-table {
+    font-size: 0.8rem;
+  }
+
+  .admin-header {
+    justify-content: center;
+  }
+}

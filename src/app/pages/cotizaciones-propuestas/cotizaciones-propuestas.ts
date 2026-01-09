@@ -1,11 +1,24 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { CotizacionesService } from '../../shared/services/cotizaciones/cotizaciones';
+import { Cotizacion } from '../../shared/models/cotizacion/cotizacion/cotizacion-module';
 
 @Component({
   selector: 'app-cotizaciones-propuestas',
-  imports: [],
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './cotizaciones-propuestas.html',
-  styleUrl: './cotizaciones-propuestas.css',
+  styleUrls: ['./cotizaciones-propuestas.css']
 })
-export class CotizacionesPropuestas {
+export class CotizacionesPropuestas implements OnInit {
 
+  cotizaciones: Cotizacion[] = [];
+
+  constructor(private cotizacionesService: CotizacionesService) {}
+
+  ngOnInit(): void {
+    this.cotizacionesService.cotizaciones$.subscribe(() => {
+      this.cotizaciones = this.cotizacionesService.getPublicadas();
+    });
+  }
 }

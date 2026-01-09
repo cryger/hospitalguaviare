@@ -21,6 +21,7 @@ import { Pqrsf as AdminPqrsf } from './pages/admin/pqrsf/pqrsf';
 import { Transparencia as AdminTransparencia } from './pages/admin/transparencia/transparencia';
 import { AuthGuard } from './shared/guards/auth/auth-guard';
 import { Breadcrumb } from './componentes/breadcrumb/breadcrumb';
+import { CotizacionesPropuestasAdminComponent } from './pages/admin/cotizaciones-propuestas-admin/cotizaciones-propuestas-admin/cotizaciones-propuestas-admin';
 
 
 export const routes: Routes = [
@@ -55,7 +56,7 @@ export const routes: Routes = [
       { path: 'noticias', component: NoticiasAdminComponent, data: { breadcrumb: 'Administrar Noticias' }},
       { path: 'transparencia', component: AdminTransparencia, data: { breadcrumb: 'Administrar Transparencia' } },
       { path: 'pqrsf', component: AdminPqrsf, data: { breadcrumb: 'Administrar PQRSF' } },
-      { path: 'cotizaciones', component: CotizacionesPropuestas, data: {Breadcrumb: 'Cotizaciones y Propuestas'}},
+      { path: 'cotizaciones', component: CotizacionesPropuestasAdminComponent, data: {Breadcrumb: 'Cotizaciones y Propuestas'}},
       { path: 'usuarios', component: Usuarios, data: { breadcrumb: 'Administrar Usuarios' } },
       { path: 'configuracion', component: Configuacion, data: {Breadcrumb: 'Configuracion'}}
     ]

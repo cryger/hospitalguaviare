@@ -1,1 +1,149 @@
-<p>cotizaciones-propuestas-admin works!</p>
+<h2 class="gov-title">Gestión de Cotizaciones y Propuestas</h2>
+
+<!-- =========================
+     HEADER + ACCIÓN
+========================== -->
+<div class="admin-header">
+  <button
+    class="gov-btn-primary"
+    type="button"
+    (click)="abrirCrear()">
+    ➕ Agregar cotización
+  </button>
+</div>
+
+<!-- =========================
+     LISTADO
+========================== -->
+<table class="gov-table">
+  <thead>
+    <tr>
+      <th>Título</th>
+      <th>Documento</th>
+      <th>Estado</th>
+      <th>Fecha</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let c of cotizaciones">
+      <td>{{ c.titulo }}</td>
+      <td>{{ c.archivoNombre }}</td>
+      <td>{{ c.estado }}</td>
+      <td>{{ c.fechaPublicacion | date }}</td>
+      <td class="acciones">
+         <button
+          type="button"
+          class="gov-btn-secondary"
+          (click)="abrirPreview(c)">
+          Ver
+        </button>
+
+        <button
+          type="button"
+          class="gov-btn-warning"
+          (click)="abrirEditar(c)">
+          Editar
+        </button>
+
+        <button
+          type="button"
+          class="gov-btn-danger"
+          (click)="eliminar(c.id)">
+          Eliminar
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
+<!-- =========================
+     MODAL CREAR COTIZACIÓN
+========================== -->
+<div class="gov-modal-backdrop" *ngIf="modalOpen">
+
+  <div class="gov-modal">
+
+    <!-- HEADER -->
+    <header class="gov-modal-header">
+      <h3>
+        {{ modalModo === 'crear' ? 'Registrar cotización' :
+           modalModo === 'editar' ? 'Editar cotización' :
+           'Vista previa de cotización' }}
+      </h3>
+
+      <button class="gov-modal-close" (click)="cerrarModal()">✕</button>
+    </header>
+
+    <!-- BODY -->
+    <section class="gov-modal-body">
+
+      <!-- PREVIEW -->
+      <div *ngIf="esPreview() && cotizacionSeleccionada">
+        <p><strong>Título:</strong> {{ cotizacionSeleccionada.titulo }}</p>
+        <p><strong>Descripción:</strong> {{ cotizacionSeleccionada.descripcion }}</p>
+        <p><strong>Estado:</strong> {{ cotizacionSeleccionada.estado }}</p>
+
+        <a
+          class="gov-btn-secondary"
+          [href]="cotizacionSeleccionada.archivoUrl"
+          target="_blank">
+          📄 Ver documento
+        </a>
+      </div>
+
+      <!-- FORM -->
+      <form
+        *ngIf="!esPreview()"
+        [formGroup]="form"
+        (ngSubmit)="guardar()"
+        class="gov-form">
+
+        <div class="gov-field">
+          <label>Título</label>
+          <input type="text" formControlName="titulo" />
+        </div>
+
+        <div class="gov-field">
+          <label>Descripción</label>
+          <textarea rows="3" formControlName="descripcion"></textarea>
+        </div>
+
+        <div class="gov-field" *ngIf="modalModo === 'crear'">
+          <label>Documento</label>
+          <input
+            type="file"
+            (change)="onFileSelected($event)"
+            accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.jpg,.png"
+          />
+        </div>
+
+        <div class="gov-field">
+          <label>Estado</label>
+          <select formControlName="estado">
+            <option value="publicada">Publicada</option>
+            <option value="borrador">Borrador</option>
+          </select>
+        </div>
+
+        <footer class="gov-modal-actions">
+          <button type="button" class="gov-btn-secondary" (click)="cerrarModal()">
+            Cancelar
+          </button>
+
+          <button
+            type="submit"
+            class="gov-btn-primary"
+            [disabled]="form.invalid">
+            {{ modalModo === 'editar' ? 'Actualizar' : 'Guardar' }}
+          </button>
+        </footer>
+
+      </form>
+
+    </section>
+
+  </div>
+</div>

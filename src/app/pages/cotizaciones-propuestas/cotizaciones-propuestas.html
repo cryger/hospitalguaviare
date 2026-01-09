@@ -1,1 +1,25 @@
-<p>cotizaciones-propuestas works!</p>
+<section class="cotizaciones-publicas">
+
+  <article class="cotizacion-card" *ngFor="let c of cotizaciones">
+
+    <div class="cotizacion-info">
+      <h3>{{ c.titulo }}</h3>
+      <p>{{ c.descripcion }}</p>
+
+      <span class="fecha">
+        {{ c.fechaPublicacion | date:'longDate' }}
+      </span>
+    </div>
+
+    <a
+      class="gov-btn-secondary"
+      [href]="c.archivoUrl"
+      target="_blank"
+      rel="noopener"
+    >
+      📄 Descargar documento
+    </a>
+
+  </article>
+
+</section>
