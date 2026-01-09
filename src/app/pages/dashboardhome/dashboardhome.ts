@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NoticiasService } from '../../shared/services/noticias/noticias';
 import { Noticia } from '../../shared/models/noticias/noticias/noticias-module';
+import { Cotizacion } from '../../shared/models/cotizacion/cotizacion/cotizacion-module';
+import { filter } from 'rxjs';
+import { CotizacionesService } from '../../shared/services/cotizaciones/cotizaciones';
 
 @Component({
   selector: 'app-dashboard-home',
@@ -21,11 +24,13 @@ export class DashboardHomeComponent implements OnInit {
   ultimasNoticias: Noticia[] = [];
   ultimasPublicadas: Noticia[] = [];
   ultimosBorradores: Noticia[] = [];
+  cotizacionespropuestas: Cotizacion[] | undefined;
 
   constructor(private noticiasService: NoticiasService) {}
 
   ngOnInit(): void {
     this.cargarNoticias();
+    this.cargarCotizaciones();
   }
 
   private cargarNoticias(): void {
@@ -38,5 +43,9 @@ export class DashboardHomeComponent implements OnInit {
     this.ultimasNoticias = todas.slice(0, 5);
     this.ultimasPublicadas = todas.filter(n => n.estado === 'publicada').slice(0, 5);
     this.ultimosBorradores = todas.filter(n => n.estado === 'borrador').slice(0, 5);
+  }
+
+  private cargarCotizaciones():void{
+    console.log ("Aqui debe traer las cotizaciones");
   }
 }
