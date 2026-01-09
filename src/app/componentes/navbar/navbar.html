@@ -1,4 +1,11 @@
 <div class="container-navbar-menu-govco blue-menu-govco">
+  <!-- OVERLAY MOBILE -->
+  <div
+    class="gov-menu-backdrop"
+    *ngIf="menuAbierto"
+    (click)="cerrarMenu()">
+  </div>
+
   <nav class="navbar navbar-menu-govco"
        role="navigation"
        aria-label="Menú principal">
@@ -6,7 +13,7 @@
     <!-- BOTÓN HAMBURGUESA -->
     <button
       class="menu-toggle-govco"
-      (click)="menuAbierto = !menuAbierto"
+      (click)="toggleMenu()"
       aria-label="Abrir menú">
       ☰
     </button>
@@ -17,13 +24,13 @@
 
       <ul class="navbar-nav navbar-nav-menu-govco mx-auto">
         <li class="nav-item">
-          <a class="nav-link active" routerLink="/">
+          <a class="nav-link active" routerLink="/" (click)="cerrarMenu()">
             <span class="text-item-menu-govco">Inicio</span>
           </a>
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" routerLink="/transparencia">
+          <a class="nav-link" routerLink="/transparencia" (click)="cerrarMenu()">
             <span class="text-item-menu-govco">
               Transparencia y acceso a información pública
             </span>
@@ -31,7 +38,7 @@
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" routerLink="/atencion-ciudadano">
+          <a class="nav-link" routerLink="/atencion-ciudadano" (click)="cerrarMenu()">
             <span class="text-item-menu-govco">
               Atención y Servicios a la ciudadanía
             </span>
@@ -39,37 +46,37 @@
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" routerLink="/participa">
+          <a class="nav-link" routerLink="/participa" (click)="cerrarMenu()">
             <span class="text-item-menu-govco">Participa</span>
           </a>
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" routerLink="/nuestro-hospital">
+          <a class="nav-link" routerLink="/nuestro-hospital" (click)="cerrarMenu()">
             <span class="text-item-menu-govco">Nuestro Hospital</span>
           </a>
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" routerLink="/normatividad">
+          <a class="nav-link" routerLink="/normatividad" (click)="cerrarMenu()">
             <span class="text-item-menu-govco">Normatividad</span>
           </a>
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" routerLink="/cotizaciones-propuestas">
+          <a class="nav-link" routerLink="/cotizaciones-propuestas" (click)="cerrarMenu()">
             <span class="text-item-menu-govco">Cotizaciones y Propuestas</span>
           </a>
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" routerLink="/trabaja-nosotros">
+          <a class="nav-link" routerLink="/trabaja-nosotros" (click)="cerrarMenu()">
             <span class="text-item-menu-govco">Trabaja con Nosotros</span>
           </a>
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" routerLink="/pqrsf">
+          <a class="nav-link" routerLink="/pqrsf" (click)="cerrarMenu()">
             <span class="text-item-menu-govco">PQRSF</span>
           </a>
         </li>

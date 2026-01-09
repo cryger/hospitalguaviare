@@ -10,4 +10,18 @@ import { RouterLink } from "@angular/router";
 export class Navbar {
   menuAbierto = false;
 
+  toggleMenu(): void {
+  this.menuAbierto = !this.menuAbierto;
+  this.toggleBodyScroll();
+}
+
+cerrarMenu(): void {
+  this.menuAbierto = false;
+  this.toggleBodyScroll();
+}
+
+private toggleBodyScroll(): void {
+  document.body.style.overflow = this.menuAbierto ? 'hidden' : '';
+}
+
 }

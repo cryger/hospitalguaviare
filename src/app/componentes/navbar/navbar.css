@@ -704,6 +704,19 @@ html {
     white-space: normal;
   }
 }
+/* =========================
+   OVERLAY
+========================= */
+.gov-menu-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 998;
+}
+
+/* =========================
+   MENÚ MOBILE
+========================= */
 @media (max-width: 991px) {
 
   .navbar-collapse-menu-govco {
@@ -715,9 +728,21 @@ html {
     z-index: 999;
     border-top: 2px solid #004884;
     box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+
+    /* 🔴 estado cerrado */
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
   }
 
+  /* 🔴 estado abierto */
+  .navbar-collapse-menu-govco.menu-open {
+    max-height: calc(100vh - 80px); /* altura del header */
+    overflow-y: auto;
+  }
 }
+
+
 
 /* cambios para solucionar collapse en movil
 */
@@ -822,6 +847,8 @@ html {
   }
 
 }
+
+
 
 
 
