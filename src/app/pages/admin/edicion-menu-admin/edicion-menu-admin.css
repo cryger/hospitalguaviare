@@ -1,0 +1,10 @@
+.subitem {
+  padding-left: 1.5rem;
+  color: #374151;
+}
+
+.admin-header {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 1rem;
+}

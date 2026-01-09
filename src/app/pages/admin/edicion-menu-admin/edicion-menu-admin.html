@@ -1,0 +1,91 @@
+<h2 class="gov-title">Gestión del menú</h2>
+
+<div class="admin-header">
+  <button class="gov-btn-primary" (click)="abrirModal()">
+    ➕ Agregar elemento
+  </button>
+</div>
+
+<table class="gov-table">
+  <thead>
+    <tr>
+      <th>Etiqueta</th>
+      <th>Ruta</th>
+      <th>Tipo</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <ng-container *ngFor="let p of principales">
+      <tr>
+        <td><strong>{{ p.label }}</strong></td>
+        <td>{{ p.route || '—' }}</td>
+        <td>Principal</td>
+        <td>
+          <button class="gov-btn-danger" (click)="eliminar(p.id)">
+            Eliminar
+          </button>
+        </td>
+      </tr>
+
+      <tr *ngFor="let s of subItems(p.id)">
+        <td class="subitem">↳ {{ s.label }}</td>
+        <td>{{ s.route }}</td>
+        <td>Subítem</td>
+        <td>
+          <button class="gov-btn-danger" (click)="eliminar(s.id)">
+            Eliminar
+          </button>
+        </td>
+      </tr>
+    </ng-container>
+  </tbody>
+</table>
+
+<!-- MODAL -->
+<div class="gov-modal-backdrop" *ngIf="modalOpen">
+  <div class="gov-modal">
+
+    <header class="gov-modal-header">
+      <h3>Agregar elemento al menú</h3>
+      <button class="gov-modal-close" (click)="modalOpen = false">✕</button>
+    </header>
+
+    <section class="gov-modal-body">
+      <form [formGroup]="form" (ngSubmit)="guardar()" class="gov-form">
+
+        <div class="gov-field">
+          <label>Texto</label>
+          <input type="text" formControlName="label" />
+        </div>
+
+        <div class="gov-field">
+          <label>Ruta</label>
+          <input type="text" formControlName="route" placeholder="/ruta" />
+        </div>
+
+        <div class="gov-field">
+          <label>Elemento padre</label>
+          <select formControlName="parentId">
+            <option [ngValue]="null">Principal</option>
+            <option *ngFor="let p of principales" [ngValue]="p.id">
+              {{ p.label }}
+            </option>
+          </select>
+        </div>
+
+        <footer class="gov-modal-actions">
+          <button type="button" class="gov-btn-secondary" (click)="modalOpen = false">
+            Cancelar
+          </button>
+          <button type="submit" class="gov-btn-primary">
+            Guardar
+          </button>
+        </footer>
+
+      </form>
+    </section>
+
+  </div>
+</div>
