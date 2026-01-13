@@ -18,7 +18,7 @@
         <p>{{ s.descripcion }}</p>
 
         <a *ngIf="s.ruta"
-
+           [routerLink]="s.ruta"
            class="gov-link">
           Ver más
         </a>
@@ -28,3 +28,4 @@
   </article>
 
 </section>
+

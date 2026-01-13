@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ServiciosAtencionService } from '../../../../shared/services/servicios-atencion/servicios-atencion';
+
 
 interface CategoriaServicio {
   id: number;
@@ -27,6 +29,7 @@ interface Servicio {
 })
 export class ServiciosAtencionAdmin implements OnInit {
 
+
   /* =========================
      DATA
   ========================== */
@@ -51,7 +54,11 @@ export class ServiciosAtencionAdmin implements OnInit {
   categoriaEditando: CategoriaServicio | null = null;
   servicioEditando: Servicio | null = null;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+  private fb: FormBuilder,
+  private serviciosAtencionService: ServiciosAtencionService
+) {}
+
 
   ngOnInit(): void {
     this.initForms();
@@ -79,14 +86,8 @@ export class ServiciosAtencionAdmin implements OnInit {
   }
 
   private cargarDatos(): void {
-    // TEMPORAL (luego servicio/API)
-    this.categorias = [
-      { id: 1, nombre: 'Canales oficiales', activo: true },
-      { id: 2, nombre: 'Solicitud de citas', activo: true },
-      { id: 3, nombre: 'Información de interés', activo: true }
-    ];
-
-    this.servicios = [];
+    this.categorias = this.serviciosAtencionService.getCategoriasActivas();
+    this.servicios = this.serviciosAtencionService.getServiciosActivos();
   }
 
   /* =========================
@@ -113,20 +114,24 @@ export class ServiciosAtencionAdmin implements OnInit {
     this.formCategoria.patchValue(cat);
   }
 
-  guardarCategoria(): void {
-    if (this.formCategoria.invalid) return;
+ guardarCategoria(): void {
+  if (this.formCategoria.invalid) return;
 
-    if (this.categoriaEditando) {
-      Object.assign(this.categoriaEditando, this.formCategoria.value);
-    } else {
-      this.categorias.push({
-        id: Date.now(),
-        ...this.formCategoria.value
-      });
-    }
-
-    this.cerrarModalCategoria();
+  if (this.categoriaEditando) {
+    Object.assign(this.categoriaEditando, this.formCategoria.value);
+  } else {
+    this.categorias.push({
+      id: Date.now(),
+      ...this.formCategoria.value
+    });
   }
+
+  // ✅ PASO 3: persistir
+  this.serviciosAtencionService.guardarCategorias(this.categorias);
+
+  this.cerrarModalCategoria();
+}
+
 
   cerrarModalCategoria(): void {
     this.modalCategoriaOpen = false;
