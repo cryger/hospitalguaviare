@@ -1,10 +1,254 @@
-.subitem {
-  padding-left: 1.5rem;
+/* HEADER */
+.menu-header {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 1.5rem;
+}
+
+/* TABLA */
+.gov-table-wrapper {
+  background: #ffffff;
+  border-radius: 6px;
+  padding: 1rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,.08);
+}
+
+.gov-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.gov-table th,
+.gov-table td {
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.gov-table th {
+  font-weight: 600;
+  color: #004884;
+}
+
+/* ACCIONES */
+.acciones {
+  display: flex;
+  gap: 0.5rem;
+}
+
+/* ESTADO */
+td span.active {
+  color: #0f5132;
+  font-weight: 600;
+}
+
+/* MODAL */
+.gov-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.45);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gov-modal {
+  background: #ffffff;
+  width: 100%;
+  max-width: 520px;
+  border-radius: 8px;
+  box-shadow: 0 10px 25px rgba(0,0,0,.2);
+}
+
+.gov-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.gov-modal-body {
+  padding: 1rem;
+}
+
+.gov-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+/* ===============================
+   MODAL BACKDROP
+================================ */
+.gov-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ===============================
+   MODAL CONTAINER
+================================ */
+.gov-modal {
+  background: #ffffff;
+  width: 100%;
+  max-width: 560px;
+  border-radius: 8px;
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+  animation: govFadeIn 0.2s ease-out;
+}
+
+/* ===============================
+   HEADER
+================================ */
+.gov-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid #e5e7eb;
+  background-color: #f8fafc;
+}
+
+.gov-modal-header h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #004884;
+}
+
+/* BOTÓN CERRAR */
+.gov-modal-close {
+  background: transparent;
+  border: none;
+  font-size: 1.25rem;
+  cursor: pointer;
   color: #374151;
 }
 
-.admin-header {
+.gov-modal-close:hover {
+  color: #dc2626;
+}
+
+/* ===============================
+   BODY
+================================ */
+.gov-modal-body {
+  padding: 1.25rem;
+}
+
+/* ===============================
+   FORMULARIO
+================================ */
+.gov-form {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.gov-field label {
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-bottom: 0.25rem;
+  color: #374151;
+  display: block;
+}
+
+.gov-field input,
+.gov-field select {
+  width: 100%;
+  padding: 0.55rem 0.65rem;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+.gov-field input:focus,
+.gov-field select:focus {
+  outline: none;
+  border-color: #004884;
+  box-shadow: 0 0 0 2px rgba(0, 72, 132, 0.15);
+}
+
+/* CHECKBOX */
+.gov-field input[type="checkbox"] {
+  width: auto;
+  margin-right: 0.4rem;
+}
+
+/* ===============================
+   ACTIONS
+================================ */
+.gov-modal-actions {
   display: flex;
   justify-content: flex-end;
-  margin-bottom: 1rem;
+  gap: 0.75rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e5e7eb;
 }
+
+/* ===============================
+   ANIMACIÓN
+================================ */
+@keyframes govFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/*========================
+  BOTONES DE ACCION
+=========================*/
+
+.gov-btn-primary {
+  background-color: #004884;
+  color: #ffffff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.gov-btn-editar {
+  background-color: #fd0;
+  color: #111827;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.gov-btn-primary:hover {
+  background-color: #003766;
+}
+
+.gov-btn-editar:hover {
+  background-color: #ead655;
+}
+
+.gov-btn-eliminar{
+  background-color: #c62828;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.gov-btn-eliminar:hover {
+  background-color: #eb5f47;
+}
+

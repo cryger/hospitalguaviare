@@ -1,54 +1,47 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { MenuItem } from '../../../shared/models/menu/menu.model/menu.model-module';
+import { MenuItem } from '../../models/menu/menu.model/menu.model-module';
 
 @Injectable({ providedIn: 'root' })
 export class MenuService {
 
-  private storageKey = 'menu-data';
-
-  private data: MenuItem[] = [];
-  private menu$ = new BehaviorSubject<MenuItem[]>([]);
+  private storageKey = 'menu-items';
+  private items: MenuItem[] = [];
 
   constructor() {
     const saved = localStorage.getItem(this.storageKey);
-    this.data = saved ? JSON.parse(saved) : [];
-    this.menu$.next(this.data);
+    this.items = saved ? JSON.parse(saved) : [];
+  }
+
+  private save(): void {
+    localStorage.setItem(this.storageKey, JSON.stringify(this.items));
   }
 
   getAll(): MenuItem[] {
-    return [...this.data];
+    return [...this.items];
   }
 
-  menuChanges() {
-    return this.menu$.asObservable();
-  }
-
-  crear(item: Omit<MenuItem, 'id'>): void {
-    this.data.push({
-      ...item,
+  crear(data: Omit<MenuItem, 'id'>): void {
+    this.items.push({
+      ...data,
       id: Date.now()
     });
     this.save();
   }
 
   actualizar(id: number, data: Partial<MenuItem>): void {
-    const i = this.data.findIndex(x => x.id === id);
-    if (i !== -1) {
-      this.data[i] = { ...this.data[i], ...data };
-      this.save();
-    }
-  }
+    const index = this.items.findIndex(i => i.id === id);
+    if (index === -1) return;
 
-  eliminar(id: number): void {
-    this.data = this.data.filter(
-      x => x.id !== id && x.parentId !== id
-    );
+    this.items[index] = {
+      ...this.items[index],
+      ...data
+    };
     this.save();
   }
 
-  private save(): void {
-    localStorage.setItem(this.storageKey, JSON.stringify(this.data));
-    this.menu$.next(this.data);
+  eliminar(id: number): void {
+    // elimina hijos también
+    this.items = this.items.filter(i => i.id !== id && i.parentId !== id);
+    this.save();
   }
 }

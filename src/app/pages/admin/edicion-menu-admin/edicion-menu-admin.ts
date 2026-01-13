@@ -5,15 +5,18 @@ import { MenuService } from '../../../shared/services/menu/menu.service';
 import { MenuItem } from '../../../shared/models/menu/menu.model/menu.model-module';
 
 @Component({
-  selector: 'app-edicion-menu-admin',
+  selector: 'app-editar-menu-admin',
+  standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './edicion-menu-admin.html',
-  styleUrl: './edicion-menu-admin.css',
+  styleUrls: ['./edicion-menu-admin.css']
 })
 export class EdicionMenuAdmin implements OnInit {
+
   form!: FormGroup;
-  items: MenuItem[] = [];
+  menus: MenuItem[] = [];
   modalOpen = false;
+  editando: MenuItem | null = null;
 
   constructor(
     private fb: FormBuilder,
@@ -23,47 +26,82 @@ export class EdicionMenuAdmin implements OnInit {
   ngOnInit(): void {
     this.form = this.fb.group({
       label: ['', Validators.required],
-      route: [''],
+      route: ['', Validators.required],
       parentId: [null],
       activo: [true]
     });
 
-    this.cargar();
+    this.cargarMenus();
   }
 
-  cargar(): void {
-    this.items = this.menuService.getAll();
-  }
-
-  abrirModal(): void {
-    this.form.reset({ activo: true, parentId: null });
-    this.modalOpen = true;
+  cargarMenus(): void {
+    this.menus = this.menuService.getAll();
   }
 
   guardar(): void {
-    if (this.form.invalid) return;
+  if (this.form.invalid) return;
 
-    this.menuService.crear({
-      ...this.form.value,
-      orden: this.items.length + 1
-    });
-
-    this.modalOpen = false;
-    this.cargar();
+  if (this.editando) {
+    this.menuService.actualizar(this.editando.id, this.form.value);
+  } else {
+    this.menuService.crear(this.form.value);
   }
+
+  this.cerrarModal();
+  this.cargarMenus();
+}
+
+
+  editar(menu: MenuItem): void {
+  this.editando = menu;
+  this.modalOpen = true;
+
+  this.form.patchValue({
+    label: menu.label,
+    route: menu.route,
+    parentId: menu.parentId,
+    activo: menu.activo
+  });
+}
+
 
   eliminar(id: number): void {
-    if (!confirm('¿Eliminar este elemento del menú?')) return;
+    const ok = confirm('¿Está seguro de eliminar este elemento del menú?');
+    if (!ok) return;
+
     this.menuService.eliminar(id);
-    this.cargar();
+    this.cargarMenus();
   }
 
-  get principales(): MenuItem[] {
-    return this.items.filter(i => !i.parentId);
+  resetForm(): void {
+    this.editando = null;
+    this.form.reset({
+      parentId: null,
+      activo: true
+    });
   }
 
-  subItems(parentId: number): MenuItem[] {
-    return this.items.filter(i => i.parentId === parentId);
+  get menusPrincipales(): MenuItem[] {
+    return this.menus.filter(m => m.parentId === null);
   }
 
+  abrirModal():void{
+    this.modalOpen = true;
+    this.editando = null;
+
+    this.form.reset({
+      parentId: null,
+      activo:true
+    });
+  }
+
+  cerrarModal():void{
+    this.modalOpen = false;
+    this.editando = null;
+
+    this.form.reset({
+      parentId: null,
+      activo:true
+    });
+  }
 }
