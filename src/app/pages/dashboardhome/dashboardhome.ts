@@ -25,6 +25,8 @@ export class DashboardHomeComponent implements OnInit {
   ultimasPublicadas: Noticia[] = [];
   ultimosBorradores: Noticia[] = [];
   cotizacionespropuestas: Cotizacion[] | undefined;
+  totalCotizaciones: any;
+  cotizacionesService: any;
 
   constructor(private noticiasService: NoticiasService) {}
 
@@ -46,6 +48,8 @@ export class DashboardHomeComponent implements OnInit {
   }
 
   private cargarCotizaciones():void{
-    console.log ("Aqui debe traer las cotizaciones");
+    const totalCotizacionesGet = this.cotizacionesService.getAll();
+
+    this.totalCotizaciones = totalCotizacionesGet.length;
   }
 }

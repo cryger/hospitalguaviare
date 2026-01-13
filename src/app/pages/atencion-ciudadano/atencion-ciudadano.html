@@ -1,1 +1,30 @@
-<p>atencion-ciudadano works!</p>
+<h1 class="gov-title">Servicios</h1>
+
+<p class="gov-intro">
+  Consulte los servicios disponibles y los canales oficiales de atención a la ciudadanía.
+</p>
+
+<section class="servicios-container">
+
+  <article class="categoria" *ngFor="let cat of categorias">
+
+    <header class="categoria-header">
+      <h2>{{ cat.nombre }}</h2>
+    </header>
+
+    <ul class="servicios-lista">
+      <li *ngFor="let s of serviciosPorCategoria(cat.id)">
+        <h3>{{ s.titulo }}</h3>
+        <p>{{ s.descripcion }}</p>
+
+        <a *ngIf="s.ruta"
+
+           class="gov-link">
+          Ver más
+        </a>
+      </li>
+    </ul>
+
+  </article>
+
+</section>

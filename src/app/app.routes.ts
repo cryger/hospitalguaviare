@@ -5,7 +5,7 @@ import { Home } from './componentes/home/home';
 import { Transparencia } from './pages/transparencia/transparencia';
 import { Participa } from './pages/participa/participa';
 import { NuestroHospital } from './pages/nuestro-hospital/nuestro-hospital';
-import { AtencionCiudadano } from './pages/atencion-ciudadano/atencion-ciudadano';
+import { AtencionCiudadano} from './pages/atencion-ciudadano/atencion-ciudadano'
 import { CotizacionesPropuestas } from './pages/cotizaciones-propuestas/cotizaciones-propuestas';
 import { TrabajaNosotros} from './pages/trabaja-nosotros/trabaja-nosotros';
 import { Pqrsf } from './pages/pqrsf/pqrsf';
@@ -22,6 +22,7 @@ import { Transparencia as AdminTransparencia } from './pages/admin/transparencia
 import { AuthGuard } from './shared/guards/auth/auth-guard';
 import { Breadcrumb } from './componentes/breadcrumb/breadcrumb';
 import { CotizacionesPropuestasAdminComponent } from './pages/admin/cotizaciones-propuestas-admin/cotizaciones-propuestas-admin/cotizaciones-propuestas-admin';
+import { ServiciosAtencionAdmin } from './pages/admin/servicios-atencion-admin/servicios-atencion-admin/servicios-atencion-admin';
 
 
 export const routes: Routes = [
@@ -57,6 +58,7 @@ export const routes: Routes = [
       { path: 'transparencia', component: AdminTransparencia, data: { breadcrumb: 'Administrar Transparencia' } },
       { path: 'pqrsf', component: AdminPqrsf, data: { breadcrumb: 'Administrar PQRSF' } },
       { path: 'cotizaciones', component: CotizacionesPropuestasAdminComponent, data: {Breadcrumb: 'Cotizaciones y Propuestas'}},
+      { path: 'servicios-atencion-ciudadano', component: ServiciosAtencionAdmin, data: {Breadcrumb: 'Servicios y Atencion al Ciudadano'}},
       { path: 'usuarios', component: Usuarios, data: { breadcrumb: 'Administrar Usuarios' } },
       { path: 'configuracion', component: Configuacion, data: {Breadcrumb: 'Configuracion'}}
     ]

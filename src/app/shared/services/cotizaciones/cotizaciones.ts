@@ -28,6 +28,10 @@ export class CotizacionesService {
     return [...this.cotizaciones];
   }
 
+  getTotal():number{
+    return this.cotizaciones.length;
+  }
+
   crear(data: Omit<Cotizacion, 'id' | 'fechaPublicacion'>): void {
     const nueva: Cotizacion = {
       ...data,
