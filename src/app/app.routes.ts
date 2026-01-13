@@ -22,7 +22,7 @@ import { Transparencia as AdminTransparencia } from './pages/admin/transparencia
 import { AuthGuard } from './shared/guards/auth/auth-guard';
 import { Breadcrumb } from './componentes/breadcrumb/breadcrumb';
 import { CotizacionesPropuestasAdminComponent } from './pages/admin/cotizaciones-propuestas-admin/cotizaciones-propuestas-admin/cotizaciones-propuestas-admin';
-import { EdicionMenuAdmin } from './pages/admin/edicion-menu-admin/edicion-menu-admin';
+
 
 export const routes: Routes = [
 
@@ -53,7 +53,6 @@ export const routes: Routes = [
     canActivate: [AuthGuard],
     children: [
       { path: '', component: DashboardHomeComponent, data: { breadcrumb: 'Dashboard' } },
-      { path: 'menu', component: EdicionMenuAdmin, data: {Breadcrumb: 'Edicion de Menu'}},
       { path: 'noticias', component: NoticiasAdminComponent, data: { breadcrumb: 'Administrar Noticias' }},
       { path: 'transparencia', component: AdminTransparencia, data: { breadcrumb: 'Administrar Transparencia' } },
       { path: 'pqrsf', component: AdminPqrsf, data: { breadcrumb: 'Administrar PQRSF' } },
