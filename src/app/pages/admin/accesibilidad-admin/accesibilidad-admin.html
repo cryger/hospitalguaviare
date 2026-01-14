@@ -1,0 +1,60 @@
+<h2 class="gov-title">Menú de Accesibilidad</h2>
+
+<div class="admin-header-actions">
+  <button class="gov-btn-primary" (click)="abrirModal()">➕ Agregar opción</button>
+</div>
+<br>
+
+<table class="gov-table">
+  <thead>
+    <tr>
+      <th>Título</th>
+      <th>Tipo</th>
+      <th>Estado</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let i of items">
+      <td>{{ i.titulo }}</td>
+      <td>{{ i.tipo }}</td>
+      <td>{{ i.activo ? 'Activo' : 'Inactivo' }}</td>
+      <td>
+        <button class="gov-btn-warning" (click)="abrirModal(i)">Editar</button>
+        <button class="gov-btn-danger" (click)="eliminar(i.id)">Eliminar</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- MODAL -->
+<div class="gov-modal-backdrop" *ngIf="modalOpen">
+  <div class="gov-modal">
+    <form [formGroup]="form" (ngSubmit)="guardar()" class="gov-form">
+      <h3>Opción de accesibilidad</h3>
+
+      <div class="gov-field">
+        <label>Título</label>
+        <input formControlName="titulo" />
+      </div>
+
+      <div class="gov-field">
+        <label>Enlace</label>
+        <input formControlName="url" />
+      </div>
+
+      <fieldset formGroupName="css">
+        <legend>Estilos</legend>
+
+        <input type="color" formControlName="backgroundColor" />
+        <input type="color" formControlName="color" />
+        <input formControlName="borderRadius" placeholder="4px" />
+      </fieldset>
+
+      <footer class="gov-modal-actions">
+        <button type="button" class="gov-btn-secondary" (click)="modalOpen=false">Cancelar</button>
+        <button type="submit" class="gov-btn-primary">Guardar</button>
+      </footer>
+    </form>
+  </div>
+</div>
