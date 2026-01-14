@@ -121,3 +121,25 @@
   gap: 0.75rem;
   margin-top: 1rem;
 }
+
+.gov-btn-primary {
+  background-color: #004884;
+  color: #ffffff;
+  border: none;
+  padding: 0.6rem 1.25rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.gov-btn-secondary {
+  background-color: #e5e7eb;
+  color: #111827;
+  border: none;
+  padding: 0.5rem 1.25rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  border-radius: 4px;
+  cursor: pointer;
+}
