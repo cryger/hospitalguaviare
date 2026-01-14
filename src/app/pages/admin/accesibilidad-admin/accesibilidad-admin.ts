@@ -25,6 +25,7 @@ export class AccesibilidadAdmin implements OnInit {
 
   ngOnInit(): void {
     this.items = this.accesibilidadService.getAll();
+    this.accesibilidadService.getActivos();
 
     this.form = this.fb.group({
       titulo: ['', Validators.required],
