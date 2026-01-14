@@ -28,6 +28,11 @@ export class AccesibilidadService {
     this.generarCSS();
   }
 
+  /*========== admin =========*/
+
+
+
+
   private generarCSS(): void {
     const css = this.items.map(i => `
 .accessibility-btn-${i.id} {

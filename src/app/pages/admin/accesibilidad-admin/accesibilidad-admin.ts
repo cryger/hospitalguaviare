@@ -25,7 +25,7 @@ export class AccesibilidadAdmin implements OnInit {
 
   ngOnInit(): void {
     this.items = this.accesibilidadService.getAll();
-    this.accesibilidadService.getActivos();
+    this.cargar();
 
     this.form = this.fb.group({
       titulo: ['', Validators.required],
@@ -79,5 +79,9 @@ export class AccesibilidadAdmin implements OnInit {
   eliminar(id: number): void {
     this.items = this.items.filter(i => i.id !== id);
     this.accesibilidadService.guardar(this.items);
+  }
+
+  cargar():void{
+    this.items = this.accesibilidadService.getAll();
   }
 }
