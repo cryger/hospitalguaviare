@@ -4,9 +4,12 @@ import { RouterLink } from '@angular/router';
 
 import {
   ServiciosAtencionService,
-  CategoriaServicio,
-  ServicioAtencion
 } from '../../shared/services/servicios-atencion/servicios-atencion';
+
+import {
+  CategoriaServicio,
+  Servicio
+} from '../../shared/models/servicios-atencion/servicios-atencion/servicios-atencion-module'
 
 @Component({
   selector: 'app-atencion-ciudadano',
@@ -18,7 +21,7 @@ import {
 export class AtencionCiudadano implements OnInit {
 
   categorias: CategoriaServicio[] = [];
-  servicios: ServicioAtencion[] = [];
+  servicios: Servicio[] = [];
 
   constructor(
     private serviciosAtencionService: ServiciosAtencionService
@@ -29,7 +32,7 @@ export class AtencionCiudadano implements OnInit {
     this.servicios = this.serviciosAtencionService.getServiciosActivos();
   }
 
-  serviciosPorCategoria(categoriaId: number): ServicioAtencion[] {
+  serviciosPorCategoria(categoriaId: number): Servicio[] {
     return this.servicios.filter(
       s => s.categoriaId === categoriaId
     );

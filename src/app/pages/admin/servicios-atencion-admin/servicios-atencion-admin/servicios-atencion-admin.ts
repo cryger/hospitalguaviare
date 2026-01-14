@@ -2,23 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ServiciosAtencionService } from '../../../../shared/services/servicios-atencion/servicios-atencion';
+import { CategoriaServicio, Servicio } from '../../../../shared/models/servicios-atencion/servicios-atencion/servicios-atencion-module';
 
 
-interface CategoriaServicio {
-  id: number;
-  nombre: string;
-  parentId?: number | null;
-  activo: boolean;
-}
-
-interface Servicio {
-  id: number;
-  categoriaId: number;
-  titulo: string;
-  descripcion: string;
-  ruta?: string;
-  activo: boolean;
-}
 
 @Component({
   selector: 'app-servicios-atencion-admin',
@@ -172,7 +158,8 @@ export class ServiciosAtencionAdmin implements OnInit {
       });
     }
 
-    this.cerrarModalServicio();
+    this.serviciosAtencionService.guardarServicios(this.servicios);
+  this.cerrarModalServicio();
   }
 
   cerrarModalServicio(): void {

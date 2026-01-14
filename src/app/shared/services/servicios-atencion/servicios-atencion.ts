@@ -1,81 +1,70 @@
 import { Injectable } from '@angular/core';
+import { Servicio,CategoriaServicio } from '../../models/servicios-atencion/servicios-atencion/servicios-atencion-module';
 
-export interface CategoriaServicio {
-  id: number;
-  nombre: string;
-  parentId?: number | null;
-  activo: boolean;
-}
-
-export interface ServicioAtencion {
-  id: number;
-  categoriaId: number;
-  titulo: string;
-  descripcion: string;
-  ruta?: string;
-  activo: boolean;
-}
-
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class ServiciosAtencionService {
 
-  private storageKeyCategorias = 'servicios-atencion-categorias';
-  private storageKeyServicios = 'servicios-atencion-servicios';
+  private categoriasKey = 'servicios-categorias';
+  private serviciosKey = 'servicios-items';
 
   private categorias: CategoriaServicio[] = [];
-  private servicios: ServicioAtencion[] = [];
+  private servicios: Servicio[] = [];
+  categoriaId: number | null = null;
 
   constructor() {
-    this.categorias = JSON.parse(
-      localStorage.getItem(this.storageKeyCategorias) || '[]'
-    );
+    this.cargarDesdeStorage();
+  }
 
-    this.servicios = JSON.parse(
-      localStorage.getItem(this.storageKeyServicios) || '[]'
-    );
+  /* =========================
+     STORAGE
+  ========================== */
+
+  private cargarDesdeStorage(): void {
+    const cat = localStorage.getItem(this.categoriasKey);
+    const serv = localStorage.getItem(this.serviciosKey);
+
+    this.categorias = cat ? JSON.parse(cat) : [];
+    this.servicios = serv ? JSON.parse(serv) : [];
+  }
+
+  private guardarStorage(): void {
+    localStorage.setItem(this.categoriasKey, JSON.stringify(this.categorias));
+    localStorage.setItem(this.serviciosKey, JSON.stringify(this.servicios));
   }
 
   /* =========================
      CATEGORÍAS
   ========================== */
 
+  getCategorias(): CategoriaServicio[] {
+    return [...this.categorias];
+  }
+
   getCategoriasActivas(): CategoriaServicio[] {
     return this.categorias.filter(c => c.activo);
   }
 
   guardarCategorias(categorias: CategoriaServicio[]): void {
-    this.categorias = categorias;
-    localStorage.setItem(
-      this.storageKeyCategorias,
-      JSON.stringify(this.categorias)
-    );
+    this.categorias = [...categorias];
+    this.guardarStorage();
   }
 
   /* =========================
      SERVICIOS
   ========================== */
 
-  getServiciosActivos(): ServicioAtencion[] {
+  getServicios(): Servicio[] {
+    return [...this.servicios];
+  }
+
+  getServiciosActivos(): Servicio[] {
     return this.servicios.filter(s => s.activo);
   }
 
-  guardarServicios(servicios: ServicioAtencion[]): void {
-    this.servicios = servicios;
-    localStorage.setItem(
-      this.storageKeyServicios,
-      JSON.stringify(this.servicios)
-    );
-  }
-
-  /* =========================
-     HELPERS
-  ========================== */
-
-  serviciosPorCategoria(categoriaId: number): ServicioAtencion[] {
-    return this.servicios.filter(
-      s => s.categoriaId === categoriaId && s.activo
-    );
+  guardarServicios(servicios: Servicio[]): void {
+    this.servicios = [...servicios];
+    this.guardarStorage();
   }
 }
+
+
