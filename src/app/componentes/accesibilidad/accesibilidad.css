@@ -141,6 +141,63 @@
   background-size: 1rem 1rem;
 }
 
+/* === CENTRO DE RELEVO === */
+
+.barra-accesibilidad-govco .icon-relevo {
+  background: #004884;
+  width: 48px;
+  height: 40px;
+  border: none;
+  outline: none;
+  text-decoration: none;
+}
+
+.barra-accesibilidad-govco .icon-relevo::after {
+  background: #fff;
+  content: '\e9b7';
+  font-family: "govco-font";
+  height: 24px;
+  width: 24px;
+  color: #004884;
+  padding: 4px;
+  border-radius: 5px;
+  opacity: 1;
+  position: relative;
+}
+
+.icon-relevo .govco-signos {
+  background-image: url(../../shared/assets/icons/icon_centro_relevo.svg);
+  min-width: 1rem;
+  min-height: 1rem;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-size: 1rem 1rem;
+}
+
+
+.barra-accesibilidad-govco #titleRelevo {
+  text-align: left;
+  position: absolute;
+  background: #3366CC;
+  color: #fff;
+  line-height: normal !important;
+  font-family: WorkSans-Medium !important;
+  font-size: 14px;
+  margin-top: -8px;
+  opacity: 0;
+  width: 172px;
+  height: 40px;
+  border-radius: 10px 0px 0px 10px;
+  padding: 10px;
+}
+
+.barra-accesibilidad-govco button:hover #titleRelevo {
+  opacity: 1;
+  visibility: visible;
+  right: 55px;
+  left: auto;
+}
+
 .barra-accesibilidad-govco #titleLecturaPantalla {
   background-image: "../../shared/assets/icons/microphone-alt.svg";
   text-align: left;
@@ -157,6 +214,7 @@
   border-radius: 10px 0px 0px 10px;
   padding: 10px;
 }
+
 
 .barra-accesibilidad-govco button:hover #titleLecturaPantalla {
   opacity: 1;

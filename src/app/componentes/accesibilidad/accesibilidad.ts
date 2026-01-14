@@ -57,4 +57,13 @@ export class Accesibilidad {
     window.speechSynthesis.speak(speech);
 
   }
+
+  //Centro de relevo para lengua de senas
+  centroRelevo():void{
+    window.open(
+    'https://ticsinbarreras.mintic.gov.co/791/w3-propertyvalue-339742.html',
+    '_blank',
+    'noopener,noreferrer'
+  );
+  }
 }
