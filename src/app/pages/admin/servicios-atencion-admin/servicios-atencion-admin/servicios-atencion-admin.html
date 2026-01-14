@@ -44,7 +44,7 @@
         <td>{{ c.parentId ? 'Subcategoría' : 'Principal' }}</td>
         <td>{{ c.activo ? 'Activa' : 'Inactiva' }}</td>
         <td class="acciones">
-          <button class="gov-btn-secondary" (click)="editarCategoria(c)">
+          <button class="gov-btn-editar" (click)="editarCategoria(c)">
             Editar
           </button>
           <button class="gov-btn-danger" (click)="eliminarCategoria(c.id)">
@@ -88,7 +88,7 @@
         <td>{{ s.ruta || '-' }}</td>
         <td>{{ s.activo ? 'Activo' : 'Inactivo' }}</td>
         <td class="acciones">
-          <button class="gov-btn-secondary" (click)="editarServicio(s)">
+          <button class="gov-btn-editar" (click)="editarServicio(s)">
             Editar
           </button>
           <button class="gov-btn-danger" (click)="eliminarServicio(s.id)">
