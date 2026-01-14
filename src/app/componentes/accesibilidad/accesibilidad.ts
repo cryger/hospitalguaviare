@@ -1,23 +1,31 @@
 import { Component } from '@angular/core';
 import { Accessibility } from '../../shared/services/accessibility/accessibility';
 import { ScreenReaderService } from '../../shared/services/accessibility/screen-reader.service';
-
-
+import { AccesibilidadService } from '../../shared/services/accesibilidad-service/accesibilidad-service';
+import { AccesibilidadItem } from '../../shared/models/accesibilidad-model/accesibilidad-model/accesibilidad-model-module';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-accesibilidad',
   standalone: true,
   templateUrl: './accesibilidad.html',
   styleUrls: ['./accesibilidad.css'],
-  imports: [],
+  imports: [CommonModule],
 })
 export class Accesibilidad {
 
   menuOpen: boolean = true;
   fontSize: number = 16; // tamaño base
   private contrast_key = 'high-contrast';
+  items: AccesibilidadItem[] = [];
+  abrir: any;
 
-  constructor(private accessiblity:Accessibility, private screenReader:ScreenReaderService){}
+  constructor(private accessiblity:Accessibility, private screenReader:ScreenReaderService, private accesibilidadService: AccesibilidadService){}
+
+  ngOnInit():void{
+    this.items = this.accesibilidadService.getActivos();
+
+  }
 
   // Abrir/cerrar menú
   toggleMenu(): void {

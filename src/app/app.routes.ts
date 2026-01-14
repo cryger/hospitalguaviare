@@ -23,6 +23,7 @@ import { AuthGuard } from './shared/guards/auth/auth-guard';
 import { Breadcrumb } from './componentes/breadcrumb/breadcrumb';
 import { CotizacionesPropuestasAdminComponent } from './pages/admin/cotizaciones-propuestas-admin/cotizaciones-propuestas-admin/cotizaciones-propuestas-admin';
 import { ServiciosAtencionAdmin } from './pages/admin/servicios-atencion-admin/servicios-atencion-admin/servicios-atencion-admin';
+import { AccesibilidadAdmin } from './pages/admin/accesibilidad-admin/accesibilidad-admin';
 
 
 export const routes: Routes = [
@@ -60,6 +61,7 @@ export const routes: Routes = [
       { path: 'cotizaciones', component: CotizacionesPropuestasAdminComponent, data: {Breadcrumb: 'Cotizaciones y Propuestas'}},
       { path: 'servicios-atencion-ciudadano', component: ServiciosAtencionAdmin, data: {Breadcrumb: 'Servicios y Atencion al Ciudadano'}},
       { path: 'usuarios', component: Usuarios, data: { breadcrumb: 'Administrar Usuarios' } },
+      { path: 'accesibilidad-admin', component: AccesibilidadAdmin, data: { breadcrumb: 'Administrar Accesibilidad' } },
       { path: 'configuracion', component: Configuacion, data: {Breadcrumb: 'Configuracion'}}
     ]
   },

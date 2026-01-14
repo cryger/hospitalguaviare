@@ -24,5 +24,13 @@
       <button id="centroRelevo" class="icon-relevo govco-signos"  (click)="centroRelevo()">
         <span id="titleRelevo" class="govco-signal">Centro de Relevo</span>
       </button>
+
+      <button
+        *ngFor="let i of items"
+        [class]="'accessibility-btn-' + i.id"
+        (click)="abrir(i)">
+        {{ i.titulo }}
+      </button>
+
     </div>
   </div>
