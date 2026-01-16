@@ -1,1 +1,79 @@
-<p>usuarios works!</p>
+<h2 class="gov-title">Gestión de Usuarios</h2>
+
+<button class="gov-btn-primary" (click)="abrirModal()">
+  ➕ Agregar usuario
+</button>
+
+<table class="gov-table">
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Usuario</th>
+      <th>Rol</th>
+      <th>Estado</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let u of usuarios">
+      <td>{{ u.nombre }}</td>
+      <td>{{ u.usuario }}</td>
+      <td>{{ u.rol }}</td>
+      <td>{{ u.activo ? 'Activo' : 'Inactivo' }}</td>
+      <td class="acciones">
+        <button class="gov-btn-secondary" (click)="editar(u)">Editar</button>
+        <button class="gov-btn-danger" (click)="eliminar(u.id)">Eliminar</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- MODAL -->
+<div class="gov-modal-backdrop" *ngIf="modalOpen">
+  <div class="gov-modal">
+
+    <header class="gov-modal-header">
+      <h3>{{ editando ? 'Editar usuario' : 'Agregar usuario' }}</h3>
+      <button class="gov-modal-close" (click)="cerrarModal()">✕</button>
+    </header>
+
+    <form [formGroup]="form" (ngSubmit)="guardar()" class="gov-form">
+      <div class="gov-field">
+        <label>Nombre</label>
+        <input formControlName="nombre" />
+      </div>
+
+      <div class="gov-field">
+        <label>Usuario</label>
+        <input formControlName="usuario" />
+      </div>
+
+      <div class="gov-field">
+        <label>Contraseña</label>
+        <input type="password" formControlName="password" />
+      </div>
+
+      <div class="gov-field">
+        <label>Rol</label>
+        <select formControlName="rol">
+          <option value="admin">Administrador</option>
+          <option value="funcionario">Funcionario</option>
+        </select>
+      </div>
+
+      <div class="gov-field">
+        <label>
+          <input type="checkbox" formControlName="activo" />
+          Activo
+        </label>
+      </div>
+
+      <footer class="gov-modal-actions">
+        <button type="button" class="gov-btn-secondary" (click)="cerrarModal()">Cancelar</button>
+        <button type="submit" class="gov-btn-primary">Guardar</button>
+      </footer>
+    </form>
+
+  </div>
+</div>
