@@ -1,19 +1,213 @@
+/* =========================
+   TÍTULO
+========================= */
+.gov-title {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #004884;
+  margin-bottom: 1rem;
+}
+
+/* =========================
+   BOTÓN AGREGAR
+========================= */
+.gov-btn-primary {
+  background-color: #004884;
+  color: #ffffff;
+  border: none;
+  padding: 0.5rem 1.2rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.gov-btn-primary:hover {
+  background-color: #003a6d;
+}
+
+.gov-btn-secondary {
+  background-color: #e5e7eb;
+  color: #111827;
+  border: none;
+  padding: 0.45rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+.gov-btn-danger {
+  background-color: #dc2626;
+  color: white;
+  border: none;
+  padding: 0.45rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+/* =========================
+   TABLA
+========================= */
 .gov-table {
   width: 100%;
   border-collapse: collapse;
+  margin-top: 1rem;
+  background: #ffffff;
 }
 
-.gov-table th,
+.gov-table thead {
+  background-color: #f3f4f6;
+}
+
+.gov-table th {
+  text-align: left;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #374151;
+  padding: 0.75rem;
+  border-bottom: 1px solid #d1d5db;
+}
+
 .gov-table td {
-  padding: 10px;
-  border-bottom: 1px solid #ddd;
+  font-size: 0.85rem;
+  color: #111827;
+  padding: 0.75rem;
+  border-bottom: 1px solid #e5e7eb;
 }
 
+.gov-table tr:hover {
+  background-color: #f9fafb;
+}
+
+/* =========================
+   ACCIONES
+========================= */
 .acciones {
   display: flex;
-  gap: 8px;
+  gap: 0.5rem;
 }
 
+/* =========================
+   MODAL BACKDROP
+========================= */
+.gov-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+/* =========================
+   MODAL
+========================= */
 .gov-modal {
-  max-width: 500px;
+  background: #ffffff;
+  width: 100%;
+  max-width: 480px;
+  border-radius: 8px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  font-family: 'Work Sans', Arial, sans-serif;
+}
+
+/* =========================
+   MODAL HEADER
+========================= */
+.gov-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.gov-modal-header h3 {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #004884;
+}
+
+.gov-modal-close {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: #374151;
+}
+
+/* =========================
+   FORMULARIO
+========================= */
+.gov-form {
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.gov-field {
+  display: flex;
+  flex-direction: column;
+}
+
+.gov-field label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 0.25rem;
+}
+
+.gov-field input,
+.gov-field select {
+  padding: 0.45rem 0.6rem;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  font-size: 0.85rem;
+}
+
+.gov-field input:focus,
+.gov-field select:focus {
+  outline: none;
+  border-color: #004884;
+}
+
+/* =========================
+   CHECKBOX
+========================= */
+.gov-field input[type="checkbox"] {
+  width: auto;
+  margin-right: 0.5rem;
+}
+
+/* =========================
+   MODAL FOOTER
+========================= */
+.gov-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  padding: 0.75rem 1.25rem;
+  border-top: 1px solid #e5e7eb;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media (max-width: 768px) {
+  .gov-table {
+    font-size: 0.8rem;
+  }
+
+  .acciones {
+    flex-direction: column;
+  }
+
+  .gov-modal {
+    max-width: 95%;
+  }
 }
