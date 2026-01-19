@@ -17,8 +17,9 @@ export class AuthGuard implements CanActivate {
       return true;
     }else{
       if(username != 'admin'){
-        localStorage.setItem('auth','false' )
-        localStorage.setItem('Usuario',username)
+        localStorage.getItem('usuarios-data');
+        console.log('Data de usuario:', username);
+        localStorage.setItem('auth','true');
       }
     }
     return false;

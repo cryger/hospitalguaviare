@@ -36,8 +36,10 @@ export class Login {
       this.router.navigate(['/admin']); // 👈 TU DASHBOARD
     } else if(!this.authGuard.login(username,password)){
       localStorage.setItem('usuario', username);
+      this.router.navigate(['/funcionario']);
+      console.log('la ruta de navegacion es:',this.router.navigate(['/funcionario']))
 
-      this.error = 'Usuario o contraseña incorrectos';
+      //this.error = 'Usuario o contraseña incorrectos';
     }
 
 

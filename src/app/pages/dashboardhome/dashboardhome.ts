@@ -24,15 +24,17 @@ export class DashboardHomeComponent implements OnInit {
   ultimasNoticias: Noticia[] = [];
   ultimasPublicadas: Noticia[] = [];
   ultimosBorradores: Noticia[] = [];
-  cotizacionespropuestas: Cotizacion[] | undefined;
+  cotizaciones: Cotizacion[] = [];
+  cotizacionespropuestas: Cotizacion[] = [];
   totalCotizaciones: any;
-  cotizacionesService: any;
 
-  constructor(private noticiasService: NoticiasService) {}
+
+  constructor(private noticiasService: NoticiasService, private cotizacionesService: CotizacionesService) {}
 
   ngOnInit(): void {
     this.cargarNoticias();
     this.cargarCotizaciones();
+    console.log('Servicio:', this.cotizacionesService);
   }
 
   private cargarNoticias(): void {
@@ -48,8 +50,10 @@ export class DashboardHomeComponent implements OnInit {
   }
 
   private cargarCotizaciones():void{
-    const totalCotizacionesGet = this.cotizacionesService.getAll();
+    this.cotizacionesService.cotizaciones$
+    .subscribe((data: Cotizacion[]) =>{
+      this.cotizaciones = data;
+    })
 
-    this.totalCotizaciones = totalCotizacionesGet.length;
   }
 }
