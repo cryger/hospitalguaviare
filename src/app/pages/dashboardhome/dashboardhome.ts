@@ -36,7 +36,7 @@ export class DashboardHomeComponent implements OnInit {
   ngOnInit(): void {
     this.cargarNoticias();
     this.cargarCotizaciones();
-    console.log('Servicio:', this.cotizacionesService);
+
   }
 
   private cargarNoticias(): void {

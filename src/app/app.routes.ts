@@ -8,7 +8,7 @@ import { NuestroHospital } from './pages/nuestro-hospital/nuestro-hospital';
 import { AtencionCiudadano} from './pages/atencion-ciudadano/atencion-ciudadano'
 import { CotizacionesPropuestas } from './pages/cotizaciones-propuestas/cotizaciones-propuestas';
 import { TrabajaNosotros} from './pages/trabaja-nosotros/trabaja-nosotros';
-import { Pqrsf } from './pages/pqrsf/pqrsf';
+import { PqrsfComponent } from './pages/pqrsf/pqrsf';
 import { Normatividad } from './pages/normatividad/normatividad';
 import { Servicios } from './pages/servicios/servicios';
 import { Login } from './pages/login/login';
@@ -17,7 +17,7 @@ import { DashboardHomeComponent } from './pages/dashboardhome/dashboardhome';
 import { NoticiasAdminComponent } from './pages/admin/noticias/noticias';
 import { Usuarios } from './pages/admin/usuarios/usuarios';
 import { Configuacion } from './pages/admin/configuracion/configuracion';
-import { Pqrsf as AdminPqrsf } from './pages/admin/pqrsf/pqrsf';
+import { PqrsfAdminComponent as AdminPqrsf } from './pages/admin/pqrsf-admin/pqrsf-admin';
 import { Transparencia as AdminTransparencia } from './pages/admin/transparencia/transparencia';
 import { AuthGuard } from './shared/guards/auth/auth-guard';
 import { Breadcrumb } from './componentes/breadcrumb/breadcrumb';
@@ -41,7 +41,7 @@ export const routes: Routes = [
       { path: 'atencion-ciudadano', component: AtencionCiudadano,data: { breadcrumb: 'Atencion al Usuario' } },
       { path: 'cotizaciones-propuestas', component: CotizacionesPropuestas, data: { breadcrumb: 'Cotizaciones y Propuestas' } },
       { path: 'trabaja-nosotros', component: TrabajaNosotros, data: { breadcrumb: 'Trabaja con Nosotros' } },
-      { path: 'pqrsf', component: Pqrsf, data: { breadcrumb: 'PQRSF' } },
+      { path: 'pqrsf', component: PqrsfComponent, data: { breadcrumb: 'PQRSF' } },
       { path: 'normatividad', component: Normatividad, data: { breadcrumb: 'Normatividad' } },
       { path: 'servicios', component: Servicios, data: { breadcrumb: 'Servicios' } },
       { path: 'login', component: Login, data: { breadcrumb: 'Login' } },

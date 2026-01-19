@@ -1,0 +1,74 @@
+<h2 class="gov-title">Gestión de PQRSF</h2>
+
+<!-- FILTROS -->
+<div class="pqrsf-filtros">
+  <button
+    class="gov-tab"
+    [class.active]="filtroEstado === 'Todas'"
+    (click)="filtroEstado = 'Todas'">
+    Todas
+  </button>
+
+  <button
+    class="gov-tab warning"
+    [class.active]="filtroEstado === 'Pendientes'"
+    (click)="filtroEstado = 'Pendientes'">
+    Pendientes
+  </button>
+
+  <button
+    class="gov-tab success"
+    [class.active]="filtroEstado === 'Respondidas'"
+    (click)="filtroEstado = 'Respondidas'">
+    Respondidas
+  </button>
+</div>
+
+<!-- TABLA -->
+<div class="gov-table-wrapper">
+  <table class="gov-table">
+    <thead>
+      <tr>
+        <th>Tipo</th>
+        <th>Ciudadano</th>
+        <th>Fecha</th>
+        <th>Estado</th>
+        <th class="acciones">Acción</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let p of pqrsfFiltradas">
+        <td>{{ p.tipo }}</td>
+        <td>{{ p.nombre }}</td>
+        <td>{{ p.fechaCreacion | date:'mediumDate' }}</td>
+
+        <td>
+          <span
+            class="estado"
+            [class.pendiente]="p.estado !== 'Respondida'"
+            [class.respondida]="p.estado === 'Respondida'">
+            {{ p.estado }}
+          </span>
+        </td>
+
+        <td class="acciones">
+          <button
+            class="gov-btn-secondary"
+            (click)="ver(p)">
+            Ver / Responder
+          </button>
+        </td>
+      </tr>
+
+      <tr *ngIf="pqrsfFiltradas.length === 0">
+        <td colspan="5" class="sin-datos">
+          No hay PQRSF para este filtro
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+<!--MOdal-->

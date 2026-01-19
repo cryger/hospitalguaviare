@@ -1,1 +1,58 @@
-<p>pqrsf works!</p>
+<section class="gov-container">
+  <h2 class="gov-title">PQRSF</h2>
+
+  <form class="gov-form" [formGroup]="form" (ngSubmit)="enviar()">
+
+    <div class="gov-field">
+      <label>Tipo</label>
+      <select formControlName="tipo">
+        <option>Petición</option>
+        <option>Queja</option>
+        <option>Reclamo</option>
+        <option>Sugerencia</option>
+        <option>Felicitación</option>
+      </select>
+    </div>
+
+    <div class="gov-field">
+      <label>Nombre completo</label>
+      <input type="text" formControlName="nombre">
+    </div>
+
+    <div class="gov-field">
+      <label>Correo electrónico</label>
+      <input type="email" formControlName="correo">
+    </div>
+
+    <div class="gov-field">
+      <label>Teléfono (opcional)</label>
+      <input type="text" formControlName="telefono">
+    </div>
+
+    <div class="gov-field">
+      <label>Asunto</label>
+      <input type="text" formControlName="asunto">
+    </div>
+    <div class="gov-field">
+      <label>Adjuntar archivo (PDF / imagen)</label>
+      <input type="file" (change)="onFileChange($event)">
+    </div>
+
+
+    <div class="gov-field">
+      <label>Mensaje</label>
+      <textarea rows="4" formControlName="mensaje"></textarea>
+    </div>
+
+    <div class="gov-actions">
+      <button class="gov-btn-primary" type="submit">
+        Enviar PQRSF
+      </button>
+    </div>
+
+    <div *ngIf="enviado" class="gov-success">
+      Su solicitud ha sido registrada correctamente.
+    </div>
+
+  </form>
+</section>

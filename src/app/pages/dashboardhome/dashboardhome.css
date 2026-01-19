@@ -65,3 +65,28 @@
   font-size: 0.8rem;
   color: #6b7280;
 }
+
+.dashboard-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.2rem;
+}
+
+.card {
+  background: #fff;
+  border-radius: 8px;
+  padding: 1.2rem;
+  box-shadow: 0 4px 8px rgba(0,0,0,.08);
+}
+
+.card strong {
+  font-size: 2rem;
+}
+
+.card.warning {
+  border-left: 4px solid #f9a825;
+}
+
+.card.success {
+  border-left: 4px solid #2e7d32;
+}
