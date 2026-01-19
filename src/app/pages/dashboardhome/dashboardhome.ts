@@ -19,14 +19,16 @@ export class DashboardHomeComponent implements OnInit {
   totalNoticias = 0;
   publicadas = 0;
   borradores = 0;
+  totalCotizaciones = 0;
 
   // LISTADOS
   ultimasNoticias: Noticia[] = [];
   ultimasPublicadas: Noticia[] = [];
   ultimosBorradores: Noticia[] = [];
-  cotizaciones: Cotizacion[] = [];
-  cotizacionespropuestas: Cotizacion[] = [];
-  totalCotizaciones: any;
+  cotizaciones: Cotizacion[] =[];
+  ultimasCotizaciones: Cotizacion[] = [];
+
+
 
 
   constructor(private noticiasService: NoticiasService, private cotizacionesService: CotizacionesService) {}
@@ -51,9 +53,17 @@ export class DashboardHomeComponent implements OnInit {
 
   private cargarCotizaciones():void{
     this.cotizacionesService.cotizaciones$
-    .subscribe((data: Cotizacion[]) =>{
-      this.cotizaciones = data;
-    })
+      .subscribe(cotizaciones => {
+
+        // total
+        this.totalCotizaciones = cotizaciones.length;
+
+        // solo publicadas y las más recientes
+        this.ultimasCotizaciones = cotizaciones
+          .filter(c => c.estado === 'publicada')
+          .slice(0, 5);
+
+      });
 
   }
 }
