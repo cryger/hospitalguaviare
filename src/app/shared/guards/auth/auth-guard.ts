@@ -1,10 +1,13 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
+import { audit } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
+
+
 
   constructor(private router: Router) {}
 
@@ -12,6 +15,11 @@ export class AuthGuard implements CanActivate {
     if (username === 'admin' && password === 'admin123') {
       localStorage.setItem('auth', 'true');
       return true;
+    }else{
+      if(username != 'admin'){
+        localStorage.setItem('auth','false' )
+        localStorage.setItem('Usuario',username)
+      }
     }
     return false;
   }

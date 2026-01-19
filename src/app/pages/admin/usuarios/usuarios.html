@@ -22,7 +22,7 @@
       <td>{{ u.rol }}</td>
       <td>{{ u.activo ? 'Activo' : 'Inactivo' }}</td>
       <td class="acciones">
-        <button class="gov-btn-secondary" (click)="editar(u)">Editar</button>
+        <button class="gov-btn-editar" (click)="editar(u)">Editar</button>
         <button class="gov-btn-danger" (click)="eliminar(u.id)">Eliminar</button>
       </td>
     </tr>

@@ -34,8 +34,12 @@ export class Login {
 
     if (this.authGuard.login(username, password)) {
       this.router.navigate(['/admin']); // 👈 TU DASHBOARD
-    } else {
+    } else if(!this.authGuard.login(username,password)){
+      localStorage.setItem('usuario', username);
+
       this.error = 'Usuario o contraseña incorrectos';
     }
+
+
   }
 }

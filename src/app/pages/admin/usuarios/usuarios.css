@@ -25,9 +25,13 @@
   background-color: #003a6d;
 }
 
-.gov-btn-secondary {
-  background-color: #e5e7eb;
-  color: #111827;
+.gov-btn-editar:hover {
+  background-color: rgb(250, 198, 28);
+}
+
+.gov-btn-editar {
+  background-color: rgb(254, 204, 47, 1);
+  color: #ffffff;
   border: none;
   padding: 0.45rem 1rem;
   border-radius: 4px;
