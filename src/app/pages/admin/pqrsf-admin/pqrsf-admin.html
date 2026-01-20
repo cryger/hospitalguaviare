@@ -55,7 +55,7 @@
         <td class="acciones">
           <button
             class="gov-btn-secondary"
-            (click)="ver(p)">
+            (click)="verDetalle(p)">
             Ver / Responder
           </button>
         </td>
@@ -72,3 +72,87 @@
 
 
 <!--MOdal-->
+
+<!-- =========================
+     MODAL VER / RESPONDER PQRSF
+========================= -->
+<div class="gov-modal-backdrop" *ngIf="modalPQRSFOpen">
+
+  <div class="gov-modal gov-modal-lg" role="dialog" aria-modal="true">
+
+    <!-- HEADER -->
+    <header class="gov-modal-header">
+      <div>
+        <h3>Detalle de PQRSF</h3>
+        <p class="gov-modal-subtitle">
+          Información enviada por el ciudadano
+        </p>
+      </div>
+
+      <button
+        type="button"
+        class="gov-modal-close"
+        aria-label="Cerrar"
+        (click)="cerrarModalPQRSF()">
+        ✕
+      </button>
+    </header>
+
+    <!-- BODY -->
+    <section class="gov-modal-body">
+
+      <!-- INFO CIUDADANO -->
+      <div class="pqrsf-info">
+        <div><strong>Tipo:</strong> {{ seleccionado?.tipo }}</div>
+        <div><strong>Ciudadano:</strong> {{ seleccionado?.nombre }}</div>
+        <div><strong>Correo:</strong> {{ seleccionado?.correo }}</div>
+        <div><strong>Fecha:</strong> {{ seleccionado?.fechaCreacion | date }}</div>
+      </div>
+
+      <!-- MENSAJE -->
+      <div class="pqrsf-mensaje">
+        <label>Mensaje del ciudadano</label>
+        <div class="mensaje-box">
+          {{ seleccionado?.mensaje }}
+        </div>
+      </div>
+
+      <!-- RESPUESTA -->
+      <form
+        [formGroup]="formRespuesta"
+        (ngSubmit)="responderPQRSF()"
+        class="gov-form">
+
+        <div class="gov-field">
+          <label for="respuesta">Respuesta institucional</label>
+          <textarea
+            id="respuesta"
+            rows="5"
+            formControlName="respuesta"
+            placeholder="Escriba la respuesta oficial al ciudadano">
+          </textarea>
+        </div>
+
+        <!-- ACCIONES -->
+        <footer class="gov-modal-actions">
+          <button
+            type="button"
+            class="gov-btn-secondary"
+            (click)="cerrarModalPQRSF()">
+            Cancelar
+          </button>
+
+          <button
+            type="submit"
+            class="gov-btn-primary"
+            [disabled]="formRespuesta.invalid">
+            Enviar respuesta
+          </button>
+        </footer>
+
+      </form>
+
+    </section>
+
+  </div>
+</div>

@@ -1,36 +1,47 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, Validators } from '@angular/forms';
 import { PqrsfService } from '../../../shared/services/pqrsf/pqrsf';
 import { PQRSF } from '../../../shared/models/pqrsf/pqrsf/pqrsf-module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-pqrsf-admin',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule,ReactiveFormsModule],
   templateUrl: './pqrsf-admin.html',
   styleUrls: ['./pqrsf-admin.css']
 })
 export class PqrsfAdminComponent implements OnInit {
 
   pqrsf: PQRSF[] = [];
-  seleccionado: PQRSF | null = null;
+  seleccionado: PQRSF | any = null;
   respuesta = '';
+  modalPQRSFOpen = false;
+
+  pqrsfSeleccionada: any = null;
+
+  formRespuesta!: FormGroup;
 
 
 
-  constructor(private pqrsfService: PqrsfService) {}
+  constructor(private pqrsfService: PqrsfService, private fb:FormBuilder) {}
 
   ngOnInit(): void {
     this.pqrsfService.pqrsf$.subscribe(data => {
       this.pqrsf = data;
     });
+
+    this.formRespuesta = this.fb.group({
+    respuesta: ['', Validators.required]
+  });
   }
 
-  ver(item: PQRSF): void {
-    this.seleccionado = item;
-    this.respuesta = item.respuesta || '';
-  }
+  verDetalle(pqrsf: any): void {
+  this.seleccionado = pqrsf;
+  this.formRespuesta.reset();
+  this.modalPQRSFOpen = true;
+}
 
   responder(): void {
     if (!this.seleccionado || !this.respuesta) return;
@@ -39,6 +50,18 @@ export class PqrsfAdminComponent implements OnInit {
     this.seleccionado = null;
     this.respuesta = '';
   }
+
+  responderPQRSF(): void {
+
+
+  if (this.formRespuesta.invalid) return;
+
+  // 🔜 LÓGICA REAL (API / servicio)
+  this.seleccionado.estado = 'Respondida';
+  this.seleccionado.respuesta = this.formRespuesta.value.respuesta;
+
+  this.cerrarModalPQRSF();
+}
 
   filtroEstado: 'Todas' | 'Pendientes' | 'Respondidas' = 'Todas';
 
@@ -52,5 +75,10 @@ export class PqrsfAdminComponent implements OnInit {
   }
 
   return this.pqrsf.filter(p => p.estado === 'Respondida');
+}
+
+cerrarModalPQRSF(): void {
+  this.modalPQRSFOpen = false;
+  this.seleccionado = null;
 }
 }
