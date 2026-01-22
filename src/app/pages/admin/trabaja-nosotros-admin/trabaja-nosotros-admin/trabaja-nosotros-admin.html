@@ -31,10 +31,10 @@
           </span>
         </td>
         <td class="acciones">
-          <button class="gov-btn-secondary" (click)="editar(v)">
+          <button class="gov-btn-editar" (click)="editar(v)">
             Editar
           </button>
-          <button class="gov-btn-danger" (click)="eliminar(v.id)">
+          <button class="gov-btn-eliminar" (click)="eliminar(v.id)">
             Eliminar
           </button>
         </td>
@@ -74,8 +74,12 @@
 
         <div class="gov-form-grid">
           <div class="gov-field">
-            <label>Tipo de contrato</label>
-            <input type="text" formControlName="tipoContrato">
+            <label>Tipo de Contrato</label>
+            <select formControlName="tipoContrato">
+              <option value="prestacion de servicios">Prestacion de Servicios</option>
+              <option value="Termino Definido">Termino Definido</option>
+              <option value="Termino Indefinido">Termino Indefinido</option>
+            </select>
           </div>
 
           <div class="gov-field">

@@ -39,8 +39,26 @@
   border-radius: 4px;
   cursor: pointer;
 }
+.gov-btn-editar {
+  background: #ee0;
+  color: #090909;
+  border: none;
+  padding: .45rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
 
 .gov-btn-danger {
+  background: #dc2626;
+  color: #ffffff;
+  border: none;
+  padding: .45rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  gap: 0.5rem;
+}
+
+.gov-btn-eliminar {
   background: #dc2626;
   color: #ffffff;
   border: none;
