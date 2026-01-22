@@ -24,7 +24,7 @@ export class TrabajaNosotrosModule {
   ubicacion: string;
   descripcion: string;
   requisitos: string[];
-  imagen: string;
+  imagenUrl: string;
   fechaPublicacion: Date;
   estado: 'publicada' | 'borrador';
 }
