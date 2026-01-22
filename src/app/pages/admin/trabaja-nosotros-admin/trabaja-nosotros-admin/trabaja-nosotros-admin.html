@@ -1,0 +1,143 @@
+<h2 class="gov-title">Gestión de Vacantes – Trabaja con Nosotros</h2>
+
+<!-- ACCIÓN -->
+<div class="admin-actions">
+  <button class="gov-btn-primary" (click)="abrirCrear()">
+    ➕ Agregar vacante
+  </button>
+</div>
+
+<!-- TABLA -->
+<div class="gov-table-wrapper">
+  <table class="gov-table">
+    <thead>
+      <tr>
+        <th>Título</th>
+        <th>Contrato</th>
+        <th>Vacantes</th>
+        <th>Estado</th>
+        <th class="acciones">Acciones</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let v of vacantes">
+        <td>{{ v.titulo }}</td>
+        <td>{{ v.tipoContrato }}</td>
+        <td>{{ v.vacantes }}</td>
+        <td>
+          <span class="estado" [class.publicada]="v.estado === 'publicada'">
+            {{ v.estado }}
+          </span>
+        </td>
+        <td class="acciones">
+          <button class="gov-btn-secondary" (click)="editar(v)">
+            Editar
+          </button>
+          <button class="gov-btn-danger" (click)="eliminar(v.id)">
+            Eliminar
+          </button>
+        </td>
+      </tr>
+
+      <tr *ngIf="vacantes.length === 0">
+        <td colspan="5" class="sin-datos">
+          No hay vacantes registradas
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- =========================
+     MODAL CREAR / EDITAR
+========================= -->
+<div class="gov-modal-backdrop" *ngIf="modalOpen">
+
+  <div class="gov-modal gov-modal-lg">
+
+    <header class="gov-modal-header">
+      <h3>
+        {{ editando ? 'Editar vacante' : 'Nueva vacante' }}
+      </h3>
+      <button class="gov-modal-close" (click)="modalOpen = false">✕</button>
+    </header>
+
+    <section class="gov-modal-body">
+
+      <form [formGroup]="form" (ngSubmit)="guardar()" class="gov-form">
+
+        <div class="gov-field">
+          <label>Título</label>
+          <input type="text" formControlName="titulo">
+        </div>
+
+        <div class="gov-form-grid">
+          <div class="gov-field">
+            <label>Tipo de contrato</label>
+            <input type="text" formControlName="tipoContrato">
+          </div>
+
+          <div class="gov-field">
+            <label>Vacantes</label>
+            <input type="number" formControlName="vacantes">
+          </div>
+
+          <div class="gov-field">
+            <label>Salario</label>
+            <input type="text" formControlName="salario">
+          </div>
+
+          <div class="gov-field">
+            <label>Horario</label>
+            <input type="text" formControlName="horario">
+          </div>
+
+          <div class="gov-field">
+            <label>Ubicación</label>
+            <input type="text" formControlName="ubicacion">
+          </div>
+        </div>
+
+        <div class="gov-field">
+          <label>Descripción</label>
+          <textarea rows="3" formControlName="descripcion"></textarea>
+        </div>
+
+        <div class="gov-field">
+          <label>Requisitos (uno por línea)</label>
+          <textarea rows="4" formControlName="requisitos"></textarea>
+        </div>
+
+        <div class="gov-field">
+          <label>URL Imagen</label>
+          <input type="text" formControlName="imagenUrl">
+        </div>
+
+        <div class="gov-field">
+          <label>Estado</label>
+          <select formControlName="estado">
+            <option value="publicada">Publicada</option>
+            <option value="borrador">Borrador</option>
+          </select>
+        </div>
+
+        <footer class="gov-modal-actions">
+          <button
+            type="button"
+            class="gov-btn-secondary"
+            (click)="modalOpen = false">
+            Cancelar
+          </button>
+
+          <button type="submit" class="gov-btn-primary">
+            Guardar
+          </button>
+        </footer>
+
+      </form>
+
+    </section>
+
+  </div>
+</div>

@@ -1,1 +1,62 @@
-<p>trabaja-nosotros works!</p>
+<section class="gov-container">
+  <h2 class="gov-title">Trabaja con Nosotros</h2>
+
+  <article
+    class="vacante-card"
+    *ngFor="let v of vacantes">
+
+    <div class="vacante-info">
+      <h3>{{ v.titulo }}</h3>
+
+      <ul class="vacante-datos">
+        <li><strong>Contrato:</strong> {{ v.tipoContrato }}</li>
+        <li><strong>Vacantes:</strong> {{ v.vacantes }}</li>
+        <li><strong>Salario:</strong> {{ v.salario }}</li>
+        <li><strong>Horario:</strong> {{ v.horario }}</li>
+        <li><strong>Área:</strong> {{ v.ubicacion }}</li>
+      </ul>
+
+      <p class="vacante-descripcion">
+        {{ v.descripcion }}
+      </p>
+
+      <button class="gov-btn-primary" (click)="verRequisitos(v)">
+        Ver requisitos
+      </button>
+    </div>
+
+    <div class="vacante-imagen">
+      <img [src]="v.imagen" [alt]="v.titulo">
+    </div>
+
+  </article>
+</section>
+
+<!-- =========================
+     MODAL REQUISITOS
+========================= -->
+<div class="gov-modal-backdrop" *ngIf="modalOpen">
+
+  <div class="gov-modal">
+
+    <header class="gov-modal-header">
+      <h3>Requisitos del cargo</h3>
+      <button class="gov-modal-close" (click)="cerrarModal()">✕</button>
+    </header>
+
+    <section class="gov-modal-body">
+      <ul class="requisitos-lista">
+        <li *ngFor="let r of seleccionada?.requisitos">
+          {{ r }}
+        </li>
+      </ul>
+    </section>
+
+    <footer class="gov-modal-actions">
+      <button class="gov-btn-secondary" (click)="cerrarModal()">
+        Cerrar
+      </button>
+    </footer>
+
+  </div>
+</div>
