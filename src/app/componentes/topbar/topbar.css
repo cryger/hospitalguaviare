@@ -52,8 +52,7 @@ html {
 }
 
 .barra-superior-govco .idioma-icon-barra-superior-govco::before {
-  font-family: "govco-font";
-  content: '\ec56';
+
   color: #3366CC;
   font-size: 14px;
 }

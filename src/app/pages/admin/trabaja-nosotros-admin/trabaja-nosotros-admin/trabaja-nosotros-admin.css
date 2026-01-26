@@ -17,6 +17,16 @@
 /* =========================
    BOTONES
 ========================= */
+ .gov-btn-primary {
+  background-color: #004884;
+  color: #ffffff;
+  border: none;
+  padding: 0.45rem 1.1rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border-radius: 4px;
+  cursor: pointer;
+}
 .gov-btn-editar {
   background-color: #ffdd00;
   color: #ffffff;
