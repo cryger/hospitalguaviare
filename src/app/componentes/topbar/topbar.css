@@ -37,13 +37,14 @@ html {
   cursor: pointer;
   padding: 0;
   border: 0.125rem solid #FFFFFF;
-  font-size: 10px;
+  font-size: 15px;
   position: absolute;
   right: 5.375rem;
+  margin-top: -1rem;
 }
 
 .barra-superior-govco .idioma-icon-barra-superior-govco:hover {
-  background-color: #004884;
+  background-color: #0d88ed;
 }
 
 .barra-superior-govco .idioma-icon-barra-superior-govco:focus {
