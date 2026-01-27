@@ -1,17 +1,35 @@
-
- <div class="container-fluid">
+<div class="container-fluid">
   <div class="row">
     <div class="col-lg-9">
-       <nav class="navbar navbar-expand-lg barra-superior-govco navbar-md" aria-label="Barra superior">
-          <a href="https://www.gov.co/" target="_blank" aria-label="Portal del Estado Colombiano - GOV.CO"></a>
+      <nav class="navbar navbar-expand-lg barra-superior-govco navbar-md" aria-label="Barra superior">
+        <a href="https://www.gov.co/" target="_blank" aria-label="Portal del Estado Colombiano - GOV.CO"></a>
+
+        <!-- Selector de idioma -->
+        <div class="language-selector">
           <button
-          class="idioma-icon-barra-superior-govco float-right"
-          aria-label="Button to change the language of the page to English"
-          (click)="traducirAE()">
-        {{ translationService.getIdiomaActual() === 'es' ? 'En' : 'Es' }}
-        </button>
-        </nav>
+            class="idioma-icon-barra-superior-govco float-right"
+            [attr.aria-label]="'Cambiar idioma a ' + (idiomaActual === 'es' ? 'inglés' : 'español')"
+            (click)="toggleMenuIdiomas()">
+            {{ idiomaActual === 'es' ? 'En' : 'Es' }}
+            <span class="arrow-down" *ngIf="!mostrarMenuIdiomas">▼</span>
+            <span class="arrow-up" *ngIf="mostrarMenuIdiomas">▲</span>
+          </button>
+
+          <!-- Menú desplegable de idiomas -->
+          <div class="menu-idiomas-dropdown" *ngIf="mostrarMenuIdiomas">
+            <button
+              *ngFor="let idioma of idiomas"
+              class="btn-Idioma"
+              [class.active]="idioma.codigo === idiomaActual"
+              (click)="cambiarIdioma(idioma.codigo)"
+              [attr.aria-label]="'Cambiar a ' + idioma.nombre">
+              <span class="bandera">{{ idioma.bandera }}</span>
+              <span class="nombre">{{ idioma.nombre }}</span>
+              <span class="check" *ngIf="idioma.codigo === idiomaActual">✓</span>
+            </button>
+          </div>
+        </div>
+      </nav>
     </div>
   </div>
- </div>
-
+</div>
