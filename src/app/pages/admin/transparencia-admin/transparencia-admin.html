@@ -1,0 +1,218 @@
+<h2 class="gov-title">Gestion de Publicaciones - Transparencia</h2>
+
+<!-- =========================
+     ACCIONES SUPERIORES
+========================== -->
+<div class="admin-header-actions">
+  <button
+    class="gov-btn-primary"
+    type="button"
+    (click)="abrirModalCategoria()">
+    ➕ Agregar categoría
+  </button>
+
+  <button
+    class="gov-btn-secondary"
+    type="button"
+    (click)="abrirModalServicio()">
+    ➕ Agregar Publicacion
+  </button>
+</div>
+
+<!-- =========================
+     TABLA DE CATEGORÍAS
+========================== -->
+<section class="admin-section">
+  <h3>Categorías</h3>
+
+  <table class="gov-table">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Tipo</th>
+        <th>Estado</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let c of categorias">
+        <td>
+          <span *ngIf="c.parentId">↳</span>
+          {{ c.nombre }}
+        </td>
+        <td>{{ c.parentId ? 'Subcategoría' : 'Principal' }}</td>
+        <td>{{ c.activo ? 'Activa' : 'Inactiva' }}</td>
+        <td class="acciones">
+          <button class="gov-btn-editar" (click)="editarCategoria(c)">
+            Editar
+          </button>
+          <button class="gov-btn-danger" (click)="eliminarCategoria(c.id)">
+            Eliminar
+          </button>
+        </td>
+      </tr>
+
+      <tr *ngIf="categorias.length === 0">
+        <td colspan="4" class="empty">
+          No hay categorías registradas
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- =========================
+     TABLA DE SERVICIOS
+========================== -->
+<section class="admin-section">
+  <h3>Publicaciones</h3>
+
+  <table class="gov-table">
+    <thead>
+      <tr>
+        <th>Título</th>
+        <th>Categoría</th>
+        <th>Ruta</th>
+        <th>Estado</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let s of publicaciones">
+        <td>{{ s.titulo }}</td>
+        <td>
+          {{ traerCategorias(s.categoriaId) }}
+        </td>
+        <td>{{ s.ruta || '-' }}</td>
+        <td>{{ s.activo ? 'Activo' : 'Inactivo' }}</td>
+        <td class="acciones">
+          <button class="gov-btn-editar" (click)="editarServicio(s)">
+            Editar
+          </button>
+          <button class="gov-btn-danger" (click)="eliminarServicio(s.id)">
+            Eliminar
+          </button>
+        </td>
+      </tr>
+
+      <tr *ngIf="publicaciones.length === 0">
+        <td colspan="5" class="empty">
+          No hay publicaciones registradas
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- =========================
+     MODAL CATEGORÍA
+========================== -->
+<div class="gov-modal-backdrop" *ngIf="modalCategoriaOpen">
+  <div class="gov-modal">
+
+    <header class="gov-modal-header">
+      <h3>{{ categoriaEditando ? 'Editar categoría' : 'Agregar categoría' }}</h3>
+      <button class="gov-modal-close" (click)="cerrarModalCategoria()">✕</button>
+    </header>
+
+    <section class="gov-modal-body">
+      <form [formGroup]="formCategoria" (ngSubmit)="guardarCategoria()" class="gov-form">
+
+        <div class="gov-field">
+          <label>Nombre</label>
+          <input type="text" formControlName="nombre" />
+        </div>
+
+        <div class="gov-field">
+          <label>Categoría padre</label>
+          <select formControlName="parentId">
+            <option [ngValue]="null">Principal</option>
+            <option *ngFor="let c of categorias" [ngValue]="c.id">
+              {{ c.nombre }}
+            </option>
+          </select>
+        </div>
+
+        <div class="gov-field">
+          <label>
+            <input type="checkbox" formControlName="activo" />
+            Activa
+          </label>
+        </div>
+
+        <footer class="gov-modal-actions">
+          <button type="button" class="gov-btn-secondary" (click)="cerrarModalCategoria()">
+            Cancelar
+          </button>
+          <button type="submit" class="gov-btn-primary">
+            Guardar
+          </button>
+        </footer>
+
+      </form>
+    </section>
+
+  </div>
+</div>
+
+<!-- =========================
+     MODAL SERVICIO
+========================== -->
+<div class="gov-modal-backdrop" *ngIf="modalServicioOpen">
+  <div class="gov-modal">
+
+    <header class="gov-modal-header">
+      <h3>{{ publicacionEditando ? 'Editar servicio' : 'Agregar servicio' }}</h3>
+      <button class="gov-modal-close" (click)="cerrarModalServicio()">✕</button>
+    </header>
+
+    <section class="gov-modal-body">
+      <form [formGroup]="formServicio" (ngSubmit)="guardarServicio()" class="gov-form">
+
+        <div class="gov-field">
+          <label>Título</label>
+          <input type="text" formControlName="titulo" />
+        </div>
+
+        <div class="gov-field">
+          <label>Categoría</label>
+          <select formControlName="categoriaId">
+            <option *ngFor="let c of categorias" [ngValue]="c.id">
+              {{ c.nombre }}
+            </option>
+          </select>
+        </div>
+
+        <div class="gov-field">
+          <label>Descripción</label>
+          <textarea rows="3" formControlName="descripcion"></textarea>
+        </div>
+
+        <div class="gov-field">
+          <label>Ruta (opcional)</label>
+          <input type="text" formControlName="ruta" placeholder="/ruta" />
+        </div>
+
+        <div class="gov-field">
+          <label>
+            <input type="checkbox" formControlName="activo" />
+            Activo
+          </label>
+        </div>
+
+        <footer class="gov-modal-actions">
+          <button type="button" class="gov-btn-secondary" (click)="cerrarModalServicio()">
+            Cancelar
+          </button>
+          <button type="submit" class="gov-btn-primary">
+            Guardar
+          </button>
+        </footer>
+
+      </form>
+    </section>
+
+  </div>
+</div>

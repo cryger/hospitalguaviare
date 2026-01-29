@@ -18,7 +18,7 @@ import { NoticiasAdminComponent } from './pages/admin/noticias/noticias';
 import { Usuarios } from './pages/admin/usuarios/usuarios';
 import { Configuacion } from './pages/admin/configuracion/configuracion';
 import { PqrsfAdminComponent as AdminPqrsf } from './pages/admin/pqrsf-admin/pqrsf-admin';
-import { Transparencia as AdminTransparencia } from './pages/admin/transparencia/transparencia';
+import { transparenciaAdminComponent as AdminTransparencia } from './pages/admin/transparencia-admin/transparencia-admin';
 import { AuthGuard } from './shared/guards/auth/auth-guard';
 import { Breadcrumb } from './componentes/breadcrumb/breadcrumb';
 import { CotizacionesPropuestasAdminComponent } from './pages/admin/cotizaciones-propuestas-admin/cotizaciones-propuestas-admin/cotizaciones-propuestas-admin';
