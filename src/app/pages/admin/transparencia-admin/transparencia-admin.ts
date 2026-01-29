@@ -35,7 +35,7 @@ export class transparenciaAdminComponent implements OnInit {
   ========================== */
 
   modalCategoriaOpen = false;
-  modalServicioOpen = false;
+  modalPublicacionOpen = false;
 
   categoriaEditando: CategoriaTransparencia | null = null;
   publicacionEditando: TransparenciaPublicaciones | null = null;
@@ -133,20 +133,20 @@ export class transparenciaAdminComponent implements OnInit {
      SERVICIOS
   ========================== */
 
-  abrirModalServicio(): void {
-    this.modalServicioOpen = true;
+  abrirModalPublicacion(): void {
+    this.modalPublicacionOpen = true;
     this.publicacionEditando = null;
     this.formServicio.reset({ activo: true });
   }
 
-  editarServicio(serv: TransparenciaPublicaciones): void {
+  editarPublicacion(serv: TransparenciaPublicaciones): void {
     this.publicacionEditando = serv;
-    this.modalServicioOpen = true;
+    this.modalPublicacionOpen = true;
 
     this.formServicio.patchValue(serv);
   }
 
-  guardarServicio(): void {
+  guardarPublicacion(): void {
     if (this.formServicio.invalid) return;
 
     if (this.publicacionEditando) {
@@ -159,15 +159,15 @@ export class transparenciaAdminComponent implements OnInit {
     }
 
     this.TransparenciaService.guardarPublicaciones(this.publicaciones);
-  this.cerrarModalServicio();
+  this.cerrarModalPublicacion();
   }
 
-  cerrarModalServicio(): void {
-    this.modalServicioOpen = false;
+  cerrarModalPublicacion(): void {
+    this.modalPublicacionOpen = false;
     this.publicacionEditando = null;
   }
 
-  eliminarServicio(id: number): void {
+  eliminarPublicacion(id: number): void {
     this.publicaciones = this.publicaciones.filter(s => s.id !== id);
   }
 

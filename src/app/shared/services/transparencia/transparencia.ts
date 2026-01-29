@@ -1,72 +1,78 @@
 import { Injectable } from '@angular/core';
-import { CategoriaTransparencia, TransparenciaPublicaciones } from '../../models/transparencia-module/transparencia-module';
+import {
+  CategoriaTransparencia,
+  TransparenciaPublicaciones
+} from '../../models/transparencia-module/transparencia-module';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TransparenciaService {
+
   private categoriasKey = 'categorias-transparencia';
   private publicacionesKey = 'publicaciones-transparencia';
 
-  private categoriasTransparencia: CategoriaTransparencia[] =[];
-  private publicacionesTransparencia : TransparenciaPublicaciones[]=[];
-  categoriaId: number | null = null;
+  private categoriasTransparencia: CategoriaTransparencia[] = [];
+  private publicacionesTransparencia: TransparenciaPublicaciones[] = [];
 
-  constructor(){
+  constructor() {
     this.cargarDesdeStorage();
   }
 
-    /* =========================
+  /* =========================
      STORAGE
   ========================== */
 
   private cargarDesdeStorage(): void {
     const cat = localStorage.getItem(this.categoriasKey);
-    const serv = localStorage.getItem(this.publicacionesKey);
+    const pub = localStorage.getItem(this.publicacionesKey);
 
     this.categoriasTransparencia = cat ? JSON.parse(cat) : [];
-    this.publicacionesTransparencia = serv ? JSON.parse(serv) : [];
+    this.publicacionesTransparencia = pub ? JSON.parse(pub) : [];
   }
 
   private guardarStorage(): void {
-    localStorage.setItem(this.categoriasKey, JSON.stringify(this.categoriasTransparencia));
-    localStorage.setItem(this.publicacionesKey, JSON.stringify(this.publicacionesTransparencia));
+    localStorage.setItem(
+      this.categoriasKey,
+      JSON.stringify(this.categoriasTransparencia)
+    );
+    localStorage.setItem(
+      this.publicacionesKey,
+      JSON.stringify(this.publicacionesTransparencia)
+    );
   }
 
-    /* =========================
-       CATEGORÍAS
-    ========================== */
+  /* =========================
+     CATEGORÍAS
+  ========================== */
 
-    getCategorias(): CategoriaTransparencia[] {
-      return [...this.categoriasTransparencia];
-    }
+  getCategorias(): CategoriaTransparencia[] {
+    return [...this.categoriasTransparencia];
+  }
 
-    getCategoriasActivas(): CategoriaTransparencia[] {
-      return this.categoriasTransparencia.filter(c => c.activo);
-    }
+  getCategoriasActivas(): CategoriaTransparencia[] {
+    return this.categoriasTransparencia.filter(c => c.activo);
+  }
 
-    guardarCategorias(categorias: CategoriaTransparencia[]): void {
-      this.categoriasTransparencia = [...categorias];
-      this.guardarStorage();
-    }
+  guardarCategorias(categorias: CategoriaTransparencia[]): void {
+    this.categoriasTransparencia = [...categorias];
+    this.guardarStorage();
+  }
 
-      /* =========================
-         publicaciones
-      ========================== */
+  /* =========================
+     PUBLICACIONES
+  ========================== */
 
-      getPublicaciones(): TransparenciaPublicaciones[] {
-        return [...this.publicacionesTransparencia];
-      }
+  getPublicaciones(): TransparenciaPublicaciones[] {
+    return [...this.publicacionesTransparencia];
+  }
 
-      getPublicacionesActivos(): TransparenciaPublicaciones[] {
-        return this.publicacionesTransparencia.filter(s => s.activo);
-      }
+  getPublicacionesActivos(): TransparenciaPublicaciones[] {
+    return this.publicacionesTransparencia.filter(p => p.activo);
+  }
 
-      guardarPublicaciones(servicios: TransparenciaPublicaciones[]): void {
-        this.publicacionesTransparencia = [...this.publicacionesTransparencia];
-        this.guardarStorage();
-      }
-
-
-
+  guardarPublicaciones(publicaciones: TransparenciaPublicaciones[]): void {
+    this.publicacionesTransparencia = [...publicaciones];
+    this.guardarStorage();
+  }
 }

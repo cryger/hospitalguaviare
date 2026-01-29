@@ -14,7 +14,7 @@
   <button
     class="gov-btn-secondary"
     type="button"
-    (click)="abrirModalServicio()">
+    (click)="abrirModalPublicacion()">
     ➕ Agregar Publicacion
   </button>
 </div>
@@ -88,10 +88,10 @@
         <td>{{ s.ruta || '-' }}</td>
         <td>{{ s.activo ? 'Activo' : 'Inactivo' }}</td>
         <td class="acciones">
-          <button class="gov-btn-editar" (click)="editarServicio(s)">
+          <button class="gov-btn-editar" (click)="editarPublicacion(s)">
             Editar
           </button>
-          <button class="gov-btn-danger" (click)="eliminarServicio(s.id)">
+          <button class="gov-btn-danger" (click)="eliminarPublicacion(s.id)">
             Eliminar
           </button>
         </td>
@@ -158,18 +158,18 @@
 </div>
 
 <!-- =========================
-     MODAL SERVICIO
+     MODAL PUBLICACION
 ========================== -->
-<div class="gov-modal-backdrop" *ngIf="modalServicioOpen">
+<div class="gov-modal-backdrop" *ngIf="modalPublicacionOpen">
   <div class="gov-modal">
 
     <header class="gov-modal-header">
-      <h3>{{ publicacionEditando ? 'Editar servicio' : 'Agregar servicio' }}</h3>
-      <button class="gov-modal-close" (click)="cerrarModalServicio()">✕</button>
+      <h3>{{ publicacionEditando ? 'Editar Publicacion' : 'Agregar Publicacion' }}</h3>
+      <button class="gov-modal-close" (click)="cerrarModalPublicacion()">✕</button>
     </header>
 
     <section class="gov-modal-body">
-      <form [formGroup]="formServicio" (ngSubmit)="guardarServicio()" class="gov-form">
+      <form [formGroup]="formServicio" (ngSubmit)="guardarPublicacion()" class="gov-form">
 
         <div class="gov-field">
           <label>Título</label>
@@ -203,7 +203,7 @@
         </div>
 
         <footer class="gov-modal-actions">
-          <button type="button" class="gov-btn-secondary" (click)="cerrarModalServicio()">
+          <button type="button" class="gov-btn-secondary" (click)="cerrarModalPublicacion()">
             Cancelar
           </button>
           <button type="submit" class="gov-btn-primary">
