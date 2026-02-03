@@ -848,6 +848,39 @@ html {
 
 }
 
+.nav-item-dropdown {
+  position: relative;
+}
+
+.nav-link-dropdown {
+  background: none;
+  border: none;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+}
+
+/* Submenú */
+.submenu-govco {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  background-color: #f6f8f9;
+}
+
+.submenu-link-govco {
+  display: block;
+  padding: 12px 20px;
+  text-decoration: none;
+  color: #004884;
+  font-size: 14px;
+}
+
+.submenu-link-govco:hover {
+  background-color: #e6effd;
+}
+
+
 
 
 

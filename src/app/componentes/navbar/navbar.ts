@@ -10,15 +10,23 @@ import { CommonModule } from '@angular/common';
 })
 export class Navbar {
   menuAbierto = false;
+  submenuAbierto: string | null = null;
 
   toggleMenu(): void {
   this.menuAbierto = !this.menuAbierto;
+  if(!this.menuAbierto){
+    this.submenuAbierto = null;
+  }
   this.toggleBodyScroll();
 }
 
 cerrarMenu(): void {
   this.menuAbierto = false;
+  this.submenuAbierto = null;
   this.toggleBodyScroll();
+}
+toggleSubmenu(menu: string){
+this.submenuAbierto = this.submenuAbierto === menu ? null: menu;
 }
 
 private toggleBodyScroll(): void {
