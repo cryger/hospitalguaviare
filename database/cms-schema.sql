@@ -6,9 +6,11 @@
 
 SET NAMES utf8mb4;
 
-CREATE DATABASE IF NOT EXISTS hsjg_portal
-  CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci;
-USE hsjg_portal;
+-- En cPanel la base de datos se crea desde "Bases de datos MySQL"
+-- (queda con prefijo, ej. usuario_hsjgportal). Selecciónela en phpMyAdmin
+-- y ejecute este archivo. En un servidor propio puede usar:
+--   CREATE DATABASE hsjg_portal CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci;
+--   USE hsjg_portal;
 
 -- ---------------------------------------------------------------------
 -- MENÚS: contenedores de navegación (principal, superior, pie...)
@@ -105,8 +107,40 @@ CREATE TABLE cms_entrada_multimedia (
 ) ENGINE=InnoDB;
 
 -- ---------------------------------------------------------------------
+-- USUARIOS DEL ADMIN (la contraseña se guarda con bcrypt)
+-- Crear el primero con:  npm run crear-admin -- usuario "Nombre" clave
+-- ---------------------------------------------------------------------
+CREATE TABLE cms_usuarios (
+  id             INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  nombre         VARCHAR(150) NOT NULL,
+  usuario        VARCHAR(80)  NOT NULL,
+  password_hash  VARCHAR(100) NOT NULL,
+  rol            ENUM('admin','editor') NOT NULL DEFAULT 'editor',
+  activo         TINYINT(1) NOT NULL DEFAULT 1,
+  ultimo_acceso  DATETIME NULL,
+  creado_en      DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  UNIQUE KEY uq_usuario (usuario)
+) ENGINE=InnoDB;
+
+-- ---------------------------------------------------------------------
 -- Datos iniciales
 -- ---------------------------------------------------------------------
-INSERT INTO cms_menus (nombre, ubicacion) VALUES
-  ('Menú principal', 'principal'),
-  ('Pie de página',  'pie');
+INSERT INTO cms_menus (id, nombre, ubicacion) VALUES
+  (1, 'Menú principal', 'principal'),
+  (2, 'Pie de página',  'pie');
+
+-- Estructura igual al menú actual del sitio. Las páginas sin entradas
+-- siguen mostrando la versión fija hasta que se les agregue contenido.
+INSERT INTO cms_paginas (id, menu_id, parent_id, titulo, slug, plantilla, url_externa, orden, visible_en_menu, estado) VALUES
+  (1,  1, NULL, 'Transparencia y acceso a información pública', 'transparencia',          'documentos', NULL, 0, 1, 'publicada'),
+  (2,  1, NULL, 'Atención y Servicios a la ciudadanía',         'atencion-ciudadano',     'contenido',  NULL, 1, 1, 'publicada'),
+  (3,  1, NULL, 'Participa',                                    'participa',              'contenido',  NULL, 2, 1, 'publicada'),
+  (4,  1, NULL, 'Nuestro Hospital',                             'nuestro-hospital',       'contenido',  NULL, 3, 1, 'publicada'),
+  (5,  1, 4,    'Misión y visión',                              'mision-vision',          'contenido',  NULL, 0, 1, 'publicada'),
+  (6,  1, 4,    'Reseña histórica',                             'resena-historica',       'contenido',  NULL, 1, 1, 'publicada'),
+  (7,  1, NULL, 'Normatividad',                                 'normatividad',           'documentos', NULL, 4, 1, 'publicada'),
+  (8,  1, NULL, 'Noticias',                                     'noticias',               'listado',    NULL, 5, 0, 'publicada'),
+  (9,  1, NULL, 'Cotizaciones y Propuestas',                    'cotizaciones-propuestas','enlace', '/cotizaciones-propuestas', 6, 1, 'publicada'),
+  (10, 1, NULL, 'Trabaja con Nosotros',                         'trabaja-nosotros',       'enlace', '/trabaja-nosotros', 7, 1, 'publicada'),
+  (11, 1, NULL, 'PQRSF',                                        'pqrsf',                  'enlace', '/pqrsf', 8, 1, 'publicada'),
+  (12, 2, NULL, 'Políticas de privacidad',                      'politicas-privacidad',   'contenido',  NULL, 0, 1, 'borrador');

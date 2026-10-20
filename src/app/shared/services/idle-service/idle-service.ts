@@ -35,7 +35,7 @@ export class IdleService {
   }
 
   private logout(): void {
-    localStorage.removeItem('auth');
+    ['auth', 'cms-token', 'cms-usuario', 'username'].forEach((k) => localStorage.removeItem(k));
     localStorage.removeItem('sidebar-collapsed');
     this.router.navigate(['/login']);
   }

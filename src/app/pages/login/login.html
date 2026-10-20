@@ -27,12 +27,12 @@
         />
       </div>
 
-      <button type="submit" [disabled]="loginForm.invalid">
-        Entrar
+      <button type="submit" [disabled]="loginForm.invalid || enviando()">
+        {{ enviando() ? 'Ingresando…' : 'Entrar' }}
       </button>
 
-      <p class="gov-error" *ngIf="error">
-        {{ error }}
+      <p class="gov-error" *ngIf="error()" role="alert">
+        {{ error() }}
       </p>
 
     </form>
