@@ -1,0 +1,25 @@
+.volver { font-size: 0.8rem; color: var(--c-primario-2); text-decoration: none; font-weight: 600; }
+.volver:hover { text-decoration: underline; }
+code { font-size: 0.8rem; background: #f1f5f9; padding: 0.1rem 0.35rem; border-radius: 4px; }
+
+.editor-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+  gap: 1.25rem;
+  align-items: start;
+}
+.editor-layout .panel + .panel { margin-top: 0; }
+
+.entradas { list-style: none; margin: 0; padding: 0; }
+.entradas li { display: flex; align-items: center; gap: 0.6rem; padding: 0.55rem 0; border-bottom: 1px solid #f1f5f9; }
+.entradas li:last-child { border-bottom: none; }
+.e-icono { font-size: 1.1rem; }
+.e-info { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.e-info a { font-weight: 600; font-size: 0.86rem; color: var(--c-texto); text-decoration: none; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.e-info a:hover { color: var(--c-primario-2); }
+.e-info small { font-size: 0.74rem; color: var(--c-muted); }
+.e-orden { display: flex; gap: 0.2rem; }
+
+@media (max-width: 1000px) {
+  .editor-layout { grid-template-columns: 1fr; }
+}

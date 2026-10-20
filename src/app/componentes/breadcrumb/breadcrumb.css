@@ -36,3 +36,33 @@
 .breadcrumb-item-govco.invested, .breadcrumb-item-govco.invested > a, .breadcrumb-item-govco.invested+.breadcrumb-item-govco.invested::before {
   color: #FFFFFF;
 }
+
+/* Clases usadas en la plantilla (.breadcrumb / .breadcrumb-item) */
+.breadcrumb {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+  content: '›';
+  padding: 0 0.5rem;
+  color: #6b7280;
+}
+
+.breadcrumb-item > a {
+  color: #3366cc;
+  text-decoration: none;
+}
+
+.breadcrumb-item > a:hover {
+  text-decoration: underline;
+}
+
+.breadcrumb-item.active {
+  color: #282c34;
+  font-weight: 600;
+}

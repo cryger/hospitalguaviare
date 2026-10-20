@@ -1,0 +1,156 @@
+<header class="cms-head">
+  <div>
+    <h1>Menús y estructura</h1>
+    <p>Organice cómo se navega el portal: cada menú contiene páginas, y las páginas pueden tener subpáginas.</p>
+  </div>
+  <div class="cms-head-actions">
+    <a class="btn" routerLink="/admin/contenido/paginas">Ver todas las páginas</a>
+  </div>
+</header>
+
+@if (cms.error()) {
+  <div class="aviso aviso-error" role="alert">
+    {{ cms.error() }}
+    <button class="btn-link" type="button" (click)="cms.error.set(null)">Cerrar</button>
+  </div>
+}
+
+<div class="menus-layout">
+
+  <!-- ===== LISTA DE MENÚS ===== -->
+  <aside class="panel menus-lista">
+    <div class="panel-head">
+      <h2>Menús</h2>
+      <button class="btn btn-sm btn-primario" type="button" (click)="nuevoMenu()">+ Nuevo</button>
+    </div>
+
+    <ul>
+      @for (m of cms.menus(); track m.id) {
+        <li>
+          <button
+            type="button"
+            class="menu-item"
+            [class.activo]="m.id === menuSeleccionadoId()"
+            (click)="menuSeleccionadoId.set(m.id)">
+            <span class="menu-nombre">{{ m.nombre }}</span>
+            <span class="menu-meta">{{ etiquetaUbicacion(m.ubicacion) }} · {{ contarPaginas(m.id) }} páginas</span>
+          </button>
+        </li>
+      } @empty {
+        <li class="vacio">Aún no hay menús.</li>
+      }
+    </ul>
+  </aside>
+
+  <!-- ===== ESTRUCTURA DEL MENÚ ===== -->
+  <section class="panel">
+    @if (menuSeleccionado(); as menu) {
+      <div class="panel-head">
+        <div>
+          <h2>{{ menu.nombre }}</h2>
+          <span class="badge badge-info">{{ etiquetaUbicacion(menu.ubicacion) }}</span>
+          @if (!menu.activo) { <span class="badge badge-oculta">inactivo</span> }
+        </div>
+        <div class="cms-head-actions">
+          <button class="btn btn-sm" type="button" (click)="editarMenu(menu)">✏️ Editar menú</button>
+          <button class="btn btn-sm btn-peligro" type="button" (click)="eliminarMenu(menu)">Eliminar</button>
+        </div>
+      </div>
+
+      <p class="panel-sub">
+        Use ↑ ↓ para cambiar el orden, → para convertir en subpágina de la anterior y ← para subirla de nivel.
+      </p>
+
+      @if (estructura().length) {
+        <ol class="arbol" [class.bloqueado]="ocupado()">
+          @for (n of estructura(); track n.pagina.id) {
+            <li class="nodo" [style.--nivel]="n.nivel">
+              <span class="nodo-guia" aria-hidden="true">{{ n.nivel ? '└' : '' }}</span>
+              <div class="nodo-info">
+                <a class="nodo-titulo" [routerLink]="['/admin/contenido/paginas', n.pagina.id]">{{ n.pagina.titulo }}</a>
+                <span class="nodo-meta">
+                  {{ cms.rutaPagina(n.pagina.id) }} ·
+                  {{ cms.conteoEntradasPorPagina().get(n.pagina.id) || 0 }} entradas
+                </span>
+              </div>
+              <span class="badge" [class]="'badge badge-' + n.pagina.estado">{{ n.pagina.estado }}</span>
+              <div class="nodo-acciones">
+                <button class="btn btn-icono" type="button" title="Subir" aria-label="Subir"
+                        [disabled]="esPrimero(n.pagina)" (click)="mover(n.pagina, -1)">↑</button>
+                <button class="btn btn-icono" type="button" title="Bajar" aria-label="Bajar"
+                        [disabled]="esUltimo(n.pagina)" (click)="mover(n.pagina, 1)">↓</button>
+                <button class="btn btn-icono" type="button" title="Subir de nivel" aria-label="Subir de nivel"
+                        [disabled]="n.pagina.parentId === null" (click)="desindentar(n.pagina)">←</button>
+                <button class="btn btn-icono" type="button" title="Convertir en subpágina" aria-label="Convertir en subpágina"
+                        [disabled]="esPrimero(n.pagina)" (click)="indentar(n.pagina)">→</button>
+                <button class="btn btn-icono" type="button"
+                        [title]="n.pagina.visibleEnMenu ? 'Ocultar del menú' : 'Mostrar en el menú'"
+                        [attr.aria-label]="n.pagina.visibleEnMenu ? 'Ocultar del menú' : 'Mostrar en el menú'"
+                        (click)="alternarVisible(n.pagina)">{{ n.pagina.visibleEnMenu ? '👁️' : '🚫' }}</button>
+                <button class="btn btn-icono btn-peligro" type="button" title="Quitar del menú" aria-label="Quitar del menú"
+                        (click)="quitarDelMenu(n.pagina)">✕</button>
+              </div>
+            </li>
+          }
+        </ol>
+      } @else {
+        <p class="vacio">Este menú no tiene páginas todavía.</p>
+      }
+
+      <div class="agregar">
+        <form class="agregar-fila" (ngSubmit)="agregarNueva()">
+          <input class="input" name="nueva" placeholder="Título de la nueva página" [(ngModel)]="nuevaPaginaTitulo" />
+          <button class="btn btn-primario" type="submit" [disabled]="!nuevaPaginaTitulo.trim()">+ Crear página</button>
+        </form>
+
+        @if (paginasSinMenu().length) {
+          <form class="agregar-fila" (ngSubmit)="agregarExistente()">
+            <select class="select" name="existente" [(ngModel)]="paginaExistenteId">
+              <option [ngValue]="null">Agregar una página existente sin menú…</option>
+              @for (p of paginasSinMenu(); track p.id) {
+                <option [ngValue]="p.id">{{ p.titulo }}</option>
+              }
+            </select>
+            <button class="btn" type="submit" [disabled]="!paginaExistenteId">Agregar</button>
+          </form>
+        }
+      </div>
+    } @else {
+      <p class="vacio">Cree o seleccione un menú para ver su estructura.</p>
+    }
+  </section>
+</div>
+
+<!-- ===== MODAL MENÚ ===== -->
+@if (editandoMenu(); as m) {
+  <div class="modal-fondo" (click)="editandoMenu.set(null)">
+    <form class="modal-caja" (click)="$event.stopPropagation()" (ngSubmit)="guardarMenu()" role="dialog" aria-modal="true">
+      <div class="modal-head">
+        <h2>{{ m.id ? 'Editar menú' : 'Nuevo menú' }}</h2>
+        <button class="btn btn-icono" type="button" aria-label="Cerrar" (click)="editandoMenu.set(null)">✕</button>
+      </div>
+      <div class="modal-body form-grid">
+        <div class="campo full">
+          <label for="menu-nombre">Nombre</label>
+          <input id="menu-nombre" class="input" name="nombre" required [(ngModel)]="m.nombre" />
+        </div>
+        <div class="campo">
+          <label for="menu-ubicacion">Ubicación en el sitio</label>
+          <select id="menu-ubicacion" class="select" name="ubicacion" [(ngModel)]="m.ubicacion">
+            @for (u of ubicaciones; track u.valor) {
+              <option [value]="u.valor">{{ u.etiqueta }}</option>
+            }
+          </select>
+        </div>
+        <div class="campo">
+          <span class="label">Estado</span>
+          <label class="check"><input type="checkbox" name="activo" [(ngModel)]="m.activo" /> Activo</label>
+        </div>
+      </div>
+      <div class="modal-foot">
+        <button class="btn" type="button" (click)="editandoMenu.set(null)">Cancelar</button>
+        <button class="btn btn-primario" type="submit" [disabled]="!m.nombre?.trim()">Guardar</button>
+      </div>
+    </form>
+  </div>
+}

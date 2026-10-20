@@ -15,55 +15,58 @@
 
   </div>
 
-  <nav class="sidebar-nav">
-      <a routerLink="/admin" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" data-tooltip="Inicio">
-    <span class="icon">🏠</span>
-    <span class="text"> Inicio</span>
-  </a>
+  <nav class="sidebar-nav" aria-label="Menú de administración">
+    <a routerLink="/admin" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" data-tooltip="Inicio">
+      <span class="icon">🏠</span><span class="text">Inicio</span>
+    </a>
 
-  <a routerLink="/admin/noticias" routerLinkActive="active" data-tooltip="Noticias">
-    <span class="icon">📰</span>
-    <span class="text"> Noticias</span>
-  </a>
+    <span class="nav-grupo">Contenido del portal</span>
+    <a routerLink="/admin/contenido/menus" routerLinkActive="active" data-tooltip="Menús y estructura">
+      <span class="icon">🧭</span><span class="text">Menús y estructura</span>
+    </a>
+    <a routerLink="/admin/contenido/paginas" routerLinkActive="active" data-tooltip="Páginas">
+      <span class="icon">📑</span><span class="text">Páginas</span>
+    </a>
+    <a routerLink="/admin/contenido/entradas" routerLinkActive="active" data-tooltip="Entradas">
+      <span class="icon">📝</span><span class="text">Entradas</span>
+    </a>
+    <a routerLink="/admin/contenido/multimedia" routerLinkActive="active" data-tooltip="Multimedia">
+      <span class="icon">🖼️</span><span class="text">Multimedia</span>
+    </a>
 
-  <a routerLink="/admin/transparencia" routerLinkActive="active" data-tooltip="Transparencia">
-    <span class="icon">📄</span>
-    <span class="text"> Transparencia</span>
-  </a>
+    <span class="nav-grupo">Módulos</span>
+    <a routerLink="/admin/pqrsf" routerLinkActive="active" data-tooltip="PQRSF">
+      <span class="icon">📬</span><span class="text">PQRSF</span>
+    </a>
+    <a routerLink="/admin/cotizaciones" routerLinkActive="active" data-tooltip="Cotizaciones y Propuestas">
+      <span class="icon">💼</span><span class="text">Cotizaciones y Propuestas</span>
+    </a>
+    <a routerLink="/admin/vacantes" routerLinkActive="active" data-tooltip="Trabaja con Nosotros">
+      <span class="icon">🧑‍⚕️</span><span class="text">Trabaja con Nosotros</span>
+    </a>
+    <a routerLink="/admin/usuarios" routerLinkActive="active" data-tooltip="Usuarios">
+      <span class="icon">👥</span><span class="text">Usuarios</span>
+    </a>
 
-  <a routerLink="/admin/pqrsf" routerLinkActive="active" data-tooltip="PQRSF">
-    <span class="icon">📬</span>
-    <span class="text"> PQRSF</span>
-  </a>
+    <span class="nav-grupo">Sistema</span>
+    <a routerLink="/admin/configuracion" routerLinkActive="active" data-tooltip="Configuración">
+      <span class="icon">⚙️</span><span class="text">Configuración</span>
+    </a>
+    <a routerLink="/admin/accesibilidad-admin" routerLinkActive="active" data-tooltip="Accesibilidad">
+      <span class="icon">♿</span><span class="text">Accesibilidad</span>
+    </a>
 
-  <a routerLink="/admin/cotizaciones" routerLinkActive="active" data-tooltip="Cotizaciones y Propuestas">
-    <span class="icon">💼</span>
-    <span class="text"> Cotizaciones y Propuestas</span>
-  </a>
-  <a routerLink="/admin/vacantes" routerLinkActive="active" data-tooltip="Trabaja con Nosotros">
-    <span class="icon">🧑‍⚕️</span>
-    <span class="text"> Trabaja con Nosotros</span>
-  </a>
-
-  <a routerLink="/admin/servicios-atencion-ciudadano" routerLinkActive="active" data-tooltip="Servicios y Atencion al Ciudadano">
-    <span class="icon">📋</span>
-    <span class="text"> Servicios y Atencion</span>
-  </a>
-
-  <a routerLink="/admin/usuarios" routerLinkActive="active" data-tooltip="Usuarios">
-    <span class="icon">👥</span>
-    <span class="text"> Usuarios</span>
-  </a>
-
-  <a routerLink="/admin/configuracion" routerLinkActive="active" data-tooltip="Configuracion">
-    <span class="icon">⚙️</span>
-    <span class="text"> Configuración</span>
-  </a>
-
-  <a routerLink="/admin/accesibilidad-admin" routerLinkActive="active" data-tooltip="Accesibilidad">
-    <span class="icon">♿</span>
-    <span class="text"> Accesibilidad</span>
-  </a>
+    <!-- Se retiran cuando su contenido quede migrado al CMS -->
+    <span class="nav-grupo">Por migrar al CMS</span>
+    <a routerLink="/admin/noticias" routerLinkActive="active" data-tooltip="Noticias (anterior)">
+      <span class="icon">📰</span><span class="text">Noticias</span>
+    </a>
+    <a routerLink="/admin/transparencia" routerLinkActive="active" data-tooltip="Transparencia (anterior)">
+      <span class="icon">📄</span><span class="text">Transparencia</span>
+    </a>
+    <a routerLink="/admin/servicios-atencion-ciudadano" routerLinkActive="active" data-tooltip="Servicios y Atención (anterior)">
+      <span class="icon">📋</span><span class="text">Servicios y Atención</span>
+    </a>
   </nav>
 </aside>
 

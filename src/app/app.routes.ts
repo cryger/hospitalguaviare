@@ -64,7 +64,32 @@ export const routes: Routes = [
       { path: 'usuarios', component: Usuarios, data: { breadcrumb: 'Administrar Usuarios' } },
       { path: 'accesibilidad-admin', component: AccesibilidadAdmin, data: { breadcrumb: 'Administrar Accesibilidad' } },
       { path: 'configuracion', component: Configuacion, data: {Breadcrumb: 'Configuracion'}},
-      { path : 'vacantes', component:TrabajaNosotrosAdminComponent,data:{Breadcrumb: 'trabaja con Nosotros'}}
+      { path : 'vacantes', component:TrabajaNosotrosAdminComponent,data:{Breadcrumb: 'trabaja con Nosotros'}},
+
+      // 🧩 CMS: Menú → Páginas → Entradas → Multimedia
+      {
+        path: 'contenido',
+        data: { breadcrumb: 'Contenido' },
+        children: [
+          { path: '', pathMatch: 'full', redirectTo: 'menus' },
+          { path: 'menus', data: { breadcrumb: 'Menús y estructura' },
+            loadComponent: () => import('./pages/admin/cms/menus/cms-menus').then(m => m.CmsMenus) },
+          { path: 'paginas', data: { breadcrumb: 'Páginas' },
+            loadComponent: () => import('./pages/admin/cms/paginas/cms-paginas').then(m => m.CmsPaginas) },
+          { path: 'paginas/nueva', data: { breadcrumb: 'Nueva página' },
+            loadComponent: () => import('./pages/admin/cms/paginas/cms-pagina-editor').then(m => m.CmsPaginaEditor) },
+          { path: 'paginas/:id', data: { breadcrumb: 'Editar página' },
+            loadComponent: () => import('./pages/admin/cms/paginas/cms-pagina-editor').then(m => m.CmsPaginaEditor) },
+          { path: 'entradas', data: { breadcrumb: 'Entradas' },
+            loadComponent: () => import('./pages/admin/cms/entradas/cms-entradas').then(m => m.CmsEntradas) },
+          { path: 'entradas/nueva', data: { breadcrumb: 'Nueva entrada' },
+            loadComponent: () => import('./pages/admin/cms/entradas/cms-entrada-editor').then(m => m.CmsEntradaEditor) },
+          { path: 'entradas/:id', data: { breadcrumb: 'Editar entrada' },
+            loadComponent: () => import('./pages/admin/cms/entradas/cms-entrada-editor').then(m => m.CmsEntradaEditor) },
+          { path: 'multimedia', data: { breadcrumb: 'Multimedia' },
+            loadComponent: () => import('./pages/admin/cms/multimedia/cms-multimedia').then(m => m.CmsMultimediaComponent) },
+        ]
+      }
     ]
   },
 

@@ -1,0 +1,128 @@
+<header class="cms-head">
+  <div>
+    <h1>Biblioteca multimedia</h1>
+    <p>
+      {{ totales().total }} archivos · {{ totales().imagen }} imágenes · {{ totales().video }} videos ·
+      {{ totales().documento }} documentos · {{ peso(totales().peso) }}
+    </p>
+  </div>
+  <div class="cms-head-actions">
+    <button class="btn btn-primario" type="button" (click)="mostrarSubida.set(!mostrarSubida())">
+      {{ mostrarSubida() ? 'Cerrar' : '⬆️ Subir archivos' }}
+    </button>
+  </div>
+</header>
+
+@if (cms.config.modo === 'local') {
+  <div class="aviso aviso-info">
+    Modo local: los archivos se guardan en este navegador (máx. 2 MB cada uno). Al conectar la API se guardarán en el servidor.
+  </div>
+}
+@if (cms.error()) {
+  <div class="aviso aviso-error" role="alert">{{ cms.error() }}
+    <button class="btn-link" type="button" (click)="cms.error.set(null)">Cerrar</button>
+  </div>
+}
+
+@if (mostrarSubida()) {
+  <section class="panel subida">
+    <app-dropzone (archivos)="subir($event)" [ayuda]="'Máximo ' + cms.config.maxArchivoMb + ' MB por archivo'" />
+    @if (subiendo()) { <p class="vacio">Subiendo…</p> }
+  </section>
+}
+
+<div class="biblio-layout" [class.con-detalle]="seleccionado()">
+  <section class="panel">
+    <div class="filtros">
+      <input class="input" type="search" placeholder="Buscar archivo…" aria-label="Buscar archivo"
+             [ngModel]="busqueda()" (ngModelChange)="busqueda.set($event)" />
+      <select class="select" aria-label="Filtrar por tipo" [ngModel]="filtroTipo()" (ngModelChange)="filtroTipo.set($event)">
+        <option value="">Todos los tipos</option>
+        <option value="imagen">Imágenes</option>
+        <option value="video">Videos</option>
+        <option value="documento">Documentos</option>
+        <option value="audio">Audio</option>
+        <option value="otro">Otros</option>
+      </select>
+      <label class="check"><input type="checkbox" [ngModel]="soloSinUso()" (ngModelChange)="soloSinUso.set($event)" /> Solo sin usar</label>
+    </div>
+
+    @if (lista().length) {
+      <ul class="rejilla">
+        @for (m of lista(); track m.id) {
+          <li>
+            <button type="button" class="item" [class.activo]="m.id === seleccionadoId()" (click)="abrir(m)">
+              <app-media-thumb [media]="m" />
+              <span class="item-nombre" [title]="m.titulo || m.nombre">{{ m.titulo || m.nombre }}</span>
+              <span class="item-meta">
+                {{ peso(m.tamano) }} ·
+                @if (cms.usosMultimedia().get(m.id); as n) { usado {{ n }}× } @else { <em>sin usar</em> }
+              </span>
+            </button>
+          </li>
+        }
+      </ul>
+    } @else {
+      <p class="vacio">No hay archivos que coincidan.</p>
+    }
+  </section>
+
+  @if (seleccionado(); as m) {
+    <aside class="panel detalle">
+      <div class="panel-head">
+        <h2>Detalles</h2>
+        <button class="btn btn-icono" type="button" aria-label="Cerrar detalles" (click)="seleccionadoId.set(null)">✕</button>
+      </div>
+
+      @if (m.tipo === 'imagen') {
+        <img class="preview" [src]="m.url" [alt]="m.alt || ''" />
+      } @else if (m.tipo === 'video' && !m.url.includes('youtu')) {
+        <video class="preview" [src]="m.url" controls preload="metadata"></video>
+      } @else {
+        <app-media-thumb [media]="m" />
+      }
+
+      <dl class="meta">
+        <dt>Archivo</dt><dd [title]="m.nombre">{{ m.nombre }}</dd>
+        <dt>Tipo</dt><dd>{{ m.tipo }} {{ m.mime ? '(' + m.mime + ')' : '' }}</dd>
+        <dt>Tamaño</dt><dd>{{ peso(m.tamano) }}</dd>
+        <dt>Subido</dt><dd>{{ m.creadoEn | date: 'dd/MM/yyyy h:mm a' }}</dd>
+      </dl>
+
+      <form (ngSubmit)="guardarDetalle()">
+        <div class="campo bloque">
+          <label for="md-titulo">Título</label>
+          <input id="md-titulo" class="input" name="titulo" [(ngModel)]="detalle.titulo" />
+        </div>
+        @if (m.tipo === 'imagen') {
+          <div class="campo bloque">
+            <label for="md-alt">Texto alternativo</label>
+            <input id="md-alt" class="input" name="alt" [(ngModel)]="detalle.alt" />
+            <small>Describe la imagen para lectores de pantalla (requisito de accesibilidad).</small>
+          </div>
+        }
+        <div class="campo bloque">
+          <label for="md-desc">Descripción</label>
+          <textarea id="md-desc" class="textarea" name="descripcion" rows="2" [(ngModel)]="detalle.descripcion"></textarea>
+        </div>
+        <div class="acciones-detalle">
+          <button class="btn btn-primario btn-sm" type="submit">Guardar</button>
+          <button class="btn btn-sm" type="button" (click)="copiarUrl()">{{ copiado() ? '✔ Copiada' : 'Copiar URL' }}</button>
+          <a class="btn btn-sm" [href]="m.url" target="_blank" rel="noopener" [attr.download]="m.url.startsWith('data:') ? m.nombre : null">Abrir</a>
+          <button class="btn btn-sm btn-peligro" type="button" (click)="eliminar()">Eliminar</button>
+        </div>
+      </form>
+
+      <h3 class="subtitulo">Usado en</h3>
+      @if (usadoEn().length) {
+        <ul class="usos">
+          @for (e of usadoEn(); track e.id) {
+            <li><a [routerLink]="['/admin/contenido/entradas', e.id]">{{ e.titulo }}</a></li>
+          }
+        </ul>
+      } @else {
+        <p class="muted">No está asociado a ninguna entrada.</p>
+      }
+    </aside>
+  }
+</div>
