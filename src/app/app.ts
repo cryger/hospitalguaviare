@@ -2,7 +2,8 @@ import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { NgbPaginationModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbAlert } from '@ng-bootstrap/ng-bootstrap';
-      import { NgbPagination,
+import { ReactiveFormsModule } from '@angular/forms';
+import { NgbPagination,
 	NgbPaginationEllipsis,
 	NgbPaginationFirst,
 	NgbPaginationLast,
@@ -14,7 +15,7 @@ import { NgbAlert } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet,NgbAlertModule,NgbPaginationModule],
+  imports: [RouterOutlet,NgbAlertModule,NgbPaginationModule,ReactiveFormsModule],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })

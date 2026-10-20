@@ -1,0 +1,88 @@
+<aside class="dashboard-sidebar" [class.collapsed]="collapsed">
+  <div class="sidebar-logo-wrapper">
+    <img  src="HSJG-LOGO_POSITIVO.png" alt="Logo Hospital">
+
+    </div>
+    <div class="logo">
+    <strong>ESE Guaviare</strong>
+    <br>
+    <span>Administrador</span>
+    <br>
+
+    <button class="btn-cerrarSesion" type="button" (click)="openLogoutModal()">
+      Cerrar sesión
+    </button>
+
+  </div>
+
+  <nav class="sidebar-nav">
+      <a routerLink="/admin" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" data-tooltip="Inicio">
+    <span class="icon">🏠</span>
+    <span class="text"> Inicio</span>
+  </a>
+
+  <a routerLink="/admin/noticias" data-tooltip="Noticias">
+    <span class="icon">📰</span>
+    <span class="text"> Noticias</span>
+  </a>
+
+  <a routerLink="/admin/transparencia" data-tooltip="Transparencia">
+    <span class="icon">📄</span>
+    <span class="text"> Transparencia</span>
+  </a>
+
+  <a routerLink="/admin/pqrsf" data-tooltip="PQRSF">
+    <span class="icon">📬</span>
+    <span class="text"> PQRSF</span>
+  </a>
+
+  <a routerLink="/admin/cotizaciones" data-tooltip="Ofertas">
+    <span class="icon">💼</span>
+    <span class="text"> Cotizaciones y Propuestas</span>
+  </a>
+  <a routerLink="/admin/vacantes" data-tooltip="Ofertas">
+    <span class="icon">💼</span>
+    <span class="text"> Trabaja con Nosotros</span>
+  </a>
+
+  <a routerLink="/admin/servicios-atencion-ciudadano" data-tooltip="Servicios y Atencion al Ciudadano">
+    <span class="icon">📋</span>
+    <span class="text"> Servicios y Atencion</span>
+  </a>
+
+  <a routerLink="/admin/usuarios" data-tooltip="Usuarios">
+    <span class="icon">👥</span>
+    <span class="text"> Usuarios</span>
+  </a>
+
+  <a routerLink="/admin/configuracion" data-tooltip="Configuracion">
+    <span class="icon">⚙️</span>
+    <span class="text"> Configuración</span>
+  </a>
+
+  <a routerLink="/admin/accesibilidad-admin" data-tooltip="Accesibilidad">
+    <span class="icon">♿</span>
+    <span class="text"> Accesibilidad</span>
+  </a>
+  </nav>
+</aside>
+
+<!-- MODAL -->
+<div class="modal-backdrop" *ngIf="showLogoutModal">
+  <div class="modal">
+
+    <h2>Confirmar cierre de sesión</h2>
+    <p>¿Está seguro de que desea cerrar la sesión?</p>
+
+    <div class="modal-actions">
+      <button class="btn-cancel" (click)="closeLogoutModal()">
+        Cancelar
+      </button>
+
+      <button class="btn-confirm" (click)="confirmLogout()">
+        Cerrar sesión
+      </button>
+    </div>
+
+  </div>
+</div>

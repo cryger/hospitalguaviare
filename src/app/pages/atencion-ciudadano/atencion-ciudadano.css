@@ -1,0 +1,65 @@
+.gov-intro {
+  max-width: 720px;
+  margin-bottom: 2rem;
+  color: #374151;
+}
+
+/* CONTENEDOR */
+.servicios-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* CATEGORÍA */
+.categoria {
+  background: #ffffff;
+  border-radius: 6px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,.08);
+}
+
+.categoria-header h2 {
+  color: #004884;
+  margin-bottom: 1rem;
+}
+
+/* SERVICIOS */
+.servicios-lista {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+}
+
+.servicios-lista li {
+  border: 1px solid #e5e7eb;
+  border-radius: 4px;
+  padding: 1rem;
+}
+
+.servicios-lista h3 {
+  font-size: 1rem;
+  margin-bottom: .5rem;
+  color: #111827;
+}
+
+.gov-link {
+  color: #004884;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.gov-link:hover {
+  text-decoration: underline;
+}
+
+/* ADMIN */
+.admin-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}

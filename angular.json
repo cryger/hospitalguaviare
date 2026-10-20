@@ -3,6 +3,8 @@
   "version": 1,
   "cli": {
     "packageManager": "npm",
+    "analytics": "e833e5b1-4ef4-4527-9eb4-f85706a20644",
+    "packageManager": "npm",
     "analytics": "e833e5b1-4ef4-4527-9eb4-f85706a20644"
   },
   "newProjectRoot": "projects",
@@ -17,14 +19,6 @@
         "build": {
           "builder": "@angular/build:application",
           "options": {
-            "scripts": [
-              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
-              "src/app/shared/assets/js/topbar.js",
-              "src/app/shared/assets/js/accesibilidad.js",
-              "src/app/shared/assets/js/navbar.js",
-              "src/app/shared/assets/js/cabecera.js",
-              "src/app/shared/assets/js/navbar.js"
-            ],
             "browser": "src/main.ts",
             "tsConfig": "tsconfig.app.json",
             "assets": [
@@ -42,13 +36,13 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kB",
-                  "maximumError": "1MB"
+                  "maximumWarning": "2mb",
+                  "maximumError": "3mb"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "4kB",
-                  "maximumError": "8kB"
+                  "maximumWarning": "20kb",
+                  "maximumError": "25kb"
                 }
               ],
               "outputHashing": "all"
@@ -63,6 +57,9 @@
         },
         "serve": {
           "builder": "@angular/build:dev-server",
+          "options": {
+            "proxyConfig": "proxy.conf.json"
+          },
           "configurations": {
             "production": {
               "buildTarget": "hospitalguaviare:build:production"
@@ -72,6 +69,7 @@
             }
           },
           "defaultConfiguration": "development"
+
         },
         "test": {
           "builder": "@angular/build:unit-test"

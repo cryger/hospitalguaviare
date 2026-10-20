@@ -1,0 +1,269 @@
+<h2 class="gov-title">Gestión de Noticias</h2>
+
+<!-- =========================
+     HEADER + ACCIÓN
+========================== -->
+<div class="noticias-header">
+  <button
+    class="gov-btn-primary"
+    type="button"
+    (click)="abrirModalCrear()"
+  >
+    ➕ Agregar noticia
+  </button>
+</div>
+
+<!-- =========================
+     RESUMEN (KPIs simples)
+========================== -->
+<div class="noticias-kpis">
+  <div class="kpi-card">
+    <span>Total noticias</span>
+    <strong>{{ noticias.length }}</strong>
+  </div>
+
+  <div class="kpi-card">
+    <span>Publicadas</span>
+    <strong>{{ totalPublicadas }}</strong>
+  </div>
+
+  <div class="kpi-card">
+    <span>Borradores</span>
+    <strong>{{ totalBorradores }}</strong>
+  </div>
+</div>
+
+<!-- =========================
+     LISTADO
+========================== -->
+<div class="noticias-listado">
+
+  <input
+    type="text"
+    placeholder="Buscar noticia..."
+    [(ngModel)]="filtro"
+    aria-label="Buscar noticia"
+  />
+
+  <table>
+    <thead>
+      <tr>
+        <th>Título</th>
+        <th>Autor</th>
+        <th>Fecha</th>
+        <th>Estado</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let n of noticiasFiltradas">
+        <td>{{ n.titulo }}</td>
+        <td>{{ n.autor }}</td>
+        <td>{{ n.fechaPublicacion | date }}</td>
+        <td>{{ n.estado }}</td>
+        <!-- 🔴 ACCIONES -->
+      <td class="acciones" style="align-items: center;">
+        <button
+          type="button"
+          class="btn-action btn-edit"
+          (click)="editarNoticia(n.id)">
+          Editar
+        </button>
+
+        <button
+          type="button"
+          class="btn-action btn-delete"
+          (click)="eliminarNoticia(n.id)">
+          Eliminar
+        </button>
+      </td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
+
+
+
+<!-- =========================
+     MODAL CREAR NOTICIA
+========================== -->
+<div class="gov-modal-backdrop" *ngIf="crearOpen">
+
+  <div class="gov-modal" role="dialog" aria-modal="true">
+
+    <!-- HEADER -->
+    <header class="gov-modal-header">
+      <div>
+        <h3>{{ modoEdicion ? 'Editar noticia' : 'Crear noticia' }}</h3>
+        <p class="gov-modal-subtitle">
+          Complete la información para registrar una nueva noticia institucional.
+        </p>
+      </div>
+
+      <button
+        type="button"
+        class="gov-modal-close"
+        aria-label="Cerrar"
+        (click)="cerrarModalCrear()"
+      >
+        ✕
+      </button>
+    </header>
+
+    <!-- BODY -->
+    <section class="gov-modal-body">
+
+      <form
+        [formGroup]="form"
+        (ngSubmit)="guardar()"
+        class="gov-form"
+        novalidate
+      >
+
+        <!-- TÍTULO -->
+        <div class="gov-field">
+          <label for="titulo">Título de la noticia</label>
+          <input
+            id="titulo"
+            type="text"
+            formControlName="titulo"
+          />
+        </div>
+
+        <!-- RESUMEN -->
+        <div class="gov-field">
+          <label for="resumen">Resumen</label>
+          <textarea
+            id="resumen"
+            rows="3"
+            formControlName="resumen"
+          ></textarea>
+        </div>
+
+        <!-- CONTENIDO -->
+        <div class="gov-field">
+          <label for="contenido">Contenido completo</label>
+          <textarea
+            id="contenido"
+            rows="6"
+            formControlName="contenido"
+          ></textarea>
+        </div>
+
+        <!-- GRID -->
+        <div class="gov-form-grid">
+
+          <div class="gov-field">
+            <label for="autor">Autor</label>
+            <input
+              id="autor"
+              type="text"
+              formControlName="autor"
+            />
+          </div>
+
+          <div class="gov-field">
+            <label for="estado">Estado</label>
+            <select
+              id="estado"
+              formControlName="estado"
+            >
+              <option value="publicada">Publicada</option>
+              <option value="borrador">Borrador</option>
+            </select>
+          </div>
+
+        </div>
+
+        <!-- IMAGEN -->
+        <div class="gov-field">
+          <label for="imagenUrl">URL de imagen</label>
+          <input
+            id="imagenUrl"
+            type="text"
+            formControlName="imagenUrl"
+            placeholder="https://"
+          />
+          <small>Opcional. Imagen representativa de la noticia.</small>
+        </div>
+
+        <!-- ACCIONES -->
+        <footer class="gov-modal-actions">
+          <button
+            type="button"
+            class="gov-btn-secondary"
+            (click)="cerrarModalCrear()"
+          >
+            Cancelar
+          </button>
+
+          <button
+            type="submit"
+            class="gov-btn-primary"
+            [disabled]="form.invalid"
+          >
+            {{ modoEdicion ? 'Actualizar noticia' : 'Guardar noticia' }}
+          </button>
+        </footer>
+
+      </form>
+
+    </section>
+
+  </div>
+</div>
+
+<!-- =========================
+     MODAL CONFIRMAR ELIMINACIÓN
+========================== -->
+<div class="gov-modal-backdrop" *ngIf="eliminarOpen">
+
+  <div class="gov-modal gov-modal-sm" role="dialog" aria-modal="true">
+
+    <header class="gov-modal-header">
+      <h3>Confirmar eliminación</h3>
+
+      <button
+        type="button"
+        class="gov-modal-close"
+        aria-label="Cerrar"
+        (click)="cerrarModalEliminar()"
+      >
+        ✕
+      </button>
+    </header>
+
+    <section class="gov-modal-body">
+      <p>
+        ¿Está seguro de que desea eliminar esta noticia?
+      </p>
+      <p class="gov-muted">
+        Esta acción no se puede deshacer.
+      </p>
+    </section>
+
+    <footer class="gov-modal-actions">
+      <button
+        type="button"
+        class="gov-btn-secondary"
+        (click)="cerrarModalEliminar()"
+      >
+        Cancelar
+      </button>
+
+      <button
+        type="button"
+        class="gov-btn-danger"
+        (click)="confirmarEliminacion()"
+      >
+        Eliminar
+      </button>
+    </footer>
+
+  </div>
+</div>
+
+
+

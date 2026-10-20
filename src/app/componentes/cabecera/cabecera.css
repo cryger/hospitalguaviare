@@ -704,3 +704,21 @@ html {
   outline: max(0.125rem, 0.15em) solid #000000;
   outline-offset: max(0.125rem, 0.15em);
 }
+
+@media (max-width: 768px) {
+
+  .container-logo-header-govco {
+    padding: 0.75rem 1rem;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .logo-aut-header-govco {
+    display: none;
+  }
+
+  .container-logo-header-govco .logo-header-govco {
+    width: 56px;
+    height: 56px;
+  }
+}

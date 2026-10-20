@@ -1,1 +1,376 @@
 /* You can add global styles to this file, and also import other style files */
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* ===== FIX TABLETS (800px aprox) ===== */
+@media (min-width: 768px) and (max-width: 900px) {
+
+  /* Evita el encajonamiento */
+  html, body {
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  app-root,
+  app-topbar,
+  app-footer,
+  main,
+  section {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+  }
+
+  /* Topbar GOV.CO */
+  .topbar-govco {
+    width: 100vw;
+    margin: 0;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  /* Navbar / menú principal */
+  .navbar,
+  .menu-principal,
+  .govco-menu {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .navbar a,
+  .menu-principal a {
+    font-size: 0.9rem;
+    white-space: normal;
+    text-align: center;
+  }
+
+  /* Contenedores internos */
+  .container,
+  .container-fluid {
+    max-width: 100%;
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  /* Slider */
+  .carrusel-govco {
+    width: 100%;
+    overflow: hidden;
+  }
+
+  /* Footer */
+  footer {
+    width: 100%;
+    margin: 0;
+  }
+}
+
+/* ===== FIX MENU TABLET / LAPTOP PEQUEÑO ===== */
+@media (max-width: 1200px) {
+
+  /* Contenedor del menú */
+  .navbar-nav-menu-govco {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 0.5rem 1rem;
+  }
+
+  /* Cada item */
+  .navbar-nav-menu-govco .nav-item {
+    flex: 0 0 auto;
+    text-align: center;
+    max-width: 160px;
+  }
+
+  /* Links */
+  .navbar-nav-menu-govco .nav-link {
+    padding: 0.5rem 0.25rem;
+    font-size: 0.9rem;
+    line-height: 1.2;
+    white-space: normal;
+  }
+
+  /* Texto interno */
+  .navbar-nav-menu-govco .text-item-menu-govco {
+    display: block;
+    word-break: break-word;
+    text-align: center;
+  }
+}
+/* ===== FIX FOOTER TABLET / LAPTOP PEQUEÑO ===== */
+
+/* ========CONTENEDOR PRINCIPAL GOV.CO============  */
+/* ===============================
+   CONTENEDOR MAESTRO GOV.CO
+   =============================== */
+
+.govco-container {
+  max-width: 1140px;        /* ancho institucional */
+  margin: 0 auto;           /* centrado */
+  padding-left: 1rem;
+  padding-right: 1rem;
+  width: 100%;
+}
+
+
+/* ============================
+   ALTO CONTRASTE - GOV.CO
+============================ */
+
+body.high-contrast {
+  background: #000000 !important;
+  color: #ffffff !important;
+}
+
+/* TEXTO GENERAL */
+body.high-contrast * {
+  background-color: transparent !important;
+  color: #ffff00 !important;
+  border-color: #ffff00 !important;
+}
+
+/* LINKS */
+body.high-contrast a {
+  color: #ffff00 !important;
+  text-decoration: underline;
+}
+
+/* BOTONES */
+body.high-contrast button {
+  background: #000000 !important;
+  color: #ffff00 !important;
+  border: 2px solid #ffff00 !important;
+}
+
+/* INPUTS */
+body.high-contrast input,
+body.high-contrast textarea,
+body.high-contrast select {
+  background: #000000 !important;
+  color: #ffff00 !important;
+  border: 2px solid #ffffff !important;
+}
+
+/* TARJETAS / MODALES */
+body.high-contrast .card,
+body.high-contrast .gov-modal,
+body.high-contrast .dashboard-sidebar {
+  background: #000000 !important;
+}
+
+/* ICONOS */
+body.high-contrast svg,
+body.high-contrast i {
+  fill: #ffff00 !important;
+  color: #ffff00 !important;
+}
+
+/* ============================
+   PROTECCIÓN HEADER GOV.CO
+============================ */
+
+/* Contenedor principal del menú */
+body.high-contrast .container-navbar-menu-govco,
+body.high-contrast .blue-menu-govco {
+  background-color: #000000 !important;
+  color: #ffff00 !important;
+
+}
+
+/* Restablecer estilos internos del menú GOV */
+body.high-contrast .container-navbar-menu-govco *,
+body.high-contrast .blue-menu-govco * {
+  background-color: initial !important;
+  color: inherit !important;
+  border-color: inherit !important;
+  box-shadow: none !important;
+}
+
+/* ============================
+   ALTO CONTRASTE CONTENIDO
+============================ */
+
+body.high-contrast main,
+body.high-contrast .dashboard-content,
+body.high-contrast .dashboard-main {
+  background-color: #000000 !important;
+  color: #ffff00 !important;
+}
+
+/* TEXTO */
+body.high-contrast h1,
+body.high-contrast h2,
+body.high-contrast h3,
+body.high-contrast h4,
+body.high-contrast p,
+body.high-contrast span,
+body.high-contrast li,
+body.high-contrast label {
+  color: #ffff00 !important;
+}
+
+/* LINKS */
+body.high-contrast a {
+  color: #ffff00 !important;
+  text-decoration: underline;
+}
+
+/* INPUTS */
+body.high-contrast input,
+body.high-contrast textarea,
+body.high-contrast select {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+}
+
+/* BOTONES */
+body.high-contrast button {
+  background-color: #000000 !important;
+  color: #ffff00 !important;
+  border: 2px solid #ffff00 !important;
+}
+
+/* ============================
+   MENÚ GOV.CO - ALTO CONTRASTE
+============================ */
+
+body.high-contrast .text-item-menu-govco {
+  color: #ffff00 !important; /* AMARILLO */
+}
+
+/* Iconos del menú si existen */
+body.high-contrast .text-item-menu-govco svg,
+body.high-contrast .text-item-menu-govco i {
+  color: #ffff00 !important;
+  fill: #ffff00 !important;
+}
+/* ============================
+   CURSOR / CARET
+============================ */
+
+body.high-contrast input,
+body.high-contrast textarea {
+  caret-color: #ffffff !important;
+}
+
+/* ============================
+   LOGO - ALTO CONTRASTE GOV
+============================ */
+
+/* Por defecto */
+.logo-contraste {
+  display: none;
+}
+
+.logo-normal {
+  display: inline-block;
+}
+
+/* Cuando alto contraste está activo */
+body.high-contrast .logo-normal {
+  display: none !important;
+}
+
+body.high-contrast .logo-contraste {
+  display: inline-block !important;
+}
+
+/* ============================
+   TOPBAR - ALTO CONTRASTE
+============================ */
+
+body.high-contrast .barra-superior-govco {
+  background-color: #ffdd00 !important; /* AMARILLO */
+  color: #000000 !important;
+  border-bottom: 2px solid #000000;
+}
+
+/* Texto e iconos del topbar */
+body.high-contrast .barra-superior-govco *,
+body.high-contrast .barra-superior-govco i,
+body.high-contrast .barra-superior-govco svg {
+  color: #ffffff !important;
+  fill: #ffdd00 !important;
+}
+
+/* ============================
+   FOOTER - ALTO CONTRASTE
+============================ */
+
+body.high-contrast footer,
+body.high-contrast .govco-footer-logo {
+  background-color: #ffdd00 !important;
+  color: #000000 !important;
+  border-top: 2px solid #000000;
+}
+
+/* Texto del footer */
+body.high-contrast footer *,
+body.high-contrast .govco-footer-logo * {
+  color: #000000 !important;
+}
+
+.body.high-contrast .govco-logo{
+  color: #000000;
+}
+
+/* ============================
+   BARRA DE ACCESIBILIDAD
+   ALTO CONTRASTE
+============================ */
+
+body.high-contrast .accessibility-wrapper,
+body.high-contrast .accessibility-bar,
+body.high-contrast .barra-accesbilidad-govco {
+  background: #ffdd00;
+  background-color: #ffdd00 !important; /* AMARILLO */
+  border: 2px solid #000000;
+}
+
+/** ====================================
+          BOTONES E ICONOS DE LA BARRA
+========================================**/
+
+body.high-contrast .barra-accesbilidad-govco button,
+body.high-contrast .barra-accesbilidad-govco a,
+body.high-contrast .barra-accesbilidad-govco span,
+body.high-contrast .barra-accesbilidad-govco i,
+body.high-contrast .barra-accesbilidad-govco svg {
+  background-color: #ffdd00 !important;
+  color: #000000 !important;
+  fill: #000000 !important;
+}
+
+
+/** ====================================
+      HOVER BARRA DE ACCESIBILIDAD
+=======================================**/
+body.high-contrast .barra-accesbilidad-govco button:hover,
+body.high-contrast .barra-accesbilidad-govco a:hover {
+  background-color: #000000 !important;
+  color: #ffdd00 !important;
+}
+
+
+body.high-contrast .barra-accesbilidad-govco button:hover,
+body.high-contrast .barra-accesbilidad-govco a:hover {
+  background-color: #000000 !important;
+  color: #ffdd00 !important;
+}
+
+
+
+
+
+
+
+
+

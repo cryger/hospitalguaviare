@@ -7,5 +7,10 @@ import { Component } from '@angular/core';
   styleUrl: './volver-arriba.css',
 })
 export class VolverArriba {
-
+  backGoToUp(): void {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  }
 }

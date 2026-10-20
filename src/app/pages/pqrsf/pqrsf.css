@@ -1,0 +1,65 @@
+.gov-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.gov-title {
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  color: #004884;
+}
+
+.gov-form {
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 2rem;
+  box-shadow: 0 4px 10px rgba(0,0,0,.08);
+}
+
+.gov-field {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.2rem;
+}
+
+.gov-field label {
+  font-weight: 600;
+  margin-bottom: .4rem;
+  color: #111;
+}
+
+.gov-field input,
+.gov-field select,
+.gov-field textarea {
+  padding: .65rem;
+  border-radius: 4px;
+  border: 1px solid #cdd5df;
+  font-size: .95rem;
+}
+
+.gov-field textarea {
+  resize: vertical;
+}
+
+.gov-actions {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.gov-btn-primary {
+  background: #004884;
+  color: #fff;
+  border: none;
+  padding: .7rem 1.6rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.gov-success {
+  background: #e6f4ea;
+  border-left: 4px solid #2e7d32;
+  padding: 1rem;
+  margin-top: 1.5rem;
+}

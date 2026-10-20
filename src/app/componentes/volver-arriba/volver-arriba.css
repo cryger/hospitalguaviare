@@ -1,0 +1,53 @@
+/* Volver arriba - versión compatible Angular */
+
+.volver-arriba-govco {
+  color: #ffffff;
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background: #004884;
+  box-shadow: 4px 4px 6px #00000029;
+  border: none;
+  cursor: pointer;
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 1000;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition: all 300ms ease;
+  overflow: hidden;
+}
+
+/* Ícono flecha */
+.volver-arriba-govco::before {
+  content: "↑";
+  font-size: 32px;
+  font-weight: bold;
+  line-height: 1;
+}
+
+/* Hover */
+.volver-arriba-govco:hover {
+  width: 140px;
+  border-radius: 27px;
+  background: #004884;
+  justify-content: flex-start;
+  padding-left: 16px;
+}
+
+/* Texto hover */
+.volver-arriba-govco:hover::after {
+  content: "Volver arriba";
+  font-size: 14px;
+  margin-left: 12px;
+  white-space: nowrap;
+}
+
+/* Focus accesible */
+.volver-arriba-govco:focus-visible {
+  outline: 3px solid #000;
+}

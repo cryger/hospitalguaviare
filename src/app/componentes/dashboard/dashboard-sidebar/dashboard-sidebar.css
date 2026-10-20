@@ -1,0 +1,260 @@
+/* ================================
+   SIDEBAR
+================================ */
+
+.dashboard-sidebar {
+  width: 260px;
+  height: 100%;
+  background: #0b457f;
+  color: white;
+
+  display: flex;
+  flex-direction: column;
+
+  transition: width 0.25s ease;
+  overflow: hidden;
+}
+
+/* SIDEBAR COLAPSADO */
+.dashboard-sidebar.collapsed {
+  width: 80px;
+}
+
+/* ================================
+   LOGO
+================================ */
+
+.sidebar-logo-wrapper {
+  width: 100%;
+  height: 160px;
+  padding: 1rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  box-sizing: border-box;
+  overflow: hidden;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.sidebar-logo-wrapper img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+/* ================================
+   TEXTO + USUARIO
+================================ */
+
+.logo {
+  padding: 0.75rem 1rem;
+  text-align: center;
+  font-size: 0.85rem;
+  transition: opacity 0.2s ease;
+}
+
+/* OCULTAR TEXTO CUANDO COLAPSA */
+.dashboard-sidebar.collapsed .logo {
+  display: none;
+}
+
+/* ================================
+   BOTÓN CERRAR SESIÓN
+================================ */
+
+.btn-cerrarSesion {
+  margin-top: 0.75rem;
+  width: 100%;
+  background: #dc2727;
+  color: white;
+  border: none;
+  padding: 0.45rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  cursor: pointer;
+}
+
+
+/* OCULTAR BOTÓN EN COLLAPSE */
+.dashboard-sidebar.collapsed .btn-cerrarSesion {
+  display: none;
+}
+
+/* ================================
+   NAVEGACIÓN
+================================ */
+
+.dashboard-sidebar nav {
+  margin-top: 1rem;
+  padding: 0 12px;
+  display: flex;
+  flex-direction: column;
+}
+
+.dashboard-sidebar nav a {
+  display: block;
+  color: white;
+  padding: 10px 12px;
+  border-radius: 4px;
+  text-decoration: none;
+  margin-bottom: 6px;
+  font-size: 0.9rem;
+  white-space: nowrap;
+  transition: background 0.2s ease;
+}
+
+.dashboard-sidebar nav a.active,
+.dashboard-sidebar nav a:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* TEXTO OCULTO EN COLLAPSE */
+.dashboard-sidebar.collapsed nav a {
+  font-size: 0;
+  padding: 12px 0;
+  text-align: center;
+}
+
+/* ================================
+   MODAL LOGOUT
+================================ */
+
+/* Fondo oscuro */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+/* Modal */
+.modal {
+  background: white;
+  padding: 1.5rem;
+  width: 100%;
+  max-width: 380px;
+  border-radius: 6px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.modal h2 {
+  font-size: 1.1rem;
+  color: #004884;
+  margin-bottom: 0.5rem;
+}
+
+.modal p {
+  font-size: 0.9rem;
+  color: #374151;
+  margin-bottom: 1.5rem;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.btn-cancel {
+  flex: 1;
+  background: #e5e7eb;
+  border: none;
+  padding: 0.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-confirm {
+  flex: 1;
+  background: #004884;
+  color: white;
+  border: none;
+  padding: 0.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+
+/* ==============================
+    iconografia para el dashboard
+================================= */
+
+/* CONTENEDOR DEL MENÚ */
+.sidebar-nav a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* ICONO */
+.sidebar-nav .icon {
+  font-size: 1.2rem;
+  min-width: 24px;
+  text-align: center;
+}
+
+/* TEXTO */
+.sidebar-nav .text {
+  white-space: nowrap;
+}
+
+/* ===== SIDEBAR COLAPSADO ===== */
+.dashboard-sidebar.collapsed .sidebar-nav .text {
+  display: none; /* 👈 solo iconos */
+}
+
+.dashboard-sidebar.collapsed .sidebar-nav a {
+  justify-content: center;
+  padding: 12px 0;
+}
+
+/* ================================
+   TOOLTIP REAL (FUNCIONA CON OVERFLOW)
+================================ */
+
+.dashboard-sidebar.collapsed .sidebar-nav a {
+  position: relative;
+}
+
+/* Tooltip */
+.dashboard-sidebar.collapsed .sidebar-nav a::after {
+  content: attr(data-tooltip);
+
+  position: fixed; /* 🔴 CLAVE */
+  left: 90px;      /* ancho sidebar colapsado + margen */
+  transform: translateY(-50%);
+
+  background: #004884;
+  color: #ffffff;
+  padding: 6px 10px;
+  border-radius: 4px;
+
+  font-size: 0.75rem;
+  white-space: nowrap;
+
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease;
+
+  z-index: 9999;
+}
+
+/* Mostrar tooltip */
+.dashboard-sidebar.collapsed .sidebar-nav a:hover::after {
+  opacity: 1;
+}
+
+/*=========================================
+implementaciones para navegacion
+
+**/
+
+

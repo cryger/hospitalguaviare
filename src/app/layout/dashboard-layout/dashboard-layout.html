@@ -1,0 +1,53 @@
+<div
+  class="dashboard-wrapper"
+  [class.sidebar-collapsed]="isSidebarCollapsed"
+  [class.mobile]="isMobile"
+>
+
+  <!-- =========================
+       SIDEBAR DESKTOP
+       (siempre visible)
+  ========================== -->
+  <app-dashboard-sidebar
+    *ngIf="!isMobile"
+    [collapsed]="isSidebarCollapsed">
+  </app-dashboard-sidebar>
+
+  <!-- =========================
+       SIDEBAR MOBILE
+       (solo cuando está abierto)
+  ========================== -->
+  <app-dashboard-sidebar
+    *ngIf="isMobile && isSidebarOpenMobile"
+    class="mobile-sidebar"
+    [collapsed]="false"
+    (click)="closeMobileSidebar()">
+  </app-dashboard-sidebar>
+
+  <!-- OVERLAY MOBILE -->
+  <div
+    class="mobile-overlay"
+    *ngIf="isMobile && isSidebarOpenMobile"
+    (click)="closeMobileSidebar()">
+  </div>
+
+  <!-- ACCESIBILIDAD -->
+  <app-accesibilidad></app-accesibilidad>
+
+
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <div class="dashboard-main">
+    <app-dashboard-topbar
+      (toggleSidebar)="toggleSidebar()">
+    </app-dashboard-topbar>
+
+    <!-- MIGAS DE PAN -->
+    <app-breadcrumb></app-breadcrumb>
+
+    <main class="dashboard-content">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+
+</div>
