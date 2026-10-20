@@ -1,3 +1,15 @@
+<<<<<<< HEAD
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-atencion-ciudadano',
+  imports: [],
+  templateUrl: './atencion-ciudadano.html',
+  styleUrl: './atencion-ciudadano.css',
+})
+export class AtencionCiudadano {
+
+=======
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
@@ -37,4 +49,5 @@ export class AtencionCiudadano implements OnInit {
       s => s.categoriaId === categoriaId
     );
   }
+>>>>>>> 6865d3237f4bc5713e442c82baab8c7322857aba
 }
