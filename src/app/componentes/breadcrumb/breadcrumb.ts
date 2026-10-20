@@ -26,6 +26,9 @@ export class Breadcrumb implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    // Construye de inmediato (el componente puede crearse después del primer NavigationEnd)
+    this.breadcrumbs = this.buildBreadcrumbs(this.activatedRoute.root);
+
     this.router.events.pipe(
       filter((event) => event instanceof NavigationEnd)
     ).subscribe(() => {
@@ -45,7 +48,8 @@ export class Breadcrumb implements OnInit {
     }
 
     for (const child of children) {
-      const routeURL: string = `${url}/${child.snapshot.url.map(segment => segment.toString()).join('/')}`;
+      const segmento = child.snapshot.url.map(segment => segment.toString()).join('/');
+      const routeURL: string = segmento ? `${url}/${segmento}` : url || '/';
       const label = child.snapshot.data['breadcrumb'] || '';
       if (label) {
         breadcrumbs.push({ label, url: routeURL });

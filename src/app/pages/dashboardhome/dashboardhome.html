@@ -1,67 +1,260 @@
-<h1 class="dashboard-title">Panel de control</h1>
+<section class="dash">
 
-<!-- TARJETAS -->
-<div class="dashboard-cards">
+  <!-- =========================
+       ENCABEZADO
+  ========================== -->
+  <header class="dash-header">
+    <div>
+      <h1 class="dash-title">{{ saludo() }}, {{ nombreUsuario }}</h1>
+      <p class="dash-subtitle">
+        Panel de control del portal web · {{ ahora() | date: "EEEE d 'de' MMMM 'de' y, h:mm a" : '' : 'es-CO' }}
+      </p>
+    </div>
+  </header>
 
-  <div class="card">
-    <h3>Total noticias</h3>
-    <strong>{{ totalNoticias }}</strong>
-  </div>
+  <!-- =========================
+       ALERTAS
+  ========================== -->
+  @if (alertas().length) {
+    <section class="alertas" aria-label="Alertas de gestión">
+      @for (a of alertas(); track a.texto) {
+        <div class="alerta" [class]="'alerta alerta-' + a.nivel" role="status">
+          <span class="alerta-texto">{{ a.texto }}</span>
+          <a class="alerta-accion" [routerLink]="a.ruta">{{ a.accion }} →</a>
+        </div>
+      }
+    </section>
+  } @else {
+    <div class="alerta alerta-ok" role="status">✔ Todo al día. No hay pendientes críticos en el portal.</div>
+  }
 
-  <div class="card">
-    <h3>Publicadas</h3>
-    <strong>{{ publicadas }}</strong>
-  </div>
+  <!-- =========================
+       KPIs
+  ========================== -->
+  <section class="kpis" aria-label="Indicadores">
 
-  <div class="card">
-    <h3>Borradores</h3>
-    <strong>{{ borradores }}</strong>
-  </div>
+    <a class="kpi" routerLink="/admin/pqrsf" [class.kpi-danger]="kpiPqrsf().vencidas > 0">
+      <span class="kpi-icon">📬</span>
+      <span class="kpi-label">PQRSF pendientes</span>
+      <strong class="kpi-value">{{ kpiPqrsf().pendientes }}</strong>
+      <span class="kpi-meta">
+        @if (kpiPqrsf().vencidas) {
+          <span class="txt-danger">{{ kpiPqrsf().vencidas }} vencidas</span> ·
+        }
+        {{ kpiPqrsf().total }} recibidas en total
+      </span>
+    </a>
 
-  <div class="card">
-    <h3>PQRS pendientes</h3>
-    <strong>0</strong>
-  </div>
-  <div class="card">
-    <h3>Cotizaciones y Publicaciones</h3>
-    <strong>{{totalCotizaciones}}</strong>
-  </div>
+    <a class="kpi" routerLink="/admin/noticias">
+      <span class="kpi-icon">📰</span>
+      <span class="kpi-label">Noticias publicadas</span>
+      <strong class="kpi-value">{{ kpiNoticias().publicadas }}</strong>
+      <span class="kpi-meta">{{ kpiNoticias().borradores }} borradores · {{ kpiNoticias().archivadas }} archivadas</span>
+    </a>
 
-</div>
+    <a class="kpi" routerLink="/admin/transparencia">
+      <span class="kpi-icon">📄</span>
+      <span class="kpi-label">Transparencia</span>
+      <strong class="kpi-value">{{ kpiTransparencia().publicaciones }}</strong>
+      <span class="kpi-meta">publicaciones en {{ kpiTransparencia().categorias }} categorías</span>
+    </a>
 
+    <a class="kpi" routerLink="/admin/cotizaciones">
+      <span class="kpi-icon">💼</span>
+      <span class="kpi-label">Cotizaciones publicadas</span>
+      <strong class="kpi-value">{{ kpiCotizaciones().publicadas }}</strong>
+      <span class="kpi-meta">{{ kpiCotizaciones().borradores }} en borrador</span>
+    </a>
 
+    <a class="kpi" routerLink="/admin/vacantes">
+      <span class="kpi-icon">🧑‍⚕️</span>
+      <span class="kpi-label">Vacantes activas</span>
+      <strong class="kpi-value">{{ kpiVacantes().publicadas }}</strong>
+      <span class="kpi-meta">{{ kpiVacantes().plazas }} plazas disponibles</span>
+    </a>
 
-<!-- LISTADOS -->
-<div class="dashboard-lists">
+    <a class="kpi" routerLink="/admin/servicios-atencion-ciudadano">
+      <span class="kpi-icon">📋</span>
+      <span class="kpi-label">Servicios activos</span>
+      <strong class="kpi-value">{{ kpiServicios().activos }}</strong>
+      <span class="kpi-meta">de {{ kpiServicios().total }} registrados</span>
+    </a>
 
-  <!-- TOTAL -->
-  <section class="list">
-    <h4>Últimas noticias</h4>
-    <ul>
-      <li *ngFor="let n of ultimasNoticias">
-        {{ n.titulo }}
-      </li>
-    </ul>
+    <a class="kpi" routerLink="/admin/usuarios">
+      <span class="kpi-icon">👥</span>
+      <span class="kpi-label">Usuarios activos</span>
+      <strong class="kpi-value">{{ kpiUsuarios().activos }}</strong>
+      <span class="kpi-meta">{{ kpiUsuarios().admins }} administradores</span>
+    </a>
+
   </section>
 
-  <!-- PUBLICADAS -->
-  <section class="list">
-    <h4>Publicadas</h4>
-    <ul>
-      <li *ngFor="let n of ultimasPublicadas">
-        {{ n.titulo }}
-      </li>
-    </ul>
+  <!-- =========================
+       FILA: PQRSF
+  ========================== -->
+  <div class="grid grid-2-1">
+
+    <!-- Pendientes con semáforo -->
+    <section class="panel">
+      <div class="panel-head">
+        <h2>PQRSF por atender</h2>
+        <a routerLink="/admin/pqrsf" class="panel-link">Ver todas</a>
+      </div>
+
+      @if (pqrsfPendientes().length) {
+        <div class="table-wrap">
+          <table class="tabla">
+            <thead>
+              <tr>
+                <th>Radicado</th>
+                <th>Tipo</th>
+                <th>Asunto</th>
+                <th>Recibida</th>
+                <th>Plazo</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (p of pqrsfPendientes().slice(0, 6); track p.item.id) {
+                <tr>
+                  <td class="mono">#{{ p.item.id }}</td>
+                  <td>{{ p.item.tipo }}</td>
+                  <td class="ellipsis" [title]="p.item.asunto">{{ p.item.asunto }}</td>
+                  <td>{{ p.item.fechaCreacion | date: 'dd/MM/yyyy' }}</td>
+                  <td>
+                    <span class="semaforo" [class]="'semaforo semaforo-' + p.semaforo">
+                      @if (p.semaforo === 'vencida') {
+                        Vencida ({{ -p.diasRestantes }} d)
+                      } @else {
+                        {{ p.diasRestantes }} días háb.
+                      }
+                    </span>
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      } @else {
+        <p class="vacio">No hay PQRSF pendientes. 🎉</p>
+      }
+    </section>
+
+    <!-- Resumen PQRSF -->
+    <section class="panel">
+      <div class="panel-head">
+        <h2>Resumen PQRSF</h2>
+      </div>
+
+      <div class="mini-stats">
+        <div>
+          <strong>{{ kpiPqrsf().cumplimiento }}%</strong>
+          <span>respondidas</span>
+        </div>
+        <div>
+          <strong>{{ kpiPqrsf().promedioRespuesta ?? '—' }}</strong>
+          <span>días háb. promedio</span>
+        </div>
+      </div>
+
+      <h3 class="subtitulo">Por tipo</h3>
+      <ul class="barras">
+        @for (t of pqrsfPorTipo(); track t.tipo) {
+          <li>
+            <span class="barra-label">{{ t.tipo }}</span>
+            <span class="barra-track"><span class="barra-fill" [style.width.%]="t.porcentaje"></span></span>
+            <span class="barra-num">{{ t.cantidad }}</span>
+          </li>
+        }
+      </ul>
+
+      <h3 class="subtitulo">Por estado</h3>
+      <div class="stack" role="img"
+           [attr.aria-label]="'Recibida ' + pqrsfPorEstado()[0].cantidad + ', En proceso ' + pqrsfPorEstado()[1].cantidad + ', Respondida ' + pqrsfPorEstado()[2].cantidad + ', Cerrada ' + pqrsfPorEstado()[3].cantidad">
+        @for (e of pqrsfPorEstado(); track e.estado) {
+          @if (e.cantidad) {
+            <span class="stack-seg" [class]="'stack-seg est-' + $index" [style.width.%]="e.porcentaje"></span>
+          }
+        }
+      </div>
+      <ul class="leyenda">
+        @for (e of pqrsfPorEstado(); track e.estado) {
+          <li><span class="dot" [class]="'dot est-' + $index"></span>{{ e.estado }} <b>{{ e.cantidad }}</b></li>
+        }
+      </ul>
+    </section>
+  </div>
+
+  <!-- =========================
+       FILA: NOTICIAS + ACTIVIDAD
+  ========================== -->
+  <div class="grid grid-1-1">
+
+    <section class="panel">
+      <div class="panel-head">
+        <h2>Últimas noticias</h2>
+        <a routerLink="/admin/noticias" class="panel-link">Administrar</a>
+      </div>
+
+      @if (ultimasNoticias().length) {
+        <ul class="lista">
+          @for (n of ultimasNoticias(); track n.id) {
+            <li>
+              @if (n.imagenUrl) {
+                <img class="thumb" [src]="n.imagenUrl" alt="" />
+              } @else {
+                <span class="thumb thumb-vacio">📰</span>
+              }
+              <div class="lista-body">
+                <span class="lista-titulo">{{ n.titulo }}</span>
+                <span class="lista-meta">{{ n.autor || 'Sin autor' }} · {{ n.fechaPublicacion | date: 'dd/MM/yyyy' }}</span>
+              </div>
+              <span class="badge" [class]="'badge badge-' + n.estado">{{ n.estado }}</span>
+            </li>
+          }
+        </ul>
+      } @else {
+        <p class="vacio">Aún no hay noticias. <a routerLink="/admin/noticias">Crear la primera</a></p>
+      }
+    </section>
+
+    <section class="panel">
+      <div class="panel-head">
+        <h2>Actividad reciente</h2>
+      </div>
+
+      @if (actividadReciente().length) {
+        <ol class="timeline">
+          @for (a of actividadReciente(); track $index) {
+            <li>
+              <span class="tl-icon">{{ a.icono }}</span>
+              <div class="tl-body">
+                <a [routerLink]="a.ruta" class="tl-titulo">{{ a.titulo }}</a>
+                <span class="tl-meta">{{ a.modulo }} · {{ a.detalle }} · {{ a.fecha | date: 'dd/MM/yyyy h:mm a' }}</span>
+              </div>
+            </li>
+          }
+        </ol>
+      } @else {
+        <p class="vacio">Sin actividad registrada.</p>
+      }
+    </section>
+  </div>
+
+  <!-- =========================
+       ACCESOS RÁPIDOS
+  ========================== -->
+  <section class="panel">
+    <div class="panel-head">
+      <h2>Accesos rápidos</h2>
+    </div>
+    <div class="accesos">
+      @for (q of accesosRapidos; track q.ruta) {
+        <a class="acceso" [routerLink]="q.ruta">
+          <span class="acceso-icon">{{ q.icono }}</span>
+          <span>{{ q.texto }}</span>
+        </a>
+      }
+    </div>
   </section>
 
-  <!-- BORRADORES -->
-  <section class="list">
-    <h4>Borradores</h4>
-    <ul>
-      <li *ngFor="let n of ultimosBorradores">
-        {{ n.titulo }}
-      </li>
-    </ul>
-  </section>
-
-</div>
+</section>

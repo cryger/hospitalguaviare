@@ -1,0 +1,98 @@
+<div class="modal-fondo" (click)="cerrar.emit()">
+  <div class="modal-caja grande" role="dialog" aria-modal="true" [attr.aria-label]="titulo()" (click)="$event.stopPropagation()">
+    <div class="modal-head">
+      <h2>{{ titulo() }}</h2>
+      <button class="btn btn-icono" type="button" aria-label="Cerrar" (click)="cerrar.emit()">✕</button>
+    </div>
+
+    <div class="tabs" role="tablist">
+      <button type="button" role="tab" [class.on]="pestana() === 'biblioteca'" (click)="pestana.set('biblioteca')">Biblioteca</button>
+      <button type="button" role="tab" [class.on]="pestana() === 'subir'" (click)="pestana.set('subir')">Subir archivos</button>
+      <button type="button" role="tab" [class.on]="pestana() === 'url'" (click)="pestana.set('url')">Desde URL</button>
+    </div>
+
+    <div class="modal-body">
+      @if (cms.error()) {
+        <div class="aviso aviso-error" role="alert">
+          {{ cms.error() }}
+          <button class="btn-link" type="button" (click)="cms.error.set(null)">Cerrar</button>
+        </div>
+      }
+
+      @switch (pestana()) {
+        @case ('biblioteca') {
+          <div class="filtros">
+            <input class="input" type="search" placeholder="Buscar…" aria-label="Buscar archivo"
+                   [ngModel]="busqueda()" (ngModelChange)="busqueda.set($event)" />
+            @if (!soloTipo()) {
+              <select class="select" aria-label="Filtrar por tipo" [ngModel]="filtroTipo()" (ngModelChange)="filtroTipo.set($event)">
+                <option value="">Todos los tipos</option>
+                <option value="imagen">Imágenes</option>
+                <option value="video">Videos</option>
+                <option value="documento">Documentos</option>
+                <option value="audio">Audio</option>
+              </select>
+            }
+          </div>
+
+          @if (lista().length) {
+            <ul class="rejilla">
+              @for (m of lista(); track m.id) {
+                <li>
+                  <button type="button" class="item" [class.elegido]="esElegido(m.id)" [class.previo]="esPrevio(m.id)"
+                          [attr.aria-pressed]="esElegido(m.id)" (click)="alternar(m)">
+                    <app-media-thumb [media]="m" />
+                    <span class="item-nombre" [title]="m.titulo || m.nombre">{{ m.titulo || m.nombre }}</span>
+                    @if (esElegido(m.id)) { <span class="marca" aria-hidden="true">✓</span> }
+                    @if (esPrevio(m.id)) { <span class="ya">ya agregado</span> }
+                  </button>
+                </li>
+              }
+            </ul>
+          } @else {
+            <p class="vacio">No hay archivos. <button class="btn-link" type="button" (click)="pestana.set('subir')">Suba el primero</button></p>
+          }
+        }
+        @case ('subir') {
+          <app-dropzone (archivos)="subir($event)"
+                        [ayuda]="'Máximo ' + cms.config.maxArchivoMb + ' MB por archivo' + (cms.config.modo === 'local' ? ' (2 MB en modo local)' : '')" />
+          @if (subiendo()) { <p class="vacio">Subiendo…</p> }
+        }
+        @case ('url') {
+          <form class="form-grid" (ngSubmit)="agregarUrl()">
+            <div class="campo full">
+              <label for="mp-url">URL</label>
+              <input id="mp-url" class="input" name="url" required placeholder="https://www.youtube.com/watch?v=…" [(ngModel)]="url.url" />
+              <small>Útil para videos de YouTube o documentos que ya están publicados en otro servidor.</small>
+            </div>
+            <div class="campo">
+              <label for="mp-titulo">Título</label>
+              <input id="mp-titulo" class="input" name="titulo" [(ngModel)]="url.titulo" />
+            </div>
+            <div class="campo">
+              <label for="mp-tipo">Tipo</label>
+              <select id="mp-tipo" class="select" name="tipo" [(ngModel)]="url.tipo" [disabled]="!!soloTipo()">
+                <option value="video">Video</option>
+                <option value="documento">Documento</option>
+                <option value="imagen">Imagen</option>
+                <option value="audio">Audio</option>
+                <option value="otro">Otro</option>
+              </select>
+            </div>
+            <div class="full">
+              <button class="btn btn-primario" type="submit" [disabled]="!url.url.trim()">Agregar a la biblioteca</button>
+            </div>
+          </form>
+        }
+      }
+    </div>
+
+    <div class="modal-foot">
+      <span class="conteo">{{ elegidos().length }} seleccionado(s)</span>
+      <button class="btn" type="button" (click)="cerrar.emit()">Cancelar</button>
+      <button class="btn btn-primario" type="button" [disabled]="!elegidos().length" (click)="confirmar()">
+        {{ multiple() ? 'Agregar seleccionados' : 'Usar este archivo' }}
+      </button>
+    </div>
+  </div>
+</div>

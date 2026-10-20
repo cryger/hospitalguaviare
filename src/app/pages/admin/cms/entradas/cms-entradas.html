@@ -1,0 +1,93 @@
+<header class="cms-head">
+  <div>
+    <h1>Entradas</h1>
+    <p>Todo el contenido del portal: artículos, noticias, documentos, servicios y eventos.</p>
+  </div>
+  <div class="cms-head-actions">
+    <a class="btn btn-primario" routerLink="/admin/contenido/entradas/nueva"
+       [queryParams]="filtroPagina() ? { pagina: filtroPagina() } : {}">+ Nueva entrada</a>
+  </div>
+</header>
+
+@if (cms.error()) {
+  <div class="aviso aviso-error" role="alert">{{ cms.error() }}
+    <button class="btn-link" type="button" (click)="cms.error.set(null)">Cerrar</button>
+  </div>
+}
+
+<section class="panel">
+  <div class="filtros">
+    <input class="input" type="search" placeholder="Buscar entrada…" aria-label="Buscar entrada"
+           [ngModel]="busqueda()" (ngModelChange)="busqueda.set($event)" />
+    <select class="select" aria-label="Filtrar por página" [ngModel]="filtroPagina()" (ngModelChange)="filtroPagina.set($event)">
+      <option value="">Todas las páginas</option>
+      @for (n of paginasOrdenadas(); track n.pagina.id) {
+        <option [ngValue]="n.pagina.id">{{ sangria(n.nivel) }}{{ n.pagina.titulo }}</option>
+      }
+    </select>
+    <select class="select" aria-label="Filtrar por tipo" [ngModel]="filtroTipo()" (ngModelChange)="filtroTipo.set($event)">
+      <option value="">Todos los tipos</option>
+      @for (t of tipos; track t.valor) {
+        <option [value]="t.valor">{{ t.etiqueta }}</option>
+      }
+    </select>
+    <select class="select" aria-label="Filtrar por estado" [ngModel]="filtroEstado()" (ngModelChange)="filtroEstado.set($event)">
+      <option value="">Todos los estados</option>
+      <option value="publicada">Publicada</option>
+      <option value="borrador">Borrador</option>
+      <option value="archivada">Archivada</option>
+    </select>
+  </div>
+
+  @if (lista().length) {
+    <div class="table-wrap">
+      <table class="tabla">
+        <thead>
+          <tr>
+            <th>Entrada</th>
+            <th class="ocultar-movil">Página</th>
+            <th class="ocultar-movil">Tipo</th>
+            <th>Estado</th>
+            <th class="ocultar-movil">Fecha</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (e of lista(); track e.id) {
+            <tr>
+              <td>
+                <div class="celda-titulo">
+                  <div class="miniatura"><app-media-thumb [media]="cms.multimediaPorId().get(e.imagenDestacadaId ?? -1)" /></div>
+                  <div>
+                    <a class="titulo-celda" [routerLink]="['/admin/contenido/entradas', e.id]">
+                      @if (e.destacada) { <span class="destacada" title="Destacada">★</span> }
+                      {{ e.titulo }}
+                    </a>
+                    <span class="sub-celda">{{ e.multimediaIds.length }} archivo(s) · {{ e.autor || 'Sin autor' }}</span>
+                  </div>
+                </div>
+              </td>
+              <td class="ocultar-movil">
+                <a class="btn-link" [routerLink]="['/admin/contenido/paginas', e.paginaId]">{{ tituloPagina(e.paginaId) }}</a>
+              </td>
+              <td class="ocultar-movil">{{ iconoTipo(e.tipo) }} {{ etiquetaTipo(e.tipo) }}</td>
+              <td><span class="badge" [class]="'badge badge-' + e.estado">{{ e.estado }}</span></td>
+              <td class="ocultar-movil">{{ (e.fechaPublicacion || e.creadoEn) | date: 'dd/MM/yyyy' }}</td>
+              <td class="acciones">
+                @if (e.estado !== 'publicada') {
+                  <button class="btn btn-sm" type="button" (click)="cambiarEstado(e, 'publicada')">Publicar</button>
+                } @else {
+                  <button class="btn btn-sm" type="button" (click)="cambiarEstado(e, 'archivada')">Archivar</button>
+                }
+                <a class="btn btn-sm" [routerLink]="['/admin/contenido/entradas', e.id]">Editar</a>
+                <button class="btn btn-sm btn-peligro" type="button" (click)="eliminar(e)">Eliminar</button>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  } @else {
+    <p class="vacio">No hay entradas que coincidan con el filtro.</p>
+  }
+</section>

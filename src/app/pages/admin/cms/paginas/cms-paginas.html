@@ -1,0 +1,88 @@
+<header class="cms-head">
+  <div>
+    <h1>Páginas</h1>
+    <p>Cada página pertenece a un menú y agrupa entradas (textos, noticias, documentos…).</p>
+  </div>
+  <div class="cms-head-actions">
+    <a class="btn" routerLink="/admin/contenido/menus">Organizar menús</a>
+    <a class="btn btn-primario" routerLink="/admin/contenido/paginas/nueva">+ Nueva página</a>
+  </div>
+</header>
+
+@if (cms.error()) {
+  <div class="aviso aviso-error" role="alert">{{ cms.error() }}
+    <button class="btn-link" type="button" (click)="cms.error.set(null)">Cerrar</button>
+  </div>
+}
+
+<div class="kpis">
+  <div class="kpi"><b>{{ resumen().total }}</b>páginas</div>
+  <div class="kpi"><b>{{ resumen().publicadas }}</b>publicadas</div>
+  <div class="kpi"><b>{{ resumen().borradores }}</b>borradores</div>
+  <div class="kpi"><b>{{ resumen().sinMenu }}</b>sin menú</div>
+</div>
+
+<section class="panel">
+  <div class="filtros">
+    <input class="input" type="search" placeholder="Buscar página…" aria-label="Buscar página"
+           [ngModel]="busqueda()" (ngModelChange)="busqueda.set($event)" />
+    <select class="select" aria-label="Filtrar por menú" [ngModel]="filtroMenu()" (ngModelChange)="filtroMenu.set($event)">
+      <option value="">Todos los menús</option>
+      @for (m of cms.menus(); track m.id) {
+        <option [ngValue]="m.id">{{ m.nombre }}</option>
+      }
+      <option value="sin">Sin menú</option>
+    </select>
+    <select class="select" aria-label="Filtrar por estado" [ngModel]="filtroEstado()" (ngModelChange)="filtroEstado.set($event)">
+      <option value="">Todos los estados</option>
+      <option value="publicada">Publicada</option>
+      <option value="borrador">Borrador</option>
+      <option value="oculta">Oculta</option>
+    </select>
+  </div>
+
+  @if (filas().length) {
+    <div class="table-wrap">
+      <table class="tabla">
+        <thead>
+          <tr>
+            <th>Título</th>
+            <th class="ocultar-movil">Menú</th>
+            <th class="ocultar-movil">Plantilla</th>
+            <th>Entradas</th>
+            <th>Estado</th>
+            <th class="ocultar-movil">Actualizada</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (f of filas(); track f.pagina.id) {
+            <tr>
+              <td>
+                <span class="indent">{{ sangria(f.nivel) }}</span>
+                <a class="titulo-celda" [routerLink]="['/admin/contenido/paginas', f.pagina.id]">{{ f.pagina.titulo }}</a>
+                <span class="sub-celda">{{ cms.rutaPagina(f.pagina.id) }}</span>
+              </td>
+              <td class="ocultar-movil">{{ f.menuNombre }}</td>
+              <td class="ocultar-movil">{{ etiquetaPlantilla(f.pagina.plantilla) }}</td>
+              <td>
+                <a class="btn-link" [routerLink]="['/admin/contenido/entradas']" [queryParams]="{ pagina: f.pagina.id }">
+                  {{ cms.conteoEntradasPorPagina().get(f.pagina.id) || 0 }}
+                </a>
+              </td>
+              <td><span class="badge" [class]="'badge badge-' + f.pagina.estado">{{ f.pagina.estado }}</span></td>
+              <td class="ocultar-movil">{{ f.pagina.actualizadoEn | date: 'dd/MM/yyyy' }}</td>
+              <td class="acciones">
+                <a class="btn btn-sm" [routerLink]="['/admin/contenido/entradas/nueva']" [queryParams]="{ pagina: f.pagina.id }">+ Entrada</a>
+                <a class="btn btn-sm" [routerLink]="['/admin/contenido/paginas', f.pagina.id]">Editar</a>
+                <button class="btn btn-sm btn-peligro" type="button" (click)="eliminar(f.pagina)">Eliminar</button>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  } @else {
+    <p class="vacio">No hay páginas que coincidan con el filtro.</p>
+  }
+</section>

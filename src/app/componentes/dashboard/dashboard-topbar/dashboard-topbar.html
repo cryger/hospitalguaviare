@@ -1,7 +1,17 @@
-
 <header class="dashboard-topbar">
-  <button class="toogle-menu" type="button" (click)="toggle()">☰</button>
-  <span class="titulo-topbar">Panel de administración</span>
+  <div class="topbar-left">
+    <button class="toggle-menu" type="button" (click)="toggle()" aria-label="Mostrar u ocultar menú">☰</button>
+    <span class="titulo-topbar">Panel de administración</span>
+  </div>
 
-  <button class="cambio-idioma">Cambio de Idioma</button>
+  <div class="topbar-right">
+    <a class="ver-sitio" routerLink="/" target="_blank" rel="noopener">Ver sitio ↗</a>
+    <div class="usuario" [title]="nombreUsuario">
+      <span class="avatar" aria-hidden="true">{{ iniciales }}</span>
+      <span class="usuario-info">
+        <strong>{{ nombreUsuario }}</strong>
+        <small>Administrador</small>
+      </span>
+    </div>
+  </div>
 </header>

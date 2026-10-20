@@ -1,0 +1,26 @@
+.tabs { display: flex; gap: 0.25rem; padding: 0 1.25rem; border-bottom: 1px solid var(--c-borde); }
+.tabs button {
+  background: none; border: none; border-bottom: 3px solid transparent; padding: 0.7rem 0.9rem;
+  font-size: 0.85rem; font-weight: 600; color: var(--c-muted); cursor: pointer; font-family: inherit;
+}
+.tabs button.on { color: var(--c-primario); border-bottom-color: var(--c-primario); }
+
+.rejilla {
+  list-style: none; margin: 0; padding: 0; display: grid; gap: 0.75rem;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+}
+.item {
+  position: relative; width: 100%; display: flex; flex-direction: column; gap: 0.35rem;
+  background: #fff; border: 2px solid var(--c-borde); border-radius: 8px; padding: 0.35rem;
+  cursor: pointer; font-family: inherit; text-align: left;
+}
+.item:hover { border-color: #94a3b8; }
+.item.elegido { border-color: var(--c-primario-2); box-shadow: 0 0 0 3px rgba(51, 102, 204, 0.2); }
+.item.previo { opacity: 0.55; }
+.item-nombre { font-size: 0.74rem; color: var(--c-texto-2); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.marca {
+  position: absolute; top: 6px; right: 6px; width: 22px; height: 22px; border-radius: 50%;
+  background: var(--c-primario-2); color: #fff; display: grid; place-items: center; font-size: 0.75rem; font-weight: 700;
+}
+.ya { position: absolute; top: 6px; left: 6px; background: rgba(0,0,0,.65); color: #fff; font-size: .65rem; padding: .1rem .35rem; border-radius: 4px; }
+.conteo { margin-right: auto; font-size: 0.8rem; color: var(--c-muted); align-self: center; }

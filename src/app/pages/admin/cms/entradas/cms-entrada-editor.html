@@ -1,0 +1,166 @@
+@if (noEncontrada()) {
+  <div class="aviso aviso-error">La entrada no existe o fue eliminada. <a routerLink="/admin/contenido/entradas">Volver</a></div>
+} @else if (!cms.paginas().length && !cms.cargando()) {
+  <div class="aviso aviso-info">Primero cree una página para poder agregarle entradas.
+    <a routerLink="/admin/contenido/paginas/nueva">Crear página</a></div>
+} @else {
+
+<header class="cms-head">
+  <div>
+    @if (form.paginaId) {
+      <a class="volver" [routerLink]="['/admin/contenido/paginas', form.paginaId]">← {{ cms.paginaPorId().get(+form.paginaId)?.titulo }}</a>
+    }
+    <h1>{{ entradaId() ? 'Editar entrada' : 'Nueva entrada' }}</h1>
+  </div>
+</header>
+
+@if (cms.error()) {
+  <div class="aviso aviso-error" role="alert">{{ cms.error() }}
+    <button class="btn-link" type="button" (click)="cms.error.set(null)">Cerrar</button>
+  </div>
+}
+@if (mensajeOk()) {
+  <div class="aviso aviso-ok" role="status">{{ mensajeOk() }}</div>
+}
+
+<div class="editor-layout">
+  <!-- ===== COLUMNA PRINCIPAL ===== -->
+  <div class="col-principal">
+    <section class="panel">
+      <div class="campo">
+        <label for="en-titulo" class="sr-only">Título</label>
+        <input id="en-titulo" class="input input-titulo" name="titulo" placeholder="Título de la entrada"
+               [(ngModel)]="form.titulo" (ngModelChange)="alCambiarTitulo()" />
+        <span class="slug-preview">
+          {{ form.paginaId ? cms.rutaPagina(+form.paginaId) : '' }}/<input class="slug-input" name="slug" aria-label="Slug"
+            [(ngModel)]="form.slug" (ngModelChange)="slugManual = true" />
+        </span>
+      </div>
+
+      <div class="campo bloque">
+        <label for="en-resumen">Resumen</label>
+        <textarea id="en-resumen" class="textarea" name="resumen" rows="2" maxlength="300"
+                  placeholder="Texto corto que aparece en listados y tarjetas" [(ngModel)]="form.resumen"></textarea>
+        <small>{{ (form.resumen || '').length }}/300</small>
+      </div>
+
+      <div class="campo bloque">
+        <span class="label">Contenido</span>
+        <app-rich-editor [(valor)]="contenido" />
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-head">
+        <h2>Multimedia ({{ archivosGaleria().length }})</h2>
+        <button class="btn btn-sm btn-primario" type="button" (click)="picker.set('galeria')">+ Agregar</button>
+      </div>
+      <p class="panel-sub">Imágenes, videos y documentos asociados a esta entrada. El orden se respeta en el sitio.</p>
+
+      @if (archivosGaleria().length) {
+        <ul class="galeria">
+          @for (m of archivosGaleria(); track m.id; let primero = $first, ultimo = $last) {
+            <li>
+              <app-media-thumb [media]="m" />
+              @if (m.id === destacadaId()) { <span class="chip-destacada">Destacada</span> }
+              <span class="g-nombre" [title]="m.titulo || m.nombre">{{ m.titulo || m.nombre }}</span>
+              <div class="g-acciones">
+                <button class="btn btn-icono" type="button" aria-label="Mover a la izquierda" [disabled]="primero" (click)="moverEnGaleria(m.id, -1)">←</button>
+                <button class="btn btn-icono" type="button" aria-label="Mover a la derecha" [disabled]="ultimo" (click)="moverEnGaleria(m.id, 1)">→</button>
+                @if (m.tipo === 'imagen' && m.id !== destacadaId()) {
+                  <button class="btn btn-icono" type="button" title="Usar como imagen destacada" aria-label="Usar como imagen destacada" (click)="destacadaId.set(m.id)">★</button>
+                }
+                <button class="btn btn-icono btn-peligro" type="button" aria-label="Quitar" (click)="quitarDeGaleria(m.id)">✕</button>
+              </div>
+            </li>
+          }
+        </ul>
+      } @else {
+        <button class="vacio-media" type="button" (click)="picker.set('galeria')">
+          Sin archivos todavía. Haga clic para agregar imágenes, videos o documentos.
+        </button>
+      }
+    </section>
+  </div>
+
+  <!-- ===== COLUMNA LATERAL ===== -->
+  <aside class="col-lateral">
+    <section class="panel">
+      <div class="panel-head"><h2>Publicación</h2></div>
+
+      <div class="campo bloque">
+        <label for="en-estado">Estado</label>
+        <select id="en-estado" class="select" name="estado" [(ngModel)]="form.estado">
+          <option value="borrador">Borrador</option>
+          <option value="publicada">Publicada</option>
+          <option value="archivada">Archivada</option>
+        </select>
+      </div>
+      <div class="campo bloque">
+        <label for="en-fecha">Fecha de publicación</label>
+        <input id="en-fecha" class="input" type="datetime-local" name="fecha" [(ngModel)]="fechaLocal" />
+        <small>Vacía = se asigna al publicar.</small>
+      </div>
+      <div class="campo bloque">
+        <label for="en-autor">Autor</label>
+        <input id="en-autor" class="input" name="autor" [(ngModel)]="form.autor" />
+      </div>
+      <label class="check bloque"><input type="checkbox" name="destacada" [(ngModel)]="form.destacada" /> Destacar en portada</label>
+
+      <div class="acciones-pub">
+        @if (entradaId()) {
+          <button class="btn btn-peligro btn-sm" type="button" (click)="eliminar()">Eliminar</button>
+        }
+        <span class="flex"></span>
+        <button class="btn" type="button" [disabled]="guardando() || !valido()" (click)="guardar()">Guardar</button>
+        @if (form.estado !== 'publicada') {
+          <button class="btn btn-primario" type="button" [disabled]="guardando() || !valido()" (click)="guardar('publicada')">Publicar</button>
+        }
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-head"><h2>Ubicación</h2></div>
+      <div class="campo bloque">
+        <label for="en-pagina">Página *</label>
+        <select id="en-pagina" class="select" name="paginaId" [(ngModel)]="form.paginaId">
+          @for (n of paginasOrdenadas(); track n.pagina.id) {
+            <option [ngValue]="n.pagina.id">{{ sangria(n.nivel) }}{{ n.pagina.titulo }}</option>
+          }
+        </select>
+      </div>
+      <div class="campo bloque">
+        <label for="en-tipo">Tipo de entrada</label>
+        <select id="en-tipo" class="select" name="tipo" [(ngModel)]="form.tipo">
+          @for (t of tipos; track t.valor) {
+            <option [value]="t.valor">{{ t.icono }} {{ t.etiqueta }}</option>
+          }
+        </select>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-head"><h2>Imagen destacada</h2></div>
+      @if (imagenDestacada(); as img) {
+        <app-media-thumb [media]="img" />
+        <div class="acciones-pub">
+          <button class="btn btn-sm" type="button" (click)="picker.set('destacada')">Cambiar</button>
+          <button class="btn btn-sm btn-peligro" type="button" (click)="destacadaId.set(null)">Quitar</button>
+        </div>
+      } @else {
+        <button class="vacio-media" type="button" (click)="picker.set('destacada')">Elegir imagen destacada</button>
+      }
+    </section>
+  </aside>
+</div>
+
+@if (picker()) {
+  <app-media-picker
+    [titulo]="picker() === 'destacada' ? 'Imagen destacada' : 'Agregar multimedia'"
+    [multiple]="picker() === 'galeria'"
+    [soloTipo]="picker() === 'destacada' ? 'imagen' : null"
+    [yaSeleccionados]="picker() === 'galeria' ? galeria() : []"
+    (seleccionar)="alSeleccionar($event)"
+    (cerrar)="picker.set(null)" />
+}
+}

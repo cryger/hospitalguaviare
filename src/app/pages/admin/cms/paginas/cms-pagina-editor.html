@@ -1,0 +1,155 @@
+@if (noEncontrada()) {
+  <div class="aviso aviso-error">La página no existe o fue eliminada. <a routerLink="/admin/contenido/paginas">Volver</a></div>
+} @else {
+
+<header class="cms-head">
+  <div>
+    <a class="volver" routerLink="/admin/contenido/paginas">← Páginas</a>
+    <h1>{{ paginaId() ? 'Editar página' : 'Nueva página' }}</h1>
+    @if (paginaId()) {
+      <p>Ruta pública: <code>{{ cms.rutaPagina(paginaId()!) }}</code></p>
+    }
+  </div>
+  <div class="cms-head-actions">
+    @if (paginaId()) {
+      <button class="btn btn-peligro" type="button" (click)="eliminar()">Eliminar</button>
+    }
+    <button class="btn" type="button" [disabled]="guardando() || !form.titulo?.trim()" (click)="guardar()">Guardar</button>
+    @if (form.estado !== 'publicada') {
+      <button class="btn btn-primario" type="button" [disabled]="guardando() || !form.titulo?.trim()" (click)="guardar(true)">Publicar</button>
+    }
+  </div>
+</header>
+
+@if (cms.error()) {
+  <div class="aviso aviso-error" role="alert">{{ cms.error() }}
+    <button class="btn-link" type="button" (click)="cms.error.set(null)">Cerrar</button>
+  </div>
+}
+@if (mensajeOk()) {
+  <div class="aviso aviso-ok" role="status">{{ mensajeOk() }}</div>
+}
+
+<div class="editor-layout">
+  <!-- ===== DATOS DE LA PÁGINA ===== -->
+  <form class="panel" (ngSubmit)="guardar()">
+    <div class="form-grid">
+      <div class="campo full">
+        <label for="pg-titulo">Título *</label>
+        <input id="pg-titulo" class="input" name="titulo" required [(ngModel)]="form.titulo" (ngModelChange)="alCambiarTitulo()" />
+      </div>
+
+      <div class="campo full">
+        <label for="pg-slug">Slug (URL)</label>
+        <input id="pg-slug" class="input" name="slug" [(ngModel)]="form.slug" (ngModelChange)="slugManual = true" />
+        <small>Se genera automáticamente desde el título. Solo letras, números y guiones.</small>
+      </div>
+
+      <div class="campo">
+        <label for="pg-menu">Menú</label>
+        <select id="pg-menu" class="select" name="menuId" [(ngModel)]="form.menuId" (ngModelChange)="alCambiarMenu()">
+          <option [ngValue]="null">— Sin menú —</option>
+          @for (m of cms.menus(); track m.id) {
+            <option [ngValue]="m.id">{{ m.nombre }}</option>
+          }
+        </select>
+      </div>
+
+      <div class="campo">
+        <label for="pg-padre">Página superior</label>
+        <select id="pg-padre" class="select" name="parentId" [(ngModel)]="form.parentId">
+          <option [ngValue]="null">— Ninguna (primer nivel) —</option>
+          @for (p of padresPosibles(); track p.id) {
+            <option [ngValue]="p.id">{{ sangria(p.nivel) }}{{ p.titulo }}</option>
+          }
+        </select>
+      </div>
+
+      <div class="campo">
+        <label for="pg-plantilla">Plantilla</label>
+        <select id="pg-plantilla" class="select" name="plantilla" [(ngModel)]="form.plantilla">
+          @for (p of plantillas; track p.valor) {
+            <option [value]="p.valor">{{ p.etiqueta }}</option>
+          }
+        </select>
+        <small>{{ ayudaPlantilla() }}</small>
+      </div>
+
+      <div class="campo">
+        <label for="pg-estado">Estado</label>
+        <select id="pg-estado" class="select" name="estado" [(ngModel)]="form.estado">
+          <option value="borrador">Borrador</option>
+          <option value="publicada">Publicada</option>
+          <option value="oculta">Oculta</option>
+        </select>
+      </div>
+
+      @if (form.plantilla === 'enlace') {
+        <div class="campo full">
+          <label for="pg-url">URL de destino</label>
+          <input id="pg-url" class="input" name="urlExterna" placeholder="https://… o /ruta-interna" [(ngModel)]="form.urlExterna" />
+        </div>
+      }
+
+      <div class="campo full">
+        <label for="pg-desc">Descripción</label>
+        <textarea id="pg-desc" class="textarea" name="descripcion" rows="3" [(ngModel)]="form.descripcion"
+                  placeholder="Texto introductorio de la página (también se usa para buscadores)"></textarea>
+      </div>
+
+      <div class="campo">
+        <label for="pg-icono">Icono (opcional)</label>
+        <input id="pg-icono" class="input" name="icono" placeholder="Ej: 🏥" [(ngModel)]="form.icono" />
+      </div>
+
+      <div class="campo">
+        <span class="label">Navegación</span>
+        <label class="check"><input type="checkbox" name="visible" [(ngModel)]="form.visibleEnMenu" /> Mostrar en el menú</label>
+      </div>
+
+      @if (form.migradoDe) {
+        <div class="campo full">
+          <span class="label">Migrado desde</span>
+          <code class="slug-preview">{{ form.migradoDe }}</code>
+        </div>
+      }
+    </div>
+  </form>
+
+  <!-- ===== ENTRADAS DE LA PÁGINA ===== -->
+  <section class="panel">
+    <div class="panel-head">
+      <h2>Entradas</h2>
+      @if (paginaId()) {
+        <a class="btn btn-sm btn-primario" [routerLink]="['/admin/contenido/entradas/nueva']" [queryParams]="{ pagina: paginaId() }">+ Nueva entrada</a>
+      }
+    </div>
+
+    @if (!paginaId()) {
+      <p class="vacio">Guarde la página para empezar a agregarle entradas.</p>
+    } @else if (entradas().length) {
+      <ul class="entradas">
+        @for (e of entradas(); track e.id; let primero = $first, ultimo = $last) {
+          <li>
+            <span class="e-icono" aria-hidden="true">{{ iconoTipo(e.tipo) }}</span>
+            <div class="e-info">
+              <a [routerLink]="['/admin/contenido/entradas', e.id]">{{ e.titulo }}</a>
+              <small>
+                {{ e.fechaPublicacion ? (e.fechaPublicacion | date: 'dd/MM/yyyy') : 'Sin publicar' }}
+                · {{ e.multimediaIds.length }} archivo(s)
+              </small>
+            </div>
+            <span class="badge" [class]="'badge badge-' + e.estado">{{ e.estado }}</span>
+            <div class="e-orden">
+              <button class="btn btn-icono" type="button" aria-label="Subir" [disabled]="primero" (click)="moverEntrada(e, -1)">↑</button>
+              <button class="btn btn-icono" type="button" aria-label="Bajar" [disabled]="ultimo" (click)="moverEntrada(e, 1)">↓</button>
+            </div>
+          </li>
+        }
+      </ul>
+    } @else {
+      <p class="vacio">Esta página aún no tiene entradas.</p>
+    }
+  </section>
+</div>
+}
