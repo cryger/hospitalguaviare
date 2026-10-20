@@ -230,3 +230,10 @@
     grid-template-columns: 1fr;
   }
 }
+
+.visually-hidden {
+  position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;
+}
+.sin-noticias { grid-column: 1 / -1; color: #4b5563; text-align: center; padding: 2rem 0; }
+.paginacion { display: flex; justify-content: center; gap: 0.35rem; margin-top: 1.25rem; }
+a.btn-govco { display: inline-block; text-decoration: none; }

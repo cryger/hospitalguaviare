@@ -151,94 +151,128 @@ export class CmsLocalDataSource extends CmsDataSource {
     return this.crear<CmsMultimedia>('multimedia', data);
   }
 
-  /* ===== Datos de ejemplo (estructura actual del portal) ===== */
+  /* ===== Estructura inicial (Resolución 1519 de 2020) ===== */
+  private readonly versionSemilla = 3;
+
   private sembrarSiVacio(): void {
     if (localStorage.getItem(this.prefijo + 'menus')) return;
+    this.cargarSemilla();
+  }
 
+  private cargarSemilla(): void {
     const t = this.ahora();
     const menus: CmsMenu[] = [
       { id: 1, nombre: 'Menú principal', ubicacion: 'principal', activo: true },
       { id: 2, nombre: 'Pie de página', ubicacion: 'pie', activo: true },
     ];
-
-    const p = (
-      id: number, titulo: string, slug: string, orden: number,
-      extra: Partial<CmsPagina> = {},
-    ): CmsPagina => ({
-      id, menuId: 1, parentId: null, titulo, slug, orden, plantilla: 'contenido',
-      visibleEnMenu: true, estado: 'publicada', creadoEn: t, actualizadoEn: t, ...extra,
-    });
-
-    const paginas: CmsPagina[] = [
-      p(1, 'Transparencia y acceso a información pública', 'transparencia', 0, { plantilla: 'documentos' }),
-      p(2, 'Atención y Servicios a la ciudadanía', 'atencion-ciudadano', 1),
-      p(3, 'Participa', 'participa', 2),
-      p(4, 'Nuestro Hospital', 'nuestro-hospital', 3),
-      p(5, 'Misión y visión', 'mision-vision', 0, { parentId: 4 }),
-      p(6, 'Reseña histórica', 'resena-historica', 1, { parentId: 4 }),
-      p(7, 'Normatividad', 'normatividad', 4, { plantilla: 'documentos' }),
-      p(8, 'Noticias', 'noticias', 5, { plantilla: 'listado', visibleEnMenu: false }),
-      ...this.paginasDeModulos(9, 6, t),
-      p(12, 'Políticas de privacidad', 'politicas-privacidad', 0, { menuId: 2 }),
-    ];
-
-    const entradas: CmsEntrada[] = [
-      {
-        id: 1, paginaId: 5, titulo: 'Misión', slug: 'mision', tipo: 'articulo', estado: 'borrador',
-        resumen: '', contenido: '<p>Escriba aquí la misión institucional.</p>', destacada: false,
-        imagenDestacadaId: null, multimediaIds: [], autor: 'Administrador', fechaPublicacion: null,
-        orden: 0, creadoEn: t, actualizadoEn: t,
-      },
-    ];
-
-    localStorage.setItem(this.prefijo + 'menus', JSON.stringify(menus));
-    localStorage.setItem(this.prefijo + 'paginas', JSON.stringify(paginas));
-    localStorage.setItem(this.prefijo + 'entradas', JSON.stringify(entradas));
-    localStorage.setItem(this.prefijo + 'multimedia', '[]');
-    localStorage.setItem(this.prefijo + 'version', String(this.versionSemilla));
-  }
-
-  private readonly versionSemilla = 2;
-
-  /** Módulos con flujo propio que se enlazan desde el menú (no son páginas del CMS) */
-  private paginasDeModulos(idInicial: number, ordenInicial: number, t: string): CmsPagina[] {
-    const modulos = [
-      { titulo: 'Cotizaciones y Propuestas', url: '/cotizaciones-propuestas' },
-      { titulo: 'Trabaja con Nosotros', url: '/trabaja-nosotros' },
-      { titulo: 'PQRSF', url: '/pqrsf' },
-    ];
-    return modulos.map((m, i): CmsPagina => ({
-      id: idInicial + i,
-      menuId: 1,
-      parentId: null,
-      titulo: m.titulo,
-      slug: m.url.slice(1),
-      orden: ordenInicial + i,
-      plantilla: 'enlace',
-      urlExterna: m.url,
+    const paginas: CmsPagina[] = ESTRUCTURA_1519.map((p) => ({
       visibleEnMenu: true,
       estado: 'publicada',
       creadoEn: t,
       actualizadoEn: t,
+      ...p,
     }));
-  }
-
-  /** Migra datos guardados con una semilla anterior sin borrar lo que el usuario creó */
-  private actualizarSemilla(): void {
-    const version = Number(localStorage.getItem(this.prefijo + 'version') || 1);
-    if (version >= this.versionSemilla) return;
-
-    const paginas = this.leer<CmsPagina>('paginas');
-    const principal = this.leer<CmsMenu>('menus').find((m) => m.ubicacion === 'principal');
-    if (principal) {
-      const faltantes = this.paginasDeModulos(0, 0, this.ahora()).filter(
-        (m) => !paginas.some((p) => p.urlExterna === m.urlExterna || p.slug === m.slug),
-      );
-      let id = this.nuevoId(paginas);
-      let orden = paginas.filter((p) => p.menuId === principal.id && p.parentId === null).length;
-      faltantes.forEach((m) => paginas.push({ ...m, id: id++, orden: orden++, menuId: principal.id }));
-      this.escribir('paginas', paginas);
-    }
+    localStorage.setItem(this.prefijo + 'menus', JSON.stringify(menus));
+    localStorage.setItem(this.prefijo + 'paginas', JSON.stringify(paginas));
+    localStorage.setItem(this.prefijo + 'entradas', '[]');
+    if (!localStorage.getItem(this.prefijo + 'multimedia')) localStorage.setItem(this.prefijo + 'multimedia', '[]');
     localStorage.setItem(this.prefijo + 'version', String(this.versionSemilla));
   }
+
+  /**
+   * Modo local (solo desarrollo): si los datos son de una estructura anterior,
+   * se reemplazan por la estructura de la Res. 1519 (se conserva la multimedia).
+   */
+  private actualizarSemilla(): void {
+    const version = Number(localStorage.getItem(this.prefijo + 'version') || 1);
+    if (version < this.versionSemilla) this.cargarSemilla();
+  }
 }
+
+type PaginaSemilla = Omit<CmsPagina, 'creadoEn' | 'actualizadoEn' | 'visibleEnMenu' | 'estado'> &
+  Partial<Pick<CmsPagina, 'visibleEnMenu' | 'estado'>>;
+
+/** Generada a partir de database/cms-schema.sql (misma estructura e ids) */
+const ESTRUCTURA_1519: PaginaSemilla[] = [
+  { id: 1, menuId: 1, parentId: null, titulo: "Transparencia y acceso a la información pública", slug: 'transparencia', plantilla: 'contenido', descripcion: "Información pública de la E.S.E. Hospital San José del Guaviare, organizada según la Ley 1712 de 2014 y la Resolución 1519 de 2020 de MinTIC.", orden: 0 },
+  { id: 2, menuId: 1, parentId: 1, titulo: "1. Información de la entidad", slug: 'informacion-de-la-entidad', plantilla: 'contenido', orden: 0 },
+  { id: 3, menuId: 1, parentId: 2, titulo: "1.1 Misión, visión, funciones y deberes", slug: 'mision-vision-funciones-y-deberes', plantilla: 'contenido', orden: 0 },
+  { id: 4, menuId: 1, parentId: 2, titulo: "1.2 Estructura orgánica - Organigrama", slug: 'estructura-organica-organigrama', plantilla: 'contenido', orden: 1 },
+  { id: 5, menuId: 1, parentId: 2, titulo: "1.3 Mapas y cartas descriptivas de los procesos", slug: 'mapas-y-cartas-descriptivas-de-los-procesos', plantilla: 'documentos', orden: 2 },
+  { id: 6, menuId: 1, parentId: 2, titulo: "1.4 Directorio institucional", slug: 'directorio-institucional', plantilla: 'contenido', orden: 3 },
+  { id: 7, menuId: 1, parentId: 2, titulo: "1.5 Directorio de servidores públicos, empleados o contratistas", slug: 'directorio-de-servidores-publicos-empleados-o-contratistas', plantilla: 'documentos', orden: 4 },
+  { id: 8, menuId: 1, parentId: 2, titulo: "1.6 Directorio de entidades", slug: 'directorio-de-entidades', plantilla: 'contenido', orden: 5 },
+  { id: 9, menuId: 1, parentId: 2, titulo: "1.7 Directorio de agremiaciones, asociaciones y otros grupos de interés", slug: 'directorio-de-agremiaciones-asociaciones-y-otros-grupos-de-interes', plantilla: 'contenido', orden: 6 },
+  { id: 10, menuId: 1, parentId: 2, titulo: "1.8 Servicio al público, normas, formularios y protocolos de atención", slug: 'servicio-al-publico-normas-formularios-y-protocolos-de-atencion', plantilla: 'documentos', orden: 7 },
+  { id: 11, menuId: 1, parentId: 2, titulo: "1.9 Procedimientos que se siguen para tomar decisiones en las diferentes áreas", slug: 'procedimientos-que-se-siguen-para-tomar-decisiones-en-las-diferentes-areas', plantilla: 'documentos', orden: 8 },
+  { id: 12, menuId: 1, parentId: 2, titulo: "1.10 Mecanismo de presentación directa de solicitudes, quejas y reclamos", slug: 'mecanismo-pqrsd', plantilla: 'enlace', urlExterna: '/pqrsf', orden: 9 },
+  { id: 13, menuId: 1, parentId: 2, titulo: "1.11 Calendario de actividades y eventos", slug: 'calendario-de-actividades-y-eventos', plantilla: 'contenido', orden: 10 },
+  { id: 14, menuId: 1, parentId: 2, titulo: "1.12 Información sobre decisiones que pueden afectar al público", slug: 'informacion-sobre-decisiones-que-pueden-afectar-al-publico', plantilla: 'documentos', orden: 11 },
+  { id: 15, menuId: 1, parentId: 2, titulo: "1.13 Entes y autoridades que lo vigilan", slug: 'entes-y-autoridades-que-lo-vigilan', plantilla: 'contenido', orden: 12 },
+  { id: 16, menuId: 1, parentId: 2, titulo: "1.14 Publicación de hojas de vida", slug: 'publicacion-de-hojas-de-vida', plantilla: 'documentos', orden: 13 },
+  { id: 17, menuId: 1, parentId: 1, titulo: "2. Normativa", slug: 'normativa', plantilla: 'contenido', orden: 1 },
+  { id: 18, menuId: 1, parentId: 17, titulo: "2.1 Normativa de la entidad", slug: 'normativa-de-la-entidad', plantilla: 'contenido', orden: 0 },
+  { id: 19, menuId: 1, parentId: 18, titulo: "2.1.1 Leyes", slug: 'leyes', plantilla: 'documentos', orden: 0 },
+  { id: 20, menuId: 1, parentId: 18, titulo: "2.1.2 Decreto único reglamentario", slug: 'decreto-unico-reglamentario', plantilla: 'documentos', orden: 1 },
+  { id: 21, menuId: 1, parentId: 18, titulo: "2.1.3 Normativa aplicable", slug: 'normativa-aplicable', plantilla: 'documentos', orden: 2 },
+  { id: 22, menuId: 1, parentId: 18, titulo: "2.1.4 Vínculo al Diario o Gaceta Oficial", slug: 'vinculo-al-diario-o-gaceta-oficial', plantilla: 'enlace', urlExterna: 'http://www.imprenta.gov.co/diario-oficial', orden: 3 },
+  { id: 23, menuId: 1, parentId: 18, titulo: "2.1.5 Políticas, lineamientos y manuales", slug: 'politicas-lineamientos-y-manuales', plantilla: 'documentos', orden: 4 },
+  { id: 24, menuId: 1, parentId: 18, titulo: "2.1.6 Agenda regulatoria", slug: 'agenda-regulatoria', plantilla: 'documentos', orden: 5 },
+  { id: 25, menuId: 1, parentId: 17, titulo: "2.2 Búsqueda de normas", slug: 'busqueda-de-normas', plantilla: 'contenido', orden: 1 },
+  { id: 26, menuId: 1, parentId: 25, titulo: "2.2.1 Sistema Único de Información Normativa - SUIN", slug: 'sistema-unico-de-informacion-normativa-suin', plantilla: 'enlace', urlExterna: 'https://www.suin-juriscol.gov.co', orden: 0 },
+  { id: 27, menuId: 1, parentId: 25, titulo: "2.2.2 Sistema de búsqueda de normas propio de la entidad", slug: 'sistema-de-busqueda-de-normas-propio-de-la-entidad', plantilla: 'documentos', orden: 1 },
+  { id: 28, menuId: 1, parentId: 17, titulo: "2.3 Proyectos de normas para comentarios", slug: 'proyectos-de-normas-para-comentarios', plantilla: 'documentos', orden: 2 },
+  { id: 29, menuId: 1, parentId: 1, titulo: "3. Contratación", slug: 'contratacion', plantilla: 'contenido', orden: 2 },
+  { id: 30, menuId: 1, parentId: 29, titulo: "3.1 Plan Anual de Adquisiciones", slug: 'plan-anual-de-adquisiciones', plantilla: 'documentos', orden: 0 },
+  { id: 31, menuId: 1, parentId: 29, titulo: "3.2 Publicación de la información contractual", slug: 'publicacion-de-la-informacion-contractual', plantilla: 'documentos', orden: 1 },
+  { id: 32, menuId: 1, parentId: 29, titulo: "3.3 Publicación de la ejecución de los contratos", slug: 'publicacion-de-la-ejecucion-de-los-contratos', plantilla: 'documentos', orden: 2 },
+  { id: 33, menuId: 1, parentId: 29, titulo: "3.4 Manual de contratación, adquisición y/o compras", slug: 'manual-de-contratacion-adquisicion-yo-compras', plantilla: 'documentos', orden: 3 },
+  { id: 34, menuId: 1, parentId: 29, titulo: "3.5 Formatos o modelos de contratos o pliegos tipo", slug: 'formatos-o-modelos-de-contratos-o-pliegos-tipo', plantilla: 'documentos', orden: 4 },
+  { id: 35, menuId: 1, parentId: 1, titulo: "4. Planeación, presupuesto e informes", slug: 'planeacion-presupuesto-e-informes', plantilla: 'contenido', orden: 3 },
+  { id: 36, menuId: 1, parentId: 35, titulo: "4.1 Presupuesto general de ingresos, gastos e inversión", slug: 'presupuesto-general-de-ingresos-gastos-e-inversion', plantilla: 'documentos', orden: 0 },
+  { id: 37, menuId: 1, parentId: 35, titulo: "4.2 Ejecución presupuestal", slug: 'ejecucion-presupuestal', plantilla: 'documentos', orden: 1 },
+  { id: 38, menuId: 1, parentId: 35, titulo: "4.3 Plan de acción", slug: 'plan-de-accion', plantilla: 'documentos', orden: 2 },
+  { id: 39, menuId: 1, parentId: 35, titulo: "4.4 Proyectos de inversión", slug: 'proyectos-de-inversion', plantilla: 'documentos', orden: 3 },
+  { id: 40, menuId: 1, parentId: 35, titulo: "4.5 Informes de empalme", slug: 'informes-de-empalme', plantilla: 'documentos', orden: 4 },
+  { id: 41, menuId: 1, parentId: 35, titulo: "4.6 Información pública y/o relevante", slug: 'informacion-publica-yo-relevante', plantilla: 'documentos', orden: 5 },
+  { id: 42, menuId: 1, parentId: 35, titulo: "4.7 Informes de gestión, evaluación y auditoría", slug: 'informes-de-gestion-evaluacion-y-auditoria', plantilla: 'documentos', orden: 6 },
+  { id: 43, menuId: 1, parentId: 35, titulo: "4.8 Informes de la Oficina de Control Interno", slug: 'informes-de-la-oficina-de-control-interno', plantilla: 'documentos', orden: 7 },
+  { id: 44, menuId: 1, parentId: 35, titulo: "4.9 Informe sobre defensa pública y prevención del daño antijurídico", slug: 'informe-sobre-defensa-publica-y-prevencion-del-dano-antijuridico', plantilla: 'documentos', orden: 8 },
+  { id: 45, menuId: 1, parentId: 35, titulo: "4.10 Informes trimestrales sobre acceso a información, quejas y reclamos", slug: 'informes-trimestrales-sobre-acceso-a-informacion-quejas-y-reclamos', plantilla: 'documentos', orden: 9 },
+  { id: 46, menuId: 1, parentId: 1, titulo: "5. Trámites", slug: 'tramites-transparencia', plantilla: 'enlace', urlExterna: '/atencion-y-servicios-a-la-ciudadania/tramites-y-otros-procedimientos', orden: 4 },
+  { id: 47, menuId: 1, parentId: 1, titulo: "6. Participa", slug: 'participa-transparencia', plantilla: 'enlace', urlExterna: '/participa', orden: 5 },
+  { id: 48, menuId: 1, parentId: 1, titulo: "7. Datos abiertos", slug: 'datos-abiertos', plantilla: 'contenido', orden: 6 },
+  { id: 49, menuId: 1, parentId: 48, titulo: "7.1 Instrumentos de gestión de la información", slug: 'instrumentos-de-gestion-de-la-informacion', plantilla: 'contenido', orden: 0 },
+  { id: 50, menuId: 1, parentId: 49, titulo: "7.1.1 Registro de activos de información", slug: 'registro-de-activos-de-informacion', plantilla: 'documentos', orden: 0 },
+  { id: 51, menuId: 1, parentId: 49, titulo: "7.1.2 Índice de información clasificada y reservada", slug: 'indice-de-informacion-clasificada-y-reservada', plantilla: 'documentos', orden: 1 },
+  { id: 52, menuId: 1, parentId: 49, titulo: "7.1.3 Esquema de publicación de la información", slug: 'esquema-de-publicacion-de-la-informacion', plantilla: 'documentos', orden: 2 },
+  { id: 53, menuId: 1, parentId: 49, titulo: "7.1.4 Programa de Gestión Documental", slug: 'programa-de-gestion-documental', plantilla: 'documentos', orden: 3 },
+  { id: 54, menuId: 1, parentId: 49, titulo: "7.1.5 Tablas de Retención Documental", slug: 'tablas-de-retencion-documental', plantilla: 'documentos', orden: 4 },
+  { id: 55, menuId: 1, parentId: 49, titulo: "7.1.6 Costos de reproducción de la información pública", slug: 'costos-de-reproduccion-de-la-informacion-publica', plantilla: 'documentos', orden: 5 },
+  { id: 56, menuId: 1, parentId: 48, titulo: "7.2 Sección de datos abiertos", slug: 'seccion-de-datos-abiertos', plantilla: 'enlace', urlExterna: 'https://www.datos.gov.co', orden: 1 },
+  { id: 57, menuId: 1, parentId: 1, titulo: "8. Información específica para grupos de interés", slug: 'informacion-especifica-para-grupos-de-interes', plantilla: 'contenido', orden: 7 },
+  { id: 58, menuId: 1, parentId: 57, titulo: "8.1 Información para niñas, niños y adolescentes", slug: 'informacion-para-ninas-ninos-y-adolescentes', plantilla: 'contenido', orden: 0 },
+  { id: 59, menuId: 1, parentId: 57, titulo: "8.2 Información para mujeres", slug: 'informacion-para-mujeres', plantilla: 'contenido', orden: 1 },
+  { id: 60, menuId: 1, parentId: 57, titulo: "8.3 Otros grupos de interés", slug: 'otros-grupos-de-interes', plantilla: 'contenido', orden: 2 },
+  { id: 61, menuId: 1, parentId: 1, titulo: "9. Obligación de reporte de información específica por parte de la entidad", slug: 'reporte-de-informacion-especifica', plantilla: 'documentos', orden: 8 },
+  { id: 62, menuId: 1, parentId: null, titulo: "Atención y servicios a la ciudadanía", slug: 'atencion-y-servicios-a-la-ciudadania', plantilla: 'contenido', descripcion: "Trámites, canales de atención y mecanismos para presentar peticiones, quejas, reclamos, sugerencias y denuncias.", orden: 1 },
+  { id: 63, menuId: 1, parentId: 62, titulo: "Trámites y otros procedimientos", slug: 'tramites-y-otros-procedimientos', plantilla: 'contenido', orden: 0 },
+  { id: 64, menuId: 1, parentId: 62, titulo: "Canales de atención y pida una cita", slug: 'canales-de-atencion', plantilla: 'contenido', orden: 1 },
+  { id: 65, menuId: 1, parentId: 62, titulo: "PQRSD - Peticiones, quejas, reclamos, sugerencias y denuncias", slug: 'pqrsd', plantilla: 'enlace', urlExterna: '/pqrsf', orden: 2 },
+  { id: 66, menuId: 1, parentId: null, titulo: "Participa", slug: 'participa', plantilla: 'contenido', descripcion: "Espacios de participación ciudadana en la gestión de la E.S.E. Hospital San José del Guaviare (lineamientos del DAFP).", orden: 2 },
+  { id: 67, menuId: 1, parentId: 66, titulo: "Participación para el diagnóstico de necesidades e identificación de problemas", slug: 'participacion-para-el-diagnostico-de-necesidades-e-identificacion-de-problemas', plantilla: 'contenido', orden: 0 },
+  { id: 68, menuId: 1, parentId: 66, titulo: "Planeación y presupuesto participativo", slug: 'planeacion-y-presupuesto-participativo', plantilla: 'contenido', orden: 1 },
+  { id: 69, menuId: 1, parentId: 66, titulo: "Consulta ciudadana", slug: 'consulta-ciudadana', plantilla: 'contenido', orden: 2 },
+  { id: 70, menuId: 1, parentId: 66, titulo: "Colaboración e innovación abierta", slug: 'colaboracion-e-innovacion-abierta', plantilla: 'contenido', orden: 3 },
+  { id: 71, menuId: 1, parentId: 66, titulo: "Rendición de cuentas", slug: 'rendicion-de-cuentas', plantilla: 'documentos', orden: 4 },
+  { id: 72, menuId: 1, parentId: 66, titulo: "Control social", slug: 'control-social', plantilla: 'contenido', orden: 5 },
+  { id: 73, menuId: 1, parentId: null, titulo: "Nuestro Hospital", slug: 'nuestro-hospital', plantilla: 'contenido', orden: 3 },
+  { id: 74, menuId: 1, parentId: 73, titulo: "Reseña histórica", slug: 'resena-historica', plantilla: 'contenido', orden: 0 },
+  { id: 75, menuId: 1, parentId: 73, titulo: "Portafolio de servicios", slug: 'portafolio-de-servicios', plantilla: 'listado', orden: 1 },
+  { id: 76, menuId: 1, parentId: 73, titulo: "Sedes y horarios de atención", slug: 'sedes-y-horarios', plantilla: 'contenido', orden: 2 },
+  { id: 77, menuId: 1, parentId: null, titulo: "Cotizaciones y Propuestas", slug: 'cotizaciones-propuestas', plantilla: 'enlace', urlExterna: '/cotizaciones-propuestas', orden: 4 },
+  { id: 78, menuId: 1, parentId: null, titulo: "Trabaja con Nosotros", slug: 'trabaja-nosotros', plantilla: 'enlace', urlExterna: '/trabaja-nosotros', orden: 5 },
+  { id: 79, menuId: 1, parentId: null, titulo: "Noticias", slug: 'noticias', plantilla: 'listado', orden: 6, visibleEnMenu: false },
+  { id: 80, menuId: 2, parentId: null, titulo: "Políticas de privacidad y tratamiento de datos", slug: 'politicas-de-privacidad', plantilla: 'contenido', orden: 0, estado: 'borrador' },
+  { id: 81, menuId: 2, parentId: null, titulo: "Términos y condiciones", slug: 'terminos-y-condiciones', plantilla: 'contenido', orden: 1, estado: 'borrador' },
+];

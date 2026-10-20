@@ -951,3 +951,5 @@ html {
 @media (max-width: 991px) {
   .navbar-menu-govco ul.navbar-nav li button.cms-dropdown-toggle { justify-content: flex-start; padding: 12px 24px; width: 100%; }
 }
+
+.cms-submenu .submenu-todo { font-weight: 700; border-bottom: 1px solid #e5e7eb; }

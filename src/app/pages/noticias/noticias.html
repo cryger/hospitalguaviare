@@ -1,62 +1,51 @@
-<section class="govco-noticias">
+<section class="govco-noticias" aria-labelledby="titulo-noticias">
+  <h2 id="titulo-noticias" class="visually-hidden">Noticias</h2>
 
   <!-- BARRA SUPERIOR DE FILTROS -->
   <div class="govco-noticias-header">
-
     <div class="ordenar">
-      <label>Ordenar por:</label>
-      <select [(ngModel)]="orden">
+      <label for="noticias-orden">Ordenar por:</label>
+      <select id="noticias-orden" [value]="orden()" (change)="cambiarOrden($any($event.target).value)">
         <option value="recientes">Recientes</option>
         <option value="antiguas">Antiguas</option>
       </select>
     </div>
 
     <div class="filtrar-fecha">
-      <label>Filtrar por fecha</label>
-      <input type="date" [(ngModel)]="fechaFiltro">
+      <label for="noticias-fecha">Filtrar por fecha</label>
+      <input id="noticias-fecha" type="date" [value]="fechaFiltro() ?? ''" (change)="cambiarFecha($any($event.target).value)">
     </div>
-
   </div>
 
   <!-- GRID DE NOTICIAS -->
   <section class="govco-noticias-grid">
+    @for (noticia of noticiasPaginadas(); track noticia.id) {
+      <article class="noticia-card">
+        <div class="noticia-imagen">
+          <img [src]="noticia.imagen || 'assets/noticias/noticias_1.jpg'" [alt]="noticia.alt" loading="lazy">
+        </div>
 
-    <article
-      class="noticia-card"
-      *ngFor="let noticia of noticiasPaginadas">
-
-      <div class="noticia-imagen">
-        <img [src]="noticia.imagen" [alt]="noticia.titulo">
-      </div>
-
-      <div class="noticia-contenido">
-        <span class="categoria">{{ noticia.categoria }}</span>
-
-        <p class="fecha">
-          {{ noticia.fecha | date:'dd MMMM yyyy, h:mm a' }}
-        </p>
-
-        <h3>{{ noticia.titulo }}</h3>
-
-        <p class="resumen">
-          {{ noticia.resumen }}
-        </p>
-
-        <button class="btn-govco">PARTICIPA</button>
-      </div>
-
-    </article>
-
+        <div class="noticia-contenido">
+          <span class="categoria">{{ noticia.categoria }}</span>
+          <p class="fecha">{{ noticia.fecha | date: "d 'de' MMMM 'de' y, h:mm a" : '' : 'es-CO' }}</p>
+          <h3>{{ noticia.titulo }}</h3>
+          <p class="resumen">{{ noticia.resumen }}</p>
+          <a class="btn-govco" [routerLink]="noticia.url">Leer más</a>
+        </div>
+      </article>
+    } @empty {
+      <p class="sin-noticias">Pronto publicaremos noticias del hospital.</p>
+    }
   </section>
-  <button
-  *ngFor="let p of paginas"
-  class="gov-page-number"
-  [class.active]="paginaActual === p"
-  (click)="irPagina(p)"
->
-  {{ p }}
-</button>
 
-
+  @if (totalPaginas() > 1) {
+    <nav class="paginacion" aria-label="Paginación de noticias">
+      @for (p of paginas(); track p) {
+        <button type="button" class="gov-page-number" [class.active]="paginaActual() === p"
+                [attr.aria-current]="paginaActual() === p ? 'page' : null" (click)="irPagina(p)">
+          {{ p }}
+        </button>
+      }
+    </nav>
+  }
 </section>
-

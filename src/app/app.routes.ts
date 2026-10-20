@@ -1,32 +1,20 @@
 import { Routes } from '@angular/router';
-import { rutaCmsComodin, rutaCmsPrioritaria } from './pages/cms-publico/cms-publico.routes';
+import { rutaCmsComodin } from './pages/cms-publico/cms-publico.routes';
 import { PublicLayout } from './layout/public-layout/public-layout';
 import { DashboardLayout } from './layout/dashboard-layout/dashboard-layout';
 import { Home } from './componentes/home/home';
-import { Transparencia } from './pages/transparencia/transparencia';
-import { Participa } from './pages/participa/participa';
-import { NuestroHospital } from './pages/nuestro-hospital/nuestro-hospital';
-import { AtencionCiudadano} from './pages/atencion-ciudadano/atencion-ciudadano'
 import { CotizacionesPropuestas } from './pages/cotizaciones-propuestas/cotizaciones-propuestas';
-import { TrabajaNosotros} from './pages/trabaja-nosotros/trabaja-nosotros';
+import { TrabajaNosotros } from './pages/trabaja-nosotros/trabaja-nosotros';
 import { PqrsfComponent } from './pages/pqrsf/pqrsf';
-import { Normatividad } from './pages/normatividad/normatividad';
-import { Servicios } from './pages/servicios/servicios';
 import { Login } from './pages/login/login';
-import { AdminGuard } from './shared/guards/admin/admin-guard';
 import { DashboardHomeComponent } from './pages/dashboardhome/dashboardhome';
-import { NoticiasAdminComponent } from './pages/admin/noticias/noticias';
 import { Usuarios } from './pages/admin/usuarios/usuarios';
 import { Configuacion } from './pages/admin/configuracion/configuracion';
 import { PqrsfAdminComponent as AdminPqrsf } from './pages/admin/pqrsf-admin/pqrsf-admin';
-import { transparenciaAdminComponent as AdminTransparencia } from './pages/admin/transparencia-admin/transparencia-admin';
 import { AuthGuard } from './shared/guards/auth/auth-guard';
-import { Breadcrumb } from './componentes/breadcrumb/breadcrumb';
 import { CotizacionesPropuestasAdminComponent } from './pages/admin/cotizaciones-propuestas-admin/cotizaciones-propuestas-admin/cotizaciones-propuestas-admin';
-import { ServiciosAtencionAdmin } from './pages/admin/servicios-atencion-admin/servicios-atencion-admin/servicios-atencion-admin';
 import { AccesibilidadAdmin } from './pages/admin/accesibilidad-admin/accesibilidad-admin';
 import { TrabajaNosotrosAdminComponent } from './pages/admin/trabaja-nosotros-admin/trabaja-nosotros-admin/trabaja-nosotros-admin';
-
 
 export const routes: Routes = [
 
@@ -35,21 +23,21 @@ export const routes: Routes = [
     path: '',
     component: PublicLayout,
     children: [
-      // CMS con contenido publicado tiene prioridad sobre la página fija (migración gradual)
-      rutaCmsPrioritaria,
       { path: '', component: Home, data: { breadcrumb: 'Inicio' } },
-      { path: 'home', component: Home,data: { breadcrumb: 'Inicio' } },
-      { path: 'transparencia', component: Transparencia,data: { breadcrumb: 'Transparencia' } },
-      { path: 'participa', component: Participa,data: { breadcrumb: 'Participa' } },
-      { path: 'nuestro-hospital', component: NuestroHospital,data: { breadcrumb: 'Nuesto Hospital' } },
-      { path: 'atencion-ciudadano', component: AtencionCiudadano,data: { breadcrumb: 'Atencion al Usuario' } },
+      { path: 'home', redirectTo: '', pathMatch: 'full' },
+
+      // Módulos con flujo propio (formularios / listados especiales)
       { path: 'cotizaciones-propuestas', component: CotizacionesPropuestas, data: { breadcrumb: 'Cotizaciones y Propuestas' } },
       { path: 'trabaja-nosotros', component: TrabajaNosotros, data: { breadcrumb: 'Trabaja con Nosotros' } },
       { path: 'pqrsf', component: PqrsfComponent, data: { breadcrumb: 'PQRSF' } },
-      { path: 'normatividad', component: Normatividad, data: { breadcrumb: 'Normatividad' } },
-      { path: 'servicios', component: Servicios, data: { breadcrumb: 'Servicios' } },
-      { path: 'login', component: Login, data: { breadcrumb: 'Login' } },
-      // Páginas nuevas creadas en el CMS (y 404)
+      { path: 'login', component: Login, data: { breadcrumb: 'Iniciar sesión' } },
+
+      // Direcciones anteriores → nueva estructura (Res. 1519 de 2020)
+      { path: 'normatividad', redirectTo: 'transparencia/normativa', pathMatch: 'full' },
+      { path: 'atencion-ciudadano', redirectTo: 'atencion-y-servicios-a-la-ciudadania', pathMatch: 'full' },
+      { path: 'servicios', redirectTo: 'nuestro-hospital/portafolio-de-servicios', pathMatch: 'full' },
+
+      // Todo lo demás lo resuelve el CMS (páginas, subpáginas, entradas y 404)
       rutaCmsComodin,
     ]
   },
@@ -61,15 +49,12 @@ export const routes: Routes = [
     canActivate: [AuthGuard],
     children: [
       { path: '', component: DashboardHomeComponent, data: { breadcrumb: 'Dashboard' } },
-      { path: 'noticias', component: NoticiasAdminComponent, data: { breadcrumb: 'Administrar Noticias' }},
-      { path: 'transparencia', component: AdminTransparencia, data: { breadcrumb: 'Administrar Transparencia' } },
       { path: 'pqrsf', component: AdminPqrsf, data: { breadcrumb: 'Administrar PQRSF' } },
-      { path: 'cotizaciones', component: CotizacionesPropuestasAdminComponent, data: {Breadcrumb: 'Cotizaciones y Propuestas'}},
-      { path: 'servicios-atencion-ciudadano', component: ServiciosAtencionAdmin, data: {Breadcrumb: 'Servicios y Atencion al Ciudadano'}},
+      { path: 'cotizaciones', component: CotizacionesPropuestasAdminComponent, data: { breadcrumb: 'Cotizaciones y Propuestas' } },
+      { path: 'vacantes', component: TrabajaNosotrosAdminComponent, data: { breadcrumb: 'Trabaja con Nosotros' } },
       { path: 'usuarios', component: Usuarios, data: { breadcrumb: 'Administrar Usuarios' } },
       { path: 'accesibilidad-admin', component: AccesibilidadAdmin, data: { breadcrumb: 'Administrar Accesibilidad' } },
-      { path: 'configuracion', component: Configuacion, data: {Breadcrumb: 'Configuracion'}},
-      { path : 'vacantes', component:TrabajaNosotrosAdminComponent,data:{Breadcrumb: 'trabaja con Nosotros'}},
+      { path: 'configuracion', component: Configuacion, data: { breadcrumb: 'Configuración' } },
 
       // 🧩 CMS: Menú → Páginas → Entradas → Multimedia
       {
@@ -102,4 +87,3 @@ export const routes: Routes = [
   // 🚫 FALLBACK
   { path: '**', redirectTo: '' }
 ];
-

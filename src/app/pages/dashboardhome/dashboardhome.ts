@@ -4,12 +4,10 @@ import localeEsCO from '@angular/common/locales/es-CO';
 import { RouterLink } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
 
-import { NoticiasService } from '../../shared/services/noticias/noticias';
 import { CotizacionesService } from '../../shared/services/cotizaciones/cotizaciones';
 import { PqrsfService } from '../../shared/services/pqrsf/pqrsf';
 import { TrabajaNosotrosService } from '../../shared/services/trabaja-nosotros/trabaja-nosotros-service';
-import { TransparenciaService } from '../../shared/services/transparencia/transparencia';
-import { ServiciosAtencionService } from '../../shared/services/servicios-atencion/servicios-atencion';
+import { CmsService } from '../../shared/services/cms/cms.service';
 import { UsuariosService } from '../../shared/services/usuarios/usuarios';
 
 import { PQRSF, TipoPQRSF, EstadoPQRSF } from '../../shared/models/pqrsf/pqrsf/pqrsf-module';
@@ -54,26 +52,48 @@ interface Alerta {
   styleUrls: ['./dashboardhome.css'],
 })
 export class DashboardHomeComponent implements OnDestroy {
-  private noticiasService = inject(NoticiasService);
   private cotizacionesService = inject(CotizacionesService);
   private pqrsfService = inject(PqrsfService);
   private vacantesService = inject(TrabajaNosotrosService);
-  private transparenciaService = inject(TransparenciaService);
-  private serviciosService = inject(ServiciosAtencionService);
+  private cms = inject(CmsService);
   private usuariosService = inject(UsuariosService);
 
   /* =========================
      FUENTES DE DATOS (reactivas)
   ========================== */
-  readonly noticias = toSignal(this.noticiasService.noticias$, { initialValue: [] });
   readonly cotizaciones = toSignal(this.cotizacionesService.cotizaciones$, { initialValue: [] });
   readonly pqrsf = toSignal(this.pqrsfService.pqrsf$, { initialValue: [] });
   readonly vacantes = toSignal(this.vacantesService.vacantesObservable(), { initialValue: [] });
 
-  // Estos servicios no exponen observable: se leen al cargar
-  readonly categoriasTransparencia = signal(this.transparenciaService.getCategorias());
-  readonly publicacionesTransparencia = signal(this.transparenciaService.getPublicaciones());
-  readonly servicios = signal(this.serviciosService.getServicios());
+  /** Noticias = entradas del CMS de tipo "noticia" */
+  readonly noticias = computed(() => {
+    const mm = this.cms.multimediaPorId();
+    return this.cms
+      .entradas()
+      .filter((e) => e.tipo === 'noticia')
+      .map((e) => {
+        const img = e.imagenDestacadaId ? mm.get(e.imagenDestacadaId) : undefined;
+        return {
+          id: e.id,
+          titulo: e.titulo,
+          estado: e.estado,
+          autor: e.autor,
+          fechaPublicacion: e.fechaPublicacion || e.creadoEn,
+          imagenUrl: img?.tipo === 'imagen' ? img.url : '',
+        };
+      });
+  });
+
+  /** Páginas de Transparencia (Res. 1519) que deberían tener contenido */
+  private readonly seccionesTransparencia = computed(() => {
+    const raiz = this.cms.paginas().find((p) => p.slug === 'transparencia' && p.parentId === null);
+    if (!raiz) return [];
+    const ids = this.cms.descendientes(raiz.id);
+    ids.delete(raiz.id);
+    const conHijas = new Set(this.cms.paginas().map((p) => p.parentId));
+    // hojas del árbol que no son enlaces: ahí va la información
+    return this.cms.paginas().filter((p) => ids.has(p.id) && p.plantilla !== 'enlace' && !conHijas.has(p.id));
+  });
   readonly usuarios = signal(this.usuariosService.getAll());
 
   /* =========================
@@ -125,17 +145,26 @@ export class DashboardHomeComponent implements OnDestroy {
   });
 
   readonly kpiTransparencia = computed(() => {
-    const pubs = this.publicacionesTransparencia();
+    const secciones = this.seccionesTransparencia();
+    const conContenido = secciones.filter((p) =>
+      this.cms.entradas().some((e) => e.paginaId === p.id && this.cms.esEntradaPublica(e)),
+    ).length;
     return {
-      categorias: this.categoriasTransparencia().filter((c) => c.activo).length,
-      publicaciones: pubs.filter((p) => p.activo).length,
-      inactivas: pubs.filter((p) => !p.activo).length,
+      secciones: secciones.length,
+      conContenido,
+      cumplimiento: secciones.length ? Math.round((conContenido / secciones.length) * 100) : 0,
     };
   });
 
-  readonly kpiServicios = computed(() => {
-    const s = this.servicios();
-    return { total: s.length, activos: s.filter((x) => x.activo).length };
+  readonly kpiContenido = computed(() => {
+    const p = this.cms.paginas();
+    const e = this.cms.entradas();
+    return {
+      paginas: p.filter((x) => x.estado === 'publicada').length,
+      entradas: e.filter((x) => this.cms.esEntradaPublica(x)).length,
+      borradores: e.filter((x) => x.estado === 'borrador').length,
+      archivos: this.cms.multimedia().length,
+    };
   });
 
   readonly kpiUsuarios = computed(() => {
@@ -230,7 +259,7 @@ export class DashboardHomeComponent implements OnDestroy {
         icono: '📰',
         titulo: n.titulo,
         detalle: n.estado,
-        ruta: '/admin/noticias',
+        ruta: '/admin/contenido/entradas',
       })),
       ...this.cotizaciones().map((c) => ({
         fecha: new Date(c.fechaPublicacion),
@@ -292,7 +321,7 @@ export class DashboardHomeComponent implements OnDestroy {
       a.push({
         nivel: 'info',
         texto: `${borradores} noticia(s) en borrador sin publicar.`,
-        ruta: '/admin/noticias',
+        ruta: '/admin/contenido/entradas',
         accion: 'Ver',
       });
     }
@@ -302,31 +331,30 @@ export class DashboardHomeComponent implements OnDestroy {
       a.push({
         nivel: 'info',
         texto: `${sinImagen} noticia(s) publicadas no tienen imagen.`,
-        ruta: '/admin/noticias',
+        ruta: '/admin/contenido/entradas',
         accion: 'Completar',
       });
     }
 
-    // Transparencia (ITA): categorías activas sin publicaciones y publicaciones sin documento
-    const pubs = this.publicacionesTransparencia().filter((p) => p.activo);
-    const categoriasVacias = this.categoriasTransparencia().filter(
-      (c) => c.activo && !pubs.some((p) => p.categoriaId === c.id),
-    ).length;
-    if (categoriasVacias > 0) {
+    // Transparencia (ITA - Res. 1519 de 2020): secciones sin información publicada
+    const t = this.kpiTransparencia();
+    const vacias = t.secciones - t.conContenido;
+    if (vacias > 0) {
       a.push({
         nivel: 'warning',
-        texto: `${categoriasVacias} categoría(s) de Transparencia sin publicaciones activas.`,
-        ruta: '/admin/transparencia',
-        accion: 'Publicar',
+        texto: `${vacias} de ${t.secciones} secciones de Transparencia aún no tienen información publicada.`,
+        ruta: '/admin/contenido/paginas',
+        accion: 'Completar',
       });
     }
-    const sinDocumento = pubs.filter((p) => !p.ruta).length;
-    if (sinDocumento > 0) {
+
+    const borradoresCms = this.kpiContenido().borradores - this.kpiNoticias().borradores;
+    if (borradoresCms > 0) {
       a.push({
-        nivel: 'warning',
-        texto: `${sinDocumento} publicación(es) de Transparencia sin documento o enlace.`,
-        ruta: '/admin/transparencia',
-        accion: 'Corregir',
+        nivel: 'info',
+        texto: `${borradoresCms} entrada(s) del portal en borrador.`,
+        ruta: '/admin/contenido/entradas',
+        accion: 'Revisar',
       });
     }
 
@@ -347,9 +375,10 @@ export class DashboardHomeComponent implements OnDestroy {
      ACCESOS RÁPIDOS
   ========================== */
   readonly accesosRapidos = [
-    { icono: '📰', texto: 'Nueva noticia', ruta: '/admin/noticias' },
+    { icono: '📰', texto: 'Nueva entrada', ruta: '/admin/contenido/entradas/nueva' },
     { icono: '📬', texto: 'Gestionar PQRSF', ruta: '/admin/pqrsf' },
-    { icono: '📄', texto: 'Publicar en Transparencia', ruta: '/admin/transparencia' },
+    { icono: '🧭', texto: 'Menús y páginas', ruta: '/admin/contenido/menus' },
+    { icono: '🖼️', texto: 'Multimedia', ruta: '/admin/contenido/multimedia' },
     { icono: '💼', texto: 'Nueva cotización', ruta: '/admin/cotizaciones' },
     { icono: '🧑‍⚕️', texto: 'Nueva vacante', ruta: '/admin/vacantes' },
     { icono: '👥', texto: 'Usuarios', ruta: '/admin/usuarios' },
@@ -385,6 +414,10 @@ export class DashboardHomeComponent implements OnDestroy {
       if (d !== 0 && d !== 6) dias++;
     }
     return dias;
+  }
+
+  constructor() {
+    this.cms.cargar();
   }
 
   ngOnDestroy(): void {

@@ -1,115 +1,96 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { NoticiasService } from '../../shared/services/noticias/noticias';
-import { Noticia } from '../../shared/models/noticias/noticias/noticias-module';
+import { Component, computed, inject, OnInit, signal } from '@angular/core';
+import { DatePipe } from '@angular/common';
+import { RouterLink } from '@angular/router';
+import { CmsService } from '../../shared/services/cms/cms.service';
 
+interface NoticiaTarjeta {
+  id: number;
+  categoria: string;
+  titulo: string;
+  resumen: string;
+  fecha: Date;
+  imagen: string | null;
+  alt: string;
+  url: string;
+}
+
+/**
+ * Noticias del inicio: entradas publicadas de tipo "noticia" del CMS
+ * (se cargan en Admin › Contenido › Entradas).
+ */
 @Component({
   selector: 'app-noticias',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [DatePipe, RouterLink],
   templateUrl: './noticias.html',
-  styleUrls: ['./noticias.css']
+  styleUrls: ['./noticias.css'],
 })
 export class NoticiasPublicComponent implements OnInit {
+  private cms = inject(CmsService);
 
-  orden: 'recientes' | 'antiguas' = 'recientes';
-  fechaFiltro: string | null = null;
+  readonly orden = signal<'recientes' | 'antiguas'>('recientes');
+  readonly fechaFiltro = signal<string | null>(null);
+  readonly paginaActual = signal(1);
+  readonly itemsPorPagina = 4;
 
-  paginaActual = 1;
-  itemsPorPagina = 4; // 4 columnas x 2 filas
+  private readonly noticias = computed<NoticiaTarjeta[]>(() => {
+    const multimedia = this.cms.multimediaPorId();
+    return this.cms
+      .entradas()
+      .filter((e) => e.tipo === 'noticia' && this.cms.esEntradaPublica(e))
+      .filter((e) => {
+        const p = this.cms.paginaPorId().get(e.paginaId);
+        return !!p && this.cms.esPublica(p);
+      })
+      .map((e) => {
+        const img = e.imagenDestacadaId ? multimedia.get(e.imagenDestacadaId) : undefined;
+        return {
+          id: e.id,
+          categoria: this.cms.paginaPorId().get(e.paginaId)?.titulo ?? 'Noticias',
+          titulo: e.titulo,
+          resumen: e.resumen ?? '',
+          fecha: new Date(e.fechaPublicacion || e.creadoEn),
+          imagen: img?.tipo === 'imagen' ? img.url : null,
+          alt: img?.alt || '',
+          url: this.cms.urlEntrada(e),
+        };
+      });
+  });
 
-  noticias: {
-    categoria: string;
-    titulo: string;
-    resumen: string;
-    fecha: Date;
-    imagen: string;
-  }[] = [];
+  readonly noticiasFiltradas = computed(() => {
+    const f = this.fechaFiltro();
+    const lista = this.noticias().filter((n) => !f || this.fechaLocal(n.fecha) === f);
+    return lista.sort((a, b) =>
+      this.orden() === 'recientes' ? b.fecha.getTime() - a.fecha.getTime() : a.fecha.getTime() - b.fecha.getTime(),
+    );
+  });
 
-  constructor(private noticiasService: NoticiasService) {}
+  readonly totalPaginas = computed(() => Math.ceil(this.noticiasFiltradas().length / this.itemsPorPagina));
+  readonly paginas = computed(() => Array.from({ length: this.totalPaginas() }, (_, i) => i + 1));
+  readonly noticiasPaginadas = computed(() => {
+    const inicio = (this.paginaActual() - 1) * this.itemsPorPagina;
+    return this.noticiasFiltradas().slice(inicio, inicio + this.itemsPorPagina);
+  });
 
   ngOnInit(): void {
-    this.noticiasService.noticias$.subscribe(() => {
-    this.cargarNoticias();
-  });
+    this.cms.cargar();
   }
 
-  /*=========================
-    RESETEA LA PAGINA AL INICIAR EL PAGINADO
-  =============================*/
-  ngOnChanges(): void {
-  this.paginaActual = 1;
-}
-
-  private cargarNoticias(): void {
-    const publicadas = this.noticiasService.getPublicadas();
-
-    // 🔄 Adaptamos al formato que YA usa tu vista
-    this.noticias = publicadas.map((n: Noticia) => ({
-      categoria: 'Noticias', // o puedes mapear según lógica futura
-      titulo: n.titulo,
-      resumen: n.resumen,
-      fecha: new Date(n.fechaPublicacion),
-      imagen: n.imagenUrl || 'assets/noticias/default.jpg'
-    }));
+  cambiarOrden(v: string): void {
+    this.orden.set(v === 'antiguas' ? 'antiguas' : 'recientes');
+    this.paginaActual.set(1);
   }
 
-  get noticiasFiltradas() {
-    let resultado = [...this.noticias];
-
-    if (this.fechaFiltro) {
-      resultado = resultado.filter(n =>
-        n.fecha.toISOString().split('T')[0] === this.fechaFiltro
-      );
-    }
-
-    resultado.sort((a, b) => {
-      return this.orden === 'recientes'
-        ? b.fecha.getTime() - a.fecha.getTime()
-        : a.fecha.getTime() - b.fecha.getTime();
-    });
-
-    return resultado;
+  cambiarFecha(v: string): void {
+    this.fechaFiltro.set(v || null);
+    this.paginaActual.set(1);
   }
 
-  /* ======================================
-    PAGINACION
-  ============================================*/
-  get paginas(): number[] {
-  return Array.from({ length: this.totalPaginas }, (_, i) => i + 1);
-}
-
-
-
-  get totalPaginas(): number {
-  return Math.ceil(this.noticiasFiltradas.length / this.itemsPorPagina);
-  }
-  get noticiasPaginadas() {
-    const inicio = (this.paginaActual - 1) * this.itemsPorPagina;
-    return this.noticiasFiltradas.slice(
-      inicio,
-      inicio + this.itemsPorPagina
-    );
+  irPagina(p: number): void {
+    if (p >= 1 && p <= this.totalPaginas()) this.paginaActual.set(p);
   }
 
-irPagina(pagina: number): void {
-  if (pagina < 1 || pagina > this.totalPaginas) return;
-  this.paginaActual = pagina;
-}
-
-paginaAnterior(): void {
-  if (this.paginaActual > 1) {
-    this.paginaActual--;
+  private fechaLocal(d: Date): string {
+    return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
   }
-}
-
-paginaSiguiente(): void {
-if (this.paginaActual < this.totalPaginas) {
-    this.paginaActual++;
-  }
-}
-
-
-
 }

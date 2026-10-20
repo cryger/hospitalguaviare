@@ -45,18 +45,18 @@
       </span>
     </a>
 
-    <a class="kpi" routerLink="/admin/noticias">
+    <a class="kpi" routerLink="/admin/contenido/entradas">
       <span class="kpi-icon">📰</span>
       <span class="kpi-label">Noticias publicadas</span>
       <strong class="kpi-value">{{ kpiNoticias().publicadas }}</strong>
       <span class="kpi-meta">{{ kpiNoticias().borradores }} borradores · {{ kpiNoticias().archivadas }} archivadas</span>
     </a>
 
-    <a class="kpi" routerLink="/admin/transparencia">
+    <a class="kpi" routerLink="/admin/contenido/paginas" [class.kpi-danger]="kpiTransparencia().cumplimiento < 50">
       <span class="kpi-icon">📄</span>
-      <span class="kpi-label">Transparencia</span>
-      <strong class="kpi-value">{{ kpiTransparencia().publicaciones }}</strong>
-      <span class="kpi-meta">publicaciones en {{ kpiTransparencia().categorias }} categorías</span>
+      <span class="kpi-label">Transparencia (Res. 1519)</span>
+      <strong class="kpi-value">{{ kpiTransparencia().cumplimiento }}%</strong>
+      <span class="kpi-meta">{{ kpiTransparencia().conContenido }} de {{ kpiTransparencia().secciones }} secciones con información</span>
     </a>
 
     <a class="kpi" routerLink="/admin/cotizaciones">
@@ -73,11 +73,11 @@
       <span class="kpi-meta">{{ kpiVacantes().plazas }} plazas disponibles</span>
     </a>
 
-    <a class="kpi" routerLink="/admin/servicios-atencion-ciudadano">
-      <span class="kpi-icon">📋</span>
-      <span class="kpi-label">Servicios activos</span>
-      <strong class="kpi-value">{{ kpiServicios().activos }}</strong>
-      <span class="kpi-meta">de {{ kpiServicios().total }} registrados</span>
+    <a class="kpi" routerLink="/admin/contenido/menus">
+      <span class="kpi-icon">🧭</span>
+      <span class="kpi-label">Contenido publicado</span>
+      <strong class="kpi-value">{{ kpiContenido().entradas }}</strong>
+      <span class="kpi-meta">entradas en {{ kpiContenido().paginas }} páginas · {{ kpiContenido().archivos }} archivos</span>
     </a>
 
     <a class="kpi" routerLink="/admin/usuarios">
@@ -192,7 +192,7 @@
     <section class="panel">
       <div class="panel-head">
         <h2>Últimas noticias</h2>
-        <a routerLink="/admin/noticias" class="panel-link">Administrar</a>
+        <a routerLink="/admin/contenido/entradas" class="panel-link">Administrar</a>
       </div>
 
       @if (ultimasNoticias().length) {
@@ -213,7 +213,7 @@
           }
         </ul>
       } @else {
-        <p class="vacio">Aún no hay noticias. <a routerLink="/admin/noticias">Crear la primera</a></p>
+        <p class="vacio">Aún no hay noticias. <a routerLink="/admin/contenido/entradas/nueva">Crear la primera</a> (tipo "Noticia")</p>
       }
     </section>
 

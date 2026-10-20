@@ -13,14 +13,12 @@ interface ItemMenu {
 
 /** Menú de respaldo si el CMS aún no tiene un menú principal publicado */
 const MENU_FIJO: ItemMenu[] = [
-  ['Transparencia y acceso a información pública', '/transparencia'],
-  ['Atención y Servicios a la ciudadanía', '/atencion-ciudadano'],
+  ['Transparencia y acceso a la información pública', '/transparencia'],
+  ['Atención y servicios a la ciudadanía', '/atencion-y-servicios-a-la-ciudadania'],
   ['Participa', '/participa'],
   ['Nuestro Hospital', '/nuestro-hospital'],
-  ['Normatividad', '/normatividad'],
   ['Cotizaciones y Propuestas', '/cotizaciones-propuestas'],
   ['Trabaja con Nosotros', '/trabaja-nosotros'],
-  ['PQRSF', '/pqrsf'],
 ].map(([titulo, url]) => ({ id: url, titulo, url, externo: false, hijos: [] }));
 
 @Component({
