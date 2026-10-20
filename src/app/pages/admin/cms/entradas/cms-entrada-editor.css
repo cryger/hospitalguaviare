@@ -53,3 +53,5 @@
 @media (max-width: 1100px) {
   .editor-layout { grid-template-columns: 1fr; }
 }
+
+.txt-alerta { color: var(--c-warn); font-weight: 600; }

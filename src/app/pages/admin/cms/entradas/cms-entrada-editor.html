@@ -130,9 +130,14 @@
         <label for="en-pagina">Página *</label>
         <select id="en-pagina" class="select" name="paginaId" [(ngModel)]="form.paginaId">
           @for (n of paginasOrdenadas(); track n.pagina.id) {
-            <option [ngValue]="n.pagina.id">{{ sangria(n.nivel) }}{{ n.pagina.titulo }}</option>
+            <option [ngValue]="n.pagina.id" [disabled]="n.pagina.plantilla === 'enlace' && n.pagina.id !== form.paginaId">
+              {{ sangria(n.nivel) }}{{ n.pagina.titulo }}{{ n.pagina.plantilla === 'enlace' ? ' (enlace)' : '' }}
+            </option>
           }
         </select>
+        @if (esPaginaEnlace()) {
+          <small class="txt-alerta">Esta página es un enlace: sus entradas no se ven en el sitio. Elija otra página.</small>
+        }
       </div>
       <div class="campo bloque">
         <label for="en-tipo">Tipo de entrada</label>

@@ -124,10 +124,17 @@
   <section class="panel">
     <div class="panel-head">
       <h2>Entradas</h2>
-      @if (paginaId()) {
+      @if (paginaId() && form.plantilla !== 'enlace') {
         <a class="btn btn-sm btn-primario" [routerLink]="['/admin/contenido/entradas/nueva']" [queryParams]="{ pagina: paginaId() }">+ Nueva entrada</a>
       }
     </div>
+
+    @if (form.plantilla === 'enlace') {
+      <div class="aviso aviso-info">
+        Esta página es un <strong>enlace</strong> a {{ form.urlExterna || 'otra dirección' }}: en el sitio solo redirige,
+        por eso sus entradas no se muestran. Para publicar contenido, cambie la plantilla o use otra página.
+      </div>
+    }
 
     @if (!paginaId()) {
       <p class="vacio">Guarde la página para empezar a agregarle entradas.</p>

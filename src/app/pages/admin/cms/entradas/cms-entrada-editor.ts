@@ -84,7 +84,11 @@ export class CmsEntradaEditor {
       this.entradaId.set(id);
     } else {
       this.form = this.vacia();
-      this.form.paginaId = Number(this.pagina()) || this.cms.paginas()[0]?.id;
+      const pedida = this.cms.paginaPorId().get(Number(this.pagina()));
+      this.form.paginaId =
+        pedida && pedida.plantilla !== 'enlace'
+          ? pedida.id
+          : this.cms.paginas().find((p) => p.plantilla !== 'enlace')?.id;
       this.contenido.set('');
       this.galeria.set([]);
       this.destacadaId.set(null);
@@ -109,6 +113,11 @@ export class CmsEntradaEditor {
     if (isNaN(d.getTime())) return '';
     const off = d.getTimezoneOffset() * 60000;
     return new Date(d.getTime() - off).toISOString().slice(0, 16);
+  }
+
+  /** Las páginas tipo "enlace" solo redirigen: sus entradas no se publican */
+  esPaginaEnlace(): boolean {
+    return this.cms.paginaPorId().get(Number(this.form.paginaId))?.plantilla === 'enlace';
   }
 
   sangria(nivel: number): string {

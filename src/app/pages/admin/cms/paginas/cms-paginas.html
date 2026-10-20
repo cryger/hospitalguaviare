@@ -73,7 +73,9 @@
               <td><span class="badge" [class]="'badge badge-' + f.pagina.estado">{{ f.pagina.estado }}</span></td>
               <td class="ocultar-movil">{{ f.pagina.actualizadoEn | date: 'dd/MM/yyyy' }}</td>
               <td class="acciones">
-                <a class="btn btn-sm" [routerLink]="['/admin/contenido/entradas/nueva']" [queryParams]="{ pagina: f.pagina.id }">+ Entrada</a>
+                @if (f.pagina.plantilla !== 'enlace') {
+                  <a class="btn btn-sm" [routerLink]="['/admin/contenido/entradas/nueva']" [queryParams]="{ pagina: f.pagina.id }">+ Entrada</a>
+                }
                 <a class="btn btn-sm" [routerLink]="['/admin/contenido/paginas', f.pagina.id]">Editar</a>
                 <button class="btn btn-sm btn-peligro" type="button" (click)="eliminar(f.pagina)">Eliminar</button>
               </td>
