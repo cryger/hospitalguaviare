@@ -1,36 +1,80 @@
-import { Component } from '@angular/core';
-import { RouterLink } from "@angular/router";
-import { CommonModule } from '@angular/common';
+import { Component, computed, inject, OnInit } from '@angular/core';
+import { RouterLink, RouterLinkActive } from '@angular/router';
+import { CmsService } from '../../shared/services/cms/cms.service';
+import { CmsPaginaNodo } from '../../shared/models/cms/cms.models';
+
+interface ItemMenu {
+  id: string;
+  titulo: string;
+  url: string;
+  externo: boolean;
+  hijos: ItemMenu[];
+}
+
+/** Menú de respaldo si el CMS aún no tiene un menú principal publicado */
+const MENU_FIJO: ItemMenu[] = [
+  ['Transparencia y acceso a información pública', '/transparencia'],
+  ['Atención y Servicios a la ciudadanía', '/atencion-ciudadano'],
+  ['Participa', '/participa'],
+  ['Nuestro Hospital', '/nuestro-hospital'],
+  ['Normatividad', '/normatividad'],
+  ['Cotizaciones y Propuestas', '/cotizaciones-propuestas'],
+  ['Trabaja con Nosotros', '/trabaja-nosotros'],
+  ['PQRSF', '/pqrsf'],
+].map(([titulo, url]) => ({ id: url, titulo, url, externo: false, hijos: [] }));
 
 @Component({
   selector: 'app-navbar',
-  imports: [RouterLink,CommonModule],
+  imports: [RouterLink, RouterLinkActive],
   templateUrl: './navbar.html',
   styleUrl: './navbar.css',
 })
-export class Navbar {
+export class Navbar implements OnInit {
+  private cms = inject(CmsService);
+
   menuAbierto = false;
   submenuAbierto: string | null = null;
 
-  toggleMenu(): void {
-  this.menuAbierto = !this.menuAbierto;
-  if(!this.menuAbierto){
-    this.submenuAbierto = null;
+  /** Ítems del menú principal administrado desde el CMS */
+  readonly items = computed<ItemMenu[]>(() => {
+    this.cms.paginas();
+    this.cms.menus();
+    const nodos = this.cms.menuPublico('principal');
+    return nodos.length ? nodos.map((n) => this.aItem(n)) : MENU_FIJO;
+  });
+
+  ngOnInit(): void {
+    this.cms.cargar();
   }
-  this.toggleBodyScroll();
-}
 
-cerrarMenu(): void {
-  this.menuAbierto = false;
-  this.submenuAbierto = null;
-  this.toggleBodyScroll();
-}
-toggleSubmenu(menu: string){
-this.submenuAbierto = this.submenuAbierto === menu ? null: menu;
-}
+  private aItem(n: CmsPaginaNodo): ItemMenu {
+    const url = this.cms.urlPagina(n.pagina);
+    return {
+      id: String(n.pagina.id),
+      titulo: n.pagina.titulo,
+      url,
+      externo: this.cms.esExterna(url),
+      hijos: n.hijos.map((h) => this.aItem(h)),
+    };
+  }
 
-private toggleBodyScroll(): void {
-  document.body.style.overflow = this.menuAbierto ? 'hidden' : '';
-}
+  toggleMenu(): void {
+    this.menuAbierto = !this.menuAbierto;
+    if (!this.menuAbierto) this.submenuAbierto = null;
+    this.toggleBodyScroll();
+  }
 
+  cerrarMenu(): void {
+    this.menuAbierto = false;
+    this.submenuAbierto = null;
+    this.toggleBodyScroll();
+  }
+
+  toggleSubmenu(id: string): void {
+    this.submenuAbierto = this.submenuAbierto === id ? null : id;
+  }
+
+  private toggleBodyScroll(): void {
+    document.body.style.overflow = this.menuAbierto ? 'hidden' : '';
+  }
 }

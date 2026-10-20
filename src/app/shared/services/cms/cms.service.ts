@@ -8,7 +8,17 @@ import {
   CmsMultimedia,
   CmsPagina,
   CmsPaginaNodo,
+  UbicacionMenu,
 } from '../../models/cms/cms.models';
+
+/** Resultado de resolver una URL pública contra el CMS */
+export interface CmsRutaResuelta {
+  pagina: CmsPagina;
+  entrada: CmsEntrada | null;
+}
+
+/** Prefijos que nunca maneja el CMS (rutas del sistema) */
+export const RUTAS_RESERVADAS = ['admin', 'login', 'home', 'assets'];
 
 /**
  * Fachada del CMS: mantiene el estado en signals y delega la
@@ -27,6 +37,15 @@ export class CmsService {
   readonly cargando = signal(false);
   readonly error = signal<string | null>(null);
   private cargado = false;
+
+  constructor() {
+    // Modo local: si el admin guarda en otra pestaña, el sitio público se actualiza solo
+    if (typeof window !== 'undefined' && this.config.modo === 'local') {
+      window.addEventListener('storage', (e) => {
+        if (e.key?.startsWith('cms-')) this.cargar(true);
+      });
+    }
+  }
 
   /* ===== Derivados ===== */
   readonly multimediaPorId = computed(() => new Map(this.multimedia().map((m) => [m.id, m])));
@@ -131,6 +150,99 @@ export class CmsService {
     return this.entradas()
       .filter((e) => e.paginaId === paginaId)
       .sort((a, b) => a.orden - b.orden || (b.fechaPublicacion || '').localeCompare(a.fechaPublicacion || ''));
+  }
+
+  /* ===== Vista pública ===== */
+
+  esPublica(p: CmsPagina): boolean {
+    return p.estado === 'publicada';
+  }
+
+  esEntradaPublica(e: CmsEntrada): boolean {
+    return (
+      e.estado === 'publicada' &&
+      (!e.fechaPublicacion || new Date(e.fechaPublicacion).getTime() <= Date.now())
+    );
+  }
+
+  /** URL a la que debe llevar un ítem de menú */
+  urlPagina(p: CmsPagina): string {
+    return p.plantilla === 'enlace' && p.urlExterna ? p.urlExterna : this.rutaPagina(p.id);
+  }
+
+  urlEntrada(e: CmsEntrada): string {
+    return `${this.rutaPagina(e.paginaId)}/${e.slug}`;
+  }
+
+  esExterna(url: string): boolean {
+    return /^(https?:)?\/\//i.test(url) || url.startsWith('mailto:') || url.startsWith('tel:');
+  }
+
+  /** Árbol de navegación público para una ubicación (principal, pie…) */
+  menuPublico(ubicacion: UbicacionMenu): CmsPaginaNodo[] {
+    const menu = this.menus().find((m) => m.ubicacion === ubicacion && m.activo);
+    if (!menu) return [];
+    const filtrar = (nodos: CmsPaginaNodo[]): CmsPaginaNodo[] =>
+      nodos
+        .filter((n) => this.esPublica(n.pagina) && n.pagina.visibleEnMenu)
+        .map((n) => ({ ...n, hijos: filtrar(n.hijos) }));
+    return filtrar(this.arbol(menu.id));
+  }
+
+  hijasPublicas(paginaId: number): CmsPagina[] {
+    return this.paginas()
+      .filter((p) => p.parentId === paginaId && this.esPublica(p))
+      .sort((a, b) => a.orden - b.orden);
+  }
+
+  /** Entradas visibles de una página, en el orden que corresponde a su plantilla */
+  entradasPublicas(pagina: CmsPagina, incluirNoPublicadas = false): CmsEntrada[] {
+    const lista = this.entradas().filter(
+      (e) => e.paginaId === pagina.id && (incluirNoPublicadas ? e.estado !== 'archivada' : this.esEntradaPublica(e)),
+    );
+    if (pagina.plantilla === 'listado') {
+      // blog: destacadas primero y luego por fecha descendente
+      return lista.sort(
+        (a, b) =>
+          Number(b.destacada) - Number(a.destacada) ||
+          (b.fechaPublicacion || b.creadoEn).localeCompare(a.fechaPublicacion || a.creadoEn),
+      );
+    }
+    return lista.sort((a, b) => a.orden - b.orden);
+  }
+
+  /**
+   * Resuelve una URL (/nuestro-hospital/mision-vision o /noticias/mi-noticia)
+   * a una página y, opcionalmente, una entrada.
+   */
+  resolverRuta(segmentos: string[], incluirNoPublicadas = false): CmsRutaResuelta | null {
+    const segs = segmentos.filter(Boolean).map((s) => decodeURIComponent(s).toLowerCase());
+    if (!segs.length || RUTAS_RESERVADAS.includes(segs[0])) return null;
+
+    const visible = (p: CmsPagina) => incluirNoPublicadas || this.esPublica(p);
+    const buscarPagina = (partes: string[]): CmsPagina | null => {
+      const ruta = '/' + partes.join('/');
+      const p = this.paginas().find((x) => x.slug === partes[partes.length - 1] && this.rutaPagina(x.id) === ruta);
+      return p && visible(p) ? p : null;
+    };
+
+    const pagina = buscarPagina(segs);
+    if (pagina) return { pagina, entrada: null };
+
+    if (segs.length >= 2) {
+      const padre = buscarPagina(segs.slice(0, -1));
+      const slug = segs[segs.length - 1];
+      const entrada = padre
+        ? this.entradas().find(
+            (e) =>
+              e.paginaId === padre.id &&
+              e.slug === slug &&
+              (incluirNoPublicadas ? e.estado !== 'archivada' : this.esEntradaPublica(e)),
+          )
+        : undefined;
+      if (padre && entrada) return { pagina: padre, entrada };
+    }
+    return null;
   }
 
   /* ===== Menús ===== */

@@ -110,6 +110,11 @@
       <div class="acciones-pub">
         @if (entradaId()) {
           <button class="btn btn-peligro btn-sm" type="button" (click)="eliminar()">Eliminar</button>
+          <a class="btn btn-sm" target="_blank" rel="noopener"
+             [routerLink]="cms.rutaPagina(+form.paginaId!) + '/' + form.slug"
+             [queryParams]="form.estado === 'publicada' ? {} : { 'vista-previa': 1 }">
+            {{ form.estado === 'publicada' ? 'Ver ↗' : 'Vista previa ↗' }}
+          </a>
         }
         <span class="flex"></span>
         <button class="btn" type="button" [disabled]="guardando() || !valido()" (click)="guardar()">Guardar</button>

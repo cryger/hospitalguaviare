@@ -87,6 +87,8 @@
                         [title]="n.pagina.visibleEnMenu ? 'Ocultar del menú' : 'Mostrar en el menú'"
                         [attr.aria-label]="n.pagina.visibleEnMenu ? 'Ocultar del menú' : 'Mostrar en el menú'"
                         (click)="alternarVisible(n.pagina)">{{ n.pagina.visibleEnMenu ? '👁️' : '🚫' }}</button>
+                <a class="btn btn-icono" title="Ver en el sitio" aria-label="Ver en el sitio" target="_blank" rel="noopener"
+                   [routerLink]="cms.rutaPagina(n.pagina.id)" [queryParams]="n.pagina.estado === 'publicada' ? {} : { 'vista-previa': 1 }">↗</a>
                 <button class="btn btn-icono btn-peligro" type="button" title="Quitar del menú" aria-label="Quitar del menú"
                         (click)="quitarDelMenu(n.pagina)">✕</button>
               </div>

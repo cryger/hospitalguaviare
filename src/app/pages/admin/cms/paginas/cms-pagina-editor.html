@@ -13,6 +13,10 @@
   <div class="cms-head-actions">
     @if (paginaId()) {
       <button class="btn btn-peligro" type="button" (click)="eliminar()">Eliminar</button>
+      <a class="btn" target="_blank" rel="noopener" [routerLink]="cms.rutaPagina(paginaId()!)"
+         [queryParams]="form.estado === 'publicada' ? {} : { 'vista-previa': 1 }">
+        {{ form.estado === 'publicada' ? 'Ver en el sitio ↗' : 'Vista previa ↗' }}
+      </a>
     }
     <button class="btn" type="button" [disabled]="guardando() || !form.titulo?.trim()" (click)="guardar()">Guardar</button>
     @if (form.estado !== 'publicada') {

@@ -1,9 +1,13 @@
 import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';
+import { registerLocaleData } from '@angular/common';
+import localeEsCO from '@angular/common/locales/es-CO';
 import { provideRouter, withComponentInputBinding } from '@angular/router';
 import { provideHttpClient, withFetch } from '@angular/common/http';
 
 import { routes } from './app.routes';
 import { provideCms } from './shared/services/cms/cms.providers';
+
+registerLocaleData(localeEsCO, 'es-CO');
 
 export const appConfig: ApplicationConfig = {
   providers: [

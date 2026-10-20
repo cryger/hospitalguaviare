@@ -27,6 +27,7 @@ export class CmsLocalDataSource extends CmsDataSource {
   constructor() {
     super();
     this.sembrarSiVacio();
+    this.actualizarSemilla();
   }
 
   /* ===== Helpers de almacenamiento ===== */
@@ -169,21 +170,21 @@ export class CmsLocalDataSource extends CmsDataSource {
     });
 
     const paginas: CmsPagina[] = [
-      p(1, 'Nuestro hospital', 'nuestro-hospital', 0),
-      p(2, 'Misión y visión', 'mision-vision', 0, { parentId: 1 }),
-      p(3, 'Reseña histórica', 'resena-historica', 1, { parentId: 1 }),
-      p(4, 'Servicios', 'servicios', 1, { plantilla: 'listado' }),
-      p(5, 'Atención al ciudadano', 'atencion-ciudadano', 2),
-      p(6, 'Noticias', 'noticias', 3, { plantilla: 'listado' }),
-      p(7, 'Transparencia', 'transparencia', 4, { plantilla: 'documentos' }),
-      p(8, 'Normatividad', 'normatividad', 5, { plantilla: 'documentos' }),
-      p(9, 'Participa', 'participa', 6),
-      p(10, 'Políticas de privacidad', 'politicas-privacidad', 0, { menuId: 2 }),
+      p(1, 'Transparencia y acceso a información pública', 'transparencia', 0, { plantilla: 'documentos' }),
+      p(2, 'Atención y Servicios a la ciudadanía', 'atencion-ciudadano', 1),
+      p(3, 'Participa', 'participa', 2),
+      p(4, 'Nuestro Hospital', 'nuestro-hospital', 3),
+      p(5, 'Misión y visión', 'mision-vision', 0, { parentId: 4 }),
+      p(6, 'Reseña histórica', 'resena-historica', 1, { parentId: 4 }),
+      p(7, 'Normatividad', 'normatividad', 4, { plantilla: 'documentos' }),
+      p(8, 'Noticias', 'noticias', 5, { plantilla: 'listado', visibleEnMenu: false }),
+      ...this.paginasDeModulos(9, 6, t),
+      p(12, 'Políticas de privacidad', 'politicas-privacidad', 0, { menuId: 2 }),
     ];
 
     const entradas: CmsEntrada[] = [
       {
-        id: 1, paginaId: 2, titulo: 'Misión', slug: 'mision', tipo: 'articulo', estado: 'borrador',
+        id: 1, paginaId: 5, titulo: 'Misión', slug: 'mision', tipo: 'articulo', estado: 'borrador',
         resumen: '', contenido: '<p>Escriba aquí la misión institucional.</p>', destacada: false,
         imagenDestacadaId: null, multimediaIds: [], autor: 'Administrador', fechaPublicacion: null,
         orden: 0, creadoEn: t, actualizadoEn: t,
@@ -194,5 +195,50 @@ export class CmsLocalDataSource extends CmsDataSource {
     localStorage.setItem(this.prefijo + 'paginas', JSON.stringify(paginas));
     localStorage.setItem(this.prefijo + 'entradas', JSON.stringify(entradas));
     localStorage.setItem(this.prefijo + 'multimedia', '[]');
+    localStorage.setItem(this.prefijo + 'version', String(this.versionSemilla));
+  }
+
+  private readonly versionSemilla = 2;
+
+  /** Módulos con flujo propio que se enlazan desde el menú (no son páginas del CMS) */
+  private paginasDeModulos(idInicial: number, ordenInicial: number, t: string): CmsPagina[] {
+    const modulos = [
+      { titulo: 'Cotizaciones y Propuestas', url: '/cotizaciones-propuestas' },
+      { titulo: 'Trabaja con Nosotros', url: '/trabaja-nosotros' },
+      { titulo: 'PQRSF', url: '/pqrsf' },
+    ];
+    return modulos.map((m, i): CmsPagina => ({
+      id: idInicial + i,
+      menuId: 1,
+      parentId: null,
+      titulo: m.titulo,
+      slug: m.url.slice(1),
+      orden: ordenInicial + i,
+      plantilla: 'enlace',
+      urlExterna: m.url,
+      visibleEnMenu: true,
+      estado: 'publicada',
+      creadoEn: t,
+      actualizadoEn: t,
+    }));
+  }
+
+  /** Migra datos guardados con una semilla anterior sin borrar lo que el usuario creó */
+  private actualizarSemilla(): void {
+    const version = Number(localStorage.getItem(this.prefijo + 'version') || 1);
+    if (version >= this.versionSemilla) return;
+
+    const paginas = this.leer<CmsPagina>('paginas');
+    const principal = this.leer<CmsMenu>('menus').find((m) => m.ubicacion === 'principal');
+    if (principal) {
+      const faltantes = this.paginasDeModulos(0, 0, this.ahora()).filter(
+        (m) => !paginas.some((p) => p.urlExterna === m.urlExterna || p.slug === m.slug),
+      );
+      let id = this.nuevoId(paginas);
+      let orden = paginas.filter((p) => p.menuId === principal.id && p.parentId === null).length;
+      faltantes.forEach((m) => paginas.push({ ...m, id: id++, orden: orden++, menuId: principal.id }));
+      this.escribir('paginas', paginas);
+    }
+    localStorage.setItem(this.prefijo + 'version', String(this.versionSemilla));
   }
 }

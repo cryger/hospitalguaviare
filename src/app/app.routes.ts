@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { rutaCmsComodin, rutaCmsPrioritaria } from './pages/cms-publico/cms-publico.routes';
 import { PublicLayout } from './layout/public-layout/public-layout';
 import { DashboardLayout } from './layout/dashboard-layout/dashboard-layout';
 import { Home } from './componentes/home/home';
@@ -34,6 +35,8 @@ export const routes: Routes = [
     path: '',
     component: PublicLayout,
     children: [
+      // CMS con contenido publicado tiene prioridad sobre la página fija (migración gradual)
+      rutaCmsPrioritaria,
       { path: '', component: Home, data: { breadcrumb: 'Inicio' } },
       { path: 'home', component: Home,data: { breadcrumb: 'Inicio' } },
       { path: 'transparencia', component: Transparencia,data: { breadcrumb: 'Transparencia' } },
@@ -46,6 +49,8 @@ export const routes: Routes = [
       { path: 'normatividad', component: Normatividad, data: { breadcrumb: 'Normatividad' } },
       { path: 'servicios', component: Servicios, data: { breadcrumb: 'Servicios' } },
       { path: 'login', component: Login, data: { breadcrumb: 'Login' } },
+      // Páginas nuevas creadas en el CMS (y 404)
+      rutaCmsComodin,
     ]
   },
 

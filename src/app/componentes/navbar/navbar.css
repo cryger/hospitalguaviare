@@ -892,3 +892,62 @@ html {
 
 
 
+
+/* =========================================
+   Submenús generados desde el CMS
+========================================= */
+.cms-dropdown-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: inherit;
+  font: inherit;
+}
+.cms-dropdown-toggle .flecha { font-size: 0.75em; transition: transform 0.15s ease; }
+.cms-dropdown.abierto .cms-dropdown-toggle .flecha { transform: rotate(180deg); }
+
+.cms-submenu { display: none; }
+.cms-dropdown.abierto .cms-submenu { display: block; }
+.cms-submenu .submenu-link-govco.activo { font-weight: 700; background-color: #e6effd; }
+.cms-submenu .submenu-link-govco:focus-visible { outline: 3px solid #ffab00; outline-offset: -3px; }
+
+@media (min-width: 992px) {
+  .cms-dropdown:hover .cms-submenu,
+  .cms-dropdown:focus-within .cms-submenu { display: block; }
+
+  .cms-submenu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 240px;
+    z-index: 1000;
+    background: #fff;
+    border-radius: 0 0 6px 6px;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.15);
+    padding: 0.35rem 0;
+  }
+}
+
+/* El botón del submenú se ve igual que los demás enlaces del menú */
+.navbar-menu-govco ul.navbar-nav li button.cms-dropdown-toggle {
+  height: 100%;
+  width: auto;
+  justify-content: center;
+  text-align: center;
+  color: #4b4b4b;
+  font-size: 14px;
+  line-height: normal;
+  font-family: WorkSans-Medium, 'Work Sans', sans-serif;
+  text-decoration: underline;
+  padding: 0.5rem;
+}
+.navbar-menu-govco ul.navbar-nav li button.cms-dropdown-toggle:focus-visible {
+  outline: 3px solid #ffab00;
+  outline-offset: -3px;
+}
+.navbar-menu-govco ul.navbar-nav li button.cms-dropdown-toggle .text-item-menu-govco {
+  max-width: 11.25rem;
+}
+@media (max-width: 991px) {
+  .navbar-menu-govco ul.navbar-nav li button.cms-dropdown-toggle { justify-content: flex-start; padding: 12px 24px; width: 100%; }
+}

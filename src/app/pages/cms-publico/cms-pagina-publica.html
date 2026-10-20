@@ -1,0 +1,217 @@
+@if (vistaPrevia) {
+  <div class="aviso-previa" role="status">👁️ Vista previa: se muestran también los borradores.</div>
+}
+
+@if (!cargado()) {
+  <p class="cargando">Cargando…</p>
+} @else if (!pagina()) {
+  <!-- ===== 404 ===== -->
+  <section class="no-encontrada">
+    <h1>Página no encontrada</h1>
+    <p>La dirección que busca no existe o ya no está disponible.</p>
+    <a class="btn-govco" routerLink="/">Ir al inicio</a>
+  </section>
+} @else if (entrada(); as e) {
+  <!-- ===== DETALLE DE ENTRADA ===== -->
+  <article class="entrada">
+    <header class="entrada-head">
+      <a class="volver" [routerLink]="cms.rutaPagina(pagina()!.id)">← {{ pagina()!.titulo }}</a>
+      <h1>{{ e.titulo }}</h1>
+      <p class="meta">
+        @if (e.fechaPublicacion) { <time [attr.datetime]="e.fechaPublicacion">{{ e.fechaPublicacion | date: "d 'de' MMMM 'de' y" : '' : 'es-CO' }}</time> }
+        @if (e.autor) { · {{ e.autor }} }
+        @if (e.estado !== 'publicada') { · <span class="chip-borrador">{{ e.estado }}</span> }
+      </p>
+      @if (e.resumen) { <p class="lead">{{ e.resumen }}</p> }
+    </header>
+
+    @if (imagenDe(e); as img) {
+      <app-cms-media-publica class="destacada" [media]="img" />
+    }
+
+    @if (e.contenido) {
+      <div class="contenido-html" [innerHTML]="e.contenido"></div>
+    }
+
+    @if (visuales(e).length) {
+      <section class="bloque">
+        <h2 class="h-seccion">Galería</h2>
+        <div class="rejilla-media">
+          @for (m of visuales(e); track m.id) {
+            <app-cms-media-publica [media]="m" />
+          }
+        </div>
+      </section>
+    }
+
+    @if (documentos(e).length) {
+      <section class="bloque">
+        <h2 class="h-seccion">Documentos</h2>
+        <div class="lista-docs">
+          @for (m of documentos(e); track m.id) {
+            <app-cms-media-publica [media]="m" />
+          }
+        </div>
+      </section>
+    }
+  </article>
+
+  @if (relacionadas().length) {
+    <section class="bloque">
+      <h2 class="h-seccion">También en {{ pagina()!.titulo }}</h2>
+      <div class="tarjetas">
+        @for (r of relacionadas(); track r.id) {
+          <a class="tarjeta" [routerLink]="url(r)">
+            @if (imagenDe(r); as img) { <img [src]="img.url" [alt]="img.alt || ''" loading="lazy" /> }
+            <div class="tarjeta-cuerpo"><h3>{{ r.titulo }}</h3></div>
+          </a>
+        }
+      </div>
+    </section>
+  }
+} @else {
+  <!-- ===== PÁGINA ===== -->
+  @let p = pagina()!;
+  <header class="pagina-head">
+    <h1>{{ p.icono ? p.icono + ' ' : '' }}{{ p.titulo }}</h1>
+    @if (p.descripcion) { <p class="lead">{{ p.descripcion }}</p> }
+  </header>
+
+  @if (p.plantilla === 'enlace') {
+    <p>Redirigiendo… Si no ocurre automáticamente, <a [href]="p.urlExterna">haga clic aquí</a>.</p>
+  }
+
+  @switch (p.plantilla) {
+    @case ('listado') {
+      @if (entradas().length) {
+        <div class="tarjetas">
+          @for (e of entradasFiltradas().slice(0, mostrar()); track e.id) {
+            <a class="tarjeta" [routerLink]="url(e)">
+              @if (imagenDe(e); as img) {
+                <img [src]="img.url" [alt]="img.alt || ''" loading="lazy" />
+              } @else {
+                <div class="tarjeta-sin-img" aria-hidden="true">📰</div>
+              }
+              <div class="tarjeta-cuerpo">
+                @if (e.destacada) { <span class="chip">Destacado</span> }
+                <h2>{{ e.titulo }}</h2>
+                @if (e.fechaPublicacion) {
+                  <time [attr.datetime]="e.fechaPublicacion">{{ e.fechaPublicacion | date: "d 'de' MMMM 'de' y" : '' : 'es-CO' }}</time>
+                }
+                @if (e.resumen) { <p>{{ e.resumen }}</p> }
+                <span class="leer">Leer más →</span>
+              </div>
+            </a>
+          }
+        </div>
+        @if (entradasFiltradas().length > mostrar()) {
+          <div class="centro"><button class="btn-govco" type="button" (click)="mostrar.set(mostrar() + 9)">Cargar más</button></div>
+        }
+      }
+    }
+
+    @case ('documentos') {
+      @if (entradas().length) {
+        <div class="buscador">
+          <label for="buscar-docs">Buscar documento</label>
+          <input id="buscar-docs" type="search" placeholder="Escriba una palabra clave"
+                 [value]="busqueda()" (input)="busqueda.set($any($event.target).value)" />
+        </div>
+        <div class="docs">
+          @for (e of entradasFiltradas(); track e.id) {
+            <section class="doc-grupo">
+              <h2>
+                <a [routerLink]="url(e)">{{ e.titulo }}</a>
+              </h2>
+              @if (e.resumen) { <p>{{ e.resumen }}</p> }
+              @if (e.fechaPublicacion) {
+                <small>Publicado: {{ e.fechaPublicacion | date: 'dd/MM/yyyy' }}</small>
+              }
+              <div class="lista-docs">
+                @for (m of documentos(e); track m.id) {
+                  <app-cms-media-publica [media]="m" />
+                }
+              </div>
+            </section>
+          } @empty {
+            <p class="vacio">No se encontraron documentos con "{{ busqueda() }}".</p>
+          }
+        </div>
+      }
+    }
+
+    @case ('galeria') {
+      @if (galeria().length) {
+        <ul class="galeria">
+          @for (m of galeria(); track m.id) {
+            <li>
+              @if (m.tipo === 'imagen') {
+                <button type="button" class="galeria-item" (click)="lightbox.set(m)" [attr.aria-label]="'Ampliar ' + (m.alt || m.titulo || 'imagen')">
+                  <img [src]="m.url" [alt]="m.alt || ''" loading="lazy" />
+                </button>
+              } @else {
+                <app-cms-media-publica [media]="m" />
+              }
+            </li>
+          }
+        </ul>
+      }
+    }
+
+    @default {
+      <!-- contenido: entradas como texto corrido -->
+      @for (e of entradas(); track e.id) {
+        <section class="bloque-contenido">
+          @if (entradas().length > 1 || e.titulo !== p.titulo) { <h2>{{ e.titulo }}</h2> }
+          @if (e.estado !== 'publicada') { <span class="chip-borrador">{{ e.estado }}</span> }
+          @if (imagenDe(e); as img) { <app-cms-media-publica class="destacada" [media]="img" /> }
+          @if (e.contenido) { <div class="contenido-html" [innerHTML]="e.contenido"></div> }
+          @if (visuales(e).length) {
+            <div class="rejilla-media">
+              @for (m of visuales(e); track m.id) { <app-cms-media-publica [media]="m" /> }
+            </div>
+          }
+          @if (documentos(e).length) {
+            <div class="lista-docs">
+              @for (m of documentos(e); track m.id) { <app-cms-media-publica [media]="m" /> }
+            </div>
+          }
+        </section>
+      }
+    }
+  }
+
+  @if (!entradas().length && !subpaginas().length && p.plantilla !== 'enlace') {
+    <p class="vacio">Esta sección se encuentra en construcción. Pronto encontrará aquí la información.</p>
+  }
+
+  @if (subpaginas().length) {
+    <section class="bloque">
+      <h2 class="h-seccion">En esta sección</h2>
+      <div class="subpaginas">
+        @for (s of subpaginas(); track s.id) {
+          @if (esExterna(cms.urlPagina(s))) {
+            <a class="subpagina" [href]="cms.urlPagina(s)" target="_blank" rel="noopener">
+              <strong>{{ s.icono ? s.icono + ' ' : '' }}{{ s.titulo }}</strong>
+              @if (s.descripcion) { <span>{{ s.descripcion }}</span> }
+            </a>
+          } @else {
+            <a class="subpagina" [routerLink]="cms.urlPagina(s)">
+              <strong>{{ s.icono ? s.icono + ' ' : '' }}{{ s.titulo }}</strong>
+              @if (s.descripcion) { <span>{{ s.descripcion }}</span> }
+            </a>
+          }
+        }
+      </div>
+    </section>
+  }
+}
+
+<!-- LIGHTBOX -->
+@if (lightbox(); as m) {
+  <div class="lightbox" role="dialog" aria-modal="true" [attr.aria-label]="m.alt || m.titulo || 'Imagen'" (click)="lightbox.set(null)">
+    <button type="button" class="lightbox-cerrar" aria-label="Cerrar" (click)="lightbox.set(null)">✕</button>
+    <img [src]="m.url" [alt]="m.alt || ''" (click)="$event.stopPropagation()" />
+    @if (m.descripcion || m.titulo) { <p>{{ m.descripcion || m.titulo }}</p> }
+  </div>
+}
