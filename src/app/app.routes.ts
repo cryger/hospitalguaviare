@@ -27,4 +27,74 @@ import { AccesibilidadAdmin } from './pages/admin/accesibilidad-admin/accesibili
 import { TrabajaNosotrosAdminComponent } from './pages/admin/trabaja-nosotros-admin/trabaja-nosotros-admin/trabaja-nosotros-admin';
 
 
-export const routes: Routes = [];
+export const routes: Routes = [
+
+  // 🌍 SITIO PÚBLICO
+  {
+    path: '',
+    component: PublicLayout,
+    children: [
+      { path: '', component: Home, data: { breadcrumb: 'Inicio' } },
+      { path: 'home', component: Home,data: { breadcrumb: 'Inicio' } },
+      { path: 'transparencia', component: Transparencia,data: { breadcrumb: 'Transparencia' } },
+      { path: 'participa', component: Participa,data: { breadcrumb: 'Participa' } },
+      { path: 'nuestro-hospital', component: NuestroHospital,data: { breadcrumb: 'Nuesto Hospital' } },
+      { path: 'atencion-ciudadano', component: AtencionCiudadano,data: { breadcrumb: 'Atencion al Usuario' } },
+      { path: 'cotizaciones-propuestas', component: CotizacionesPropuestas, data: { breadcrumb: 'Cotizaciones y Propuestas' } },
+      { path: 'trabaja-nosotros', component: TrabajaNosotros, data: { breadcrumb: 'Trabaja con Nosotros' } },
+      { path: 'pqrsf', component: PqrsfComponent, data: { breadcrumb: 'PQRSF' } },
+      { path: 'normatividad', component: Normatividad, data: { breadcrumb: 'Normatividad' } },
+      { path: 'servicios', component: Servicios, data: { breadcrumb: 'Servicios' } },
+      { path: 'login', component: Login, data: { breadcrumb: 'Login' } },
+    ]
+  },
+
+  // 🔐 DASHBOARD ADMIN
+  {
+    path: 'admin',
+    component: DashboardLayout,
+    canActivate: [AuthGuard],
+    children: [
+      { path: '', component: DashboardHomeComponent, data: { breadcrumb: 'Dashboard' } },
+      { path: 'noticias', component: NoticiasAdminComponent, data: { breadcrumb: 'Administrar Noticias' }},
+      { path: 'transparencia', component: AdminTransparencia, data: { breadcrumb: 'Administrar Transparencia' } },
+      { path: 'pqrsf', component: AdminPqrsf, data: { breadcrumb: 'Administrar PQRSF' } },
+      { path: 'cotizaciones', component: CotizacionesPropuestasAdminComponent, data: {Breadcrumb: 'Cotizaciones y Propuestas'}},
+      { path: 'servicios-atencion-ciudadano', component: ServiciosAtencionAdmin, data: {Breadcrumb: 'Servicios y Atencion al Ciudadano'}},
+      { path: 'usuarios', component: Usuarios, data: { breadcrumb: 'Administrar Usuarios' } },
+      { path: 'accesibilidad-admin', component: AccesibilidadAdmin, data: { breadcrumb: 'Administrar Accesibilidad' } },
+      { path: 'configuracion', component: Configuacion, data: {Breadcrumb: 'Configuracion'}},
+      { path : 'vacantes', component:TrabajaNosotrosAdminComponent,data:{Breadcrumb: 'trabaja con Nosotros'}},
+
+      // 🧩 CMS: Menú → Páginas → Entradas → Multimedia
+      {
+        path: 'contenido',
+        data: { breadcrumb: 'Contenido' },
+        children: [
+          { path: '', pathMatch: 'full', redirectTo: 'menus' },
+          { path: 'menus', data: { breadcrumb: 'Menús y estructura' },
+            loadComponent: () => import('./pages/admin/cms/menus/cms-menus').then(m => m.CmsMenus) },
+          { path: 'paginas', data: { breadcrumb: 'Páginas' },
+            loadComponent: () => import('./pages/admin/cms/paginas/cms-paginas').then(m => m.CmsPaginas) },
+          { path: 'paginas/nueva', data: { breadcrumb: 'Nueva página' },
+            loadComponent: () => import('./pages/admin/cms/paginas/cms-pagina-editor').then(m => m.CmsPaginaEditor) },
+          { path: 'paginas/:id', data: { breadcrumb: 'Editar página' },
+            loadComponent: () => import('./pages/admin/cms/paginas/cms-pagina-editor').then(m => m.CmsPaginaEditor) },
+          { path: 'entradas', data: { breadcrumb: 'Entradas' },
+            loadComponent: () => import('./pages/admin/cms/entradas/cms-entradas').then(m => m.CmsEntradas) },
+          { path: 'entradas/nueva', data: { breadcrumb: 'Nueva entrada' },
+            loadComponent: () => import('./pages/admin/cms/entradas/cms-entrada-editor').then(m => m.CmsEntradaEditor) },
+          { path: 'entradas/:id', data: { breadcrumb: 'Editar entrada' },
+            loadComponent: () => import('./pages/admin/cms/entradas/cms-entrada-editor').then(m => m.CmsEntradaEditor) },
+          { path: 'multimedia', data: { breadcrumb: 'Multimedia' },
+            loadComponent: () => import('./pages/admin/cms/multimedia/cms-multimedia').then(m => m.CmsMultimediaComponent) },
+        ]
+      }
+    ]
+  },
+
+
+  // 🚫 FALLBACK
+  { path: '**', redirectTo: '' }
+];
+
