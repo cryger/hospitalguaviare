@@ -1,4 +1,15 @@
 import { Component } from '@angular/core';
+<<<<<<< HEAD
+
+@Component({
+  selector: 'app-pqrsf',
+  imports: [],
+  templateUrl: './pqrsf.html',
+  styleUrl: './pqrsf.css',
+})
+export class Pqrsf {
+
+=======
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { PqrsfService } from '../../shared/services/pqrsf/pqrsf';
@@ -55,4 +66,5 @@ export class PqrsfComponent {
     this.enviado = true;
     this.form.reset({ tipo: 'Petición' });
   }
+>>>>>>> 6865d3237f4bc5713e442c82baab8c7322857aba
 }

@@ -1,3 +1,15 @@
+<<<<<<< HEAD
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-trabaja-nosotros',
+  imports: [],
+  templateUrl: './trabaja-nosotros.html',
+  styleUrl: './trabaja-nosotros.css',
+})
+export class TrabajaNosotros {
+
+=======
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TrabajaNosotrosService } from '../../shared/services/trabaja-nosotros/trabaja-nosotros-service';
@@ -31,4 +43,5 @@ export class TrabajaNosotros implements OnInit {
     this.modalOpen = false;
     this.seleccionada = null;
   }
+>>>>>>> 6865d3237f4bc5713e442c82baab8c7322857aba
 }
