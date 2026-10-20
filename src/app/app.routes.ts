@@ -8,7 +8,7 @@ import { NuestroHospital } from './pages/nuestro-hospital/nuestro-hospital';
 import { AtencionCiudadano} from './pages/atencion-ciudadano/atencion-ciudadano'
 import { CotizacionesPropuestas } from './pages/cotizaciones-propuestas/cotizaciones-propuestas';
 import { TrabajaNosotros} from './pages/trabaja-nosotros/trabaja-nosotros';
-import { PqrsfComponent } from './pages/pqrsf/pqrsf';
+
 import { Normatividad } from './pages/normatividad/normatividad';
 import { Servicios } from './pages/servicios/servicios';
 import { Login } from './pages/login/login';
