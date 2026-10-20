@@ -1,0 +1,16 @@
+@media (max-width: 991.98px) {
+  .navbar-nav-menu-govco {
+    flex-direction: column !important;
+    align-items: flex-start;
+    width: 100%;
+  }
+
+  .navbar-nav-menu-govco .nav-item {
+    width: 100%;
+  }
+
+  .navbar-nav-menu-govco .nav-link {
+    width: 100%;
+    white-space: normal;
+  }
+}
