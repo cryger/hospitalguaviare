@@ -6,7 +6,7 @@
 export const environment = {
   production: false,
   cms: {
-    modo: 'local' as 'local' | 'api',
+    modo: 'api' as 'local' | 'api',
     apiUrl: 'http://localhost:3000/api',
     maxArchivoMb: 20,
   },
