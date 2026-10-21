@@ -953,3 +953,25 @@ html {
 }
 
 .cms-submenu .submenu-todo { font-weight: 700; border-bottom: 1px solid #e5e7eb; }
+
+/* Ítems del submenú: alto automático para que los títulos largos (ej. numerales
+   de Transparencia) se acomoden en varias líneas sin montarse unos sobre otros */
+.navbar-menu-govco ul.navbar-nav .cms-submenu li {
+  height: auto;
+}
+.navbar-menu-govco ul.navbar-nav .cms-submenu li a.submenu-link-govco {
+  display: block;
+  height: auto;
+  white-space: normal;
+  line-height: 1.35 !important;
+  padding: 10px 20px;
+  text-align: left;
+}
+@media (min-width: 992px) {
+  .cms-submenu {
+    min-width: 300px;
+    max-width: 380px;
+    max-height: calc(100vh - 160px);
+    overflow-y: auto;
+  }
+}
