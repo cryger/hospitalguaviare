@@ -12,6 +12,7 @@ const { config } = require('./src/config');
 const { rutasAuth } = require('./src/auth');
 const { rutasCms } = require('./src/cms');
 const { manejarErrores } = require('./src/errores');
+const { aplicarMigraciones } = require('./src/migraciones');
 
 const app = express();
 app.set('trust proxy', 1);
@@ -47,6 +48,10 @@ app.use(['/api', '/'], router);
 app.use(manejarErrores);
 
 const puerto = process.env.PORT || 3000;
-app.listen(puerto, () => console.log(`API CMS escuchando en el puerto ${puerto}`));
+
+// Aplica las migraciones pendientes (estructura del portal) y luego inicia el servidor
+aplicarMigraciones()
+  .catch((e) => console.error('⚠ No se pudieron aplicar las migraciones:', e.message))
+  .finally(() => app.listen(puerto, () => console.log(`API CMS escuchando en el puerto ${puerto}`)));
 
 module.exports = app;
