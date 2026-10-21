@@ -73,6 +73,9 @@
   <!-- ===== PÁGINA ===== -->
   @let p = pagina()!;
   <header class="pagina-head">
+    @if (padre(); as pa) {
+      <a class="antetitulo" [routerLink]="cms.rutaPagina(pa.id)">{{ pa.titulo }}</a>
+    }
     <h1>{{ p.icono ? p.icono + ' ' : '' }}{{ p.titulo }}</h1>
     @if (p.descripcion) { <p class="lead">{{ p.descripcion }}</p> }
   </header>
@@ -159,10 +162,53 @@
     }
 
     @default {
+      <!-- Trámites y servicios: tarjetas desplegables -->
+      @if (servicios().length) {
+        @if (servicios().length > 2) {
+          <nav class="atajos" aria-label="Ir a un trámite">
+            @for (e of servicios(); track e.id) {
+              <a class="atajo" [href]="'#srv-' + e.slug" (click)="irA(e.slug, $event)">
+                <span aria-hidden="true">{{ iconoServicio(e) }}</span>{{ e.titulo }}
+              </a>
+            }
+          </nav>
+        }
+
+        <div class="servicios">
+          @for (e of servicios(); track e.id; let primero = $first) {
+            <details class="servicio" [id]="'srv-' + e.slug" [open]="primero && servicios().length === 1">
+              <summary>
+                <span class="srv-icono" aria-hidden="true">{{ iconoServicio(e) }}</span>
+                <span class="srv-texto">
+                  <span class="srv-titulo">{{ e.titulo }}</span>
+                  @if (e.resumen) { <span class="srv-resumen">{{ e.resumen }}</span> }
+                </span>
+                @if (e.estado !== 'publicada') { <span class="chip-borrador">{{ e.estado }}</span> }
+                <span class="srv-flecha" aria-hidden="true"></span>
+              </summary>
+              <div class="srv-cuerpo">
+                @if (e.contenido) { <div class="contenido-html" [innerHTML]="e.contenido"></div> }
+                @if (documentos(e).length) {
+                  <h3 class="srv-sub">Documentos</h3>
+                  <div class="lista-docs">
+                    @for (m of documentos(e); track m.id) { <app-cms-media-publica [media]="m" /> }
+                  </div>
+                }
+                @if (visuales(e).length) {
+                  <div class="rejilla-media">
+                    @for (m of visuales(e); track m.id) { <app-cms-media-publica [media]="m" /> }
+                  </div>
+                }
+              </div>
+            </details>
+          }
+        </div>
+      }
+
       <!-- contenido: entradas como texto corrido -->
-      @for (e of entradas(); track e.id) {
+      @for (e of noServicios(); track e.id) {
         <section class="bloque-contenido">
-          @if (entradas().length > 1 || e.titulo !== p.titulo) { <h2>{{ e.titulo }}</h2> }
+          @if (noServicios().length > 1 || e.titulo !== p.titulo) { <h2>{{ e.titulo }}</h2> }
           @if (e.estado !== 'publicada') { <span class="chip-borrador">{{ e.estado }}</span> }
           @if (imagenDe(e); as img) { <app-cms-media-publica class="destacada" [media]="img" /> }
           @if (e.contenido) { <div class="contenido-html" [innerHTML]="e.contenido"></div> }

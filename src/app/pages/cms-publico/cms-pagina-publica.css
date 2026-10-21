@@ -41,11 +41,11 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 3px solid 
 
 /* ===== Contenido HTML del editor ===== */
 .contenido-html { font-size: 1rem; line-height: 1.75; }
-.contenido-html :is(h2) { color: var(--azul); font-size: 1.4rem; margin: 1.5rem 0 .6rem; }
-.contenido-html :is(h3) { font-size: 1.15rem; margin: 1.2rem 0 .5rem; }
-.contenido-html a { color: var(--azul-2); }
-.contenido-html blockquote { border-left: 4px solid var(--azul-2); margin: 1rem 0; padding: .5rem 1rem; background: var(--suave); }
-.contenido-html img { max-width: 100%; height: auto; }
+.contenido-html ::ng-deep :is(h2) { color: var(--azul); font-size: 1.4rem; margin: 1.5rem 0 .6rem; }
+.contenido-html ::ng-deep :is(h3) { font-size: 1.15rem; margin: 1.2rem 0 .5rem; }
+.contenido-html ::ng-deep a { color: var(--azul-2); }
+.contenido-html ::ng-deep blockquote { border-left: 4px solid var(--azul-2); margin: 1rem 0; padding: .5rem 1rem; background: var(--suave); }
+.contenido-html ::ng-deep img { max-width: 100%; height: auto; }
 
 .bloque-contenido { margin-bottom: 2rem; }
 .bloque-contenido > h2 { color: var(--azul); font-size: 1.45rem; margin: 0 0 .75rem; }
@@ -122,3 +122,222 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 3px solid 
   h1 { font-size: 1.55rem; }
   .tarjetas, .lista-docs, .rejilla-media { grid-template-columns: 1fr; }
 }
+
+/* =====================================================================
+   Estilo visual (tipografía institucional, encabezado y trámites)
+===================================================================== */
+:host {
+  font-family: 'WorkSans-Regular', 'Work Sans', 'Montserrat', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --azul-suave: #e8f0fb;
+  --sombra: 0 1px 2px rgba(16, 24, 40, .05), 0 2px 8px rgba(16, 24, 40, .06);
+}
+
+h1, h2, h3, .srv-titulo, .tarjeta-cuerpo h2, .tarjeta-cuerpo h3, .subpagina strong, .h-seccion {
+  font-family: 'WorkSans-SemiBold', 'Work Sans', 'Montserrat', system-ui, sans-serif;
+  font-weight: 600;
+}
+
+/* ----- Encabezado de página ----- */
+.pagina-head {
+  position: relative;
+  margin: -0.5rem 0 1.75rem;
+  padding: 1.75rem 1.75rem 1.5rem;
+  border-radius: 12px;
+  background:
+    radial-gradient(circle at 100% 0%, rgba(51, 102, 204, .14) 0, transparent 45%),
+    linear-gradient(135deg, #f3f7fd 0%, #e8f0fb 100%);
+  border-left: 5px solid var(--azul);
+}
+.pagina-head h1 { font-size: 1.85rem; margin: 0.15rem 0 0.4rem; }
+.pagina-head .lead { margin: 0; font-size: 1.02rem; max-width: 70ch; }
+.antetitulo {
+  display: inline-block;
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--azul-2);
+  text-decoration: none;
+  font-weight: 600;
+}
+.antetitulo:hover { text-decoration: underline; }
+
+/* ----- Atajos ----- */
+.atajos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0 0 1.5rem;
+}
+.atajo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 0.85rem;
+  border-radius: 999px;
+  background: #fff;
+  border: 1px solid #c9d7ee;
+  color: var(--azul);
+  font-size: 0.85rem;
+  text-decoration: none;
+  transition: background .15s, border-color .15s;
+}
+.atajo:hover { background: var(--azul-suave); border-color: var(--azul-2); }
+
+/* ----- Tarjetas de trámite (desplegables) ----- */
+.servicios { display: flex; flex-direction: column; gap: 0.9rem; }
+
+.servicio {
+  background: #fff;
+  border: 1px solid #dfe6f0;
+  border-radius: 12px;
+  box-shadow: var(--sombra);
+  overflow: hidden;
+  scroll-margin-top: 1rem;
+  transition: border-color .15s, box-shadow .15s;
+}
+.servicio:hover { border-color: #b9cbe8; }
+.servicio[open] { border-color: var(--azul-2); box-shadow: 0 6px 18px rgba(0, 72, 132, .10); }
+
+.servicio summary {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.1rem 1.25rem;
+  cursor: pointer;
+}
+.servicio summary::-webkit-details-marker { display: none; }
+.servicio summary:focus-visible { outline: 3px solid #ffab00; outline-offset: -3px; border-radius: 12px; }
+
+.srv-icono {
+  flex-shrink: 0;
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  font-size: 1.6rem;
+  background: linear-gradient(135deg, #e8f0fb, #d6e4f8);
+}
+.srv-texto { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 0.2rem; }
+.srv-titulo { font-size: 1.1rem; color: var(--azul); line-height: 1.3; }
+.srv-resumen { font-size: 0.92rem; color: var(--texto-2); line-height: 1.45; }
+
+.srv-flecha {
+  flex-shrink: 0;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--azul-suave);
+  position: relative;
+  transition: transform .2s, background .2s;
+}
+.srv-flecha::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 9px;
+  height: 9px;
+  border-right: 2.5px solid var(--azul);
+  border-bottom: 2.5px solid var(--azul);
+  transform: translateY(-2px) rotate(45deg);
+}
+.servicio[open] .srv-flecha { transform: rotate(180deg); background: var(--azul); }
+.servicio[open] .srv-flecha::before { border-color: #fff; }
+
+.srv-cuerpo {
+  padding: 0.25rem 1.5rem 1.4rem calc(1.25rem + 52px + 1rem);
+  border-top: 1px dashed #dfe6f0;
+}
+.srv-sub { font-size: 0.95rem; color: var(--texto-2); margin: 1.1rem 0 0.4rem; }
+
+/* Contenido dentro del trámite */
+.srv-cuerpo .contenido-html { font-size: 0.97rem; }
+.srv-cuerpo .contenido-html ::ng-deep h3 { font-size: 1rem; color: var(--azul); margin: 1rem 0 0.5rem; }
+
+/* Pasos numerados con círculos */
+.srv-cuerpo .contenido-html ::ng-deep ol {
+  list-style: none;
+  counter-reset: paso;
+  padding: 0;
+  margin: 0.75rem 0;
+}
+.srv-cuerpo .contenido-html ::ng-deep ol li {
+  counter-increment: paso;
+  position: relative;
+  padding: 0.15rem 0 0.6rem 2.6rem;
+}
+.srv-cuerpo .contenido-html ::ng-deep ol li::before {
+  content: counter(paso);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1.8rem;
+  height: 1.8rem;
+  border-radius: 50%;
+  background: var(--azul);
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 700;
+  display: grid;
+  place-items: center;
+}
+
+/* Listas con viñeta de verificación */
+.srv-cuerpo .contenido-html ::ng-deep ul { list-style: none; padding: 0; margin: 0.75rem 0; }
+.srv-cuerpo .contenido-html ::ng-deep ul li { position: relative; padding: 0.25rem 0 0.25rem 1.6rem; }
+.srv-cuerpo .contenido-html ::ng-deep ul li::before {
+  content: '';
+  position: absolute;
+  left: 0.2rem;
+  top: 0.65rem;
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+  background: var(--azul-2);
+}
+
+/* Un párrafo que solo contiene un enlace se muestra como botón de acción */
+.srv-cuerpo .contenido-html ::ng-deep p > a:only-child {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.4rem;
+  padding: 0.65rem 1.2rem;
+  border-radius: 8px;
+  background: var(--azul);
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background .15s, transform .15s;
+}
+.srv-cuerpo .contenido-html ::ng-deep p > a:only-child::after { content: '→'; }
+.srv-cuerpo .contenido-html ::ng-deep p > a:only-child:hover { background: #003a6b; transform: translateY(-1px); }
+
+/* Tarjetas de subpáginas un poco más vivas */
+.subpagina { border-radius: 10px; box-shadow: var(--sombra); transition: transform .15s, box-shadow .15s, background .15s; }
+.subpagina:hover { transform: translateY(-2px); box-shadow: 0 8px 18px rgba(0, 72, 132, .10); }
+.subpagina strong::after { content: ' →'; opacity: 0; transition: opacity .15s; }
+.subpagina:hover strong::after { opacity: 1; }
+
+@media (max-width: 576px) {
+  .pagina-head { padding: 1.25rem 1.1rem 1.1rem; margin-top: 0; }
+  .pagina-head h1 { font-size: 1.45rem; }
+  .servicio summary { padding: 0.9rem 1rem; gap: 0.75rem; }
+  .srv-icono { width: 42px; height: 42px; font-size: 1.3rem; border-radius: 11px; }
+  .srv-titulo { font-size: 1rem; }
+  .srv-cuerpo { padding: 0.25rem 1rem 1.2rem; }
+  .atajos { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 0.25rem; }
+  .atajo { white-space: nowrap; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .servicio, .srv-flecha, .subpagina, .atajo { transition: none; }
+}
+
+/* Correos y enlaces largos no se salen de la tarjeta en celular */
+.contenido-html { overflow-wrap: anywhere; }
+.lista-docs { grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr)); }
+.rejilla-media { grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr)); }
+.servicio, .srv-cuerpo, .srv-texto { min-width: 0; }

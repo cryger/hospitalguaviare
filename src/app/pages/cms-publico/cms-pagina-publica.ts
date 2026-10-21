@@ -56,6 +56,16 @@ export class CmsPaginaPublica {
       : this.entradas();
   });
 
+  /** Entradas de tipo "servicio" (trámites): se muestran como tarjetas desplegables */
+  readonly servicios = computed(() => this.entradas().filter((e) => e.tipo === 'servicio'));
+  readonly noServicios = computed(() => this.entradas().filter((e) => e.tipo !== 'servicio'));
+
+  /** Página superior, para el antetítulo del encabezado */
+  readonly padre = computed(() => {
+    const p = this.pagina();
+    return p?.parentId ? this.cms.paginaPorId().get(p.parentId) ?? null : null;
+  });
+
   readonly subpaginas = computed(() => {
     const p = this.pagina();
     return p ? this.cms.hijasPublicas(p.id) : [];
@@ -130,6 +140,31 @@ export class CmsPaginaPublica {
   imagenDe(e: CmsEntrada): CmsMultimedia | null {
     const m = this.media(e.imagenDestacadaId);
     return m?.tipo === 'imagen' ? m : null;
+  }
+
+  /** Icono según el tema del trámite o servicio */
+  iconoServicio(e: CmsEntrada): string {
+    const t = `${e.slug} ${e.titulo}`.toLowerCase();
+    const reglas: [RegExp, string][] = [
+      [/pqrs|queja|reclamo|petici/, '💬'],
+      [/\bcitas?\b|agenda|consulta externa/, '📅'],
+      [/historia/, '📋'],
+      [/laboratorio|resultado|examen/, '🧪'],
+      [/contrat|cotizaci|propuesta/, '📑'],
+      [/certificad|defunci|nacido/, '📜'],
+      [/medicamento|farmacia|f[oó]rmula/, '💊'],
+      [/vacuna/, '💉'],
+      [/urgencia/, '🚑'],
+    ];
+    return reglas.find(([r]) => r.test(t))?.[1] ?? '🗂️';
+  }
+
+  irA(slug: string, ev: Event): void {
+    ev.preventDefault();
+    const el = document.getElementById('srv-' + slug) as HTMLDetailsElement | null;
+    if (!el) return;
+    el.open = true;
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
   url(e: CmsEntrada): string {
