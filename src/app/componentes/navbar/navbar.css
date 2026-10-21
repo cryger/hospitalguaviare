@@ -975,3 +975,56 @@ html {
     overflow-y: auto;
   }
 }
+
+/* =========================================
+   Botón hamburguesa también en tablet (769–991 px):
+   en ese rango el menú ya está colapsado y antes no había cómo abrirlo.
+========================================= */
+@media (max-width: 991px) {
+  .menu-toggle-govco {
+    display: block;
+    background: none;
+    border: none;
+    font-size: 28px;
+    line-height: 1;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    color: #3366cc;
+  }
+
+  .menu-toggle-govco:focus-visible {
+    outline: 3px solid #ffab00;
+    outline-offset: 2px;
+  }
+
+  /* El menú desplegado ocupa todo el ancho en columna */
+  .navbar-menu-govco ul.navbar-nav {
+    flex-direction: column !important;
+    width: 100%;
+  }
+
+  .navbar-menu-govco ul.navbar-nav li {
+    width: 100%;
+    max-width: none;
+  }
+
+  .navbar-menu-govco ul.navbar-nav li a,
+  .navbar-menu-govco ul.navbar-nav li button.cms-dropdown-toggle {
+    justify-content: flex-start;
+    text-align: left;
+  }
+
+  .navbar-menu-govco ul.navbar-nav li a span.text-item-menu-govco,
+  .navbar-menu-govco ul.navbar-nav li button.cms-dropdown-toggle span.text-item-menu-govco {
+    text-align: left;
+    max-width: none;
+  }
+}
+
+/* En ≤ 820 px una regla anterior fuerza "ul { display:block !important }" y abría
+   todos los submenús; aquí solo se muestra el que el usuario despliega. */
+@media (max-width: 991px) {
+  .navbar-collapse-menu-govco .cms-dropdown:not(.abierto) .cms-submenu {
+    display: none !important;
+  }
+}

@@ -722,3 +722,54 @@ html {
     height: 56px;
   }
 }
+
+/* =========================================
+   Cabecera en tablet y celular (≤ 991 px):
+   antes se ocultaba completa (sin logo); ahora se muestra compacta.
+========================================= */
+@media (max-width: 991px) {
+  .logo-aut-header-govco {
+    display: block;
+    position: relative;
+  }
+
+  .logo-aut-header-govco .link-login-header-govco {
+    position: static;
+    display: block;
+    text-align: right;
+    padding: 0.5rem 1rem 0;
+    font-size: 0.85rem;
+  }
+
+  .container-logo-header-govco {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.25rem 1rem 0.75rem;
+    border-bottom: none;
+  }
+
+  .container-logo-header-govco .logo-header-govco {
+    width: 64px;
+    height: 64px;
+    object-fit: contain;
+    flex-shrink: 0;
+  }
+
+  .container-logo-header-govco .container-search-header-govco {
+    flex: 1;
+    max-width: 340px;
+  }
+}
+
+@media (max-width: 576px) {
+  .container-logo-header-govco .container-search-header-govco {
+    display: none;
+  }
+
+  .container-logo-header-govco .logo-header-govco {
+    width: 56px;
+    height: 56px;
+  }
+}
