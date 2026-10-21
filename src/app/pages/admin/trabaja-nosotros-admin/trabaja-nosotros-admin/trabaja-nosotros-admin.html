@@ -1,13 +1,19 @@
 <h2 class="gov-title">Gestión de Vacantes – Trabaja con Nosotros</h2>
 
-<!-- ACCIÓN -->
 <div class="admin-actions">
-  <button class="gov-btn-primary" (click)="abrirCrear()">
-    ➕ Agregar vacante
-  </button>
+  <div class="filtros-estado" role="tablist" aria-label="Filtrar por estado">
+    <button type="button" [class.on]="filtro() === 'todas'" (click)="filtro.set('todas')">Todas ({{ service.vacantes().length }})</button>
+    <button type="button" [class.on]="filtro() === 'publicada'" (click)="filtro.set('publicada')">Abiertas ({{ contar('publicada') }})</button>
+    <button type="button" [class.on]="filtro() === 'borrador'" (click)="filtro.set('borrador')">Borradores ({{ contar('borrador') }})</button>
+    <button type="button" [class.on]="filtro() === 'cerrada'" (click)="filtro.set('cerrada')">Cerradas ({{ contar('cerrada') }})</button>
+  </div>
+  <button class="gov-btn-primary" (click)="abrirCrear()">➕ Agregar vacante</button>
 </div>
 
-<!-- TABLA -->
+@if (mensaje()) {
+  <div class="aviso" role="status">{{ mensaje() }} <button type="button" (click)="mensaje.set(null)" aria-label="Cerrar">✕</button></div>
+}
+
 <div class="gov-table-wrapper">
   <table class="gov-table">
     <thead>
@@ -15,133 +21,131 @@
         <th>Título</th>
         <th>Contrato</th>
         <th>Vacantes</th>
+        <th>Publicación</th>
         <th>Estado</th>
         <th class="acciones">Acciones</th>
       </tr>
     </thead>
-
     <tbody>
-      <tr *ngFor="let v of vacantes">
-        <td>{{ v.titulo }}</td>
-        <td>{{ v.tipoContrato }}</td>
-        <td>{{ v.vacantes }}</td>
-        <td>
-          <span class="estado" [class.publicada]="v.estado === 'publicada'">
-            {{ v.estado }}
-          </span>
-        </td>
-        <td class="acciones">
-          <button class="gov-btn-editar" (click)="editar(v)">
-            Editar
-          </button>
-          <button class="gov-btn-eliminar" (click)="eliminar(v.id)">
-            Eliminar
-          </button>
-        </td>
-      </tr>
-
-      <tr *ngIf="vacantes.length === 0">
-        <td colspan="5" class="sin-datos">
-          No hay vacantes registradas
-        </td>
-      </tr>
+      @for (v of vacantesFiltradas(); track v.id) {
+        <tr>
+          <td>
+            {{ v.titulo }}
+            @if (v.documentoUrl) { <a class="doc" [href]="v.documentoUrl" target="_blank" rel="noopener">📄 PDF</a> }
+          </td>
+          <td>{{ v.tipoContrato }}</td>
+          <td>{{ v.vacantes }}</td>
+          <td>{{ v.fechaPublicacion | date: 'dd/MM/yyyy' }}</td>
+          <td><span class="estado" [class]="'estado ' + v.estado">{{ v.estado === 'publicada' ? 'abierta' : v.estado }}</span></td>
+          <td class="acciones">
+            @if (v.estado === 'publicada') {
+              <button class="gov-btn-editar" (click)="cambiarEstado(v, 'cerrada')">Cerrar</button>
+            } @else {
+              <button class="gov-btn-editar" (click)="cambiarEstado(v, 'publicada')">Publicar</button>
+            }
+            <button class="gov-btn-editar" (click)="editar(v)">Editar</button>
+            <button class="gov-btn-eliminar" (click)="eliminar(v)">Eliminar</button>
+          </td>
+        </tr>
+      } @empty {
+        <tr><td colspan="6" class="sin-datos">{{ service.cargando() ? 'Cargando…' : 'No hay vacantes en este filtro' }}</td></tr>
+      }
     </tbody>
   </table>
 </div>
 
-<!-- =========================
-     MODAL CREAR / EDITAR
-========================= -->
-<div class="gov-modal-backdrop" *ngIf="modalOpen">
-
-  <div class="gov-modal gov-modal-lg">
-
+<!-- MODAL CREAR / EDITAR -->
+@if (modalOpen()) {
+<div class="gov-modal-backdrop">
+  <div class="gov-modal gov-modal-lg" role="dialog" aria-modal="true">
     <header class="gov-modal-header">
-      <h3>
-        {{ editando ? 'Editar vacante' : 'Nueva vacante' }}
-      </h3>
-      <button class="gov-modal-close" (click)="modalOpen = false">✕</button>
+      <h3>{{ editando() ? 'Editar vacante' : 'Nueva vacante' }}</h3>
+      <button class="gov-modal-close" (click)="modalOpen.set(false)" aria-label="Cerrar">✕</button>
     </header>
 
     <section class="gov-modal-body">
-
       <form [formGroup]="form" (ngSubmit)="guardar()" class="gov-form">
-
         <div class="gov-field">
-          <label>Título</label>
-          <input type="text" formControlName="titulo">
+          <label for="v-titulo">Título del cargo *</label>
+          <input id="v-titulo" type="text" formControlName="titulo">
         </div>
 
         <div class="gov-form-grid">
           <div class="gov-field">
-            <label>Tipo de Contrato</label>
-            <select formControlName="tipoContrato">
-              <option value="prestacion de servicios">Prestacion de Servicios</option>
-              <option value="Termino Definido">Termino Definido</option>
-              <option value="Termino Indefinido">Termino Indefinido</option>
+            <label for="v-contrato">Tipo de contrato *</label>
+            <select id="v-contrato" formControlName="tipoContrato">
+              <option value="Prestación de servicios">Prestación de servicios</option>
+              <option value="Término definido">Término definido</option>
+              <option value="Término indefinido">Término indefinido</option>
+              <option value="Provisionalidad">Provisionalidad</option>
             </select>
           </div>
-
           <div class="gov-field">
-            <label>Vacantes</label>
-            <input type="number" formControlName="vacantes">
+            <label for="v-vacantes">Número de vacantes *</label>
+            <input id="v-vacantes" type="number" min="1" formControlName="vacantes">
           </div>
-
           <div class="gov-field">
-            <label>Salario</label>
-            <input type="text" formControlName="salario">
+            <label for="v-salario">Salario / honorarios</label>
+            <input id="v-salario" type="text" formControlName="salario" placeholder="$0.000.000 mensual">
           </div>
-
           <div class="gov-field">
-            <label>Horario</label>
-            <input type="text" formControlName="horario">
+            <label for="v-horario">Horario</label>
+            <input id="v-horario" type="text" formControlName="horario">
           </div>
-
           <div class="gov-field">
-            <label>Ubicación</label>
-            <input type="text" formControlName="ubicacion">
+            <label for="v-ubicacion">Ubicación</label>
+            <input id="v-ubicacion" type="text" formControlName="ubicacion">
+          </div>
+          <div class="gov-field">
+            <label for="v-cierre">Fecha de cierre</label>
+            <input id="v-cierre" type="date" formControlName="fechaCierre">
           </div>
         </div>
 
         <div class="gov-field">
-          <label>Descripción</label>
-          <textarea rows="3" formControlName="descripcion"></textarea>
+          <label for="v-desc">Descripción *</label>
+          <textarea id="v-desc" rows="4" formControlName="descripcion"></textarea>
         </div>
 
         <div class="gov-field">
-          <label>Requisitos (uno por línea)</label>
-          <textarea rows="4" formControlName="requisitos"></textarea>
+          <label for="v-req">Requisitos (uno por línea)</label>
+          <textarea id="v-req" rows="4" formControlName="requisitos"></textarea>
+        </div>
+
+        <div class="gov-form-grid">
+          <div class="gov-field">
+            <label for="v-img">Imagen</label>
+            <input id="v-img" type="text" formControlName="imagenUrl" placeholder="URL o suba un archivo">
+            <label class="subir">
+              <input type="file" accept="image/*" (change)="subir($event, 'imagen')">
+              {{ subiendo() === 'imagen' ? 'Subiendo…' : '⬆️ Subir imagen' }}
+            </label>
+          </div>
+          <div class="gov-field">
+            <label for="v-doc">Documento de la convocatoria (PDF)</label>
+            <input id="v-doc" type="text" formControlName="documentoUrl" placeholder="URL o suba un archivo">
+            <label class="subir">
+              <input type="file" accept=".pdf,.doc,.docx" (change)="subir($event, 'documento')">
+              {{ subiendo() === 'documento' ? 'Subiendo…' : '⬆️ Subir PDF' }}
+            </label>
+          </div>
         </div>
 
         <div class="gov-field">
-          <label>URL Imagen</label>
-          <input type="text" formControlName="imagenUrl">
-        </div>
-
-        <div class="gov-field">
-          <label>Estado</label>
-          <select formControlName="estado">
-            <option value="publicada">Publicada</option>
+          <label for="v-estado">Estado</label>
+          <select id="v-estado" formControlName="estado">
+            <option value="publicada">Abierta (publicada)</option>
             <option value="borrador">Borrador</option>
+            <option value="cerrada">Cerrada (histórico)</option>
           </select>
         </div>
 
         <footer class="gov-modal-actions">
-          <button
-            type="button"
-            class="gov-btn-secondary"
-            (click)="modalOpen = false">
-            Cancelar
-          </button>
-
-          <button type="submit" class="gov-btn-primary">
-            Guardar
-          </button>
+          <button type="button" class="gov-btn-secondary" (click)="modalOpen.set(false)">Cancelar</button>
+          <button type="submit" class="gov-btn-primary" [disabled]="guardando()">{{ guardando() ? 'Guardando…' : 'Guardar' }}</button>
         </footer>
-
       </form>
-
     </section>
-
   </div>
 </div>
+}

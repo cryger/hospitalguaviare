@@ -323,3 +323,22 @@
     transform: translateY(0);
   }
 }
+
+/* ===== Filtros, estados y subida de archivos ===== */
+.admin-actions { display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; }
+.filtros-estado { display: flex; gap: 0.35rem; flex-wrap: wrap; }
+.filtros-estado button {
+  border: 1px solid #d0d7de; background: #fff; border-radius: 999px; padding: 0.35rem 0.8rem;
+  font-size: 0.82rem; cursor: pointer; color: #374151; font-family: inherit;
+}
+.filtros-estado button.on { background: #004884; border-color: #004884; color: #fff; }
+.estado { display: inline-block; padding: 0.15rem 0.55rem; border-radius: 999px; font-size: 0.75rem; font-weight: 700; text-transform: capitalize; background: #f1f5f9; color: #6b7280; }
+.estado.publicada { background: #e6f6f0; color: #069169; }
+.estado.borrador { background: #fff4e0; color: #b45309; }
+.estado.cerrada { background: #f1f5f9; color: #6b7280; }
+.doc { display: inline-block; margin-left: 0.4rem; font-size: 0.75rem; color: #3366cc; }
+.aviso { margin: 0.75rem 0; padding: 0.6rem 1rem; border-radius: 8px; background: #e8f0fb; color: #004884; display: flex; justify-content: space-between; }
+.aviso button { background: none; border: none; cursor: pointer; color: inherit; }
+.subir { display: inline-block; margin-top: 0.4rem; font-size: 0.8rem; color: #3366cc; cursor: pointer; font-weight: 600; }
+.subir input { position: absolute; width: 1px; height: 1px; opacity: 0; }
+.subir:focus-within { outline: 3px solid #ffab00; outline-offset: 2px; }

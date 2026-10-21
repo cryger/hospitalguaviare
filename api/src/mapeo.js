@@ -46,6 +46,28 @@ const TABLAS = {
     booleanos: ['destacada'],
     fechas: ['fechaPublicacion'],
   },
+  vacantes: {
+    tabla: 'cms_vacantes',
+    campos: {
+      titulo: 'titulo',
+      tipoContrato: 'tipo_contrato',
+      vacantes: 'vacantes',
+      salario: 'salario',
+      horario: 'horario',
+      ubicacion: 'ubicacion',
+      descripcion: 'descripcion',
+      requisitos: 'requisitos',
+      imagenUrl: 'imagen_url',
+      documentoUrl: 'documento_url',
+      fechaPublicacion: 'fecha_publicacion',
+      fechaCierre: 'fecha_cierre',
+      estado: 'estado',
+      migradoDe: 'migrado_de',
+    },
+    booleanos: [],
+    fechas: ['fechaPublicacion', 'fechaCierre'],
+    json: ['requisitos'],
+  },
   multimedia: {
     tabla: 'cms_multimedia',
     campos: {
@@ -83,6 +105,13 @@ function aJson(coleccion, fila) {
     if (!(col in fila)) continue;
     let v = fila[col];
     if (d.booleanos.includes(camel)) v = Boolean(v);
+    if (d.json?.includes(camel) && typeof v === 'string') {
+      try {
+        v = JSON.parse(v);
+      } catch {
+        v = v.split('\n');
+      }
+    }
     if (v instanceof Date) v = v.toISOString();
     out[camel] = v;
   }
@@ -99,6 +128,7 @@ function aFila(coleccion, json) {
     if (v === undefined) continue;
     if (v === '') v = null;
     if (d.booleanos.includes(camel)) v = v ? 1 : 0;
+    if (d.json?.includes(camel) && v !== null && typeof v !== 'string') v = JSON.stringify(v);
     if (d.fechas?.includes(camel) && v) {
       const f = new Date(v);
       v = isNaN(f.getTime()) ? null : f;

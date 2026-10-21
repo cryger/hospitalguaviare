@@ -14,10 +14,12 @@ export class TrabajaNosotrosModule {
 
  }
 
-  export interface Vacante {
+export type EstadoVacante = 'publicada' | 'borrador' | 'cerrada';
+
+export interface Vacante {
   id: number;
   titulo: string;
-  tipoContrato: 'prestacion de servicios' | 'Termino Definido' | 'Termino Indefinido';
+  tipoContrato: string;
   vacantes: number;
   salario: string;
   horario: string;
@@ -25,6 +27,10 @@ export class TrabajaNosotrosModule {
   descripcion: string;
   requisitos: string[];
   imagenUrl: string;
-  fechaPublicacion: Date;
-  estado: 'publicada' | 'borrador';
+  /** PDF con los requisitos / términos de la convocatoria */
+  documentoUrl?: string;
+  fechaPublicacion: string | Date;
+  fechaCierre?: string | null;
+  estado: EstadoVacante;
+  migradoDe?: string;
 }

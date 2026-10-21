@@ -1,62 +1,79 @@
-<section class="gov-container">
-  <h2 class="gov-title">Trabaja con Nosotros</h2>
+<section class="tn">
+  <header class="tn-head">
+    <span class="antetitulo">Talento humano</span>
+    <h1>Trabaja con Nosotros</h1>
+    <p class="lead">Conozca las convocatorias abiertas de la E.S.E. Hospital San José del Guaviare y los requisitos para participar.</p>
+  </header>
 
-  <article
-    class="vacante-card"
-    *ngFor="let v of vacantes">
+  @if (service.cargando() && !service.vacantes().length) {
+    <p class="vacio">Cargando convocatorias…</p>
+  } @else {
+    <h2 class="h-seccion">Convocatorias abiertas</h2>
 
-    <div class="vacante-info">
-      <h3>{{ v.titulo }}</h3>
+    @if (abiertas().length) {
+      <div class="vacantes">
+        @for (v of abiertas(); track v.id) {
+          <article class="vacante" [class.sin-img]="!v.imagenUrl">
+            @if (v.imagenUrl) {
+              <div class="vacante-img"><img [src]="v.imagenUrl" [alt]="'Convocatoria ' + v.titulo" loading="lazy"></div>
+            }
+            <div class="vacante-cuerpo">
+              <span class="chip chip-abierta">Abierta</span>
+              <h3>{{ v.titulo }}</h3>
+              <ul class="datos">
+                <li><span aria-hidden="true">📝</span><strong>Contrato:</strong> {{ v.tipoContrato }}</li>
+                <li><span aria-hidden="true">👥</span><strong>Vacantes:</strong> {{ v.vacantes }}</li>
+                @if (v.salario) { <li><span aria-hidden="true">💰</span><strong>Salario:</strong> {{ v.salario }}</li> }
+                @if (v.horario) { <li><span aria-hidden="true">🕒</span><strong>Horario:</strong> {{ v.horario }}</li> }
+                @if (v.ubicacion) { <li><span aria-hidden="true">📍</span><strong>Ubicación:</strong> {{ v.ubicacion }}</li> }
+                <li><span aria-hidden="true">📅</span><strong>Publicada:</strong> {{ v.fechaPublicacion | date: "d 'de' MMMM 'de' y" : '' : 'es-CO' }}</li>
+                @if (v.fechaCierre) { <li><span aria-hidden="true">⏳</span><strong>Cierre:</strong> {{ v.fechaCierre | date: "d 'de' MMMM 'de' y" : '' : 'es-CO' }}</li> }
+              </ul>
+              <p class="desc">{{ v.descripcion }}</p>
 
-      <ul class="vacante-datos">
-        <li><strong>Contrato:</strong> {{ v.tipoContrato }}</li>
-        <li><strong>Vacantes:</strong> {{ v.vacantes }}</li>
-        <li><strong>Salario:</strong> {{ v.salario }}</li>
-        <li><strong>Horario:</strong> {{ v.horario }}</li>
-        <li><strong>Área:</strong> {{ v.ubicacion }}</li>
-      </ul>
+              @if (v.requisitos.length) {
+                <details class="req">
+                  <summary>Ver requisitos</summary>
+                  <ul>
+                    @for (r of v.requisitos; track $index) { <li>{{ r }}</li> }
+                  </ul>
+                </details>
+              }
+              @if (v.documentoUrl) {
+                <a class="btn-govco" [href]="v.documentoUrl" target="_blank" rel="noopener">📄 Descargar convocatoria</a>
+              }
+            </div>
+          </article>
+        }
+      </div>
+    } @else {
+      <div class="sin-abiertas">
+        <span aria-hidden="true">📭</span>
+        <p>En este momento no hay convocatorias abiertas. Consulte esta sección periódicamente.</p>
+      </div>
+    }
 
-      <p class="vacante-descripcion">
-        {{ v.descripcion }}
-      </p>
-
-      <button class="gov-btn-primary" (click)="verRequisitos(v)">
-        Ver requisitos
-      </button>
-    </div>
-
-    <div class="vacante-imagen">
-      <img [src]="v.imagenUrl" [alt]="v.titulo">
-    </div>
-
-  </article>
+    @if (cerradas().length) {
+      <details class="historico">
+        <summary>
+          <span>Convocatorias anteriores</span>
+          <small>{{ cerradas().length }} convocatoria(s) cerrada(s)</small>
+        </summary>
+        <ul class="lista-cerradas">
+          @for (v of cerradas(); track v.id) {
+            <li>
+              <div>
+                <strong>{{ v.titulo }}</strong>
+                <small>{{ v.fechaPublicacion | date: 'dd/MM/yyyy' }} · {{ v.vacantes }} vacante(s) · {{ v.tipoContrato }}</small>
+              </div>
+              <span class="chip">Cerrada</span>
+              @if (v.documentoUrl) {
+                <a [href]="v.documentoUrl" target="_blank" rel="noopener">Ver documento</a>
+              }
+            </li>
+          }
+        </ul>
+      </details>
+    }
+  }
 </section>
-
-<!-- =========================
-     MODAL REQUISITOS
-========================= -->
-<div class="gov-modal-backdrop" *ngIf="modalOpen">
-
-  <div class="gov-modal">
-
-    <header class="gov-modal-header">
-      <h3>Requisitos del cargo</h3>
-      <button class="gov-modal-close" (click)="cerrarModal()">✕</button>
-    </header>
-
-    <section class="gov-modal-body">
-      <ul class="requisitos-lista">
-        <li *ngFor="let r of seleccionada?.requisitos">
-          {{ r }}
-        </li>
-      </ul>
-    </section>
-
-    <footer class="gov-modal-actions">
-      <button class="gov-btn-secondary" (click)="cerrarModal()">
-        Cerrar
-      </button>
-    </footer>
-
-  </div>
-</div>

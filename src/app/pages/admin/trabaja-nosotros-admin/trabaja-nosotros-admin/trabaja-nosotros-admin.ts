@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { TrabajaNosotrosService } from '../../../../shared/services/trabaja-nosotros/trabaja-nosotros-service';
+import { CmsService } from '../../../../shared/services/cms/cms.service';
 import { Vacante } from '../../../../shared/models/trabaja-nosotros/trabaja-nosotros/trabaja-nosotros-module';
 
 @Component({
@@ -12,76 +13,110 @@ import { Vacante } from '../../../../shared/models/trabaja-nosotros/trabaja-noso
   styleUrls: ['./trabaja-nosotros-admin.css']
 })
 export class TrabajaNosotrosAdminComponent implements OnInit {
+  readonly service = inject(TrabajaNosotrosService);
+  private cms = inject(CmsService);
+  private fb = inject(FormBuilder);
 
-  vacantes: Vacante[] = [];
   form!: FormGroup;
-
-  modalOpen = false;
-  editando: Vacante | null = null;
-
-  constructor(
-    private fb: FormBuilder,
-    private service: TrabajaNosotrosService
-  ) {}
+  readonly modalOpen = signal(false);
+  readonly editando = signal<Vacante | null>(null);
+  readonly guardando = signal(false);
+  readonly subiendo = signal<'imagen' | 'documento' | null>(null);
+  readonly mensaje = signal<string | null>(null);
+  readonly filtro = signal<'todas' | 'publicada' | 'borrador' | 'cerrada'>('todas');
 
   ngOnInit(): void {
     this.form = this.fb.group({
       titulo: ['', Validators.required],
-      tipoContrato: ['', Validators.required],
-      vacantes: [1, Validators.required],
-      salario: ['', Validators.required],
-      horario: ['', Validators.required],
-      ubicacion: ['', Validators.required],
+      tipoContrato: ['Prestación de servicios', Validators.required],
+      vacantes: [1, [Validators.required, Validators.min(1)]],
+      salario: [''],
+      horario: [''],
+      ubicacion: ['ESE Hospital San José del Guaviare. Departamento del Guaviare.'],
       descripcion: ['', Validators.required],
-      requisitos: ['', Validators.required],
+      requisitos: [''],
       imagenUrl: [''],
-      estado: ['publicada']
+      documentoUrl: [''],
+      fechaCierre: [''],
+      estado: ['publicada'],
     });
-
-    this.cargar();
+    this.service.cargar(true);
   }
 
-  cargar(): void {
-    this.vacantes = this.service.getAll();
+  vacantesFiltradas(): Vacante[] {
+    const f = this.filtro();
+    return this.service.vacantes().filter((v) => f === 'todas' || v.estado === f);
+  }
+
+  contar(estado: Vacante['estado']): number {
+    return this.service.vacantes().filter((v) => v.estado === estado).length;
   }
 
   abrirCrear(): void {
-    this.editando = null;
-    this.form.reset({ estado: 'publicada' });
-    this.modalOpen = true;
+    this.editando.set(null);
+    this.form.reset({
+      tipoContrato: 'Prestación de servicios',
+      vacantes: 1,
+      ubicacion: 'ESE Hospital San José del Guaviare. Departamento del Guaviare.',
+      estado: 'publicada',
+    });
+    this.modalOpen.set(true);
   }
 
   editar(v: Vacante): void {
-    this.editando = v;
+    this.editando.set(v);
     this.form.patchValue({
       ...v,
-      requisitos: v.requisitos.join('\n')
+      requisitos: (v.requisitos || []).join('\n'),
+      fechaCierre: v.fechaCierre ? String(v.fechaCierre).slice(0, 10) : '',
     });
-    this.modalOpen = true;
+    this.modalOpen.set(true);
   }
 
-  guardar(): void {
-    if (this.form.invalid) return;
+  async subir(ev: Event, campo: 'imagen' | 'documento'): Promise<void> {
+    const input = ev.target as HTMLInputElement;
+    const archivo = input.files?.[0];
+    input.value = '';
+    if (!archivo) return;
+    this.subiendo.set(campo);
+    const [m] = await this.cms.subirArchivos([archivo]);
+    this.subiendo.set(null);
+    if (m) this.form.patchValue(campo === 'imagen' ? { imagenUrl: m.url } : { documentoUrl: m.url });
+    else this.mensaje.set(this.cms.error() || 'No se pudo subir el archivo.');
+  }
 
-    const data = {
-      ...this.form.value,
-      requisitos: this.form.value.requisitos.split('\n')
+  async guardar(): Promise<void> {
+    if (this.form.invalid || this.guardando()) {
+      this.form.markAllAsTouched();
+      return;
+    }
+    const v = this.form.value;
+    const data: Partial<Vacante> = {
+      ...v,
+      vacantes: Number(v.vacantes) || 1,
+      requisitos: String(v.requisitos || '').split('\n').map((r: string) => r.trim()).filter(Boolean),
+      fechaCierre: v.fechaCierre ? new Date(v.fechaCierre + 'T23:59:00').toISOString() : null,
     };
-
-    if (this.editando) {
-      this.service.actualizar(this.editando.id, data);
-    } else {
-      this.service.crear(data);
+    this.guardando.set(true);
+    try {
+      const actual = this.editando();
+      if (actual) await this.service.actualizar(actual.id, data);
+      else await this.service.crear(data);
+      this.modalOpen.set(false);
+      this.mensaje.set(actual ? 'Vacante actualizada.' : 'Vacante creada.');
+    } catch {
+      this.mensaje.set('No se pudo guardar la vacante. Intente de nuevo.');
+    } finally {
+      this.guardando.set(false);
     }
-
-    this.modalOpen = false;
-    this.cargar();
   }
 
-  eliminar(id: number): void {
-    if (confirm('¿Eliminar vacante?')) {
-      this.service.eliminar(id);
-      this.cargar();
-    }
+  async cambiarEstado(v: Vacante, estado: Vacante['estado']): Promise<void> {
+    await this.service.actualizar(v.id, { estado });
+  }
+
+  async eliminar(v: Vacante): Promise<void> {
+    if (!confirm(`¿Eliminar la vacante "${v.titulo}"?`)) return;
+    await this.service.eliminar(v.id);
   }
 }

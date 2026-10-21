@@ -18,6 +18,8 @@ const rutasCms = express.Router();
 const CONSULTAS_PUBLICAS = {
   menus: 'SELECT * FROM cms_menus WHERE activo = 1',
   paginas: "SELECT * FROM cms_paginas WHERE estado = 'publicada'",
+  // Las convocatorias cerradas se muestran como históricas
+  vacantes: "SELECT * FROM cms_vacantes WHERE estado IN ('publicada', 'cerrada')",
   entradas: `SELECT e.* FROM cms_entradas e
                JOIN cms_paginas p ON p.id = e.pagina_id AND p.estado = 'publicada'
               WHERE e.estado = 'publicada'
@@ -69,7 +71,8 @@ rutasCms.get('/:coleccion', sesionOpcional, async (req, res, next) => {
     }
 
     const sql = admin ? `SELECT * FROM ${d.tabla}` : CONSULTAS_PUBLICAS[col];
-    const [filas] = await pool.query(`${sql} ORDER BY ${col === 'multimedia' ? 'creado_en DESC' : 'id'}`);
+    const orden = col === 'multimedia' ? 'creado_en DESC' : col === 'vacantes' ? 'fecha_publicacion DESC, id DESC' : 'id';
+    const [filas] = await pool.query(`${sql} ORDER BY ${orden}`);
     res.json(filas.map((f) => aJson(col, f)));
   } catch (e) {
     next(e);
