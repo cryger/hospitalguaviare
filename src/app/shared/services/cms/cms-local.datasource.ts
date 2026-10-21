@@ -152,7 +152,7 @@ export class CmsLocalDataSource extends CmsDataSource {
   }
 
   /* ===== Estructura inicial (Resolución 1519 de 2020) ===== */
-  private readonly versionSemilla = 3;
+  private readonly versionSemilla = 4;
 
   private sembrarSiVacio(): void {
     if (localStorage.getItem(this.prefijo + 'menus')) return;
@@ -180,12 +180,47 @@ export class CmsLocalDataSource extends CmsDataSource {
   }
 
   /**
-   * Modo local (solo desarrollo): si los datos son de una estructura anterior,
-   * se reemplazan por la estructura de la Res. 1519 (se conserva la multimedia).
+   * Modo local: actualiza los datos guardados en el navegador.
+   * - Versión 1-2 (estructura anterior a la Res. 1519): se reemplaza la estructura.
+   * - Versión 3 en adelante: solo se AGREGAN las páginas nuevas que falten (por slug),
+   *   sin borrar ni modificar lo que ya existe.
    */
   private actualizarSemilla(): void {
     const version = Number(localStorage.getItem(this.prefijo + 'version') || 1);
-    if (version < this.versionSemilla) this.cargarSemilla();
+    if (version >= this.versionSemilla) return;
+    if (version < 3) {
+      this.cargarSemilla();
+      return;
+    }
+
+    const paginas = this.leer<CmsPagina>('paginas');
+    const menus = this.leer<CmsMenu>('menus');
+    const porSlug = new Map(paginas.map((p) => [p.slug, p]));
+    const semillaPorId = new Map(ESTRUCTURA_1519.map((p) => [p.id, p]));
+    const t = this.ahora();
+    let id = this.nuevoId(paginas);
+
+    for (const s of ESTRUCTURA_1519) {
+      if (porSlug.has(s.slug)) continue;
+      const padreSemilla = s.parentId !== null ? semillaPorId.get(s.parentId) : undefined;
+      const padre = padreSemilla ? porSlug.get(padreSemilla.slug) : undefined;
+      if (padreSemilla && !padre) continue; // el padre fue eliminado por el usuario
+      const ubicacion = s.menuId === 2 ? 'pie' : 'principal';
+      const nueva: CmsPagina = {
+        visibleEnMenu: true,
+        estado: 'publicada',
+        creadoEn: t,
+        actualizadoEn: t,
+        ...s,
+        id: id++,
+        parentId: padre?.id ?? null,
+        menuId: padre?.menuId ?? menus.find((m) => m.ubicacion === ubicacion)?.id ?? null,
+      };
+      paginas.push(nueva);
+      porSlug.set(nueva.slug, nueva);
+    }
+    this.escribir('paginas', paginas);
+    localStorage.setItem(this.prefijo + 'version', String(this.versionSemilla));
   }
 }
 
