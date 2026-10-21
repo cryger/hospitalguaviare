@@ -55,11 +55,11 @@
 .agregar-fila { display: flex; gap: 0.5rem; }
 .agregar-fila .input, .agregar-fila .select { flex: 1; }
 
-@media (max-width: 900px) {
+@media (max-width: 1280px) {
   .menus-layout { grid-template-columns: 1fr; }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 760px) {
   .nodo { flex-wrap: wrap; padding-left: calc(0.6rem + var(--nivel, 0) * 0.9rem); }
   .nodo-acciones { width: 100%; justify-content: flex-end; }
   .agregar-fila { flex-direction: column; }

@@ -1,3 +1,22 @@
+/* ===== Base: el ancho incluye padding y borde (evita desbordes en móvil) ===== */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+img, video, iframe {
+  max-width: 100%;
+}
+
+/* Tablas de los módulos del admin: desplazamiento horizontal en pantallas pequeñas */
+@media (max-width: 991px) {
+  table.gov-table {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
 /* You can add global styles to this file, and also import other style files */
 html, body {
   margin: 0;
