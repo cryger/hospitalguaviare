@@ -33,7 +33,7 @@ SELECT 'Profesional administrativo y financiero', 'Prestación de servicios', 1,
        'ESE Hospital San José del Guaviare. Departamento del Guaviare.',
        'La ESE Hospital San José del Guaviare, dentro de la implementación de la ESTRATEGIA DE REHABILITACIÓN PSICOSOCIAL COMUNITARIA PARA LA CONVIVENCIA Y NO REPETICIÓN asignada a esta institución por el Ministerio de Salud y Protección Social mediante la Resolución 1275 de 2024, extiende invitación a participar de la convocatoria para la contratación de un profesional administrativo y financiero (profesionales en el área de conocimiento economía, administración, contaduría y afines).',
        '["Profesional en el área de conocimiento economía, administración, contaduría y afines.","Consulte los requisitos completos en el documento de la convocatoria."]',
-       'https://esehospitalguaviare.gov.co/resourses/imgTrabajos/3%20(1).png',
+       '/assets/vacantes/administrativo-financiero.jpg',
        'https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Profesional%20Administrativo%20y%20Financiero_342342342.pdf',
        '2024-10-02 12:00:00', 'cerrada', 'esehospitalguaviare.gov.co/trabaja-con-nosotros'
   FROM DUAL WHERE NOT EXISTS (SELECT 1 FROM cms_vacantes WHERE titulo = 'Profesional administrativo y financiero' AND fecha_publicacion = '2024-10-02 12:00:00');
@@ -44,7 +44,7 @@ SELECT 'Profesional para la coordinación general', 'Prestación de servicios', 
        'ESE Hospital San José del Guaviare. Departamento del Guaviare.',
        'La ESE Hospital San José del Guaviare, dentro de la implementación de la ESTRATEGIA DE REHABILITACIÓN PSICOSOCIAL COMUNITARIA PARA LA CONVIVENCIA Y NO REPETICIÓN asignada a esta institución por el Ministerio de Salud y Protección Social mediante la Resolución 1275 de 2024, extiende invitación a participar de la convocatoria para la contratación de un profesional para la coordinación general.',
        '["Profesional en Ciencias Sociales y Humanas, u otras áreas indicadas en el documento de la convocatoria.","Consulte los requisitos completos en el documento de la convocatoria."]',
-       'https://esehospitalguaviare.gov.co/resourses/imgTrabajos/5.png',
+       '/assets/vacantes/coordinacion-general.jpg',
        'https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Profesional%20Coordinaci%C3%B3n%20General_2431312%20.pdf',
        '2024-10-02 12:00:00', 'cerrada', 'esehospitalguaviare.gov.co/trabaja-con-nosotros'
   FROM DUAL WHERE NOT EXISTS (SELECT 1 FROM cms_vacantes WHERE titulo = 'Profesional para la coordinación general' AND fecha_publicacion = '2024-10-02 12:00:00');
@@ -55,9 +55,27 @@ SELECT 'Profesionales psicosociales', 'Prestación de servicios', 3, '$4.807.985
        'ESE Hospital San José del Guaviare. Departamento del Guaviare.',
        'La ESE Hospital San José del Guaviare, dentro de la implementación de la ESTRATEGIA DE REHABILITACIÓN PSICOSOCIAL COMUNITARIA PARA LA CONVIVENCIA Y NO REPETICIÓN asignada a esta institución por el Ministerio de Salud y Protección Social mediante la Resolución 1275 de 2024, extiende invitación a participar de la convocatoria para la contratación de tres profesionales psicosociales (profesionales en el área de las ciencias sociales y humanas: trabajo social, sociología, antropología, entre otras indicadas en el documento de la convocatoria).',
        '["Profesional en el área de las ciencias sociales y humanas: trabajo social, sociología, antropología, entre otras indicadas en el documento de la convocatoria.","Consulte los requisitos completos en el documento de la convocatoria."]',
-       'https://esehospitalguaviare.gov.co/resourses/imgTrabajos/4.png',
+       '/assets/vacantes/profesionales-psicosociales.jpg',
        'https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Profesionales%20Psicosociales_34242342.pdf',
        '2024-10-02 12:00:00', 'cerrada', 'esehospitalguaviare.gov.co/trabaja-con-nosotros'
   FROM DUAL WHERE NOT EXISTS (SELECT 1 FROM cms_vacantes WHERE titulo = 'Profesionales psicosociales' AND fecha_publicacion = '2024-10-02 12:00:00');
 
 SELECT COUNT(*) AS vacantes FROM cms_vacantes;
+-- =====================================================================
+-- 004 · Imágenes de las vacantes migradas del portal anterior
+-- Las imágenes ahora viven en el propio proyecto (public/assets/vacantes)
+-- para no depender del servidor viejo. Solo cambia las filas que aún
+-- apuntan a esehospitalguaviare.gov.co (no pisa cambios hechos en el admin).
+-- =====================================================================
+
+UPDATE cms_vacantes SET imagen_url = '/assets/vacantes/administrativo-financiero.jpg'
+ WHERE titulo = 'Profesional administrativo y financiero'
+   AND imagen_url LIKE '%esehospitalguaviare.gov.co/resourses/imgTrabajos/%';
+
+UPDATE cms_vacantes SET imagen_url = '/assets/vacantes/coordinacion-general.jpg'
+ WHERE titulo = 'Profesional para la coordinación general'
+   AND imagen_url LIKE '%esehospitalguaviare.gov.co/resourses/imgTrabajos/%';
+
+UPDATE cms_vacantes SET imagen_url = '/assets/vacantes/profesionales-psicosociales.jpg'
+ WHERE titulo = 'Profesionales psicosociales'
+   AND imagen_url LIKE '%esehospitalguaviare.gov.co/resourses/imgTrabajos/%';

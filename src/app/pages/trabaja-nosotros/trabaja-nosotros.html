@@ -13,37 +13,7 @@
     @if (abiertas().length) {
       <div class="vacantes">
         @for (v of abiertas(); track v.id) {
-          <article class="vacante" [class.sin-img]="!v.imagenUrl">
-            @if (v.imagenUrl) {
-              <div class="vacante-img"><img [src]="v.imagenUrl" [alt]="'Convocatoria ' + v.titulo" loading="lazy"></div>
-            }
-            <div class="vacante-cuerpo">
-              <span class="chip chip-abierta">Abierta</span>
-              <h3>{{ v.titulo }}</h3>
-              <ul class="datos">
-                <li><span aria-hidden="true">📝</span><strong>Contrato:</strong> {{ v.tipoContrato }}</li>
-                <li><span aria-hidden="true">👥</span><strong>Vacantes:</strong> {{ v.vacantes }}</li>
-                @if (v.salario) { <li><span aria-hidden="true">💰</span><strong>Salario:</strong> {{ v.salario }}</li> }
-                @if (v.horario) { <li><span aria-hidden="true">🕒</span><strong>Horario:</strong> {{ v.horario }}</li> }
-                @if (v.ubicacion) { <li><span aria-hidden="true">📍</span><strong>Ubicación:</strong> {{ v.ubicacion }}</li> }
-                <li><span aria-hidden="true">📅</span><strong>Publicada:</strong> {{ v.fechaPublicacion | date: "d 'de' MMMM 'de' y" : '' : 'es-CO' }}</li>
-                @if (v.fechaCierre) { <li><span aria-hidden="true">⏳</span><strong>Cierre:</strong> {{ v.fechaCierre | date: "d 'de' MMMM 'de' y" : '' : 'es-CO' }}</li> }
-              </ul>
-              <p class="desc">{{ v.descripcion }}</p>
-
-              @if (v.requisitos.length) {
-                <details class="req">
-                  <summary>Ver requisitos</summary>
-                  <ul>
-                    @for (r of v.requisitos; track $index) { <li>{{ r }}</li> }
-                  </ul>
-                </details>
-              }
-              @if (v.documentoUrl) {
-                <a class="btn-govco" [href]="v.documentoUrl" target="_blank" rel="noopener">📄 Descargar convocatoria</a>
-              }
-            </div>
-          </article>
+          <ng-container *ngTemplateOutlet="tarjeta; context: { $implicit: v }" />
         }
       </div>
     } @else {
@@ -54,26 +24,56 @@
     }
 
     @if (cerradas().length) {
-      <details class="historico">
-        <summary>
-          <span>Convocatorias anteriores</span>
-          <small>{{ cerradas().length }} convocatoria(s) cerrada(s)</small>
-        </summary>
-        <ul class="lista-cerradas">
-          @for (v of cerradas(); track v.id) {
-            <li>
-              <div>
-                <strong>{{ v.titulo }}</strong>
-                <small>{{ v.fechaPublicacion | date: 'dd/MM/yyyy' }} · {{ v.vacantes }} vacante(s) · {{ v.tipoContrato }}</small>
-              </div>
-              <span class="chip">Cerrada</span>
-              @if (v.documentoUrl) {
-                <a [href]="v.documentoUrl" target="_blank" rel="noopener">Ver documento</a>
-              }
-            </li>
-          }
-        </ul>
-      </details>
+      <h2 class="h-seccion h-anteriores">
+        Convocatorias anteriores
+        <small>{{ cerradas().length }} cerrada(s)</small>
+      </h2>
+      <div class="vacantes">
+        @for (v of cerradas(); track v.id) {
+          <ng-container *ngTemplateOutlet="tarjeta; context: { $implicit: v }" />
+        }
+      </div>
     }
   }
 </section>
+
+<!-- Tarjeta de vacante (abiertas y cerradas) -->
+<ng-template #tarjeta let-v>
+  <article class="vacante" [class.sin-img]="!v.imagenUrl" [class.cerrada]="v.estado === 'cerrada'">
+    @if (v.imagenUrl) {
+      <a class="vacante-img" [href]="v.imagenUrl" target="_blank" rel="noopener" [attr.aria-label]="'Ver imagen completa: ' + v.titulo">
+        <img [src]="v.imagenUrl" [alt]="'Pieza gráfica de la convocatoria ' + v.titulo" loading="lazy">
+      </a>
+    }
+    <div class="vacante-cuerpo">
+      @if (v.estado === 'cerrada') {
+        <span class="chip chip-cerrada">Convocatoria cerrada</span>
+      } @else {
+        <span class="chip chip-abierta">Abierta</span>
+      }
+      <h3>{{ v.titulo }}</h3>
+      <ul class="datos">
+        <li><span aria-hidden="true">📝</span><strong>Contrato:</strong> {{ v.tipoContrato }}</li>
+        <li><span aria-hidden="true">👥</span><strong>Vacantes:</strong> {{ v.vacantes }}</li>
+        @if (v.salario) { <li><span aria-hidden="true">💰</span><strong>Salario:</strong> {{ v.salario }}</li> }
+        @if (v.horario) { <li><span aria-hidden="true">🕒</span><strong>Horario:</strong> {{ v.horario }}</li> }
+        @if (v.ubicacion) { <li><span aria-hidden="true">📍</span><strong>Ubicación:</strong> {{ v.ubicacion }}</li> }
+        <li><span aria-hidden="true">📅</span><strong>Publicada:</strong> {{ v.fechaPublicacion | date: "d 'de' MMMM 'de' y" : '' : 'es-CO' }}</li>
+        @if (v.fechaCierre) { <li><span aria-hidden="true">⏳</span><strong>Cierre:</strong> {{ v.fechaCierre | date: "d 'de' MMMM 'de' y" : '' : 'es-CO' }}</li> }
+      </ul>
+      <p class="desc">{{ v.descripcion }}</p>
+
+      @if (v.requisitos.length) {
+        <details class="req">
+          <summary>Ver requisitos</summary>
+          <ul>
+            @for (r of v.requisitos; track $index) { <li>{{ r }}</li> }
+          </ul>
+        </details>
+      }
+      @if (v.documentoUrl) {
+        <a class="btn-govco" [href]="v.documentoUrl" target="_blank" rel="noopener">📄 {{ v.estado === 'cerrada' ? 'Ver documento' : 'Descargar convocatoria' }}</a>
+      }
+    </div>
+  </article>
+</ng-template>
