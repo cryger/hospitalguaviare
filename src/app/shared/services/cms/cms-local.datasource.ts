@@ -10,7 +10,8 @@ import {
 } from './cms-datasource';
 import { CmsEntrada, CmsMenu, CmsMultimedia, CmsPagina } from '../../models/cms/cms.models';
 import { COTIZACIONES_SEMILLA, VACANTES_SEMILLA } from './cms-semilla-modulos';
-import { ENTRADAS_PIE } from './cms-semilla-pie';
+import { ENTRADAS_PIE, EntradaPieSemilla } from './cms-semilla-pie';
+import { ENTRADAS_ENTIDAD } from './cms-semilla-entidad';
 
 /**
  * Implementación en localStorage para trabajar el admin sin backend.
@@ -31,7 +32,8 @@ export class CmsLocalDataSource extends CmsDataSource {
     this.sembrarSiVacio();
     this.sembrarModulos();
     this.actualizarSemilla();
-    this.sembrarEntradasPie();
+    this.sembrarEntradasFijas('pie-semilla', ENTRADAS_PIE);
+    this.sembrarEntradasFijas('entidad-semilla', ENTRADAS_ENTIDAD);
     this.semillaNoticias = this.sembrarNoticias();
   }
 
@@ -164,7 +166,7 @@ export class CmsLocalDataSource extends CmsDataSource {
   }
 
   /* ===== Estructura inicial (Resolución 1519 de 2020) ===== */
-  private readonly versionSemilla = 9;
+  private readonly versionSemilla = 10;
 
   private sembrarSiVacio(): void {
     if (localStorage.getItem(this.prefijo + 'menus')) return;
@@ -280,6 +282,22 @@ export class CmsLocalDataSource extends CmsDataSource {
         }
       }
     }
+
+    // Versión 10: Nuestro Hospital › Misión y visión enlaza a Transparencia 1.1
+    if (version < 10) {
+      const orden: Record<string, number> = { 'mision-vision': 0, 'resena-historica': 1, 'portafolio-de-servicios': 2, 'sedes-y-horarios': 3 };
+      const entradas = this.leer<CmsEntrada>('entradas');
+      for (const p of paginas) {
+        if (p.slug in orden) p.orden = orden[p.slug];
+        if (p.slug === 'mision-vision' && !entradas.some((e) => e.paginaId === p.id)) {
+          const s = ESTRUCTURA_1519.find((x) => x.slug === 'mision-vision');
+          Object.assign(p, { plantilla: 'enlace', urlExterna: s?.urlExterna, estado: 'publicada', actualizadoEn: t });
+        }
+        if (p.slug === 'mision-vision-funciones-y-deberes' && !p.descripcion) {
+          p.descripcion = ESTRUCTURA_1519.find((x) => x.slug === p.slug)?.descripcion;
+        }
+      }
+    }
     this.escribir('paginas', paginas);
     localStorage.setItem(this.prefijo + 'version', String(this.versionSemilla));
   }
@@ -343,15 +361,15 @@ export class CmsLocalDataSource extends CmsDataSource {
     }
   }
 
-  /** Contenido inicial de políticas, términos y accesibilidad (una sola vez) */
-  private sembrarEntradasPie(): void {
-    const clave = this.prefijo + 'pie-semilla';
+  /** Contenido inicial fijo (pie de página, misión y visión…). Se siembra una sola vez por lista */
+  private sembrarEntradasFijas(nombre: string, lista: (EntradaPieSemilla & { orden?: number })[]): void {
+    const clave = this.prefijo + nombre;
     if (localStorage.getItem(clave) === '1') return;
     const paginas = this.leer<CmsPagina>('paginas');
     const entradas = this.leer<CmsEntrada>('entradas');
     const t = this.ahora();
     let id = this.nuevoId(entradas);
-    for (const e of ENTRADAS_PIE) {
+    for (const e of lista) {
       const pagina = paginas.find((p) => p.slug === e.paginaSlug);
       if (!pagina || entradas.some((x) => x.paginaId === pagina.id && x.slug === e.slug)) continue;
       entradas.push({
@@ -368,7 +386,7 @@ export class CmsLocalDataSource extends CmsDataSource {
         multimediaIds: [],
         autor: 'E.S.E. Hospital San José del Guaviare',
         fechaPublicacion: t,
-        orden: 0,
+        orden: e.orden ?? 0,
         creadoEn: t,
         actualizadoEn: t,
       });
@@ -385,7 +403,7 @@ type PaginaSemilla = Omit<CmsPagina, 'creadoEn' | 'actualizadoEn' | 'visibleEnMe
 const ESTRUCTURA_1519: PaginaSemilla[] = [
   { id: 1, menuId: 1, parentId: null, titulo: "Transparencia y acceso a la información pública", slug: 'transparencia', plantilla: 'contenido', descripcion: "Información pública de la E.S.E. Hospital San José del Guaviare, organizada según la Ley 1712 de 2014 y la Resolución 1519 de 2020 de MinTIC.", orden: 1 },
   { id: 2, menuId: 1, parentId: 1, titulo: "1. Información de la entidad", slug: 'informacion-de-la-entidad', plantilla: 'contenido', orden: 0 },
-  { id: 3, menuId: 1, parentId: 2, titulo: "1.1 Misión, visión, funciones y deberes", slug: 'mision-vision-funciones-y-deberes', plantilla: 'contenido', orden: 0 },
+  { id: 3, menuId: 1, parentId: 2, titulo: "1.1 Misión, visión, funciones y deberes", slug: 'mision-vision-funciones-y-deberes', plantilla: 'contenido', descripcion: "Plataforma estratégica de la E.S.E. Hospital San José del Guaviare: misión, visión y valores corporativos.", orden: 0 },
   { id: 4, menuId: 1, parentId: 2, titulo: "1.2 Estructura orgánica - Organigrama", slug: 'estructura-organica-organigrama', plantilla: 'contenido', orden: 1 },
   { id: 5, menuId: 1, parentId: 2, titulo: "1.3 Mapas y cartas descriptivas de los procesos", slug: 'mapas-y-cartas-descriptivas-de-los-procesos', plantilla: 'documentos', orden: 2 },
   { id: 6, menuId: 1, parentId: 2, titulo: "1.4 Directorio institucional", slug: 'directorio-institucional', plantilla: 'contenido', orden: 3 },
@@ -457,9 +475,10 @@ const ESTRUCTURA_1519: PaginaSemilla[] = [
   { id: 72, menuId: 1, parentId: 67, titulo: "Rendición de cuentas", slug: 'rendicion-de-cuentas', plantilla: 'documentos', orden: 4 },
   { id: 73, menuId: 1, parentId: 67, titulo: "Control social", slug: 'control-social', plantilla: 'contenido', orden: 5 },
   { id: 74, menuId: 1, parentId: null, titulo: "Nuestro Hospital", slug: 'nuestro-hospital', plantilla: 'contenido', orden: 0 },
-  { id: 75, menuId: 1, parentId: 74, titulo: "Reseña histórica", slug: 'resena-historica', plantilla: 'contenido', orden: 0 },
-  { id: 76, menuId: 1, parentId: 74, titulo: "Portafolio de servicios", slug: 'portafolio-de-servicios', plantilla: 'listado', orden: 1 },
-  { id: 77, menuId: 1, parentId: 74, titulo: "Sedes y horarios de atención", slug: 'sedes-y-horarios', plantilla: 'contenido', orden: 2 },
+  { id: 86, menuId: 1, parentId: 74, titulo: "Misión y visión", slug: 'mision-vision', plantilla: 'enlace', urlExterna: '/transparencia/informacion-de-la-entidad/mision-vision-funciones-y-deberes', orden: 0 },
+  { id: 75, menuId: 1, parentId: 74, titulo: "Reseña histórica", slug: 'resena-historica', plantilla: 'contenido', orden: 1 },
+  { id: 76, menuId: 1, parentId: 74, titulo: "Portafolio de servicios", slug: 'portafolio-de-servicios', plantilla: 'listado', orden: 2 },
+  { id: 77, menuId: 1, parentId: 74, titulo: "Sedes y horarios de atención", slug: 'sedes-y-horarios', plantilla: 'contenido', orden: 3 },
   { id: 83, menuId: 1, parentId: null, titulo: "Información de interés", slug: 'informacion-de-interes', plantilla: 'contenido', descripcion: "Invitaciones a cotizar y convocatorias laborales de la E.S.E. Hospital San José del Guaviare.", orden: 4 },
   { id: 78, menuId: 1, parentId: 83, titulo: "Invitaciones a cotizar", slug: 'cotizaciones-propuestas', plantilla: 'enlace', urlExterna: '/informacion-de-interes/invitaciones-a-cotizar', orden: 0 },
   { id: 79, menuId: 1, parentId: 83, titulo: "Trabaja con nosotros", slug: 'trabaja-nosotros', plantilla: 'enlace', urlExterna: '/informacion-de-interes/trabaja-con-nosotros', orden: 1 },
