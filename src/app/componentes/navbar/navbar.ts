@@ -27,6 +27,7 @@ const MENU_FIJO: ItemMenu[] = [
   styleUrl: './navbar.css',
 })
 export class Navbar implements OnInit {
+
   private cms = inject(CmsService);
 
   menuAbierto = false;
