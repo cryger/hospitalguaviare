@@ -1,45 +1,20 @@
-<footer class="govco-footer" aria-label="Información de contacto de la entidad">
-  <div class="govco-data-front">
-    <div class="govco-footer-text">
-      <div class="row govco-nombre-entidad">
-        <div class="col-xs-12 col-lg-6">
-          <p class="govco-text-header-1">{{ entidad.nombre }}</p>
-        </div>
-        <div class="col-xs-12 col-lg-4 govco-logo-div-a">
-          <span class="logo-hospital" role="img" aria-label="Logo E.S.E. Hospital San José del Guaviare"></span>
-        </div>
+<footer class="pie" aria-label="Información de contacto de la entidad">
+  <div class="pie-tarjeta">
+
+    <!-- Identidad de la entidad -->
+    <div class="pie-marca">
+      <span class="logo-hospital" role="img" aria-label="Logo E.S.E. Hospital San José del Guaviare"></span>
+      <div class="marca-texto">
+        <p class="nombre">{{ entidad.nombre }}</p>
+        <p class="lema">Empresa Social del Estado · Guaviare, Colombia</p>
       </div>
 
-      <!-- Sede principal -->
-      <div class="row col-xs-12 col-lg-7 govco-texto-sedes">
-        <p class="govco-text-header-2">Sede principal</p>
-        <address class="datos-contacto">
-          <span><strong>Dirección:</strong> {{ entidad.direccion }}, {{ entidad.ciudad }}</span>
-          <span><strong>Código postal:</strong> {{ entidad.codigoPostal }}</span>
-          <span><strong>Horario de atención:</strong></span>
-          @for (h of entidad.horario; track h) {
-            <span class="sangria">{{ h }}</span>
-          }
-          @for (t of entidad.telefonos; track t.tel) {
-            <span><strong>{{ t.etiqueta }}:&nbsp;</strong><a [href]="'tel:' + t.tel">{{ t.numero }}</a></span>
-          }
-          <span>
-            <strong>Correo institucional:&nbsp;</strong><br class="govco-mostrar">
-            <a [href]="'mailto:' + entidad.correoInstitucional">{{ entidad.correoInstitucional }}</a>
-          </span>
-          <span>
-            <strong>Correo de notificaciones judiciales:&nbsp;</strong><br class="govco-mostrar">
-            <a [href]="'mailto:' + entidad.correoJudicial">{{ entidad.correoJudicial }}</a>
-          </span>
-        </address>
-      </div>
-
-      <!-- Redes sociales -->
-      <div class="row col-xs-12 col-lg-7 govco-network" aria-label="Redes sociales">
+      <ul class="redes" aria-label="Redes sociales">
         @for (r of entidad.redes; track r.red) {
-          <div class="govco-iconContainer">
-            <a class="red-social" [href]="r.url" target="_blank" rel="noopener" [attr.aria-label]="r.red + ' (se abre en una pestaña nueva)'">
-              <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false">
+          <li>
+            <a [href]="r.url" target="_blank" rel="noopener" [title]="r.red + ': ' + r.usuario"
+               [attr.aria-label]="r.red + ' ' + r.usuario + ' (se abre en una pestaña nueva)'">
+              <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false">
                 @switch (r.icono) {
                   @case ('facebook') {
                     <path fill="currentColor" d="M9.1 23.7v-8H6.6V12h2.5v-1.6c0-4.1 1.8-6 5.9-6 .8 0 2.1.2 2.6.3v3.3h-1.4c-1.6 0-2.3.6-2.3 2.2V12h3.6l-.6 3.7h-3v8.2C19.4 23.2 24 18.2 24 12 24 5.4 18.6 0 12 0S0 5.4 0 12c0 5.6 3.9 10.4 9.1 11.7Z"/>
@@ -57,39 +32,95 @@
                   }
                 }
               </svg>
-              <span class="govco-link-modal">{{ r.usuario }}</span>
             </a>
-          </div>
+          </li>
         }
-      </div>
+      </ul>
+    </div>
 
-      <div class="row govco-links-directorio">
-        <a class="govco-link-modal" [routerLink]="urlDirectorio()">Directorio institucional</a>
-      </div>
+    <div class="pie-columnas">
 
-      <!-- Políticas, términos, accesibilidad y mapa del sitio (Admin › Menús › Pie de página) -->
-      <nav class="row govco-links-container" aria-label="Enlaces del pie de página">
-        @for (e of enlaces(); track e.url) {
-          <div class="govco-link-container mt-2">
-            @if (e.externo) {
-              <a class="govco-link-modal govco-link-modal-bold" [href]="e.url" target="_blank" rel="noopener">{{ e.titulo }}</a>
-            } @else {
-              <a class="govco-link-modal govco-link-modal-bold" [routerLink]="e.url">{{ e.titulo }}</a>
-            }
-          </div>
-        }
+      <!-- Sede y horario -->
+      <section class="columna" aria-labelledby="pie-sede">
+        <h2 id="pie-sede">Sede principal</h2>
+        <ul class="datos">
+          <li>
+            <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2C8.1 2 5 5.1 5 9c0 5.2 7 13 7 13s7-7.8 7-13c0-3.9-3.1-7-7-7Zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5Z"/></svg>
+            <span>
+              <span class="etiqueta">Dirección</span>
+              {{ entidad.direccion }}<br>{{ entidad.ciudad }}<br>
+              Código postal: {{ entidad.codigoPostal }}
+            </span>
+          </li>
+          <li>
+            <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 7v5l3 2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            <span>
+              <span class="etiqueta">Horario de atención al público</span>
+              @for (h of entidad.horario; track h) {
+                <span class="linea">{{ h }}</span>
+              }
+            </span>
+          </li>
+        </ul>
+      </section>
+
+      <!-- Contacto -->
+      <section class="columna" aria-labelledby="pie-contacto">
+        <h2 id="pie-contacto">Contáctenos</h2>
+        <ul class="datos">
+          <li>
+            <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1l-2.3 2.2Z"/></svg>
+            <span>
+              <span class="etiqueta">Teléfonos</span>
+              @for (t of entidad.telefonos; track t.tel) {
+                <span class="linea">{{ t.etiqueta }}: <a [href]="'tel:' + t.tel">{{ t.numero }}</a></span>
+              }
+              @if (entidad.lineaAnticorrupcion; as l) {
+                <span class="linea">Línea anticorrupción: <a [href]="'tel:' + l.tel">{{ l.numero }}</a></span>
+              }
+            </span>
+          </li>
+          <li>
+            <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="m3.5 6.5 8.5 6.5 8.5-6.5" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+            <span>
+              <span class="etiqueta">Correo institucional</span>
+              <a class="correo" [href]="'mailto:' + entidad.correoInstitucional">{{ entidad.correoInstitucional }}</a>
+              <span class="etiqueta mt">Notificaciones judiciales</span>
+              <a class="correo" [href]="'mailto:' + entidad.correoJudicial">{{ entidad.correoJudicial }}</a>
+            </span>
+          </li>
+        </ul>
+      </section>
+
+      <!-- Enlaces -->
+      <nav class="columna" aria-labelledby="pie-enlaces">
+        <h2 id="pie-enlaces">Enlaces de interés</h2>
+        <ul class="enlaces">
+          <li><a [routerLink]="urlDirectorio()">Directorio institucional</a></li>
+          <li><a routerLink="/pqrsf">PQRSD: peticiones, quejas, reclamos, sugerencias y denuncias</a></li>
+          @for (e of enlaces(); track e.url) {
+            <li>
+              @if (e.externo) {
+                <a [href]="e.url" target="_blank" rel="noopener">{{ e.titulo }}</a>
+              } @else {
+                <a [routerLink]="e.url">{{ e.titulo }}</a>
+              }
+            </li>
+          }
+        </ul>
       </nav>
     </div>
   </div>
 
-  <div class="govco-footer-logo">
-    <div class="govco-logo-container">
-      <a href="https://www.gov.co" target="_blank" rel="noopener" aria-label="Portal del Estado colombiano GOV.CO">
-        <span class="govco-co"></span>
-        <span class="govco-separator"></span>
-        <span class="govco-logo"></span>
+  <!-- Franja GOV.CO (obligatoria, Res. 1519 de 2020) -->
+  <div class="pie-govco">
+    <div class="govco-contenido">
+      <a class="govco-marca" href="https://www.gov.co" target="_blank" rel="noopener" aria-label="Ir al portal del Estado colombiano GOV.CO (se abre en una pestaña nueva)">
+        <span class="govco-co" aria-hidden="true"></span>
+        <span class="govco-separador" aria-hidden="true"></span>
+        <span class="govco-logo" aria-hidden="true"></span>
       </a>
-      <span class="derechos">© {{ anio }} {{ entidad.nombre }}</span>
+      <p class="derechos">© {{ anio }} {{ entidad.nombre }}. Todos los derechos reservados.</p>
     </div>
   </div>
 </footer>

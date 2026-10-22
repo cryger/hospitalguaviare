@@ -26,6 +26,8 @@ const ENTIDAD = {
   ],
   correoInstitucional: 'contactenos@esehospitalguaviare.gov.co',
   correoJudicial: 'representacionjudcial@esehospitalguaviare.gov.co',
+  /** Res. 1519: línea anticorrupción / denuncias. Deje null mientras no exista; aparece sola al llenarla */
+  lineaAnticorrupcion: null as { numero: string; tel: string } | null,
   redes: [
     { red: 'Facebook', usuario: 'hospitalsanjosedelguaviare', icono: 'facebook', url: 'https://www.facebook.com/hospitalsanjosedelguaviare' },
     { red: 'Instagram', usuario: '@ese_hsjg', icono: 'instagram', url: 'https://www.instagram.com/ese_hsjg/' },

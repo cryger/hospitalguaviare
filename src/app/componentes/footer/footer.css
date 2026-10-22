@@ -1,430 +1,169 @@
-@charset "UTF-8";
-
-/**
- * Gov.co (https://www.gov.co) - Gobierno de Colombia
- *  - Componente: Footer
- *  - Version: 4.0.0
- */
-
-/* FUENTE ICONOS */
-@font-face {
- font-family: "govco-fontv2";
- src: url("../../shared/assets/icons/fonts/govco-font-icons.ttf") format("truetype");
- font-weight: normal;
- font-style: normal;
-}
-
-p {
- line-height: 1.5 !important;
-}
-
-.row > * {
- padding-left: 0 !important;
- margin-left: unset !important;
-}
-
-.row {
- margin-left: 0 !important;
-}
-
-.row.col-xs-12.col-lg-7.govco-texto-sedes,
-.row.col-xs-12.col-lg-7.govco-network {
- padding-left: 0 !important;
- width: 100% !important;
-}
-
-body {
- font-family: var(--bs-font-sans-serif) !important;
- color: #212529 !important;
- font-size: 16px !important;
-}
-
-[class^="govco-"]:before,
-[class*=" govco-"]:before {
- font-family: "govco-fontv2";
- font-style: normal;
- font-weight: normal;
-
- display: inline-block;
- text-decoration: inherit;
- width: 1em;
- margin-right: 0.2em;
- text-align: center;
- /* opacity: .8; */
-
- /* For safety - reset parent styles, that can break glyph codes*/
- font-variant: normal;
- text-transform: none;
-
- /* fix buttons height, for twitter bootstrap */
- line-height: 1em;
-
- /* Animation center compensation - margins should be symmetric */
- /* remove if not needed */
- margin-left: 0.2em;
-
- /* you can be more comfortable with increased icons size */
- /* font-size: 120%; */
-
- /* Font smoothing. That was taken from TWBS */
- -webkit-font-smoothing: antialiased;
- -moz-osx-font-smoothing: grayscale;
-
- /* Uncomment for 3D effect */
- /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
-}
-
-.govco-twitter-square:before {
- content: "\ee16";
-}
-
-.govco-twitter:before {
- content: "\ee17";
-}
-
-.govco-instagram-square:before {
- content: "\ed5b";
-}
-
-.govco-instagram:before {
- content: "\ed5c";
-}
-
-.govco-facebook-f:before {
- content: "\ed0e";
-}
-
-.govco-facebook-messenger:before {
- content: "\ed0f";
-}
-
-.govco-facebook-square:before {
- content: "\ed10";
-}
-
-.govco-facebook:before {
- content: "\ed11";
-}
-
-.govco-phone:before {
- content: "\ea8a";
-}
-
-.govco-phone-alt:before {
- content: "\ea85";
-}
-/* FUENTE ICONOS */
-
-/* MODAL 1 */
-.govco-logo-entidad {
- height: 64px;
- display: inline-block;
- content: url(https://cdn.www.gov.co/v4/assets/images/Entidad.svg);
-}
-
-.govco-co {
- height: 48px;
- margin-top: 24px;
- display: inline-block;
- content: url(https://cdn.www.gov.co/v4/assets/images/logo-colombia.svg);
-}
-
-.govco-separator {
- border-left: 1px solid #e5eefb;
- opacity: 1px;
- height: 44px;
- margin-left: 10px;
- margin-right: 5px;
- display: inline-block;
-}
-
-.govco-logo {
- height: 30px;
- display: inline-block;
- content: url(https://cdn.www.gov.co/v4/assets/images/logo.svg);
- vertical-align: super;
-}
-
-.govco-footer-logo {
- height: 96px;
- background-color: #3366cc;
- width: 100%;
- margin-top: 20px !important;
-}
-
-.govco-data-front {
- width: calc(100% - 40px);
- margin-left: 20px !important;
- -webkit-box-shadow: 50px 30px 0px -30px #e6effd, -50px 30px 0px -30px #e6effd,
-  0px 20px 0px 0px #e6effd, 50px 50px 0px -30px #e6effd,
-  -50px 50px 0px -30px #e6effd;
- box-shadow: 50px 30px 0px -30px #e6effd, -50px 30px 0px -30px #e6effd,
-  0px 20px 0px 0px #e6effd, 50px 50px 0px -30px #e6effd,
-  -50px 50px 0px -30px #e6effd;
- top: 0;
- border: 2px solid #e5eefb;
- border-radius: 10px;
- opacity: 1;
-}
-
-.govco-text-header-1 {
- color: #3366cc;
- text-align: left;
- font-size: 20px;
- font-weight: 600;
-}
-
-.govco-text-header-2 {
- color: #3366cc;
- text-align: left;
- font-size: 16px;
- font-weight: bold;
- margin-bottom: 0 !important;
-}
-
-.govco-text-header-3 {
- color: #3366cc;
- text-align: left;
- font-weight: bold;
- margin-bottom: 0 !important;
-}
-
-.govco-logo-container {
- margin-left: 80px !important;
-}
-
-.govco-link-modal {
- color: #3366cc;
- margin-right: 30px !important;
- text-decoration: underline;
-}
-
-.icon::before {
- margin: 0 !important;
- padding: 0 !important;
- transform: scale(1.5, 1.5);
- margin-right: 10px !important;
- margin-left: 5px !important;
- vertical-align: text-top !important;
- color: #3366cc;
-}
-
-.govco-iconContainer {
- display: inline-block !important;
- width: auto !important;
-}
-
-.govco-links-container {
- margin-bottom: 50px !important;
- margin-top: 30px !important;
-}
-
-.govco-footer-text {
- margin-top: 50px !important;
- margin-left: 80px !important;
-}
-.govco-texto-sedes,
-.govco-network {
- padding: unset !important;
-}
-
-.govco-network,
-.govco-listado-sedes {
- margin-top: 30px !important;
-}
-
-.govco-sedes {
- margin-top: 20px !important;
-}
-
-.govco-logo-div-a {
- text-align: center !important;
-}
-
-.govco-links-directorio {
- margin-top: 20px !important;
-}
-
-.govco-link-container {
- display: inline-block;
- width: auto !important;
-}
-
-.govco-mostrar {
- display: none !important;
-}
-
-.govco-nombre-entidad {
- margin-bottom: 0px !important;
-}
-
-@media (max-width: 991px) {
- .govco-sedes {
-  margin-left: 0 !important;
-  padding-left: 0 !important;
-  padding-right: 5px !important;
- }
-
- .govco-sede-info {
-  margin-left: 0 !important;
- }
-
- .govco-text-header-1 {
-  margin-left: 15px !important;
- }
-
- .govco-logo-entidad {
-  height: 65px;
- }
-
- .govco-footer-text {
-  margin: 0 !important;
-  margin-top: 50px !important;
- }
-
- .govco-nombre-entidad {
-  margin-left: 0px !important;
-  width: 100% !important;
- }
-
- .govco-logo-div-a {
-  margin-left: 0 !important;
- }
-
- .govco-texto-sedes,
- .govco-links-directorio,
- .govco-listado-sedes,
- .govco-links-container {
-  margin-left: 15px !important;
-  margin-top: 20px !important;
- }
-
- .govco-texto-sedes,
- .govco-network {
-  padding: unset !important;
- }
-
- .govco-iconContainer {
-  margin-top: 20px !important;
-  display: block !important;
-  width: 100% !important;
- }
-
- .govco-network {
-  margin-left: 15px !important;
-  margin-top: 10px !important;
- }
-
- .govco-text-header-3 {
-  margin-top: 20px !important;
- }
-
- .govco-link-container {
-  display: block !important;
-  width: 100% !important;
- }
-
- .govco-mostrar {
-  display: unset !important;
- }
-
- .govco-logo-container {
-  text-align: center !important;
-  margin-left: unset !important;
- }
-
- .govco-texto-sedes {
-  padding-right: 20px !important;
- }
-}
-
-.footer-column-left{
-  width: 55%;
-  padding-right: 5%;
-}
-.footer-col-title{
-  font-size: 1.14rem;
-  margin-bottom: 5px;
+/* =====================================================================
+   Pie de página — lineamientos GOV.CO (Res. 1519 de 2020, Anexo 2)
+   Incluye: nombre, dirección (municipio y departamento), código postal,
+   horario, teléfonos, correo institucional y de notificaciones judiciales,
+   redes sociales, políticas, términos, mapa del sitio y franja GOV.CO.
+===================================================================== */
+:host {
+  --azul: #3366cc;
+  --azul-oscuro: #004884;
+  --azul-claro: #e6effd;
+  --texto: #1f2937;
+  --texto-2: #4b5563;
+  --borde: #e5eefb;
   display: block;
-  font-weight: 700;
-  color: #3366cc;
-  position: relative;
-}
-.footer-col_logo{
-  display: flex;
-  flex-flow: column;
-  justify-content: flex-start;
-}
-.hora{
-  float:left;
-  font-size: 27px;
-  font-weight: 700 !important;
-  line-height: 1.5rem;
-  color: #ffffff;
-  margin: 0 1%;
-  width: 31%;
-  text-align: center;
-  letter-spacing: 1px;
-  padding-top: 5px;
+  margin-top: 2.5rem;
+  font-family: 'WorkSans-Regular', 'Work Sans', 'Montserrat', system-ui, sans-serif;
+  color: var(--texto);
 }
 
-/* =========================================
-   Datos reales de la entidad
-========================================= */
+.pie {
+  background: var(--azul-claro);
+  padding-top: 2rem;
+}
+
+/* Tarjeta blanca principal */
+.pie-tarjeta {
+  max-width: 1240px;
+  margin: 0 auto;
+  margin-inline: max(16px, calc((100% - 1240px) / 2));
+  background: #fff;
+  border: 2px solid var(--borde);
+  border-radius: 14px;
+  padding: 2rem 2.5rem 2.25rem;
+  box-shadow: 0 6px 24px rgba(0, 72, 132, 0.06);
+}
+
+/* Identidad */
+.pie-marca {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--borde);
+  flex-wrap: wrap;
+}
 .logo-hospital {
-  height: 80px;
-  display: inline-block;
+  height: 76px;
+  display: block;
+  flex: 0 0 auto;
   content: url("../../shared/images/HSJG-LOGO.png");
 }
-
-.datos-contacto {
-  font-style: normal;
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  line-height: 1.6;
+.marca-texto { flex: 1 1 260px; min-width: 0; }
+.nombre {
+  margin: 0;
+  color: var(--azul);
+  font-family: 'WorkSans-SemiBold', 'Work Sans', system-ui, sans-serif;
+  font-weight: 700;
+  font-size: 1.3rem;
+  line-height: 1.25;
 }
-.datos-contacto .sangria { padding-left: 1rem; }
-.datos-contacto > span { min-width: 0; max-width: 100%; overflow-wrap: anywhere; }
-.datos-contacto a {
-  color: #3366cc;
-  text-decoration: underline;
-  overflow-wrap: anywhere;
-  word-break: break-word;
+.lema { margin: .2rem 0 0; color: var(--texto-2); font-size: .92rem; }
+
+.redes { list-style: none; display: flex; gap: .6rem; margin: 0; padding: 0; }
+.redes a {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--azul-claro);
+  color: var(--azul);
+  transition: background .2s, color .2s, transform .2s;
+}
+.redes a:hover { background: var(--azul); color: #fff; transform: translateY(-2px); }
+
+/* Columnas */
+.pie-columnas {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1.3fr) minmax(0, .95fr);
+  gap: 2rem 2.5rem;
+  padding-top: 1.75rem;
+}
+.columna h2 {
+  margin: 0 0 1rem;
+  color: var(--azul-oscuro);
+  font-family: 'WorkSans-SemiBold', 'Work Sans', system-ui, sans-serif;
+  font-weight: 700;
+  font-size: 1.02rem;
+  padding-bottom: .5rem;
+  border-bottom: 3px solid var(--azul);
+  display: inline-block;
 }
 
-.red-social {
+.datos { list-style: none; margin: 0; padding: 0; display: grid; gap: 1.1rem; }
+.datos li { display: flex; gap: .75rem; align-items: flex-start; font-size: .93rem; line-height: 1.55; }
+.datos li > span { min-width: 0; display: flex; flex-direction: column; }
+.ico { width: 20px; height: 20px; flex: 0 0 20px; color: var(--azul); margin-top: .15rem; }
+.etiqueta { font-weight: 700; color: var(--texto); }
+.etiqueta.mt { margin-top: .6rem; }
+.linea { color: var(--texto-2); }
+.datos a { color: var(--azul); text-decoration: underline; }
+.datos a:hover { color: var(--azul-oscuro); }
+.correo { overflow-wrap: anywhere; font-size: .88rem; }
+.datos a[href^='tel:'] { white-space: nowrap; }
+
+.enlaces { list-style: none; margin: 0; padding: 0; display: grid; gap: .55rem; }
+.enlaces a {
   display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  color: #3366cc;
-  text-decoration: none;
+  gap: .45rem;
+  align-items: baseline;
+  color: var(--azul);
+  text-decoration: underline;
+  font-size: .93rem;
+  line-height: 1.45;
 }
-.red-social svg { flex: 0 0 auto; }
-.red-social:hover .govco-link-modal { color: #004884; }
+.enlaces a::before { content: '›'; font-weight: 700; text-decoration: none; display: inline-block; }
+.enlaces a:hover { color: var(--azul-oscuro); }
 
-.govco-footer a:focus-visible {
-  outline: 3px solid #ffab00;
-  outline-offset: 2px;
-}
+.pie a:focus-visible { outline: 3px solid #ffab00; outline-offset: 2px; border-radius: 4px; }
 
-.govco-footer-logo .govco-logo-container {
+/* Franja GOV.CO */
+.pie-govco { background: var(--azul); margin-top: 2rem; }
+.govco-contenido {
+  max-width: 1240px;
+  margin-inline: max(16px, calc((100% - 1240px) / 2));
+  min-height: 84px;
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  gap: 1rem 2rem;
   flex-wrap: wrap;
-  gap: 8px 24px;
+  padding: .9rem 72px .9rem 0; /* deja libre el botón "volver arriba" */
 }
-.govco-footer-logo .govco-logo-container > a { display: inline-flex; align-items: center; }
-.derechos {
-  color: #fff;
-  font-size: 0.85rem;
-  margin-top: 18px;
+.govco-marca { display: inline-flex; align-items: center; }
+.govco-co {
+  height: 44px;
+  display: inline-block;
+  content: url(https://cdn.www.gov.co/v4/assets/images/logo-colombia.svg);
+}
+.govco-separador { width: 1px; height: 40px; background: #e5eefb; margin: 0 14px; display: inline-block; }
+.govco-logo {
+  height: 30px;
+  display: inline-block;
+  content: url(https://cdn.www.gov.co/v4/assets/images/logo.svg);
+}
+.derechos { margin: 0; color: #fff; font-size: .85rem; }
+
+/* Tablet */
+@media (max-width: 991px) {
+  .pie-tarjeta { padding: 1.75rem 1.5rem; }
+  .pie-columnas { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .pie-columnas > nav { grid-column: 1 / -1; }
+  .enlaces { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
 }
 
-@media (max-width: 991px) {
-  .datos-contacto a { word-break: break-all; }
-  .govco-links-container .govco-link-container { margin-top: 12px !important; }
-  .govco-footer-logo { height: auto; padding-bottom: 16px; }
-  .govco-footer-logo .govco-logo-container { justify-content: center; }
-  .derechos { margin-top: 0; text-align: center; width: 100%; }
+/* Teléfono */
+@media (max-width: 600px) {
+  :host { margin-top: 1.75rem; }
+  .pie { padding-top: 1.25rem; }
+  .pie-tarjeta { padding: 1.4rem 1.1rem; border-radius: 12px; }
+  .pie-marca { gap: .9rem; }
+  .logo-hospital { height: 60px; }
+  .nombre { font-size: 1.1rem; }
+  .redes { width: 100%; justify-content: flex-start; }
+  .pie-columnas { grid-template-columns: 1fr; gap: 1.6rem; }
+  .enlaces { grid-template-columns: 1fr; }
+  .govco-contenido { justify-content: center; text-align: center; padding: 1rem 0 1rem; }
+  .derechos { width: 100%; }
 }
