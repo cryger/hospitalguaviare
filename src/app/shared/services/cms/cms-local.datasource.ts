@@ -164,7 +164,7 @@ export class CmsLocalDataSource extends CmsDataSource {
   }
 
   /* ===== Estructura inicial (Resolución 1519 de 2020) ===== */
-  private readonly versionSemilla = 8;
+  private readonly versionSemilla = 9;
 
   private sembrarSiVacio(): void {
     if (localStorage.getItem(this.prefijo + 'menus')) return;
@@ -256,12 +256,12 @@ export class CmsLocalDataSource extends CmsDataSource {
       }
     }
 
-    // Versión 7: orden del menú principal
-    // Transparencia · Nuestro Hospital · Atención y servicios a la ciudadanía · Participa · Información de interés
-    if (version < 7) {
+    // Versión 9: orden del menú principal
+    // Nuestro Hospital · Transparencia · Atención y servicios a la ciudadanía · Participa · Información de interés
+    if (version < 9) {
       const orden: Record<string, number> = {
-        transparencia: 0,
-        'nuestro-hospital': 1,
+        'nuestro-hospital': 0,
+        transparencia: 1,
         'atencion-y-servicios-a-la-ciudadania': 2,
         participa: 3,
         'informacion-de-interes': 4,
@@ -383,7 +383,7 @@ type PaginaSemilla = Omit<CmsPagina, 'creadoEn' | 'actualizadoEn' | 'visibleEnMe
 
 /** Generada a partir de database/cms-schema.sql (misma estructura e ids) */
 const ESTRUCTURA_1519: PaginaSemilla[] = [
-  { id: 1, menuId: 1, parentId: null, titulo: "Transparencia y acceso a la información pública", slug: 'transparencia', plantilla: 'contenido', descripcion: "Información pública de la E.S.E. Hospital San José del Guaviare, organizada según la Ley 1712 de 2014 y la Resolución 1519 de 2020 de MinTIC.", orden: 0 },
+  { id: 1, menuId: 1, parentId: null, titulo: "Transparencia y acceso a la información pública", slug: 'transparencia', plantilla: 'contenido', descripcion: "Información pública de la E.S.E. Hospital San José del Guaviare, organizada según la Ley 1712 de 2014 y la Resolución 1519 de 2020 de MinTIC.", orden: 1 },
   { id: 2, menuId: 1, parentId: 1, titulo: "1. Información de la entidad", slug: 'informacion-de-la-entidad', plantilla: 'contenido', orden: 0 },
   { id: 3, menuId: 1, parentId: 2, titulo: "1.1 Misión, visión, funciones y deberes", slug: 'mision-vision-funciones-y-deberes', plantilla: 'contenido', orden: 0 },
   { id: 4, menuId: 1, parentId: 2, titulo: "1.2 Estructura orgánica - Organigrama", slug: 'estructura-organica-organigrama', plantilla: 'contenido', orden: 1 },
@@ -456,7 +456,7 @@ const ESTRUCTURA_1519: PaginaSemilla[] = [
   { id: 71, menuId: 1, parentId: 67, titulo: "Colaboración e innovación abierta", slug: 'colaboracion-e-innovacion-abierta', plantilla: 'contenido', orden: 3 },
   { id: 72, menuId: 1, parentId: 67, titulo: "Rendición de cuentas", slug: 'rendicion-de-cuentas', plantilla: 'documentos', orden: 4 },
   { id: 73, menuId: 1, parentId: 67, titulo: "Control social", slug: 'control-social', plantilla: 'contenido', orden: 5 },
-  { id: 74, menuId: 1, parentId: null, titulo: "Nuestro Hospital", slug: 'nuestro-hospital', plantilla: 'contenido', orden: 1 },
+  { id: 74, menuId: 1, parentId: null, titulo: "Nuestro Hospital", slug: 'nuestro-hospital', plantilla: 'contenido', orden: 0 },
   { id: 75, menuId: 1, parentId: 74, titulo: "Reseña histórica", slug: 'resena-historica', plantilla: 'contenido', orden: 0 },
   { id: 76, menuId: 1, parentId: 74, titulo: "Portafolio de servicios", slug: 'portafolio-de-servicios', plantilla: 'listado', orden: 1 },
   { id: 77, menuId: 1, parentId: 74, titulo: "Sedes y horarios de atención", slug: 'sedes-y-horarios', plantilla: 'contenido', orden: 2 },

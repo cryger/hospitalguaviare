@@ -13,8 +13,8 @@ interface ItemMenu {
 
 /** Menú de respaldo si el CMS aún no tiene un menú principal publicado */
 const MENU_FIJO: ItemMenu[] = [
-  ['Transparencia y acceso a la información pública', '/transparencia'],
   ['Nuestro Hospital', '/nuestro-hospital'],
+  ['Transparencia y acceso a la información pública', '/transparencia'],
   ['Atención y servicios a la ciudadanía', '/atencion-y-servicios-a-la-ciudadania'],
   ['Participa', '/participa'],
   ['Información de interés', '/informacion-de-interes'],
