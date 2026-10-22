@@ -10,6 +10,7 @@ import {
 } from './cms-datasource';
 import { CmsEntrada, CmsMenu, CmsMultimedia, CmsPagina } from '../../models/cms/cms.models';
 import { COTIZACIONES_SEMILLA, VACANTES_SEMILLA } from './cms-semilla-modulos';
+import { ENTRADAS_PIE } from './cms-semilla-pie';
 
 /**
  * Implementación en localStorage para trabajar el admin sin backend.
@@ -30,6 +31,7 @@ export class CmsLocalDataSource extends CmsDataSource {
     this.sembrarSiVacio();
     this.sembrarModulos();
     this.actualizarSemilla();
+    this.sembrarEntradasPie();
   }
 
   /* ===== Helpers de almacenamiento ===== */
@@ -154,7 +156,7 @@ export class CmsLocalDataSource extends CmsDataSource {
   }
 
   /* ===== Estructura inicial (Resolución 1519 de 2020) ===== */
-  private readonly versionSemilla = 7;
+  private readonly versionSemilla = 8;
 
   private sembrarSiVacio(): void {
     if (localStorage.getItem(this.prefijo + 'menus')) return;
@@ -260,8 +262,52 @@ export class CmsLocalDataSource extends CmsDataSource {
         if (p.parentId === null && p.slug in orden) Object.assign(p, { orden: orden[p.slug], actualizadoEn: t });
       }
     }
+
+    // Versión 8: se publican las páginas del pie de página
+    if (version < 8) {
+      for (const p of paginas) {
+        if (['politicas-de-privacidad', 'terminos-y-condiciones'].includes(p.slug) && p.estado === 'borrador') {
+          const s = ESTRUCTURA_1519.find((x) => x.slug === p.slug);
+          Object.assign(p, { estado: 'publicada', descripcion: p.descripcion || s?.descripcion, actualizadoEn: t });
+        }
+      }
+    }
     this.escribir('paginas', paginas);
     localStorage.setItem(this.prefijo + 'version', String(this.versionSemilla));
+  }
+
+  /** Contenido inicial de políticas, términos y accesibilidad (una sola vez) */
+  private sembrarEntradasPie(): void {
+    const clave = this.prefijo + 'pie-semilla';
+    if (localStorage.getItem(clave) === '1') return;
+    const paginas = this.leer<CmsPagina>('paginas');
+    const entradas = this.leer<CmsEntrada>('entradas');
+    const t = this.ahora();
+    let id = this.nuevoId(entradas);
+    for (const e of ENTRADAS_PIE) {
+      const pagina = paginas.find((p) => p.slug === e.paginaSlug);
+      if (!pagina || entradas.some((x) => x.paginaId === pagina.id && x.slug === e.slug)) continue;
+      entradas.push({
+        id: id++,
+        paginaId: pagina.id,
+        titulo: e.titulo,
+        slug: e.slug,
+        resumen: e.resumen,
+        contenido: e.contenido,
+        tipo: 'articulo',
+        estado: 'publicada',
+        destacada: false,
+        imagenDestacadaId: null,
+        multimediaIds: [],
+        autor: 'E.S.E. Hospital San José del Guaviare',
+        fechaPublicacion: t,
+        orden: 0,
+        creadoEn: t,
+        actualizadoEn: t,
+      });
+    }
+    this.escribir('entradas', entradas);
+    localStorage.setItem(clave, '1');
   }
 }
 
@@ -351,6 +397,8 @@ const ESTRUCTURA_1519: PaginaSemilla[] = [
   { id: 78, menuId: 1, parentId: 83, titulo: "Invitaciones a cotizar", slug: 'cotizaciones-propuestas', plantilla: 'enlace', urlExterna: '/informacion-de-interes/invitaciones-a-cotizar', orden: 0 },
   { id: 79, menuId: 1, parentId: 83, titulo: "Trabaja con nosotros", slug: 'trabaja-nosotros', plantilla: 'enlace', urlExterna: '/informacion-de-interes/trabaja-con-nosotros', orden: 1 },
   { id: 80, menuId: 1, parentId: null, titulo: "Noticias", slug: 'noticias', plantilla: 'listado', orden: 5, visibleEnMenu: false },
-  { id: 81, menuId: 2, parentId: null, titulo: "Políticas de privacidad y tratamiento de datos", slug: 'politicas-de-privacidad', plantilla: 'contenido', orden: 0, estado: 'borrador' },
-  { id: 82, menuId: 2, parentId: null, titulo: "Términos y condiciones", slug: 'terminos-y-condiciones', plantilla: 'contenido', orden: 1, estado: 'borrador' },
+  { id: 81, menuId: 2, parentId: null, titulo: "Políticas de privacidad y tratamiento de datos", slug: 'politicas-de-privacidad', plantilla: 'contenido', descripcion: "Cómo recolectamos, usamos y protegemos sus datos personales, y cómo puede ejercer sus derechos como titular.", orden: 0 },
+  { id: 82, menuId: 2, parentId: null, titulo: "Términos y condiciones", slug: 'terminos-y-condiciones', plantilla: 'contenido', descripcion: "Condiciones de uso del portal web de la E.S.E. Hospital San José del Guaviare.", orden: 1 },
+  { id: 84, menuId: 2, parentId: null, titulo: "Accesibilidad", slug: 'accesibilidad', plantilla: 'contenido', descripcion: "Herramientas y compromisos para que todas las personas puedan usar este portal.", orden: 2 },
+  { id: 85, menuId: 2, parentId: null, titulo: "Mapa del sitio", slug: 'mapa-del-sitio', plantilla: 'enlace', urlExterna: '/mapa-del-sitio', orden: 3 },
 ];

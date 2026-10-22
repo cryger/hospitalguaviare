@@ -1,0 +1,59 @@
+<section class="mapa">
+  <header class="mapa-head">
+    <span class="antetitulo">Navegación</span>
+    <h1>Mapa del sitio</h1>
+    <p class="lead">Todas las secciones del portal de la E.S.E. Hospital San José del Guaviare en un solo lugar.</p>
+  </header>
+
+  @if (!principal().length) {
+    <p class="vacio">Cargando secciones…</p>
+  } @else {
+    <div class="columnas">
+      <nav class="bloque" aria-label="Secciones principales">
+        <ul class="arbol nivel-0">
+          <li class="raiz"><a routerLink="/">Inicio</a></li>
+          @for (n of principal(); track n.id) {
+            <li class="raiz">
+              <ng-container *ngTemplateOutlet="enlace; context: { $implicit: n }" />
+              @if (n.hijos.length) {
+                <ng-container *ngTemplateOutlet="rama; context: { $implicit: n.hijos }" />
+              }
+            </li>
+          }
+        </ul>
+      </nav>
+
+      @if (pie().length) {
+        <nav class="bloque bloque-pie" aria-label="Información legal y de uso">
+          <h2>Información legal y de uso</h2>
+          <ul class="arbol">
+            @for (n of pie(); track n.id) {
+              <li><ng-container *ngTemplateOutlet="enlace; context: { $implicit: n }" /></li>
+            }
+          </ul>
+        </nav>
+      }
+    </div>
+  }
+</section>
+
+<ng-template #rama let-nodos>
+  <ul class="arbol">
+    @for (n of nodos; track n.id) {
+      <li>
+        <ng-container *ngTemplateOutlet="enlace; context: { $implicit: n }" />
+        @if (n.hijos.length) {
+          <ng-container *ngTemplateOutlet="rama; context: { $implicit: n.hijos }" />
+        }
+      </li>
+    }
+  </ul>
+</ng-template>
+
+<ng-template #enlace let-n>
+  @if (n.externo) {
+    <a [href]="n.url" target="_blank" rel="noopener">{{ n.titulo }} <span class="ext" aria-label="(se abre en una pestaña nueva)">↗</span></a>
+  } @else {
+    <a [routerLink]="n.url">{{ n.titulo }}</a>
+  }
+</ng-template>

@@ -367,3 +367,64 @@ body {
   letter-spacing: 1px;
   padding-top: 5px;
 }
+
+/* =========================================
+   Datos reales de la entidad
+========================================= */
+.logo-hospital {
+  height: 80px;
+  display: inline-block;
+  content: url("../../shared/images/HSJG-LOGO.png");
+}
+
+.datos-contacto {
+  font-style: normal;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  line-height: 1.6;
+}
+.datos-contacto .sangria { padding-left: 1rem; }
+.datos-contacto > span { min-width: 0; max-width: 100%; overflow-wrap: anywhere; }
+.datos-contacto a {
+  color: #3366cc;
+  text-decoration: underline;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.red-social {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #3366cc;
+  text-decoration: none;
+}
+.red-social svg { flex: 0 0 auto; }
+.red-social:hover .govco-link-modal { color: #004884; }
+
+.govco-footer a:focus-visible {
+  outline: 3px solid #ffab00;
+  outline-offset: 2px;
+}
+
+.govco-footer-logo .govco-logo-container {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+}
+.govco-footer-logo .govco-logo-container > a { display: inline-flex; align-items: center; }
+.derechos {
+  color: #fff;
+  font-size: 0.85rem;
+  margin-top: 18px;
+}
+
+@media (max-width: 991px) {
+  .datos-contacto a { word-break: break-all; }
+  .govco-links-container .govco-link-container { margin-top: 12px !important; }
+  .govco-footer-logo { height: auto; padding-bottom: 16px; }
+  .govco-footer-logo .govco-logo-container { justify-content: center; }
+  .derechos { margin-top: 0; text-align: center; width: 100%; }
+}
