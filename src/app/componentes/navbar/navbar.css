@@ -911,9 +911,10 @@ html {
 .cms-submenu .submenu-link-govco.activo { font-weight: 700; background-color: #e6effd; }
 .cms-submenu .submenu-link-govco:focus-visible { outline: 3px solid #ffab00; outline-offset: -3px; }
 
-/* En escritorio el submenú lo abre/cierra el componente (un solo submenú a la vez):
-   al pasar el mouse a otra sección se cierra el anterior y se abre el nuevo. */
 @media (min-width: 992px) {
+  .cms-dropdown:hover .cms-submenu,
+  .cms-dropdown:focus-within .cms-submenu { display: block; }
+
   .cms-submenu {
     position: absolute;
     top: 100%;
