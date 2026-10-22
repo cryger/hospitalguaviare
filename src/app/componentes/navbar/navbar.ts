@@ -14,10 +14,10 @@ interface ItemMenu {
 /** Menú de respaldo si el CMS aún no tiene un menú principal publicado */
 const MENU_FIJO: ItemMenu[] = [
   ['Transparencia y acceso a la información pública', '/transparencia'],
-  ['Atención y servicios a la ciudadanía', '/atencion-y-servicios-a-la-ciudadania'],
+  ['Información de interés', '/informacion-de-interes'],
   ['Participa', '/participa'],
   ['Nuestro Hospital', '/nuestro-hospital'],
-  ['Información de interés', '/informacion-de-interes'],
+  ['Atención y servicios a la ciudadanía', '/atencion-y-servicios-a-la-ciudadania'],
 ].map(([titulo, url]) => ({ id: url, titulo, url, externo: false, hijos: [] }));
 
 @Component({
