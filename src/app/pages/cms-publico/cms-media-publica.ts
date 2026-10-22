@@ -62,7 +62,7 @@ import { CmsMultimedia, ICONOS_MULTIMEDIA } from '../../shared/models/cms/cms.mo
     .archivo:focus-visible { outline: 3px solid #ffab00; outline-offset: 2px; }
     .archivo-icono { font-size: 1.6rem; }
     .archivo-info { flex: 1; min-width: 0; display: flex; flex-direction: column; }
-    .archivo-info strong { font-size: .95rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .archivo-info strong { font-size: .92rem; line-height: 1.3; overflow-wrap: anywhere; display: -webkit-box; -webkit-line-clamp: 3; line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
     .archivo-info small { font-size: .78rem; color: #4b5563; text-transform: uppercase; }
     .archivo-accion { font-size: .85rem; font-weight: 600; text-decoration: underline; white-space: nowrap; }
   `,

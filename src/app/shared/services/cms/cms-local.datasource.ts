@@ -34,10 +34,12 @@ export class CmsLocalDataSource extends CmsDataSource {
     this.actualizarSemilla();
     this.sembrarEntradasFijas('pie-semilla', ENTRADAS_PIE);
     this.sembrarEntradasFijas('entidad-semilla', ENTRADAS_ENTIDAD);
-    this.semillaNoticias = this.sembrarNoticias();
+    this.semillaNoticias = this.sembrarDesdeArchivo('noticias-semilla', 'assets/semillas/noticias.json').then(() =>
+      this.sembrarDesdeArchivo('nuestro-hospital-semilla', 'assets/semillas/nuestro-hospital.json'),
+    );
   }
 
-  /** Noticias migradas del portal anterior (se descargan una sola vez desde /assets) */
+  /** Contenido migrado del portal anterior (se descarga una sola vez desde /assets/semillas) */
   private semillaNoticias: Promise<void>;
 
   /* ===== Helpers de almacenamiento ===== */
@@ -166,7 +168,7 @@ export class CmsLocalDataSource extends CmsDataSource {
   }
 
   /* ===== Estructura inicial (Resolución 1519 de 2020) ===== */
-  private readonly versionSemilla = 10;
+  private readonly versionSemilla = 11;
 
   private sembrarSiVacio(): void {
     if (localStorage.getItem(this.prefijo + 'menus')) return;
@@ -298,28 +300,49 @@ export class CmsLocalDataSource extends CmsDataSource {
         }
       }
     }
+
+    // Versión 11: nuevos elementos del menú Nuestro Hospital (orden del submenú)
+    if (version < 11) {
+      const orden: Record<string, number> = { 'resena-historica': 1, 'portafolio-de-servicios': 3, 'sedes-y-horarios': 4 };
+      for (const p of paginas) if (p.slug in orden) p.orden = orden[p.slug];
+    }
     this.escribir('paginas', paginas);
     localStorage.setItem(this.prefijo + 'version', String(this.versionSemilla));
   }
 
   /**
-   * Noticias migradas de esehospitalguaviare.gov.co/publicaciones/16 (una sola vez).
-   * Mismo contenido que api/migraciones/010-noticias.sql.
+   * Siembra una sola vez el contenido migrado de un archivo JSON:
+   * - noticias.json        → api/migraciones/010-noticias.sql
+   * - nuestro-hospital.json → api/migraciones/013-nuestro-hospital.sql
    */
-  private async sembrarNoticias(): Promise<void> {
-    const clave = this.prefijo + 'noticias-semilla';
+  private async sembrarDesdeArchivo(nombre: string, ruta: string): Promise<void> {
+    const clave = this.prefijo + nombre;
     if (localStorage.getItem(clave) === '1') return;
     try {
-      const r = await fetch('assets/semillas/noticias.json');
+      const r = await fetch(ruta);
       if (!r.ok) return;
+      type Item = {
+        paginaSlug?: string;
+        titulo: string;
+        slug: string;
+        resumen: string;
+        contenido: string;
+        tipo?: CmsEntrada['tipo'];
+        orden?: number;
+        soloSiVacia?: boolean;
+        fecha: string | null;
+        adjuntos: string[];
+        destacada: string | null;
+      };
       const semilla: {
         origen: string;
         multimedia: { nombre: string; url: string; tipo: CmsMultimedia['tipo']; mime: string | null; titulo: string; alt: string | null }[];
-        noticias: { titulo: string; slug: string; resumen: string; contenido: string; fecha: string; adjuntos: string[]; destacada: string | null }[];
+        noticias?: Item[];
+        entradas?: Item[];
       } = await r.json();
+      const items: Item[] = semilla.entradas ?? (semilla.noticias ?? []).map((n) => ({ ...n, paginaSlug: 'noticias', tipo: 'noticia' }));
 
-      const pagina = this.leer<CmsPagina>('paginas').find((p) => p.slug === 'noticias');
-      if (!pagina) return;
+      const paginas = this.leer<CmsPagina>('paginas');
       const t = this.ahora();
       const multimedia = this.leer<CmsMultimedia>('multimedia');
       const entradas = this.leer<CmsEntrada>('entradas');
@@ -331,8 +354,11 @@ export class CmsLocalDataSource extends CmsDataSource {
         porUrl.set(m.url, idM++);
       }
       let idE = this.nuevoId(entradas);
-      for (const n of semilla.noticias) {
+      for (const n of items) {
+        const pagina = paginas.find((p) => p.slug === n.paginaSlug);
+        if (!pagina) continue;
         if (entradas.some((e) => e.paginaId === pagina.id && e.slug === n.slug)) continue;
+        if (n.soloSiVacia && entradas.some((e) => e.paginaId === pagina.id)) continue;
         entradas.push({
           id: idE++,
           paginaId: pagina.id,
@@ -340,14 +366,14 @@ export class CmsLocalDataSource extends CmsDataSource {
           slug: n.slug,
           resumen: n.resumen,
           contenido: n.contenido,
-          tipo: 'noticia',
+          tipo: n.tipo ?? 'articulo',
           estado: 'publicada',
           destacada: false,
           imagenDestacadaId: n.destacada ? porUrl.get(n.destacada) ?? null : null,
           multimediaIds: n.adjuntos.map((u) => porUrl.get(u)).filter((x): x is number => x !== undefined),
           autor: 'E.S.E. Hospital San José del Guaviare',
-          fechaPublicacion: n.fecha,
-          orden: 0,
+          fechaPublicacion: n.fecha ?? t,
+          orden: n.orden ?? 0,
           migradoDe: semilla.origen,
           creadoEn: t,
           actualizadoEn: t,
@@ -357,7 +383,7 @@ export class CmsLocalDataSource extends CmsDataSource {
       this.escribir('entradas', entradas);
       localStorage.setItem(clave, '1');
     } catch {
-      /* sin conexión o almacenamiento lleno: el portal sigue funcionando sin las noticias */
+      /* sin conexión o almacenamiento lleno: el portal sigue funcionando sin este contenido */
     }
   }
 
@@ -477,8 +503,18 @@ const ESTRUCTURA_1519: PaginaSemilla[] = [
   { id: 74, menuId: 1, parentId: null, titulo: "Nuestro Hospital", slug: 'nuestro-hospital', plantilla: 'contenido', orden: 0 },
   { id: 86, menuId: 1, parentId: 74, titulo: "Misión y visión", slug: 'mision-vision', plantilla: 'enlace', urlExterna: '/transparencia/informacion-de-la-entidad/mision-vision-funciones-y-deberes', orden: 0 },
   { id: 75, menuId: 1, parentId: 74, titulo: "Reseña histórica", slug: 'resena-historica', plantilla: 'contenido', orden: 1 },
-  { id: 76, menuId: 1, parentId: 74, titulo: "Portafolio de servicios", slug: 'portafolio-de-servicios', plantilla: 'listado', orden: 2 },
-  { id: 77, menuId: 1, parentId: 74, titulo: "Sedes y horarios de atención", slug: 'sedes-y-horarios', plantilla: 'contenido', orden: 3 },
+  { id: 87, menuId: 1, parentId: 74, titulo: "Estructura orgánica", slug: 'estructura-organica', plantilla: 'enlace', urlExterna: '/transparencia/informacion-de-la-entidad/estructura-organica-organigrama', orden: 2 },
+  { id: 76, menuId: 1, parentId: 74, titulo: "Portafolio de servicios", slug: 'portafolio-de-servicios', plantilla: 'listado', orden: 3 },
+  { id: 77, menuId: 1, parentId: 74, titulo: "Sedes y horarios de atención", slug: 'sedes-y-horarios', plantilla: 'contenido', orden: 4 },
+  { id: 88, menuId: 1, parentId: 74, titulo: "Calendario de eventos", slug: 'calendario-de-eventos', plantilla: 'enlace', urlExterna: '/transparencia/informacion-de-la-entidad/calendario-de-actividades-y-eventos', orden: 5 },
+  { id: 89, menuId: 1, parentId: 74, titulo: "Alianza de usuarios", slug: 'alianza-de-usuarios', plantilla: 'contenido', descripcion: "Asociación de usuarios que representa a la comunidad ante la E.S.E. Hospital San José del Guaviare.", orden: 6 },
+  { id: 90, menuId: 1, parentId: 74, titulo: "Comité de convivencia laboral", slug: 'comite-de-convivencia-laboral', plantilla: 'documentos', descripcion: "Resoluciones, comunicados y actas del proceso de conformación del Comité de Convivencia Laboral.", orden: 7 },
+  { id: 91, menuId: 1, parentId: 74, titulo: "Talento humano", slug: 'talento-humano', plantilla: 'documentos', descripcion: "Manual de funciones, planes de gestión gerencial y documentos del área de Talento Humano.", orden: 8 },
+  { id: 92, menuId: 1, parentId: 74, titulo: "Planes Decreto 612 de 2018", slug: 'planes-decreto-612-de-2018', plantilla: 'documentos', descripcion: "Planes institucionales y estratégicos que la entidad debe publicar según el Decreto 612 de 2018.", orden: 9 },
+  { id: 93, menuId: 1, parentId: 74, titulo: "Canal anticorrupción – SICOF", slug: 'canal-anticorrupcion-sicof', plantilla: 'contenido', descripcion: "Subsistema del Riesgo de Corrupción, Opacidad y Fraude: cómo reportar una conducta posiblemente irregular.", orden: 10 },
+  { id: 94, menuId: 1, parentId: 74, titulo: "Sistema SARLAFT", slug: 'sistema-sarlaft', plantilla: 'enlace', urlExterna: 'https://esehospitalguaviare.gov.co/sistema-sarlaft/', orden: 11 },
+  { id: 95, menuId: 1, parentId: 74, titulo: "Acceso ALMERA", slug: 'acceso-almera', plantilla: 'enlace', urlExterna: 'https://sgi.almeraim.com/sgi/index.php?conid=sgiesehospitalguaviare', orden: 12 },
+  { id: 96, menuId: 1, parentId: 74, titulo: "Acceso Outlook", slug: 'acceso-outlook', plantilla: 'enlace', urlExterna: 'https://outlook.office.com/mail/', orden: 13 },
   { id: 83, menuId: 1, parentId: null, titulo: "Información de interés", slug: 'informacion-de-interes', plantilla: 'contenido', descripcion: "Invitaciones a cotizar y convocatorias laborales de la E.S.E. Hospital San José del Guaviare.", orden: 4 },
   { id: 78, menuId: 1, parentId: 83, titulo: "Invitaciones a cotizar", slug: 'cotizaciones-propuestas', plantilla: 'enlace', urlExterna: '/informacion-de-interes/invitaciones-a-cotizar', orden: 0 },
   { id: 79, menuId: 1, parentId: 83, titulo: "Trabaja con nosotros", slug: 'trabaja-nosotros', plantilla: 'enlace', urlExterna: '/informacion-de-interes/trabaja-con-nosotros', orden: 1 },
