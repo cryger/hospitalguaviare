@@ -22,7 +22,7 @@
         @if (e.autor) { · {{ e.autor }} }
         @if (e.estado !== 'publicada') { · <span class="chip-borrador">{{ e.estado }}</span> }
       </p>
-      @if (e.resumen) { <p class="lead">{{ e.resumen }}</p> }
+      @if (mostrarResumen(e)) { <p class="lead">{{ e.resumen }}</p> }
     </header>
 
     @if (imagenDe(e); as img) {
@@ -33,11 +33,11 @@
       <div class="contenido-html" [innerHTML]="e.contenido"></div>
     }
 
-    @if (visuales(e).length) {
+    @if (galeriaDe(e).length) {
       <section class="bloque">
         <h2 class="h-seccion">Galería</h2>
         <div class="rejilla-media">
-          @for (m of visuales(e); track m.id) {
+          @for (m of galeriaDe(e); track m.id) {
             <app-cms-media-publica [media]="m" />
           }
         </div>

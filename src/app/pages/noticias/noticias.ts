@@ -66,7 +66,19 @@ export class NoticiasPublicComponent implements OnInit {
   });
 
   readonly totalPaginas = computed(() => Math.ceil(this.noticiasFiltradas().length / this.itemsPorPagina));
-  readonly paginas = computed(() => Array.from({ length: this.totalPaginas() }, (_, i) => i + 1));
+  /** Paginación compacta: 1 … 4 5 6 … 37 */
+  readonly paginas = computed<(number | null)[]>(() => {
+    const total = this.totalPaginas();
+    const actual = this.paginaActual();
+    const visibles = new Set([1, total, actual - 1, actual, actual + 1].filter((p) => p >= 1 && p <= total));
+    const orden = [...visibles].sort((a, b) => a - b);
+    const salida: (number | null)[] = [];
+    orden.forEach((p, i) => {
+      if (i > 0 && p - orden[i - 1] > 1) salida.push(null); // null = "…"
+      salida.push(p);
+    });
+    return salida;
+  });
   readonly noticiasPaginadas = computed(() => {
     const inicio = (this.paginaActual() - 1) * this.itemsPorPagina;
     return this.noticiasFiltradas().slice(inicio, inicio + this.itemsPorPagina);

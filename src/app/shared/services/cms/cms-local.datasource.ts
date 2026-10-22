@@ -32,7 +32,11 @@ export class CmsLocalDataSource extends CmsDataSource {
     this.sembrarModulos();
     this.actualizarSemilla();
     this.sembrarEntradasPie();
+    this.semillaNoticias = this.sembrarNoticias();
   }
+
+  /** Noticias migradas del portal anterior (se descargan una sola vez desde /assets) */
+  private semillaNoticias: Promise<void>;
 
   /* ===== Helpers de almacenamiento ===== */
   private leer<T>(c: CmsColeccion): T[] {
@@ -63,6 +67,10 @@ export class CmsLocalDataSource extends CmsDataSource {
 
   /* ===== CRUD ===== */
   listar<T>(c: CmsColeccion): Observable<T[]> {
+    // Las entradas y la multimedia esperan a que termine la semilla de noticias
+    if (c === 'entradas' || c === 'multimedia') {
+      return defer(() => this.semillaNoticias.then(() => this.leer<T>(c)));
+    }
     return of(this.leer<T>(c));
   }
 
@@ -274,6 +282,65 @@ export class CmsLocalDataSource extends CmsDataSource {
     }
     this.escribir('paginas', paginas);
     localStorage.setItem(this.prefijo + 'version', String(this.versionSemilla));
+  }
+
+  /**
+   * Noticias migradas de esehospitalguaviare.gov.co/publicaciones/16 (una sola vez).
+   * Mismo contenido que api/migraciones/010-noticias.sql.
+   */
+  private async sembrarNoticias(): Promise<void> {
+    const clave = this.prefijo + 'noticias-semilla';
+    if (localStorage.getItem(clave) === '1') return;
+    try {
+      const r = await fetch('assets/semillas/noticias.json');
+      if (!r.ok) return;
+      const semilla: {
+        origen: string;
+        multimedia: { nombre: string; url: string; tipo: CmsMultimedia['tipo']; mime: string | null; titulo: string; alt: string | null }[];
+        noticias: { titulo: string; slug: string; resumen: string; contenido: string; fecha: string; adjuntos: string[]; destacada: string | null }[];
+      } = await r.json();
+
+      const pagina = this.leer<CmsPagina>('paginas').find((p) => p.slug === 'noticias');
+      if (!pagina) return;
+      const t = this.ahora();
+      const multimedia = this.leer<CmsMultimedia>('multimedia');
+      const entradas = this.leer<CmsEntrada>('entradas');
+      const porUrl = new Map(multimedia.map((m) => [m.url, m.id]));
+      let idM = this.nuevoId(multimedia);
+      for (const m of semilla.multimedia) {
+        if (porUrl.has(m.url)) continue;
+        multimedia.push({ id: idM, nombre: m.nombre, url: m.url, tipo: m.tipo, mime: m.mime ?? undefined, titulo: m.titulo, alt: m.alt ?? undefined, migradoDe: semilla.origen, creadoEn: t });
+        porUrl.set(m.url, idM++);
+      }
+      let idE = this.nuevoId(entradas);
+      for (const n of semilla.noticias) {
+        if (entradas.some((e) => e.paginaId === pagina.id && e.slug === n.slug)) continue;
+        entradas.push({
+          id: idE++,
+          paginaId: pagina.id,
+          titulo: n.titulo,
+          slug: n.slug,
+          resumen: n.resumen,
+          contenido: n.contenido,
+          tipo: 'noticia',
+          estado: 'publicada',
+          destacada: false,
+          imagenDestacadaId: n.destacada ? porUrl.get(n.destacada) ?? null : null,
+          multimediaIds: n.adjuntos.map((u) => porUrl.get(u)).filter((x): x is number => x !== undefined),
+          autor: 'E.S.E. Hospital San José del Guaviare',
+          fechaPublicacion: n.fecha,
+          orden: 0,
+          migradoDe: semilla.origen,
+          creadoEn: t,
+          actualizadoEn: t,
+        });
+      }
+      this.escribir('multimedia', multimedia);
+      this.escribir('entradas', entradas);
+      localStorage.setItem(clave, '1');
+    } catch {
+      /* sin conexión o almacenamiento lleno: el portal sigue funcionando sin las noticias */
+    }
   }
 
   /** Contenido inicial de políticas, términos y accesibilidad (una sola vez) */

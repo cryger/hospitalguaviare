@@ -27,7 +27,7 @@
 
         <div class="noticia-contenido">
           <span class="categoria">{{ noticia.categoria }}</span>
-          <p class="fecha">{{ noticia.fecha | date: "d 'de' MMMM 'de' y, h:mm a" : '' : 'es-CO' }}</p>
+          <p class="fecha">{{ noticia.fecha | date: "d 'de' MMMM 'de' y" : '' : 'es-CO' }}</p>
           <h3>{{ noticia.titulo }}</h3>
           <p class="resumen">{{ noticia.resumen }}</p>
           <a class="btn-govco" [routerLink]="noticia.url">Leer más</a>
@@ -40,12 +40,24 @@
 
   @if (totalPaginas() > 1) {
     <nav class="paginacion" aria-label="Paginación de noticias">
-      @for (p of paginas(); track p) {
-        <button type="button" class="gov-page-number" [class.active]="paginaActual() === p"
-                [attr.aria-current]="paginaActual() === p ? 'page' : null" (click)="irPagina(p)">
-          {{ p }}
-        </button>
+      <button type="button" class="gov-page-number" (click)="irPagina(paginaActual() - 1)" [disabled]="paginaActual() === 1" aria-label="Página anterior">‹</button>
+      @for (p of paginas(); track $index) {
+        @if (p === null) {
+          <span class="puntos" aria-hidden="true">…</span>
+        } @else {
+          <button type="button" class="gov-page-number" [class.active]="paginaActual() === p"
+                  [attr.aria-current]="paginaActual() === p ? 'page' : null" [attr.aria-label]="'Página ' + p" (click)="irPagina(p)">
+            {{ p }}
+          </button>
+        }
       }
+      <button type="button" class="gov-page-number" (click)="irPagina(paginaActual() + 1)" [disabled]="paginaActual() === totalPaginas()" aria-label="Página siguiente">›</button>
     </nav>
+  }
+
+  @if (noticiasFiltradas().length) {
+    <div class="ver-todas">
+      <a class="btn-govco" routerLink="/noticias">Ver todas las noticias ({{ noticiasFiltradas().length }})</a>
+    </div>
   }
 </section>

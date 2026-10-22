@@ -137,6 +137,20 @@ export class CmsPaginaPublica {
     return this.adjuntos(e).filter((m) => m.tipo === 'imagen' || m.tipo === 'video');
   }
 
+  /** Galería del detalle: sin repetir la imagen destacada que ya se muestra arriba */
+  galeriaDe(e: CmsEntrada): CmsMultimedia[] {
+    return this.visuales(e).filter((m) => m.id !== e.imagenDestacadaId);
+  }
+
+  /** El resumen no se repite si el contenido ya empieza con ese mismo texto (noticias migradas) */
+  mostrarResumen(e: CmsEntrada): boolean {
+    if (!e.resumen) return false;
+    if (!e.contenido) return true;
+    const plano = (t: string) => t.replace(/<[^>]+>/g, ' ').replace(/&nbsp;/g, ' ').replace(/\s+/g, ' ').trim();
+    const inicio = plano(e.resumen).replace(/…$/, '').slice(0, 120);
+    return !plano(e.contenido).startsWith(inicio);
+  }
+
   imagenDe(e: CmsEntrada): CmsMultimedia | null {
     const m = this.media(e.imagenDestacadaId);
     return m?.tipo === 'imagen' ? m : null;
