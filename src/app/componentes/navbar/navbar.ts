@@ -65,6 +65,22 @@ export class Navbar implements OnInit {
     this.menuAbierto = false;
     this.submenuAbierto = null;
     this.toggleBodyScroll();
+    // Quita el foco del enlace pulsado para que el submenú no se quede abierto
+    (document.activeElement as HTMLElement | null)?.blur();
+  }
+
+  /** Escritorio: al pasar a otra sección se cierra el submenú anterior y se abre el nuevo */
+  abrirEnEscritorio(id: string): void {
+    if (window.innerWidth >= 992 && !this.menuAbierto) this.submenuAbierto = id;
+  }
+
+  /** Teclado: al salir con Tab de una sección se cierra su submenú */
+  cerrarSiSaleElFoco(id: string, evento: FocusEvent): void {
+    const seccion = evento.currentTarget as HTMLElement;
+    const destino = evento.relatedTarget as Node | null;
+    if (!this.menuAbierto && this.submenuAbierto === id && !seccion.contains(destino)) {
+      this.submenuAbierto = null;
+    }
   }
 
   toggleSubmenu(id: string): void {

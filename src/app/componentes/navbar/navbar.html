@@ -23,6 +23,9 @@
         @for (item of items(); track item.id) {
           @if (item.hijos.length) {
             <li class="nav-item nav-item-dropdown cms-dropdown" [class.abierto]="submenuAbierto === item.id"
+                (mouseenter)="abrirEnEscritorio(item.id)"
+                (focusin)="abrirEnEscritorio(item.id)"
+                (focusout)="cerrarSiSaleElFoco(item.id, $event)"
                 (mouseleave)="submenuAbierto === item.id && !menuAbierto ? submenuAbierto = null : null">
               <button type="button" class="nav-link nav-link-dropdown cms-dropdown-toggle"
                       [attr.aria-expanded]="submenuAbierto === item.id"

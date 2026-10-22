@@ -912,8 +912,9 @@ html {
 .cms-submenu .submenu-link-govco:focus-visible { outline: 3px solid #ffab00; outline-offset: -3px; }
 
 @media (min-width: 992px) {
-  .cms-dropdown:hover .cms-submenu,
-  .cms-dropdown:focus-within .cms-submenu { display: block; }
+  /* Solo se abre el submenú bajo el mouse o el que el componente marca como abierto
+     (antes :focus-within dejaba "pegado" el submenú en el que se hizo clic) */
+  .cms-dropdown:hover .cms-submenu { display: block; }
 
   .cms-submenu {
     position: absolute;
