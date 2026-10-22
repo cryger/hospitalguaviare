@@ -1,1 +1,395 @@
-<p>configuacion works!</p>
+<section class="cfg">
+  <header class="cfg-head">
+    <div>
+      <h1>Configuración</h1>
+      <p>Datos institucionales del portal, su cuenta, la seguridad de la sesión y el estado técnico del sistema.</p>
+    </div>
+    <span class="modo" [class.local]="!usaApi" [title]="usaApi ? config.apiUrl : 'Los datos se guardan solo en este navegador'">
+      {{ usaApi ? 'Conectado a la API' : 'Modo local (sin API)' }}
+    </span>
+  </header>
+
+  <!-- Pestañas -->
+  <nav class="tabs" role="tablist" aria-label="Secciones de configuración">
+    @for (t of pestanas; track t.id) {
+      <button type="button" role="tab" class="tab" [class.on]="pestana() === t.id"
+              [attr.aria-selected]="pestana() === t.id" [attr.aria-controls]="'panel-' + t.id"
+              (click)="cambiarPestana(t.id)">
+        <span aria-hidden="true">{{ t.icono }}</span> {{ t.titulo }}
+      </button>
+    }
+  </nav>
+
+  @if (!listo()) {
+    <p class="cargando">Cargando configuración…</p>
+  } @else {
+
+    <!-- =====================================================
+         DATOS DE LA ENTIDAD
+    ====================================================== -->
+    @if (pestana() === 'entidad') {
+      <div id="panel-entidad" role="tabpanel" class="grid-entidad">
+        <form class="panel" (ngSubmit)="guardarEntidad()" autocomplete="off">
+          <div class="panel-head">
+            <div>
+              <h2>Datos de la entidad</h2>
+              <p class="ayuda">Se muestran en el pie de página de todas las páginas del portal.</p>
+            </div>
+            @if (config.actualizacion()['entidad']?.en; as en) {
+              <span class="meta">Actualizado {{ en | date: "d 'de' MMM y, h:mm a" : '' : 'es-CO' }}@if (config.actualizacion()['entidad']?.por; as por) { · {{ por }} }</span>
+            }
+          </div>
+
+          @if (!esAdmin) {
+            <div class="aviso aviso-info">Solo un administrador puede modificar estos datos. Usted puede consultarlos.</div>
+          }
+
+          <fieldset [disabled]="!esAdmin || guardandoEntidad()">
+            <!-- Identificación -->
+            <h3 class="sub">Identificación</h3>
+            <div class="campos">
+              <label class="campo ancho">
+                <span>Nombre de la entidad *</span>
+                <input name="nombre" [(ngModel)]="borrador.nombre" maxlength="150" required>
+              </label>
+              <label class="campo ancho">
+                <span>Lema o descripción corta</span>
+                <input name="lema" [(ngModel)]="borrador.lema" maxlength="150" placeholder="Empresa Social del Estado · Guaviare, Colombia">
+              </label>
+            </div>
+
+            <!-- Ubicación -->
+            <h3 class="sub">Sede principal</h3>
+            <div class="campos">
+              <label class="campo ancho">
+                <span>Dirección *</span>
+                <input name="direccion" [(ngModel)]="borrador.direccion" maxlength="200" required>
+              </label>
+              <label class="campo">
+                <span>Municipio y departamento *</span>
+                <input name="ciudad" [(ngModel)]="borrador.ciudad" maxlength="150" required>
+              </label>
+              <label class="campo corto">
+                <span>Código postal *</span>
+                <input name="codigoPostal" [(ngModel)]="borrador.codigoPostal" maxlength="12" inputmode="numeric" required>
+              </label>
+            </div>
+
+            <!-- Horario -->
+            <h3 class="sub">Horario de atención al público</h3>
+            <div class="lista">
+              @for (h of borrador.horario; track $index; let i = $index) {
+                <div class="fila">
+                  <input [name]="'horario' + i" [(ngModel)]="borrador.horario[i]" maxlength="150"
+                         placeholder="Ej. Lunes a viernes: 7:00 a.m. – 12:00 m." [attr.aria-label]="'Horario, línea ' + (i + 1)">
+                  <div class="acciones-fila">
+                    <button type="button" class="ico-btn" (click)="mover(borrador.horario, i, -1)" [disabled]="i === 0" aria-label="Subir">↑</button>
+                    <button type="button" class="ico-btn" (click)="mover(borrador.horario, i, 1)" [disabled]="i === borrador.horario.length - 1" aria-label="Bajar">↓</button>
+                    <button type="button" class="ico-btn quitar" (click)="quitarHorario(i)" aria-label="Quitar línea">✕</button>
+                  </div>
+                </div>
+              }
+              <button type="button" class="btn-agregar" (click)="agregarHorario()">+ Agregar línea de horario</button>
+            </div>
+
+            <!-- Teléfonos -->
+            <h3 class="sub">Teléfonos</h3>
+            <div class="lista">
+              @for (t of borrador.telefonos; track $index; let i = $index) {
+                <div class="fila fila-2">
+                  <input [name]="'telEtiqueta' + i" [(ngModel)]="t.etiqueta" maxlength="80" placeholder="Tipo (ej. Conmutador)" [attr.aria-label]="'Tipo de teléfono ' + (i + 1)">
+                  <input [name]="'telNumero' + i" [(ngModel)]="t.numero" maxlength="40" placeholder="(608) 584 0531" inputmode="tel" [attr.aria-label]="'Número ' + (i + 1)">
+                  <div class="acciones-fila">
+                    <button type="button" class="ico-btn" (click)="mover(borrador.telefonos, i, -1)" [disabled]="i === 0" aria-label="Subir">↑</button>
+                    <button type="button" class="ico-btn" (click)="mover(borrador.telefonos, i, 1)" [disabled]="i === borrador.telefonos.length - 1" aria-label="Bajar">↓</button>
+                    <button type="button" class="ico-btn quitar" (click)="quitarTelefono(i)" aria-label="Quitar teléfono">✕</button>
+                  </div>
+                </div>
+              }
+              <button type="button" class="btn-agregar" (click)="agregarTelefono()">+ Agregar teléfono</button>
+            </div>
+            <div class="campos">
+              <label class="campo">
+                <span>Línea anticorrupción / denuncias</span>
+                <input name="lineaAnticorrupcion" [(ngModel)]="borrador.lineaAnticorrupcion" maxlength="60" placeholder="Número o correo para denuncias">
+                <small [class.alerta]="!borrador.lineaAnticorrupcion.trim()">Requerida por la Res. 1519 de 2020. Si la deja vacía no aparece en el pie de página.</small>
+              </label>
+            </div>
+
+            <!-- Correos -->
+            <h3 class="sub">Correos electrónicos</h3>
+            <div class="campos">
+              <label class="campo">
+                <span>Correo institucional *</span>
+                <input type="email" name="correoInstitucional" [(ngModel)]="borrador.correoInstitucional" maxlength="150" required>
+              </label>
+              <label class="campo">
+                <span>Correo de notificaciones judiciales *</span>
+                <input type="email" name="correoJudicial" [(ngModel)]="borrador.correoJudicial" maxlength="150" required>
+              </label>
+            </div>
+
+            <!-- Redes -->
+            <h3 class="sub">Redes sociales</h3>
+            <div class="lista">
+              @for (r of borrador.redes; track $index; let i = $index) {
+                <div class="fila fila-3">
+                  <select [name]="'red' + i" [(ngModel)]="r.red" [attr.aria-label]="'Red social ' + (i + 1)">
+                    @for (o of redes; track o.valor) { <option [value]="o.valor">{{ o.etiqueta }}</option> }
+                  </select>
+                  <input [name]="'redUsuario' + i" [(ngModel)]="r.usuario" maxlength="100" placeholder="@usuario o nombre" [attr.aria-label]="'Usuario ' + (i + 1)">
+                  <input [name]="'redUrl' + i" [(ngModel)]="r.url" maxlength="300" placeholder="https://…" inputmode="url" [attr.aria-label]="'Enlace ' + (i + 1)">
+                  <div class="acciones-fila">
+                    <button type="button" class="ico-btn" (click)="mover(borrador.redes, i, -1)" [disabled]="i === 0" aria-label="Subir">↑</button>
+                    <button type="button" class="ico-btn" (click)="mover(borrador.redes, i, 1)" [disabled]="i === borrador.redes.length - 1" aria-label="Bajar">↓</button>
+                    <button type="button" class="ico-btn quitar" (click)="quitarRed(i)" aria-label="Quitar red social">✕</button>
+                  </div>
+                </div>
+              }
+              @if (borrador.redes.length < 6) {
+                <button type="button" class="btn-agregar" (click)="agregarRed()">+ Agregar red social</button>
+              }
+            </div>
+          </fieldset>
+
+          @if (avisoEntidad(); as a) {
+            <div class="aviso" [class.aviso-ok]="a.tipo === 'ok'" [class.aviso-error]="a.tipo === 'error'" role="status">{{ a.texto }}</div>
+          }
+
+          @if (esAdmin) {
+            <div class="barra-guardar" [class.con-cambios]="hayCambios">
+              <span>{{ hayCambios ? 'Tiene cambios sin guardar' : 'Sin cambios' }}</span>
+              <div>
+                <button type="button" class="btn btn-sec" (click)="reiniciarEntidad()" [disabled]="!hayCambios || guardandoEntidad()">Descartar</button>
+                <button type="submit" class="btn btn-pri" [disabled]="!hayCambios || guardandoEntidad()">
+                  {{ guardandoEntidad() ? 'Guardando…' : 'Guardar cambios' }}
+                </button>
+              </div>
+            </div>
+          }
+        </form>
+
+        <!-- Cumplimiento ITA -->
+        <aside class="panel ita" aria-label="Cumplimiento del pie de página">
+          <h2>Cumplimiento ITA</h2>
+          <p class="ayuda">Información mínima del pie de página según la Res. 1519 de 2020 (Anexo 2).</p>
+          <div class="medidor" role="img" [attr.aria-label]="cumplidos() + ' de ' + requisitosIta().length + ' requisitos'">
+            <div class="medidor-barra"><span [style.width.%]="cumplidos() / requisitosIta().length * 100"
+                 [class.completo]="cumplidos() === requisitosIta().length"></span></div>
+            <strong>{{ cumplidos() }}/{{ requisitosIta().length }}</strong>
+          </div>
+          <ul class="checks">
+            @for (r of requisitosIta(); track r.texto) {
+              <li [class.ok]="r.ok"><span aria-hidden="true">{{ r.ok ? '✔' : '✕' }}</span> {{ r.texto }}</li>
+            }
+          </ul>
+          <p class="ayuda">Los enlaces a políticas, términos, accesibilidad y mapa del sitio se administran en
+            <strong>Menús y estructura › Pie de página</strong>.</p>
+        </aside>
+      </div>
+    }
+
+    <!-- =====================================================
+         MI CUENTA
+    ====================================================== -->
+    @if (pestana() === 'cuenta') {
+      <div id="panel-cuenta" role="tabpanel" class="grid-2">
+        <section class="panel">
+          <h2>Mis datos</h2>
+          @if (!usaApi) {
+            <div class="aviso aviso-info">En modo local no hay cuentas de usuario. Esta sección funciona cuando el panel está conectado a la API.</div>
+          } @else if (errorPerfil()) {
+            <div class="aviso aviso-error">{{ errorPerfil() }} <button type="button" class="link" (click)="cargarPerfil()">Reintentar</button></div>
+          } @else if (!perfil()) {
+            <p class="cargando">Cargando…</p>
+          } @else {
+            @let p = perfil()!;
+            <div class="perfil">
+              <span class="avatar" aria-hidden="true">{{ p.nombre.charAt(0) }}</span>
+              <div>
+                <strong>{{ p.nombre }}</strong>
+                <span class="rol" [class.admin]="p.rol === 'admin'">{{ p.rol === 'admin' ? 'Administrador' : 'Editor' }}</span>
+              </div>
+            </div>
+            <dl class="datos">
+              <dt>Usuario</dt><dd>{{ p.usuario }}</dd>
+              <dt>Último ingreso</dt><dd>{{ p.ultimoAcceso ? (p.ultimoAcceso | date: "d 'de' MMMM 'de' y, h:mm a" : '' : 'es-CO') : '—' }}</dd>
+              <dt>Cuenta creada</dt><dd>{{ p.creadoEn ? (p.creadoEn | date: "d 'de' MMMM 'de' y" : '' : 'es-CO') : '—' }}</dd>
+              <dt>Su sesión vence</dt><dd>{{ p.sesionVence ? (p.sesionVence | date: "d 'de' MMMM, h:mm a" : '' : 'es-CO') : '—' }}</dd>
+            </dl>
+            <p class="ayuda">Para cambiar su nombre o rol, pida ayuda a un administrador en <strong>Usuarios</strong>.</p>
+          }
+        </section>
+
+        <section class="panel">
+          <h2>Cambiar contraseña</h2>
+          @if (!usaApi) {
+            <div class="aviso aviso-info">Disponible cuando el panel está conectado a la API.</div>
+          } @else {
+            <form (ngSubmit)="cambiarClave()" autocomplete="off">
+              <fieldset [disabled]="guardandoClave()">
+                <label class="campo">
+                  <span>Contraseña actual</span>
+                  <input [type]="verClaves() ? 'text' : 'password'" name="actual" [(ngModel)]="clave.actual" autocomplete="current-password" required>
+                </label>
+                <label class="campo">
+                  <span>Nueva contraseña</span>
+                  <input [type]="verClaves() ? 'text' : 'password'" name="nueva" [(ngModel)]="clave.nueva" autocomplete="new-password" maxlength="72" required>
+                </label>
+                <label class="campo">
+                  <span>Confirmar nueva contraseña</span>
+                  <input [type]="verClaves() ? 'text' : 'password'" name="confirmar" [(ngModel)]="clave.confirmar" autocomplete="new-password" maxlength="72" required>
+                </label>
+                <label class="check">
+                  <input type="checkbox" [checked]="verClaves()" (change)="verClaves.set(!verClaves())"> Mostrar contraseñas
+                </label>
+              </fieldset>
+
+              <ul class="checks compacto">
+                @for (r of requisitosClave(); track r.texto) {
+                  <li [class.ok]="r.ok"><span aria-hidden="true">{{ r.ok ? '✔' : '•' }}</span> {{ r.texto }}</li>
+                }
+              </ul>
+
+              @if (avisoClave(); as a) {
+                <div class="aviso" [class.aviso-ok]="a.tipo === 'ok'" [class.aviso-error]="a.tipo === 'error'" role="status">{{ a.texto }}</div>
+              }
+
+              <button type="submit" class="btn btn-pri" [disabled]="!claveValida || guardandoClave()">
+                {{ guardandoClave() ? 'Actualizando…' : 'Actualizar contraseña' }}
+              </button>
+            </form>
+          }
+        </section>
+      </div>
+    }
+
+    <!-- =====================================================
+         SESIÓN Y SEGURIDAD
+    ====================================================== -->
+    @if (pestana() === 'sesion') {
+      <div id="panel-sesion" role="tabpanel" class="grid-2">
+        <section class="panel">
+          <h2>Cierre por inactividad</h2>
+          <p class="ayuda">Si nadie usa el panel durante este tiempo, la sesión se cierra sola para proteger la información.
+            Aplica a todos los usuarios del panel.</p>
+          <form (ngSubmit)="guardarSesion()">
+            <label class="campo corto-2">
+              <span>Cerrar sesión después de</span>
+              <select name="minutos" [(ngModel)]="minutos" [disabled]="!esAdmin || guardandoSesion()">
+                @for (m of opcionesMinutos; track m) { <option [ngValue]="m">{{ m }} minutos</option> }
+              </select>
+            </label>
+            @if (avisoSesion(); as a) {
+              <div class="aviso" [class.aviso-ok]="a.tipo === 'ok'" [class.aviso-error]="a.tipo === 'error'" role="status">{{ a.texto }}</div>
+            }
+            @if (esAdmin) {
+              <button type="submit" class="btn btn-pri" [disabled]="guardandoSesion() || minutos === config.sesion().minutosInactividad">
+                {{ guardandoSesion() ? 'Guardando…' : 'Guardar' }}
+              </button>
+            } @else {
+              <p class="ayuda">Solo un administrador puede cambiar este tiempo.</p>
+            }
+          </form>
+        </section>
+
+        <section class="panel">
+          <h2>Seguridad de la cuenta</h2>
+          <ul class="consejos">
+            <li>La sesión también vence automáticamente unas horas después de iniciarla (lo define la API).</li>
+            <li>Use una contraseña de al menos 8 caracteres con letras y números, y no la comparta.</li>
+            <li>Cierre sesión al terminar, sobre todo en equipos compartidos.</li>
+            <li>Tras 10 intentos fallidos de ingreso, el acceso se bloquea 15 minutos.</li>
+          </ul>
+          <button type="button" class="btn btn-peligro" (click)="cerrarSesion()">Cerrar sesión ahora</button>
+        </section>
+      </div>
+    }
+
+    <!-- =====================================================
+         ESTADO DEL SISTEMA
+    ====================================================== -->
+    @if (pestana() === 'sistema') {
+      <div id="panel-sistema" role="tabpanel">
+        <div class="panel-head fuera">
+          <p class="ayuda">Información técnica para soporte. No contiene datos personales.</p>
+          @if (usaApi) {
+            <button type="button" class="btn btn-sec" (click)="cargarEstado()" [disabled]="cargandoEstado()">
+              {{ cargandoEstado() ? 'Consultando…' : '↻ Actualizar' }}
+            </button>
+          }
+        </div>
+
+        <div class="tarjetas">
+          <div class="tarjeta">
+            <span class="t-label">Modo de datos</span>
+            <strong>{{ usaApi ? 'API + MySQL' : 'Local (navegador)' }}</strong>
+            <small>{{ usaApi ? config.apiUrl : 'Configure API_URL en environment.ts para usar la base de datos' }}</small>
+          </div>
+          <div class="tarjeta" [class.mal]="usaApi && ping() && !ping()!.ok">
+            <span class="t-label">Conexión con la API</span>
+            @if (!usaApi) {
+              <strong>No aplica</strong>
+            } @else if (ping(); as p) {
+              <strong>{{ p.ok ? '● En línea' : '● Sin respuesta' }}</strong>
+              <small>{{ p.ms }} ms</small>
+            } @else {
+              <strong>—</strong>
+            }
+          </div>
+          <div class="tarjeta">
+            <span class="t-label">Base de datos</span>
+            @if (estado(); as e) {
+              <strong>{{ e.baseDatos.nombre }}</strong>
+              <small>{{ e.baseDatos.version }} · {{ e.baseDatos.latenciaMs }} ms</small>
+            } @else { <strong>—</strong> }
+          </div>
+          <div class="tarjeta">
+            <span class="t-label">Versiones</span>
+            <strong>Angular {{ versionAngular }}</strong>
+            <small>@if (estado(); as e) { API {{ e.api.version }} · Node {{ e.api.node }} } @else { API — }</small>
+          </div>
+        </div>
+
+        @if (errorEstado()) {
+          <div class="aviso aviso-error">{{ errorEstado() }}</div>
+        }
+
+        @if (estado(); as e) {
+          <div class="grid-2">
+            <section class="panel">
+              <h2>Contenido</h2>
+              <dl class="datos">
+                <dt>Páginas</dt><dd>{{ e.conteos.paginas }}</dd>
+                <dt>Entradas</dt><dd>{{ e.conteos.entradas }}</dd>
+                <dt>Archivos multimedia</dt><dd>{{ e.conteos.multimedia }}</dd>
+                <dt>Usuarios activos</dt><dd>{{ e.conteos.usuarios }}</dd>
+                <dt>API activa desde</dt><dd>{{ e.api.activaDesde | date: "d MMM y, h:mm a" : '' : 'es-CO' }} ({{ tiempoActiva(e.api.activaDesde) }})</dd>
+                <dt>Entorno</dt><dd>{{ e.api.entorno }}</dd>
+              </dl>
+            </section>
+
+            <section class="panel">
+              <h2>Migraciones de la base de datos</h2>
+              @if (e.migraciones.pendientes.length) {
+                <div class="aviso aviso-error">Hay {{ e.migraciones.pendientes.length }} migración(es) pendiente(s). Reinicie la API para aplicarlas.</div>
+              } @else {
+                <div class="aviso aviso-ok">La base de datos está al día.</div>
+              }
+              <ul class="migraciones">
+                @for (m of e.migraciones.aplicadas; track m.nombre) {
+                  <li><span class="ok">✔</span> <code>{{ m.nombre }}</code> <small>{{ m.aplicada_en | date: 'dd/MM/yyyy HH:mm' }}</small></li>
+                }
+                @for (m of e.migraciones.pendientes; track m) {
+                  <li class="pend"><span>⏳</span> <code>{{ m }}</code> <small>pendiente</small></li>
+                }
+              </ul>
+            </section>
+          </div>
+        } @else if (!usaApi) {
+          <div class="aviso aviso-info">En modo local no hay base de datos. Cuando publique la API, aquí verá su estado.</div>
+        }
+      </div>
+    }
+  }
+</section>

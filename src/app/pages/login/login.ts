@@ -26,8 +26,13 @@ export class Login {
   });
 
   // signals: la app es zoneless y estos valores cambian después de un await
+  private readonly params = inject(ActivatedRoute).snapshot.queryParamMap;
   readonly error = signal(
-    inject(ActivatedRoute).snapshot.queryParamMap.has('expirada') ? 'Su sesión expiró. Inicie sesión de nuevo.' : '',
+    this.params.has('expirada')
+      ? 'Su sesión expiró. Inicie sesión de nuevo.'
+      : this.params.has('inactividad')
+        ? 'Su sesión se cerró por inactividad. Inicie sesión de nuevo.'
+        : '',
   );
   readonly enviando = signal(false);
 

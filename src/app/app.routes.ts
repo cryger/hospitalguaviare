@@ -11,7 +11,7 @@ import { PqrsfComponent } from './pages/pqrsf/pqrsf';
 import { Login } from './pages/login/login';
 import { DashboardHomeComponent } from './pages/dashboardhome/dashboardhome';
 import { Usuarios } from './pages/admin/usuarios/usuarios';
-import { Configuacion } from './pages/admin/configuracion/configuracion';
+import { Configuracion } from './pages/admin/configuracion/configuracion';
 import { PqrsfAdminComponent as AdminPqrsf } from './pages/admin/pqrsf-admin/pqrsf-admin';
 import { AuthGuard } from './shared/guards/auth/auth-guard';
 import { CotizacionesPropuestasAdminComponent } from './pages/admin/cotizaciones-propuestas-admin/cotizaciones-propuestas-admin/cotizaciones-propuestas-admin';
@@ -69,7 +69,7 @@ export const routes: Routes = [
       { path: 'vacantes', component: TrabajaNosotrosAdminComponent, data: { breadcrumb: 'Trabaja con nosotros' } },
       { path: 'usuarios', component: Usuarios, data: { breadcrumb: 'Administrar Usuarios' } },
       { path: 'accesibilidad-admin', component: AccesibilidadAdmin, data: { breadcrumb: 'Administrar Accesibilidad' } },
-      { path: 'configuracion', component: Configuacion, data: { breadcrumb: 'Configuración' } },
+      { path: 'configuracion', component: Configuracion, data: { breadcrumb: 'Configuración' } },
 
       // 🧩 CMS: Menú → Páginas → Entradas → Multimedia
       {

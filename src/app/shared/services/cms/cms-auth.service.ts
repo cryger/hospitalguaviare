@@ -10,6 +10,12 @@ export interface UsuarioCms {
   rol: 'admin' | 'editor';
 }
 
+export interface PerfilCms extends UsuarioCms {
+  ultimoAcceso: string | null;
+  creadoEn: string | null;
+  sesionVence: string | null;
+}
+
 const CLAVE_TOKEN = 'cms-token';
 const CLAVE_USUARIO = 'cms-usuario';
 
@@ -61,6 +67,17 @@ export class CmsAuthService {
     localStorage.setItem('auth', 'true');
     localStorage.setItem('username', r.usuario.nombre);
     return r.usuario;
+  }
+
+  /** Datos del usuario que inició sesión (desde la base de datos) */
+  async perfil(): Promise<PerfilCms> {
+    const r = await firstValueFrom(this.http.get<{ usuario: PerfilCms }>(`${this.config.apiUrl}/auth/yo`));
+    return r.usuario;
+  }
+
+  /** Cambia la contraseña del usuario actual */
+  async cambiarClave(actual: string, nueva: string): Promise<void> {
+    await firstValueFrom(this.http.put(`${this.config.apiUrl}/auth/clave`, { actual, nueva }));
   }
 
   logout(): void {

@@ -11,6 +11,7 @@ const path = require('path');
 const { config } = require('./src/config');
 const { rutasAuth } = require('./src/auth');
 const { rutasCms } = require('./src/cms');
+const { rutasConfiguracion } = require('./src/configuracion');
 const { manejarErrores } = require('./src/errores');
 const { aplicarMigraciones } = require('./src/migraciones');
 
@@ -38,6 +39,7 @@ const router = express.Router();
 router.get('/salud', (_req, res) => res.json({ ok: true, hora: new Date().toISOString() }));
 router.use('/auth', rutasAuth);
 router.use('/cms', rutasCms);
+router.use('/', rutasConfiguracion);
 router.use(
   '/uploads',
   express.static(path.resolve(config.uploadDir), { maxAge: '30d', fallthrough: false }),
