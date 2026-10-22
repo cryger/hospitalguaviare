@@ -1,9 +1,11 @@
 <section class="tn">
   <header class="tn-head">
-    <span class="antetitulo">Talento humano</span>
-    <h1>Trabaja con Nosotros</h1>
+    <span class="antetitulo">Información de interés</span>
+    <h1>Trabaja con nosotros</h1>
     <p class="lead">Conozca las convocatorias abiertas de la E.S.E. Hospital San José del Guaviare y los requisitos para participar.</p>
   </header>
+
+  <app-info-interes-nav />
 
   @if (service.cargando() && !service.vacantes().length) {
     <p class="vacio">Cargando convocatorias…</p>

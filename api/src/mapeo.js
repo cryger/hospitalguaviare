@@ -68,6 +68,22 @@ const TABLAS = {
     fechas: ['fechaPublicacion', 'fechaCierre'],
     json: ['requisitos'],
   },
+  cotizaciones: {
+    tabla: 'cms_cotizaciones',
+    campos: {
+      titulo: 'titulo',
+      descripcion: 'descripcion',
+      dependencia: 'dependencia',
+      documentoUrl: 'documento_url',
+      documentoNombre: 'documento_nombre',
+      fechaPublicacion: 'fecha_publicacion',
+      fechaCierre: 'fecha_cierre',
+      estado: 'estado',
+      migradoDe: 'migrado_de',
+    },
+    booleanos: [],
+    fechas: ['fechaPublicacion', 'fechaCierre'],
+  },
   multimedia: {
     tabla: 'cms_multimedia',
     campos: {

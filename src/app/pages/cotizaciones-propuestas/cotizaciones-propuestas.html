@@ -1,26 +1,87 @@
-<section class="cotizaciones-publicas">
+<section class="cot">
+  <header class="cot-head">
+    <span class="antetitulo">Información de interés</span>
+    <h1>Invitaciones a cotizar</h1>
+    <p class="lead">La E.S.E. Hospital San José del Guaviare invita a personas naturales y jurídicas a presentar cotizaciones para la adquisición de bienes y servicios. Descargue el documento de cada invitación para conocer las especificaciones y condiciones.</p>
+  </header>
 
-  <article class="cotizacion-card" *ngFor="let c of cotizaciones">
+  <app-info-interes-nav />
 
-    <div class="cotizacion-info">
-      <h3>{{ c.titulo }}</h3>
-      <p>{{ c.descripcion }}</p>
+  @if (service.cargando() && !service.cotizaciones().length) {
+    <p class="vacio">Cargando invitaciones…</p>
+  } @else {
+    <h2 class="h-seccion">Invitaciones vigentes <small>{{ vigentes().length }}</small></h2>
 
-      <span class="fecha">
-        {{ c.fechaPublicacion | date:'longDate' }}
-      </span>
+    @if (vigentes().length) {
+      <div class="lista">
+        @for (c of vigentes(); track c.id) {
+          <ng-container *ngTemplateOutlet="tarjeta; context: { $implicit: c }" />
+        }
+      </div>
+    } @else {
+      <div class="sin-datos">
+        <span aria-hidden="true">📭</span>
+        <p>En este momento no hay invitaciones a cotizar vigentes. Consulte esta sección periódicamente.</p>
+      </div>
+    }
+
+    @if (anteriores().length) {
+      <h2 class="h-seccion h-anteriores">Invitaciones anteriores <small>{{ anteriores().length }}</small></h2>
+      <div class="lista">
+        @for (c of anteriores(); track c.id) {
+          <ng-container *ngTemplateOutlet="tarjeta; context: { $implicit: c }" />
+        }
+      </div>
+    }
+
+    <aside class="nota">
+      <strong>Importante:</strong> las cotizaciones se reciben en los términos, medios y fechas indicados en el documento de cada invitación.
+      La publicación de una invitación a cotizar no obliga al hospital a contratar.
+    </aside>
+  }
+</section>
+
+<!-- Tarjeta de invitación (vigentes y anteriores) -->
+<ng-template #tarjeta let-c>
+  <article class="item" [class.cerrada]="c.estado === 'cerrada'">
+    <div class="item-fecha" aria-hidden="true">
+      <span class="dia">{{ c.fechaPublicacion | date: 'dd' }}</span>
+      <span class="mes">{{ c.fechaPublicacion | date: 'MMM' : '' : 'es-CO' }}</span>
+      <span class="anio">{{ c.fechaPublicacion | date: 'y' }}</span>
     </div>
 
-    <a
-      class="gov-btn-secondary"
-      [href]="c.archivoUrl"
-      target="_blank"
-      rel="noopener"
-    >
-      📄 Descargar Documento
-    </a>
+    <div class="item-cuerpo">
+      <div class="chips">
+        @if (c.estado === 'cerrada') {
+          <span class="chip chip-cerrada">Cerrada</span>
+        } @else {
+          <span class="chip chip-vigente">Vigente</span>
+          @if (diasRestantes(c.fechaCierre); as d) {
+            @if (d > 0) { <span class="chip chip-plazo">{{ d === 1 ? 'Cierra mañana' : 'Faltan ' + d + ' días' }}</span> }
+          }
+        }
+        <span class="tipo">Invitación a presentar cotización</span>
+      </div>
 
+      <h3>{{ c.titulo }}</h3>
 
+      <ul class="datos">
+        <li><span aria-hidden="true">📅</span><strong>Publicada:</strong> {{ c.fechaPublicacion | date: "d 'de' MMMM 'de' y" : '' : 'es-CO' }}</li>
+        @if (c.fechaCierre) {
+          <li><span aria-hidden="true">⏳</span><strong>Fecha límite:</strong> {{ c.fechaCierre | date: "d 'de' MMMM 'de' y" : '' : 'es-CO' }}</li>
+        }
+        @if (c.dependencia) {
+          <li><span aria-hidden="true">🏢</span><strong>Dependencia:</strong> {{ c.dependencia }}</li>
+        }
+      </ul>
+
+      @if (c.descripcion) { <p class="desc">{{ c.descripcion }}</p> }
+
+      @if (c.documentoUrl) {
+        <a class="btn-govco" [class.btn-sec]="c.estado === 'cerrada'" [href]="c.documentoUrl" target="_blank" rel="noopener">
+          📄 {{ c.estado === 'cerrada' ? 'Ver documento' : 'Descargar invitación' }}
+        </a>
+      }
+    </div>
   </article>
-
-</section>
+</ng-template>

@@ -17,8 +17,7 @@ const MENU_FIJO: ItemMenu[] = [
   ['Atención y servicios a la ciudadanía', '/atencion-y-servicios-a-la-ciudadania'],
   ['Participa', '/participa'],
   ['Nuestro Hospital', '/nuestro-hospital'],
-  ['Cotizaciones y Propuestas', '/cotizaciones-propuestas'],
-  ['Trabaja con Nosotros', '/trabaja-nosotros'],
+  ['Información de interés', '/informacion-de-interes'],
 ].map(([titulo, url]) => ({ id: url, titulo, url, externo: false, hijos: [] }));
 
 @Component({

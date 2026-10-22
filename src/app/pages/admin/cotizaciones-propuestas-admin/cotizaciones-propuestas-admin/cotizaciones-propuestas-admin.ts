@@ -1,160 +1,122 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CotizacionesService } from '../../../../shared/services/cotizaciones/cotizaciones';
-import { Cotizacion } from '../../../../shared/models/cotizacion/cotizacion/cotizacion-module';
-
-type ModalModo = 'crear' | 'editar' | 'preview';
+import { CmsService } from '../../../../shared/services/cms/cms.service';
+import { Cotizacion, EstadoCotizacion } from '../../../../shared/models/cotizacion/cotizacion/cotizacion-module';
 
 @Component({
   selector: 'app-cotizaciones-propuestas-admin',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './cotizaciones-propuestas-admin.html',
-  styleUrls: ['./cotizaciones-propuestas-admin.css']
+  styleUrls: ['./cotizaciones-propuestas-admin.css'],
 })
 export class CotizacionesPropuestasAdminComponent implements OnInit {
+  readonly service = inject(CotizacionesService);
+  private cms = inject(CmsService);
+  private fb = inject(FormBuilder);
 
-  /* =========================
-     FORM
-  ========================== */
   form!: FormGroup;
-  archivoSeleccionado: File | null = null;
-
-  /* =========================
-     DATA
-  ========================== */
-  cotizaciones: Cotizacion[] = [];
-  cotizacionSeleccionada: Cotizacion | null = null;
-
-  /* =========================
-     UI STATE
-  ========================== */
-  modalOpen = false;
-  modalModo: ModalModo = 'crear';
-
-  constructor(
-    private fb: FormBuilder,
-    private cotizacionesService: CotizacionesService
-  ) {}
+  readonly modalOpen = signal(false);
+  readonly editando = signal<Cotizacion | null>(null);
+  readonly guardando = signal(false);
+  readonly subiendo = signal(false);
+  readonly mensaje = signal<string | null>(null);
+  readonly filtro = signal<'todas' | EstadoCotizacion>('todas');
 
   ngOnInit(): void {
     this.form = this.fb.group({
       titulo: ['', Validators.required],
       descripcion: ['', Validators.required],
-      estado: ['publicada', Validators.required]
+      dependencia: ['Subgerencia Administrativa y Financiera'],
+      documentoUrl: [''],
+      documentoNombre: [''],
+      fechaPublicacion: [''],
+      fechaCierre: [''],
+      estado: ['publicada'],
     });
-
-    this.cargar();
+    this.service.cargar(true);
   }
 
-  /* =========================
-     CRUD
-  ========================== */
-
-  cargar(): void {
-    this.cotizaciones = this.cotizacionesService.getAll();
+  filtradas(): Cotizacion[] {
+    const f = this.filtro();
+    return this.service.cotizaciones().filter((c) => f === 'todas' || c.estado === f);
   }
 
-  guardar(): void {
-    if (this.form.invalid) return;
-
-    // CREAR
-    if (this.modalModo === 'crear') {
-      if (!this.archivoSeleccionado) return;
-
-      this.cotizacionesService.crear({
-        ...this.form.value,
-        archivoNombre: this.archivoSeleccionado.name,
-        archivoTipo: this.archivoSeleccionado.type,
-        archivoUrl: URL.createObjectURL(this.archivoSeleccionado)
-      });
-    }
-
-    // EDITAR
-    if (this.modalModo === 'editar' && this.cotizacionSeleccionada) {
-      this.cotizacionesService.actualizar(
-        this.cotizacionSeleccionada.id,
-        this.form.value
-      );
-    }
-
-    this.cerrarModal();
-    this.cargar();
+  contar(estado: EstadoCotizacion): number {
+    return this.service.cotizaciones().filter((c) => c.estado === estado).length;
   }
-
-  eliminar(id: number): void {
-  const confirmar = confirm(
-    '¿Está seguro de que desea eliminar esta cotización?'
-  );
-
-  if (!confirmar) {
-    return;
-  }
-
-  this.cotizacionesService.eliminar(id);
-  this.cargar();
-}
-
-
-  /* =========================
-     MODAL CONTROL
-  ========================== */
 
   abrirCrear(): void {
-    this.modalModo = 'crear';
-    this.cotizacionSeleccionada = null;
-    this.form.reset({ estado: 'publicada' });
-    this.archivoSeleccionado = null;
-    this.modalOpen = true;
-  }
-
-  abrirEditar(c: Cotizacion): void {
-    this.modalModo = 'editar';
-    this.cotizacionSeleccionada = c;
-
-    this.form.patchValue({
-      titulo: c.titulo,
-      descripcion: c.descripcion,
-      estado: c.estado
+    this.editando.set(null);
+    this.form.reset({
+      dependencia: 'Subgerencia Administrativa y Financiera',
+      fechaPublicacion: this.aFechaInput(new Date().toISOString()),
+      estado: 'publicada',
     });
-
-    this.modalOpen = true;
+    this.modalOpen.set(true);
   }
 
-  abrirPreview(c: Cotizacion): void {
-    this.modalModo = 'preview';
-    this.cotizacionSeleccionada = c;
-    this.modalOpen = true;
+  editar(c: Cotizacion): void {
+    this.editando.set(c);
+    this.form.reset({
+      ...c,
+      fechaPublicacion: this.aFechaInput(c.fechaPublicacion),
+      fechaCierre: this.aFechaInput(c.fechaCierre),
+    });
+    this.modalOpen.set(true);
   }
 
-  cerrarModal(): void {
-    this.modalOpen = false;
-    this.cotizacionSeleccionada = null;
-    this.archivoSeleccionado = null;
-    this.form.reset({ estado: 'publicada' });
+  async subir(ev: Event): Promise<void> {
+    const input = ev.target as HTMLInputElement;
+    const archivo = input.files?.[0];
+    input.value = '';
+    if (!archivo) return;
+    this.subiendo.set(true);
+    const [m] = await this.cms.subirArchivos([archivo]);
+    this.subiendo.set(false);
+    if (m) this.form.patchValue({ documentoUrl: m.url, documentoNombre: archivo.name });
+    else this.mensaje.set(this.cms.error() || 'No se pudo subir el archivo.');
   }
 
-  /* =========================
-     FILE
-  ========================== */
-
-  onFileSelected(event: Event): void {
-    const input = event.target as HTMLInputElement;
-    if (input.files && input.files.length) {
-      this.archivoSeleccionado = input.files[0];
+  async guardar(): Promise<void> {
+    if (this.form.invalid || this.guardando()) {
+      this.form.markAllAsTouched();
+      return;
+    }
+    const v = this.form.value;
+    const data: Partial<Cotizacion> = {
+      ...v,
+      fechaPublicacion: v.fechaPublicacion ? new Date(v.fechaPublicacion + 'T12:00:00').toISOString() : new Date().toISOString(),
+      fechaCierre: v.fechaCierre ? new Date(v.fechaCierre + 'T23:59:00').toISOString() : null,
+    };
+    this.guardando.set(true);
+    try {
+      const actual = this.editando();
+      if (actual) await this.service.actualizar(actual.id, data);
+      else await this.service.crear(data);
+      this.modalOpen.set(false);
+      this.mensaje.set(actual ? 'Invitación actualizada.' : 'Invitación creada.');
+    } catch {
+      this.mensaje.set('No se pudo guardar la invitación. Intente de nuevo.');
+    } finally {
+      this.guardando.set(false);
     }
   }
 
-  /* =========================
-     HELPERS
-  ========================== */
-
-  esPreview(): boolean {
-    return this.modalModo === 'preview';
+  async cambiarEstado(c: Cotizacion, estado: EstadoCotizacion): Promise<void> {
+    await this.service.actualizar(c.id, { estado });
   }
 
-  esEditar(): boolean {
-    return this.modalModo === 'editar';
+  async eliminar(c: Cotizacion): Promise<void> {
+    if (!confirm(`¿Eliminar la invitación "${c.titulo}"?`)) return;
+    await this.service.eliminar(c.id);
+  }
+
+  private aFechaInput(f?: string | Date | null): string {
+    if (!f) return '';
+    const d = new Date(f);
+    return isNaN(d.getTime()) ? '' : d.toISOString().slice(0, 10);
   }
 }

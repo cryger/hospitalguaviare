@@ -9,6 +9,7 @@ import {
   tipoDesdeMime,
 } from './cms-datasource';
 import { CmsEntrada, CmsMenu, CmsMultimedia, CmsPagina } from '../../models/cms/cms.models';
+import { COTIZACIONES_SEMILLA, VACANTES_SEMILLA } from './cms-semilla-modulos';
 
 /**
  * Implementación en localStorage para trabajar el admin sin backend.
@@ -27,6 +28,7 @@ export class CmsLocalDataSource extends CmsDataSource {
   constructor() {
     super();
     this.sembrarSiVacio();
+    this.sembrarModulos();
     this.actualizarSemilla();
   }
 
@@ -152,7 +154,7 @@ export class CmsLocalDataSource extends CmsDataSource {
   }
 
   /* ===== Estructura inicial (Resolución 1519 de 2020) ===== */
-  private readonly versionSemilla = 4;
+  private readonly versionSemilla = 5;
 
   private sembrarSiVacio(): void {
     if (localStorage.getItem(this.prefijo + 'menus')) return;
@@ -177,6 +179,20 @@ export class CmsLocalDataSource extends CmsDataSource {
     localStorage.setItem(this.prefijo + 'entradas', '[]');
     if (!localStorage.getItem(this.prefijo + 'multimedia')) localStorage.setItem(this.prefijo + 'multimedia', '[]');
     localStorage.setItem(this.prefijo + 'version', String(this.versionSemilla));
+  }
+
+  /** Vacantes e invitaciones a cotizar migradas del portal anterior (solo si están vacías) */
+  private sembrarModulos(): void {
+    const clave = this.prefijo + 'modulos-semilla';
+    if (localStorage.getItem(clave) === '1') return;
+    const t = this.ahora();
+    const sembrar = (c: CmsColeccion, datos: object[]) => {
+      if (this.leer(c).length) return;
+      this.escribir(c, datos.map((d, i) => ({ ...d, id: i + 1, creadoEn: t, actualizadoEn: t })));
+    };
+    sembrar('vacantes', VACANTES_SEMILLA);
+    sembrar('cotizaciones', COTIZACIONES_SEMILLA);
+    localStorage.setItem(clave, '1');
   }
 
   /**
@@ -218,6 +234,16 @@ export class CmsLocalDataSource extends CmsDataSource {
       };
       paginas.push(nueva);
       porSlug.set(nueva.slug, nueva);
+    }
+
+    // Versión 5: "Información de interés" agrupa Invitaciones a cotizar y Trabaja con nosotros
+    const info = porSlug.get('informacion-de-interes');
+    if (version < 5 && info) {
+      for (const p of paginas) {
+        const s = ESTRUCTURA_1519.find((x) => x.slug === p.slug && x.parentId === 83);
+        if (s) Object.assign(p, { parentId: info.id, menuId: info.menuId, titulo: s.titulo, plantilla: 'enlace', urlExterna: s.urlExterna, orden: s.orden, visibleEnMenu: true, actualizadoEn: t });
+        if (p.slug === 'noticias' && p.parentId === null) p.orden = 5;
+      }
     }
     this.escribir('paginas', paginas);
     localStorage.setItem(this.prefijo + 'version', String(this.versionSemilla));
@@ -306,9 +332,10 @@ const ESTRUCTURA_1519: PaginaSemilla[] = [
   { id: 75, menuId: 1, parentId: 74, titulo: "Reseña histórica", slug: 'resena-historica', plantilla: 'contenido', orden: 0 },
   { id: 76, menuId: 1, parentId: 74, titulo: "Portafolio de servicios", slug: 'portafolio-de-servicios', plantilla: 'listado', orden: 1 },
   { id: 77, menuId: 1, parentId: 74, titulo: "Sedes y horarios de atención", slug: 'sedes-y-horarios', plantilla: 'contenido', orden: 2 },
-  { id: 78, menuId: 1, parentId: null, titulo: "Cotizaciones y Propuestas", slug: 'cotizaciones-propuestas', plantilla: 'enlace', urlExterna: '/cotizaciones-propuestas', orden: 4 },
-  { id: 79, menuId: 1, parentId: null, titulo: "Trabaja con Nosotros", slug: 'trabaja-nosotros', plantilla: 'enlace', urlExterna: '/trabaja-nosotros', orden: 5 },
-  { id: 80, menuId: 1, parentId: null, titulo: "Noticias", slug: 'noticias', plantilla: 'listado', orden: 6, visibleEnMenu: false },
+  { id: 83, menuId: 1, parentId: null, titulo: "Información de interés", slug: 'informacion-de-interes', plantilla: 'contenido', descripcion: "Invitaciones a cotizar y convocatorias laborales de la E.S.E. Hospital San José del Guaviare.", orden: 4 },
+  { id: 78, menuId: 1, parentId: 83, titulo: "Invitaciones a cotizar", slug: 'cotizaciones-propuestas', plantilla: 'enlace', urlExterna: '/informacion-de-interes/invitaciones-a-cotizar', orden: 0 },
+  { id: 79, menuId: 1, parentId: 83, titulo: "Trabaja con nosotros", slug: 'trabaja-nosotros', plantilla: 'enlace', urlExterna: '/informacion-de-interes/trabaja-con-nosotros', orden: 1 },
+  { id: 80, menuId: 1, parentId: null, titulo: "Noticias", slug: 'noticias', plantilla: 'listado', orden: 5, visibleEnMenu: false },
   { id: 81, menuId: 2, parentId: null, titulo: "Políticas de privacidad y tratamiento de datos", slug: 'politicas-de-privacidad', plantilla: 'contenido', orden: 0, estado: 'borrador' },
   { id: 82, menuId: 2, parentId: null, titulo: "Términos y condiciones", slug: 'terminos-y-condiciones', plantilla: 'contenido', orden: 1, estado: 'borrador' },
 ];

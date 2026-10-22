@@ -1,149 +1,116 @@
-<h2 class="gov-title">Gestión de Cotizaciones y Propuestas</h2>
+<h2 class="gov-title">Gestión de Invitaciones a Cotizar</h2>
 
-<!-- =========================
-     HEADER + ACCIÓN
-========================== -->
-<div class="admin-header">
-  <button
-    class="gov-btn-primary"
-    type="button"
-    (click)="abrirCrear()">
-    ➕ Agregar cotización
-  </button>
+<div class="admin-actions">
+  <div class="filtros-estado" role="tablist" aria-label="Filtrar por estado">
+    <button type="button" [class.on]="filtro() === 'todas'" (click)="filtro.set('todas')">Todas ({{ service.cotizaciones().length }})</button>
+    <button type="button" [class.on]="filtro() === 'publicada'" (click)="filtro.set('publicada')">Vigentes ({{ contar('publicada') }})</button>
+    <button type="button" [class.on]="filtro() === 'borrador'" (click)="filtro.set('borrador')">Borradores ({{ contar('borrador') }})</button>
+    <button type="button" [class.on]="filtro() === 'cerrada'" (click)="filtro.set('cerrada')">Cerradas ({{ contar('cerrada') }})</button>
+  </div>
+  <button class="gov-btn-primary" (click)="abrirCrear()">➕ Nueva invitación</button>
 </div>
 
-<!-- =========================
-     LISTADO
-========================== -->
-<table class="gov-table">
-  <thead>
-    <tr>
-      <th>Título</th>
-      <th>Documento</th>
-      <th>Estado</th>
-      <th>Fecha</th>
-      <th>Acciones</th>
-    </tr>
-  </thead>
+@if (mensaje()) {
+  <div class="aviso" role="status">{{ mensaje() }} <button type="button" (click)="mensaje.set(null)" aria-label="Cerrar">✕</button></div>
+}
 
-  <tbody>
-    <tr *ngFor="let c of cotizaciones">
-      <td>{{ c.titulo }}</td>
-      <td>{{ c.archivoNombre }}</td>
-      <td>{{ c.estado }}</td>
-      <td>{{ c.fechaPublicacion | date }}</td>
-      <td class="acciones">
-         <button
-          type="button"
-          class="gov-btn-secondary"
-          (click)="abrirPreview(c)">
-          Ver
-        </button>
+<div class="gov-table-wrapper">
+  <table class="gov-table">
+    <thead>
+      <tr>
+        <th>Objeto</th>
+        <th>Publicación</th>
+        <th>Cierre</th>
+        <th>Estado</th>
+        <th class="acciones">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (c of filtradas(); track c.id) {
+        <tr>
+          <td>
+            {{ c.titulo }}
+            @if (c.documentoUrl) { <a class="doc" [href]="c.documentoUrl" target="_blank" rel="noopener">📄 PDF</a> }
+          </td>
+          <td>{{ c.fechaPublicacion | date: 'dd/MM/yyyy' }}</td>
+          <td>{{ c.fechaCierre ? (c.fechaCierre | date: 'dd/MM/yyyy') : '—' }}</td>
+          <td><span class="estado" [class]="'estado ' + c.estado">{{ c.estado === 'publicada' ? 'vigente' : c.estado }}</span></td>
+          <td class="acciones">
+            @if (c.estado === 'publicada') {
+              <button class="gov-btn-editar" (click)="cambiarEstado(c, 'cerrada')">Cerrar</button>
+            } @else {
+              <button class="gov-btn-editar" (click)="cambiarEstado(c, 'publicada')">Publicar</button>
+            }
+            <button class="gov-btn-editar" (click)="editar(c)">Editar</button>
+            <button class="gov-btn-eliminar" (click)="eliminar(c)">Eliminar</button>
+          </td>
+        </tr>
+      } @empty {
+        <tr><td colspan="5" class="sin-datos">{{ service.cargando() ? 'Cargando…' : 'No hay invitaciones en este filtro' }}</td></tr>
+      }
+    </tbody>
+  </table>
+</div>
 
-        <button
-          type="button"
-          class="gov-btn-warning"
-          (click)="abrirEditar(c)">
-          Editar
-        </button>
-
-        <button
-          type="button"
-          class="gov-btn-danger"
-          (click)="eliminar(c.id)">
-          Eliminar
-        </button>
-      </td>
-    </tr>
-  </tbody>
-</table>
-
-
-<!-- =========================
-     MODAL CREAR COTIZACIÓN
-========================== -->
-<div class="gov-modal-backdrop" *ngIf="modalOpen">
-
-  <div class="gov-modal">
-
-    <!-- HEADER -->
+<!-- MODAL CREAR / EDITAR -->
+@if (modalOpen()) {
+<div class="gov-modal-backdrop">
+  <div class="gov-modal gov-modal-lg" role="dialog" aria-modal="true">
     <header class="gov-modal-header">
-      <h3>
-        {{ modalModo === 'crear' ? 'Registrar cotización' :
-           modalModo === 'editar' ? 'Editar cotización' :
-           'Vista previa de cotización' }}
-      </h3>
-
-      <button class="gov-modal-close" (click)="cerrarModal()">✕</button>
+      <h3>{{ editando() ? 'Editar invitación a cotizar' : 'Nueva invitación a cotizar' }}</h3>
+      <button class="gov-modal-close" (click)="modalOpen.set(false)" aria-label="Cerrar">✕</button>
     </header>
 
-    <!-- BODY -->
     <section class="gov-modal-body">
-
-      <!-- PREVIEW -->
-      <div *ngIf="esPreview() && cotizacionSeleccionada">
-        <p><strong>Título:</strong> {{ cotizacionSeleccionada.titulo }}</p>
-        <p><strong>Descripción:</strong> {{ cotizacionSeleccionada.descripcion }}</p>
-        <p><strong>Estado:</strong> {{ cotizacionSeleccionada.estado }}</p>
-
-        <a
-          class="gov-btn-secondary"
-          [href]="cotizacionSeleccionada.archivoUrl"
-          target="_blank">
-          📄 Ver documento
-        </a>
-      </div>
-
-      <!-- FORM -->
-      <form
-        *ngIf="!esPreview()"
-        [formGroup]="form"
-        (ngSubmit)="guardar()"
-        class="gov-form">
-
+      <form [formGroup]="form" (ngSubmit)="guardar()" class="gov-form">
         <div class="gov-field">
-          <label>Título</label>
-          <input type="text" formControlName="titulo" />
+          <label for="c-titulo">Objeto a contratar *</label>
+          <input id="c-titulo" type="text" formControlName="titulo" placeholder="Ej.: Suministro de reactivos para laboratorio clínico">
         </div>
 
         <div class="gov-field">
-          <label>Descripción</label>
-          <textarea rows="3" formControlName="descripcion"></textarea>
+          <label for="c-desc">Descripción *</label>
+          <textarea id="c-desc" rows="4" formControlName="descripcion"></textarea>
         </div>
 
-        <div class="gov-field" *ngIf="modalModo === 'crear'">
-          <label>Documento</label>
-          <input
-            type="file"
-            (change)="onFileSelected($event)"
-            accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.jpg,.png"
-          />
+        <div class="gov-form-grid">
+          <div class="gov-field">
+            <label for="c-dep">Dependencia</label>
+            <input id="c-dep" type="text" formControlName="dependencia">
+          </div>
+          <div class="gov-field">
+            <label for="c-pub">Fecha de publicación</label>
+            <input id="c-pub" type="date" formControlName="fechaPublicacion">
+          </div>
+          <div class="gov-field">
+            <label for="c-cierre">Fecha límite para cotizar</label>
+            <input id="c-cierre" type="date" formControlName="fechaCierre">
+          </div>
+          <div class="gov-field">
+            <label for="c-estado">Estado</label>
+            <select id="c-estado" formControlName="estado">
+              <option value="publicada">Vigente (publicada)</option>
+              <option value="borrador">Borrador</option>
+              <option value="cerrada">Cerrada (histórico)</option>
+            </select>
+          </div>
         </div>
 
         <div class="gov-field">
-          <label>Estado</label>
-          <select formControlName="estado">
-            <option value="publicada">Publicada</option>
-            <option value="borrador">Borrador</option>
-          </select>
+          <label for="c-doc">Documento de la invitación (PDF)</label>
+          <input id="c-doc" type="text" formControlName="documentoUrl" placeholder="URL o suba un archivo">
+          <label class="subir">
+            <input type="file" accept=".pdf,.doc,.docx,.xls,.xlsx" (change)="subir($event)">
+            {{ subiendo() ? 'Subiendo…' : '⬆️ Subir documento' }}
+          </label>
         </div>
 
         <footer class="gov-modal-actions">
-          <button type="button" class="gov-btn-secondary" (click)="cerrarModal()">
-            Cancelar
-          </button>
-
-          <button
-            type="submit"
-            class="gov-btn-primary"
-            [disabled]="form.invalid">
-            {{ modalModo === 'editar' ? 'Actualizar' : 'Guardar' }}
-          </button>
+          <button type="button" class="gov-btn-secondary" (click)="modalOpen.set(false)">Cancelar</button>
+          <button type="submit" class="gov-btn-primary" [disabled]="guardando()">{{ guardando() ? 'Guardando…' : 'Guardar' }}</button>
         </footer>
-
       </form>
-
     </section>
-
   </div>
 </div>
+}

@@ -1,11 +1,12 @@
 import { Component, computed, inject } from '@angular/core';
 import { DatePipe, NgTemplateOutlet } from '@angular/common';
+import { InformacionInteresNav } from '../informacion-interes/informacion-interes-nav';
 import { TrabajaNosotrosService } from '../../shared/services/trabaja-nosotros/trabaja-nosotros-service';
 
 @Component({
   selector: 'app-trabaja-nosotros',
   standalone: true,
-  imports: [DatePipe, NgTemplateOutlet],
+  imports: [DatePipe, NgTemplateOutlet, InformacionInteresNav],
   templateUrl: './trabaja-nosotros.html',
   styleUrls: ['./trabaja-nosotros.css'],
 })

@@ -1,94 +1,23 @@
-:host {
-  display: block;
-  padding: 1rem;
+/* =========================
+   CONTENEDOR GENERAL
+========================= */
+.gov-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
 }
 
-
-.gov-table {
-  width: 100%;
-  border-collapse: collapse;
-  background: #ffffff;
-  border: 1px solid #e5e7eb;
-  border-radius: 6px;
-  overflow: hidden;
-}
-
-.gov-table thead {
-  background-color: #f8fafc;
-}
-
-.gov-table th {
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: #374151;
-  text-align: left;
-  padding: 0.75rem;
-  border-bottom: 1px solid #e5e7eb;
-}
-
-.gov-table td {
-  font-size: 0.85rem;
-  color: #111827;
-  padding: 0.75rem;
-  border-bottom: 1px solid #e5e7eb;
-  vertical-align: middle;
-  align-items: left;
-}
-
-.gov-table tbody tr:hover {
-  background-color: #f9fafb;
-}
-
-.gov-table td:last-child {
-  text-align: right;
-}
-
-/*==============================
-  ESTILOS PARA HEADER DE BOTONES
-==============================*/
-.gov-modal-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 1.25rem;
-  border-bottom: 1px solid #e5e7eb;
-}
-
-.gov-modal-header h3 {
-  font-size: 1.1rem;
+.gov-title {
+  font-size: 1.8rem;
   font-weight: 600;
   color: #004884;
-  margin: 0;
+  margin-bottom: 1.5rem;
 }
 
-.gov-modal-close {
-  background: transparent;
-  border: none;
-  font-size: 1.25rem;
-  color: #374151;
-  cursor: pointer;
-}
-
-.admin-header {
-  display: flex;
-  justify-content: flex-end; /* 🔴 derecha */
-  align-items: center;
-  margin-bottom: 1.25rem;
-}
-
-.acciones {
-  display: flex;
-  justify-content: flex-end;
-  gap: 0.5rem;
-  flex-wrap: wrap;
-}
-
-
-
-/*==================================
-  ESTILOS PARA BOTONES DE ACCIONES
-  ================================*/
-  .gov-btn-primary {
+/* =========================
+   BOTONES
+========================= */
+ .gov-btn-primary {
   background-color: #004884;
   color: #ffffff;
   border: none;
@@ -98,8 +27,7 @@
   border-radius: 4px;
   cursor: pointer;
 }
-
-.gov-btn-warning {
+.gov-btn-editar {
   background-color: #ffdd00;
   color: #ffffff;
   border: none;
@@ -129,97 +57,288 @@
   background-color: #d1d5db;
 }
 
-.gov-btn-danger {
+.gov-btn-eliminar {
   background-color: #c62828;
   color: #ffffff;
   border: none;
-  padding: 0.4rem 1.1rem;
+  padding: 0.4rem 0.9rem;
   font-size: 0.8rem;
   font-weight: 600;
   border-radius: 4px;
   cursor: pointer;
 }
 
-.gov-btn-danger:hover {
+.gov-btn-eliminar:hover {
   background-color: #b71c1c;
 }
-/*================================
-  ESTILOS PARA MODAL
-  ===============================*/
+
+/* =========================
+   ADMIN – ACCIONES
+========================= */
+.admin-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 1rem;
+  gap: 0.5rem;
+}
+
+/* =========================
+   TABLA ADMIN
+========================= */
+.gov-table-wrapper {
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 4px 10px rgba(0,0,0,.08);
+}
+
+.gov-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.gov-table thead {
+  background: #f3f4f6;
+}
+
+.gov-table th,
+.gov-table td {
+  padding: .7rem;
+  font-size: .95rem;
+  text-align: left;
+}
+
+.gov-table th {
+  font-weight: 600;
+  color: #374151;
+}
+
+.gov-table tbody tr {
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.gov-table tbody tr:hover {
+  background: #f9fafb;
+}
+
+.acciones {
+  text-align: right;
+  white-space: nowrap;
+}
+
+.estado {
+  padding: .25rem .6rem;
+  border-radius: 999px;
+  font-size: .8rem;
+  font-weight: 600;
+}
+
+.estado.publicada {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.estado.borrador {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.sin-datos {
+  text-align: center;
+  padding: 1rem;
+  color: #6b7280;
+  font-style: italic;
+}
+
+/* =========================
+   TARJETAS PÚBLICO
+========================= */
+.vacante-card {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 1.5rem;
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 10px rgba(0,0,0,.08);
+}
+
+.vacante-info h3 {
+  margin-bottom: .5rem;
+}
+
+.vacante-datos {
+  list-style: none;
+  padding: 0;
+  margin: .5rem 0 1rem;
+}
+
+.vacante-datos li {
+  font-size: .95rem;
+  margin-bottom: .25rem;
+}
+
+.vacante-descripcion {
+  margin-bottom: 1rem;
+  color: #374151;
+}
+
+/* =========================
+   IMAGEN
+========================= */
+.vacante-imagen img {
+  width: 100%;
+  height: 100%;
+  max-height: 220px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+/* =========================
+   MODAL
+========================= */
 .gov-modal-backdrop {
   position: fixed;
   inset: 0;
-  background-color: rgba(0, 0, 0, 0.45);
+  background: rgba(0,0,0,.55);
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   z-index: 9999;
 }
 
 .gov-modal {
   background: #ffffff;
   width: 100%;
-  max-width: 520px;
-  border-radius: 6px;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
-  overflow: hidden;
+  max-width: 600px;
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.25);
+  animation: modalFade .25s ease;
 }
 
+.gov-modal-lg {
+  max-width: 850px;
+}
+
+/* HEADER */
+.gov-modal-header {
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid #e5e7eb;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.gov-modal-header h3 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.gov-modal-close {
+  background: transparent;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+/* BODY */
 .gov-modal-body {
   padding: 1.25rem;
 }
 
+/* FORM */
 .gov-form {
   display: flex;
   flex-direction: column;
-  gap: 0.9rem;
-  padding-right: 1.5rem;
+  gap: 1rem;
+}
+
+.gov-field {
+  display: flex;
+  flex-direction: column;
 }
 
 .gov-field label {
-  display: block;
-  font-size: 0.8rem;
   font-weight: 600;
-  color: #374151;
-  margin-bottom: 0.25rem;
+  margin-bottom: .25rem;
 }
 
 .gov-field input,
 .gov-field textarea,
 .gov-field select {
-  width: 100%;
-  font-size: 0.85rem;
-  padding: 0.45rem 0.5rem;
+  padding: .5rem;
   border-radius: 4px;
-  border: 1px solid #d1d5db;
+  border: 1px solid #cbd5e1;
+  font-size: .95rem;
 }
 
-.gov-field textarea {
-  resize: vertical;
+.gov-form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
 }
 
-.gov-field small {
-  font-size: 0.75rem;
-  color: #6b7280;
-}
-
+/* MODAL FOOTER */
 .gov-modal-actions {
+  padding: 1rem 1.25rem;
+  border-top: 1px solid #e5e7eb;
   display: flex;
   justify-content: flex-end;
-  gap: 0.75rem;
-  margin-top: 1rem;
+  gap: .5rem;
 }
 
-/*=================================
-            RESPONSIVE
-=================================*/
+/* REQUISITOS */
+.requisitos-lista {
+  padding-left: 1.2rem;
+}
 
+.requisitos-lista li {
+  margin-bottom: .4rem;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
 @media (max-width: 768px) {
-  .gov-table {
-    font-size: 0.8rem;
+  .vacante-card {
+    grid-template-columns: 1fr;
   }
 
-  .admin-header {
+  .admin-actions {
     justify-content: center;
   }
 }
+
+/* =========================
+   ANIMACIÓN
+========================= */
+@keyframes modalFade {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== Filtros, estados y subida de archivos ===== */
+.admin-actions { display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; }
+.filtros-estado { display: flex; gap: 0.35rem; flex-wrap: wrap; }
+.filtros-estado button {
+  border: 1px solid #d0d7de; background: #fff; border-radius: 999px; padding: 0.35rem 0.8rem;
+  font-size: 0.82rem; cursor: pointer; color: #374151; font-family: inherit;
+}
+.filtros-estado button.on { background: #004884; border-color: #004884; color: #fff; }
+.estado { display: inline-block; padding: 0.15rem 0.55rem; border-radius: 999px; font-size: 0.75rem; font-weight: 700; text-transform: capitalize; background: #f1f5f9; color: #6b7280; }
+.estado.publicada { background: #e6f6f0; color: #069169; }
+.estado.borrador { background: #fff4e0; color: #b45309; }
+.estado.cerrada { background: #f1f5f9; color: #6b7280; }
+.doc { display: inline-block; margin-left: 0.4rem; font-size: 0.75rem; color: #3366cc; }
+.aviso { margin: 0.75rem 0; padding: 0.6rem 1rem; border-radius: 8px; background: #e8f0fb; color: #004884; display: flex; justify-content: space-between; }
+.aviso button { background: none; border: none; cursor: pointer; color: inherit; }
+.subir { display: inline-block; margin-top: 0.4rem; font-size: 0.8rem; color: #3366cc; cursor: pointer; font-weight: 600; }
+.subir input { position: absolute; width: 1px; height: 1px; opacity: 0; }
+.subir:focus-within { outline: 3px solid #ffab00; outline-offset: 2px; }

@@ -5,6 +5,7 @@ import { DashboardLayout } from './layout/dashboard-layout/dashboard-layout';
 import { Home } from './componentes/home/home';
 import { CotizacionesPropuestas } from './pages/cotizaciones-propuestas/cotizaciones-propuestas';
 import { TrabajaNosotros } from './pages/trabaja-nosotros/trabaja-nosotros';
+import { InformacionInteres } from './pages/informacion-interes/informacion-interes';
 import { PqrsfComponent } from './pages/pqrsf/pqrsf';
 import { Login } from './pages/login/login';
 import { DashboardHomeComponent } from './pages/dashboardhome/dashboardhome';
@@ -27,8 +28,16 @@ export const routes: Routes = [
       { path: 'home', redirectTo: '', pathMatch: 'full' },
 
       // Módulos con flujo propio (formularios / listados especiales)
-      { path: 'cotizaciones-propuestas', component: CotizacionesPropuestas, data: { breadcrumb: 'Cotizaciones y Propuestas' } },
-      { path: 'trabaja-nosotros', component: TrabajaNosotros, data: { breadcrumb: 'Trabaja con Nosotros' } },
+      // Información de interés: invitaciones a cotizar y convocatorias laborales
+      {
+        path: 'informacion-de-interes',
+        data: { breadcrumb: 'Información de interés' },
+        children: [
+          { path: '', component: InformacionInteres, data: { breadcrumb: '' } },
+          { path: 'invitaciones-a-cotizar', component: CotizacionesPropuestas, data: { breadcrumb: 'Invitaciones a cotizar' } },
+          { path: 'trabaja-con-nosotros', component: TrabajaNosotros, data: { breadcrumb: 'Trabaja con nosotros' } },
+        ],
+      },
       { path: 'pqrsf', component: PqrsfComponent, data: { breadcrumb: 'PQRSF' } },
       { path: 'login', component: Login, data: { breadcrumb: 'Iniciar sesión' } },
 
@@ -36,6 +45,10 @@ export const routes: Routes = [
       { path: 'normatividad', redirectTo: 'transparencia/normativa', pathMatch: 'full' },
       { path: 'atencion-ciudadano', redirectTo: 'atencion-y-servicios-a-la-ciudadania', pathMatch: 'full' },
       { path: 'servicios', redirectTo: 'nuestro-hospital/portafolio-de-servicios', pathMatch: 'full' },
+      { path: 'cotizaciones-propuestas', redirectTo: 'informacion-de-interes/invitaciones-a-cotizar', pathMatch: 'full' },
+      { path: 'invitaciones-a-presentar-propuestas-cotizacion', redirectTo: 'informacion-de-interes/invitaciones-a-cotizar', pathMatch: 'full' },
+      { path: 'trabaja-nosotros', redirectTo: 'informacion-de-interes/trabaja-con-nosotros', pathMatch: 'full' },
+      { path: 'trabaja-con-nosotros', redirectTo: 'informacion-de-interes/trabaja-con-nosotros', pathMatch: 'full' },
 
       // Todo lo demás lo resuelve el CMS (páginas, subpáginas, entradas y 404)
       rutaCmsComodin,
@@ -50,8 +63,8 @@ export const routes: Routes = [
     children: [
       { path: '', component: DashboardHomeComponent, data: { breadcrumb: 'Dashboard' } },
       { path: 'pqrsf', component: AdminPqrsf, data: { breadcrumb: 'Administrar PQRSF' } },
-      { path: 'cotizaciones', component: CotizacionesPropuestasAdminComponent, data: { breadcrumb: 'Cotizaciones y Propuestas' } },
-      { path: 'vacantes', component: TrabajaNosotrosAdminComponent, data: { breadcrumb: 'Trabaja con Nosotros' } },
+      { path: 'cotizaciones', component: CotizacionesPropuestasAdminComponent, data: { breadcrumb: 'Invitaciones a cotizar' } },
+      { path: 'vacantes', component: TrabajaNosotrosAdminComponent, data: { breadcrumb: 'Trabaja con nosotros' } },
       { path: 'usuarios', component: Usuarios, data: { breadcrumb: 'Administrar Usuarios' } },
       { path: 'accesibilidad-admin', component: AccesibilidadAdmin, data: { breadcrumb: 'Administrar Accesibilidad' } },
       { path: 'configuracion', component: Configuacion, data: { breadcrumb: 'Configuración' } },

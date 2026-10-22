@@ -1,24 +1,29 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, computed, inject } from '@angular/core';
+import { DatePipe, NgTemplateOutlet } from '@angular/common';
 import { CotizacionesService } from '../../shared/services/cotizaciones/cotizaciones';
-import { Cotizacion } from '../../shared/models/cotizacion/cotizacion/cotizacion-module';
+import { InformacionInteresNav } from '../informacion-interes/informacion-interes-nav';
 
 @Component({
   selector: 'app-cotizaciones-propuestas',
   standalone: true,
-  imports: [CommonModule],
+  imports: [DatePipe, NgTemplateOutlet, InformacionInteresNav],
   templateUrl: './cotizaciones-propuestas.html',
-  styleUrls: ['./cotizaciones-propuestas.css']
+  styleUrls: ['./cotizaciones-propuestas.css'],
 })
-export class CotizacionesPropuestas implements OnInit {
+export class CotizacionesPropuestas {
+  readonly service = inject(CotizacionesService);
 
-  cotizaciones: Cotizacion[] = [];
+  readonly vigentes = computed(() => this.service.cotizaciones().filter((c) => c.estado === 'publicada'));
+  readonly anteriores = computed(() => this.service.cotizaciones().filter((c) => c.estado === 'cerrada'));
 
-  constructor(private cotizacionesService: CotizacionesService) {}
+  constructor() {
+    this.service.cargar();
+  }
 
-  ngOnInit(): void {
-    this.cotizacionesService.cotizaciones$.subscribe(() => {
-      this.cotizaciones = this.cotizacionesService.getPublicadas();
-    });
+  /** Días que faltan para la fecha límite (null si no tiene) */
+  diasRestantes(fecha?: string | null): number | null {
+    if (!fecha) return null;
+    const ms = new Date(fecha).getTime() - Date.now();
+    return isNaN(ms) ? null : Math.ceil(ms / 86_400_000);
   }
 }
