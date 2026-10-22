@@ -1,18 +1,18 @@
 <div class="container-navbar-menu-govco blue-menu-govco">
   <!-- OVERLAY MOBILE -->
-  @if (menuAbierto) {
+  @if (menuAbierto()) {
     <div class="gov-menu-backdrop" (click)="cerrarMenu()"></div>
   }
 
   <nav class="navbar navbar-menu-govco" role="navigation" aria-label="Menú principal">
 
     <!-- BOTÓN HAMBURGUESA -->
-    <button class="menu-toggle-govco" (click)="toggleMenu()" aria-label="Abrir menú" [attr.aria-expanded]="menuAbierto">
+    <button class="menu-toggle-govco" (click)="toggleMenu()" aria-label="Abrir menú" [attr.aria-expanded]="menuAbierto()">
       ☰
     </button>
 
     <!-- MENÚ (administrado desde Admin › Menús y estructura) -->
-    <div id="menu-principal" class="navbar-collapse-menu-govco" [class.menu-open]="menuAbierto">
+    <div id="menu-principal" class="navbar-collapse-menu-govco" [class.menu-open]="menuAbierto()">
       <ul class="navbar-nav navbar-nav-menu-govco mx-auto">
         <li class="nav-item">
           <a class="nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="cerrarMenu()">
@@ -22,10 +22,13 @@
 
         @for (item of items(); track item.id) {
           @if (item.hijos.length) {
-            <li class="nav-item nav-item-dropdown cms-dropdown" [class.abierto]="submenuAbierto === item.id"
-                (mouseleave)="submenuAbierto === item.id && !menuAbierto ? submenuAbierto = null : null">
+            <li class="nav-item nav-item-dropdown cms-dropdown" [class.abierto]="submenuAbierto() === item.id"
+                (mouseenter)="alEntrar(item.id)"
+                (mouseleave)="alSalir(item.id)"
+                (focusin)="alEnfocar(item.id)"
+                (focusout)="alDesenfocar(item.id, $event)">
               <button type="button" class="nav-link nav-link-dropdown cms-dropdown-toggle"
-                      [attr.aria-expanded]="submenuAbierto === item.id"
+                      [attr.aria-expanded]="submenuAbierto() === item.id"
                       [attr.aria-controls]="'submenu-' + item.id"
                       (click)="toggleSubmenu(item.id)">
                 <span class="text-item-menu-govco">{{ item.titulo }}</span>

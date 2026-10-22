@@ -1,5 +1,7 @@
-import { Component, computed, inject, OnInit } from '@angular/core';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { Component, computed, DestroyRef, HostListener, inject, OnInit, signal } from '@angular/core';
+import { NavigationEnd, Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { filter } from 'rxjs';
 import { CmsService } from '../../shared/services/cms/cms.service';
 import { CmsPaginaNodo } from '../../shared/models/cms/cms.models';
 
@@ -29,8 +31,12 @@ const MENU_FIJO: ItemMenu[] = [
 export class Navbar implements OnInit {
   private cms = inject(CmsService);
 
-  menuAbierto = false;
-  submenuAbierto: string | null = null;
+  /** Escritorio con mouse: los submenús se abren al pasar el cursor */
+  private readonly escritorio = window.matchMedia('(min-width: 992px)');
+
+  readonly menuAbierto = signal(false);
+  /** Solo un submenú abierto a la vez */
+  readonly submenuAbierto = signal<string | null>(null);
 
   /** Ítems del menú principal administrado desde el CMS */
   readonly items = computed<ItemMenu[]>(() => {
@@ -39,6 +45,18 @@ export class Navbar implements OnInit {
     const nodos = this.cms.menuPublico('principal');
     return nodos.length ? nodos.map((n) => this.aItem(n)) : MENU_FIJO;
   });
+
+  constructor() {
+    // Al cambiar de sección se cierran el submenú y el menú móvil
+    inject(Router)
+      .events.pipe(filter((e) => e instanceof NavigationEnd), takeUntilDestroyed())
+      .subscribe(() => this.cerrarMenu());
+
+    // Si pasa de escritorio a móvil (o al revés) se reinicia el estado
+    const alCambiar = () => this.cerrarMenu();
+    this.escritorio.addEventListener('change', alCambiar);
+    inject(DestroyRef).onDestroy(() => this.escritorio.removeEventListener('change', alCambiar));
+  }
 
   ngOnInit(): void {
     this.cms.cargar();
@@ -55,23 +73,58 @@ export class Navbar implements OnInit {
     };
   }
 
+  /* ===== Escritorio: mouse ===== */
+  alEntrar(id: string): void {
+    if (this.escritorio.matches) this.submenuAbierto.set(id); // cierra el anterior y abre este
+  }
+
+  alSalir(id: string): void {
+    if (this.escritorio.matches && this.submenuAbierto() === id) this.submenuAbierto.set(null);
+  }
+
+  /* ===== Escritorio: teclado (Tab) ===== */
+  alEnfocar(id: string): void {
+    if (this.escritorio.matches) this.submenuAbierto.set(id);
+  }
+
+  alDesenfocar(id: string, e: FocusEvent): void {
+    const li = e.currentTarget as HTMLElement;
+    if (this.escritorio.matches && !li.contains(e.relatedTarget as Node | null) && this.submenuAbierto() === id) {
+      this.submenuAbierto.set(null);
+    }
+  }
+
+  @HostListener('document:keydown.escape')
+  cerrarConEscape(): void {
+    if (this.submenuAbierto() || this.menuAbierto()) this.cerrarMenu();
+  }
+
+  /* ===== Clic (móvil, tablet y escritorio) ===== */
   toggleMenu(): void {
-    this.menuAbierto = !this.menuAbierto;
-    if (!this.menuAbierto) this.submenuAbierto = null;
+    this.menuAbierto.update((v) => !v);
+    if (!this.menuAbierto()) this.submenuAbierto.set(null);
     this.toggleBodyScroll();
   }
 
   cerrarMenu(): void {
-    this.menuAbierto = false;
-    this.submenuAbierto = null;
+    this.menuAbierto.set(false);
+    this.submenuAbierto.set(null);
     this.toggleBodyScroll();
+    // Quita el foco del enlace pulsado para que no quede "pegado" abierto
+    const activo = document.activeElement as HTMLElement | null;
+    if (activo?.closest('.cms-dropdown')) activo.blur();
   }
 
   toggleSubmenu(id: string): void {
-    this.submenuAbierto = this.submenuAbierto === id ? null : id;
+    // En escritorio el mouse/foco ya lo abrió: el clic solo lo asegura abierto
+    if (this.escritorio.matches) {
+      this.submenuAbierto.set(id);
+      return;
+    }
+    this.submenuAbierto.update((actual) => (actual === id ? null : id));
   }
 
   private toggleBodyScroll(): void {
-    document.body.style.overflow = this.menuAbierto ? 'hidden' : '';
+    document.body.style.overflow = this.menuAbierto() ? 'hidden' : '';
   }
 }
