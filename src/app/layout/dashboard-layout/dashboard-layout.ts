@@ -1,66 +1,76 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, DestroyRef, HostListener, inject, signal } from '@angular/core';
+import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
+import { filter } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { DashboardTopbar } from '../../componentes/dashboard/dashboard-topbar/dashboard-topbar';
 import { DashboardSidebar } from '../../componentes/dashboard/dashboard-sidebar/dashboard-sidebar';
-import { DashboardCards } from '../../componentes/dashboard/dashboard-cards/dashboard-cards';
-import { DashboardTable } from '../../componentes/dashboard/dashboard-table/dashboard-table';
-import { RouterOutlet } from "@angular/router";
-import { Route } from '@angular/router';
 import { Accesibilidad } from '../../componentes/accesibilidad/accesibilidad';
-import { CommonModule } from '@angular/common';
 import { IdleService } from '../../shared/services/idle-service/idle-service';
 import { Breadcrumb } from '../../componentes/breadcrumb/breadcrumb';
 
+/** Mismo punto de corte que el CSS (max-width: 991px) */
+const CONSULTA_MOVIL = '(max-width: 991px)';
+
 @Component({
   selector: 'app-dashboard-layout',
-  imports: [DashboardSidebar, DashboardTopbar, RouterOutlet,Accesibilidad,CommonModule,Breadcrumb],
+  imports: [DashboardSidebar, DashboardTopbar, RouterOutlet, Accesibilidad, Breadcrumb],
   templateUrl: './dashboard-layout.html',
   styleUrl: './dashboard-layout.css',
 })
 export class DashboardLayout {
+  private readonly idleService = inject(IdleService);
 
-  constructor(private idleService: IdleService){}
-  isSidebarCollapsed = false;
-  isSidebarOpenMobile = false;       // Mobile
-  isMobile = false;
+  /** Se evalúa desde el primer render: en el teléfono nunca se pinta el sidebar de escritorio */
+  private readonly media = window.matchMedia(CONSULTA_MOVIL);
 
-  ngOnInit():void{
-    // 🔐 Recupera el estado guardado
-    const savedState = localStorage.getItem('sidebar-collapsed');
-    this.isSidebarCollapsed = savedState === 'true';
+  readonly isMobile = signal(this.media.matches);
+  readonly isSidebarCollapsed = signal(leerColapsado());
+  readonly isSidebarOpenMobile = signal(false);
+
+  constructor() {
     this.idleService.startWatching();
 
+    // Cambio de resolución / rotación del teléfono: se adapta de inmediato
+    const alCambiar = (e: MediaQueryListEvent) => {
+      this.isMobile.set(e.matches);
+      this.isSidebarOpenMobile.set(false);
+    };
+    this.media.addEventListener('change', alCambiar);
+    inject(DestroyRef).onDestroy(() => this.media.removeEventListener('change', alCambiar));
 
+    // En el teléfono el menú se cierra al navegar
+    inject(Router)
+      .events.pipe(filter((e) => e instanceof NavigationEnd), takeUntilDestroyed())
+      .subscribe(() => this.isSidebarOpenMobile.set(false));
   }
-
 
   toggleSidebar(): void {
-  if (this.isMobile) {
-    this.isSidebarOpenMobile = !this.isSidebarOpenMobile;
-  } else {
-    this.isSidebarCollapsed = !this.isSidebarCollapsed;
-    localStorage.setItem(
-      'sidebar-collapsed',
-      this.isSidebarCollapsed.toString()
-    );
-  }
-}
-
- @HostListener('window:resize')
-checkScreen(): void {
-  this.isMobile = window.innerWidth < 992;
-
-  if (this.isMobile) {
-    // 🔴 EN MOBILE SIEMPRE INICIA CERRADO
-    this.isSidebarOpenMobile = false;
-  }
-}
-
-  closeMobileSidebar(): void {
-    if (this.isMobile) {
-      this.isSidebarOpenMobile = false;
+    if (this.isMobile()) {
+      this.isSidebarOpenMobile.update((v) => !v);
+      return;
+    }
+    this.isSidebarCollapsed.update((v) => !v);
+    try {
+      localStorage.setItem('sidebar-collapsed', String(this.isSidebarCollapsed()));
+    } catch {
+      /* almacenamiento no disponible */
     }
   }
 
+  closeMobileSidebar(): void {
+    this.isSidebarOpenMobile.set(false);
+  }
 
+  @HostListener('document:keydown.escape')
+  cerrarConEscape(): void {
+    if (this.isSidebarOpenMobile()) this.closeMobileSidebar();
+  }
+}
 
+function leerColapsado(): boolean {
+  try {
+    return localStorage.getItem('sidebar-collapsed') === 'true';
+  } catch {
+    return false;
+  }
 }
