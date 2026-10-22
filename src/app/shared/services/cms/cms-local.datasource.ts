@@ -154,7 +154,7 @@ export class CmsLocalDataSource extends CmsDataSource {
   }
 
   /* ===== Estructura inicial (Resolución 1519 de 2020) ===== */
-  private readonly versionSemilla = 6;
+  private readonly versionSemilla = 7;
 
   private sembrarSiVacio(): void {
     if (localStorage.getItem(this.prefijo + 'menus')) return;
@@ -246,12 +246,18 @@ export class CmsLocalDataSource extends CmsDataSource {
       }
     }
 
-    // Versión 6: "Información de interés" pasa a la 2.ª posición y "Atención y servicios a la ciudadanía" a la 5.ª
-    if (version < 6) {
+    // Versión 7: orden del menú principal
+    // Transparencia · Nuestro Hospital · Atención y servicios a la ciudadanía · Participa · Información de interés
+    if (version < 7) {
+      const orden: Record<string, number> = {
+        transparencia: 0,
+        'nuestro-hospital': 1,
+        'atencion-y-servicios-a-la-ciudadania': 2,
+        participa: 3,
+        'informacion-de-interes': 4,
+      };
       for (const p of paginas) {
-        if (p.parentId !== null) continue;
-        if (p.slug === 'informacion-de-interes') Object.assign(p, { orden: 1, actualizadoEn: t });
-        if (p.slug === 'atencion-y-servicios-a-la-ciudadania') Object.assign(p, { orden: 4, actualizadoEn: t });
+        if (p.parentId === null && p.slug in orden) Object.assign(p, { orden: orden[p.slug], actualizadoEn: t });
       }
     }
     this.escribir('paginas', paginas);
@@ -325,23 +331,23 @@ const ESTRUCTURA_1519: PaginaSemilla[] = [
   { id: 59, menuId: 1, parentId: 57, titulo: "8.2 Información para mujeres", slug: 'informacion-para-mujeres', plantilla: 'contenido', orden: 1 },
   { id: 60, menuId: 1, parentId: 57, titulo: "8.3 Otros grupos de interés", slug: 'otros-grupos-de-interes', plantilla: 'contenido', orden: 2 },
   { id: 61, menuId: 1, parentId: 1, titulo: "9. Obligación de reporte de información específica por parte de la entidad", slug: 'reporte-de-informacion-especifica', plantilla: 'documentos', orden: 8 },
-  { id: 62, menuId: 1, parentId: null, titulo: "Atención y servicios a la ciudadanía", slug: 'atencion-y-servicios-a-la-ciudadania', plantilla: 'contenido', descripcion: "Trámites, canales de atención y mecanismos para presentar peticiones, quejas, reclamos, sugerencias y denuncias.", orden: 4 },
+  { id: 62, menuId: 1, parentId: null, titulo: "Atención y servicios a la ciudadanía", slug: 'atencion-y-servicios-a-la-ciudadania', plantilla: 'contenido', descripcion: "Trámites, canales de atención y mecanismos para presentar peticiones, quejas, reclamos, sugerencias y denuncias.", orden: 2 },
   { id: 63, menuId: 1, parentId: 62, titulo: "Trámites y otros procedimientos", slug: 'tramites-y-otros-procedimientos', plantilla: 'contenido', orden: 0 },
   { id: 64, menuId: 1, parentId: 62, titulo: "Canales de atención y pida una cita", slug: 'canales-de-atencion', plantilla: 'contenido', orden: 1 },
   { id: 65, menuId: 1, parentId: 62, titulo: "PQRSD - Peticiones, quejas, reclamos, sugerencias y denuncias", slug: 'pqrsd', plantilla: 'enlace', urlExterna: '/pqrsf', orden: 2 },
   { id: 66, menuId: 1, parentId: 62, titulo: "Carpeta Ciudadana Digital", slug: 'carpeta-ciudadana-digital', plantilla: 'enlace', urlExterna: 'https://carpetaciudadana.and.gov.co/', descripcion: "Consulte en un solo lugar sus documentos e información en poder del Estado colombiano.", orden: 3 },
-  { id: 67, menuId: 1, parentId: null, titulo: "Participa", slug: 'participa', plantilla: 'contenido', descripcion: "Espacios de participación ciudadana en la gestión de la E.S.E. Hospital San José del Guaviare (lineamientos del DAFP).", orden: 2 },
+  { id: 67, menuId: 1, parentId: null, titulo: "Participa", slug: 'participa', plantilla: 'contenido', descripcion: "Espacios de participación ciudadana en la gestión de la E.S.E. Hospital San José del Guaviare (lineamientos del DAFP).", orden: 3 },
   { id: 68, menuId: 1, parentId: 67, titulo: "Participación para el diagnóstico de necesidades e identificación de problemas", slug: 'participacion-para-el-diagnostico-de-necesidades-e-identificacion-de-problemas', plantilla: 'contenido', orden: 0 },
   { id: 69, menuId: 1, parentId: 67, titulo: "Planeación y presupuesto participativo", slug: 'planeacion-y-presupuesto-participativo', plantilla: 'contenido', orden: 1 },
   { id: 70, menuId: 1, parentId: 67, titulo: "Consulta ciudadana", slug: 'consulta-ciudadana', plantilla: 'contenido', orden: 2 },
   { id: 71, menuId: 1, parentId: 67, titulo: "Colaboración e innovación abierta", slug: 'colaboracion-e-innovacion-abierta', plantilla: 'contenido', orden: 3 },
   { id: 72, menuId: 1, parentId: 67, titulo: "Rendición de cuentas", slug: 'rendicion-de-cuentas', plantilla: 'documentos', orden: 4 },
   { id: 73, menuId: 1, parentId: 67, titulo: "Control social", slug: 'control-social', plantilla: 'contenido', orden: 5 },
-  { id: 74, menuId: 1, parentId: null, titulo: "Nuestro Hospital", slug: 'nuestro-hospital', plantilla: 'contenido', orden: 3 },
+  { id: 74, menuId: 1, parentId: null, titulo: "Nuestro Hospital", slug: 'nuestro-hospital', plantilla: 'contenido', orden: 1 },
   { id: 75, menuId: 1, parentId: 74, titulo: "Reseña histórica", slug: 'resena-historica', plantilla: 'contenido', orden: 0 },
   { id: 76, menuId: 1, parentId: 74, titulo: "Portafolio de servicios", slug: 'portafolio-de-servicios', plantilla: 'listado', orden: 1 },
   { id: 77, menuId: 1, parentId: 74, titulo: "Sedes y horarios de atención", slug: 'sedes-y-horarios', plantilla: 'contenido', orden: 2 },
-  { id: 83, menuId: 1, parentId: null, titulo: "Información de interés", slug: 'informacion-de-interes', plantilla: 'contenido', descripcion: "Invitaciones a cotizar y convocatorias laborales de la E.S.E. Hospital San José del Guaviare.", orden: 1 },
+  { id: 83, menuId: 1, parentId: null, titulo: "Información de interés", slug: 'informacion-de-interes', plantilla: 'contenido', descripcion: "Invitaciones a cotizar y convocatorias laborales de la E.S.E. Hospital San José del Guaviare.", orden: 4 },
   { id: 78, menuId: 1, parentId: 83, titulo: "Invitaciones a cotizar", slug: 'cotizaciones-propuestas', plantilla: 'enlace', urlExterna: '/informacion-de-interes/invitaciones-a-cotizar', orden: 0 },
   { id: 79, menuId: 1, parentId: 83, titulo: "Trabaja con nosotros", slug: 'trabaja-nosotros', plantilla: 'enlace', urlExterna: '/informacion-de-interes/trabaja-con-nosotros', orden: 1 },
   { id: 80, menuId: 1, parentId: null, titulo: "Noticias", slug: 'noticias', plantilla: 'listado', orden: 5, visibleEnMenu: false },
