@@ -277,6 +277,10 @@ export class CmsPaginaPublica {
       [/medicamento|farmacia|f[oó]rmula/, '💊'],
       [/vacuna/, '💉'],
       [/urgencia/, '🚑'],
+      [/encuesta|satisfacci/, '📝'],
+      [/trato digno|derechos/, '🤝'],
+      [/vigilancia|veedur|observaci|procesos vigilados/, '🔎'],
+      [/modalidades|control social/, '🧭'],
     ];
     return reglas.find(([r]) => r.test(t))?.[1] ?? '🗂️';
   }

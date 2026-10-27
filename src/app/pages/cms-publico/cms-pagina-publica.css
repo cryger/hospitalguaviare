@@ -451,3 +451,16 @@ h1, h2, h3, .srv-titulo, .tarjeta-cuerpo h2, .tarjeta-cuerpo h3, .subpagina stro
 @media (prefers-reduced-motion: reduce) {
   .container-govco, .btn-search-basic-govco, .btn-bdc { transition: none; }
 }
+
+/* ===== Tablas dentro del contenido (estilo BDC GOV.CO v5 · tablas) ===== */
+.contenido-html ::ng-deep table {
+  display: block; width: 100%; max-width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch;
+  border-collapse: collapse; margin: 1rem 0 1.25rem; font-size: .9rem; line-height: 1.45;
+}
+.contenido-html ::ng-deep th,
+.contenido-html ::ng-deep td { border: 1px solid #B5C7E9; padding: .6rem .75rem; text-align: left; vertical-align: top; min-width: 7.5rem; }
+.contenido-html ::ng-deep thead th { background: #0943B5; color: #fff; font-weight: 700; }
+.contenido-html ::ng-deep tbody th { background: #E5ECF8; color: #0943B5; font-weight: 700; white-space: nowrap; }
+.contenido-html ::ng-deep tbody tr:nth-child(even) td { background: #F6F8FC; }
+.contenido-html ::ng-deep td a { overflow-wrap: anywhere; }
+.contenido-html ::ng-deep h3 { color: var(--azul); font-size: 1.15rem; margin: 1.4rem 0 .5rem; }
