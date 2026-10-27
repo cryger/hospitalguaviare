@@ -1,0 +1,11 @@
+{
+  "descripcion": "Videos en Lengua de Señas Colombiana (LSC) que aparecen al pasar el mouse o el foco del teclado sobre los enlaces. La clave es el texto del enlace en minúsculas y sin tildes. Para agregar un video: guarde el .mp4 (y opcionalmente .webm y una imagen .jpg) en esta carpeta y agregue una entrada aquí.",
+  "videos": {
+    "inicio": {
+      "titulo": "Inicio",
+      "video": "assets/senas/inicio.mp4",
+      "webm": "assets/senas/inicio.webm",
+      "poster": "assets/senas/inicio.jpg"
+    }
+  }
+}

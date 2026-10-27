@@ -1,0 +1,16 @@
+@if (svc.actual(); as a) {
+  @if (posicion(); as p) {
+    <!-- Contenido visual de apoyo: el texto del enlace ya lo leen los lectores de pantalla -->
+    <div class="senas-caja" aria-hidden="true" [style.top.px]="p.top" [style.left.px]="p.left" (mouseleave)="salir()">
+      <!-- Se recrea el video al cambiar de enlace para que cargue la fuente nueva -->
+      @for (s of [a.sena]; track s.video) {
+      <video #video class="senas-video" [attr.poster]="a.sena.poster || null" [muted]="true" autoplay playsinline
+             [loop]="!reducirMovimiento" disablepictureinpicture width="144" height="144" (loadeddata)="reproducir(video)">
+        @if (a.sena.webm) { <source [src]="a.sena.webm" type="video/webm" /> }
+        <source [src]="a.sena.video" type="video/mp4" />
+      </video>
+      }
+      <span class="senas-texto"><span class="senas-ico">🤟</span> {{ a.sena.titulo }}</span>
+    </div>
+  }
+}

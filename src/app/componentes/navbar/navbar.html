@@ -15,7 +15,7 @@
     <div id="menu-principal" class="navbar-collapse-menu-govco" [class.menu-open]="menuAbierto">
       <ul class="navbar-nav navbar-nav-menu-govco mx-auto">
         <li class="nav-item">
-          <a class="nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="cerrarMenu()">
+          <a class="nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="cerrarMenu()" appSenas="Inicio">
             <span class="text-item-menu-govco">Inicio</span>
           </a>
         </li>
@@ -30,7 +30,7 @@
               <button type="button" class="nav-link nav-link-dropdown cms-dropdown-toggle"
                       [attr.aria-expanded]="submenuAbierto === item.id"
                       [attr.aria-controls]="'submenu-' + item.id"
-                      (click)="toggleSubmenu(item.id)">
+                      (click)="toggleSubmenu(item.id)" [appSenas]="item.titulo">
                 <span class="text-item-menu-govco">{{ item.titulo }}</span>
                 <span class="flecha" aria-hidden="true">▾</span>
               </button>
@@ -45,9 +45,9 @@
                 @for (h of item.hijos; track h.id) {
                   <li>
                     @if (h.externo) {
-                      <a class="submenu-link-govco" [href]="h.url" target="_blank" rel="noopener" (click)="cerrarMenu()">{{ h.titulo }}</a>
+                      <a class="submenu-link-govco" [href]="h.url" target="_blank" rel="noopener" (click)="cerrarMenu()" [appSenas]="h.titulo">{{ h.titulo }}</a>
                     } @else {
-                      <a class="submenu-link-govco" [routerLink]="h.url" routerLinkActive="activo" (click)="cerrarMenu()">{{ h.titulo }}</a>
+                      <a class="submenu-link-govco" [routerLink]="h.url" routerLinkActive="activo" (click)="cerrarMenu()" [appSenas]="h.titulo">{{ h.titulo }}</a>
                     }
                   </li>
                 }
@@ -56,11 +56,11 @@
           } @else {
             <li class="nav-item">
               @if (item.externo) {
-                <a class="nav-link" [href]="item.url" target="_blank" rel="noopener" (click)="cerrarMenu()">
+                <a class="nav-link" [href]="item.url" target="_blank" rel="noopener" (click)="cerrarMenu()" [appSenas]="item.titulo">
                   <span class="text-item-menu-govco">{{ item.titulo }}</span>
                 </a>
               } @else {
-                <a class="nav-link" [routerLink]="item.url" routerLinkActive="active" (click)="cerrarMenu()">
+                <a class="nav-link" [routerLink]="item.url" routerLinkActive="active" (click)="cerrarMenu()" [appSenas]="item.titulo">
                   <span class="text-item-menu-govco">{{ item.titulo }}</span>
                 </a>
               }

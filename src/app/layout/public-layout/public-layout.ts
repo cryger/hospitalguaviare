@@ -1,3 +1,4 @@
+import { SenasFlotante } from '../../componentes/senas-flotante/senas-flotante';
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
@@ -15,7 +16,7 @@ import { Contenido } from '../../componentes/contenido/contenido';
 
 @Component({
   selector: 'app-public-layout',
-  imports: [RouterOutlet, Navbar, Topbar, Footer, Accesibilidad, CommonModule, NgbAlertModule, Cabecera,Breadcrumb,VolverArriba, Contenido],
+  imports: [RouterOutlet, Navbar, Topbar, Footer, Accesibilidad, CommonModule, NgbAlertModule, Cabecera,Breadcrumb,VolverArriba, Contenido, SenasFlotante],
   templateUrl: './public-layout.html',
   styleUrl: './public-layout.css',
 })

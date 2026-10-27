@@ -1,3 +1,4 @@
+import { SenasDirective } from '../../shared/directives/senas.directive';
 import { Component, computed, inject, OnInit } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { CmsService } from '../../shared/services/cms/cms.service';
@@ -22,7 +23,7 @@ const MENU_FIJO: ItemMenu[] = [
 
 @Component({
   selector: 'app-navbar',
-  imports: [RouterLink, RouterLinkActive],
+  imports: [RouterLink, RouterLinkActive, SenasDirective],
   templateUrl: './navbar.html',
   styleUrl: './navbar.css',
 })

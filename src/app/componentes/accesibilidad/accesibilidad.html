@@ -25,6 +25,12 @@
         <span id="titleRelevo" class="govco-signal">Centro de Relevo</span>
       </button>
 
+      <button id="lenguaSenas" class="icon-senas" type="button" (click)="senas.alternar()" [attr.aria-pressed]="senas.activo()" aria-label="Videos en lengua de señas"
+              title="Mostrar u ocultar los videos en Lengua de Señas Colombiana al pasar sobre los enlaces">
+        <span aria-hidden="true">🤟</span>
+        <span id="titleSenas">Lengua de señas: {{ senas.activo() ? 'activada' : 'desactivada' }}</span>
+      </button>
+
       <button
         *ngFor="let i of items"
         [class]="'accessibility-btn-' + i.id"

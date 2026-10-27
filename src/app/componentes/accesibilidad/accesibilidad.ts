@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { LenguaSenasService } from '../../shared/services/senas/lengua-senas.service';
+import { inject, Component } from '@angular/core';
 import { Accessibility } from '../../shared/services/accessibility/accessibility';
 import { ScreenReaderService } from '../../shared/services/accessibility/screen-reader.service';
 import { AccesibilidadService } from '../../shared/services/accesibilidad-service/accesibilidad-service';
@@ -13,6 +14,7 @@ import { CommonModule } from '@angular/common';
   imports: [CommonModule],
 })
 export class Accesibilidad {
+  readonly senas = inject(LenguaSenasService);
 
   menuOpen: boolean = true;
   fontSize: number = 16; // tamaño base

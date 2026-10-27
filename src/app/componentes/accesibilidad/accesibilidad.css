@@ -398,3 +398,55 @@
 
 
 
+
+/* === LENGUA DE SEÑAS (videos al pasar sobre los enlaces) === */
+.barra-accesibilidad-govco .icon-senas {
+  background: #004884;
+  width: 48px;
+  height: 40px;
+  border: none;
+  padding: 0;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}
+.barra-accesibilidad-govco .icon-senas > span[aria-hidden] {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 5px;
+  background: #fff;
+  font-size: 18px;
+  line-height: 1;
+}
+.barra-accesibilidad-govco .icon-senas[aria-pressed="false"] > span[aria-hidden] {
+  opacity: 0.55;
+  background: #c8c8c8;
+  text-decoration: line-through;
+}
+.barra-accesibilidad-govco .icon-senas:focus-visible { outline: 2px solid #fff; outline-offset: -3px; }
+.barra-accesibilidad-govco #titleSenas {
+  text-align: left;
+  position: absolute;
+  top: 0;
+  background: #3366CC;
+  color: #fff;
+  line-height: normal !important;
+  font-family: WorkSans-Medium !important;
+  font-size: 14px;
+  opacity: 0;
+  visibility: hidden;
+  width: 210px;
+  min-height: 40px;
+  border-radius: 10px 0 0 10px;
+  padding: 10px;
+  pointer-events: none;
+}
+.barra-accesibilidad-govco button:hover #titleSenas,
+.barra-accesibilidad-govco button:focus-visible #titleSenas {
+  opacity: 1;
+  visibility: visible;
+  right: 55px;
+  left: auto;
+}
