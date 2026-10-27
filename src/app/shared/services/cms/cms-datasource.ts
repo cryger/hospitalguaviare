@@ -1,7 +1,7 @@
 import { Observable } from 'rxjs';
 import { CmsMultimedia } from '../../models/cms/cms.models';
 
-export type CmsColeccion = 'menus' | 'paginas' | 'entradas' | 'multimedia' | 'vacantes' | 'cotizaciones';
+export type CmsColeccion = 'menus' | 'paginas' | 'entradas' | 'multimedia' | 'vacantes' | 'cotizaciones' | 'eventos';
 
 export interface CambioOrdenPagina {
   id: number;

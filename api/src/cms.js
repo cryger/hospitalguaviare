@@ -21,6 +21,8 @@ const CONSULTAS_PUBLICAS = {
   // Las convocatorias cerradas se muestran como históricas
   vacantes: "SELECT * FROM cms_vacantes WHERE estado IN ('publicada', 'cerrada')",
   cotizaciones: "SELECT * FROM cms_cotizaciones WHERE estado IN ('publicada', 'cerrada')",
+  // Los eventos cancelados se muestran con aviso; los borradores no
+  eventos: "SELECT * FROM cms_eventos WHERE estado IN ('publicado', 'cancelado')",
   entradas: `SELECT e.* FROM cms_entradas e
                JOIN cms_paginas p ON p.id = e.pagina_id AND p.estado = 'publicada'
               WHERE e.estado = 'publicada'
@@ -72,7 +74,11 @@ rutasCms.get('/:coleccion', sesionOpcional, async (req, res, next) => {
     }
 
     const sql = admin ? `SELECT * FROM ${d.tabla}` : CONSULTAS_PUBLICAS[col];
-    const orden = col === 'multimedia' ? 'creado_en DESC' : ['vacantes', 'cotizaciones'].includes(col) ? 'fecha_publicacion DESC, id DESC' : 'id';
+    const orden =
+      col === 'multimedia' ? 'creado_en DESC'
+      : ['vacantes', 'cotizaciones'].includes(col) ? 'fecha_publicacion DESC, id DESC'
+      : col === 'eventos' ? 'fecha_inicio, id'
+      : 'id';
     const [filas] = await pool.query(`${sql} ORDER BY ${orden}`);
     res.json(filas.map((f) => aJson(col, f)));
   } catch (e) {

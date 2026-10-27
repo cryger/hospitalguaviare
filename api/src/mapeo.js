@@ -84,6 +84,27 @@ const TABLAS = {
     booleanos: [],
     fechas: ['fechaPublicacion', 'fechaCierre'],
   },
+  eventos: {
+    tabla: 'cms_eventos',
+    campos: {
+      titulo: 'titulo',
+      descripcion: 'descripcion',
+      categoria: 'categoria',
+      fechaInicio: 'fecha_inicio',
+      fechaFin: 'fecha_fin',
+      todoElDia: 'todo_el_dia',
+      lugar: 'lugar',
+      modalidad: 'modalidad',
+      enlace: 'enlace',
+      dirigidoA: 'dirigido_a',
+      responsable: 'responsable',
+      estado: 'estado',
+      destacado: 'destacado',
+      migradoDe: 'migrado_de',
+    },
+    booleanos: ['todoElDia', 'destacado'],
+    fechas: ['fechaInicio', 'fechaFin'],
+  },
   multimedia: {
     tabla: 'cms_multimedia',
     campos: {

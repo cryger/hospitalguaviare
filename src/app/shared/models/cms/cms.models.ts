@@ -6,7 +6,7 @@
 
 export type UbicacionMenu = 'principal' | 'superior' | 'pie' | 'lateral';
 export type EstadoPagina = 'publicada' | 'borrador' | 'oculta';
-export type PlantillaPagina = 'contenido' | 'listado' | 'documentos' | 'galeria' | 'enlace';
+export type PlantillaPagina = 'contenido' | 'listado' | 'documentos' | 'galeria' | 'enlace' | 'calendario';
 export type TipoEntrada = 'articulo' | 'noticia' | 'documento' | 'evento' | 'servicio' | 'enlace';
 export type EstadoEntrada = 'publicada' | 'borrador' | 'archivada';
 export type TipoMultimedia = 'imagen' | 'video' | 'documento' | 'audio' | 'otro';
@@ -92,6 +92,7 @@ export const PLANTILLAS_PAGINA: { valor: PlantillaPagina; etiqueta: string; ayud
   { valor: 'documentos', etiqueta: 'Documentos', ayuda: 'Tabla de archivos descargables (ej. Transparencia, Normatividad).' },
   { valor: 'galeria', etiqueta: 'Galería', ayuda: 'Cuadrícula de imágenes y videos.' },
   { valor: 'enlace', etiqueta: 'Enlace', ayuda: 'Solo redirige a una URL (interna o externa).' },
+  { valor: 'calendario', etiqueta: 'Calendario de eventos', ayuda: 'Muestra el calendario institucional (los eventos se administran en Contenido › Calendario de eventos).' },
 ];
 
 export const TIPOS_ENTRADA: { valor: TipoEntrada; etiqueta: string; icono: string }[] = [

@@ -209,6 +209,19 @@
       }
     }
 
+    @case ('calendario') {
+      <!-- Calendario de eventos administrable (Panel › Calendario de eventos) -->
+      @for (e of entradas(); track e.id) {
+        @if (e.tipo !== 'evento') {
+          <section class="bloque-contenido">
+            @if (e.titulo !== p.titulo) { <h2>{{ e.titulo }}</h2> }
+            @if (e.contenido) { <div class="contenido-html" [innerHTML]="e.contenido"></div> }
+          </section>
+        }
+      }
+      <app-calendario-eventos />
+    }
+
     @case ('galeria') {
       @if (galeria().length) {
         <ul class="galeria">
@@ -293,7 +306,7 @@
     }
   }
 
-  @if (!entradas().length && !subpaginas().length && p.plantilla !== 'enlace') {
+  @if (!entradas().length && !subpaginas().length && p.plantilla !== 'enlace' && p.plantilla !== 'calendario') {
     <p class="vacio">Esta sección se encuentra en construcción. Pronto encontrará aquí la información.</p>
   }
 

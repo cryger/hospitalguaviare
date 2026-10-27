@@ -26,6 +26,7 @@
 .tipo-noticia { background: #e7f6ec; color: #116b35; }
 .tipo-documento { background: #fff4e0; color: #8a4b00; }
 .tipo-servicio { background: #f1e9fb; color: #5b2a9a; }
+.tipo-evento { background: #e0f2f1; color: #00695c; }
 .resultado h2 { margin: 0 0 .35rem; font-size: 1.1rem; line-height: 1.35; }
 .resultado h2 a { color: var(--govcolor-cobalt, #0943B5); text-decoration: underline; text-underline-offset: 2px; }
 .resultado h2 a:hover { color: var(--azul); }

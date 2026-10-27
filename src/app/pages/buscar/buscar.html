@@ -59,13 +59,13 @@
             <p class="ubicacion">
               <span class="tipo tipo-{{ r.tipo }}">{{ etiquetas[r.tipo] }}</span>
               <span class="seccion">{{ r.seccion }}</span>
-              @if (r.fecha && r.tipo === 'noticia') { · <time [attr.datetime]="r.fecha">{{ r.fecha | date: "d 'de' MMMM 'de' y" : '' : 'es-CO' }}</time> }
+              @if (r.fecha && (r.tipo === 'noticia' || r.tipo === 'evento')) { · <time [attr.datetime]="r.fecha">{{ r.fecha | date: "d 'de' MMMM 'de' y" : '-0500' : 'es-CO' }}</time> }
             </p>
             <h2>
               @if (r.externa) {
                 <a [href]="r.url" target="_blank" rel="noopener"><span [innerHTML]="marcar(r.titulo)"></span> <span class="ext">(abre en otra pestaña)</span></a>
               } @else {
-                <a [routerLink]="r.url" [innerHTML]="marcar(r.titulo)"></a>
+                <a [href]="r.url" (click)="abrir($event, r.url)" [innerHTML]="marcar(r.titulo)"></a>
               }
             </h2>
             @if (r.extracto) { <p class="extracto" [innerHTML]="marcar(r.extracto)"></p> }

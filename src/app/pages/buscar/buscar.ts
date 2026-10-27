@@ -7,7 +7,7 @@ import { BusquedaSitioService, ETIQUETAS_TIPO, TipoResultado } from '../../share
 import { resaltar, terminosDe } from '../../shared/utils/busqueda';
 
 const POR_PAGINA = 10;
-const TIPOS: TipoResultado[] = ['seccion', 'noticia', 'documento', 'servicio', 'contenido'];
+const TIPOS: TipoResultado[] = ['seccion', 'noticia', 'documento', 'servicio', 'evento', 'contenido'];
 
 /** Resultados del buscador general del portal (/buscar?q=…&tipo=…) */
 @Component({
@@ -75,6 +75,13 @@ export class Buscar {
     this.consulta.set('');
     this.tipo.set('');
     this.mostrar.set(POR_PAGINA);
+  }
+
+  /** Abre un resultado interno (la URL puede traer ?evento=…) */
+  abrir(ev: MouseEvent, url: string): void {
+    if (ev.ctrlKey || ev.metaKey || ev.shiftKey || ev.button !== 0) return;
+    ev.preventDefault();
+    this.router.navigateByUrl(url);
   }
 
   marcar(texto: string): string {

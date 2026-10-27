@@ -1,0 +1,21 @@
+.kpis { display: flex; gap: .75rem; flex-wrap: wrap; margin-bottom: 1rem; }
+.kpi { background: #fff; border: 1px solid var(--c-borde); border-radius: 8px; padding: .6rem .9rem; font-size: .8rem; color: var(--c-muted); min-width: 8.5rem; }
+.kpi b { display: block; font-size: 1.3rem; color: var(--c-primario); }
+
+.celda-fecha { white-space: nowrap; }
+.titulo-evento { text-align: left; color: var(--c-texto); font-size: .9rem; }
+.titulo-evento:hover { color: var(--c-primario-2); }
+tr.pasado td { opacity: .7; }
+.cat { display: inline-block; font-size: .72rem; font-weight: 700; padding: .2rem .6rem; border-radius: 999px; background: var(--c); color: #fff; white-space: nowrap; }
+.badge-publicado { background: var(--c-ok-bg); color: var(--c-ok); }
+.badge-cancelado { background: var(--c-danger-bg); color: var(--c-danger); }
+
+.grupo-fechas { border: 1px solid var(--c-borde); border-radius: 8px; padding: .75rem 1rem .9rem; margin: 0; display: grid; gap: .6rem; }
+.grupo-fechas legend { font-size: .8rem; font-weight: 700; color: var(--c-primario); padding: 0 .35rem; }
+.fila-fechas { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: .75rem; }
+.opc { font-weight: 400; color: var(--c-muted); }
+.err { color: var(--c-danger); font-size: .78rem; margin: 0; }
+.visually-hidden { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; }
+/* El formulario envuelve cuerpo y pie: el cuerpo se desplaza y el pie queda visible */
+.modal-caja > form { display: flex; flex-direction: column; min-height: 0; flex: 1 1 auto; }
+.modal-caja > form > .modal-body { flex: 1 1 auto; min-height: 0; }

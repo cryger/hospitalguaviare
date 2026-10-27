@@ -2,8 +2,13 @@ import { Injectable, computed, inject } from '@angular/core';
 import { CmsService } from '../cms/cms.service';
 import { CmsEntrada, CmsPagina } from '../../models/cms/cms.models';
 import { extracto, normalizar, terminosDe } from '../../utils/busqueda';
+import { EventosService } from '../eventos/eventos.service';
+import { diaDe } from '../../models/eventos/evento';
 
-export type TipoResultado = 'seccion' | 'noticia' | 'documento' | 'servicio' | 'contenido';
+/** Página del CMS donde se muestra el calendario */
+const RUTA_CALENDARIO = '/transparencia/informacion-de-la-entidad/calendario-de-actividades-y-eventos';
+
+export type TipoResultado = 'seccion' | 'noticia' | 'documento' | 'servicio' | 'evento' | 'contenido';
 
 export interface ResultadoBusqueda {
   clave: string;
@@ -31,6 +36,7 @@ export const ETIQUETAS_TIPO: Record<TipoResultado, string> = {
   noticia: 'Noticia',
   documento: 'Documento',
   servicio: 'Trámite o servicio',
+  evento: 'Evento',
   contenido: 'Contenido',
 };
 
@@ -49,9 +55,10 @@ const PAGINAS_FIJAS: { titulo: string; url: string; texto: string }[] = [
 @Injectable({ providedIn: 'root' })
 export class BusquedaSitioService {
   private cms = inject(CmsService);
+  private eventos = inject(EventosService);
 
-  cargar(): Promise<void> {
-    return this.cms.cargar();
+  async cargar(): Promise<void> {
+    await Promise.all([this.cms.cargar(), this.eventos.cargar()]);
   }
 
   /** ¿La página y todas sus superiores están publicadas? */
@@ -110,6 +117,25 @@ export class BusquedaSitioService {
         fecha: e.fechaPublicacion || null,
         idxTitulo: normalizar(e.titulo),
         idxCuerpo: normalizar([e.resumen, e.contenido, archivos].join(' ')),
+      });
+    }
+
+    // Eventos del calendario (publicados o cancelados)
+    const calendario = this.cms.paginas().find((p) => p.plantilla === 'calendario' && this.visible(p));
+    const rutaCal = calendario ? this.cms.rutaPagina(calendario.id) : RUTA_CALENDARIO;
+    for (const ev of this.eventos.publicos()) {
+      const dia = diaDe(ev);
+      lista.push({
+        clave: 'v' + ev.id,
+        tipo: 'evento',
+        titulo: (ev.estado === 'cancelado' ? 'Cancelado: ' : '') + ev.titulo,
+        texto: [ev.descripcion, ev.lugar].filter(Boolean).join(' · '),
+        seccion: 'Calendario de eventos',
+        url: `${rutaCal}?evento=${ev.id}`,
+        externa: false,
+        fecha: ev.fechaInicio,
+        idxTitulo: normalizar(ev.titulo),
+        idxCuerpo: normalizar([ev.descripcion, ev.lugar, ev.responsable, ev.dirigidoA, dia].join(' ')),
       });
     }
 

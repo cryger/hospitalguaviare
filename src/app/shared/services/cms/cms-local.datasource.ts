@@ -11,6 +11,7 @@ import {
 import { CmsEntrada, CmsMenu, CmsMultimedia, CmsPagina } from '../../models/cms/cms.models';
 import { COTIZACIONES_SEMILLA, VACANTES_SEMILLA } from './cms-semilla-modulos';
 import { ENTRADAS_PIE, EntradaPieSemilla } from './cms-semilla-pie';
+import { EVENTOS_SEMILLA } from './cms-semilla-eventos';
 import { ENTRADAS_ENTIDAD } from './cms-semilla-entidad';
 
 /**
@@ -31,6 +32,7 @@ export class CmsLocalDataSource extends CmsDataSource {
     super();
     this.sembrarSiVacio();
     this.sembrarModulos();
+    this.sembrarEventos();
     this.actualizarSemilla();
     this.sembrarEntradasFijas('pie-semilla', ENTRADAS_PIE);
     this.sembrarEntradasFijas('entidad-semilla', ENTRADAS_ENTIDAD);
@@ -168,7 +170,7 @@ export class CmsLocalDataSource extends CmsDataSource {
   }
 
   /* ===== Estructura inicial (Resolución 1519 de 2020) ===== */
-  private readonly versionSemilla = 12;
+  private readonly versionSemilla = 13;
 
   private sembrarSiVacio(): void {
     if (localStorage.getItem(this.prefijo + 'menus')) return;
@@ -206,6 +208,17 @@ export class CmsLocalDataSource extends CmsDataSource {
     };
     sembrar('vacantes', VACANTES_SEMILLA);
     sembrar('cotizaciones', COTIZACIONES_SEMILLA);
+    localStorage.setItem(clave, '1');
+  }
+
+  /** Eventos del calendario migrados del portal anterior (una sola vez) */
+  private sembrarEventos(): void {
+    const clave = this.prefijo + 'eventos-semilla';
+    if (localStorage.getItem(clave) === '1') return;
+    if (!this.leer('eventos').length) {
+      const t = this.ahora();
+      this.escribir('eventos', EVENTOS_SEMILLA.map((e, i) => ({ ...e, id: i + 1, creadoEn: t, actualizadoEn: t })));
+    }
     localStorage.setItem(clave, '1');
   }
 
@@ -312,6 +325,15 @@ export class CmsLocalDataSource extends CmsDataSource {
       for (const p of paginas) {
         const s = ESTRUCTURA_1519.find((x) => x.slug === p.slug);
         if (!p.descripcion && s?.descripcion) Object.assign(p, { descripcion: s.descripcion, actualizadoEn: t });
+      }
+    }
+    // Versión 13: 1.11 Calendario de actividades y eventos usa la plantilla "calendario"
+    if (version < 13) {
+      for (const p of paginas) {
+        if (p.slug === 'calendario-de-actividades-y-eventos' && p.plantilla === 'contenido') {
+          const s = ESTRUCTURA_1519.find((x) => x.slug === p.slug);
+          Object.assign(p, { plantilla: 'calendario', descripcion: p.descripcion || s?.descripcion, actualizadoEn: t });
+        }
       }
     }
     this.escribir('paginas', paginas);
@@ -448,7 +470,7 @@ const ESTRUCTURA_1519: PaginaSemilla[] = [
   { id: 10, menuId: 1, parentId: 2, titulo: "1.8 Servicio al público, normas, formularios y protocolos de atención", slug: 'servicio-al-publico-normas-formularios-y-protocolos-de-atencion', plantilla: 'documentos', orden: 7 },
   { id: 11, menuId: 1, parentId: 2, titulo: "1.9 Procedimientos que se siguen para tomar decisiones en las diferentes áreas", slug: 'procedimientos-que-se-siguen-para-tomar-decisiones-en-las-diferentes-areas', plantilla: 'documentos', orden: 8 },
   { id: 12, menuId: 1, parentId: 2, titulo: "1.10 Mecanismo de presentación directa de solicitudes, quejas y reclamos", slug: 'mecanismo-pqrsd', plantilla: 'enlace', urlExterna: '/pqrsf', orden: 9 },
-  { id: 13, menuId: 1, parentId: 2, titulo: "1.11 Calendario de actividades y eventos", slug: 'calendario-de-actividades-y-eventos', plantilla: 'contenido', orden: 10 },
+  { id: 13, menuId: 1, parentId: 2, titulo: "1.11 Calendario de actividades y eventos", slug: 'calendario-de-actividades-y-eventos', plantilla: 'calendario', descripcion: "Agenda de capacitaciones, jornadas, comités y espacios de participación de la E.S.E. Hospital San José del Guaviare.", orden: 10 },
   { id: 14, menuId: 1, parentId: 2, titulo: "1.12 Información sobre decisiones que pueden afectar al público", slug: 'informacion-sobre-decisiones-que-pueden-afectar-al-publico', plantilla: 'documentos', orden: 11 },
   { id: 15, menuId: 1, parentId: 2, titulo: "1.13 Entes y autoridades que lo vigilan", slug: 'entes-y-autoridades-que-lo-vigilan', plantilla: 'contenido', orden: 12 },
   { id: 16, menuId: 1, parentId: 2, titulo: "1.14 Publicación de hojas de vida", slug: 'publicacion-de-hojas-de-vida', plantilla: 'documentos', orden: 13 },

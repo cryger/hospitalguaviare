@@ -1,0 +1,205 @@
+<section class="cal" aria-labelledby="cal-titulo">
+  <h2 id="cal-titulo" class="visually-hidden">Calendario de eventos</h2>
+
+  <!-- Filtros: buscador estándar + categoría -->
+  <app-buscador-govco idCampo="buscar-eventos" titulo="Buscar en el calendario"
+      ayuda="Busque por nombre del evento, lugar o responsable; el calendario se actualiza mientras escribe."
+      placeholder="Ej. Martes del Saber, inducción, auditorio…" etiquetaBoton="Buscar eventos"
+      [valor]="busqueda()" (valorChange)="busqueda.set($event)" (enviar)="vista.set('lista')">
+    <div filtros class="desplegable-govco">
+      <label for="cal-categoria">Categoría</label>
+      <select id="cal-categoria" class="btn-dropdown" [value]="categoria()" (change)="categoria.set($any($event.target).value)">
+        <option value="">Todas las categorías</option>
+        @for (c of categorias; track c.valor) { <option [value]="c.valor" [selected]="c.valor === categoria()">{{ c.etiqueta }}</option> }
+      </select>
+    </div>
+    @if (hayFiltros()) {
+      <div class="bn-activos">
+        <span class="bn-activos-txt">Filtros aplicados:</span>
+        <ul class="etiquetas-govco">
+          @if (busqueda().trim()) {
+            <li><span class="etiqueta-govco">«{{ busqueda().trim() }}»
+              <button type="button" (click)="busqueda.set('')" [attr.aria-label]="'Quitar búsqueda ' + busqueda().trim()">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18"/></svg></button></span></li>
+          }
+          @if (categoria()) {
+            <li><span class="etiqueta-govco">{{ cat(categoria()).etiqueta }}
+              <button type="button" (click)="categoria.set('')" aria-label="Quitar filtro de categoría">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18"/></svg></button></span></li>
+          }
+        </ul>
+        <button type="button" class="btn-bdc outline-btn-govco limpiar" (click)="limpiarFiltros()">Limpiar filtros</button>
+      </div>
+    }
+  </app-buscador-govco>
+
+  <!-- Barra: mes, navegación y vistas -->
+  <div class="cal-barra">
+    <div class="cal-nav">
+      <button type="button" class="cal-flecha" (click)="cambiarMes(-1)" aria-label="Mes anterior">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M15 6l-6 6 6 6"/></svg>
+      </button>
+      <p class="cal-mes" aria-live="polite">{{ titulo() }}</p>
+      <button type="button" class="cal-flecha" (click)="cambiarMes(1)" aria-label="Mes siguiente">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 6l6 6-6 6"/></svg>
+      </button>
+      <button type="button" class="btn-bdc outline-btn-govco btn-hoy" (click)="irHoy()">Hoy</button>
+    </div>
+    <div class="cal-vistas" role="tablist" aria-label="Vista del calendario">
+      <button type="button" role="tab" id="tab-mes" aria-controls="panel-mes" [attr.aria-selected]="vista() === 'mes'" [class.activa]="vista() === 'mes'" (click)="vista.set('mes')">Mes</button>
+      <button type="button" role="tab" id="tab-lista" aria-controls="panel-lista" [attr.aria-selected]="vista() === 'lista'" [class.activa]="vista() === 'lista'" (click)="vista.set('lista')">Lista</button>
+    </div>
+  </div>
+
+  <!-- Leyenda -->
+  <ul class="cal-leyenda" aria-label="Categorías de eventos">
+    @for (c of categorias; track c.valor) {
+      <li><span class="punto" [style.background]="c.color" aria-hidden="true"></span>{{ c.etiqueta }}</li>
+    }
+  </ul>
+
+  @if (svc.cargando() && !svc.eventos().length) {
+    <p class="resultado-busqueda" role="status">Cargando eventos…</p>
+  }
+
+  @if (vista() === 'mes') {
+    <div id="panel-mes" role="tabpanel" aria-labelledby="tab-mes">
+      <p class="resultado-busqueda" role="status" aria-live="polite">
+        <strong>{{ eventosMes().length }}</strong> {{ eventosMes().length === 1 ? 'evento' : 'eventos' }} en {{ titulo() }}
+        @if (eventosMes().length) {
+          · <button type="button" class="enlace-btn" (click)="descargarMes()">Descargar el mes (.ics)</button>
+        }
+      </p>
+
+      <table class="cal-grid" role="grid" [attr.aria-label]="'Calendario de ' + titulo()">
+        <thead>
+          <tr>
+            @for (d of diasSemana; track d) { <th scope="col" [attr.abbr]="d"><span aria-hidden="true">{{ d.slice(0, 3) }}</span><span class="visually-hidden">{{ d }}</span></th> }
+          </tr>
+        </thead>
+        <tbody>
+          @for (semana of semanas(); track $index) {
+            <tr>
+              @for (c of semana; track c.fecha) {
+                <td [class.fuera]="!c.delMes" [class.hoy]="c.hoy" [class.sel]="c.fecha === seleccionado()" [attr.aria-selected]="c.fecha === seleccionado()">
+                  <button #botonDia type="button" class="cal-dia" [attr.data-fecha]="c.fecha"
+                          [attr.tabindex]="c.fecha === seleccionado() ? 0 : -1" [attr.aria-label]="etiquetaDia(c)"
+                          (click)="elegir(c.fecha, c.delMes)" (keydown)="teclado($event, c.fecha)">
+                    <span class="num" aria-hidden="true">{{ c.dia }}</span>
+                    @if (c.eventos.length) {
+                      <span class="chips" aria-hidden="true">
+                        @for (e of c.eventos.slice(0, 3); track e.id) {
+                          <span class="chip" [class.cancelado]="e.estado === 'cancelado'" [style.--c]="cat(e.categoria).color">{{ e.titulo }}</span>
+                        }
+                        @if (c.eventos.length > 3) { <span class="mas">+{{ c.eventos.length - 3 }} más</span> }
+                      </span>
+                      <span class="puntos" aria-hidden="true">
+                        @for (e of c.eventos.slice(0, 4); track e.id) { <span class="punto" [style.background]="cat(e.categoria).color"></span> }
+                      </span>
+                    }
+                  </button>
+                </td>
+              }
+            </tr>
+          }
+        </tbody>
+      </table>
+      <p class="cal-ayuda">Use las flechas del teclado para moverse entre los días y «Re Pág» / «Av Pág» para cambiar de mes.</p>
+
+      <section class="cal-dia-detalle" aria-live="polite">
+        <h3>{{ fechaLarga(seleccionado()) }}</h3>
+        @if (eventosDia().length) {
+          <ul class="cal-lista">
+            @for (e of eventosDia(); track e.id) {
+              <li><ng-container *ngTemplateOutlet="tarjeta; context: { $implicit: e }" /></li>
+            }
+          </ul>
+        } @else {
+          <p class="sin-eventos">No hay eventos programados para este día.</p>
+        }
+      </section>
+    </div>
+  } @else {
+    <div id="panel-lista" role="tabpanel" aria-labelledby="tab-lista">
+      <div class="cal-periodo">
+        <div class="desplegable-govco">
+          <label for="cal-periodo">Mostrar</label>
+          <select id="cal-periodo" class="btn-dropdown" [value]="periodo()" (change)="periodo.set($any($event.target).value)">
+            <option value="proximos">Próximos eventos</option>
+            <option value="anteriores">Eventos anteriores</option>
+          </select>
+        </div>
+      </div>
+      <p class="resultado-busqueda" role="status" aria-live="polite">
+        <strong>{{ totalLista() }}</strong> {{ totalLista() === 1 ? 'evento' : 'eventos' }} {{ periodo() === 'proximos' ? 'próximos' : 'anteriores' }}
+        @if (busqueda().trim()) { para «{{ busqueda().trim() }}» }
+      </p>
+      @for (g of grupos(); track g.clave) {
+        <section class="cal-grupo">
+          <h3>{{ g.titulo }}</h3>
+          <ul class="cal-lista">
+            @for (e of g.eventos; track e.id) {
+              <li><ng-container *ngTemplateOutlet="tarjeta; context: { $implicit: e }" /></li>
+            }
+          </ul>
+        </section>
+      } @empty {
+        <div class="sin-resultados">
+          <p>No encontramos eventos con esos criterios.</p>
+          <p>Pruebe con otras palabras, otra categoría o consulte los {{ periodo() === 'proximos' ? 'eventos anteriores' : 'próximos eventos' }}.</p>
+          @if (hayFiltros()) { <button type="button" class="btn-bdc fill-btn-govco" (click)="limpiarFiltros()">Ver todos los eventos</button> }
+        </div>
+      }
+    </div>
+  }
+</section>
+
+<!-- Tarjeta de evento -->
+<ng-template #tarjeta let-e>
+  <article class="evento" [class.cancelado]="e.estado === 'cancelado'" [style.--c]="cat(e.categoria).color" [attr.id]="'evento-' + e.id">
+    <div class="fecha" aria-hidden="true">
+      <span class="d">{{ diaNumero(e) }}</span>
+      <span class="m">{{ mesCorto(e) }}</span>
+    </div>
+    <div class="cuerpo">
+      <p class="meta">
+        <span class="cat">{{ cat(e.categoria).etiqueta }}</span>
+        @if (e.estado === 'cancelado') { <span class="estado-cancelado">Cancelado</span> }
+        @if (e.destacado) { <span class="destacado">Destacado</span> }
+      </p>
+      <h4 [innerHTML]="marcar(e.titulo)"></h4>
+      <ul class="datos">
+        <li><span class="ico" aria-hidden="true">📅</span><span><span class="visually-hidden">Fecha: </span>{{ fechaEvento(e) }}</span></li>
+        <li><span class="ico" aria-hidden="true">🕓</span><span><span class="visually-hidden">Hora: </span>{{ horario(e) }}</span></li>
+        @if (e.lugar) { <li><span class="ico" aria-hidden="true">📍</span><span><span class="visually-hidden">Lugar: </span><span [innerHTML]="marcar(e.lugar)"></span> · {{ modalidad(e) }}</span></li> }
+        @else { <li><span class="ico" aria-hidden="true">📍</span><span><span class="visually-hidden">Modalidad: </span>{{ modalidad(e) }}</span></li> }
+        @if (e.dirigidoA) { <li><span class="ico" aria-hidden="true">👥</span><span><span class="visually-hidden">Dirigido a: </span>{{ e.dirigidoA }}</span></li> }
+        @if (e.responsable) { <li><span class="ico" aria-hidden="true">🧑‍💼</span><span><span class="visually-hidden">Responsable: </span><span [innerHTML]="marcar(e.responsable)"></span></span></li> }
+      </ul>
+      @if (e.descripcion) {
+        @if (abierto() === e.id) {
+          <p class="desc" [id]="'desc-' + e.id" [innerHTML]="marcar(e.descripcion)"></p>
+        }
+        <button type="button" class="enlace-btn" [attr.aria-expanded]="abierto() === e.id" [attr.aria-controls]="'desc-' + e.id"
+                (click)="abierto.set(abierto() === e.id ? null : e.id)">
+          {{ abierto() === e.id ? 'Ocultar detalles' : 'Ver detalles' }}
+        </button>
+      }
+      @if (e.estado !== 'cancelado') {
+        <div class="acciones">
+          @if (e.enlace) {
+            <a class="btn-bdc fill-btn-govco" [href]="e.enlace" target="_blank" rel="noopener">
+              {{ e.modalidad === 'presencial' ? 'Inscribirse' : 'Unirse / inscribirse' }}<span class="visually-hidden"> a {{ e.titulo }} (abre en otra pestaña)</span>
+            </a>
+          }
+          <button type="button" class="btn-bdc outline-btn-govco" (click)="descargarEvento(e)">
+            Agregar a mi calendario<span class="visually-hidden"> el evento {{ e.titulo }}</span>
+          </button>
+          <a class="enlace-btn" [href]="google(e)" target="_blank" rel="noopener">Google Calendar<span class="visually-hidden"> (abre en otra pestaña)</span></a>
+        </div>
+      } @else {
+        <p class="aviso-cancelado" role="note">Este evento fue cancelado.</p>
+      }
+    </div>
+  </article>
+</ng-template>

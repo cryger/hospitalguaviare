@@ -1,0 +1,233 @@
+<div class="cms-head">
+  <div>
+    <h1>Calendario de eventos</h1>
+    <p>Capacitaciones, jornadas, comités y espacios de participación que se publican en el calendario del portal.</p>
+  </div>
+  <div class="cms-head-actions">
+    <a class="btn" [href]="rutaPublica" target="_blank" rel="noopener">Ver en el portal ↗</a>
+    <button type="button" class="btn btn-primario" (click)="nuevo()">+ Nuevo evento</button>
+  </div>
+</div>
+
+@if (aviso(); as a) {
+  <div class="aviso" [class.aviso-ok]="a.tipo === 'ok'" [class.aviso-error]="a.tipo === 'error'" role="status">
+    {{ a.texto }}
+    <button type="button" class="btn-link" (click)="aviso.set(null)" aria-label="Cerrar aviso">✕</button>
+  </div>
+}
+
+<div class="kpis">
+  <div class="kpi"><b>{{ kpis().proximos }}</b>Próximos publicados</div>
+  <div class="kpi"><b>{{ kpis().mes }}</b>Este mes</div>
+  <div class="kpi"><b>{{ kpis().borradores }}</b>Borradores</div>
+  <div class="kpi"><b>{{ kpis().cancelados }}</b>Cancelados</div>
+</div>
+
+<section class="panel">
+  <app-buscador-govco idCampo="buscar-eventos-admin" etiqueta="Buscar evento" [compacto]="true"
+      placeholder="Título, lugar o responsable…" etiquetaBoton="Buscar eventos"
+      [valor]="busqueda()" (valorChange)="busqueda.set($event)">
+    <div filtros class="desplegable-govco">
+      <label for="f-periodo">Periodo</label>
+      <select id="f-periodo" class="btn-dropdown" [ngModel]="periodo()" (ngModelChange)="periodo.set($event)">
+        <option value="proximos">Próximos</option>
+        <option value="anteriores">Anteriores</option>
+        <option value="todos">Todos</option>
+      </select>
+    </div>
+    <div filtros class="desplegable-govco">
+      <label for="f-categoria">Categoría</label>
+      <select id="f-categoria" class="btn-dropdown" [ngModel]="filtroCategoria()" (ngModelChange)="filtroCategoria.set($event)">
+        <option value="">Todas</option>
+        @for (c of categorias; track c.valor) { <option [value]="c.valor">{{ c.etiqueta }}</option> }
+      </select>
+    </div>
+    <div filtros class="desplegable-govco">
+      <label for="f-estado">Estado</label>
+      <select id="f-estado" class="btn-dropdown" [ngModel]="filtroEstado()" (ngModelChange)="filtroEstado.set($event)">
+        <option value="">Todos</option>
+        <option value="publicado">Publicado</option>
+        <option value="borrador">Borrador</option>
+        <option value="cancelado">Cancelado</option>
+      </select>
+    </div>
+  </app-buscador-govco>
+  <p class="resultado-busqueda admin" role="status" aria-live="polite">
+    <strong>{{ lista().length }}</strong> de {{ svc.eventos().length }} eventos
+    @if (hayFiltros()) { <button type="button" class="btn-bdc outline-btn-govco limpiar-admin" (click)="limpiarFiltros()">Limpiar filtros</button> }
+  </p>
+
+  @if (lista().length) {
+    <div class="table-wrap">
+      <table class="tabla">
+        <thead>
+          <tr>
+            <th>Fecha</th>
+            <th>Evento</th>
+            <th class="ocultar-movil">Categoría</th>
+            <th>Estado</th>
+            <th class="acciones"><span class="visually-hidden">Acciones</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (e of lista(); track e.id) {
+            <tr [class.pasado]="pasado(e)">
+              <td class="celda-fecha">
+                <span class="titulo-celda">{{ dia(e) }}</span>
+                <span class="sub-celda">{{ horario(e) }}</span>
+              </td>
+              <td>
+                <button type="button" class="btn-link titulo-evento" (click)="editar(e)">{{ e.titulo }}</button>
+                @if (e.destacado) { <span class="badge badge-info">Destacado</span> }
+                <span class="sub-celda">{{ e.lugar || 'Sin lugar' }}{{ e.responsable ? ' · ' + e.responsable : '' }}</span>
+              </td>
+              <td class="ocultar-movil"><span class="cat" [style.--c]="cat(e.categoria).color">{{ cat(e.categoria).etiqueta }}</span></td>
+              <td><span class="badge" [class]="'badge badge-' + e.estado">{{ e.estado }}</span></td>
+              <td class="acciones">
+                <button type="button" class="btn btn-sm" (click)="editar(e)">Editar</button>
+                <button type="button" class="btn btn-sm" (click)="editar(e, true)" title="Crear una copia del evento">Duplicar</button>
+                @if (e.estado === 'publicado') {
+                  <button type="button" class="btn btn-sm" (click)="cambiarEstado(e, 'cancelado')">Cancelar</button>
+                } @else {
+                  <button type="button" class="btn btn-sm" (click)="cambiarEstado(e, 'publicado')">Publicar</button>
+                }
+                <button type="button" class="btn btn-sm btn-peligro" (click)="eliminar(e)">Eliminar</button>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  } @else {
+    <p class="vacio">{{ svc.cargando() ? 'Cargando eventos…' : 'No hay eventos con estos filtros.' }}</p>
+  }
+</section>
+
+<!-- ===== Crear / editar ===== -->
+@if (modal()) {
+  <div class="modal-fondo" (click)="cerrar()">
+    <div class="modal-caja grande" role="dialog" aria-modal="true" aria-labelledby="titulo-modal-evento" (click)="$event.stopPropagation()" (keydown.escape)="cerrar()">
+      <div class="modal-head">
+        <h2 id="titulo-modal-evento">{{ editando() ? 'Editar evento' : 'Nuevo evento' }}</h2>
+        <button type="button" class="btn btn-icono" (click)="cerrar()" aria-label="Cerrar">✕</button>
+      </div>
+      <form [formGroup]="form" (ngSubmit)="guardar()" novalidate>
+        <div class="modal-body">
+          <div class="form-grid">
+            <div class="campo full">
+              <label for="ev-titulo">Nombre del evento *</label>
+              <input id="ev-titulo" class="input" formControlName="titulo" [class.invalido]="error('titulo')" placeholder="Ej. Martes del Saber – Protección de datos" />
+              @if (error('titulo')) { <small class="err">Escriba el nombre del evento.</small> }
+            </div>
+
+            <div class="campo">
+              <label for="ev-categoria">Categoría *</label>
+              <select id="ev-categoria" class="select" formControlName="categoria">
+                @for (c of categorias; track c.valor) { <option [value]="c.valor">{{ c.etiqueta }}</option> }
+              </select>
+            </div>
+            <div class="campo">
+              <label for="ev-estado">Estado</label>
+              <select id="ev-estado" class="select" formControlName="estado">
+                <option value="publicado">Publicado (visible en el portal)</option>
+                <option value="borrador">Borrador (oculto)</option>
+                <option value="cancelado">Cancelado (visible con aviso)</option>
+              </select>
+            </div>
+
+            <fieldset class="full grupo-fechas">
+              <legend>Fecha y hora</legend>
+              <div class="fila-fechas">
+                <div class="campo">
+                  <label for="ev-fecha">Fecha *</label>
+                  <input id="ev-fecha" type="date" class="input" formControlName="fecha" [class.invalido]="error('fecha')" />
+                </div>
+                @if (!form.controls.todoElDia.value) {
+                  <div class="campo">
+                    <label for="ev-hini">Hora de inicio</label>
+                    <input id="ev-hini" type="time" class="input" formControlName="horaInicio" />
+                  </div>
+                  <div class="campo">
+                    <label for="ev-hfin">Hora de fin</label>
+                    <input id="ev-hfin" type="time" class="input" formControlName="horaFin" />
+                  </div>
+                }
+                <div class="campo">
+                  <label for="ev-ffin">Termina otro día <span class="opc">(opcional)</span></label>
+                  <input id="ev-ffin" type="date" class="input" formControlName="fechaFin" [min]="form.controls.fecha.value" />
+                </div>
+              </div>
+              <label class="check"><input type="checkbox" formControlName="todoElDia" /> Todo el día (sin hora definida)</label>
+              <small>Las horas corresponden a la hora de Colombia.</small>
+            </fieldset>
+
+            @if (!editando()) {
+              <fieldset class="full grupo-fechas">
+                <legend>Repetir</legend>
+                <div class="fila-fechas">
+                  <div class="campo">
+                    <label for="ev-repetir">Frecuencia</label>
+                    <select id="ev-repetir" class="select" formControlName="repetir">
+                      <option value="no">No se repite</option>
+                      <option value="semanal">Cada semana</option>
+                      <option value="quincenal">Cada dos semanas</option>
+                      <option value="mensual">Cada mes</option>
+                    </select>
+                  </div>
+                  @if (form.controls.repetir.value !== 'no') {
+                    <div class="campo">
+                      <label for="ev-hasta">Hasta *</label>
+                      <input id="ev-hasta" type="date" class="input" formControlName="repetirHasta" [min]="form.controls.fecha.value" />
+                    </div>
+                  }
+                </div>
+                @if (form.controls.repetir.value !== 'no' && contarRepeticiones() > 1) {
+                  <small>Se crearán <b>{{ contarRepeticiones() }}</b> eventos independientes (cada uno se puede editar después).</small>
+                }
+              </fieldset>
+            }
+
+            @if (form.errors?.['rango']; as msg) {
+              <p class="full err" role="alert">{{ msg }}</p>
+            }
+
+            <div class="campo">
+              <label for="ev-lugar">Lugar</label>
+              <input id="ev-lugar" class="input" formControlName="lugar" placeholder="Ej. Auditorio de la E.S.E." />
+            </div>
+            <div class="campo">
+              <label for="ev-modalidad">Modalidad</label>
+              <select id="ev-modalidad" class="select" formControlName="modalidad">
+                @for (m of modalidades; track m.valor) { <option [value]="m.valor">{{ m.etiqueta }}</option> }
+              </select>
+            </div>
+            <div class="campo">
+              <label for="ev-dirigido">Dirigido a</label>
+              <input id="ev-dirigido" class="input" formControlName="dirigidoA" placeholder="Ej. Funcionarios, ciudadanía, usuarios…" />
+            </div>
+            <div class="campo">
+              <label for="ev-resp">Responsable</label>
+              <input id="ev-resp" class="input" formControlName="responsable" placeholder="Ej. Talento Humano" />
+            </div>
+            <div class="campo full">
+              <label for="ev-enlace">Enlace de inscripción o reunión virtual <span class="opc">(opcional)</span></label>
+              <input id="ev-enlace" type="url" class="input" formControlName="enlace" [class.invalido]="error('enlace')" placeholder="https://…" />
+              @if (error('enlace')) { <small class="err">Escriba una dirección completa que empiece por https://</small> }
+            </div>
+            <div class="campo full">
+              <label for="ev-desc">Descripción</label>
+              <textarea id="ev-desc" class="textarea" rows="4" formControlName="descripcion" placeholder="Temas, agenda, recomendaciones…"></textarea>
+            </div>
+            <label class="check full"><input type="checkbox" formControlName="destacado" /> Destacar este evento</label>
+          </div>
+        </div>
+        <div class="modal-foot">
+          <button type="button" class="btn" (click)="cerrar()">Cancelar</button>
+          <button type="submit" class="btn btn-primario" [disabled]="guardando()">
+            {{ guardando() ? 'Guardando…' : editando() ? 'Guardar cambios' : contarRepeticiones() > 1 ? 'Crear ' + contarRepeticiones() + ' eventos' : 'Crear evento' }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+}
