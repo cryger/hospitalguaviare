@@ -88,41 +88,82 @@
     @case ('listado') {
       @if (entradas().length) {
         <!-- Buscador de publicaciones -->
-        <form class="buscador-noticias" role="search" aria-label="Buscar en {{ p.titulo }}" (submit)="$event.preventDefault()">
-          <div class="campo-busqueda">
-            <label for="buscar-listado">Buscar</label>
-            <div class="caja">
-              <span class="lupa" aria-hidden="true">🔍</span>
-              <input id="buscar-listado" type="search" autocomplete="off"
-                     placeholder="Ej. vacunación, jornada de salud, resolución 0847…"
-                     [value]="busqueda()" (input)="buscar($any($event.target).value)" />
+        <form class="buscador-noticias" role="search" aria-label="Buscar en {{ p.titulo }}"
+              (submit)="$event.preventDefault(); resultadoBusqueda.focus()">
+          <div class="bn-encabezado">
+            <h2 class="bn-titulo">Buscar publicaciones</h2>
+            <p class="bn-ayuda" id="ayuda-buscador">Escriba una o varias palabras; los resultados se actualizan mientras escribe.</p>
+          </div>
+          <div class="bn-campos">
+            <div class="campo-busqueda">
+              <label for="buscar-listado">Palabras clave</label>
+              <div class="govco-search-basic">
+                <div class="container-govco" [class.con-texto]="!!busqueda()">
+                  <input #campoBusqueda id="buscar-listado" type="search" class="input-search-basic-govco" autocomplete="off"
+                         placeholder="Ej. vacunación, jornada de salud, resolución…" aria-describedby="ayuda-buscador"
+                         [value]="busqueda()" (input)="buscar($any($event.target).value)" />
+                  @if (busqueda()) {
+                    <button class="btn-clean-basic-govco" type="button" aria-label="Limpiar texto de búsqueda"
+                            (click)="buscar(''); campoBusqueda.focus()">
+                      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18"/></svg>
+                    </button>
+                    <span class="line-basic-govco" aria-hidden="true"></span>
+                  }
+                  <button class="btn-search-basic-govco" type="submit" aria-label="Buscar publicaciones">
+                    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5L21 21"/></svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="desplegable-govco">
+              <label for="filtro-anio">Año</label>
+              <select id="filtro-anio" class="btn-dropdown" [value]="anio()" (change)="filtrarAnio($any($event.target).value)">
+                <option value="">Todos los años</option>
+                @for (a of anios(); track a) { <option [value]="a">{{ a }}</option> }
+              </select>
+            </div>
+            <div class="desplegable-govco">
+              <label for="filtro-orden">Ordenar por</label>
+              <select id="filtro-orden" class="btn-dropdown" [value]="orden()" (change)="cambiarOrden($any($event.target).value)">
+                <option value="recientes">Más recientes</option>
+                <option value="antiguas">Más antiguas</option>
+              </select>
             </div>
           </div>
-          <div class="campo-filtro">
-            <label for="filtro-anio">Año</label>
-            <select id="filtro-anio" [value]="anio()" (change)="filtrarAnio($any($event.target).value)">
-              <option value="">Todos</option>
-              @for (a of anios(); track a) { <option [value]="a">{{ a }}</option> }
-            </select>
-          </div>
-          <div class="campo-filtro">
-            <label for="filtro-orden">Ordenar</label>
-            <select id="filtro-orden" [value]="orden()" (change)="cambiarOrden($any($event.target).value)">
-              <option value="recientes">Más recientes</option>
-              <option value="antiguas">Más antiguas</option>
-            </select>
-          </div>
           @if (hayFiltros()) {
-            <button type="button" class="limpiar" (click)="limpiarFiltros()">Limpiar</button>
+            <div class="bn-activos">
+              <span class="bn-activos-txt">Filtros aplicados:</span>
+              <ul class="etiquetas-govco">
+                @if (busqueda().trim()) {
+                  <li><span class="etiqueta-govco">«{{ busqueda().trim() }}»
+                    <button type="button" (click)="buscar('')" aria-label="Quitar búsqueda {{ busqueda().trim() }}">
+                      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18"/></svg>
+                    </button></span></li>
+                }
+                @if (anio()) {
+                  <li><span class="etiqueta-govco">Año {{ anio() }}
+                    <button type="button" (click)="filtrarAnio('')" aria-label="Quitar filtro de año {{ anio() }}">
+                      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18"/></svg>
+                    </button></span></li>
+                }
+                @if (orden() !== 'recientes') {
+                  <li><span class="etiqueta-govco">Más antiguas primero
+                    <button type="button" (click)="cambiarOrden('recientes')" aria-label="Quitar orden por más antiguas">
+                      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18"/></svg>
+                    </button></span></li>
+                }
+              </ul>
+              <button type="button" class="btn-bdc outline-btn-govco limpiar" (click)="limpiarFiltros(); campoBusqueda.focus()">Limpiar filtros</button>
+            </div>
           }
         </form>
-        <p class="resultado-busqueda" role="status" aria-live="polite">
+        <p #resultadoBusqueda class="resultado-busqueda" role="status" aria-live="polite" tabindex="-1">
           @if (busqueda().trim() || anio()) {
-            {{ entradasFiltradas().length }} {{ entradasFiltradas().length === 1 ? 'resultado' : 'resultados' }}
+            <strong>{{ entradasFiltradas().length }}</strong> {{ entradasFiltradas().length === 1 ? 'resultado' : 'resultados' }}
             @if (busqueda().trim()) { para «{{ busqueda().trim() }}» }
             @if (anio()) { en {{ anio() }} }
           } @else {
-            {{ entradas().length }} publicaciones
+            <strong>{{ entradas().length }}</strong> publicaciones
           }
         </p>
 
@@ -150,11 +191,11 @@
           <div class="sin-resultados">
             <p>No encontramos publicaciones con esos criterios.</p>
             <p>Pruebe con otras palabras, revise la ortografía o quite el filtro de año.</p>
-            <button type="button" class="btn-govco" (click)="limpiarFiltros()">Ver todas</button>
+            <button type="button" class="btn-bdc fill-btn-govco" (click)="limpiarFiltros()">Ver todas las publicaciones</button>
           </div>
         }
         @if (entradasFiltradas().length > mostrar()) {
-          <div class="centro"><button class="btn-govco" type="button" (click)="mostrar.set(mostrar() + 9)">Cargar más ({{ entradasFiltradas().length - mostrar() }} restantes)</button></div>
+          <div class="centro"><button class="btn-bdc fill-btn-govco" type="button" (click)="mostrar.set(mostrar() + 9)">Cargar más ({{ entradasFiltradas().length - mostrar() }} restantes)</button></div>
         }
       }
     }
