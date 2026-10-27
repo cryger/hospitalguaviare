@@ -60,6 +60,48 @@
       "video": "assets/senas/cotizaciones.mp4",
       "webm": "assets/senas/cotizaciones.webm",
       "poster": "assets/senas/cotizaciones.jpg"
+    },
+    "trabaja con nosotros": {
+      "titulo": "Trabaja con nosotros",
+      "video": "assets/senas/trabaja-con-nosotros.mp4",
+      "webm": "assets/senas/trabaja-con-nosotros.webm",
+      "poster": "assets/senas/trabaja-con-nosotros.jpg"
+    },
+    "pqrsfd": {
+      "titulo": "PQRSFD",
+      "video": "assets/senas/pqrsfd.mp4",
+      "webm": "assets/senas/pqrsfd.webm",
+      "poster": "assets/senas/pqrsfd.jpg"
+    },
+    "pqrsf": {
+      "titulo": "PQRSFD",
+      "video": "assets/senas/pqrsfd.mp4",
+      "webm": "assets/senas/pqrsfd.webm",
+      "poster": "assets/senas/pqrsfd.jpg"
+    },
+    "pqrsd": {
+      "titulo": "PQRSFD",
+      "video": "assets/senas/pqrsfd.mp4",
+      "webm": "assets/senas/pqrsfd.webm",
+      "poster": "assets/senas/pqrsfd.jpg"
+    },
+    "pqrsd - peticiones, quejas, reclamos, sugerencias y denuncias": {
+      "titulo": "PQRSFD",
+      "video": "assets/senas/pqrsfd.mp4",
+      "webm": "assets/senas/pqrsfd.webm",
+      "poster": "assets/senas/pqrsfd.jpg"
+    },
+    "canales oficiales para pqrsfd": {
+      "titulo": "PQRSFD",
+      "video": "assets/senas/pqrsfd.mp4",
+      "webm": "assets/senas/pqrsfd.webm",
+      "poster": "assets/senas/pqrsfd.jpg"
+    },
+    "pqrsd: peticiones, quejas, reclamos, sugerencias y denuncias": {
+      "titulo": "PQRSFD",
+      "video": "assets/senas/pqrsfd.mp4",
+      "webm": "assets/senas/pqrsfd.webm",
+      "poster": "assets/senas/pqrsfd.jpg"
     }
   }
 }
