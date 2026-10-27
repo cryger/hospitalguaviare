@@ -341,3 +341,39 @@ h1, h2, h3, .srv-titulo, .tarjeta-cuerpo h2, .tarjeta-cuerpo h3, .subpagina stro
 .lista-docs { grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr)); }
 .rejilla-media { grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr)); }
 .servicio, .srv-cuerpo, .srv-texto { min-width: 0; }
+
+/* ===== Buscador de publicaciones (listado / noticias) ===== */
+.buscador-noticias {
+  display: flex; flex-wrap: wrap; align-items: flex-end; gap: .75rem 1rem;
+  padding: 1rem 1.1rem; margin-bottom: .75rem;
+  background: #f5f8fd; border: 1px solid var(--borde); border-radius: 10px;
+}
+.buscador-noticias label { display: block; font-weight: 600; font-size: .85rem; margin-bottom: .3rem; }
+.campo-busqueda { flex: 1 1 320px; min-width: 0; }
+.caja { position: relative; }
+.caja .lupa { position: absolute; left: .75rem; top: 50%; transform: translateY(-50%); font-size: .95rem; opacity: .6; pointer-events: none; }
+.caja input {
+  width: 100%; border: 1px solid #737373; border-radius: 8px; padding: .65rem .8rem .65rem 2.3rem;
+  font-size: 1rem; font-family: inherit; background: #fff;
+}
+.campo-filtro select {
+  border: 1px solid #737373; border-radius: 8px; padding: .62rem .7rem; font-size: .95rem; font-family: inherit; background: #fff; min-width: 140px;
+}
+.buscador-noticias input:focus-visible, .buscador-noticias select:focus-visible, .limpiar:focus-visible { outline: 3px solid #ffab00; outline-offset: 1px; }
+.limpiar {
+  background: none; border: 1px solid var(--azul-2); color: var(--azul-2); border-radius: 8px;
+  padding: .6rem 1rem; font: inherit; font-weight: 600; cursor: pointer;
+}
+.limpiar:hover { background: #e8f0fb; }
+.resultado-busqueda { margin: 0 0 1rem; color: var(--texto-2); font-size: .9rem; }
+.sin-resultados { text-align: center; padding: 2rem 1rem; border: 2px dashed #c9d7ee; border-radius: 10px; color: var(--texto-2); }
+.sin-resultados p { margin: 0 0 .4rem; }
+.sin-resultados .btn-govco { margin-top: .75rem; }
+:host ::ng-deep .tarjeta-cuerpo mark { background: #fff3b0; color: inherit; padding: 0 .1em; border-radius: 3px; }
+
+@media (max-width: 576px) {
+  .buscador-noticias { padding: .9rem; }
+  .campo-filtro { flex: 1 1 140px; }
+  .campo-filtro select { width: 100%; min-width: 0; }
+  .limpiar { width: 100%; }
+}

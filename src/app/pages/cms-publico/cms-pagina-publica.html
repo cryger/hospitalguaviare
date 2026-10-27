@@ -87,6 +87,45 @@
   @switch (p.plantilla) {
     @case ('listado') {
       @if (entradas().length) {
+        <!-- Buscador de publicaciones -->
+        <form class="buscador-noticias" role="search" aria-label="Buscar en {{ p.titulo }}" (submit)="$event.preventDefault()">
+          <div class="campo-busqueda">
+            <label for="buscar-listado">Buscar</label>
+            <div class="caja">
+              <span class="lupa" aria-hidden="true">🔍</span>
+              <input id="buscar-listado" type="search" autocomplete="off"
+                     placeholder="Ej. vacunación, jornada de salud, resolución 0847…"
+                     [value]="busqueda()" (input)="buscar($any($event.target).value)" />
+            </div>
+          </div>
+          <div class="campo-filtro">
+            <label for="filtro-anio">Año</label>
+            <select id="filtro-anio" [value]="anio()" (change)="filtrarAnio($any($event.target).value)">
+              <option value="">Todos</option>
+              @for (a of anios(); track a) { <option [value]="a">{{ a }}</option> }
+            </select>
+          </div>
+          <div class="campo-filtro">
+            <label for="filtro-orden">Ordenar</label>
+            <select id="filtro-orden" [value]="orden()" (change)="cambiarOrden($any($event.target).value)">
+              <option value="recientes">Más recientes</option>
+              <option value="antiguas">Más antiguas</option>
+            </select>
+          </div>
+          @if (hayFiltros()) {
+            <button type="button" class="limpiar" (click)="limpiarFiltros()">Limpiar</button>
+          }
+        </form>
+        <p class="resultado-busqueda" role="status" aria-live="polite">
+          @if (busqueda().trim() || anio()) {
+            {{ entradasFiltradas().length }} {{ entradasFiltradas().length === 1 ? 'resultado' : 'resultados' }}
+            @if (busqueda().trim()) { para «{{ busqueda().trim() }}» }
+            @if (anio()) { en {{ anio() }} }
+          } @else {
+            {{ entradas().length }} publicaciones
+          }
+        </p>
+
         <div class="tarjetas">
           @for (e of entradasFiltradas().slice(0, mostrar()); track e.id) {
             <a class="tarjeta" [routerLink]="url(e)">
@@ -97,18 +136,25 @@
               }
               <div class="tarjeta-cuerpo">
                 @if (e.destacada) { <span class="chip">Destacado</span> }
-                <h2>{{ e.titulo }}</h2>
+                <h2 [innerHTML]="resaltar(e.titulo)"></h2>
                 @if (e.fechaPublicacion) {
                   <time [attr.datetime]="e.fechaPublicacion">{{ e.fechaPublicacion | date: "d 'de' MMMM 'de' y" : '' : 'es-CO' }}</time>
                 }
-                @if (e.resumen) { <p>{{ e.resumen }}</p> }
+                @if (e.resumen) { <p [innerHTML]="resaltar(e.resumen)"></p> }
                 <span class="leer">Leer más →</span>
               </div>
             </a>
           }
         </div>
+        @if (!entradasFiltradas().length) {
+          <div class="sin-resultados">
+            <p>No encontramos publicaciones con esos criterios.</p>
+            <p>Pruebe con otras palabras, revise la ortografía o quite el filtro de año.</p>
+            <button type="button" class="btn-govco" (click)="limpiarFiltros()">Ver todas</button>
+          </div>
+        }
         @if (entradasFiltradas().length > mostrar()) {
-          <div class="centro"><button class="btn-govco" type="button" (click)="mostrar.set(mostrar() + 9)">Cargar más</button></div>
+          <div class="centro"><button class="btn-govco" type="button" (click)="mostrar.set(mostrar() + 9)">Cargar más ({{ entradasFiltradas().length - mostrar() }} restantes)</button></div>
         }
       }
     }
@@ -118,7 +164,7 @@
         <div class="buscador">
           <label for="buscar-docs">Buscar documento</label>
           <input id="buscar-docs" type="search" placeholder="Escriba una palabra clave"
-                 [value]="busqueda()" (input)="busqueda.set($any($event.target).value)" />
+                 [value]="busqueda()" (input)="buscar($any($event.target).value)" />
         </div>
         <div class="docs">
           @for (e of entradasFiltradas(); track e.id) {

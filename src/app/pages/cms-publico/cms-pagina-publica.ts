@@ -11,6 +11,20 @@ import { esVistaPrevia } from './cms-publico.routes';
 
 const POR_PAGINA = 9;
 
+/** Minúsculas, sin tildes ni etiquetas HTML: "Vacunación" y "vacunacion" coinciden */
+function normalizar(texto: string): string {
+  return texto
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/&nbsp;/g, ' ')
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+const escaparHtml = (t: string) => t.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
 @Component({
   selector: 'app-cms-pagina-publica',
   imports: [RouterLink, DatePipe, CmsMediaPublica],
@@ -38,7 +52,10 @@ export class CmsPaginaPublica {
 
   readonly cargado = signal(false);
   readonly mostrar = signal(POR_PAGINA);
-  readonly busqueda = signal('');
+  readonly busqueda = signal(this.route.snapshot.queryParamMap.get('q') ?? '');
+  /** Filtros del buscador (plantilla listado/noticias) */
+  readonly anio = signal('');
+  readonly orden = signal<'recientes' | 'antiguas'>('recientes');
   readonly lightbox = signal<CmsMultimedia | null>(null);
 
   readonly pagina = computed(() => this.resuelto()?.pagina ?? null);
@@ -49,11 +66,40 @@ export class CmsPaginaPublica {
     return p ? this.cms.entradasPublicas(p, this.vistaPrevia) : [];
   });
 
+  /** Texto de búsqueda de cada entrada: título, resumen, contenido y nombres de sus archivos */
+  private readonly indice = computed(() => {
+    const mapa = this.cms.multimediaPorId();
+    return new Map(
+      this.entradas().map((e) => [
+        e.id,
+        normalizar(
+          [e.titulo, e.resumen ?? '', e.contenido ?? '', ...e.multimediaIds.map((id) => mapa.get(id)?.titulo ?? '')].join(' '),
+        ),
+      ]),
+    );
+  });
+
+  /** Palabras buscadas (todas deben aparecer, en cualquier orden) */
+  readonly terminos = computed(() => normalizar(this.busqueda()).split(' ').filter((t) => t.length > 1));
+
+  /** Años con publicaciones, para el filtro */
+  readonly anios = computed(() =>
+    [...new Set(this.entradas().map((e) => (e.fechaPublicacion || e.creadoEn).slice(0, 4)))].sort().reverse(),
+  );
+
+  readonly hayFiltros = computed(() => !!this.busqueda().trim() || !!this.anio() || this.orden() !== 'recientes');
+
   readonly entradasFiltradas = computed(() => {
-    const q = this.busqueda().toLowerCase().trim();
-    return q
-      ? this.entradas().filter((e) => `${e.titulo} ${e.resumen ?? ''}`.toLowerCase().includes(q))
-      : this.entradas();
+    const terminos = this.terminos();
+    const anio = this.anio();
+    const indice = this.indice();
+    let lista = this.entradas().filter((e) => {
+      if (anio && !(e.fechaPublicacion || e.creadoEn).startsWith(anio)) return false;
+      const texto = indice.get(e.id) ?? '';
+      return terminos.every((t) => texto.includes(t));
+    });
+    if (this.orden() === 'antiguas') lista = [...lista].reverse();
+    return lista;
   });
 
   /** Entradas de tipo "servicio" (trámites): se muestran como tarjetas desplegables */
@@ -108,12 +154,74 @@ export class CmsPaginaPublica {
       }
     });
 
-    // Al cambiar de página se reinician filtros
+    // Al cambiar de página se reinician filtros (la primera vez se respeta ?q= de la URL)
+    let primera = true;
     effect(() => {
       this.segmentos();
       this.mostrar.set(POR_PAGINA);
-      this.busqueda.set('');
+      if (!primera) {
+        this.busqueda.set('');
+        this.anio.set('');
+        this.orden.set('recientes');
+      }
+      primera = false;
     });
+  }
+
+  /* ===== Buscador ===== */
+  buscar(texto: string): void {
+    this.busqueda.set(texto);
+    this.mostrar.set(POR_PAGINA);
+    // La búsqueda queda en la URL (?q=…) para poder compartirla
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: { q: texto.trim() || null },
+      queryParamsHandling: 'merge',
+      replaceUrl: true,
+    });
+  }
+
+  filtrarAnio(anio: string): void {
+    this.anio.set(anio);
+    this.mostrar.set(POR_PAGINA);
+  }
+
+  cambiarOrden(orden: string): void {
+    this.orden.set(orden === 'antiguas' ? 'antiguas' : 'recientes');
+    this.mostrar.set(POR_PAGINA);
+  }
+
+  limpiarFiltros(): void {
+    this.anio.set('');
+    this.orden.set('recientes');
+    this.buscar('');
+  }
+
+  /** Resalta las palabras buscadas en un texto (se usa con [innerHTML]) */
+  resaltar(texto: string | null | undefined): string {
+    const limpio = escaparHtml(texto ?? '');
+    const terminos = this.terminos();
+    if (!terminos.length) return limpio;
+    // Recorre el texto letra por letra comparando sin tildes para conservar el original
+    const base = limpio.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    if (base.length !== limpio.length) return limpio; // por seguridad, si cambian las longitudes no se resalta
+    const marcas = new Array<boolean>(limpio.length).fill(false);
+    const minus = base.toLowerCase();
+    for (const t of terminos) {
+      let i = minus.indexOf(t);
+      while (i !== -1) {
+        for (let k = i; k < i + t.length; k++) marcas[k] = true;
+        i = minus.indexOf(t, i + t.length);
+      }
+    }
+    let salida = '';
+    let abierta = false;
+    for (let i = 0; i < limpio.length; i++) {
+      if (marcas[i] && !abierta) { salida += '<mark>'; abierta = true; }
+      if (!marcas[i] && abierta) { salida += '</mark>'; abierta = false; }
+      salida += limpio[i];
+    }
+    return abierta ? salida + '</mark>' : salida;
   }
 
   /* ===== Helpers de plantilla ===== */
