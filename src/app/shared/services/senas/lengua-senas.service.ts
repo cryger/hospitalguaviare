@@ -10,8 +10,12 @@ export interface VideoSena {
   poster?: string;
 }
 
+/** Dónde ubicar el recuadro respecto al enlace */
+export type PosicionSena = 'abajo' | 'arriba' | 'lado';
+
 interface Mostrar {
   sena: VideoSena;
+  posicion: PosicionSena;
   /** Rectángulo del enlace que lo activó (para ubicar el recuadro) */
   rect: DOMRect;
   /** Elemento que lo activó (para devolverle el control al cerrar) */
@@ -50,9 +54,13 @@ export class LenguaSenasService {
     return this.catalogo.get(normalizar(texto)) ?? null;
   }
 
-  mostrar(sena: VideoSena, origen: HTMLElement): void {
+  mostrar(sena: VideoSena, origen: HTMLElement, posicion: PosicionSena = 'abajo'): void {
     if (!this.activo()) return;
-    this.actual.set({ sena, rect: origen.getBoundingClientRect(), origen });
+    // "lado": junto a la lista que contiene el enlace (submenús), para no taparla
+    const ancla = posicion === 'lado' ? origen.closest('ul') ?? origen : origen;
+    const r = ancla.getBoundingClientRect();
+    const rect = posicion === 'lado' ? new DOMRect(r.x, origen.getBoundingClientRect().y, r.width, origen.getBoundingClientRect().height) : r;
+    this.actual.set({ sena, rect, origen, posicion });
   }
 
   ocultar(): void {

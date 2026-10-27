@@ -1,5 +1,5 @@
 import { Directive, ElementRef, OnDestroy, inject, input } from '@angular/core';
-import { LenguaSenasService } from '../services/senas/lengua-senas.service';
+import { LenguaSenasService, PosicionSena } from '../services/senas/lengua-senas.service';
 
 const RETARDO_MOSTRAR_MS = 250;
 const RETARDO_OCULTAR_MS = 200;
@@ -27,6 +27,8 @@ export class SenasDirective implements OnDestroy {
 
   /** Texto o clave del video (por defecto, el texto del enlace) */
   readonly appSenas = input<string>('');
+  /** abajo (por defecto) · arriba (menú principal, para no tapar el submenú) · lado (enlaces de submenú) */
+  readonly senasPosicion = input<PosicionSena>('abajo');
 
   private temporizador: ReturnType<typeof setTimeout> | null = null;
 
@@ -43,7 +45,7 @@ export class SenasDirective implements OnDestroy {
       await this.svc.cargar();
       const texto = this.appSenas() || this.el.nativeElement.textContent || '';
       const sena = this.svc.buscar(texto);
-      if (sena) this.svc.mostrar(sena, this.el.nativeElement);
+      if (sena) this.svc.mostrar(sena, this.el.nativeElement, this.senasPosicion());
     }, RETARDO_MOSTRAR_MS);
   }
 

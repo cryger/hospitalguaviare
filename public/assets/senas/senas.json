@@ -6,6 +6,24 @@
       "video": "assets/senas/inicio.mp4",
       "webm": "assets/senas/inicio.webm",
       "poster": "assets/senas/inicio.jpg"
+    },
+    "nuestro hospital": {
+      "titulo": "Nuestro Hospital",
+      "video": "assets/senas/nuestro-hospital.mp4",
+      "webm": "assets/senas/nuestro-hospital.webm",
+      "poster": "assets/senas/nuestro-hospital.jpg"
+    },
+    "transparencia y acceso a la informacion publica": {
+      "titulo": "Transparencia",
+      "video": "assets/senas/transparencia.mp4",
+      "webm": "assets/senas/transparencia.webm",
+      "poster": "assets/senas/transparencia.jpg"
+    },
+    "transparencia": {
+      "titulo": "Transparencia",
+      "video": "assets/senas/transparencia.mp4",
+      "webm": "assets/senas/transparencia.webm",
+      "poster": "assets/senas/transparencia.jpg"
     }
   }
 }
