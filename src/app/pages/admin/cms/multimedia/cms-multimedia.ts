@@ -6,10 +6,12 @@ import { CmsService } from '../../../../shared/services/cms/cms.service';
 import { CmsMultimedia, TipoMultimedia } from '../../../../shared/models/cms/cms.models';
 import { MediaThumb } from '../shared/media-thumb';
 import { Dropzone } from '../shared/dropzone';
+import { BuscadorGovco } from '../../../../shared/components/buscador-govco/buscador-govco';
+import { coincide, terminosDe } from '../../../../shared/utils/busqueda';
 
 @Component({
   selector: 'app-cms-multimedia',
-  imports: [FormsModule, RouterLink, DatePipe, MediaThumb, Dropzone],
+  imports: [FormsModule, RouterLink, DatePipe, MediaThumb, Dropzone, BuscadorGovco],
   templateUrl: './cms-multimedia.html',
   styleUrls: ['../cms-admin.css', './cms-multimedia.css'],
 })
@@ -27,16 +29,24 @@ export class CmsMultimediaComponent implements OnInit {
   detalle: Partial<CmsMultimedia> = {};
 
   readonly lista = computed(() => {
-    const q = this.busqueda().toLowerCase().trim();
+    const q = terminosDe(this.busqueda());
     const t = this.filtroTipo();
     const usos = this.cms.usosMultimedia();
     return this.cms
       .multimedia()
       .filter((m) => !t || m.tipo === t)
       .filter((m) => !this.soloSinUso() || !usos.get(m.id))
-      .filter((m) => !q || `${m.titulo} ${m.nombre} ${m.alt}`.toLowerCase().includes(q))
+      .filter((m) => coincide(`${m.titulo} ${m.nombre} ${m.alt ?? ''}`, q))
       .sort((a, b) => b.creadoEn.localeCompare(a.creadoEn));
   });
+
+  readonly hayFiltros = computed(() => !!this.busqueda().trim() || !!this.filtroTipo() || this.soloSinUso());
+
+  limpiarFiltros(): void {
+    this.busqueda.set('');
+    this.filtroTipo.set('');
+    this.soloSinUso.set(false);
+  }
 
   readonly seleccionado = computed(() =>
     this.seleccionadoId() ? this.cms.multimediaPorId().get(this.seleccionadoId()!) ?? null : null,

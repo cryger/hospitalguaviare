@@ -111,7 +111,10 @@
 .check { display: flex; align-items: center; gap: 0.45rem; font-size: 0.85rem; cursor: pointer; }
 .slug-preview { font-family: ui-monospace, Consolas, monospace; font-size: 0.75rem; color: var(--c-muted); word-break: break-all; }
 
-/* ===== Filtros ===== */
+/* ===== Filtros (buscador estándar BDC GOV.CO v5: app-buscador-govco) ===== */
+app-buscador-govco .desplegable-govco { flex: 1 1 10rem; min-width: 9rem; }
+app-buscador-govco + .resultado-busqueda.admin { margin: .75rem 0 .9rem; display: flex; flex-wrap: wrap; align-items: center; gap: .5rem .75rem; font-size: .86rem; }
+.resultado-busqueda.admin .limpiar-admin { padding: .4rem .9rem; font-size: .82rem; }
 .filtros { display: flex; gap: 0.6rem; flex-wrap: wrap; margin-bottom: 0.9rem; }
 .filtros .input { max-width: 260px; }
 .filtros .select { width: auto; min-width: 150px; }

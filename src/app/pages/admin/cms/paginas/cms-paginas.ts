@@ -3,6 +3,8 @@ import { DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { CmsService } from '../../../../shared/services/cms/cms.service';
+import { BuscadorGovco } from '../../../../shared/components/buscador-govco/buscador-govco';
+import { coincide, terminosDe } from '../../../../shared/utils/busqueda';
 import {
   CmsPagina,
   CmsPaginaNodo,
@@ -16,7 +18,7 @@ interface Fila extends CmsPaginaNodo {
 
 @Component({
   selector: 'app-cms-paginas',
-  imports: [FormsModule, RouterLink, DatePipe],
+  imports: [FormsModule, RouterLink, DatePipe, BuscadorGovco],
   templateUrl: './cms-paginas.html',
   styleUrls: ['../cms-admin.css'],
   styles: `
@@ -43,14 +45,22 @@ export class CmsPaginas implements OnInit {
       { id: null, nombre: 'Sin menú' },
     ].filter((g) => fm === '' || (fm === 'sin' ? g.id === null : g.id === fm));
 
-    const q = this.busqueda().toLowerCase().trim();
+    const q = terminosDe(this.busqueda());
     const est = this.filtroEstado();
 
     return grupos
       .flatMap((g) => this.cms.plano(g.id).map((n) => ({ ...n, menuNombre: g.nombre })))
       .filter((f) => !est || f.pagina.estado === est)
-      .filter((f) => !q || `${f.pagina.titulo} ${f.pagina.slug}`.toLowerCase().includes(q));
+      .filter((f) => coincide(`${f.pagina.titulo} ${f.pagina.slug} ${f.pagina.descripcion ?? ''}`, q));
   });
+
+  readonly hayFiltros = computed(() => !!this.busqueda().trim() || this.filtroMenu() !== '' || !!this.filtroEstado());
+
+  limpiarFiltros(): void {
+    this.busqueda.set('');
+    this.filtroMenu.set('');
+    this.filtroEstado.set('');
+  }
 
   readonly resumen = computed(() => {
     const p = this.cms.paginas();

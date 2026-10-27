@@ -5,10 +5,12 @@ import { RouterLink } from '@angular/router';
 import { CmsService } from '../../../../shared/services/cms/cms.service';
 import { CmsEntrada, EstadoEntrada, TIPOS_ENTRADA, TipoEntrada } from '../../../../shared/models/cms/cms.models';
 import { MediaThumb } from '../shared/media-thumb';
+import { BuscadorGovco } from '../../../../shared/components/buscador-govco/buscador-govco';
+import { coincide, terminosDe } from '../../../../shared/utils/busqueda';
 
 @Component({
   selector: 'app-cms-entradas',
-  imports: [FormsModule, RouterLink, DatePipe, MediaThumb],
+  imports: [FormsModule, RouterLink, DatePipe, MediaThumb, BuscadorGovco],
   templateUrl: './cms-entradas.html',
   styleUrls: ['../cms-admin.css'],
   styles: `
@@ -38,7 +40,7 @@ export class CmsEntradas implements OnInit {
   });
 
   readonly lista = computed<CmsEntrada[]>(() => {
-    const q = this.busqueda().toLowerCase().trim();
+    const q = terminosDe(this.busqueda());
     const fp = this.filtroPagina();
     const ft = this.filtroTipo();
     const fe = this.filtroEstado();
@@ -47,9 +49,20 @@ export class CmsEntradas implements OnInit {
       .filter((e) => fp === '' || e.paginaId === fp)
       .filter((e) => !ft || e.tipo === ft)
       .filter((e) => !fe || e.estado === fe)
-      .filter((e) => !q || `${e.titulo} ${e.resumen ?? ''}`.toLowerCase().includes(q))
+      .filter((e) => coincide(`${e.titulo} ${e.slug} ${e.resumen ?? ''} ${e.contenido ?? ''}`, q))
       .sort((a, b) => (b.fechaPublicacion || b.creadoEn).localeCompare(a.fechaPublicacion || a.creadoEn));
   });
+
+  readonly hayFiltros = computed(
+    () => !!this.busqueda().trim() || this.filtroPagina() !== '' || !!this.filtroTipo() || !!this.filtroEstado(),
+  );
+
+  limpiarFiltros(): void {
+    this.busqueda.set('');
+    this.filtroPagina.set('');
+    this.filtroTipo.set('');
+    this.filtroEstado.set('');
+  }
 
   constructor() {
     effect(() => {

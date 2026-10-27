@@ -1,0 +1,43 @@
+:host {
+  --azul: #004884;
+  --texto-2: #4b5563;
+  display: block;
+  padding-bottom: 2.5rem;
+  font-family: 'WorkSans-Regular', 'Work Sans', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+}
+.buscar-head {
+  margin: -0.5rem 0 1.5rem; padding: 1.75rem; border-radius: 12px; border-left: 5px solid var(--azul);
+  background: linear-gradient(135deg, #f3f7fd 0%, #e8f0fb 100%);
+}
+.antetitulo { font-size: .78rem; letter-spacing: .06em; text-transform: uppercase; color: #3366cc; font-weight: 600; }
+.buscar-head h1 { color: var(--azul); font-size: 1.85rem; margin: .15rem 0 .4rem; font-weight: 700; }
+.lead { margin: 0; color: var(--texto-2); line-height: 1.6; }
+
+.resultados { list-style: none; margin: 0; padding: 0; display: grid; gap: .75rem; }
+.resultado {
+  background: #fff; border: 1px solid #dfe6f0; border-left: 4px solid var(--govcolor-cobalt, #0943B5);
+  border-radius: .5rem; padding: 1rem 1.25rem;
+}
+.ubicacion { margin: 0 0 .35rem; font-size: .82rem; color: var(--texto-2); display: flex; flex-wrap: wrap; align-items: center; gap: .25rem .5rem; }
+.tipo {
+  display: inline-block; padding: .12rem .6rem; border-radius: 1rem; font-size: .75rem; font-weight: 700;
+  background: var(--govcolor-solitude, #E5ECF8); color: var(--govcolor-cobalt, #0943B5);
+}
+.tipo-noticia { background: #e7f6ec; color: #116b35; }
+.tipo-documento { background: #fff4e0; color: #8a4b00; }
+.tipo-servicio { background: #f1e9fb; color: #5b2a9a; }
+.resultado h2 { margin: 0 0 .35rem; font-size: 1.1rem; line-height: 1.35; }
+.resultado h2 a { color: var(--govcolor-cobalt, #0943B5); text-decoration: underline; text-underline-offset: 2px; }
+.resultado h2 a:hover { color: var(--azul); }
+.resultado h2 a:focus-visible { outline: .125rem solid #000; outline-offset: .125rem; }
+.resultado .ext { font-size: .75rem; color: var(--texto-2); font-weight: 400; }
+.extracto { margin: 0; color: #374151; line-height: 1.55; font-size: .938rem; overflow-wrap: anywhere; }
+:host ::ng-deep .resultado mark { background: #fff3b0; color: inherit; padding: 0 .1em; border-radius: 3px; box-shadow: inset 0 -2px 0 #e0b400; }
+.centro { text-align: center; margin-top: 1.25rem; }
+.sin-resultados a { color: var(--govcolor-cobalt, #0943B5); }
+
+@media (max-width: 576px) {
+  .buscar-head { padding: 1.25rem 1.1rem; margin-top: 0; }
+  .buscar-head h1 { font-size: 1.5rem; }
+  .resultado { padding: .9rem 1rem; }
+}

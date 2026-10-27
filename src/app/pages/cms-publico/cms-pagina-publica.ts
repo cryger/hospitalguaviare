@@ -1,4 +1,4 @@
-import { Component, computed, effect, inject, signal } from '@angular/core';
+import { Component, computed, effect, inject, signal, untracked } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
@@ -8,26 +8,17 @@ import { CmsService } from '../../shared/services/cms/cms.service';
 import { CmsEntrada, CmsMultimedia, TIPOS_ENTRADA } from '../../shared/models/cms/cms.models';
 import { CmsMediaPublica } from './cms-media-publica';
 import { esVistaPrevia } from './cms-publico.routes';
+import { BuscadorGovco } from '../../shared/components/buscador-govco/buscador-govco';
+import { normalizar, resaltar as resaltarTexto, terminosDe } from '../../shared/utils/busqueda';
 
 const POR_PAGINA = 9;
 
-/** Minúsculas, sin tildes ni etiquetas HTML: "Vacunación" y "vacunacion" coinciden */
-function normalizar(texto: string): string {
-  return texto
-    .replace(/<[^>]+>/g, ' ')
-    .replace(/&nbsp;/g, ' ')
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
-    .toLowerCase()
-    .replace(/\s+/g, ' ')
-    .trim();
-}
-
-const escaparHtml = (t: string) => t.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+/** Orden de resultados: por fecha, alfabético o el definido en el CMS */
+type Orden = 'predeterminado' | 'recientes' | 'antiguas' | 'az';
 
 @Component({
   selector: 'app-cms-pagina-publica',
-  imports: [RouterLink, DatePipe, CmsMediaPublica],
+  imports: [RouterLink, DatePipe, CmsMediaPublica, BuscadorGovco],
   templateUrl: './cms-pagina-publica.html',
   styleUrl: './cms-pagina-publica.css',
 })
@@ -55,7 +46,7 @@ export class CmsPaginaPublica {
   readonly busqueda = signal(this.route.snapshot.queryParamMap.get('q') ?? '');
   /** Filtros del buscador (plantilla listado/noticias) */
   readonly anio = signal('');
-  readonly orden = signal<'recientes' | 'antiguas'>('recientes');
+  readonly orden = signal<Orden>('recientes');
   readonly lightbox = signal<CmsMultimedia | null>(null);
 
   readonly pagina = computed(() => this.resuelto()?.pagina ?? null);
@@ -80,14 +71,24 @@ export class CmsPaginaPublica {
   });
 
   /** Palabras buscadas (todas deben aparecer, en cualquier orden) */
-  readonly terminos = computed(() => normalizar(this.busqueda()).split(' ').filter((t) => t.length > 1));
+  readonly terminos = computed(() => terminosDe(this.busqueda()));
+
+  /** Listados de noticias van por fecha; las páginas de documentos, en el orden del CMS */
+  readonly ordenPorDefecto = computed<Orden>(() => (this.pagina()?.plantilla === 'listado' ? 'recientes' : 'predeterminado'));
 
   /** Años con publicaciones, para el filtro */
   readonly anios = computed(() =>
     [...new Set(this.entradas().map((e) => (e.fechaPublicacion || e.creadoEn).slice(0, 4)))].sort().reverse(),
   );
 
-  readonly hayFiltros = computed(() => !!this.busqueda().trim() || !!this.anio() || this.orden() !== 'recientes');
+  readonly hayFiltros = computed(() => !!this.busqueda().trim() || !!this.anio() || this.orden() !== this.ordenPorDefecto());
+
+  readonly nombreOrden: Record<Orden, string> = {
+    predeterminado: 'Orden de la sección',
+    recientes: 'Más recientes primero',
+    antiguas: 'Más antiguas primero',
+    az: 'Alfabético (A–Z)',
+  };
 
   readonly entradasFiltradas = computed(() => {
     const terminos = this.terminos();
@@ -98,7 +99,12 @@ export class CmsPaginaPublica {
       const texto = indice.get(e.id) ?? '';
       return terminos.every((t) => texto.includes(t));
     });
-    if (this.orden() === 'antiguas') lista = [...lista].reverse();
+    const fecha = (e: CmsEntrada) => e.fechaPublicacion || e.creadoEn;
+    switch (this.orden()) {
+      case 'recientes': lista = [...lista].sort((a, b) => fecha(b).localeCompare(fecha(a))); break;
+      case 'antiguas': lista = [...lista].sort((a, b) => fecha(a).localeCompare(fecha(b))); break;
+      case 'az': lista = [...lista].sort((a, b) => a.titulo.localeCompare(b.titulo, 'es')); break;
+    }
     return lista;
   });
 
@@ -154,17 +160,21 @@ export class CmsPaginaPublica {
       }
     });
 
-    // Al cambiar de página se reinician filtros (la primera vez se respeta ?q= de la URL)
-    let primera = true;
+    // Al cambiar de página se reinician los filtros (la primera vez se respeta ?q= de la URL)
+    let previa: number | null = null;
     effect(() => {
-      this.segmentos();
-      this.mostrar.set(POR_PAGINA);
-      if (!primera) {
-        this.busqueda.set('');
-        this.anio.set('');
-        this.orden.set('recientes');
-      }
-      primera = false;
+      const p = this.pagina();
+      const id = p?.id ?? null;
+      if (id === null || id === previa) return;
+      untracked(() => {
+        this.mostrar.set(POR_PAGINA);
+        if (previa !== null) {
+          this.busqueda.set('');
+          this.anio.set('');
+        }
+        this.orden.set(this.ordenPorDefecto());
+      });
+      previa = id;
     });
   }
 
@@ -187,41 +197,19 @@ export class CmsPaginaPublica {
   }
 
   cambiarOrden(orden: string): void {
-    this.orden.set(orden === 'antiguas' ? 'antiguas' : 'recientes');
+    this.orden.set((['predeterminado', 'recientes', 'antiguas', 'az'] as const).find((o) => o === orden) ?? this.ordenPorDefecto());
     this.mostrar.set(POR_PAGINA);
   }
 
   limpiarFiltros(): void {
     this.anio.set('');
-    this.orden.set('recientes');
+    this.orden.set(this.ordenPorDefecto());
     this.buscar('');
   }
 
   /** Resalta las palabras buscadas en un texto (se usa con [innerHTML]) */
   resaltar(texto: string | null | undefined): string {
-    const limpio = escaparHtml(texto ?? '');
-    const terminos = this.terminos();
-    if (!terminos.length) return limpio;
-    // Recorre el texto letra por letra comparando sin tildes para conservar el original
-    const base = limpio.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-    if (base.length !== limpio.length) return limpio; // por seguridad, si cambian las longitudes no se resalta
-    const marcas = new Array<boolean>(limpio.length).fill(false);
-    const minus = base.toLowerCase();
-    for (const t of terminos) {
-      let i = minus.indexOf(t);
-      while (i !== -1) {
-        for (let k = i; k < i + t.length; k++) marcas[k] = true;
-        i = minus.indexOf(t, i + t.length);
-      }
-    }
-    let salida = '';
-    let abierta = false;
-    for (let i = 0; i < limpio.length; i++) {
-      if (marcas[i] && !abierta) { salida += '<mark>'; abierta = true; }
-      if (!marcas[i] && abierta) { salida += '</mark>'; abierta = false; }
-      salida += limpio[i];
-    }
-    return abierta ? salida + '</mark>' : salida;
+    return resaltarTexto(texto, this.terminos());
   }
 
   /* ===== Helpers de plantilla ===== */

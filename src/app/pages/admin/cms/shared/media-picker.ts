@@ -4,6 +4,8 @@ import { CmsService } from '../../../../shared/services/cms/cms.service';
 import { CmsMultimedia, TipoMultimedia } from '../../../../shared/models/cms/cms.models';
 import { MediaThumb } from './media-thumb';
 import { Dropzone } from './dropzone';
+import { BuscadorGovco } from '../../../../shared/components/buscador-govco/buscador-govco';
+import { coincide, terminosDe } from '../../../../shared/utils/busqueda';
 
 /**
  * Selector de multimedia (modal): elegir de la biblioteca, subir archivos
@@ -11,7 +13,7 @@ import { Dropzone } from './dropzone';
  */
 @Component({
   selector: 'app-media-picker',
-  imports: [FormsModule, MediaThumb, Dropzone],
+  imports: [FormsModule, MediaThumb, Dropzone, BuscadorGovco],
   templateUrl: './media-picker.html',
   styleUrls: ['../cms-admin.css', './media-picker.css'],
 })
@@ -35,12 +37,12 @@ export class MediaPicker implements OnInit {
   url = { url: '', titulo: '', tipo: 'video' as TipoMultimedia };
 
   readonly lista = computed(() => {
-    const q = this.busqueda().toLowerCase().trim();
+    const q = terminosDe(this.busqueda());
     const tipo = this.soloTipo() || this.filtroTipo();
     return this.cms
       .multimedia()
       .filter((m) => !tipo || m.tipo === tipo)
-      .filter((m) => !q || `${m.titulo} ${m.nombre}`.toLowerCase().includes(q))
+      .filter((m) => coincide(`${m.titulo} ${m.nombre} ${m.alt ?? ''}`, q))
       .sort((a, b) => b.creadoEn.localeCompare(a.creadoEn));
   });
 

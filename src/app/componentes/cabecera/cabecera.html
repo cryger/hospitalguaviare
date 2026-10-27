@@ -3,33 +3,10 @@
   <div class="container-logo-header-govco">
     <span class="logo-header-govco"></span>
     <div class="container-search-header-govco">
-      <!-- Search -->
-      <div class="search-govco">
-        <div class="bar-search-govco">
-          <input type="text" placeholder="Buscar por componente" class="input-search-govco" aria-label="Buscador"/>
-          <button class="icon-search-govco icon-close-search-govco" aria-label="Limpiar"></button>
-          <div class="icon-search-govco search-icon-search-govco" aria-hidden="true"></div>
-        </div>
-        <div class="container-options-search-govco">
-          <div class="options-search-govco">
-            <ul>
-              <li>
-                <a href="#" tabindex="-1">Sugerencia de búsqueda con la palabra <strong>Componente 1</strong></a>
-              </li>
-              <li>
-                <a href="#" tabindex="-1">Sugerencia de búsqueda con la palabra <strong>Componente 1</strong></a>
-              </li>
-              <li>
-                <a href="#" tabindex="-1">Sugerencia de búsqueda con la palabra <strong>Componente 1</strong></a>
-              </li>
-              <li>
-                <a href="#" tabindex="-1">Sugerencia de búsqueda con la palabra <strong>Componente 1</strong></a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <!-- Search -->
+      <!-- Buscador general del portal (BDC GOV.CO v5 · buscador predictivo) -->
+      <app-buscador-govco idCampo="buscador-portal" etiqueta="Buscar en el portal" [etiquetaOculta]="true" [compacto]="true" [limpiarAlIr]="true"
+          placeholder="Buscar en el portal" etiquetaBoton="Buscar en el portal"
+          [sugerencias]="sugerencias()" [(valor)]="consulta" (enviar)="irAResultados($event)" (focusin)="preparar()" />
     </div>
   </div>
 </div>

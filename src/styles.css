@@ -393,3 +393,89 @@ body.high-contrast .barra-accesbilidad-govco a:hover {
 
 
 
+
+
+/* =====================================================================
+   BDC GOV.CO v5 — componentes compartidos del portal y del panel
+   (https://cdn.www.gov.co/v5/). El buscador básico/predictivo está en
+   shared/components/buscador-govco; aquí: tokens, desplegables,
+   etiquetas, botones y mensajes de resultados.
+   ===================================================================== */
+:root {
+  --govcolor-cobalt: #0943B5;
+  --govcolor-havelock-blue: #4672C8;
+  --govcolor-tropical-blue: #B5C7E9;
+  --govcolor-solitude: #E5ECF8;
+  --govcolor-matterhorn: #4C4C4C;
+  --govcolor-grey: #7E7E7E;
+  --govcolor-silver-dis: #C8C8C8;
+}
+
+/* Desplegables */
+.desplegable-govco { display: flex; flex-direction: column; flex: 0 1 15.938rem; min-width: 11rem; color: var(--govcolor-matterhorn); }
+.desplegable-govco > label { display: block; font-size: .938rem; margin-bottom: .5rem; line-height: 1.2; font-weight: 600; color: var(--govcolor-matterhorn); }
+.desplegable-govco .btn-dropdown {
+  appearance: none; -webkit-appearance: none; width: 100%; height: 2.625rem; cursor: pointer;
+  border: .063rem solid var(--govcolor-matterhorn); border-radius: .313rem; background-color: #fff;
+  padding: 0 2.25rem 0 1rem; font: inherit; font-size: .938rem; color: var(--govcolor-matterhorn);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%234672C8' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right .75rem center; background-size: 1rem;
+}
+.desplegable-govco .btn-dropdown:hover { border-color: var(--govcolor-cobalt); box-shadow: 0 0 0 1px var(--govcolor-cobalt); }
+.desplegable-govco .btn-dropdown:focus-visible { outline: .125rem solid #000; outline-offset: .125rem; border-color: var(--govcolor-cobalt); }
+.desplegable-govco .btn-dropdown:disabled { background-color: var(--govcolor-silver-dis); cursor: default; }
+
+/* Casilla dentro de la fila de filtros */
+.check-govco { display: inline-flex; align-items: center; gap: .5rem; min-height: 2.625rem; font-size: .938rem; color: var(--govcolor-matterhorn); cursor: pointer; }
+.check-govco input { width: 1.15rem; height: 1.15rem; accent-color: var(--govcolor-cobalt); }
+
+/* Etiquetas de filtros activos */
+.bn-activos { display: flex; flex-wrap: wrap; align-items: center; gap: .6rem .75rem; margin-top: 1.1rem; padding-top: 1rem; border-top: 1px solid var(--govcolor-solitude); }
+.bn-activos-txt { font-size: .875rem; font-weight: 600; color: var(--govcolor-matterhorn); }
+.etiquetas-govco { display: flex; flex-wrap: wrap; gap: .5rem; list-style: none; margin: 0; padding: 0; }
+.etiqueta-govco {
+  display: inline-flex; align-items: center; gap: .35rem; padding: .3rem .35rem .3rem .85rem; border-radius: 1.563rem;
+  background: var(--govcolor-solitude); color: var(--govcolor-cobalt); font-size: .875rem; font-weight: 600; max-width: 100%; overflow-wrap: anywhere;
+}
+.etiqueta-govco button {
+  flex: none; display: grid; place-items: center; width: 1.5rem; height: 1.5rem; border: 0; border-radius: 50%;
+  background: transparent; color: var(--govcolor-cobalt); cursor: pointer;
+}
+.etiqueta-govco button svg { width: .85rem; height: .85rem; fill: none; stroke: currentColor; stroke-width: 2.8; stroke-linecap: round; }
+.etiqueta-govco button:hover { background: var(--govcolor-tropical-blue); }
+.etiqueta-govco button:focus-visible { outline: .125rem solid #000; outline-offset: .063rem; }
+
+/* Botones */
+.btn-bdc {
+  display: inline-flex; align-items: center; justify-content: center; gap: .4rem;
+  border-radius: 1.563rem; border: .125rem solid var(--govcolor-cobalt); padding: .688rem 1.25rem; line-height: 1rem;
+  font: inherit; font-size: .938rem; font-weight: 600; cursor: pointer; text-decoration: none;
+  transition: background-color .15s, border-color .15s, color .15s;
+}
+.btn-bdc.fill-btn-govco { background: var(--govcolor-cobalt); color: #fff; }
+.btn-bdc.outline-btn-govco { background: #fff; color: var(--govcolor-cobalt); }
+.btn-bdc:hover, .btn-bdc:focus-visible { background: var(--govcolor-havelock-blue); border-color: var(--govcolor-havelock-blue); color: #fff; }
+.btn-bdc:focus-visible { outline: .125rem solid #000; outline-offset: .188rem; }
+.btn-bdc:disabled { background: var(--govcolor-silver-dis); border-color: var(--govcolor-silver-dis); color: #fff; pointer-events: none; }
+.bn-activos .limpiar { margin-left: auto; padding: .5rem 1.1rem; }
+
+/* Conteo y estado vacío */
+.resultado-busqueda { margin: .9rem 0 1rem; color: #4b5563; font-size: .938rem; }
+.resultado-busqueda strong { color: var(--govcolor-cobalt); }
+.resultado-busqueda:focus { outline: none; }
+.resultado-busqueda:focus-visible { outline: .125rem solid #000; outline-offset: .125rem; }
+.sin-resultados { text-align: center; padding: 2.25rem 1rem; border-radius: .5rem; color: var(--govcolor-matterhorn); background: var(--govcolor-solitude); border: 1px solid var(--govcolor-tropical-blue); }
+.sin-resultados p { margin: 0 0 .4rem; }
+.sin-resultados p:first-child { font-weight: 700; color: var(--govcolor-cobalt); font-size: 1.05rem; }
+.sin-resultados .btn-bdc { margin-top: .9rem; }
+
+@media (max-width: 576px) {
+  .desplegable-govco { flex: 1 1 140px; min-width: 0; }
+  .bn-activos .limpiar { margin-left: 0; width: 100%; }
+}
+@media (max-width: 420px) {
+  .desplegable-govco { flex-basis: 100%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .btn-bdc { transition: none; }
+}

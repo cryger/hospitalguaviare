@@ -84,89 +84,69 @@
     <p>Redirigiendo… Si no ocurre automáticamente, <a [href]="p.urlExterna">haga clic aquí</a>.</p>
   }
 
+  <!-- Buscador estándar (BDC GOV.CO v5) para listados y páginas de documentos -->
+  @if ((p.plantilla === 'listado' || p.plantilla === 'documentos') && entradas().length) {
+    @let esListado = p.plantilla === 'listado';
+    @let nombre = esListado ? 'publicaciones' : 'documentos';
+    <app-buscador-govco #buscador [idCampo]="esListado ? 'buscar-listado' : 'buscar-docs'"
+        [titulo]="esListado ? 'Buscar publicaciones' : 'Buscar documentos'"
+        [ayuda]="esListado ? 'Escriba una o varias palabras; los resultados se actualizan mientras escribe.' : 'Busque por título, descripción o nombre del archivo; los resultados se actualizan mientras escribe.'"
+        [placeholder]="esListado ? 'Ej. vacunación, jornada de salud, resolución…' : 'Ej. plan de acción, informe, resolución…'"
+        [etiquetaBoton]="'Buscar ' + nombre"
+        [valor]="busqueda()" (valorChange)="buscar($event)" (enviar)="resultadoBusqueda.focus()">
+      @if (anios().length > 1) {
+        <div filtros class="desplegable-govco">
+          <label for="filtro-anio">Año</label>
+          <select id="filtro-anio" class="btn-dropdown" [value]="anio()" (change)="filtrarAnio($any($event.target).value)">
+            <option value="">Todos los años</option>
+            @for (a of anios(); track a) { <option [value]="a" [selected]="a === anio()">{{ a }}</option> }
+          </select>
+        </div>
+      }
+      <div filtros class="desplegable-govco">
+        <label for="filtro-orden">Ordenar por</label>
+        <select id="filtro-orden" class="btn-dropdown" [value]="orden()" (change)="cambiarOrden($any($event.target).value)">
+          @if (!esListado) { <option value="predeterminado">{{ nombreOrden.predeterminado }}</option> }
+          <option value="recientes">Más recientes</option>
+          <option value="antiguas">Más antiguas</option>
+          @if (!esListado) { <option value="az">Alfabético (A–Z)</option> }
+        </select>
+      </div>
+      @if (hayFiltros()) {
+        <div class="bn-activos">
+          <span class="bn-activos-txt">Filtros aplicados:</span>
+          <ul class="etiquetas-govco">
+            @if (busqueda().trim()) {
+              <li><span class="etiqueta-govco">«{{ busqueda().trim() }}»
+                <button type="button" (click)="buscar('')" [attr.aria-label]="'Quitar búsqueda ' + busqueda().trim()"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18"/></svg></button></span></li>
+            }
+            @if (anio()) {
+              <li><span class="etiqueta-govco">Año {{ anio() }}
+                <button type="button" (click)="filtrarAnio('')" [attr.aria-label]="'Quitar filtro de año ' + anio()"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18"/></svg></button></span></li>
+            }
+            @if (orden() !== ordenPorDefecto()) {
+              <li><span class="etiqueta-govco">{{ nombreOrden[orden()] }}
+                <button type="button" (click)="cambiarOrden(ordenPorDefecto())" aria-label="Quitar orden"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18"/></svg></button></span></li>
+            }
+          </ul>
+          <button type="button" class="btn-bdc outline-btn-govco limpiar" (click)="limpiarFiltros(); buscador.enfocar()">Limpiar filtros</button>
+        </div>
+      }
+    </app-buscador-govco>
+    <p #resultadoBusqueda class="resultado-busqueda" role="status" aria-live="polite" tabindex="-1">
+      @if (busqueda().trim() || anio()) {
+        <strong>{{ entradasFiltradas().length }}</strong> {{ entradasFiltradas().length === 1 ? 'resultado' : 'resultados' }}
+        @if (busqueda().trim()) { para «{{ busqueda().trim() }}» }
+        @if (anio()) { en {{ anio() }} }
+      } @else {
+        <strong>{{ entradas().length }}</strong> {{ nombre }}
+      }
+    </p>
+  }
+
   @switch (p.plantilla) {
     @case ('listado') {
       @if (entradas().length) {
-        <!-- Buscador de publicaciones -->
-        <form class="buscador-noticias" role="search" aria-label="Buscar en {{ p.titulo }}"
-              (submit)="$event.preventDefault(); resultadoBusqueda.focus()">
-          <div class="bn-encabezado">
-            <h2 class="bn-titulo">Buscar publicaciones</h2>
-            <p class="bn-ayuda" id="ayuda-buscador">Escriba una o varias palabras; los resultados se actualizan mientras escribe.</p>
-          </div>
-          <div class="bn-campos">
-            <div class="campo-busqueda">
-              <label for="buscar-listado">Palabras clave</label>
-              <div class="govco-search-basic">
-                <div class="container-govco" [class.con-texto]="!!busqueda()">
-                  <input #campoBusqueda id="buscar-listado" type="search" class="input-search-basic-govco" autocomplete="off"
-                         placeholder="Ej. vacunación, jornada de salud, resolución…" aria-describedby="ayuda-buscador"
-                         [value]="busqueda()" (input)="buscar($any($event.target).value)" />
-                  @if (busqueda()) {
-                    <button class="btn-clean-basic-govco" type="button" aria-label="Limpiar texto de búsqueda"
-                            (click)="buscar(''); campoBusqueda.focus()">
-                      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18"/></svg>
-                    </button>
-                    <span class="line-basic-govco" aria-hidden="true"></span>
-                  }
-                  <button class="btn-search-basic-govco" type="submit" aria-label="Buscar publicaciones">
-                    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5L21 21"/></svg>
-                  </button>
-                </div>
-              </div>
-            </div>
-            <div class="desplegable-govco">
-              <label for="filtro-anio">Año</label>
-              <select id="filtro-anio" class="btn-dropdown" [value]="anio()" (change)="filtrarAnio($any($event.target).value)">
-                <option value="">Todos los años</option>
-                @for (a of anios(); track a) { <option [value]="a">{{ a }}</option> }
-              </select>
-            </div>
-            <div class="desplegable-govco">
-              <label for="filtro-orden">Ordenar por</label>
-              <select id="filtro-orden" class="btn-dropdown" [value]="orden()" (change)="cambiarOrden($any($event.target).value)">
-                <option value="recientes">Más recientes</option>
-                <option value="antiguas">Más antiguas</option>
-              </select>
-            </div>
-          </div>
-          @if (hayFiltros()) {
-            <div class="bn-activos">
-              <span class="bn-activos-txt">Filtros aplicados:</span>
-              <ul class="etiquetas-govco">
-                @if (busqueda().trim()) {
-                  <li><span class="etiqueta-govco">«{{ busqueda().trim() }}»
-                    <button type="button" (click)="buscar('')" aria-label="Quitar búsqueda {{ busqueda().trim() }}">
-                      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18"/></svg>
-                    </button></span></li>
-                }
-                @if (anio()) {
-                  <li><span class="etiqueta-govco">Año {{ anio() }}
-                    <button type="button" (click)="filtrarAnio('')" aria-label="Quitar filtro de año {{ anio() }}">
-                      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18"/></svg>
-                    </button></span></li>
-                }
-                @if (orden() !== 'recientes') {
-                  <li><span class="etiqueta-govco">Más antiguas primero
-                    <button type="button" (click)="cambiarOrden('recientes')" aria-label="Quitar orden por más antiguas">
-                      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18"/></svg>
-                    </button></span></li>
-                }
-              </ul>
-              <button type="button" class="btn-bdc outline-btn-govco limpiar" (click)="limpiarFiltros(); campoBusqueda.focus()">Limpiar filtros</button>
-            </div>
-          }
-        </form>
-        <p #resultadoBusqueda class="resultado-busqueda" role="status" aria-live="polite" tabindex="-1">
-          @if (busqueda().trim() || anio()) {
-            <strong>{{ entradasFiltradas().length }}</strong> {{ entradasFiltradas().length === 1 ? 'resultado' : 'resultados' }}
-            @if (busqueda().trim()) { para «{{ busqueda().trim() }}» }
-            @if (anio()) { en {{ anio() }} }
-          } @else {
-            <strong>{{ entradas().length }}</strong> publicaciones
-          }
-        </p>
-
         <div class="tarjetas">
           @for (e of entradasFiltradas().slice(0, mostrar()); track e.id) {
             <a class="tarjeta" [routerLink]="url(e)">
@@ -202,18 +182,13 @@
 
     @case ('documentos') {
       @if (entradas().length) {
-        <div class="buscador">
-          <label for="buscar-docs">Buscar documento</label>
-          <input id="buscar-docs" type="search" placeholder="Escriba una palabra clave"
-                 [value]="busqueda()" (input)="buscar($any($event.target).value)" />
-        </div>
         <div class="docs">
           @for (e of entradasFiltradas(); track e.id) {
             <section class="doc-grupo">
               <h2>
-                <a [routerLink]="url(e)">{{ e.titulo }}</a>
+                <a [routerLink]="url(e)" [innerHTML]="resaltar(e.titulo)"></a>
               </h2>
-              @if (e.resumen) { <p>{{ e.resumen }}</p> }
+              @if (e.resumen) { <p [innerHTML]="resaltar(e.resumen)"></p> }
               @if (e.fechaPublicacion) {
                 <small>Publicado: {{ e.fechaPublicacion | date: 'dd/MM/yyyy' }}</small>
               }
@@ -224,7 +199,11 @@
               </div>
             </section>
           } @empty {
-            <p class="vacio">No se encontraron documentos con "{{ busqueda() }}".</p>
+            <div class="sin-resultados">
+              <p>No encontramos documentos con esos criterios.</p>
+              <p>Pruebe con otras palabras, revise la ortografía o quite el filtro de año.</p>
+              <button type="button" class="btn-bdc fill-btn-govco" (click)="limpiarFiltros()">Ver todos los documentos</button>
+            </div>
           }
         </div>
       }

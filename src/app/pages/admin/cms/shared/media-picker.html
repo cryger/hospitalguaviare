@@ -21,19 +21,23 @@
 
       @switch (pestana()) {
         @case ('biblioteca') {
-          <div class="filtros">
-            <input class="input" type="search" placeholder="Buscar…" aria-label="Buscar archivo"
-                   [ngModel]="busqueda()" (ngModelChange)="busqueda.set($event)" />
+          <app-buscador-govco idCampo="buscar-en-biblioteca" etiqueta="Buscar en la biblioteca" [compacto]="true"
+              placeholder="Título o nombre del archivo…" etiquetaBoton="Buscar archivos"
+              [valor]="busqueda()" (valorChange)="busqueda.set($event)">
             @if (!soloTipo()) {
-              <select class="select" aria-label="Filtrar por tipo" [ngModel]="filtroTipo()" (ngModelChange)="filtroTipo.set($event)">
+              <div filtros class="desplegable-govco">
+      <label for="filtro-tipo-picker">Tipo</label>
+      <select id="filtro-tipo-picker" class="btn-dropdown" [ngModel]="filtroTipo()" (ngModelChange)="filtroTipo.set($event)">
                 <option value="">Todos los tipos</option>
                 <option value="imagen">Imágenes</option>
                 <option value="video">Videos</option>
                 <option value="documento">Documentos</option>
                 <option value="audio">Audio</option>
-              </select>
+      </select>
+    </div>
             }
-          </div>
+          </app-buscador-govco>
+          <p class="resultado-busqueda admin" role="status" aria-live="polite"><strong>{{ lista().length }}</strong> archivos</p>
 
           @if (lista().length) {
             <ul class="rejilla">

@@ -1,0 +1,90 @@
+<section class="buscar">
+  <header class="buscar-head">
+    <span class="antetitulo">Buscador del portal</span>
+    <h1>Buscar en el portal</h1>
+    <p class="lead">Encuentre secciones, noticias, documentos, trámites y servicios de la E.S.E. Hospital San José del Guaviare.</p>
+  </header>
+
+  <app-buscador-govco #buscador idCampo="buscar-portal" titulo="¿Qué está buscando?"
+      ayuda="Escriba una o varias palabras; los resultados se actualizan mientras escribe."
+      placeholder="Ej. historia clínica, plan de acción, citas…" etiquetaBoton="Buscar en el portal"
+      [valor]="consulta()" (valorChange)="cambiarConsulta($event)" (enviar)="resultado.focus()">
+    <div filtros class="desplegable-govco">
+      <label for="filtro-tipo">Tipo de contenido</label>
+      <select id="filtro-tipo" class="btn-dropdown" [value]="tipo()" (change)="cambiarTipo($any($event.target).value)">
+        <option value="">Todo ({{ todos().length }})</option>
+        @for (t of tipos; track t) {
+          <option [value]="t" [selected]="t === tipo()">{{ etiquetas[t] }} ({{ conteo().get(t) ?? 0 }})</option>
+        }
+      </select>
+    </div>
+    @if (hayFiltros()) {
+      <div class="bn-activos">
+        <span class="bn-activos-txt">Filtros aplicados:</span>
+        <ul class="etiquetas-govco">
+          @if (consulta().trim()) {
+            <li><span class="etiqueta-govco">«{{ consulta().trim() }}»
+              <button type="button" (click)="cambiarConsulta('')" [attr.aria-label]="'Quitar búsqueda ' + consulta().trim()">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18"/></svg>
+              </button></span></li>
+          }
+          @if (tipo()) {
+            <li><span class="etiqueta-govco">{{ etiquetas[tipo() || 'contenido'] }}
+              <button type="button" (click)="cambiarTipo('')" aria-label="Quitar filtro de tipo">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18"/></svg>
+              </button></span></li>
+          }
+        </ul>
+        <button type="button" class="btn-bdc outline-btn-govco limpiar" (click)="limpiar(); buscador.enfocar()">Limpiar filtros</button>
+      </div>
+    }
+  </app-buscador-govco>
+
+  <p #resultado class="resultado-busqueda" role="status" aria-live="polite" tabindex="-1">
+    @if (!cargado()) {
+      Cargando el contenido del portal…
+    } @else if (!terminos().length) {
+      Escriba al menos una palabra de dos letras o más para buscar.
+    } @else {
+      <strong>{{ resultados().length }}</strong> {{ resultados().length === 1 ? 'resultado' : 'resultados' }} para «{{ consulta().trim() }}»
+      @if (tipo()) { en {{ etiquetas[tipo() || 'contenido'] }} }
+    }
+  </p>
+
+  @if (cargado() && terminos().length) {
+    @if (resultados().length) {
+      <ol class="resultados">
+        @for (r of resultados().slice(0, mostrar()); track r.clave) {
+          <li class="resultado">
+            <p class="ubicacion">
+              <span class="tipo tipo-{{ r.tipo }}">{{ etiquetas[r.tipo] }}</span>
+              <span class="seccion">{{ r.seccion }}</span>
+              @if (r.fecha && r.tipo === 'noticia') { · <time [attr.datetime]="r.fecha">{{ r.fecha | date: "d 'de' MMMM 'de' y" : '' : 'es-CO' }}</time> }
+            </p>
+            <h2>
+              @if (r.externa) {
+                <a [href]="r.url" target="_blank" rel="noopener"><span [innerHTML]="marcar(r.titulo)"></span> <span class="ext">(abre en otra pestaña)</span></a>
+              } @else {
+                <a [routerLink]="r.url" [innerHTML]="marcar(r.titulo)"></a>
+              }
+            </h2>
+            @if (r.extracto) { <p class="extracto" [innerHTML]="marcar(r.extracto)"></p> }
+          </li>
+        }
+      </ol>
+      @if (resultados().length > mostrar()) {
+        <div class="centro">
+          <button type="button" class="btn-bdc fill-btn-govco" (click)="mostrar.set(mostrar() + 10)">Cargar más ({{ resultados().length - mostrar() }} restantes)</button>
+        </div>
+      }
+    } @else {
+      <div class="sin-resultados">
+        <p>No encontramos resultados con esos criterios.</p>
+        <p>Pruebe con otras palabras, revise la ortografía o consulte el <a routerLink="/mapa-del-sitio">mapa del sitio</a>.</p>
+        @if (tipo()) {
+          <button type="button" class="btn-bdc fill-btn-govco" (click)="cambiarTipo('')">Buscar en todo el portal</button>
+        }
+      </div>
+    }
+  }
+</section>

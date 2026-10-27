@@ -1,0 +1,54 @@
+<form class="buscador-govco" role="search" [attr.aria-label]="titulo() || etiqueta()" (submit)="alEnviar($event)" novalidate>
+  @if (titulo() || ayuda()) {
+    <div class="bn-encabezado">
+      @if (titulo()) { <h2 class="bn-titulo">{{ titulo() }}</h2> }
+      @if (ayuda()) { <p class="bn-ayuda" [id]="idAyuda()">{{ ayuda() }}</p> }
+    </div>
+  }
+  <div class="bn-campos">
+    <div class="campo-busqueda" #contenedor (focusout)="salir($event, contenedor)">
+      <label [for]="idCampo()" [class.visually-hidden]="etiquetaOculta()">{{ etiqueta() }}</label>
+      <div class="govco-search-basic">
+        <div class="container-govco" [class.lista-abierta]="mostrarLista()">
+          <input #campo [id]="idCampo()" type="search" class="input-search-basic-govco" autocomplete="off"
+                 [placeholder]="placeholder()" [value]="valor()"
+                 [attr.aria-describedby]="ayuda() ? idAyuda() : null"
+                 [attr.role]="sugerencias().length ? 'combobox' : null"
+                 [attr.aria-autocomplete]="sugerencias().length ? 'list' : null"
+                 [attr.aria-expanded]="sugerencias().length ? mostrarLista() : null"
+                 [attr.aria-controls]="sugerencias().length ? idLista : null"
+                 [attr.aria-activedescendant]="mostrarLista() && activa() >= 0 ? idLista + '-' + activa() : null"
+                 (input)="escribir($any($event.target).value)" (focus)="abierta.set(true)" (keydown)="teclado($event)" />
+          @if (valor()) {
+            <button class="btn-clean-basic-govco" type="button" aria-label="Limpiar texto de búsqueda" (click)="limpiar()">
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18"/></svg>
+            </button>
+            <span class="line-basic-govco" aria-hidden="true"></span>
+          }
+          <button class="btn-search-basic-govco" type="submit" [attr.aria-label]="etiquetaBoton()">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5L21 21"/></svg>
+          </button>
+        </div>
+        @if (mostrarLista()) {
+          <div class="container-options-search-govco">
+            <ul class="options-search-govco" role="listbox" [id]="idLista" [attr.aria-label]="'Sugerencias para ' + valor()">
+              @for (s of sugerencias(); track s.url + $index; let i = $index) {
+                <li role="option" class="items" [id]="idLista + '-' + i" [class.activa]="activa() === i" [attr.aria-selected]="activa() === i"
+                    (mousedown)="$event.preventDefault()" (click)="ir(s)">
+                  <span class="sug-texto" [innerHTML]="s.html"></span>
+                  @if (s.detalle) { <span class="sug-detalle">{{ s.detalle }}</span> }
+                </li>
+              }
+              <li role="option" class="items ver-todos" [id]="idLista + '-' + sugerencias().length"
+                  [class.activa]="activa() === sugerencias().length" [attr.aria-selected]="activa() === sugerencias().length" (mousedown)="$event.preventDefault()" (click)="abierta.set(false); enviar.emit(valor().trim())">
+                Ver todos los resultados para «{{ valor().trim() }}»
+              </li>
+            </ul>
+          </div>
+        }
+      </div>
+    </div>
+    <ng-content select="[filtros]" />
+  </div>
+  <ng-content />
+</form>

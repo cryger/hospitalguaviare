@@ -33,19 +33,26 @@
 
 <div class="biblio-layout" [class.con-detalle]="seleccionado()">
   <section class="panel">
-    <div class="filtros">
-      <input class="input" type="search" placeholder="Buscar archivo…" aria-label="Buscar archivo"
-             [ngModel]="busqueda()" (ngModelChange)="busqueda.set($event)" />
-      <select class="select" aria-label="Filtrar por tipo" [ngModel]="filtroTipo()" (ngModelChange)="filtroTipo.set($event)">
-        <option value="">Todos los tipos</option>
-        <option value="imagen">Imágenes</option>
-        <option value="video">Videos</option>
-        <option value="documento">Documentos</option>
-        <option value="audio">Audio</option>
-        <option value="otro">Otros</option>
+    <app-buscador-govco idCampo="buscar-multimedia" etiqueta="Buscar archivo" [compacto]="true"
+        placeholder="Título, nombre o texto alternativo…" etiquetaBoton="Buscar archivos"
+        [valor]="busqueda()" (valorChange)="busqueda.set($event)">
+      <div filtros class="desplegable-govco">
+      <label for="filtro-tipo-media">Tipo</label>
+      <select id="filtro-tipo-media" class="btn-dropdown" [ngModel]="filtroTipo()" (ngModelChange)="filtroTipo.set($event)">
+          <option value="">Todos los tipos</option>
+          <option value="imagen">Imágenes</option>
+          <option value="video">Videos</option>
+          <option value="documento">Documentos</option>
+          <option value="audio">Audio</option>
+          <option value="otro">Otros</option>
       </select>
-      <label class="check"><input type="checkbox" [ngModel]="soloSinUso()" (ngModelChange)="soloSinUso.set($event)" /> Solo sin usar</label>
     </div>
+      <label filtros class="check-govco"><input type="checkbox" [ngModel]="soloSinUso()" (ngModelChange)="soloSinUso.set($event)" /> Solo sin usar</label>
+    </app-buscador-govco>
+    <p class="resultado-busqueda admin" role="status" aria-live="polite">
+    <strong>{{ lista().length }}</strong> de {{ cms.multimedia().length }} archivos
+    @if (hayFiltros()) { <button type="button" class="btn-bdc outline-btn-govco limpiar-admin" (click)="limpiarFiltros()">Limpiar filtros</button> }
+  </p>
 
     @if (lista().length) {
       <ul class="rejilla">

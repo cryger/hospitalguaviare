@@ -23,23 +23,33 @@
 </div>
 
 <section class="panel">
-  <div class="filtros">
-    <input class="input" type="search" placeholder="Buscar página…" aria-label="Buscar página"
-           [ngModel]="busqueda()" (ngModelChange)="busqueda.set($event)" />
-    <select class="select" aria-label="Filtrar por menú" [ngModel]="filtroMenu()" (ngModelChange)="filtroMenu.set($event)">
-      <option value="">Todos los menús</option>
-      @for (m of cms.menus(); track m.id) {
-        <option [ngValue]="m.id">{{ m.nombre }}</option>
-      }
-      <option value="sin">Sin menú</option>
-    </select>
-    <select class="select" aria-label="Filtrar por estado" [ngModel]="filtroEstado()" (ngModelChange)="filtroEstado.set($event)">
-      <option value="">Todos los estados</option>
-      <option value="publicada">Publicada</option>
-      <option value="borrador">Borrador</option>
-      <option value="oculta">Oculta</option>
-    </select>
-  </div>
+  <app-buscador-govco idCampo="buscar-paginas" etiqueta="Buscar página" [compacto]="true"
+      placeholder="Título, dirección o descripción…" etiquetaBoton="Buscar páginas"
+      [valor]="busqueda()" (valorChange)="busqueda.set($event)">
+    <div filtros class="desplegable-govco">
+      <label for="filtro-menu">Menú</label>
+      <select id="filtro-menu" class="btn-dropdown" [ngModel]="filtroMenu()" (ngModelChange)="filtroMenu.set($event)">
+        <option value="">Todos los menús</option>
+        @for (m of cms.menus(); track m.id) {
+          <option [ngValue]="m.id">{{ m.nombre }}</option>
+        }
+        <option value="sin">Sin menú</option>
+      </select>
+    </div>
+    <div filtros class="desplegable-govco">
+      <label for="filtro-estado">Estado</label>
+      <select id="filtro-estado" class="btn-dropdown" [ngModel]="filtroEstado()" (ngModelChange)="filtroEstado.set($event)">
+        <option value="">Todos los estados</option>
+        <option value="publicada">Publicada</option>
+        <option value="borrador">Borrador</option>
+        <option value="oculta">Oculta</option>
+      </select>
+    </div>
+  </app-buscador-govco>
+  <p class="resultado-busqueda admin" role="status" aria-live="polite">
+    <strong>{{ filas().length }}</strong> de {{ cms.paginas().length }} páginas
+    @if (hayFiltros()) { <button type="button" class="btn-bdc outline-btn-govco limpiar-admin" (click)="limpiarFiltros()">Limpiar filtros</button> }
+  </p>
 
   @if (filas().length) {
     <div class="table-wrap">

@@ -7,6 +7,7 @@ import { CotizacionesPropuestas } from './pages/cotizaciones-propuestas/cotizaci
 import { TrabajaNosotros } from './pages/trabaja-nosotros/trabaja-nosotros';
 import { InformacionInteres } from './pages/informacion-interes/informacion-interes';
 import { MapaDelSitio } from './pages/mapa-del-sitio/mapa-del-sitio';
+import { Buscar } from './pages/buscar/buscar';
 import { PqrsfComponent } from './pages/pqrsf/pqrsf';
 import { Login } from './pages/login/login';
 import { DashboardHomeComponent } from './pages/dashboardhome/dashboardhome';
@@ -41,6 +42,7 @@ export const routes: Routes = [
       },
       { path: 'pqrsf', component: PqrsfComponent, data: { breadcrumb: 'PQRSF' } },
       { path: 'mapa-del-sitio', component: MapaDelSitio, data: { breadcrumb: 'Mapa del sitio' } },
+      { path: 'buscar', component: Buscar, data: { breadcrumb: 'Buscar en el portal' } },
       { path: 'login', component: Login, data: { breadcrumb: 'Iniciar sesión' } },
 
       // Direcciones anteriores → nueva estructura (Res. 1519 de 2020)

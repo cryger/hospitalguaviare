@@ -16,28 +16,41 @@
 }
 
 <section class="panel">
-  <div class="filtros">
-    <input class="input" type="search" placeholder="Buscar entrada…" aria-label="Buscar entrada"
-           [ngModel]="busqueda()" (ngModelChange)="busqueda.set($event)" />
-    <select class="select" aria-label="Filtrar por página" [ngModel]="filtroPagina()" (ngModelChange)="filtroPagina.set($event)">
-      <option value="">Todas las páginas</option>
-      @for (n of paginasOrdenadas(); track n.pagina.id) {
-        <option [ngValue]="n.pagina.id">{{ sangria(n.nivel) }}{{ n.pagina.titulo }}</option>
-      }
-    </select>
-    <select class="select" aria-label="Filtrar por tipo" [ngModel]="filtroTipo()" (ngModelChange)="filtroTipo.set($event)">
-      <option value="">Todos los tipos</option>
-      @for (t of tipos; track t.valor) {
-        <option [value]="t.valor">{{ t.etiqueta }}</option>
-      }
-    </select>
-    <select class="select" aria-label="Filtrar por estado" [ngModel]="filtroEstado()" (ngModelChange)="filtroEstado.set($event)">
-      <option value="">Todos los estados</option>
-      <option value="publicada">Publicada</option>
-      <option value="borrador">Borrador</option>
-      <option value="archivada">Archivada</option>
-    </select>
-  </div>
+  <app-buscador-govco idCampo="buscar-entradas" etiqueta="Buscar entrada" [compacto]="true"
+      placeholder="Título, resumen o contenido…" etiquetaBoton="Buscar entradas"
+      [valor]="busqueda()" (valorChange)="busqueda.set($event)">
+    <div filtros class="desplegable-govco">
+      <label for="filtro-pagina">Página</label>
+      <select id="filtro-pagina" class="btn-dropdown" [ngModel]="filtroPagina()" (ngModelChange)="filtroPagina.set($event)">
+        <option value="">Todas las páginas</option>
+        @for (n of paginasOrdenadas(); track n.pagina.id) {
+          <option [ngValue]="n.pagina.id">{{ sangria(n.nivel) }}{{ n.pagina.titulo }}</option>
+        }
+      </select>
+    </div>
+    <div filtros class="desplegable-govco">
+      <label for="filtro-tipo">Tipo</label>
+      <select id="filtro-tipo" class="btn-dropdown" [ngModel]="filtroTipo()" (ngModelChange)="filtroTipo.set($event)">
+        <option value="">Todos los tipos</option>
+        @for (t of tipos; track t.valor) {
+          <option [value]="t.valor">{{ t.etiqueta }}</option>
+        }
+      </select>
+    </div>
+    <div filtros class="desplegable-govco">
+      <label for="filtro-estado">Estado</label>
+      <select id="filtro-estado" class="btn-dropdown" [ngModel]="filtroEstado()" (ngModelChange)="filtroEstado.set($event)">
+        <option value="">Todos los estados</option>
+        <option value="publicada">Publicada</option>
+        <option value="borrador">Borrador</option>
+        <option value="archivada">Archivada</option>
+      </select>
+    </div>
+  </app-buscador-govco>
+  <p class="resultado-busqueda admin" role="status" aria-live="polite">
+    <strong>{{ lista().length }}</strong> de {{ cms.entradas().length }} entradas
+    @if (hayFiltros()) { <button type="button" class="btn-bdc outline-btn-govco limpiar-admin" (click)="limpiarFiltros()">Limpiar filtros</button> }
+  </p>
 
   @if (lista().length) {
     <div class="table-wrap">
