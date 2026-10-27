@@ -2,14 +2,10 @@
 <app-accesibilidad></app-accesibilidad>
 <app-cabecera></app-cabecera>
 <app-navbar></app-navbar>
-<br>
-<main class="container-main-govco">
-  <section>
-    <div class="miga-pan">
-      <app-breadcrumb></app-breadcrumb>
-    </div>
-  </section>
+<main class="container-main-govco" id="contenido-principal">
   <app-contenido>
+    <!-- Miga de pan (BDC GOV.CO v5): siempre arriba a la izquierda del contenido -->
+    <app-breadcrumb />
     <router-outlet></router-outlet>
   </app-contenido>
 </main>

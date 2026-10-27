@@ -1,18 +1,26 @@
-<nav aria-label="breadcrumb" class="breadcrumb-govco">
-  <ol class="breadcrumb">
-    <li
-      class="breadcrumb-item"
-      *ngFor="let breadcrumb of breadcrumbs; let last = last"
-      [class.active]="last">
-
-      <a *ngIf="!last" [routerLink]="breadcrumb.url">
-        {{ breadcrumb.label }}
-      </a>
-
-      <span *ngIf="last">
-        {{ breadcrumb.label }}
-      </span>
-
-    </li>
-  </ol>
-</nav>
+@if (visible() && migas().length) {
+  <nav class="breadcrumb-nav-govco" [attr.aria-label]="variante() === 'panel' ? 'Miga de pan del panel' : 'Miga de pan'">
+    <ol class="breadcrumb-govco">
+      @for (m of migas(); track m.url; let ultima = $last; let i = $index) {
+        <li class="breadcrumb-item-govco" [class.active]="ultima" [attr.aria-current]="ultima ? 'page' : null">
+          @if (!ultima) {
+            <a [routerLink]="m.url" [attr.title]="m.corto !== m.label ? m.label : null">
+              @if (m.corto !== m.label) {
+                <span aria-hidden="true">{{ m.corto }}</span><span class="visually-hidden">{{ m.label }}</span>
+              } @else { {{ m.label }} }
+            </a>
+            @if (i === 0 && omitidos()) {
+              <span class="visually-hidden">({{ omitidos() === 1 ? 'se omite 1 nivel intermedio' : 'se omiten ' + omitidos() + ' niveles intermedios' }})</span>
+            }
+          } @else {
+            <span [attr.title]="m.corto !== m.label ? m.label : null">
+              @if (m.corto !== m.label) {
+                <span aria-hidden="true">{{ m.corto }}</span><span class="visually-hidden">{{ m.label }}</span>
+              } @else { {{ m.label }} }
+            </span>
+          }
+        </li>
+      }
+    </ol>
+  </nav>
+}

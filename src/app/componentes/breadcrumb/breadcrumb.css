@@ -1,68 +1,95 @@
+/* Miga de pan — BDC GOV.CO v5 (general/miga-de-pan) */
+:host {
+  --govcolor-black: #000000;
+  --govcolor-cobalt: #0943B5;
+  --govcolor-white: #FFFFFF;
+  display: block;
+}
+
+.breadcrumb-nav-govco {
+  background-color: transparent;
+  box-shadow: none;
+  line-height: 1.5rem;
+  height: auto;
+}
+
 .breadcrumb-govco {
-  list-style: none;
-  display: flex;
-  flex-wrap: wrap;
-  padding: 0 0;
-  margin-bottom: 1rem;
-  font-size: 0.875rem;
-}
-
-.breadcrumb-item-govco {
-  padding: 0.3rem 0.4rem 0.3rem 0.8rem;
-}
-
-.breadcrumb-item-govco+.breadcrumb-item-govco::before {
-  float: left;
-  padding-right: 0.8rem;
-  color: #282C34;
-  content: var(--bs-breadcrumb-divider, ">");
-  font-weight: medium;
-}
-
-.breadcrumb-item-govco > a {
-  color: #3366CC;
-  text-decoration: underline;
-}
-
-.breadcrumb-item-govco.active {
-  color: #282C34;
-  font-weight: medium;
-}
-
-.breadcrumb-item-govco.invested {
-  background-color: #004884;
-}
-
-.breadcrumb-item-govco.invested, .breadcrumb-item-govco.invested > a, .breadcrumb-item-govco.invested+.breadcrumb-item-govco.invested::before {
-  color: #FFFFFF;
-}
-
-/* Clases usadas en la plantilla (.breadcrumb / .breadcrumb-item) */
-.breadcrumb {
-  list-style: none;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  margin: 0;
+  list-style: none;
+  margin: 0 0 1.25rem;
   padding: 0;
+  font-family: 'Verdana-Regular', Verdana, Geneva, 'DejaVu Sans', sans-serif;
+  font-size: 0.875rem;
+  line-height: 1.6;
 }
 
-.breadcrumb-item + .breadcrumb-item::before {
-  content: '›';
-  padding: 0 0.5rem;
-  color: #6b7280;
+.breadcrumb-item-govco {
+  padding: 0 1rem 0.3rem 0;
+  color: var(--govcolor-black);
+  white-space: nowrap;
 }
 
-.breadcrumb-item > a {
-  color: #3366cc;
-  text-decoration: none;
+.breadcrumb-item-govco + .breadcrumb-item-govco::before {
+  content: var(--bs-breadcrumb-divider, ">");
+  float: left;
+  padding-right: 0.8rem;
+  color: var(--govcolor-black);
 }
 
-.breadcrumb-item > a:hover {
+.breadcrumb-item-govco > a {
+  color: var(--govcolor-cobalt);
   text-decoration: underline;
+  text-underline-offset: 2px;
+  font-size: 0.875rem;
+  padding: 0;
+  border-radius: 2px;
 }
 
-.breadcrumb-item.active {
-  color: #282c34;
-  font-weight: 600;
+.breadcrumb-item-govco > a:hover {
+  color: #4672C8;
+}
+
+.breadcrumb-item-govco > a:focus-visible {
+  outline: 0.125rem solid var(--govcolor-black);
+  outline-offset: 0.125rem;
+}
+
+.breadcrumb-item-govco.active {
+  color: var(--govcolor-black);
+  background-color: transparent;
+}
+
+/* Variante invertida (fondos oscuros) */
+.breadcrumb-govco.inverted {
+  background-color: var(--govcolor-cobalt);
+  max-width: fit-content;
+  min-height: 52px;
+  padding: 0 39px;
+  border-radius: 10px;
+}
+.breadcrumb-govco.inverted .breadcrumb-item-govco,
+.breadcrumb-govco.inverted .breadcrumb-item-govco > a,
+.breadcrumb-govco.inverted .breadcrumb-item-govco + .breadcrumb-item-govco::before {
+  color: var(--govcolor-white);
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* En celular el texto puede partirse para no desbordar */
+@media (max-width: 576px) {
+  .breadcrumb-govco { margin-bottom: 1rem; font-size: 0.8125rem; }
+  .breadcrumb-item-govco { white-space: normal; padding-right: 0.6rem; }
+  .breadcrumb-item-govco + .breadcrumb-item-govco::before { padding-right: 0.5rem; }
 }
