@@ -24,6 +24,42 @@
       "video": "assets/senas/transparencia.mp4",
       "webm": "assets/senas/transparencia.webm",
       "poster": "assets/senas/transparencia.jpg"
+    },
+    "atencion y servicios a la ciudadania": {
+      "titulo": "Atención al ciudadano",
+      "video": "assets/senas/atencion-al-ciudadano.mp4",
+      "webm": "assets/senas/atencion-al-ciudadano.webm",
+      "poster": "assets/senas/atencion-al-ciudadano.jpg"
+    },
+    "atencion al ciudadano": {
+      "titulo": "Atención al ciudadano",
+      "video": "assets/senas/atencion-al-ciudadano.mp4",
+      "webm": "assets/senas/atencion-al-ciudadano.webm",
+      "poster": "assets/senas/atencion-al-ciudadano.jpg"
+    },
+    "participa": {
+      "titulo": "Participa",
+      "video": "assets/senas/participa.mp4",
+      "webm": "assets/senas/participa.webm",
+      "poster": "assets/senas/participa.jpg"
+    },
+    "6. participa": {
+      "titulo": "Participa",
+      "video": "assets/senas/participa.mp4",
+      "webm": "assets/senas/participa.webm",
+      "poster": "assets/senas/participa.jpg"
+    },
+    "invitaciones a cotizar": {
+      "titulo": "Cotizaciones",
+      "video": "assets/senas/cotizaciones.mp4",
+      "webm": "assets/senas/cotizaciones.webm",
+      "poster": "assets/senas/cotizaciones.jpg"
+    },
+    "cotizaciones": {
+      "titulo": "Cotizaciones",
+      "video": "assets/senas/cotizaciones.mp4",
+      "webm": "assets/senas/cotizaciones.webm",
+      "poster": "assets/senas/cotizaciones.jpg"
     }
   }
 }
