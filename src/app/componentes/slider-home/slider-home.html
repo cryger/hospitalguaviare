@@ -1,35 +1,81 @@
-<div class="swiper">
-  <div class="swiper-wrapper">
+@if (total()) {
+  <section class="carrusel-govco" aria-roledescription="carrusel" aria-label="Destacados de la E.S.E. Hospital San José del Guaviare"
+           #carrusel (mouseenter)="enPausaTemporal.set(true)" (mouseleave)="enPausaTemporal.set(false)"
+           (focusin)="enPausaTemporal.set(true)" (focusout)="salirFoco($event, carrusel)" (keydown)="teclado($event)">
 
-    <div class="swiper-slide">
-      <img src="assets/img/slider/BANNER_PLATAFORMA-2025.jpg" alt="Slide 1">
+    <div class="carousel-inner" [attr.aria-live]="reproduciendo() ? 'off' : 'polite'"
+         (pointerdown)="tocar($event)" (pointerup)="soltar($event)">
+      @for (b of slides(); track b.id; let i = $index) {
+        @let activa = i === indice();
+        <div class="carousel-item" [class.active]="activa" [class.con-texto]="conTexto(b)" role="group" aria-roledescription="diapositiva"
+             [attr.aria-label]="(i + 1) + ' de ' + total()" [attr.aria-hidden]="!activa" [attr.inert]="activa ? null : ''">
+          <!-- Imagen (si no hay botón, toda la imagen es el enlace) -->
+          @if (b.enlaceUrl && !b.textoBoton) {
+            @if (externo(b)) {
+              <a class="enlace-imagen" [href]="b.enlaceUrl" [attr.target]="b.nuevaPestana ? '_blank' : null" [attr.rel]="b.nuevaPestana ? 'noopener' : null">
+                <ng-container *ngTemplateOutlet="imagen; context: { $implicit: b, i }" />
+                @if (b.nuevaPestana) { <span class="visually-hidden">(abre en otra pestaña)</span> }
+              </a>
+            } @else {
+              <a class="enlace-imagen" [routerLink]="b.enlaceUrl"><ng-container *ngTemplateOutlet="imagen; context: { $implicit: b, i }" /></a>
+            }
+          } @else {
+            <ng-container *ngTemplateOutlet="imagen; context: { $implicit: b, i }" />
+          }
 
-      <div class="slide-caption">
-          <h2>Atención en Urgencias 24/7</h2>
-          <p>Atención oportuna y humanizada para toda la comunidad.</p>
-          <a routerLink="/atencion-ciudadano" class="btn-govco">
-            Conoce más
-          </a>
+          @if (conTexto(b)) {
+            <div class="carousel-caption">
+              @if (b.titulo) { <h2 class="carousel-title">{{ b.titulo }}</h2> }
+              @if (b.descripcion) { <p>{{ b.descripcion }}</p> }
+              @if (b.textoBoton && b.enlaceUrl) {
+                @if (externo(b)) {
+                  <a class="btn-bdc fill-btn-govco" [href]="b.enlaceUrl" [attr.target]="b.nuevaPestana ? '_blank' : null" [attr.rel]="b.nuevaPestana ? 'noopener' : null">
+                    {{ b.textoBoton }}@if (b.nuevaPestana) {<span class="visually-hidden"> (abre en otra pestaña)</span>}
+                  </a>
+                } @else {
+                  <a class="btn-bdc fill-btn-govco" [routerLink]="b.enlaceUrl">{{ b.textoBoton }}</a>
+                }
+              }
+            </div>
+          }
         </div>
+      }
     </div>
 
-    <div class="swiper-slide">
-      <img src="assets/img/slider/vacunacion.jpg" alt="Slide 2">
-    </div>
+    @if (total() > 1) {
+      <button type="button" class="carousel-control prev" (click)="anterior()">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M15 5l-7 7 7 7"/></svg>
+        <span class="visually-hidden">Imagen anterior</span>
+      </button>
+      <button type="button" class="carousel-control next" (click)="siguiente()">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 5l7 7-7 7"/></svg>
+        <span class="visually-hidden">Próxima imagen</span>
+      </button>
 
-    <div class="swiper-slide">
-      <img src="assets/img/slider/pqrsf.jpg" alt="Slide 3">
-    </div>
+      <div class="carousel-barra">
+        <button type="button" class="control-start-pause" (click)="alternar()" [attr.aria-pressed]="!reproduciendo()">
+          @if (reproduciendo()) {
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8 5v14M16 5v14"/></svg> Pausar
+          } @else {
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" class="relleno"><path d="M7 5l12 7-12 7z"/></svg> Reproducir
+          }
+        </button>
+        <div class="carousel-indicators" role="group" aria-label="Elegir diapositiva">
+          @for (b of slides(); track b.id; let i = $index) {
+            <button type="button" [class.active]="i === indice()" [attr.aria-current]="i === indice() ? 'true' : null"
+                    [attr.aria-label]="'Diapositiva ' + (i + 1) + ' de ' + total() + (b.titulo ? ': ' + b.titulo : '')" (click)="ir(i)"></button>
+          }
+        </div>
+      </div>
+    }
+  </section>
+} @else if (svc.cargando()) {
+  <div class="carrusel-govco cargando" aria-hidden="true"></div>
+}
 
-  </div>
-
-  <!-- Flechas -->
-  <div class="swiper-button-prev"></div>
-  <div class="swiper-button-next"></div>
-
-  <!-- Indicadores -->
-  <div class="swiper-pagination"></div>
-
-  <!-- play/pause button-->
-  <div class="swiper-button-play-pause"></div>
-</div>
+<ng-template #imagen let-b let-i="i">
+  <picture>
+    @if (b.imagenMovilUrl) { <source media="(max-width: 576px)" [attr.srcset]="b.imagenMovilUrl" /> }
+    <img [src]="b.imagenUrl" [alt]="b.alt" [attr.loading]="i === 0 ? 'eager' : 'lazy'" [attr.fetchpriority]="i === 0 ? 'high' : null" draggable="false" />
+  </picture>
+</ng-template>

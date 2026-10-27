@@ -1,0 +1,170 @@
+<div class="cms-head">
+  <div>
+    <h1>Slider del inicio</h1>
+    <p>Diapositivas del carrusel principal de la página de inicio (componente Carrusel de GOV.CO).</p>
+  </div>
+  <div class="cms-head-actions">
+    <a class="btn" href="/" target="_blank" rel="noopener">Ver inicio ↗</a>
+    <button type="button" class="btn btn-primario" (click)="nueva()">+ Nueva diapositiva</button>
+  </div>
+</div>
+
+@if (aviso(); as a) {
+  <div class="aviso" [class.aviso-ok]="a.tipo === 'ok'" [class.aviso-error]="a.tipo === 'error'" role="status">
+    {{ a.texto }}
+    <button type="button" class="btn-link" (click)="aviso.set(null)" aria-label="Cerrar aviso">✕</button>
+  </div>
+}
+
+<div class="aviso aviso-info guia">
+  <span>
+    <b>Recomendaciones GOV.CO:</b> imágenes de {{ medida }} del mismo tamaño, título de una línea (máx. {{ limiteTitulo }} caracteres),
+    texto de máx. {{ limiteDescripcion }} caracteres y entre 3 y 5 diapositivas. Si la imagen ya trae texto, escríbalo en el «texto alternativo».
+  </span>
+</div>
+
+<section class="panel">
+  <div class="panel-head">
+    <h2>Diapositivas ({{ svc.banners().length }})</h2>
+    <span class="panel-sub-inline">{{ enElAire() }} {{ enElAire() === 1 ? 'se muestra' : 'se muestran' }} ahora en el inicio</span>
+  </div>
+
+  @if (svc.banners().length) {
+    <ol class="lista-slides">
+      @for (b of svc.banners(); track b.id; let i = $index, primero = $first, ultimo = $last) {
+        @let s = situacion(b);
+        <li class="slide" [class.apagada]="s.clase !== 'badge-publicada'">
+          <span class="pos" aria-hidden="true">{{ i + 1 }}</span>
+          <img class="mini" [src]="b.imagenUrl" [alt]="''" loading="lazy" />
+          <div class="info">
+            <p class="nombre">{{ b.titulo || b.alt }}</p>
+            @if (b.titulo) { <p class="sub">{{ b.alt }}</p> }
+            <p class="sub">
+              @if (b.enlaceUrl) { Enlace: <code>{{ b.enlaceUrl }}</code>{{ b.textoBoton ? ' · Botón «' + b.textoBoton + '»' : ' · toda la imagen' }} } @else { Sin enlace }
+              @if (b.imagenMovilUrl) { · 📱 imagen para celular }
+            </p>
+            <span class="badge" [class]="'badge ' + s.clase">{{ s.texto }}</span>
+          </div>
+          <div class="acciones-slide">
+            <div class="orden" role="group" [attr.aria-label]="'Orden de la diapositiva ' + (i + 1)">
+              <button type="button" class="btn btn-icono" [disabled]="primero || moviendo()" (click)="mover(b, -1)" [attr.aria-label]="'Subir la diapositiva ' + (i + 1)">↑</button>
+              <button type="button" class="btn btn-icono" [disabled]="ultimo || moviendo()" (click)="mover(b, 1)" [attr.aria-label]="'Bajar la diapositiva ' + (i + 1)">↓</button>
+            </div>
+            <button type="button" class="btn btn-sm" (click)="editar(b)">Editar</button>
+            <button type="button" class="btn btn-sm" (click)="alternar(b)">{{ b.estado === 'publicado' ? 'Ocultar' : 'Publicar' }}</button>
+            <button type="button" class="btn btn-sm btn-peligro" (click)="eliminar(b)">Eliminar</button>
+          </div>
+        </li>
+      }
+    </ol>
+  } @else {
+    <p class="vacio">{{ svc.cargando() ? 'Cargando…' : 'No hay diapositivas. El inicio se mostrará sin slider.' }}</p>
+  }
+</section>
+
+<section class="panel">
+  <div class="panel-head"><h2>Vista previa</h2></div>
+  <p class="panel-sub">Así se ve el slider en el inicio con las diapositivas publicadas y vigentes hoy.</p>
+  <app-slider-home />
+</section>
+
+<!-- ===== Crear / editar ===== -->
+@if (modal()) {
+  <div class="modal-fondo" (click)="cerrar()">
+    <div class="modal-caja grande" role="dialog" aria-modal="true" aria-labelledby="titulo-modal-slide" (click)="$event.stopPropagation()" (keydown.escape)="cerrar()">
+      <div class="modal-head">
+        <h2 id="titulo-modal-slide">{{ editando() ? 'Editar diapositiva' : 'Nueva diapositiva' }}</h2>
+        <button type="button" class="btn btn-icono" (click)="cerrar()" aria-label="Cerrar">✕</button>
+      </div>
+      <form [formGroup]="form" (ngSubmit)="guardar()" novalidate>
+        <div class="modal-body">
+          <div class="form-grid">
+            <!-- Imagen -->
+            <div class="campo full">
+              <label for="sl-imagen">Imagen (escritorio) * <span class="opc">— recomendada {{ medida }}</span></label>
+              <div class="fila-imagen">
+                <input id="sl-imagen" class="input" formControlName="imagenUrl" [class.invalido]="error('imagenUrl')" placeholder="URL de la imagen o elíjala de la biblioteca" />
+                <button type="button" class="btn" (click)="selector.set('imagenUrl')">🖼️ Biblioteca / subir</button>
+              </div>
+              @if (error('imagenUrl')) { <small class="err">Elija o suba una imagen.</small> }
+              @if (form.controls.imagenUrl.value) {
+                <img class="previa" [src]="form.controls.imagenUrl.value" alt="Vista previa de la imagen" />
+              }
+            </div>
+
+            <div class="campo full">
+              <label for="sl-alt">Texto alternativo * <span class="opc">— describe la imagen y todo el texto que contenga</span></label>
+              <textarea id="sl-alt" class="textarea" rows="2" formControlName="alt" [class.invalido]="error('alt')"
+                        placeholder="Ej. ¿Tienes preguntas, quejas o sugerencias? Déjanos aquí tus PQRSF."></textarea>
+              <small [class.err]="error('alt')">{{ error('alt') ? 'Obligatorio para accesibilidad (WCAG 2.1).' : 'Lo leen los lectores de pantalla.' }} {{ largo('alt') }}/300</small>
+            </div>
+
+            <div class="campo full">
+              <label for="sl-movil">Imagen para celular <span class="opc">(opcional, proporción 16:9)</span></label>
+              <div class="fila-imagen">
+                <input id="sl-movil" class="input" formControlName="imagenMovilUrl" placeholder="Si se deja vacía se recorta la imagen de escritorio" />
+                <button type="button" class="btn" (click)="selector.set('imagenMovilUrl')">🖼️ Biblioteca / subir</button>
+              </div>
+            </div>
+
+            <!-- Texto -->
+            <div class="campo">
+              <label for="sl-titulo">Título sobre la imagen <span class="opc">(opcional)</span></label>
+              <input id="sl-titulo" class="input" formControlName="titulo" placeholder="Ej. Atención en Urgencias 24/7" />
+              <small [class.alerta]="largo('titulo') > limiteTitulo">{{ largo('titulo') }}/{{ limiteTitulo }} caracteres recomendados</small>
+            </div>
+            <div class="campo">
+              <label for="sl-desc">Texto <span class="opc">(opcional)</span></label>
+              <input id="sl-desc" class="input" formControlName="descripcion" placeholder="Ej. Atención oportuna y humanizada" />
+              <small [class.alerta]="largo('descripcion') > limiteDescripcion">{{ largo('descripcion') }}/{{ limiteDescripcion }} caracteres recomendados</small>
+            </div>
+
+            <!-- Enlace -->
+            <div class="campo">
+              <label for="sl-enlace">Enlace <span class="opc">(opcional)</span></label>
+              <input id="sl-enlace" class="input" formControlName="enlaceUrl" [class.invalido]="error('enlaceUrl')" placeholder="/pqrsf o https://…" />
+              <small [class.err]="error('enlaceUrl')">{{ error('enlaceUrl') ? 'Use una ruta del portal (/…) o una dirección completa (https://…).' : 'Ruta del portal (/…) o dirección externa.' }}</small>
+            </div>
+            <div class="campo">
+              <label for="sl-boton">Texto del botón <span class="opc">(opcional)</span></label>
+              <input id="sl-boton" class="input" formControlName="textoBoton" placeholder="Ej. Conoce más" />
+              <small>Si se deja vacío, toda la imagen funciona como enlace.</small>
+            </div>
+            <label class="check full"><input type="checkbox" formControlName="nuevaPestana" /> Abrir el enlace en otra pestaña (solo para sitios externos)</label>
+
+            <!-- Publicación -->
+            <div class="campo">
+              <label for="sl-estado">Estado</label>
+              <select id="sl-estado" class="select" formControlName="estado">
+                <option value="publicado">Publicada</option>
+                <option value="borrador">Oculta</option>
+              </select>
+            </div>
+            <div class="campo">
+              <span class="label">Programación <span class="opc">(opcional)</span></span>
+              <div class="fila-fechas">
+                <label class="visually-hidden" for="sl-desde">Mostrar desde</label>
+                <input id="sl-desde" type="date" class="input" formControlName="fechaInicio" title="Mostrar desde" />
+                <span aria-hidden="true">→</span>
+                <label class="visually-hidden" for="sl-hasta">Mostrar hasta</label>
+                <input id="sl-hasta" type="date" class="input" formControlName="fechaFin" [min]="form.controls.fechaInicio.value" title="Mostrar hasta" />
+              </div>
+              <small>Útil para campañas: se muestra y se retira sola en esas fechas.</small>
+            </div>
+
+            @if (form.errors?.['regla']; as msg) { <p class="full err" role="alert">{{ msg }}</p> }
+          </div>
+        </div>
+        <div class="modal-foot">
+          <button type="button" class="btn" (click)="cerrar()">Cancelar</button>
+          <button type="submit" class="btn btn-primario" [disabled]="guardando()">{{ guardando() ? 'Guardando…' : editando() ? 'Guardar cambios' : 'Agregar diapositiva' }}</button>
+        </div>
+      </form>
+    </div>
+  </div>
+}
+
+@if (selector()) {
+  <app-media-picker titulo="Elegir imagen para el slider" [multiple]="false" soloTipo="imagen"
+                    (seleccionar)="elegirImagen($event)" (cerrar)="selector.set(null)" />
+}

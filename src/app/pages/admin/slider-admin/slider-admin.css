@@ -1,0 +1,38 @@
+.guia { align-items: flex-start; }
+.panel-sub-inline { font-size: .8rem; color: var(--c-muted); }
+.lista-slides { list-style: none; margin: 0; padding: 0; display: grid; gap: .75rem; }
+.slide {
+  display: grid; grid-template-columns: auto 13rem minmax(0, 1fr) auto; align-items: center; gap: .9rem;
+  border: 1px solid var(--c-borde); border-radius: 10px; padding: .7rem .9rem; background: #fff;
+}
+.slide.apagada { background: var(--c-fondo-suave); }
+.slide.apagada .mini { opacity: .55; }
+.pos { display: grid; place-items: center; width: 1.9rem; height: 1.9rem; border-radius: 50%; background: var(--c-info-bg); color: var(--c-primario); font-weight: 700; font-size: .85rem; }
+.mini { width: 13rem; aspect-ratio: 1920 / 500; object-fit: cover; border-radius: 6px; border: 1px solid var(--c-borde); background: #e5ecf8; }
+.info { min-width: 0; display: grid; gap: .2rem; justify-items: start; }
+.nombre { margin: 0; font-weight: 700; font-size: .92rem; color: var(--c-texto); }
+.sub { margin: 0; font-size: .78rem; color: var(--c-muted); overflow-wrap: anywhere; }
+.sub code { font-size: .74rem; background: #f1f5f9; padding: 0 .25rem; border-radius: 3px; }
+.acciones-slide { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: .35rem; align-items: center; }
+.orden { display: inline-flex; gap: .25rem; margin-right: .25rem; }
+.badge-publicada { background: var(--c-ok-bg); color: var(--c-ok); }
+
+.fila-imagen { display: flex; gap: .5rem; }
+.fila-imagen .input { flex: 1; }
+.previa { margin-top: .5rem; width: 100%; max-height: 11rem; object-fit: cover; border-radius: 8px; border: 1px solid var(--c-borde); }
+.fila-fechas { display: flex; align-items: center; gap: .4rem; }
+.opc { font-weight: 400; color: var(--c-muted); }
+.err { color: var(--c-danger); font-size: .78rem; margin: 0; }
+small.alerta { color: var(--c-warn); font-weight: 600; }
+.modal-caja > form { display: flex; flex-direction: column; min-height: 0; flex: 1 1 auto; }
+.modal-caja > form > .modal-body { flex: 1 1 auto; min-height: 0; }
+.visually-hidden { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; }
+
+@media (max-width: 900px) {
+  .slide { grid-template-columns: auto minmax(0, 1fr); }
+  .mini { grid-column: 2; width: 100%; }
+  .info, .acciones-slide { grid-column: 1 / -1; }
+  .acciones-slide { justify-content: flex-start; }
+  .fila-imagen { flex-direction: column; }
+}
+.slide .badge { text-transform: none; }

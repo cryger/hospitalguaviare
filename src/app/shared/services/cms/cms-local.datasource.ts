@@ -12,6 +12,7 @@ import { CmsEntrada, CmsMenu, CmsMultimedia, CmsPagina } from '../../models/cms/
 import { COTIZACIONES_SEMILLA, VACANTES_SEMILLA } from './cms-semilla-modulos';
 import { ENTRADAS_PIE, EntradaPieSemilla } from './cms-semilla-pie';
 import { EVENTOS_SEMILLA } from './cms-semilla-eventos';
+import { BANNERS_SEMILLA } from './cms-semilla-slider';
 import { ENTRADAS_ENTIDAD } from './cms-semilla-entidad';
 
 /**
@@ -33,6 +34,7 @@ export class CmsLocalDataSource extends CmsDataSource {
     this.sembrarSiVacio();
     this.sembrarModulos();
     this.sembrarEventos();
+    this.sembrarColeccion('banners', 'slider-semilla', BANNERS_SEMILLA);
     this.actualizarSemilla();
     this.sembrarEntradasFijas('pie-semilla', ENTRADAS_PIE);
     this.sembrarEntradasFijas('entidad-semilla', ENTRADAS_ENTIDAD);
@@ -208,6 +210,17 @@ export class CmsLocalDataSource extends CmsDataSource {
     };
     sembrar('vacantes', VACANTES_SEMILLA);
     sembrar('cotizaciones', COTIZACIONES_SEMILLA);
+    localStorage.setItem(clave, '1');
+  }
+
+  /** Siembra una colección una sola vez (si está vacía) */
+  private sembrarColeccion(c: CmsColeccion, nombre: string, datos: object[]): void {
+    const clave = this.prefijo + nombre;
+    if (localStorage.getItem(clave) === '1') return;
+    if (!this.leer(c).length) {
+      const t = this.ahora();
+      this.escribir(c, datos.map((d, i) => ({ ...d, id: i + 1, creadoEn: t, actualizadoEn: t })));
+    }
     localStorage.setItem(clave, '1');
   }
 

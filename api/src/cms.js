@@ -23,6 +23,10 @@ const CONSULTAS_PUBLICAS = {
   cotizaciones: "SELECT * FROM cms_cotizaciones WHERE estado IN ('publicada', 'cerrada')",
   // Los eventos cancelados se muestran con aviso; los borradores no
   eventos: "SELECT * FROM cms_eventos WHERE estado IN ('publicado', 'cancelado')",
+  // Slider del inicio: solo lo publicado y dentro de su programación
+  banners: `SELECT * FROM cms_banners WHERE estado = 'publicado'
+              AND (fecha_inicio IS NULL OR fecha_inicio <= UTC_TIMESTAMP())
+              AND (fecha_fin IS NULL OR fecha_fin >= UTC_TIMESTAMP())`,
   entradas: `SELECT e.* FROM cms_entradas e
                JOIN cms_paginas p ON p.id = e.pagina_id AND p.estado = 'publicada'
               WHERE e.estado = 'publicada'
@@ -78,6 +82,7 @@ rutasCms.get('/:coleccion', sesionOpcional, async (req, res, next) => {
       col === 'multimedia' ? 'creado_en DESC'
       : ['vacantes', 'cotizaciones'].includes(col) ? 'fecha_publicacion DESC, id DESC'
       : col === 'eventos' ? 'fecha_inicio, id'
+      : col === 'banners' ? 'orden, id'
       : 'id';
     const [filas] = await pool.query(`${sql} ORDER BY ${orden}`);
     res.json(filas.map((f) => aJson(col, f)));

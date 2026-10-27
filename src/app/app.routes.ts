@@ -9,6 +9,7 @@ import { InformacionInteres } from './pages/informacion-interes/informacion-inte
 import { MapaDelSitio } from './pages/mapa-del-sitio/mapa-del-sitio';
 import { Buscar } from './pages/buscar/buscar';
 import { EventosAdmin } from './pages/admin/eventos-admin/eventos-admin';
+import { SliderAdmin } from './pages/admin/slider-admin/slider-admin';
 import { PqrsfComponent } from './pages/pqrsf/pqrsf';
 import { Login } from './pages/login/login';
 import { DashboardHomeComponent } from './pages/dashboardhome/dashboardhome';
@@ -71,6 +72,7 @@ export const routes: Routes = [
       { path: 'cotizaciones', component: CotizacionesPropuestasAdminComponent, data: { breadcrumb: 'Invitaciones a cotizar' } },
       { path: 'vacantes', component: TrabajaNosotrosAdminComponent, data: { breadcrumb: 'Trabaja con nosotros' } },
       { path: 'eventos', component: EventosAdmin, data: { breadcrumb: 'Calendario de eventos' } },
+      { path: 'slider', component: SliderAdmin, data: { breadcrumb: 'Slider del inicio' } },
       { path: 'usuarios', component: Usuarios, data: { breadcrumb: 'Administrar Usuarios' } },
       { path: 'accesibilidad-admin', component: AccesibilidadAdmin, data: { breadcrumb: 'Administrar Accesibilidad' } },
       { path: 'configuracion', component: Configuracion, data: { breadcrumb: 'Configuración' } },

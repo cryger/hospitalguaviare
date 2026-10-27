@@ -105,6 +105,26 @@ const TABLAS = {
     booleanos: ['todoElDia', 'destacado'],
     fechas: ['fechaInicio', 'fechaFin'],
   },
+  banners: {
+    tabla: 'cms_banners',
+    campos: {
+      titulo: 'titulo',
+      descripcion: 'descripcion',
+      imagenUrl: 'imagen_url',
+      imagenMovilUrl: 'imagen_movil_url',
+      alt: 'alt',
+      enlaceUrl: 'enlace_url',
+      textoBoton: 'texto_boton',
+      nuevaPestana: 'nueva_pestana',
+      orden: 'orden',
+      estado: 'estado',
+      fechaInicio: 'fecha_inicio',
+      fechaFin: 'fecha_fin',
+      migradoDe: 'migrado_de',
+    },
+    booleanos: ['nuevaPestana'],
+    fechas: ['fechaInicio', 'fechaFin'],
+  },
   multimedia: {
     tabla: 'cms_multimedia',
     campos: {
