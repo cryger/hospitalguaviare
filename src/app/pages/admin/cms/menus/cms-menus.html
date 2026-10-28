@@ -114,7 +114,7 @@
                 <a class="btn btn-icono" title="Ver en el sitio" aria-label="Ver en el sitio" target="_blank" rel="noopener"
                    [routerLink]="cms.rutaPagina(n.pagina.id)" [queryParams]="n.pagina.estado === 'publicada' ? {} : { 'vista-previa': 1 }">↗</a>
                 <button class="btn btn-icono btn-peligro" type="button" title="Quitar del menú" aria-label="Quitar del menú"
-                        (click)="quitarDelMenu(n.pagina)">✕</button>
+                        (click)="porQuitar.set(n.pagina)">✕</button>
               </div>
             </li>
           }
@@ -130,11 +130,19 @@
         </form>
 
         @if (paginasSinMenu().length) {
-          <form class="agregar-fila" (ngSubmit)="agregarExistente()">
-            <select class="select" name="existente" [(ngModel)]="paginaExistenteId">
+          <form class="agregar-fila agregar-existente" (ngSubmit)="agregarExistente()">
+            <label class="visually-hidden" for="pag-existente">Página sin menú</label>
+            <select id="pag-existente" class="select" name="existente" [(ngModel)]="paginaExistenteId">
               <option [ngValue]="null">Agregar una página existente sin menú…</option>
               @for (p of paginasSinMenu(); track p.id) {
-                <option [ngValue]="p.id">{{ p.titulo }}</option>
+                <option [ngValue]="p.id">{{ p.titulo }} ({{ rutaSinMenu(p) }})</option>
+              }
+            </select>
+            <label class="dentro" for="pag-destino">dentro de</label>
+            <select id="pag-destino" class="select" name="destino" [(ngModel)]="padreDestinoId">
+              <option [ngValue]="null">La raíz del menú</option>
+              @for (n of estructura(); track n.pagina.id) {
+                <option [ngValue]="n.pagina.id">{{ '— '.repeat(n.nivel) }}{{ n.pagina.titulo }}</option>
               }
             </select>
             <button class="btn" type="submit" [disabled]="!paginaExistenteId">Agregar</button>
@@ -146,6 +154,32 @@
     }
   </section>
 </div>
+
+<!-- ===== CONFIRMAR QUITAR DEL MENÚ ===== -->
+@if (porQuitar(); as q) {
+  <div class="modal-fondo" (click)="porQuitar.set(null)">
+    <div class="modal-caja" role="alertdialog" aria-modal="true" aria-labelledby="titulo-quitar" (click)="$event.stopPropagation()" (keydown.escape)="porQuitar.set(null)">
+      <div class="modal-head">
+        <h2 id="titulo-quitar">¿Quitar «{{ q.titulo }}» del menú?</h2>
+        <button class="btn btn-icono" type="button" aria-label="Cerrar" (click)="porQuitar.set(null)">✕</button>
+      </div>
+      <div class="modal-body">
+        <p>Al quitarla del menú, la página <b>y sus subpáginas</b> salen de esta sección y su dirección cambia:</p>
+        <p class="rutas"><code>{{ cms.rutaPagina(q.id) }}</code><br>→ <code>{{ rutaSinMenu(q) }}</code></p>
+        <p>Los enlaces viejos seguirán llevando a la página, pero no aparecerá en ninguna sección.</p>
+        <p class="nota-ocultar"><b>¿Solo quiere que no se vea en el menú?</b> Use <b>Ocultar del menú</b>: la página sigue en su lugar,
+          con la misma dirección, y se puede enlazar desde otras secciones (por ejemplo, desde Transparencia).</p>
+      </div>
+      <div class="modal-foot">
+        <button class="btn" type="button" (click)="porQuitar.set(null)">Cancelar</button>
+        @if (q.visibleEnMenu) {
+          <button class="btn btn-primario" type="button" (click)="ocultarEnVezDeQuitar(q)">👁️ Ocultar del menú</button>
+        }
+        <button class="btn btn-peligro" type="button" (click)="confirmarQuitar()">Quitar del menú</button>
+      </div>
+    </div>
+  </div>
+}
 
 <!-- ===== MODAL MENÚ ===== -->
 @if (editandoMenu(); as m) {

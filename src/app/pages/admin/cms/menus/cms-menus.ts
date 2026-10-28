@@ -126,6 +126,11 @@ export class CmsMenus implements OnInit {
   // Alta rápida
   nuevaPaginaTitulo = '';
   paginaExistenteId: number | null = null;
+  /** Dónde se agrega la página existente: raíz del menú o dentro de otra página */
+  padreDestinoId: number | null = null;
+
+  /** Confirmación al quitar del menú (cambia la dirección de la página) */
+  readonly porQuitar = signal<CmsPagina | null>(null);
   readonly ocupado = signal(false);
 
   async ngOnInit(): Promise<void> {
@@ -242,6 +247,22 @@ export class CmsMenus implements OnInit {
   }
 
   /** Saca la página (y sus subpáginas) del menú, sin borrarla */
+  /** Dirección que tendrá la página si se quita del menú (pasa a la raíz del sitio) */
+  rutaSinMenu(p: CmsPagina): string {
+    return '/' + p.slug;
+  }
+
+  async ocultarEnVezDeQuitar(p: CmsPagina): Promise<void> {
+    this.porQuitar.set(null);
+    if (p.visibleEnMenu) await this.alternarVisible(p);
+  }
+
+  async confirmarQuitar(): Promise<void> {
+    const p = this.porQuitar();
+    this.porQuitar.set(null);
+    if (p) await this.quitarDelMenu(p);
+  }
+
   async quitarDelMenu(p: CmsPagina): Promise<void> {
     const ids = this.cms.descendientes(p.id);
     const cambios: CambioOrdenPagina[] = this.cms
@@ -284,13 +305,17 @@ export class CmsMenus implements OnInit {
     const id = Number(this.paginaExistenteId);
     if (!id || menuId === null) return;
     const ids = this.cms.descendientes(id);
-    const raiz = this.cms.paginas().filter((p) => p.menuId === menuId && p.parentId === null).length;
+    const padre = this.padreDestinoId === null ? null : Number(this.padreDestinoId);
+    if (padre !== null && ids.has(padre)) return; // no puede quedar dentro de sí misma
+    const orden = this.cms.paginas().filter((p) => p.menuId === menuId && p.parentId === padre && !ids.has(p.id)).length;
     const cambios = this.cms
       .paginas()
       .filter((p) => ids.has(p.id))
-      .map((p) => ({ id: p.id, menuId, parentId: p.id === id ? null : p.parentId, orden: p.id === id ? raiz : p.orden }));
+      .map((p) => ({ id: p.id, menuId, parentId: p.id === id ? padre : p.parentId, orden: p.id === id ? orden : p.orden }));
+    if (padre !== null) this.alternar(padre, true);
     await this.ejecutar(() => this.cms.reordenar(cambios));
     this.paginaExistenteId = null;
+    this.padreDestinoId = null;
   }
 
   private async ejecutar(fn: () => Promise<unknown>): Promise<void> {

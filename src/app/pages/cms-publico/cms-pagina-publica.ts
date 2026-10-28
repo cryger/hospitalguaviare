@@ -150,6 +150,16 @@ export class CmsPaginaPublica {
       );
     });
 
+    // URL vieja de una página que se movió: se lleva a su dirección actual
+    effect(() => {
+      const canonica = this.resuelto()?.canonica;
+      if (!canonica) return;
+      const [ruta, query] = this.router.url.split('?');
+      if (decodeURIComponent(ruta).toLowerCase() !== canonica.toLowerCase()) {
+        this.router.navigateByUrl(canonica + (query ? '?' + query : ''), { replaceUrl: true });
+      }
+    });
+
     // Página tipo "enlace": redirige a su destino
     effect(() => {
       const p = this.pagina();

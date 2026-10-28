@@ -74,6 +74,13 @@
 .agregar { margin-top: 1rem; display: flex; flex-direction: column; gap: 0.6rem; border-top: 1px dashed var(--c-borde); padding-top: 1rem; }
 .agregar-fila { display: flex; gap: 0.5rem; }
 .agregar-fila .input, .agregar-fila .select { flex: 1; }
+.agregar-existente { align-items: center; flex-wrap: wrap; }
+.agregar-existente .select { min-width: 14rem; }
+.dentro { font-size: .82rem; color: var(--c-muted); white-space: nowrap; }
+.rutas { font-size: .85rem; line-height: 1.7; }
+.rutas code { background: var(--c-fondo-suave); padding: .1rem .35rem; border-radius: 4px; word-break: break-all; }
+.nota-ocultar { background: var(--c-info-bg); border-radius: 8px; padding: .7rem .85rem; font-size: .88rem; }
+.visually-hidden { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; }
 
 @media (max-width: 1280px) {
   .menus-layout { grid-template-columns: 1fr; }

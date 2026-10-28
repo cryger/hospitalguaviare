@@ -15,6 +15,11 @@ import {
 export interface CmsRutaResuelta {
   pagina: CmsPagina;
   entrada: CmsEntrada | null;
+  /**
+   * Si la página se movió de lugar (otra sección o fuera del menú), la URL vieja
+   * se reconoce por su slug y aquí viene la dirección actual para redirigir.
+   */
+  canonica?: string;
 }
 
 /** Prefijos que nunca maneja el CMS (rutas del sistema) */
@@ -241,6 +246,24 @@ export class CmsService {
           )
         : undefined;
       if (padre && entrada) return { pagina: padre, entrada };
+    }
+
+    // La página pudo cambiar de ubicación: se busca por su slug (si es único)
+    const porSlug = (slug: string): CmsPagina | null => {
+      const c = this.paginas().filter((x) => x.slug === slug && visible(x));
+      return c.length === 1 ? c[0] : null;
+    };
+    const ultimo = segs[segs.length - 1];
+    const movida = porSlug(ultimo);
+    if (movida) return { pagina: movida, entrada: null, canonica: this.rutaPagina(movida.id) };
+    if (segs.length >= 2) {
+      const padre = porSlug(segs[segs.length - 2]);
+      const entrada = padre
+        ? this.entradas().find(
+            (e) => e.paginaId === padre.id && e.slug === ultimo && (incluirNoPublicadas ? e.estado !== 'archivada' : this.esEntradaPublica(e)),
+          )
+        : undefined;
+      if (padre && entrada) return { pagina: padre, entrada, canonica: this.urlEntrada(entrada) };
     }
     return null;
   }
