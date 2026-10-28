@@ -12,6 +12,7 @@ import { BuscadorGovco } from '../../shared/components/buscador-govco/buscador-g
 import { CalendarioEventos } from '../../componentes/calendario-eventos/calendario-eventos';
 import { ResenaHistorica } from './resena-historica';
 import { normalizar, resaltar as resaltarTexto, terminosDe } from '../../shared/utils/busqueda';
+import { slugCategoria } from '../../shared/utils/categorias';
 
 const POR_PAGINA = 9;
 
@@ -48,6 +49,8 @@ export class CmsPaginaPublica {
   readonly busqueda = signal(this.route.snapshot.queryParamMap.get('q') ?? '');
   /** Filtros del buscador (plantilla listado/noticias) */
   readonly anio = signal('');
+  /** Categoría elegida en el filtro lateral (?categoria=comunicados, se puede compartir) */
+  readonly categoria = toSignal(this.route.queryParamMap.pipe(map((q) => q.get('categoria') ?? '')), { initialValue: '' });
   readonly orden = signal<Orden>('recientes');
   readonly lightbox = signal<CmsMultimedia | null>(null);
 
@@ -83,7 +86,41 @@ export class CmsPaginaPublica {
     [...new Set(this.entradas().map((e) => (e.fechaPublicacion || e.creadoEn).slice(0, 4)))].sort().reverse(),
   );
 
-  readonly hayFiltros = computed(() => !!this.busqueda().trim() || !!this.anio() || this.orden() !== this.ordenPorDefecto());
+  /** Coincide con la búsqueda y el año (sin mirar la categoría): base para los conteos del filtro lateral */
+  private coincide(e: CmsEntrada): boolean {
+    const anio = this.anio();
+    if (anio && !(e.fechaPublicacion || e.creadoEn).startsWith(anio)) return false;
+    const texto = this.indice().get(e.id) ?? '';
+    return this.terminos().every((t) => texto.includes(t));
+  }
+
+  /**
+   * Categorías del listado con su número de publicaciones (según búsqueda y año).
+   * Solo se muestra el filtro lateral si hay al menos dos categorías.
+   */
+  readonly categorias = computed(() => {
+    if (this.pagina()?.plantilla !== 'listado') return [];
+    const todas = new Map<string, { slug: string; nombre: string; total: number }>();
+    for (const e of this.entradas()) {
+      const nombre = e.categoria?.trim();
+      if (!nombre) continue;
+      const slug = slugCategoria(nombre);
+      if (!todas.has(slug)) todas.set(slug, { slug, nombre, total: 0 });
+    }
+    if (todas.size < 2) return [];
+    for (const e of this.entradas()) {
+      const c = e.categoria?.trim();
+      if (c && this.coincide(e)) todas.get(slugCategoria(c))!.total++;
+    }
+    return [...todas.values()].sort((a, b) => a.nombre.localeCompare(b.nombre, 'es'));
+  });
+  readonly totalTodas = computed(() => this.entradas().filter((e) => this.coincide(e)).length);
+  /** Categoría activa (solo si existe en esta página) */
+  readonly categoriaActiva = computed(() => this.categorias().find((c) => c.slug === this.categoria()) ?? null);
+
+  readonly hayFiltros = computed(
+    () => !!this.busqueda().trim() || !!this.anio() || !!this.categoriaActiva() || this.orden() !== this.ordenPorDefecto(),
+  );
 
   readonly nombreOrden: Record<Orden, string> = {
     predeterminado: 'Orden de la sección',
@@ -93,14 +130,8 @@ export class CmsPaginaPublica {
   };
 
   readonly entradasFiltradas = computed(() => {
-    const terminos = this.terminos();
-    const anio = this.anio();
-    const indice = this.indice();
-    let lista = this.entradas().filter((e) => {
-      if (anio && !(e.fechaPublicacion || e.creadoEn).startsWith(anio)) return false;
-      const texto = indice.get(e.id) ?? '';
-      return terminos.every((t) => texto.includes(t));
-    });
+    const cat = this.categoriaActiva()?.slug;
+    let lista = this.entradas().filter((e) => this.coincide(e) && (!cat || slugCategoria(e.categoria ?? '') === cat));
     const fecha = (e: CmsEntrada) => e.fechaPublicacion || e.creadoEn;
     switch (this.orden()) {
       case 'recientes': lista = [...lista].sort((a, b) => fecha(b).localeCompare(fecha(a))); break;
@@ -213,10 +244,23 @@ export class CmsPaginaPublica {
     this.mostrar.set(POR_PAGINA);
   }
 
+  /** Cambia la categoría en la URL (?categoria=…); vacío = todas */
+  filtrarCategoria(slug: string): void {
+    this.mostrar.set(POR_PAGINA);
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: { categoria: slug || null },
+      queryParamsHandling: 'merge',
+      replaceUrl: true,
+    });
+  }
+
   limpiarFiltros(): void {
     this.anio.set('');
     this.orden.set(this.ordenPorDefecto());
-    this.buscar('');
+    this.busqueda.set('');
+    this.mostrar.set(POR_PAGINA);
+    this.router.navigate([], { relativeTo: this.route, queryParams: { q: null, categoria: null }, queryParamsHandling: 'merge', replaceUrl: true });
   }
 
   /** Resalta las palabras buscadas en un texto (se usa con [innerHTML]) */

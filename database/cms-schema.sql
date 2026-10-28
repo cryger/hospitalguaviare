@@ -79,6 +79,7 @@ CREATE TABLE cms_entradas (
   resumen              TEXT NULL,
   contenido            MEDIUMTEXT NULL COMMENT 'HTML',
   tipo                 ENUM('articulo','noticia','documento','evento','servicio','enlace') NOT NULL DEFAULT 'articulo',
+  categoria            VARCHAR(80) NULL COMMENT 'Ej. Comunicados, Resoluciones (filtro de Noticias)',
   estado               ENUM('publicada','borrador','archivada') NOT NULL DEFAULT 'borrador',
   destacada            TINYINT(1) NOT NULL DEFAULT 0,
   imagen_destacada_id  INT UNSIGNED NULL,
@@ -90,6 +91,7 @@ CREATE TABLE cms_entradas (
   actualizado_en       DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   UNIQUE KEY uq_entrada_slug (pagina_id, slug),
   KEY ix_entrada_listado (pagina_id, estado, fecha_publicacion),
+  KEY ix_entrada_categoria (pagina_id, categoria),
   FULLTEXT KEY ft_entrada (titulo, resumen, contenido),
   CONSTRAINT fk_entrada_pagina FOREIGN KEY (pagina_id) REFERENCES cms_paginas(id) ON DELETE CASCADE,
   CONSTRAINT fk_entrada_imagen FOREIGN KEY (imagen_destacada_id) REFERENCES cms_multimedia(id) ON DELETE SET NULL

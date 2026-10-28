@@ -101,6 +101,17 @@
         <input id="en-fecha" class="input" type="datetime-local" name="fecha" [(ngModel)]="fechaLocal" />
         <small>Vacía = se asigna al publicar.</small>
       </div>
+      @if (esListado()) {
+        <div class="campo bloque">
+          <label for="en-categoria">Categoría</label>
+          <input id="en-categoria" class="input" name="categoria" list="en-categorias" maxlength="80" autocomplete="off"
+                 [(ngModel)]="form.categoria" [placeholder]="'Sugerida: ' + sugerida()" aria-describedby="en-categoria-ayuda" />
+          <datalist id="en-categorias">
+            @for (c of categorias(); track c) { <option [value]="c"></option> }
+          </datalist>
+          <small id="en-categoria-ayuda">Filtro lateral de la página (Comunicados, Resoluciones…). Elija una o escriba una nueva. Vacía = se usa la sugerida.</small>
+        </div>
+      }
       <div class="campo bloque">
         <label for="en-autor">Autor</label>
         <input id="en-autor" class="input" name="autor" [(ngModel)]="form.autor" />

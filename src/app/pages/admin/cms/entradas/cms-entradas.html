@@ -76,7 +76,7 @@
                       @if (e.destacada) { <span class="destacada" title="Destacada">★</span> }
                       {{ e.titulo }}
                     </a>
-                    <span class="sub-celda">{{ e.multimediaIds.length }} archivo(s) · {{ e.autor || 'Sin autor' }}</span>
+                    <span class="sub-celda">{{ e.multimediaIds.length }} archivo(s) · {{ e.autor || 'Sin autor' }}@if (e.categoria) { · {{ e.categoria }} }</span>
                   </div>
                 </div>
               </td>

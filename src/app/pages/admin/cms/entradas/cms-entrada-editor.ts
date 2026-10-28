@@ -6,6 +6,7 @@ import { CmsEntrada, CmsMultimedia, TIPOS_ENTRADA } from '../../../../shared/mod
 import { MediaPicker } from '../shared/media-picker';
 import { MediaThumb } from '../shared/media-thumb';
 import { RichEditor } from '../shared/rich-editor';
+import { CATEGORIAS_SUGERIDAS, categoriaSugerida } from '../../../../shared/utils/categorias';
 
 @Component({
   selector: 'app-cms-entrada-editor',
@@ -43,6 +44,21 @@ export class CmsEntradaEditor {
   readonly imagenDestacada = computed(() =>
     this.destacadaId() ? this.cms.multimediaPorId().get(this.destacadaId()!) ?? null : null,
   );
+
+  /** Catálogo para el campo Categoría: sugeridas + las que ya se han usado */
+  readonly categorias = computed(() => {
+    const usadas = this.cms.entradas().map((e) => e.categoria?.trim()).filter((c): c is string => !!c);
+    return [...new Set<string>([...CATEGORIAS_SUGERIDAS, ...usadas])].sort((a, b) => a.localeCompare(b, 'es'));
+  });
+
+  /** La categoría solo aplica a páginas tipo "Listado" (Noticias, boletines…) */
+  esListado(): boolean {
+    return this.cms.paginaPorId().get(Number(this.form.paginaId))?.plantilla === 'listado';
+  }
+
+  sugerida(): string {
+    return categoriaSugerida(this.form.titulo ?? '');
+  }
 
   readonly paginasOrdenadas = computed(() => {
     this.cms.paginas();
@@ -177,6 +193,8 @@ export class CmsEntradaEditor {
         imagenDestacadaId: this.destacadaId(),
         fechaPublicacion: this.fechaLocal ? new Date(this.fechaLocal).toISOString() : null,
         estado: estado ?? this.form.estado,
+        // Sin categoría en un listado: se clasifica por el título
+        categoria: this.esListado() ? this.form.categoria?.trim() || this.sugerida() : this.form.categoria?.trim() || null,
       };
       const previa = this.entradaId() ? this.cms.entradas().find((e) => e.id === this.entradaId()) : null;
       if (previa && previa.paginaId !== datos.paginaId) {

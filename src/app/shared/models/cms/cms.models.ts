@@ -44,6 +44,8 @@ export interface CmsEntrada {
   resumen?: string;
   contenido?: string; // HTML
   tipo: TipoEntrada;
+  /** Ej. Comunicados, Resoluciones: filtro lateral de Noticias */
+  categoria?: string | null;
   estado: EstadoEntrada;
   destacada: boolean;
   imagenDestacadaId: number | null;

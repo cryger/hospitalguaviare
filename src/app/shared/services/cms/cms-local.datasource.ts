@@ -14,6 +14,7 @@ import { ENTRADAS_PIE, EntradaPieSemilla } from './cms-semilla-pie';
 import { EVENTOS_SEMILLA } from './cms-semilla-eventos';
 import { BANNERS_SEMILLA } from './cms-semilla-slider';
 import { ENTRADAS_ENTIDAD } from './cms-semilla-entidad';
+import { categoriaSugerida } from '../../utils/categorias';
 
 /**
  * Implementación en localStorage para trabajar el admin sin backend.
@@ -42,7 +43,24 @@ export class CmsLocalDataSource extends CmsDataSource {
       this.sembrarDesdeArchivo('nuestro-hospital-semilla', 'assets/semillas/nuestro-hospital.json'),
     ).then(() => this.sembrarDesdeArchivo('atencion-participa-semilla', 'assets/semillas/atencion-y-participa.json'))
       .then(() => this.sembrarDesdeArchivo('tramites-semilla', 'assets/semillas/tramites.json'))
-      .then(() => this.sembrarDesdeArchivo('resena-historica-semilla', 'assets/semillas/resena-historica.json'));
+      .then(() => this.sembrarDesdeArchivo('resena-historica-semilla', 'assets/semillas/resena-historica.json'))
+      .then(() => this.clasificarPublicaciones());
+  }
+
+  /**
+   * Una sola vez: asigna categoría (Comunicados, Resoluciones…) a las publicaciones
+   * de páginas "Listado" que aún no tienen. Equivale a api/migraciones/023-categorias-publicaciones.sql
+   */
+  private clasificarPublicaciones(): void {
+    const clave = this.prefijo + 'categorias-publicaciones';
+    if (localStorage.getItem(clave) === '1') return;
+    const listados = new Set(this.leer<CmsPagina>('paginas').filter((p) => p.plantilla === 'listado').map((p) => p.id));
+    const entradas = this.leer<CmsEntrada>('entradas');
+    for (const e of entradas) {
+      if (listados.has(e.paginaId) && !e.categoria) e.categoria = categoriaSugerida(e.titulo);
+    }
+    this.escribir('entradas', entradas);
+    localStorage.setItem(clave, '1');
   }
 
   /** Contenido migrado del portal anterior (se descarga una sola vez desde /assets/semillas) */
@@ -430,6 +448,7 @@ export class CmsLocalDataSource extends CmsDataSource {
           resumen: n.resumen,
           contenido: n.contenido,
           tipo: n.tipo ?? 'articulo',
+          categoria: pagina.plantilla === 'listado' ? categoriaSugerida(n.titulo) : null,
           estado: 'publicada',
           destacada: false,
           imagenDestacadaId: n.destacada ? porUrl.get(n.destacada) ?? null : null,

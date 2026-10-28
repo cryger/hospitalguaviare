@@ -35,6 +35,7 @@ const TABLAS = {
       resumen: 'resumen',
       contenido: 'contenido',
       tipo: 'tipo',
+      categoria: 'categoria',
       estado: 'estado',
       destacada: 'destacada',
       imagenDestacadaId: 'imagen_destacada_id',

@@ -391,6 +391,52 @@ h1, h2, h3, .srv-titulo, .tarjeta-cuerpo h2, .tarjeta-cuerpo h3, .subpagina stro
 .pub:hover .leer { text-decoration: underline; }
 :host ::ng-deep .pub mark { background: #fff3b0; color: inherit; border-radius: 2px; }
 
+/* ===== Filtro lateral por categoría ===== */
+.listado.con-categorias { display: grid; grid-template-columns: 15.5rem minmax(0, 1fr); gap: 1.75rem; align-items: start; }
+.listado-cuerpo { min-width: 0; }
+.filtro-categorias {
+  position: sticky; top: 1rem; background: #fff; border: 1px solid #e3e9f3; border-radius: 12px;
+  box-shadow: var(--sombra); padding: 1rem .75rem;
+}
+.filtro-categorias h2 {
+  margin: 0 .5rem .6rem; padding-bottom: .5rem; border-bottom: 2px solid #E5ECF8;
+  font-size: 1rem; color: var(--azul); text-transform: uppercase; letter-spacing: .04em;
+}
+.filtro-categorias ul { list-style: none; margin: 0; padding: 0; display: grid; gap: .15rem; }
+.filtro-categorias button {
+  width: 100%; display: flex; align-items: center; justify-content: space-between; gap: .5rem;
+  font: inherit; font-size: .94rem; text-align: left; color: #1f2937; background: none; cursor: pointer;
+  border: 0; border-left: 4px solid transparent; border-radius: 0 8px 8px 0; padding: .55rem .6rem .55rem .75rem;
+  transition: background .15s, border-color .15s;
+}
+.filtro-categorias button:hover:not(:disabled) { background: #F2F6FC; border-left-color: #B5C7E9; }
+.filtro-categorias button:focus-visible { outline: .19rem solid #000; outline-offset: -.19rem; }
+.filtro-categorias button.activa { background: #E5ECF8; border-left-color: #0943B5; color: #0943B5; font-weight: 700; }
+.filtro-categorias button:disabled { color: #9aa3af; cursor: default; }
+.conteo {
+  flex: none; min-width: 1.9rem; text-align: center; font-size: .78rem; font-weight: 700;
+  background: #F2F6FC; color: #4672C8; border-radius: 999px; padding: .1rem .45rem;
+}
+.activa .conteo { background: #0943B5; color: #fff; }
+.chip-cat {
+  font-size: .72rem; font-weight: 700; color: #0943B5; background: #E5ECF8;
+  padding: .12rem .55rem; border-radius: 999px; text-transform: uppercase; letter-spacing: .03em;
+}
+
+@media (max-width: 900px) {
+  .listado.con-categorias { grid-template-columns: 1fr; gap: 1rem; }
+  .filtro-categorias { position: static; padding: .75rem; }
+  .filtro-categorias h2 { margin: 0 0 .5rem; padding-bottom: .4rem; font-size: .9rem; }
+  /* En pantallas pequeñas las categorías pasan a ser botones tipo "chip" */
+  .filtro-categorias ul { display: flex; flex-wrap: wrap; gap: .4rem; }
+  .filtro-categorias button {
+    width: auto; border: 1px solid #B5C7E9; border-radius: 999px; padding: .35rem .5rem .35rem .8rem; font-size: .88rem;
+  }
+  .filtro-categorias button:hover:not(:disabled) { border-color: #4672C8; }
+  .filtro-categorias button.activa { border-color: #0943B5; background: #0943B5; color: #fff; }
+  .activa .conteo { background: #fff; color: #0943B5; }
+}
+
 /* =====================================================================
    "En esta sección": tarjetas de subpáginas con icono y número
 ===================================================================== */
