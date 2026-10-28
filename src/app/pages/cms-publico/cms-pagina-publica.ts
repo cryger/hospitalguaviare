@@ -1,11 +1,11 @@
 import { Component, computed, effect, inject, signal, untracked } from '@angular/core';
-import { DatePipe } from '@angular/common';
+import { DatePipe, NgTemplateOutlet } from '@angular/common';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { map } from 'rxjs';
 import { CmsService } from '../../shared/services/cms/cms.service';
-import { CmsEntrada, CmsMultimedia, TIPOS_ENTRADA } from '../../shared/models/cms/cms.models';
+import { CmsEntrada, CmsMultimedia, CmsPagina, TIPOS_ENTRADA } from '../../shared/models/cms/cms.models';
 import { CmsMediaPublica } from './cms-media-publica';
 import { esVistaPrevia } from './cms-publico.routes';
 import { BuscadorGovco } from '../../shared/components/buscador-govco/buscador-govco';
@@ -20,7 +20,7 @@ type Orden = 'predeterminado' | 'recientes' | 'antiguas' | 'az';
 
 @Component({
   selector: 'app-cms-pagina-publica',
-  imports: [RouterLink, DatePipe, CmsMediaPublica, BuscadorGovco, CalendarioEventos, ResenaHistorica],
+  imports: [RouterLink, DatePipe, NgTemplateOutlet, CmsMediaPublica, BuscadorGovco, CalendarioEventos, ResenaHistorica],
   templateUrl: './cms-pagina-publica.html',
   styleUrl: './cms-pagina-publica.css',
 })
@@ -273,6 +273,71 @@ export class CmsPaginaPublica {
       [/modalidades|control social/, '🧭'],
     ];
     return reglas.find(([r]) => r.test(t))?.[1] ?? '🗂️';
+  }
+
+  /* ===== Tarjetas de subpáginas ("En esta sección") ===== */
+
+  /** "1.4 Directorio institucional" → "1.4" */
+  numeroDe(titulo: string): string {
+    return titulo.match(/^\s*(\d+(?:\.\d+)*)\.?\s+/)?.[1] ?? '';
+  }
+
+  sinNumero(titulo: string): string {
+    return titulo.replace(/^\s*\d+(?:\.\d+)*\.?\s+/, '');
+  }
+
+  /** Icono: el definido en la página (campo icono) o uno según el tema */
+  iconoPagina(s: CmsPagina): string {
+    if (s.icono) return s.icono;
+    const t = normalizar(`${s.slug} ${s.titulo}`);
+    const reglas: [RegExp, string][] = [
+      [/mision|vision|plataforma|valores/, '🎯'],
+      [/organigrama|estructura organica/, '🏛️'],
+      [/mapa|procesos|caracteriz/, '🗺️'],
+      [/directorio de servidores|hojas de vida|talento|empleo|trabaja/, '👥'],
+      [/directorio de entidades|entes|autoridades|vigilan|control/, '🛡️'],
+      [/agremiacion|asociacion|grupos de interes|participa/, '🤝'],
+      [/directorio|contacto|sedes|horario/, '📇'],
+      [/servicio al publico|protocolo|formulario|atencion/, '🧾'],
+      [/decision|procedimiento/, '⚖️'],
+      [/pqrs|solicitud|queja|reclamo/, '💬'],
+      [/calendario|evento|agenda/, '📅'],
+      [/normativ|norma|ley|decreto|resoluc/, '📜'],
+      [/contrat|cotiza|compra/, '📑'],
+      [/presupuest|financ|estados|planea|plan/, '📊'],
+      [/informe|rendicion|auditor/, '📈'],
+      [/datos abiertos|datos/, '🗃️'],
+      [/noticia|boletin|comunicad/, '📰'],
+      [/historia|resena/, '🕰️'],
+      [/portafolio|servicios/, '🩺'],
+      [/transparencia|informacion/, '📂'],
+    ];
+    return reglas.find(([r]) => r.test(t))?.[1] ?? '📄';
+  }
+
+  /** Qué encontrará la persona al entrar */
+  tipoPagina(s: CmsPagina, externa: boolean): string {
+    if (externa) return 'Sitio externo';
+    switch (s.plantilla) {
+      case 'documentos': return 'Documentos';
+      case 'listado': return 'Publicaciones';
+      case 'galeria': return 'Galería';
+      case 'calendario': return 'Calendario';
+      case 'historia': return 'Historia';
+      case 'enlace': return 'Ir al servicio';
+      default: return 'Información';
+    }
+  }
+
+  /** Texto por defecto si la página no tiene descripción */
+  ayudaPagina(s: CmsPagina): string {
+    switch (s.plantilla) {
+      case 'documentos': return 'Consulte y descargue los documentos publicados.';
+      case 'listado': return 'Consulte las publicaciones más recientes.';
+      case 'calendario': return 'Consulte las actividades y eventos programados.';
+      case 'enlace': return 'Acceda directamente al servicio.';
+      default: return 'Consulte la información de esta sección.';
+    }
   }
 
   irA(slug: string, ev: Event): void {

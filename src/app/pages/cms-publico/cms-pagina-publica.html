@@ -147,26 +147,36 @@
   @switch (p.plantilla) {
     @case ('listado') {
       @if (entradas().length) {
-        <div class="tarjetas">
+        <!-- Listado (noticias, boletines…): una publicación por fila, la más reciente primero -->
+        <ul class="lista-pub">
           @for (e of entradasFiltradas().slice(0, mostrar()); track e.id) {
-            <a class="tarjeta" [routerLink]="url(e)">
-              @if (imagenDe(e); as img) {
-                <img [src]="img.url" [alt]="img.alt || ''" loading="lazy" />
-              } @else {
-                <div class="tarjeta-sin-img" aria-hidden="true">📰</div>
-              }
-              <div class="tarjeta-cuerpo">
-                @if (e.destacada) { <span class="chip">Destacado</span> }
-                <h2 [innerHTML]="resaltar(e.titulo)"></h2>
-                @if (e.fechaPublicacion) {
-                  <time [attr.datetime]="e.fechaPublicacion">{{ e.fechaPublicacion | date: "d 'de' MMMM 'de' y" : '' : 'es-CO' }}</time>
-                }
-                @if (e.resumen) { <p [innerHTML]="resaltar(e.resumen)"></p> }
-                <span class="leer">Leer más →</span>
-              </div>
-            </a>
+            <li>
+              <a class="pub" [routerLink]="url(e)">
+                <span class="pub-img">
+                  @if (imagenDe(e); as img) {
+                    <img [src]="img.url" [alt]="img.alt || ''" loading="lazy" />
+                  } @else {
+                    <span class="pub-sin-img" aria-hidden="true">
+                      <svg viewBox="0 0 24 24"><path d="M5 4h11a1 1 0 0 1 1 1v14a1 1 0 0 0 1 1H6a2 2 0 0 1-2-2V5a1 1 0 0 1 1-1Zm12 4h2a1 1 0 0 1 1 1v9a2 2 0 0 1-2 2M8 8h6M8 12h6M8 16h4" /></svg>
+                    </span>
+                  }
+                </span>
+                <span class="pub-cuerpo">
+                  <span class="pub-meta">
+                    @if (e.fechaPublicacion) {
+                      <time [attr.datetime]="e.fechaPublicacion">{{ e.fechaPublicacion | date: "d 'de' MMMM 'de' y" : '' : 'es-CO' }}</time>
+                    }
+                    @if (e.destacada) { <span class="chip">Destacado</span> }
+                    @if (e.estado !== 'publicada') { <span class="chip-borrador">{{ e.estado }}</span> }
+                  </span>
+                  <h2 [innerHTML]="resaltar(e.titulo)"></h2>
+                  @if (e.resumen) { <span class="pub-resumen" [innerHTML]="resaltar(e.resumen)"></span> }
+                  <span class="leer">Leer más <span aria-hidden="true">→</span></span>
+                </span>
+              </a>
+            </li>
           }
-        </div>
+        </ul>
         @if (!entradasFiltradas().length) {
           <div class="sin-resultados">
             <p>No encontramos publicaciones con esos criterios.</p>
@@ -318,21 +328,34 @@
   @if (subpaginas().length) {
     <section class="bloque">
       <h2 class="h-seccion">En esta sección</h2>
-      <div class="subpaginas">
+      <ul class="secciones">
         @for (s of subpaginas(); track s.id) {
-          @if (esExterna(cms.urlPagina(s))) {
-            <a class="subpagina" [href]="cms.urlPagina(s)" target="_blank" rel="noopener">
-              <strong>{{ s.icono ? s.icono + ' ' : '' }}{{ s.titulo }}</strong>
-              @if (s.descripcion) { <span>{{ s.descripcion }}</span> }
-            </a>
-          } @else {
-            <a class="subpagina" [routerLink]="cms.urlPagina(s)">
-              <strong>{{ s.icono ? s.icono + ' ' : '' }}{{ s.titulo }}</strong>
-              @if (s.descripcion) { <span>{{ s.descripcion }}</span> }
-            </a>
-          }
+          @let externa = esExterna(cms.urlPagina(s));
+          @let num = numeroDe(s.titulo);
+          <li>
+            <ng-template #tarjetaSeccion>
+              <span class="sec-icono" aria-hidden="true">{{ iconoPagina(s) }}</span>
+              <span class="sec-cuerpo">
+                <span class="sec-titulo">
+                  @if (num) { <span class="sec-num">{{ num }}</span> }
+                  {{ sinNumero(s.titulo) }}
+                </span>
+                <span class="sec-desc">{{ s.descripcion || ayudaPagina(s) }}</span>
+                <span class="sec-pie">
+                  <span class="sec-tipo">{{ tipoPagina(s, externa) }}</span>
+                  <span class="sec-flecha" aria-hidden="true">{{ externa ? '↗' : '→' }}</span>
+                  @if (externa) { <span class="visually-hidden">(se abre en una pestaña nueva)</span> }
+                </span>
+              </span>
+            </ng-template>
+            @if (externa) {
+              <a class="seccion" [href]="cms.urlPagina(s)" target="_blank" rel="noopener"><ng-container *ngTemplateOutlet="tarjetaSeccion" /></a>
+            } @else {
+              <a class="seccion" [routerLink]="cms.urlPagina(s)"><ng-container *ngTemplateOutlet="tarjetaSeccion" /></a>
+            }
+          </li>
         }
-      </div>
+      </ul>
     </section>
   }
 }
