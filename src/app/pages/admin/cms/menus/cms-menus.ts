@@ -11,6 +11,17 @@ import {
   UbicacionMenu,
 } from '../../../../shared/models/cms/cms.models';
 
+const CLAVE_EXPANDIDOS = 'cms-menus-expandidos';
+
+function leerExpandidos(): Set<number> {
+  try {
+    const v = JSON.parse(localStorage.getItem(CLAVE_EXPANDIDOS) || '[]');
+    return new Set(Array.isArray(v) ? v.map(Number) : []);
+  } catch {
+    return new Set();
+  }
+}
+
 @Component({
   selector: 'app-cms-menus',
   imports: [FormsModule, RouterLink],
@@ -32,6 +43,78 @@ export class CmsMenus implements OnInit {
     const id = this.menuSeleccionadoId();
     return id === null ? [] : this.cms.plano(id);
   });
+
+  /* ===== Contraer / expandir (se recuerda en este navegador) ===== */
+  /** Páginas con subpáginas que están abiertas. Por defecto todo arranca contraído. */
+  readonly expandidos = signal<Set<number>>(leerExpandidos());
+
+  /** Solo los nodos cuyos ancestros están todos expandidos */
+  readonly visibles = computed<CmsPaginaNodo[]>(() => {
+    const abiertos = this.expandidos();
+    const porId = this.cms.paginaPorId();
+    return this.estructura().filter((n) => {
+      let padre = n.pagina.parentId;
+      let guardia = 0;
+      while (padre !== null && guardia++ < 50) {
+        if (!abiertos.has(padre)) return false;
+        padre = porId.get(padre)?.parentId ?? null;
+      }
+      return true;
+    });
+  });
+
+  readonly conHijos = computed(() => this.estructura().filter((n) => n.hijos.length));
+  readonly todoExpandido = computed(() => this.conHijos().every((n) => this.expandidos().has(n.pagina.id)));
+  readonly todoContraido = computed(() => this.conHijos().every((n) => !this.expandidos().has(n.pagina.id)));
+
+  estaExpandido(id: number): boolean {
+    return this.expandidos().has(id);
+  }
+
+  /** Total de páginas que cuelgan del nodo (todos los niveles) */
+  totalDescendientes(n: CmsPaginaNodo): number {
+    return n.hijos.reduce((acc, h) => acc + 1 + this.totalDescendientes(h), 0);
+  }
+
+  alternar(id: number, abrir?: boolean): void {
+    const s = new Set(this.expandidos());
+    const nuevo = abrir ?? !s.has(id);
+    if (nuevo) s.add(id);
+    else s.delete(id);
+    this.guardarExpandidos(s);
+  }
+
+  expandirTodo(): void {
+    const s = new Set(this.expandidos());
+    this.conHijos().forEach((n) => s.add(n.pagina.id));
+    this.guardarExpandidos(s);
+  }
+
+  contraerTodo(): void {
+    const s = new Set(this.expandidos());
+    this.conHijos().forEach((n) => s.delete(n.pagina.id));
+    this.guardarExpandidos(s);
+  }
+
+  /** Flechas ← → sobre el botón: contraer / expandir (patrón de árbol WAI-ARIA) */
+  teclaToggle(ev: KeyboardEvent, n: CmsPaginaNodo): void {
+    if (ev.key === 'ArrowRight' && !this.estaExpandido(n.pagina.id)) {
+      ev.preventDefault();
+      this.alternar(n.pagina.id, true);
+    } else if (ev.key === 'ArrowLeft' && this.estaExpandido(n.pagina.id)) {
+      ev.preventDefault();
+      this.alternar(n.pagina.id, false);
+    }
+  }
+
+  private guardarExpandidos(s: Set<number>): void {
+    this.expandidos.set(s);
+    try {
+      localStorage.setItem(CLAVE_EXPANDIDOS, JSON.stringify([...s]));
+    } catch {
+      /* almacenamiento no disponible */
+    }
+  }
 
   readonly paginasSinMenu = computed(() =>
     this.cms.paginas().filter((p) => p.menuId === null).sort((a, b) => a.titulo.localeCompare(b.titulo)),
@@ -130,6 +213,8 @@ export class CmsMenus implements OnInit {
     const nuevoPadre = h[i - 1];
     const hijosPadre = this.cms.paginas().filter((x) => x.parentId === nuevoPadre.id).length;
     const restantes = h.filter((x) => x.id !== p.id);
+    // La página pasa a ser hija: se abre su nuevo padre para que siga a la vista
+    this.alternar(nuevoPadre.id, true);
     await this.ejecutar(() =>
       this.cms.reordenar([
         ...this.numerar(restantes),

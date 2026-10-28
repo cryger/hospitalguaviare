@@ -59,13 +59,31 @@
 
       <p class="panel-sub">
         Use ↑ ↓ para cambiar el orden, → para convertir en subpágina de la anterior y ← para subirla de nivel.
+        Las páginas con subpáginas se abren y cierran con ▸.
       </p>
 
       @if (estructura().length) {
+        @if (conHijos().length) {
+          <div class="arbol-barra">
+            <span class="arbol-cuenta">{{ estructura().length }} páginas · mostrando {{ visibles().length }}</span>
+            <button class="btn btn-sm" type="button" (click)="expandirTodo()" [disabled]="todoExpandido()">⊞ Expandir todo</button>
+            <button class="btn btn-sm" type="button" (click)="contraerTodo()" [disabled]="todoContraido()">⊟ Contraer todo</button>
+          </div>
+        }
         <ol class="arbol" [class.bloqueado]="ocupado()">
-          @for (n of estructura(); track n.pagina.id) {
-            <li class="nodo" [style.--nivel]="n.nivel">
-              <span class="nodo-guia" aria-hidden="true">{{ n.nivel ? '└' : '' }}</span>
+          @for (n of visibles(); track n.pagina.id) {
+            @let abierto = estaExpandido(n.pagina.id);
+            <li class="nodo" [style.--nivel]="n.nivel" [class.con-hijos]="n.hijos.length" [class.abierto]="abierto">
+              @if (n.hijos.length) {
+                <button class="toggle" type="button" [attr.aria-expanded]="abierto"
+                        [attr.aria-label]="(abierto ? 'Contraer ' : 'Expandir ') + n.pagina.titulo"
+                        [title]="abierto ? 'Contraer' : 'Expandir'"
+                        (click)="alternar(n.pagina.id)" (keydown)="teclaToggle($event, n)">
+                  <span aria-hidden="true">▸</span>
+                </button>
+              } @else {
+                <span class="nodo-guia" aria-hidden="true">{{ n.nivel ? '└' : '•' }}</span>
+              }
               <div class="nodo-info">
                 <a class="nodo-titulo" [routerLink]="['/admin/contenido/paginas', n.pagina.id]">{{ n.pagina.titulo }}</a>
                 <span class="nodo-meta">
@@ -73,6 +91,12 @@
                   {{ cms.conteoEntradasPorPagina().get(n.pagina.id) || 0 }} entradas
                 </span>
               </div>
+              @if (n.hijos.length) {
+                <button class="chip-hijos" type="button" (click)="alternar(n.pagina.id)" tabindex="-1" aria-hidden="true">
+                  {{ n.hijos.length }} {{ n.hijos.length === 1 ? 'subpágina' : 'subpáginas' }}
+                  @if (totalDescendientes(n) > n.hijos.length) { <small>({{ totalDescendientes(n) }} en total)</small> }
+                </button>
+              }
               <span class="badge" [class]="'badge badge-' + n.pagina.estado">{{ n.pagina.estado }}</span>
               <div class="nodo-acciones">
                 <button class="btn btn-icono" type="button" title="Subir" aria-label="Subir"
