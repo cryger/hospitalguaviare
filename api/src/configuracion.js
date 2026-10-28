@@ -10,6 +10,7 @@ const path = require('path');
 const { pool } = require('./db');
 const { requiereSesion } = require('./auth');
 const { ErrorApi } = require('./errores');
+const { cargarPermisos, requiereModulo } = require('./permisos');
 
 const rutasConfiguracion = express.Router();
 const INICIO = Date.now();
@@ -69,9 +70,11 @@ const VALIDADORES = {
   },
 };
 
+/** Solo administradores (rol leído de la base de datos, no del token) */
 function soloAdmin(req, _res, next) {
-  if (req.usuario?.rol !== 'admin') return next(new ErrorApi(403, 'Solo un administrador puede cambiar la configuración.'));
-  next();
+  cargarPermisos(req)
+    .then((p) => next(p.has('configuracion') ? undefined : new ErrorApi(403, 'Solo un administrador puede cambiar la configuración.')))
+    .catch(next);
 }
 
 /* ===== Lectura pública ===== */
@@ -114,7 +117,7 @@ rutasConfiguracion.put('/configuracion/:clave', requiereSesion, soloAdmin, async
 });
 
 /* ===== Estado del sistema ===== */
-rutasConfiguracion.get('/sistema/estado', requiereSesion, async (_req, res, next) => {
+rutasConfiguracion.get('/sistema/estado', requiereSesion, requiereModulo('configuracion', 'resumen'), async (_req, res, next) => {
   try {
     const t0 = Date.now();
     const [[bd]] = await pool.query('SELECT VERSION() AS version, DATABASE() AS nombre, UTC_TIMESTAMP() AS hora');

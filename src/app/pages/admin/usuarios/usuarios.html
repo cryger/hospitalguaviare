@@ -1,79 +1,222 @@
-<h2 class="gov-title">Gestión de Usuarios</h2>
+<div class="cms-head">
+  <div>
+    <h1>Usuarios y permisos</h1>
+    <p>Cada usuario entra con su propio usuario y contraseña y solo ve los módulos de su rol.</p>
+  </div>
+  @if (svc.disponible) {
+    <div class="cms-head-actions">
+      <button type="button" class="btn btn-primario" (click)="nuevo()">+ Nuevo usuario</button>
+    </div>
+  }
+</div>
 
-<button class="gov-btn-primary" (click)="abrirModal()">
-  ➕ Agregar usuario
-</button>
+@if (!svc.disponible) {
+  <div class="aviso aviso-info" role="status">
+    Los usuarios y permisos se guardan en la base de datos. Esta copia del portal está en <b>modo local</b> (sin API),
+    así que solo existe el usuario de prueba con rol de administrador.
+  </div>
+} @else {
 
-<table class="gov-table">
-  <thead>
-    <tr>
-      <th>Nombre</th>
-      <th>Usuario</th>
-      <th>Rol</th>
-      <th>Estado</th>
-      <th>Acciones</th>
-    </tr>
-  </thead>
+  @if (aviso(); as a) {
+    <div class="aviso" [class.aviso-ok]="a.tipo === 'ok'" [class.aviso-error]="a.tipo === 'error'" role="status">
+      {{ a.texto }}
+      <button type="button" class="btn-link" (click)="aviso.set(null)" aria-label="Cerrar aviso">✕</button>
+    </div>
+  }
 
-  <tbody>
-    <tr *ngFor="let u of usuarios">
-      <td>{{ u.nombre }}</td>
-      <td>{{ u.usuario }}</td>
-      <td>{{ u.rol }}</td>
-      <td>{{ u.activo ? 'Activo' : 'Inactivo' }}</td>
-      <td class="acciones">
-        <button class="gov-btn-editar" (click)="editar(u)">Editar</button>
-        <button class="gov-btn-danger" (click)="eliminar(u.id)">Eliminar</button>
-      </td>
-    </tr>
-  </tbody>
-</table>
+  <div class="kpis">
+    <div class="kpi"><b>{{ kpis().activos }}</b>Usuarios activos</div>
+    <div class="kpi"><b>{{ kpis().admins }}</b>Administradores</div>
+    <div class="kpi"><b>{{ kpis().pqrsfd }}</b>Rol PQRSFD</div>
+    <div class="kpi"><b>{{ kpis().contratacion }}</b>Rol Contratación</div>
+    @if (kpis().inactivos) { <div class="kpi"><b>{{ kpis().inactivos }}</b>Inactivos</div> }
+  </div>
 
-<!-- MODAL -->
-<div class="gov-modal-backdrop" *ngIf="modalOpen">
-  <div class="gov-modal">
-
-    <header class="gov-modal-header">
-      <h3>{{ editando ? 'Editar usuario' : 'Agregar usuario' }}</h3>
-      <button class="gov-modal-close" (click)="cerrarModal()">✕</button>
-    </header>
-
-    <form [formGroup]="form" (ngSubmit)="guardar()" class="gov-form">
-      <div class="gov-field">
-        <label>Nombre</label>
-        <input formControlName="nombre" />
-      </div>
-
-      <div class="gov-field">
-        <label>Usuario</label>
-        <input formControlName="usuario" />
-      </div>
-
-      <div class="gov-field">
-        <label>Contraseña</label>
-        <input type="password" formControlName="password" />
-      </div>
-
-      <div class="gov-field">
-        <label>Rol</label>
-        <select formControlName="rol">
-          <option value="admin">Administrador</option>
-          <option value="funcionario">Funcionario</option>
+  <section class="panel">
+    <app-buscador-govco idCampo="buscar-usuarios" etiqueta="Buscar usuario" [compacto]="true"
+        placeholder="Nombre, usuario, correo o dependencia…" etiquetaBoton="Buscar usuarios"
+        [valor]="busqueda()" (valorChange)="busqueda.set($event)">
+      <div filtros class="desplegable-govco">
+        <label for="f-rol">Rol</label>
+        <select id="f-rol" class="btn-dropdown" [ngModel]="filtroRol()" (ngModelChange)="filtroRol.set($event)">
+          <option value="">Todos</option>
+          @for (r of roles; track r.valor) { <option [value]="r.valor">{{ r.nombre }}</option> }
         </select>
       </div>
-
-      <div class="gov-field">
-        <label>
-          <input type="checkbox" formControlName="activo" />
-          Activo
-        </label>
+      <div filtros class="desplegable-govco">
+        <label for="f-estado-u">Estado</label>
+        <select id="f-estado-u" class="btn-dropdown" [ngModel]="filtroEstado()" (ngModelChange)="filtroEstado.set($event)">
+          <option value="">Todos</option>
+          <option value="activo">Activos</option>
+          <option value="inactivo">Inactivos</option>
+        </select>
       </div>
+    </app-buscador-govco>
+    <p class="resultado-busqueda admin" role="status" aria-live="polite">
+      <strong>{{ lista().length }}</strong> de {{ svc.usuarios().length }} usuarios
+      @if (hayFiltros()) { <button type="button" class="btn-bdc outline-btn-govco limpiar-admin" (click)="limpiarFiltros()">Limpiar filtros</button> }
+    </p>
 
-      <footer class="gov-modal-actions">
-        <button type="button" class="gov-btn-secondary" (click)="cerrarModal()">Cancelar</button>
-        <button type="submit" class="gov-btn-primary">Guardar</button>
-      </footer>
-    </form>
+    @if (lista().length) {
+      <div class="table-wrap">
+        <table class="tabla">
+          <thead>
+            <tr>
+              <th>Usuario</th>
+              <th>Rol</th>
+              <th class="ocultar-movil">Puede ver</th>
+              <th class="ocultar-movil">Último ingreso</th>
+              <th class="acciones"><span class="visually-hidden">Acciones</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (u of lista(); track u.id) {
+              <tr [class.inactivo]="!u.activo">
+                <td>
+                  <button type="button" class="btn-link titulo-celda" (click)="editar(u)">{{ u.nombre }}</button>
+                  @if (esYo(u)) { <span class="badge badge-info">Usted</span> }
+                  @if (!u.activo) { <span class="badge badge-archivada">Inactivo</span> }
+                  <span class="sub-celda">{{ u.usuario }}{{ u.area ? ' · ' + u.area : '' }}{{ u.correo ? ' · ' + u.correo : '' }}</span>
+                </td>
+                <td><span class="rol" [class]="'rol rol-' + u.rol">{{ nombreRol(u.rol) }}</span></td>
+                <td class="ocultar-movil">
+                  <ul class="chips">
+                    @for (m of nombresModulos(u); track m) { <li>{{ m }}</li> }
+                  </ul>
+                </td>
+                <td class="ocultar-movil sub-celda">{{ u.ultimoAcceso ? (u.ultimoAcceso | date: 'd MMM y, h:mm a' : '-0500' : 'es-CO') : 'Nunca' }}</td>
+                <td class="acciones">
+                  <button type="button" class="btn btn-sm" (click)="editar(u)">Editar</button>
+                  @if (!esYo(u)) {
+                    <button type="button" class="btn btn-sm" (click)="alternarActivo(u)">{{ u.activo ? 'Desactivar' : 'Activar' }}</button>
+                    <button type="button" class="btn btn-sm btn-peligro" (click)="confirmar.set(u)">Eliminar</button>
+                  }
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    } @else {
+      <p class="vacio">{{ svc.cargando() ? 'Cargando usuarios…' : 'No hay usuarios con estos filtros.' }}</p>
+    }
+  </section>
+}
 
+<!-- ===== Crear / editar ===== -->
+@if (modal()) {
+  <div class="modal-fondo" (click)="cerrar()">
+    <div class="modal-caja grande" role="dialog" aria-modal="true" aria-labelledby="titulo-modal-usuario" (click)="$event.stopPropagation()" (keydown.escape)="cerrar()">
+      <div class="modal-head">
+        <h2 id="titulo-modal-usuario">{{ editando() ? 'Editar usuario' : 'Nuevo usuario' }}</h2>
+        <button type="button" class="btn btn-icono" (click)="cerrar()" aria-label="Cerrar">✕</button>
+      </div>
+      <form (ngSubmit)="guardar()" novalidate autocomplete="off">
+        <div class="modal-body">
+          <div class="form-grid">
+            <div class="campo">
+              <label for="u-nombre">Nombre completo *</label>
+              <input id="u-nombre" class="input" name="nombre" [(ngModel)]="form.nombre" maxlength="150" required />
+            </div>
+            <div class="campo">
+              <label for="u-usuario">Usuario para iniciar sesión *</label>
+              <input id="u-usuario" class="input" name="usuario" [(ngModel)]="form.usuario" maxlength="80" required
+                     placeholder="ej. laura.gomez" autocapitalize="off" spellcheck="false" />
+              <small>Minúsculas sin tildes, números, punto o guion.</small>
+            </div>
+            <div class="campo">
+              <label for="u-correo">Correo institucional <span class="opc">(opcional)</span></label>
+              <input id="u-correo" type="email" class="input" name="correo" [(ngModel)]="form.correo" maxlength="150" />
+            </div>
+            <div class="campo">
+              <label for="u-area">Dependencia u oficina <span class="opc">(opcional)</span></label>
+              <input id="u-area" class="input" name="area" [(ngModel)]="form.area" maxlength="120" placeholder="ej. Atención al usuario (SIAU)" />
+            </div>
+
+            <fieldset class="full grupo">
+              <legend>Rol *</legend>
+              <div class="roles">
+                @for (r of roles; track r.valor) {
+                  <label class="rol-opcion" [class.on]="rolForm() === r.valor">
+                    <input type="radio" name="rol" [value]="r.valor" [checked]="rolForm() === r.valor"
+                           [disabled]="!!editando() && esYo(editando()!) && r.valor !== 'admin'"
+                           (change)="cambiarRol(r.valor)" />
+                    <span><b>{{ r.nombre }}</b><small>{{ r.descripcion }}</small></span>
+                  </label>
+                }
+              </div>
+            </fieldset>
+
+            <fieldset class="full grupo">
+              <legend>Módulos que puede ver</legend>
+              @if (rolForm() === 'admin') {
+                <p class="nota">El administrador ve todo el dashboard, incluidos <b>Usuarios</b> y <b>Configuración</b>.</p>
+              } @else {
+                @if (rolForm() !== 'personalizado') {
+                  <p class="nota">Definidos por el rol. Para elegirlos uno a uno, seleccione <b>Personalizado</b>.</p>
+                }
+                <div class="modulos">
+                  @for (m of asignables; track m.clave) {
+                    <label class="modulo" [class.on]="modulosVista().has(m.clave)">
+                      <input type="checkbox" [checked]="modulosVista().has(m.clave)" [disabled]="rolForm() !== 'personalizado'"
+                             (change)="alternarModulo(m.clave, $any($event.target).checked)" />
+                      <span><b>{{ m.nombre }}</b><small>{{ m.descripcion }}</small></span>
+                    </label>
+                  }
+                </div>
+              }
+            </fieldset>
+
+            <div class="campo">
+              <label for="u-clave">{{ editando() ? 'Nueva contraseña' : 'Contraseña inicial *' }}</label>
+              <div class="clave">
+                <input id="u-clave" class="input" name="clave" [type]="verClave() ? 'text' : 'password'" [(ngModel)]="form.clave"
+                       maxlength="72" autocomplete="new-password" [placeholder]="editando() ? 'Déjela vacía para no cambiarla' : ''" />
+                <button type="button" class="btn btn-sm" (click)="verClave.set(!verClave())" [attr.aria-pressed]="verClave()">
+                  {{ verClave() ? 'Ocultar' : 'Ver' }}
+                </button>
+                <button type="button" class="btn btn-sm" (click)="nuevaClave()">Generar</button>
+              </div>
+              <small>Mínimo 8 caracteres, con letras y números.</small>
+            </div>
+            <div class="campo">
+              <span class="label">Estado</span>
+              <label class="check">
+                <input type="checkbox" name="activo" [(ngModel)]="form.activo" [disabled]="!!editando() && esYo(editando()!)" />
+                Activo (puede iniciar sesión)
+              </label>
+            </div>
+
+            @if (errorForm()) { <p class="full err" role="alert">{{ errorForm() }}</p> }
+          </div>
+        </div>
+        <div class="modal-foot">
+          <button type="button" class="btn" (click)="cerrar()">Cancelar</button>
+          <button type="submit" class="btn btn-primario" [disabled]="guardando()">
+            {{ guardando() ? 'Guardando…' : editando() ? 'Guardar cambios' : 'Crear usuario' }}
+          </button>
+        </div>
+      </form>
+    </div>
   </div>
-</div>
+}
+
+<!-- ===== Confirmar eliminación ===== -->
+@if (confirmar(); as u) {
+  <div class="modal-fondo" (click)="confirmar.set(null)">
+    <div class="modal-caja" role="alertdialog" aria-modal="true" aria-labelledby="titulo-eliminar-u" (click)="$event.stopPropagation()" (keydown.escape)="confirmar.set(null)">
+      <div class="modal-head">
+        <h2 id="titulo-eliminar-u">¿Eliminar a {{ u.nombre }}?</h2>
+      </div>
+      <div class="modal-body">
+        <p>El usuario <b>{{ u.usuario }}</b> no podrá volver a iniciar sesión. Los casos que tenga asignados quedan sin responsable,
+          pero el historial conserva su nombre.</p>
+        <p class="nota">Si solo se ausenta un tiempo, es mejor <b>desactivarlo</b>.</p>
+      </div>
+      <div class="modal-foot">
+        <button type="button" class="btn" (click)="confirmar.set(null)">No, volver</button>
+        <button type="button" class="btn btn-peligro" (click)="eliminar()">Sí, eliminar usuario</button>
+      </div>
+    </div>
+  </div>
+}

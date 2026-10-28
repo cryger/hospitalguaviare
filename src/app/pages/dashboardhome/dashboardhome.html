@@ -33,9 +33,10 @@
   ========================== -->
   <section class="kpis" aria-label="Indicadores">
 
-    <a class="kpi" routerLink="/admin/pqrsf" [class.kpi-danger]="kpiPqrsf().vencidas > 0">
+    @if (ver('pqrsfd')) {
+<a class="kpi" routerLink="/admin/pqrsf" [class.kpi-danger]="kpiPqrsf().vencidas > 0">
       <span class="kpi-icon">📬</span>
-      <span class="kpi-label">PQRSF pendientes</span>
+      <span class="kpi-label">PQRSFD pendientes</span>
       <strong class="kpi-value">{{ kpiPqrsf().pendientes }}</strong>
       <span class="kpi-meta">
         @if (kpiPqrsf().vencidas) {
@@ -44,51 +45,79 @@
         {{ kpiPqrsf().total }} recibidas en total
       </span>
     </a>
+    }
 
-    <a class="kpi" routerLink="/admin/contenido/entradas">
+    @if (ver('contratacion')) {
+    <a class="kpi" routerLink="/admin/solicitudes-contractuales" [class.kpi-danger]="kpiContratacion().vencidas > 0">
+      <span class="kpi-icon">📄</span>
+      <span class="kpi-label">Solicitudes contractuales</span>
+      <strong class="kpi-value">{{ kpiContratacion().pendientes }}</strong>
+      <span class="kpi-meta">
+        @if (kpiContratacion().vencidas) {
+          <span class="txt-danger">{{ kpiContratacion().vencidas }} vencidas</span> ·
+        }
+        pendientes de {{ kpiContratacion().total }}
+      </span>
+    </a>
+    }
+
+    @if (ver('contenido')) {
+<a class="kpi" routerLink="/admin/contenido/entradas">
       <span class="kpi-icon">📰</span>
       <span class="kpi-label">Noticias publicadas</span>
       <strong class="kpi-value">{{ kpiNoticias().publicadas }}</strong>
       <span class="kpi-meta">{{ kpiNoticias().borradores }} borradores · {{ kpiNoticias().archivadas }} archivadas</span>
     </a>
+    }
 
-    <a class="kpi" routerLink="/admin/contenido/paginas" [class.kpi-danger]="kpiTransparencia().cumplimiento < 50">
+    @if (ver('contenido')) {
+<a class="kpi" routerLink="/admin/contenido/paginas" [class.kpi-danger]="kpiTransparencia().cumplimiento < 50">
       <span class="kpi-icon">📄</span>
       <span class="kpi-label">Transparencia (Res. 1519)</span>
       <strong class="kpi-value">{{ kpiTransparencia().cumplimiento }}%</strong>
       <span class="kpi-meta">{{ kpiTransparencia().conContenido }} de {{ kpiTransparencia().secciones }} secciones con información</span>
     </a>
+    }
 
-    <a class="kpi" routerLink="/admin/cotizaciones">
+    @if (ver('cotizaciones')) {
+<a class="kpi" routerLink="/admin/cotizaciones">
       <span class="kpi-icon">💼</span>
       <span class="kpi-label">Cotizaciones publicadas</span>
       <strong class="kpi-value">{{ kpiCotizaciones().publicadas }}</strong>
       <span class="kpi-meta">{{ kpiCotizaciones().borradores }} en borrador</span>
     </a>
+    }
 
-    <a class="kpi" routerLink="/admin/vacantes">
+    @if (ver('vacantes')) {
+<a class="kpi" routerLink="/admin/vacantes">
       <span class="kpi-icon">🧑‍⚕️</span>
       <span class="kpi-label">Vacantes activas</span>
       <strong class="kpi-value">{{ kpiVacantes().publicadas }}</strong>
       <span class="kpi-meta">{{ kpiVacantes().plazas }} plazas disponibles</span>
     </a>
+    }
 
-    <a class="kpi" routerLink="/admin/contenido/menus">
+    @if (ver('contenido')) {
+<a class="kpi" routerLink="/admin/contenido/menus">
       <span class="kpi-icon">🧭</span>
       <span class="kpi-label">Contenido publicado</span>
       <strong class="kpi-value">{{ kpiContenido().entradas }}</strong>
       <span class="kpi-meta">entradas en {{ kpiContenido().paginas }} páginas · {{ kpiContenido().archivos }} archivos</span>
     </a>
+    }
 
-    <a class="kpi" routerLink="/admin/usuarios">
+    @if (ver('usuarios')) {
+<a class="kpi" routerLink="/admin/usuarios">
       <span class="kpi-icon">👥</span>
       <span class="kpi-label">Usuarios activos</span>
       <strong class="kpi-value">{{ kpiUsuarios().activos }}</strong>
       <span class="kpi-meta">{{ kpiUsuarios().admins }} administradores</span>
     </a>
+    }
 
   </section>
 
+  @if (ver('pqrsfd')) {
   <!-- =========================
        FILA: PQRSF
   ========================== -->
@@ -97,7 +126,7 @@
     <!-- Pendientes con semáforo -->
     <section class="panel">
       <div class="panel-head">
-        <h2>PQRSF por atender</h2>
+        <h2>PQRSFD por atender</h2>
         <a routerLink="/admin/pqrsf" class="panel-link">Ver todas</a>
       </div>
 
@@ -116,14 +145,16 @@
             <tbody>
               @for (p of pqrsfPendientes().slice(0, 6); track p.item.id) {
                 <tr>
-                  <td class="mono">#{{ p.item.id }}</td>
+                  <td class="mono">{{ p.item.radicado }}</td>
                   <td>{{ p.item.tipo }}</td>
                   <td class="ellipsis" [title]="p.item.asunto">{{ p.item.asunto }}</td>
-                  <td>{{ p.item.fechaCreacion | date: 'dd/MM/yyyy' }}</td>
+                  <td>{{ p.item.fechaCreacion | date: 'dd/MM/yyyy' : '-0500' }}</td>
                   <td>
                     <span class="semaforo" [class]="'semaforo semaforo-' + p.semaforo">
                       @if (p.semaforo === 'vencida') {
                         Vencida ({{ -p.diasRestantes }} d)
+                      } @else if (p.diasRestantes === 0) {
+                        Vence hoy
                       } @else {
                         {{ p.diasRestantes }} días háb.
                       }
@@ -135,14 +166,14 @@
           </table>
         </div>
       } @else {
-        <p class="vacio">No hay PQRSF pendientes. 🎉</p>
+        <p class="vacio">No hay PQRSFD pendientes. 🎉</p>
       }
     </section>
 
     <!-- Resumen PQRSF -->
     <section class="panel">
       <div class="panel-head">
-        <h2>Resumen PQRSF</h2>
+        <h2>Resumen PQRSFD</h2>
       </div>
 
       <div class="mini-stats">
@@ -183,6 +214,7 @@
       </ul>
     </section>
   </div>
+  }
 
   <!-- =========================
        FILA: NOTICIAS + ACTIVIDAD

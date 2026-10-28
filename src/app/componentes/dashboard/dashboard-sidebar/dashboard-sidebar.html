@@ -4,9 +4,9 @@
 
     </div>
     <div class="logo">
-    <strong>ESE Guaviare</strong>
+    <strong>{{ permisos.usuario()?.nombre || 'ESE Guaviare' }}</strong>
     <br>
-    <span>Administrador</span>
+    <span>{{ permisos.nombreRol() }}</span>
     <br>
 
     <button class="btn-cerrarSesion" type="button" (click)="openLogoutModal()">
@@ -15,54 +15,18 @@
 
   </div>
 
+  <!-- Solo se muestran los módulos que permite el rol del usuario -->
   <nav class="sidebar-nav" aria-label="Menú de administración">
-    <a routerLink="/admin" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" data-tooltip="Inicio">
-      <span class="icon">🏠</span><span class="text">Inicio</span>
-    </a>
-
-    <span class="nav-grupo">Contenido del portal</span>
-    <a routerLink="/admin/contenido/menus" routerLinkActive="active" data-tooltip="Menús y estructura">
-      <span class="icon">🧭</span><span class="text">Menús y estructura</span>
-    </a>
-    <a routerLink="/admin/contenido/paginas" routerLinkActive="active" data-tooltip="Páginas">
-      <span class="icon">📑</span><span class="text">Páginas</span>
-    </a>
-    <a routerLink="/admin/contenido/entradas" routerLinkActive="active" data-tooltip="Entradas">
-      <span class="icon">📝</span><span class="text">Entradas</span>
-    </a>
-    <a routerLink="/admin/contenido/multimedia" routerLinkActive="active" data-tooltip="Multimedia">
-      <span class="icon">🖼️</span><span class="text">Multimedia</span>
-    </a>
-    <a routerLink="/admin/slider" routerLinkActive="active" data-tooltip="Slider del inicio">
-      <span class="icon">🎞️</span><span class="text">Slider del inicio</span>
-    </a>
-    <a routerLink="/admin/eventos" routerLinkActive="active" data-tooltip="Calendario de eventos">
-      <span class="icon">📅</span><span class="text">Calendario de eventos</span>
-    </a>
-
-    <span class="nav-grupo">Módulos</span>
-    <a routerLink="/admin/pqrsf" routerLinkActive="active" data-tooltip="PQRSF">
-      <span class="icon">📬</span><span class="text">PQRSF</span>
-    </a>
-    <a routerLink="/admin/usuarios" routerLinkActive="active" data-tooltip="Usuarios">
-      <span class="icon">👥</span><span class="text">Usuarios</span>
-    </a>
-
-    <span class="nav-grupo">Información de interés</span>
-    <a routerLink="/admin/cotizaciones" routerLinkActive="active" data-tooltip="Invitaciones a cotizar">
-      <span class="icon">💼</span><span class="text">Invitaciones a cotizar</span>
-    </a>
-    <a routerLink="/admin/vacantes" routerLinkActive="active" data-tooltip="Trabaja con nosotros">
-      <span class="icon">🧑‍⚕️</span><span class="text">Trabaja con nosotros</span>
-    </a>
-
-    <span class="nav-grupo">Sistema</span>
-    <a routerLink="/admin/configuracion" routerLinkActive="active" data-tooltip="Configuración">
-      <span class="icon">⚙️</span><span class="text">Configuración</span>
-    </a>
-    <a routerLink="/admin/accesibilidad-admin" routerLinkActive="active" data-tooltip="Accesibilidad">
-      <span class="icon">♿</span><span class="text">Accesibilidad</span>
-    </a>
+    @for (g of permisos.menu(); track g.grupo) {
+      @if (g.grupo) {
+        <span class="nav-grupo">{{ g.grupo }}</span>
+      }
+      @for (e of g.enlaces; track e.ruta) {
+        <a [routerLink]="e.ruta" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: !!e.exacto }" [attr.data-tooltip]="e.texto">
+          <span class="icon">{{ e.icono }}</span><span class="text">{{ e.texto }}</span>
+        </a>
+      }
+    }
   </nav>
 </aside>
 

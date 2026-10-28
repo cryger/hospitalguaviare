@@ -2,15 +2,20 @@ import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { firstValueFrom } from 'rxjs';
 import { CMS_CONFIG } from './cms-config';
+import { Modulo, Rol } from '../../models/permisos/permisos';
 
 export interface UsuarioCms {
   id: number;
   nombre: string;
   usuario: string;
-  rol: 'admin' | 'editor';
+  rol: Rol;
+  /** Módulos del dashboard que puede usar (los calcula la API según el rol) */
+  modulos: Modulo[];
 }
 
 export interface PerfilCms extends UsuarioCms {
+  correo?: string;
+  area?: string;
   ultimoAcceso: string | null;
   creadoEn: string | null;
   sesionVence: string | null;
@@ -69,10 +74,17 @@ export class CmsAuthService {
     return r.usuario;
   }
 
-  /** Datos del usuario que inició sesión (desde la base de datos) */
+  /** Datos del usuario que inició sesión (desde la base de datos). Actualiza rol y módulos guardados. */
   async perfil(): Promise<PerfilCms> {
     const r = await firstValueFrom(this.http.get<{ usuario: PerfilCms }>(`${this.config.apiUrl}/auth/yo`));
-    return r.usuario;
+    const u = r.usuario;
+    try {
+      localStorage.setItem(CLAVE_USUARIO, JSON.stringify({ id: u.id, nombre: u.nombre, usuario: u.usuario, rol: u.rol, modulos: u.modulos }));
+      localStorage.setItem('username', u.nombre);
+    } catch {
+      /* almacenamiento no disponible */
+    }
+    return u;
   }
 
   /** Cambia la contraseña del usuario actual */

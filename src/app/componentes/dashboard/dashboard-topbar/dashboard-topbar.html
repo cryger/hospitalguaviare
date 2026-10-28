@@ -6,11 +6,11 @@
 
   <div class="topbar-right">
     <a class="ver-sitio" routerLink="/" target="_blank" rel="noopener">Ver sitio ↗</a>
-    <div class="usuario" [title]="nombreUsuario">
+    <div class="usuario" [title]="nombreUsuario() + ' · ' + permisos.nombreRol()">
       <span class="avatar" aria-hidden="true">{{ iniciales }}</span>
       <span class="usuario-info">
-        <strong>{{ nombreUsuario }}</strong>
-        <small>Administrador</small>
+        <strong>{{ nombreUsuario() }}</strong>
+        <small>{{ permisos.nombreRol() }}</small>
       </span>
     </div>
   </div>

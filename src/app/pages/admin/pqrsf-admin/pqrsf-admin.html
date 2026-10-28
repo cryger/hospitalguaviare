@@ -1,158 +1,377 @@
-<h2 class="gov-title">Gestión de PQRSF</h2>
-
-<!-- FILTROS -->
-<div class="pqrsf-filtros">
-  <button
-    class="gov-tab"
-    [class.active]="filtroEstado === 'Todas'"
-    (click)="filtroEstado = 'Todas'">
-    Todas
-  </button>
-
-  <button
-    class="gov-tab warning"
-    [class.active]="filtroEstado === 'Pendientes'"
-    (click)="filtroEstado = 'Pendientes'">
-    Pendientes
-  </button>
-
-  <button
-    class="gov-tab success"
-    [class.active]="filtroEstado === 'Respondidas'"
-    (click)="filtroEstado = 'Respondidas'">
-    Respondidas
-  </button>
-</div>
-
-<!-- TABLA -->
-<div class="gov-table-wrapper">
-  <table class="gov-table">
-    <thead>
-      <tr>
-        <th>Tipo</th>
-        <th>Ciudadano</th>
-        <th>Fecha</th>
-        <th>Estado</th>
-        <th class="acciones">Acción</th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <tr *ngFor="let p of pqrsfFiltradas">
-        <td>{{ p.tipo }}</td>
-        <td>{{ p.nombre }}</td>
-        <td>{{ p.fechaCreacion | date:'mediumDate' }}</td>
-
-        <td>
-          <span
-            class="estado"
-            [class.pendiente]="p.estado !== 'Respondida'"
-            [class.respondida]="p.estado === 'Respondida'">
-            {{ p.estado }}
-          </span>
-        </td>
-
-        <td class="acciones">
-          <button
-            class="gov-btn-secondary"
-            (click)="verDetalle(p)">
-            Ver / Responder
-          </button>
-        </td>
-      </tr>
-
-      <tr *ngIf="pqrsfFiltradas.length === 0">
-        <td colspan="5" class="sin-datos">
-          No hay PQRSF para este filtro
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-
-
-<!--MOdal-->
-
-<!-- =========================
-     MODAL VER / RESPONDER PQRSF
-========================= -->
-<div class="gov-modal-backdrop" *ngIf="modalPQRSFOpen">
-
-  <div class="gov-modal gov-modal-lg" role="dialog" aria-modal="true">
-
-    <!-- HEADER -->
-    <header class="gov-modal-header">
-      <div>
-        <h3>Detalle de PQRSF</h3>
-        <p class="gov-modal-subtitle">
-          Información enviada por el ciudadano
-        </p>
-      </div>
-
-      <button
-        type="button"
-        class="gov-modal-close"
-        aria-label="Cerrar"
-        (click)="cerrarModalPQRSF()">
-        ✕
-      </button>
-    </header>
-
-    <!-- BODY -->
-    <section class="gov-modal-body">
-
-      <!-- INFO CIUDADANO -->
-      <div class="pqrsf-info">
-        <div><strong>Tipo:</strong> {{ seleccionado?.tipo }}</div>
-        <div><strong>Ciudadano:</strong> {{ seleccionado?.nombre }}</div>
-        <div><strong>Correo:</strong> {{ seleccionado?.correo }}</div>
-        <div><strong>Fecha:</strong> {{ seleccionado?.fechaCreacion | date }}</div>
-      </div>
-
-      <!-- MENSAJE -->
-      <div class="pqrsf-mensaje">
-        <label>Mensaje del ciudadano</label>
-        <div class="mensaje-box">
-          {{ seleccionado?.mensaje }}
-        </div>
-      </div>
-
-      <!-- RESPUESTA -->
-      <form
-        [formGroup]="formRespuesta"
-        (ngSubmit)="responderPQRSF()"
-        class="gov-form">
-
-        <div class="gov-field">
-          <label for="respuesta">Respuesta institucional</label>
-          <textarea
-            id="respuesta"
-            rows="5"
-            formControlName="respuesta"
-            placeholder="Escriba la respuesta oficial al ciudadano">
-          </textarea>
-        </div>
-
-        <!-- ACCIONES -->
-        <footer class="gov-modal-actions">
-          <button
-            type="button"
-            class="gov-btn-secondary"
-            (click)="cerrarModalPQRSF()">
-            Cancelar
-          </button>
-
-          <button
-            type="submit"
-            class="gov-btn-primary"
-            [disabled]="formRespuesta.invalid">
-            Enviar respuesta
-          </button>
-        </footer>
-
-      </form>
-
-    </section>
-
+<div class="cms-head">
+  <div>
+    <h1>PQRSFD</h1>
+    <p>Peticiones, quejas, reclamos, sugerencias, felicitaciones y denuncias. Plazos en días hábiles según la Ley 1755 de 2015.</p>
   </div>
+  @if (svc.disponible) {
+    <div class="cms-head-actions">
+      <a class="btn" href="/pqrsf" target="_blank" rel="noopener">Formulario público ↗</a>
+      <button type="button" class="btn" (click)="exportar()" [disabled]="!lista().length">Exportar CSV</button>
+      <button type="button" class="btn btn-primario" (click)="abrirRegistro()">+ Registrar PQRSFD</button>
+    </div>
+  }
 </div>
+
+@if (!svc.disponible) {
+  <div class="aviso aviso-info" role="status">
+    Las PQRSFD contienen datos personales y se guardan solo en la base de datos. Esta copia del portal está en <b>modo local</b>
+    (sin API): conecte la API para radicar y gestionar solicitudes.
+  </div>
+} @else {
+
+  @if (aviso(); as a) {
+    <div class="aviso" [class.aviso-ok]="a.tipo === 'ok'" [class.aviso-error]="a.tipo === 'error'" role="status">
+      {{ a.texto }}
+      <button type="button" class="btn-link" (click)="aviso.set(null)" aria-label="Cerrar aviso">✕</button>
+    </div>
+  }
+  @if (svc.error()) { <div class="aviso aviso-error" role="alert">{{ svc.error() }}</div> }
+
+  <div class="kpis">
+    <button type="button" class="kpi" (click)="verKpi('')"><b>{{ kpis().abiertas }}</b>Abiertas</button>
+    <button type="button" class="kpi kpi-danger" [class.activo]="kpis().vencidas" (click)="verKpi('vencidas')"><b>{{ kpis().vencidas }}</b>Vencidas</button>
+    <button type="button" class="kpi kpi-warn" [class.activo]="kpis().porVencer" (click)="verKpi('por-vencer')"><b>{{ kpis().porVencer }}</b>Por vencer (≤ 3 días)</button>
+    <button type="button" class="kpi" (click)="verKpi('', '')"><b>{{ kpis().respondidas }}</b>Respondidas</button>
+    <div class="kpi"><b>{{ kpis().oportunidad === null ? '—' : kpis().oportunidad + '%' }}</b>Respondidas a tiempo</div>
+  </div>
+
+  <section class="panel">
+    <app-buscador-govco idCampo="buscar-pqrsfd" etiqueta="Buscar PQRSFD" [compacto]="true"
+        placeholder="Radicado, nombre, documento o asunto…" etiquetaBoton="Buscar PQRSFD"
+        [valor]="busqueda()" (valorChange)="busqueda.set($event)">
+      <div filtros class="desplegable-govco">
+        <label for="f-estado-p">Estado</label>
+        <select id="f-estado-p" class="btn-dropdown" [ngModel]="filtroEstado()" (ngModelChange)="filtroEstado.set($event)">
+          <option value="abiertas">Abiertas (sin responder)</option>
+          <option value="">Todas</option>
+          @for (e of estados; track e.valor) { <option [value]="e.valor">{{ e.nombre }}</option> }
+        </select>
+      </div>
+      <div filtros class="desplegable-govco">
+        <label for="f-plazo">Plazo</label>
+        <select id="f-plazo" class="btn-dropdown" [ngModel]="filtroPlazo()" (ngModelChange)="filtroPlazo.set($event)">
+          <option value="">Todos</option>
+          <option value="vencidas">Vencidas</option>
+          <option value="por-vencer">Por vencer</option>
+          <option value="a-tiempo">A tiempo</option>
+        </select>
+      </div>
+      <div filtros class="desplegable-govco">
+        <label for="f-tipo">Tipo</label>
+        <select id="f-tipo" class="btn-dropdown" [ngModel]="filtroTipo()" (ngModelChange)="filtroTipo.set($event)">
+          <option value="">Todos</option>
+          @for (t of tipos; track t.valor) { <option [value]="t.valor">{{ t.nombre }}</option> }
+        </select>
+      </div>
+      @if (anios().length > 1) {
+        <div filtros class="desplegable-govco">
+          <label for="f-anio">Año</label>
+          <select id="f-anio" class="btn-dropdown" [ngModel]="filtroAnio()" (ngModelChange)="filtroAnio.set($event)">
+            <option value="">Todos</option>
+            @for (a of anios(); track a) { <option [value]="a">{{ a }}</option> }
+          </select>
+        </div>
+      }
+      <div filtros class="check-govco mias">
+        <input type="checkbox" id="f-mias" [ngModel]="soloMias()" (ngModelChange)="soloMias.set($event)" />
+        <label for="f-mias">Asignadas a mí</label>
+      </div>
+    </app-buscador-govco>
+    <p class="resultado-busqueda admin" role="status" aria-live="polite">
+      <strong>{{ lista().length }}</strong> de {{ svc.total() }} solicitudes
+      @if (hayFiltros()) { <button type="button" class="btn-bdc outline-btn-govco limpiar-admin" (click)="limpiarFiltros()">Limpiar filtros</button> }
+    </p>
+
+    @if (lista().length) {
+      <div class="table-wrap">
+        <table class="tabla">
+          <thead>
+            <tr>
+              <th>Radicado</th>
+              <th>Solicitud</th>
+              <th class="ocultar-movil">Peticionario</th>
+              <th>Plazo</th>
+              <th>Estado</th>
+              <th class="acciones"><span class="visually-hidden">Acciones</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (p of lista(); track p.id) {
+              @let s = semaforo(p);
+              <tr>
+                <td class="nowrap">
+                  <span class="titulo-celda mono">{{ p.radicado }}</span>
+                  <span class="sub-celda">{{ p.fechaRadicacion | date: 'd MMM y, h:mm a' : '-0500' : 'es-CO' }}</span>
+                </td>
+                <td>
+                  <span class="tipo" [class]="'tipo tipo-' + p.tipo">{{ nombreTipo(p.tipo) }}</span>
+                  <button type="button" class="btn-link asunto" (click)="abrir(p)">{{ p.asunto }}</button>
+                  <span class="sub-celda">
+                    {{ nombreCanal(p.canal) }}{{ p.area ? ' · ' + p.area : '' }}{{ p.asignadoNombre ? ' · ' + p.asignadoNombre : '' }}
+                    @if (p.adjuntos) { · 📎 {{ p.adjuntos }} }
+                  </span>
+                </td>
+                <td class="ocultar-movil">{{ p.anonimo ? 'Anónimo' : p.nombre }}</td>
+                <td class="nowrap">
+                  @switch (s.estado) {
+                    @case ('vencida') { <span class="plazo plazo-vencida">Vencida hace {{ -s.diasRestantes }} {{ -s.diasRestantes === 1 ? 'día' : 'días' }}</span> }
+                    @case ('alerta') { <span class="plazo plazo-alerta">{{ s.diasRestantes === 0 ? 'Vence hoy' : 'Quedan ' + s.diasRestantes + (s.diasRestantes === 1 ? ' día' : ' días') }}</span> }
+                    @case ('ok') { <span class="plazo plazo-ok">Quedan {{ s.diasRestantes }} días</span> }
+                    @default { <span class="sub-celda">Vencía {{ p.fechaVencimiento | date: 'd MMM' : '-0500' : 'es-CO' }}</span> }
+                  }
+                  <span class="sub-celda">{{ p.plazoDias }} días hábiles</span>
+                </td>
+                <td><span class="badge" [class]="'badge estado-' + p.estado">{{ nombreEstado(p.estado) }}</span></td>
+                <td class="acciones"><button type="button" class="btn btn-sm btn-primario" (click)="abrir(p)">Gestionar</button></td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    } @else {
+      <p class="vacio">{{ svc.cargando() ? 'Cargando PQRSFD…' : svc.total() ? 'No hay solicitudes con estos filtros.' : 'Aún no se han radicado PQRSFD.' }}</p>
+    }
+  </section>
+}
+
+<!-- ===================== Detalle y gestión ===================== -->
+@if (detalle(); as d) {
+  @let s = semaforo(d);
+  <div class="modal-fondo" (click)="cerrarDetalle()">
+    <div class="modal-caja grande detalle" role="dialog" aria-modal="true" aria-labelledby="titulo-detalle" (click)="$event.stopPropagation()" (keydown.escape)="cerrarDetalle()">
+      <div class="modal-head">
+        <h2 id="titulo-detalle"><span class="mono">{{ d.radicado }}</span> · {{ nombreTipo(d.tipo) }}</h2>
+        <button type="button" class="btn btn-icono" (click)="cerrarDetalle()" aria-label="Cerrar">✕</button>
+      </div>
+      <div class="modal-body">
+        @if (errorDetalle()) { <div class="aviso aviso-error" role="alert">{{ errorDetalle() }}</div> }
+
+        <div class="resumen">
+          <span class="badge" [class]="'badge estado-' + d.estado">{{ nombreEstado(d.estado) }}</span>
+          @switch (s.estado) {
+            @case ('vencida') { <span class="plazo plazo-vencida">Vencida hace {{ -s.diasRestantes }} días hábiles</span> }
+            @case ('alerta') { <span class="plazo plazo-alerta">{{ s.diasRestantes === 0 ? 'Vence hoy' : 'Vence en ' + s.diasRestantes + ' días hábiles' }}</span> }
+            @case ('ok') { <span class="plazo plazo-ok">Vence en {{ s.diasRestantes }} días hábiles</span> }
+          }
+          <span>Radicada {{ d.fechaRadicacion | date: "d 'de' MMMM 'de' y, h:mm a" : '-0500' : 'es-CO' }}</span>
+          <span>Vence {{ d.fechaVencimiento | date: "d 'de' MMMM 'de' y" : '-0500' : 'es-CO' }}</span>
+        </div>
+
+        <div class="columnas">
+          <!-- Solicitud -->
+          <div>
+            <h3>{{ d.asunto }}</h3>
+            <p class="mensaje">{{ d.mensaje }}</p>
+
+            <h4>Peticionario</h4>
+            @if (d.anonimo) {
+              <p class="nota">Solicitud anónima. El ciudadano consulta la respuesta con el radicado y el código <b class="mono">{{ d.codigoConsulta }}</b>.</p>
+            } @else {
+              <dl class="datos">
+                <dt>Nombre</dt><dd>{{ d.nombre }} <small>({{ d.tipoPersona === 'juridica' ? 'persona jurídica' : 'persona natural' }})</small></dd>
+                <dt>Documento</dt><dd>{{ d.tipoDocumento }} {{ d.numeroDocumento }}</dd>
+                @if (d.correo) { <dt>Correo</dt><dd><a [href]="'mailto:' + d.correo">{{ d.correo }}</a></dd> }
+                @if (d.telefono) { <dt>Teléfono</dt><dd>{{ d.telefono }}</dd> }
+                @if (d.direccion) { <dt>Dirección</dt><dd>{{ d.direccion }}{{ d.municipio ? ', ' + d.municipio : '' }}</dd> }
+                @if (d.grupoPoblacional) { <dt>Grupo poblacional</dt><dd>{{ d.grupoPoblacional }}</dd> }
+                <dt>Respuesta por</dt><dd>{{ d.medioRespuesta === 'correo' ? 'Correo electrónico' : 'Correspondencia física' }}</dd>
+                <dt>Canal</dt><dd>{{ nombreCanal(d.canal) }}</dd>
+                <dt>Código de consulta</dt><dd class="mono">{{ d.codigoConsulta }}</dd>
+              </dl>
+            }
+
+            @let delCiudadano = archivosDe(d, 'ciudadano');
+            @if (delCiudadano.length) {
+              <h4>Adjuntos del ciudadano</h4>
+              <ul class="archivos">
+                @for (a of delCiudadano; track a.id) {
+                  <li><button type="button" class="btn-link" (click)="descargar(d, a)">📎 {{ a.nombre }}</button> <small>{{ tamano(a.tamano) }}</small></li>
+                }
+              </ul>
+            }
+
+            <h4>Historial</h4>
+            <ol class="historial">
+              @for (h of d.historial; track h.id) {
+                <li>
+                  <span class="h-fecha">{{ h.fecha | date: 'd MMM y, h:mm a' : '-0500' : 'es-CO' }}</span>
+                  <b>{{ h.accion }}</b> <small>· {{ h.usuario }}</small>
+                  @if (h.detalle) { <p>{{ h.detalle }}</p> }
+                </li>
+              }
+            </ol>
+          </div>
+
+          <!-- Gestión -->
+          <div class="gestion">
+            <form class="caja" (ngSubmit)="guardarGestion()">
+              <h4>Gestión interna</h4>
+              <div class="campo">
+                <label for="g-estado">Estado</label>
+                <select id="g-estado" class="select" name="estado" [(ngModel)]="gestion.estado">
+                  @for (e of estados; track e.valor) {
+                    <option [value]="e.valor" [disabled]="e.valor === 'respondida' && !d.respuesta">{{ e.nombre }}</option>
+                  }
+                </select>
+              </div>
+              <div class="campo">
+                <label for="g-area">Dependencia</label>
+                <input id="g-area" class="input" name="area" list="lista-dependencias" [(ngModel)]="gestion.area" maxlength="120" />
+                <datalist id="lista-dependencias">
+                  @for (x of dependencias; track x) { <option [value]="x"></option> }
+                </datalist>
+              </div>
+              <div class="campo">
+                <label for="g-resp">Responsable</label>
+                <select id="g-resp" class="select" name="asignadoA" [(ngModel)]="gestion.asignadoA">
+                  <option value="">Sin responsable</option>
+                  @for (r of responsables(); track r.id) { <option [value]="r.id">{{ r.nombre }}{{ r.area ? ' · ' + r.area : '' }}</option> }
+                </select>
+              </div>
+              <div class="campo">
+                <label for="g-nota">Nota interna <span class="opc">(no la ve el ciudadano)</span></label>
+                <textarea id="g-nota" class="textarea" rows="2" name="nota" [(ngModel)]="gestion.nota" maxlength="2000"></textarea>
+              </div>
+              <button type="submit" class="btn" [disabled]="guardando()">Guardar gestión</button>
+            </form>
+
+            <form class="caja" (ngSubmit)="responder()">
+              <h4>{{ d.respuesta ? 'Respuesta registrada' : 'Responder' }}</h4>
+              @if (d.fechaRespuesta) {
+                <p class="nota">Respondida {{ d.fechaRespuesta | date: 'd MMM y, h:mm a' : '-0500' : 'es-CO' }} por {{ d.respondidoPor || '—' }}.
+                  Puede corregirla y volver a guardarla.</p>
+              }
+              <div class="campo">
+                <label for="r-texto">Respuesta al ciudadano *</label>
+                <textarea id="r-texto" class="textarea" rows="7" name="respuesta" [(ngModel)]="respuesta.texto" maxlength="10000"></textarea>
+              </div>
+              @let deRespuesta = archivosDe(d, 'respuesta');
+              @if (deRespuesta.length) {
+                <ul class="archivos">
+                  @for (a of deRespuesta; track a.id) {
+                    <li><button type="button" class="btn-link" (click)="descargar(d, a)">📄 {{ a.nombre }}</button> <small>{{ tamano(a.tamano) }}</small></li>
+                  }
+                </ul>
+              }
+              <div class="campo">
+                <label for="r-archivos">Adjuntar documentos <span class="opc">(PDF, imagen, Word o Excel; máx. 5 de 10 MB)</span></label>
+                <input id="r-archivos" type="file" multiple [accept]="extensiones" (change)="elegirArchivos($event, 'respuesta')" />
+                @if (archivosRespuesta().length) {
+                  <ul class="archivos">
+                    @for (f of archivosRespuesta(); track $index) {
+                      <li>{{ f.name }} <small>{{ tamano(f.size) }}</small>
+                        <button type="button" class="btn-link" (click)="quitarArchivo($index, 'respuesta')" [attr.aria-label]="'Quitar ' + f.name">Quitar</button></li>
+                    }
+                  </ul>
+                }
+              </div>
+              <label class="check"><input type="checkbox" name="cerrar" [(ngModel)]="respuesta.cerrar" /> Cerrar el caso con esta respuesta</label>
+              <div class="fila-botones">
+                <button type="submit" class="btn btn-primario" [disabled]="guardando()">{{ guardando() ? 'Guardando…' : d.respuesta ? 'Actualizar respuesta' : 'Registrar respuesta' }}</button>
+                @if (d.correo && (d.respuesta || respuesta.texto)) {
+                  <a class="btn" [href]="enlaceCorreo(d)">Enviar por correo ✉</a>
+                }
+              </div>
+              <p class="nota">La respuesta queda visible para el ciudadano en «Consultar PQRSFD» del portal (radicado + código).</p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+}
+
+<!-- ===================== Registrar (ventanilla, correo, teléfono, buzón) ===================== -->
+@if (registroAbierto()) {
+  <div class="modal-fondo" (click)="registroAbierto.set(false)">
+    <div class="modal-caja grande" role="dialog" aria-modal="true" aria-labelledby="titulo-registro" (click)="$event.stopPropagation()" (keydown.escape)="registroAbierto.set(false)">
+      <div class="modal-head">
+        <h2 id="titulo-registro">Registrar PQRSFD recibida por otro canal</h2>
+        <button type="button" class="btn btn-icono" (click)="registroAbierto.set(false)" aria-label="Cerrar">✕</button>
+      </div>
+      <form (ngSubmit)="registrar()" novalidate>
+        <div class="modal-body">
+          <div class="form-grid">
+            <div class="campo">
+              <label for="rg-canal">Canal de recepción *</label>
+              <select id="rg-canal" class="select" name="canal" [(ngModel)]="registro.canal">
+                @for (c of canales; track c.valor) { <option [value]="c.valor">{{ c.nombre }}</option> }
+              </select>
+            </div>
+            <div class="campo">
+              <label for="rg-tipo">Tipo *</label>
+              <select id="rg-tipo" class="select" name="tipo" [(ngModel)]="registro.tipo">
+                @for (t of tipos; track t.valor) { <option [value]="t.valor">{{ t.nombre }} ({{ t.plazo }} días)</option> }
+              </select>
+            </div>
+            @if (permiteAnonimo(registro.tipo)) {
+              <label class="check full"><input type="checkbox" name="anonimo" [(ngModel)]="registro.anonimo" /> Anónima</label>
+            }
+            @if (!registro.anonimo || !permiteAnonimo(registro.tipo)) {
+              <div class="campo">
+                <label for="rg-tdoc">Tipo de documento *</label>
+                <select id="rg-tdoc" class="select" name="tipoDocumento" [(ngModel)]="registro.tipoDocumento">
+                  @for (t of documentos; track t.valor) { <option [value]="t.valor">{{ t.nombre }}</option> }
+                </select>
+              </div>
+              <div class="campo">
+                <label for="rg-doc">Número de documento *</label>
+                <input id="rg-doc" class="input" name="numeroDocumento" [(ngModel)]="registro.numeroDocumento" maxlength="20" inputmode="numeric" />
+              </div>
+              <div class="campo full">
+                <label for="rg-nombre">Nombre o razón social *</label>
+                <input id="rg-nombre" class="input" name="nombre" [(ngModel)]="registro.nombre" maxlength="150" />
+              </div>
+            }
+            <div class="campo">
+              <label for="rg-correo">Correo</label>
+              <input id="rg-correo" type="email" class="input" name="correo" [(ngModel)]="registro.correo" maxlength="150" />
+            </div>
+            <div class="campo">
+              <label for="rg-tel">Teléfono</label>
+              <input id="rg-tel" class="input" name="telefono" [(ngModel)]="registro.telefono" maxlength="30" inputmode="tel" />
+            </div>
+            <div class="campo">
+              <label for="rg-dir">Dirección</label>
+              <input id="rg-dir" class="input" name="direccion" [(ngModel)]="registro.direccion" maxlength="200" />
+            </div>
+            <div class="campo">
+              <label for="rg-medio">Responder por</label>
+              <select id="rg-medio" class="select" name="medioRespuesta" [(ngModel)]="registro.medioRespuesta">
+                <option value="correo">Correo electrónico</option>
+                <option value="fisica">Correspondencia física</option>
+              </select>
+            </div>
+            <div class="campo full">
+              <label for="rg-asunto">Asunto *</label>
+              <input id="rg-asunto" class="input" name="asunto" [(ngModel)]="registro.asunto" maxlength="200" />
+            </div>
+            <div class="campo full">
+              <label for="rg-mensaje">Descripción *</label>
+              <textarea id="rg-mensaje" class="textarea" rows="5" name="mensaje" [(ngModel)]="registro.mensaje" maxlength="8000"></textarea>
+            </div>
+            <div class="campo full">
+              <label for="rg-archivos">Documentos escaneados <span class="opc">(opcional)</span></label>
+              <input id="rg-archivos" type="file" multiple [accept]="extensiones" (change)="elegirArchivos($event, 'registro')" />
+              @if (archivosRegistro().length) {
+                <ul class="archivos">
+                  @for (f of archivosRegistro(); track $index) {
+                    <li>{{ f.name }} <small>{{ tamano(f.size) }}</small>
+                      <button type="button" class="btn-link" (click)="quitarArchivo($index, 'registro')">Quitar</button></li>
+                  }
+                </ul>
+              }
+            </div>
+            @if (errorRegistro()) { <p class="full err" role="alert">{{ errorRegistro() }}</p> }
+          </div>
+        </div>
+        <div class="modal-foot">
+          <button type="button" class="btn" (click)="registroAbierto.set(false)">Cancelar</button>
+          <button type="submit" class="btn btn-primario" [disabled]="guardando()">{{ guardando() ? 'Radicando…' : 'Radicar' }}</button>
+        </div>
+      </form>
+    </div>
+  </div>
+}
+
+@if (cargandoDetalle()) { <div class="cargando-capa" role="status">Abriendo solicitud…</div> }

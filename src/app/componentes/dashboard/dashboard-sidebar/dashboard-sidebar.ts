@@ -1,7 +1,8 @@
-import { Component,Input } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { AuthGuard } from '../../../shared/guards/auth/auth-guard';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { PermisosService } from '../../../shared/services/permisos/permisos.service';
 
 @Component({
   selector: 'app-dashboard-sidebar',
@@ -12,6 +13,7 @@ import { RouterModule } from '@angular/router';
 export class DashboardSidebar {
 
   @Input() collapsed = false;
+  readonly permisos = inject(PermisosService);
   showLogoutModal = false;
 
   constructor(private authGuard: AuthGuard){}

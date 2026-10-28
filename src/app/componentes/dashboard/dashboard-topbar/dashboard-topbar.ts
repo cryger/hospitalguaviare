@@ -1,5 +1,6 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, computed, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { PermisosService } from '../../../shared/services/permisos/permisos.service';
 
 @Component({
   selector: 'app-dashboard-topbar',
@@ -10,11 +11,11 @@ import { RouterLink } from '@angular/router';
 export class DashboardTopbar {
   @Output() toggleSidebar = new EventEmitter<void>();
 
-  readonly nombreUsuario =
-    localStorage.getItem('username') || localStorage.getItem('usuario') || 'Administrador';
+  readonly permisos = inject(PermisosService);
+  readonly nombreUsuario = computed(() => this.permisos.usuario()?.nombre || 'Usuario');
 
   get iniciales(): string {
-    return this.nombreUsuario
+    return this.nombreUsuario()
       .split(/\s+/)
       .map((p) => p.charAt(0))
       .join('')

@@ -1,0 +1,301 @@
+<div class="cms-head">
+  <div>
+    <h1>Solicitudes contractuales</h1>
+    <p>Certificaciones de contratos solicitadas por contratistas y excontratistas. Plazo: {{ plazo }} días hábiles (Ley 1755 de 2015, art. 14).</p>
+  </div>
+  @if (svc.disponible) {
+    <div class="cms-head-actions">
+      <a class="btn" href="/solicitudes-contractuales" target="_blank" rel="noopener">Formulario público ↗</a>
+      <button type="button" class="btn" (click)="exportar()" [disabled]="!lista().length">Exportar CSV</button>
+      <button type="button" class="btn btn-primario" (click)="abrirRegistro()">+ Registrar solicitud</button>
+    </div>
+  }
+</div>
+
+@if (!svc.disponible) {
+  <div class="aviso aviso-info" role="status">
+    Las solicitudes contractuales contienen datos personales y se guardan solo en la base de datos. Esta copia del portal está en
+    <b>modo local</b> (sin API): conecte la API para radicar y gestionar solicitudes.
+  </div>
+} @else {
+
+  @if (aviso(); as a) {
+    <div class="aviso" [class.aviso-ok]="a.tipo === 'ok'" [class.aviso-error]="a.tipo === 'error'" role="status">
+      {{ a.texto }}
+      <button type="button" class="btn-link" (click)="aviso.set(null)" aria-label="Cerrar aviso">✕</button>
+    </div>
+  }
+  @if (svc.error()) { <div class="aviso aviso-error" role="alert">{{ svc.error() }}</div> }
+
+  <div class="kpis">
+    <button type="button" class="kpi" (click)="verKpi('')"><b>{{ kpis().abiertas }}</b>Pendientes</button>
+    <button type="button" class="kpi kpi-danger" [class.activo]="kpis().vencidas" (click)="verKpi('vencidas')"><b>{{ kpis().vencidas }}</b>Vencidas</button>
+    <button type="button" class="kpi kpi-warn" [class.activo]="kpis().porVencer" (click)="verKpi('por-vencer')"><b>{{ kpis().porVencer }}</b>Por vencer (≤ 3 días)</button>
+    <button type="button" class="kpi" (click)="verKpi('', '')"><b>{{ kpis().respondidas }}</b>Respondidas</button>
+    <div class="kpi"><b>{{ kpis().oportunidad === null ? '—' : kpis().oportunidad + '%' }}</b>Respondidas a tiempo</div>
+  </div>
+
+  <section class="panel">
+    <app-buscador-govco idCampo="buscar-contratacion" etiqueta="Buscar solicitud" [compacto]="true"
+        placeholder="Radicado, cédula, nombre o correo…" etiquetaBoton="Buscar solicitudes"
+        [valor]="busqueda()" (valorChange)="busqueda.set($event)">
+      <div filtros class="desplegable-govco">
+        <label for="f-estado-c">Estado</label>
+        <select id="f-estado-c" class="btn-dropdown" [ngModel]="filtroEstado()" (ngModelChange)="filtroEstado.set($event)">
+          <option value="abiertas">Pendientes</option>
+          <option value="">Todas</option>
+          @for (e of estados; track e.valor) { <option [value]="e.valor">{{ e.nombre }}</option> }
+        </select>
+      </div>
+      <div filtros class="desplegable-govco">
+        <label for="f-plazo-c">Plazo</label>
+        <select id="f-plazo-c" class="btn-dropdown" [ngModel]="filtroPlazo()" (ngModelChange)="filtroPlazo.set($event)">
+          <option value="">Todos</option>
+          <option value="vencidas">Vencidas</option>
+          <option value="por-vencer">Por vencer</option>
+          <option value="a-tiempo">A tiempo</option>
+        </select>
+      </div>
+      <div filtros class="desplegable-govco">
+        <label for="f-vig">Vigencia</label>
+        <select id="f-vig" class="btn-dropdown" [ngModel]="filtroVigencia()" (ngModelChange)="filtroVigencia.set($event)">
+          <option value="">Todas</option>
+          @for (a of vigenciasDisponibles; track a) { <option [value]="a">{{ a }}</option> }
+        </select>
+      </div>
+      <div filtros class="check-govco mias">
+        <input type="checkbox" id="f-mias-c" [ngModel]="soloMias()" (ngModelChange)="soloMias.set($event)" />
+        <label for="f-mias-c">Asignadas a mí</label>
+      </div>
+    </app-buscador-govco>
+    <p class="resultado-busqueda admin" role="status" aria-live="polite">
+      <strong>{{ lista().length }}</strong> de {{ svc.total() }} solicitudes
+      @if (hayFiltros()) { <button type="button" class="btn-bdc outline-btn-govco limpiar-admin" (click)="limpiarFiltros()">Limpiar filtros</button> }
+    </p>
+
+    @if (lista().length) {
+      <div class="table-wrap">
+        <table class="tabla">
+          <thead>
+            <tr>
+              <th>Radicado</th>
+              <th>Solicitante</th>
+              <th class="ocultar-movil">Vigencias</th>
+              <th>Plazo</th>
+              <th>Estado</th>
+              <th class="acciones"><span class="visually-hidden">Acciones</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (p of lista(); track p.id) {
+              @let s = semaforo(p);
+              <tr>
+                <td class="nowrap">
+                  <span class="titulo-celda mono">{{ p.radicado }}</span>
+                  <span class="sub-celda">{{ p.fechaRadicacion | date: 'd MMM y, h:mm a' : '-0500' : 'es-CO' }}</span>
+                </td>
+                <td>
+                  <button type="button" class="btn-link asunto" (click)="abrir(p)">{{ p.nombre }}</button>
+                  <span class="sub-celda">C.C. {{ p.cedula }} · {{ p.tipoEntrega === 'fisica' ? 'Entrega física' : 'Por correo' }}{{ p.asignadoNombre ? ' · ' + p.asignadoNombre : '' }}</span>
+                  @if (p.migradoDe) { <span class="badge badge-info">Portal anterior</span> }
+                </td>
+                <td class="ocultar-movil">
+                  <ul class="vigencias">@for (v of p.vigencias; track v) { <li>{{ v }}</li> }</ul>
+                </td>
+                <td class="nowrap">
+                  @switch (s.estado) {
+                    @case ('vencida') { <span class="plazo plazo-vencida">Vencida hace {{ -s.diasRestantes }} {{ -s.diasRestantes === 1 ? 'día' : 'días' }}</span> }
+                    @case ('alerta') { <span class="plazo plazo-alerta">{{ s.diasRestantes === 0 ? 'Vence hoy' : 'Quedan ' + s.diasRestantes + (s.diasRestantes === 1 ? ' día' : ' días') }}</span> }
+                    @case ('ok') { <span class="plazo plazo-ok">Quedan {{ s.diasRestantes }} días</span> }
+                    @default { <span class="sub-celda">{{ p.fechaRespuesta ? 'Respondida ' + (p.fechaRespuesta | date: 'd MMM' : '-0500' : 'es-CO') : '—' }}</span> }
+                  }
+                </td>
+                <td><span class="badge" [class]="'badge estado-' + p.estado">{{ nombreEstado(p.estado) }}</span></td>
+                <td class="acciones"><button type="button" class="btn btn-sm btn-primario" (click)="abrir(p)">Gestionar</button></td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    } @else {
+      <p class="vacio">{{ svc.cargando() ? 'Cargando solicitudes…' : svc.total() ? 'No hay solicitudes con estos filtros.' : 'Aún no se han radicado solicitudes contractuales.' }}</p>
+    }
+  </section>
+}
+
+<!-- ===================== Detalle ===================== -->
+@if (detalle(); as d) {
+  @let s = semaforo(d);
+  <div class="modal-fondo" (click)="cerrarDetalle()">
+    <div class="modal-caja grande detalle" role="dialog" aria-modal="true" aria-labelledby="titulo-detalle-c" (click)="$event.stopPropagation()" (keydown.escape)="cerrarDetalle()">
+      <div class="modal-head">
+        <h2 id="titulo-detalle-c"><span class="mono">{{ d.radicado }}</span> · {{ d.nombre }}</h2>
+        <button type="button" class="btn btn-icono" (click)="cerrarDetalle()" aria-label="Cerrar">✕</button>
+      </div>
+      <div class="modal-body">
+        @if (errorDetalle()) { <div class="aviso aviso-error" role="alert">{{ errorDetalle() }}</div> }
+
+        <div class="resumen">
+          <span class="badge" [class]="'badge estado-' + d.estado">{{ nombreEstado(d.estado) }}</span>
+          @switch (s.estado) {
+            @case ('vencida') { <span class="plazo plazo-vencida">Vencida hace {{ -s.diasRestantes }} días hábiles</span> }
+            @case ('alerta') { <span class="plazo plazo-alerta">{{ s.diasRestantes === 0 ? 'Vence hoy' : 'Vence en ' + s.diasRestantes + ' días hábiles' }}</span> }
+            @case ('ok') { <span class="plazo plazo-ok">Vence en {{ s.diasRestantes }} días hábiles</span> }
+          }
+          <span>Radicada {{ d.fechaRadicacion | date: "d 'de' MMMM 'de' y, h:mm a" : '-0500' : 'es-CO' }}</span>
+          <span>Vence {{ d.fechaVencimiento | date: "d 'de' MMMM 'de' y" : '-0500' : 'es-CO' }}</span>
+        </div>
+
+        <div class="columnas">
+          <div>
+            <h3>Certificación de contratos</h3>
+            <dl class="datos">
+              <dt>Cédula</dt><dd>{{ d.cedula }}</dd>
+              <dt>Nombre</dt><dd>{{ d.nombre }}</dd>
+              <dt>Correo</dt><dd><a [href]="'mailto:' + d.correo">{{ d.correo }}</a></dd>
+              <dt>Teléfono</dt><dd>{{ d.telefono }}</dd>
+              <dt>Entrega</dt><dd>{{ d.tipoEntrega === 'fisica' ? 'Física (la recoge en la entidad)' : 'Por correo electrónico' }}</dd>
+              <dt>Vigencias</dt><dd><ul class="vigencias">@for (v of d.vigencias; track v) { <li>{{ v }}</li> }</ul></dd>
+            </dl>
+            <h4>Descripción</h4>
+            <p class="mensaje">{{ d.descripcion }}</p>
+
+            <h4>Historial</h4>
+            <ol class="historial">
+              @for (h of d.historial; track h.id) {
+                <li>
+                  <span class="h-fecha">{{ h.fecha | date: 'd MMM y, h:mm a' : '-0500' : 'es-CO' }}</span>
+                  <b>{{ h.accion }}</b> <small>· {{ h.usuario }}</small>
+                  @if (h.detalle) { <p>{{ h.detalle }}</p> }
+                </li>
+              }
+            </ol>
+          </div>
+
+          <div class="gestion">
+            <form class="caja" (ngSubmit)="guardarGestion()">
+              <h4>Gestión interna</h4>
+              <div class="campo">
+                <label for="gc-estado">Estado</label>
+                <select id="gc-estado" class="select" name="estado" [(ngModel)]="gestion.estado">
+                  @for (e of estados; track e.valor) {
+                    <option [value]="e.valor" [disabled]="(e.valor === 'respondida' || e.valor === 'rechazada') && !d.respuesta">{{ e.nombre }}</option>
+                  }
+                </select>
+              </div>
+              <div class="campo">
+                <label for="gc-resp">Responsable</label>
+                <select id="gc-resp" class="select" name="asignadoA" [(ngModel)]="gestion.asignadoA">
+                  <option value="">Sin responsable</option>
+                  @for (r of responsables(); track r.id) { <option [value]="r.id">{{ r.nombre }}{{ r.area ? ' · ' + r.area : '' }}</option> }
+                </select>
+              </div>
+              <div class="campo">
+                <label for="gc-nota">Nota interna <span class="opc">(no la ve el solicitante)</span></label>
+                <textarea id="gc-nota" class="textarea" rows="2" name="nota" [(ngModel)]="gestion.nota" maxlength="2000"></textarea>
+              </div>
+              <button type="submit" class="btn" [disabled]="guardando()">Guardar gestión</button>
+            </form>
+
+            <form class="caja" (ngSubmit)="responder()">
+              <h4>{{ d.respuesta ? 'Respuesta registrada' : 'Responder y adjuntar certificación' }}</h4>
+              @if (d.fechaRespuesta) {
+                <p class="nota">Respondida {{ d.fechaRespuesta | date: 'd MMM y, h:mm a' : '-0500' : 'es-CO' }} por {{ d.respondidoPor || '—' }}.</p>
+              }
+              <div class="campo">
+                <label for="rc-texto">Respuesta *</label>
+                <textarea id="rc-texto" class="textarea" rows="7" name="respuesta" [(ngModel)]="respuesta.texto" maxlength="10000"></textarea>
+              </div>
+              @let enviados = archivosDe(d, 'respuesta');
+              @if (enviados.length) {
+                <ul class="archivos">
+                  @for (a of enviados; track a.id) {
+                    <li><button type="button" class="btn-link" (click)="descargar(d, a)">📄 {{ a.nombre }}</button> <small>{{ tamano(a.tamano) }}</small></li>
+                  }
+                </ul>
+              }
+              <div class="campo">
+                <label for="rc-archivos">Certificación(es) <span class="opc">(PDF firmado; máx. 5 de 10 MB)</span></label>
+                <input id="rc-archivos" type="file" multiple [accept]="extensiones" (change)="elegirArchivos($event)" />
+                @if (archivosRespuesta().length) {
+                  <ul class="archivos">
+                    @for (f of archivosRespuesta(); track $index) {
+                      <li>{{ f.name }} <small>{{ tamano(f.size) }}</small>
+                        <button type="button" class="btn-link" (click)="quitarArchivo($index)">Quitar</button></li>
+                    }
+                  </ul>
+                }
+              </div>
+              <label class="check"><input type="checkbox" name="rechazar" [(ngModel)]="respuesta.rechazar" /> Rechazar (no hay contratos en esas vigencias u otra causa explicada en la respuesta)</label>
+              <div class="fila-botones">
+                <button type="submit" class="btn btn-primario" [disabled]="guardando()">{{ guardando() ? 'Guardando…' : d.respuesta ? 'Actualizar respuesta' : 'Registrar respuesta' }}</button>
+                @if (d.correo && (d.respuesta || respuesta.texto)) { <a class="btn" [href]="enlaceCorreo(d)">Enviar por correo ✉</a> }
+              </div>
+              <p class="nota">El solicitante descarga la certificación en el portal con su cédula y el radicado.</p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+}
+
+<!-- ===================== Registrar ===================== -->
+@if (registroAbierto()) {
+  <div class="modal-fondo" (click)="registroAbierto.set(false)">
+    <div class="modal-caja grande" role="dialog" aria-modal="true" aria-labelledby="titulo-registro-c" (click)="$event.stopPropagation()" (keydown.escape)="registroAbierto.set(false)">
+      <div class="modal-head">
+        <h2 id="titulo-registro-c">Registrar solicitud recibida en ventanilla o por correo</h2>
+        <button type="button" class="btn btn-icono" (click)="registroAbierto.set(false)" aria-label="Cerrar">✕</button>
+      </div>
+      <form (ngSubmit)="registrar()" novalidate>
+        <div class="modal-body">
+          <div class="form-grid">
+            <div class="campo">
+              <label for="rgc-cedula">Cédula *</label>
+              <input id="rgc-cedula" class="input" name="cedula" [(ngModel)]="registro.cedula" maxlength="20" inputmode="numeric" />
+            </div>
+            <div class="campo">
+              <label for="rgc-nombre">Nombre completo *</label>
+              <input id="rgc-nombre" class="input" name="nombre" [(ngModel)]="registro.nombre" maxlength="150" />
+            </div>
+            <div class="campo">
+              <label for="rgc-correo">Correo *</label>
+              <input id="rgc-correo" type="email" class="input" name="correo" [(ngModel)]="registro.correo" maxlength="150" />
+            </div>
+            <div class="campo">
+              <label for="rgc-tel">Teléfono *</label>
+              <input id="rgc-tel" class="input" name="telefono" [(ngModel)]="registro.telefono" maxlength="30" inputmode="tel" />
+            </div>
+            <div class="campo">
+              <label for="rgc-entrega">Tipo de entrega *</label>
+              <select id="rgc-entrega" class="select" name="tipoEntrega" [(ngModel)]="registro.tipoEntrega">
+                <option value="correo">Por correo electrónico</option>
+                <option value="fisica">Física</option>
+              </select>
+            </div>
+            <fieldset class="full grupo-vig">
+              <legend>Vigencias *</legend>
+              <div class="vig-opciones">
+                @for (a of vigenciasDisponibles; track a) {
+                  <label class="check"><input type="checkbox" [checked]="registro.vigencias.includes(a)" (change)="alternarVigencia(a, $any($event.target).checked)" /> {{ a }}</label>
+                }
+              </div>
+            </fieldset>
+            <div class="campo full">
+              <label for="rgc-desc">Descripción *</label>
+              <textarea id="rgc-desc" class="textarea" rows="4" name="descripcion" [(ngModel)]="registro.descripcion" maxlength="4000"></textarea>
+            </div>
+            @if (errorRegistro()) { <p class="full err" role="alert">{{ errorRegistro() }}</p> }
+          </div>
+        </div>
+        <div class="modal-foot">
+          <button type="button" class="btn" (click)="registroAbierto.set(false)">Cancelar</button>
+          <button type="submit" class="btn btn-primario" [disabled]="guardando()">{{ guardando() ? 'Radicando…' : 'Radicar' }}</button>
+        </div>
+      </form>
+    </div>
+  </div>
+}
+
+@if (cargandoDetalle()) { <div class="cargando-capa" role="status">Abriendo solicitud…</div> }

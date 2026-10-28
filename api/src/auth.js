@@ -5,6 +5,7 @@ const rateLimit = require('express-rate-limit');
 const { pool } = require('./db');
 const { config } = require('./config');
 const { ErrorApi } = require('./errores');
+const { modulosDe } = require('./permisos');
 
 /** Lee el token si viene; no exige sesión (para GET públicos) */
 function sesionOpcional(req, _res, next) {
@@ -45,7 +46,7 @@ rutasAuth.post('/login', limiteLogin, async (req, res, next) => {
     if (!usuario || !clave) throw new ErrorApi(400, 'Ingrese usuario y contraseña.');
 
     const [filas] = await pool.query(
-      'SELECT id, nombre, usuario, password_hash, rol, activo FROM cms_usuarios WHERE usuario = ? LIMIT 1',
+      'SELECT id, nombre, usuario, password_hash, rol, modulos, activo FROM cms_usuarios WHERE usuario = ? LIMIT 1',
       [usuario],
     );
     const u = filas[0];
@@ -55,7 +56,8 @@ rutasAuth.post('/login', limiteLogin, async (req, res, next) => {
     await pool.query('UPDATE cms_usuarios SET ultimo_acceso = NOW() WHERE id = ?', [u.id]);
     const datos = { id: u.id, nombre: u.nombre, usuario: u.usuario, rol: u.rol };
     const token = jwt.sign(datos, config.jwtSecret, { expiresIn: config.jwtExpira });
-    res.json({ token, usuario: datos });
+    // Los módulos no van en el token: la API los consulta en cada petición
+    res.json({ token, usuario: { ...datos, modulos: modulosDe(u) } });
   } catch (e) {
     next(e);
   }
@@ -64,7 +66,7 @@ rutasAuth.post('/login', limiteLogin, async (req, res, next) => {
 rutasAuth.get('/yo', requiereSesion, async (req, res, next) => {
   try {
     const [filas] = await pool.query(
-      'SELECT id, nombre, usuario, rol, activo, ultimo_acceso, creado_en FROM cms_usuarios WHERE id = ? LIMIT 1',
+      'SELECT id, nombre, usuario, correo, area, rol, modulos, activo, ultimo_acceso, creado_en FROM cms_usuarios WHERE id = ? LIMIT 1',
       [req.usuario.id],
     );
     const u = filas[0];
@@ -74,7 +76,10 @@ rutasAuth.get('/yo', requiereSesion, async (req, res, next) => {
         id: u.id,
         nombre: u.nombre,
         usuario: u.usuario,
+        correo: u.correo,
+        area: u.area,
         rol: u.rol,
+        modulos: modulosDe(u),
         ultimoAcceso: u.ultimo_acceso,
         creadoEn: u.creado_en,
         sesionVence: req.usuario.exp ? new Date(req.usuario.exp * 1000).toISOString() : null,

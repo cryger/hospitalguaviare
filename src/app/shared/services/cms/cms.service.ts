@@ -18,7 +18,7 @@ export interface CmsRutaResuelta {
 }
 
 /** Prefijos que nunca maneja el CMS (rutas del sistema) */
-export const RUTAS_RESERVADAS = ['admin', 'login', 'home', 'assets', 'buscar'];
+export const RUTAS_RESERVADAS = ['admin', 'login', 'home', 'assets', 'buscar', 'pqrsf', 'solicitudes-contractuales', 'seguimiento-solicitudes'];
 
 /**
  * Fachada del CMS: mantiene el estado en signals y delega la

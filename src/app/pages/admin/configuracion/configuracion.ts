@@ -1,7 +1,8 @@
 import { Component, OnInit, VERSION, computed, inject, signal } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { PermisosService } from '../../../shared/services/permisos/permisos.service';
 import { CmsAuthService, PerfilCms } from '../../../shared/services/cms/cms-auth.service';
 import {
   ConfiguracionService,
@@ -36,18 +37,22 @@ export class Configuracion implements OnInit {
   private readonly router = inject(Router);
   readonly config = inject(ConfiguracionService);
 
-  readonly pestanas: { id: Pestana; titulo: string; icono: string }[] = [
-    { id: 'entidad', titulo: 'Datos de la entidad', icono: '🏥' },
-    { id: 'cuenta', titulo: 'Mi cuenta', icono: '👤' },
-    { id: 'sesion', titulo: 'Sesión y seguridad', icono: '🔒' },
-    { id: 'sistema', titulo: 'Estado del sistema', icono: '🖥️' },
-  ];
-  readonly pestana = signal<Pestana>('entidad');
+  /** Ruta /admin/mi-cuenta: usuarios sin el módulo de configuración solo ven su cuenta */
+  readonly soloCuenta = !!inject(ActivatedRoute).snapshot.data['soloCuenta'];
+  readonly pestanas: { id: Pestana; titulo: string; icono: string }[] = (
+    [
+      { id: 'entidad', titulo: 'Datos de la entidad', icono: '🏥' },
+      { id: 'cuenta', titulo: 'Mi cuenta', icono: '👤' },
+      { id: 'sesion', titulo: 'Sesión y seguridad', icono: '🔒' },
+      { id: 'sistema', titulo: 'Estado del sistema', icono: '🖥️' },
+    ] as { id: Pestana; titulo: string; icono: string }[]
+  ).filter((t) => !this.soloCuenta || t.id === 'cuenta');
+  readonly pestana = signal<Pestana>(this.soloCuenta ? 'cuenta' : 'entidad');
   /** true cuando ya se cargó la configuración (también fuerza el repintado en modo zoneless) */
   readonly listo = signal(false);
   readonly redes = REDES_SOCIALES;
   readonly usaApi = this.config.usaApi;
-  readonly esAdmin = !this.usaApi || this.auth.usuario?.rol === 'admin';
+  readonly esAdmin = !this.usaApi || inject(PermisosService).puede('configuracion');
 
   /* ===== Datos de la entidad ===== */
   borrador: DatosEntidad = clonar(ENTIDAD_PREDETERMINADA);

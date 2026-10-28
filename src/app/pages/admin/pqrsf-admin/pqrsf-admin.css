@@ -1,290 +1,69 @@
-/* =========================
-   TÍTULO
-========================= */
-.gov-title {
-  font-size: 1.6rem;
-  font-weight: 600;
-  margin-bottom: 1.2rem;
+/* PQRSFD y solicitudes contractuales (dashboard) — estilos compartidos */
+.kpis { display: flex; gap: .75rem; flex-wrap: wrap; margin-bottom: 1rem; }
+.kpi {
+  background: #fff; border: 1px solid var(--c-borde); border-radius: 8px; padding: .6rem .9rem; font: inherit;
+  font-size: .8rem; color: var(--c-muted); min-width: 8.5rem; text-align: left;
 }
+button.kpi { cursor: pointer; }
+button.kpi:hover { border-color: #4672C8; }
+button.kpi:focus-visible { outline: 2px solid #000; outline-offset: 2px; }
+.kpi b { display: block; font-size: 1.35rem; color: var(--c-texto); }
+.kpi-danger.activo { border-color: var(--c-danger); background: var(--c-danger-bg); }
+.kpi-danger.activo b { color: var(--c-danger); }
+.kpi-warn.activo { border-color: var(--c-warn); background: var(--c-warn-bg); }
+.kpi-warn.activo b { color: var(--c-warn); }
 
-/* =========================
-   FILTROS / TABS
-========================= */
-.pqrsf-filtros {
-  display: flex;
-  gap: .5rem;
-  margin-bottom: 1rem;
+.mias { align-self: flex-end; padding-bottom: .55rem; }
+.nowrap { white-space: nowrap; }
+.mono { font-family: ui-monospace, Consolas, 'Courier New', monospace; letter-spacing: .01em; }
+.asunto { display: block; text-align: left; color: var(--c-texto); font-weight: 600; font-size: .9rem; margin: .2rem 0 .1rem; }
+
+.tipo { display: inline-block; font-size: .68rem; font-weight: 700; text-transform: uppercase; letter-spacing: .03em; color: #0943B5; }
+.tipo-queja, .tipo-reclamo { color: #b45309; }
+.tipo-denuncia { color: #a80521; }
+.tipo-felicitacion { color: #069169; }
+
+.plazo { display: inline-block; font-size: .75rem; font-weight: 700; padding: .18rem .55rem; border-radius: 999px; }
+.plazo-ok { background: var(--c-ok-bg); color: var(--c-ok); }
+.plazo-alerta { background: var(--c-warn-bg); color: var(--c-warn); }
+.plazo-vencida { background: var(--c-danger-bg); color: var(--c-danger); }
+
+.estado-radicada { background: #E5ECF8; color: #0943B5; }
+.estado-en_tramite { background: var(--c-warn-bg); color: var(--c-warn); }
+.estado-respondida { background: var(--c-ok-bg); color: var(--c-ok); }
+.estado-cerrada, .estado-trasladada { background: #eef0f3; color: #4b5563; }
+.estado-rechazada { background: var(--c-danger-bg); color: var(--c-danger); }
+
+/* ===== Detalle ===== */
+.modal-caja.detalle { max-width: 1100px; }
+.resumen { display: flex; flex-wrap: wrap; align-items: center; gap: .4rem 1rem; font-size: .82rem; color: var(--c-texto-2); margin-bottom: 1rem; }
+.columnas { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 1.5rem; }
+.columnas h3 { margin: 0 0 .5rem; font-size: 1.05rem; }
+.columnas h4 { margin: 1.2rem 0 .5rem; font-size: .85rem; text-transform: uppercase; letter-spacing: .03em; color: var(--c-muted); }
+.caja h4 { margin-top: 0; }
+.mensaje { white-space: pre-wrap; line-height: 1.55; background: var(--c-fondo-suave); border: 1px solid var(--c-borde); border-radius: 8px; padding: .8rem 1rem; margin: 0; font-size: .9rem; }
+.datos { display: grid; grid-template-columns: max-content 1fr; gap: .3rem .9rem; margin: 0; font-size: .86rem; }
+.datos dt { color: var(--c-muted); }
+.datos dd { margin: 0; word-break: break-word; }
+.archivos { list-style: none; margin: 0 0 .5rem; padding: 0; display: grid; gap: .3rem; font-size: .85rem; }
+.archivos small { color: var(--c-muted); }
+.historial { list-style: none; margin: 0; padding: 0 0 0 1rem; border-left: 2px solid var(--c-borde); display: grid; gap: .7rem; font-size: .82rem; }
+.historial li { position: relative; }
+.historial li::before { content: ''; position: absolute; left: -1.38rem; top: .3rem; width: .6rem; height: .6rem; border-radius: 50%; background: #4672C8; }
+.historial p { margin: .2rem 0 0; color: var(--c-texto-2); white-space: pre-wrap; }
+.h-fecha { display: block; color: var(--c-muted); font-size: .74rem; }
+.gestion { display: grid; gap: 1rem; align-content: start; }
+.caja { border: 1px solid var(--c-borde); border-radius: 10px; padding: 1rem; display: grid; gap: .7rem; background: #fff; }
+.fila-botones { display: flex; flex-wrap: wrap; gap: .5rem; }
+.nota { font-size: .78rem; color: var(--c-muted); margin: 0; }
+.opc { font-weight: 400; color: var(--c-muted); }
+.err { color: var(--c-danger); font-size: .82rem; margin: 0; font-weight: 600; }
+.cargando-capa {
+  position: fixed; inset: auto 1rem 1rem auto; z-index: 2000; background: #0943B5; color: #fff;
+  padding: .6rem 1rem; border-radius: 8px; font-size: .85rem; box-shadow: 0 6px 18px rgba(0, 0, 0, .2);
 }
+.visually-hidden { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; }
 
-.gov-tab {
-  border: 1px solid #004884;
-  background: #ffffff;
-  color: #004884;
-  padding: .45rem .9rem;
-  border-radius: 4px;
-  cursor: pointer;
-  font-weight: 500;
-}
-
-.gov-tab.active {
-  background: #004884;
-  color: #ffffff;
-}
-
-.gov-tab.warning {
-  border-color: #b45309;
-  color: #b45309;
-}
-
-.gov-tab.warning.active {
-  background: #b45309;
-  color: #ffffff;
-}
-
-.gov-tab.success {
-  border-color: #047857;
-  color: #047857;
-}
-
-.gov-tab.success.active {
-  background: #047857;
-  color: #ffffff;
-}
-
-/* =========================
-   TABLA
-========================= */
-.gov-table-wrapper {
-  background: #ffffff;
-  border-radius: 8px;
-  padding: 1rem;
-  box-shadow: 0 2px 6px rgba(0,0,0,.08);
-}
-
-.gov-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.gov-table thead {
-  background: #f3f4f6;
-}
-
-.gov-table th,
-.gov-table td {
-  padding: .65rem .75rem;
-  text-align: left;
-  font-size: .95rem;
-}
-
-.gov-table th {
-  font-weight: 600;
-  color: #374151;
-}
-
-.gov-table tbody tr {
-  border-bottom: 1px solid #e5e7eb;
-}
-
-.gov-table tbody tr:hover {
-  background: #f9fafb;
-}
-
-/* =========================
-   ESTADOS
-========================= */
-.estado {
-  padding: .2rem .55rem;
-  border-radius: 999px;
-  font-size: .8rem;
-  font-weight: 600;
-}
-
-.estado.pendiente {
-  background: #fef3c7;
-  color: #92400e;
-}
-
-.estado.respondida {
-  background: #dcfce7;
-  color: #166534;
-}
-
-/* =========================
-   ACCIONES
-========================= */
-.acciones {
-  text-align: right;
-}
-
-.gov-btn-secondary {
-  background: #004884;
-  color: #ffffff;
-  border: none;
-  padding: .35rem .75rem;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.gov-btn-secondary:hover {
-  background: #00345d;
-}
-
-/* =========================
-   SIN DATOS
-========================= */
-.sin-datos {
-  text-align: center;
-  padding: 1rem;
-  color: #6b7280;
-  font-style: italic;
-}
-
-/* =========================
-   MODAL BASE GOV
-========================= */
-.gov-modal-backdrop {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,.55);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 9999;
-}
-
-.gov-modal {
-  background: #ffffff;
-  border-radius: 8px;
-  width: 90%;
-  max-width: 600px;
-  box-shadow: 0 10px 30px rgba(0,0,0,.25);
-  animation: modalFade .25s ease;
-}
-
-.gov-modal-lg {
-  max-width: 750px;
-}
-
-/* =========================
-   HEADER
-========================= */
-.gov-modal-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: start;
-  padding: 1rem 1.25rem;
-  border-bottom: 1px solid #e5e7eb;
-}
-
-.gov-modal-header h3 {
-  margin: 0;
-  font-size: 1.2rem;
-}
-
-.gov-modal-subtitle {
-  font-size: .85rem;
-  color: #6b7280;
-  margin-top: .25rem;
-}
-
-.gov-modal-close {
-  background: transparent;
-  border: none;
-  font-size: 1.2rem;
-  cursor: pointer;
-}
-
-/* =========================
-   BODY
-========================= */
-.gov-modal-body {
-  padding: 1.25rem;
-}
-
-/* =========================
-   INFO PQRSF
-========================= */
-.pqrsf-info {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: .5rem 1rem;
-  margin-bottom: 1rem;
-  font-size: .9rem;
-}
-
-/* =========================
-   MENSAJE
-========================= */
-.pqrsf-mensaje label {
-  font-weight: 600;
-  margin-bottom: .3rem;
-  display: block;
-}
-
-.mensaje-box {
-  background: #f9fafb;
-  border: 1px solid #e5e7eb;
-  border-radius: 4px;
-  padding: .75rem;
-  font-size: .9rem;
-  margin-bottom: 1rem;
-  white-space: pre-line;
-}
-
-/* =========================
-   FORM
-========================= */
-.gov-field textarea {
-  width: 100%;
-  resize: vertical;
-}
-
-/* =========================
-   ACCIONES
-========================= */
-.gov-modal-actions {
-  display: flex;
-  justify-content: flex-end;
-  gap: .5rem;
-  margin-top: 1rem;
-}
-
-/* =========================
-   BOTONES
-========================= */
-.gov-btn-primary {
-  background: #004884;
-  color: #ffffff;
-  border: none;
-  padding: .45rem .9rem;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.gov-btn-primary:disabled {
-  opacity: .5;
-  cursor: not-allowed;
-}
-
-.gov-btn-secondary {
-  background: #e5e7eb;
-  border: none;
-  padding: .45rem .9rem;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-/* =========================
-   ANIMACIÓN
-========================= */
-@keyframes modalFade {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+@media (max-width: 900px) {
+  .columnas { grid-template-columns: 1fr; }
 }

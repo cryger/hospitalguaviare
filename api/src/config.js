@@ -19,6 +19,8 @@ const config = {
   corsOrigins: (process.env.CORS_ORIGINS || '').split(',').map((s) => s.trim()).filter(Boolean),
   publicUrl: (process.env.PUBLIC_URL || '').replace(/\/+$/, ''),
   uploadDir: path.resolve(process.env.UPLOAD_DIR || './uploads'),
+  /** Adjuntos con datos personales (PQRSFD, solicitudes contractuales): NO se publican */
+  privadoDir: path.resolve(process.env.PRIVADO_DIR || './privado'),
   maxArchivoMb: Number(process.env.MAX_ARCHIVO_MB || 20),
 };
 

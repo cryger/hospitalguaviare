@@ -1,58 +1,278 @@
-<section class="gov-container">
-  <h2 class="gov-title">PQRSF</h2>
+<section class="tramite">
+  <header class="tramite-head">
+    <h1>PQRSFD</h1>
+    <p class="lead">Peticiones, quejas, reclamos, sugerencias, felicitaciones y denuncias. Radique su solicitud en línea y consulte su
+      estado con el número de radicado.</p>
+  </header>
 
-  <form class="gov-form" [formGroup]="form" (ngSubmit)="enviar()">
+  <div class="tabs-govco" role="tablist" aria-label="Opciones de PQRSFD">
+    <button type="button" role="tab" id="tab-radicar" [attr.aria-selected]="pestana() === 'radicar'" aria-controls="panel-radicar"
+            [class.activa]="pestana() === 'radicar'" (click)="pestana.set('radicar')">Nueva solicitud</button>
+    <button type="button" role="tab" id="tab-consultar" [attr.aria-selected]="pestana() === 'consultar'" aria-controls="panel-consultar"
+            [class.activa]="pestana() === 'consultar'" (click)="pestana.set('consultar')">Consultar estado</button>
+  </div>
 
-    <div class="gov-field">
-      <label>Tipo</label>
-      <select formControlName="tipo">
-        <option>Petición</option>
-        <option>Queja</option>
-        <option>Reclamo</option>
-        <option>Sugerencia</option>
-        <option>Felicitación</option>
-      </select>
+  @if (!svc.disponible) {
+    <div class="alerta-govco info" role="status">
+      <strong>La radicación en línea aún no está habilitada en esta versión del portal.</strong>
+      Mientras tanto, envíe su solicitud al correo
+      <a href="mailto:contactenos@esehospitalguaviare.gov.co">contactenos&#64;esehospitalguaviare.gov.co</a>
+      o radíquela en la ventanilla de Atención al Usuario (SIAU).
     </div>
+  }
 
-    <div class="gov-field">
-      <label>Nombre completo</label>
-      <input type="text" formControlName="nombre">
+  <!-- ======================= RADICAR ======================= -->
+  @if (pestana() === 'radicar') {
+    <div id="panel-radicar" role="tabpanel" aria-labelledby="tab-radicar">
+
+      @if (radicacion(); as r) {
+        <div class="constancia" tabindex="-1" #constancia role="status">
+          <span class="constancia-ico" aria-hidden="true">✓</span>
+          <h2>Su solicitud quedó radicada</h2>
+          <dl>
+            <dt>Número de radicado</dt><dd class="mono grande">{{ r.radicado }}</dd>
+            <dt>Código de consulta</dt><dd class="mono grande">{{ r.codigo }}</dd>
+            <dt>Tipo</dt><dd>{{ r.tipoNombre }}</dd>
+            <dt>Fecha de radicación</dt><dd>{{ r.fechaRadicacion | date: "d 'de' MMMM 'de' y, h:mm a" : '-0500' : 'es-CO' }}</dd>
+            <dt>Plazo de respuesta</dt><dd>{{ r.plazoDias }} días hábiles: a más tardar el <b>{{ r.fechaVencimiento | date: "EEEE d 'de' MMMM 'de' y" : '-0500' : 'es-CO' }}</b></dd>
+          </dl>
+          <p class="importante">Guarde el número de radicado y el código de consulta: los necesita para ver el estado y la respuesta.</p>
+          <div class="acciones-govco">
+            <button type="button" class="btn-bdc fill-btn-govco" (click)="irAConsulta(r)">Consultar mi solicitud</button>
+            <button type="button" class="btn-bdc outline-btn-govco" (click)="imprimir()">Imprimir constancia</button>
+            <button type="button" class="btn-bdc outline-btn-govco" (click)="nuevaSolicitud()">Radicar otra solicitud</button>
+          </div>
+        </div>
+      } @else {
+        <p class="obligatorios">Los campos marcados con <span class="req" aria-hidden="true">*</span><span class="visually-hidden">asterisco</span> son obligatorios.</p>
+
+        @if (intentado() && errores().length) {
+          <div class="alerta-govco error" tabindex="-1" #resumenErrores role="alert">
+            <strong>Revise {{ errores().length === 1 ? 'el siguiente dato' : 'los siguientes ' + errores().length + ' datos' }}:</strong>
+            <ul>
+              @for (e of errores(); track e.id + e.texto) { <li><a [href]="'#' + e.id" (click)="irACampo($event, e.id)">{{ e.texto }}</a></li> }
+            </ul>
+          </div>
+        }
+
+        <form [formGroup]="form" (ngSubmit)="enviar()" novalidate>
+          <!-- Campo trampa: los lectores de pantalla y el teclado no lo ven -->
+          <div class="trampa" aria-hidden="true">
+            <label for="sitioWeb">No llene este campo</label>
+            <input id="sitioWeb" formControlName="sitioWeb" tabindex="-1" autocomplete="off" />
+          </div>
+
+          <!-- 1. Tipo -->
+          <fieldset class="seccion">
+            <legend><span class="num">1</span> ¿Qué desea presentar? <span class="req" aria-hidden="true">*</span></legend>
+            <div class="tipos" role="radiogroup" [attr.aria-invalid]="!!error('tipo')" [attr.aria-describedby]="error('tipo') ? 'error-tipo' : null" id="tipo">
+              @for (t of tipos; track t.valor) {
+                <label class="tipo-opcion" [class.on]="form.controls.tipo.value === t.valor">
+                  <input type="radio" name="tipo" [value]="t.valor" [checked]="form.controls.tipo.value === t.valor" (change)="elegirTipo(t.valor)" />
+                  <span>
+                    <b>{{ t.nombre }}</b>
+                    <small>{{ t.ayuda }}</small>
+                    <small class="plazo">Respuesta en {{ t.plazo }} días hábiles</small>
+                  </span>
+                </label>
+              }
+            </div>
+            @if (error('tipo')) { <p class="error-campo" id="error-tipo">{{ error('tipo') }}</p> }
+          </fieldset>
+
+          <!-- 2. Solicitante -->
+          <fieldset class="seccion">
+            <legend><span class="num">2</span> Datos de quien presenta la solicitud</legend>
+
+            @if (tipoElegido()?.permiteAnonimo) {
+              <label class="check-govco anon">
+                <input type="checkbox" formControlName="anonimo" />
+                Presentarla de forma anónima
+              </label>
+              @if (anonimo()) {
+                <p class="ayuda">No le pediremos datos personales. Consulte la respuesta en este portal con el radicado y el código que le daremos.</p>
+              }
+            }
+
+            @if (!anonimo()) {
+              <div class="rejilla">
+                <div class="campo">
+                  <label for="tipoPersona">Tipo de persona</label>
+                  <select id="tipoPersona" formControlName="tipoPersona">
+                    <option value="natural">Persona natural</option>
+                    <option value="juridica">Persona jurídica (empresa, entidad)</option>
+                  </select>
+                </div>
+                <div class="campo">
+                  <label for="tipoDocumento">Tipo de documento <span class="req" aria-hidden="true">*</span></label>
+                  <select id="tipoDocumento" formControlName="tipoDocumento">
+                    @for (d of documentos; track d.valor) { <option [value]="d.valor">{{ d.nombre }}</option> }
+                  </select>
+                </div>
+                <div class="campo">
+                  <label for="numeroDocumento">Número de documento <span class="req" aria-hidden="true">*</span></label>
+                  <input id="numeroDocumento" formControlName="numeroDocumento" inputmode="numeric" maxlength="20" autocomplete="off"
+                         [attr.aria-invalid]="!!error('numeroDocumento')" [attr.aria-describedby]="error('numeroDocumento') ? 'error-numeroDocumento' : null" />
+                  @if (error('numeroDocumento')) { <p class="error-campo" id="error-numeroDocumento">{{ error('numeroDocumento') }}</p> }
+                </div>
+                <div class="campo ancho">
+                  <label for="nombre">{{ form.controls.tipoPersona.value === 'juridica' ? 'Razón social' : 'Nombre completo' }} <span class="req" aria-hidden="true">*</span></label>
+                  <input id="nombre" formControlName="nombre" maxlength="150" autocomplete="name"
+                         [attr.aria-invalid]="!!error('nombre')" [attr.aria-describedby]="error('nombre') ? 'error-nombre' : null" />
+                  @if (error('nombre')) { <p class="error-campo" id="error-nombre">{{ error('nombre') }}</p> }
+                </div>
+              </div>
+            }
+            <div class="rejilla">
+              <div class="campo">
+                <label for="correo">Correo electrónico @if (!anonimo() && form.controls.medioRespuesta.value === 'correo') { <span class="req" aria-hidden="true">*</span> }</label>
+                <input id="correo" type="email" formControlName="correo" maxlength="150" autocomplete="email"
+                       [attr.aria-invalid]="!!error('correo')" [attr.aria-describedby]="error('correo') ? 'error-correo' : 'ayuda-correo'" />
+                @if (error('correo')) { <p class="error-campo" id="error-correo">{{ error('correo') }}</p> }
+                @else { <p class="ayuda" id="ayuda-correo">Ejemplo: nombre&#64;correo.com</p> }
+              </div>
+              <div class="campo">
+                <label for="telefono">Teléfono o celular</label>
+                <input id="telefono" type="tel" formControlName="telefono" maxlength="30" autocomplete="tel"
+                       [attr.aria-invalid]="!!error('telefono')" [attr.aria-describedby]="error('telefono') ? 'error-telefono' : null" />
+                @if (error('telefono')) { <p class="error-campo" id="error-telefono">{{ error('telefono') }}</p> }
+              </div>
+              @if (!anonimo()) {
+                <div class="campo">
+                  <label for="direccion">Dirección @if (form.controls.medioRespuesta.value === 'fisica') { <span class="req" aria-hidden="true">*</span> }</label>
+                  <input id="direccion" formControlName="direccion" maxlength="200" autocomplete="street-address"
+                         [attr.aria-invalid]="!!error('direccion')" [attr.aria-describedby]="error('direccion') ? 'error-direccion' : null" />
+                  @if (error('direccion')) { <p class="error-campo" id="error-direccion">{{ error('direccion') }}</p> }
+                </div>
+                <div class="campo">
+                  <label for="municipio">Municipio</label>
+                  <input id="municipio" formControlName="municipio" maxlength="100" />
+                </div>
+                <div class="campo">
+                  <label for="grupoPoblacional">Grupo poblacional <span class="opc">(opcional)</span></label>
+                  <select id="grupoPoblacional" formControlName="grupoPoblacional">
+                    @for (g of grupos; track g) { <option [value]="g">{{ g }}</option> }
+                  </select>
+                </div>
+              }
+            </div>
+          </fieldset>
+
+          <!-- 3. Solicitud -->
+          <fieldset class="seccion">
+            <legend><span class="num">3</span> Su solicitud</legend>
+            <div class="campo">
+              <label for="asunto">Asunto <span class="req" aria-hidden="true">*</span></label>
+              <input id="asunto" formControlName="asunto" maxlength="200"
+                     [attr.aria-invalid]="!!error('asunto')" [attr.aria-describedby]="error('asunto') ? 'error-asunto' : null" />
+              @if (error('asunto')) { <p class="error-campo" id="error-asunto">{{ error('asunto') }}</p> }
+            </div>
+            <div class="campo">
+              <label for="mensaje">Descripción <span class="req" aria-hidden="true">*</span></label>
+              <textarea id="mensaje" formControlName="mensaje" rows="7" maxlength="8000"
+                        [attr.aria-invalid]="!!error('mensaje')" [attr.aria-describedby]="(error('mensaje') ? 'error-mensaje ' : '') + 'contador-mensaje'"></textarea>
+              <p class="ayuda contador" id="contador-mensaje">{{ caracteres() }} de 8000 caracteres. Indique fechas, lugares y personas involucradas, si aplica.</p>
+              @if (error('mensaje')) { <p class="error-campo" id="error-mensaje">{{ error('mensaje') }}</p> }
+            </div>
+            <div class="campo">
+              <label for="archivos">Documentos de soporte <span class="opc">(opcional)</span></label>
+              <input id="archivos" type="file" multiple [accept]="extensiones" (change)="agregarArchivos($event)" aria-describedby="ayuda-archivos" />
+              <p class="ayuda" id="ayuda-archivos">Hasta {{ maxArchivos }} archivos PDF, JPG, PNG, Word o Excel de máximo {{ maxMb }} MB cada uno.</p>
+              @if (errorArchivos()) { <p class="error-campo" role="alert">{{ errorArchivos() }}</p> }
+              @if (archivos().length) {
+                <ul class="lista-archivos">
+                  @for (f of archivos(); track $index) {
+                    <li><span>📎 {{ f.name }} <small>{{ tamano(f.size) }}</small></span>
+                      <button type="button" class="btn-quitar" (click)="quitarArchivo($index)" [attr.aria-label]="'Quitar ' + f.name">Quitar</button></li>
+                  }
+                </ul>
+              }
+            </div>
+          </fieldset>
+
+          <!-- 4. Respuesta -->
+          @if (!anonimo()) {
+            <fieldset class="seccion">
+              <legend><span class="num">4</span> ¿Cómo quiere recibir la respuesta?</legend>
+              <div class="radios">
+                <label class="check-govco"><input type="radio" formControlName="medioRespuesta" value="correo" /> Correo electrónico</label>
+                <label class="check-govco"><input type="radio" formControlName="medioRespuesta" value="fisica" /> Correspondencia física (dirección)</label>
+              </div>
+            </fieldset>
+          }
+
+          <div class="autorizacion" id="aceptaDatos">
+            <label class="check-govco">
+              <input type="checkbox" formControlName="aceptaDatos" [attr.aria-invalid]="!!error('aceptaDatos')"
+                     [attr.aria-describedby]="error('aceptaDatos') ? 'error-aceptaDatos' : null" />
+              <span>Autorizo el tratamiento de mis datos personales para atender esta solicitud, según la
+                <a routerLink="/politicas-de-privacidad" target="_blank">política de privacidad y tratamiento de datos</a>
+                (Ley 1581 de 2012). <span class="req" aria-hidden="true">*</span></span>
+            </label>
+            @if (error('aceptaDatos')) { <p class="error-campo" id="error-aceptaDatos">{{ error('aceptaDatos') }}</p> }
+          </div>
+
+          @if (errorEnvio()) { <div class="alerta-govco error" role="alert">{{ errorEnvio() }}</div> }
+
+          <div class="acciones-govco">
+            <button type="submit" class="btn-bdc fill-btn-govco" [disabled]="enviando() || !svc.disponible">
+              {{ enviando() ? 'Radicando…' : 'Radicar solicitud' }}
+            </button>
+          </div>
+        </form>
+      }
     </div>
+  }
 
-    <div class="gov-field">
-      <label>Correo electrónico</label>
-      <input type="email" formControlName="correo">
+  <!-- ======================= CONSULTAR ======================= -->
+  @if (pestana() === 'consultar') {
+    <div id="panel-consultar" role="tabpanel" aria-labelledby="tab-consultar">
+      <form class="consulta" [formGroup]="consulta" (ngSubmit)="consultar()" novalidate>
+        <div class="campo">
+          <label for="c-radicado">Número de radicado</label>
+          <input id="c-radicado" formControlName="radicado" placeholder="PQRSFD-2026-000123" autocapitalize="characters" autocomplete="off" />
+        </div>
+        <div class="campo">
+          <label for="c-codigo">Código de consulta</label>
+          <input id="c-codigo" formControlName="codigo" maxlength="12" autocapitalize="characters" autocomplete="off" />
+        </div>
+        <button type="submit" class="btn-bdc fill-btn-govco" [disabled]="consultando() || !svc.disponible">{{ consultando() ? 'Consultando…' : 'Consultar' }}</button>
+      </form>
+      <p class="ayuda">El código de consulta aparece en la constancia que recibió al radicar.</p>
+
+      @if (errorConsulta()) { <div class="alerta-govco error" role="alert">{{ errorConsulta() }}</div> }
+
+      @if (resultado(); as c) {
+        <article class="resultado" aria-live="polite">
+          <header>
+            <h2><span class="mono">{{ c.radicado }}</span></h2>
+            <p>{{ c.tipoNombre }} · {{ c.asunto }}</p>
+          </header>
+          <ol class="pasos">
+            <li [class.hecho]="paso(c.estado) >= 1"><b>Radicada</b><small>{{ c.fechaRadicacion | date: 'd MMM y' : '-0500' : 'es-CO' }}</small></li>
+            <li [class.hecho]="paso(c.estado) >= 2"><b>{{ c.estado === 'trasladada' ? 'Trasladada' : 'En trámite' }}</b></li>
+            <li [class.hecho]="paso(c.estado) >= 3"><b>Respondida</b>
+              @if (c.fechaRespuesta) { <small>{{ c.fechaRespuesta | date: 'd MMM y' : '-0500' : 'es-CO' }}</small> }</li>
+          </ol>
+          <p>Estado actual: <b>{{ nombreEstado(c.estado) }}</b>.
+            @if (!c.respuesta) { Plazo de respuesta: <b>{{ c.fechaVencimiento | date: "d 'de' MMMM 'de' y" : '-0500' : 'es-CO' }}</b>. }
+          </p>
+          @if (c.estado === 'trasladada') {
+            <p class="ayuda">Su solicitud fue trasladada a la entidad competente. Le informaremos por el medio que eligió.</p>
+          }
+          @if (c.respuesta) {
+            <h3>Respuesta de la E.S.E.</h3>
+            <div class="respuesta">{{ c.respuesta }}</div>
+            @if (c.adjuntos.length) {
+              <ul class="lista-archivos">
+                @for (a of c.adjuntos; track a.id) {
+                  <li><button type="button" class="btn-link-govco" (click)="descargar(a)">📄 Descargar {{ a.nombre }}</button> <small>{{ tamano(a.tamano) }}</small></li>
+                }
+              </ul>
+            }
+          }
+        </article>
+      }
     </div>
-
-    <div class="gov-field">
-      <label>Teléfono (opcional)</label>
-      <input type="text" formControlName="telefono">
-    </div>
-
-    <div class="gov-field">
-      <label>Asunto</label>
-      <input type="text" formControlName="asunto">
-    </div>
-    <div class="gov-field">
-      <label>Adjuntar archivo (PDF / imagen)</label>
-      <input type="file" (change)="onFileChange($event)">
-    </div>
-
-
-    <div class="gov-field">
-      <label>Mensaje</label>
-      <textarea rows="4" formControlName="mensaje"></textarea>
-    </div>
-
-    <div class="gov-actions">
-      <button class="gov-btn-primary" type="submit">
-        Enviar PQRSF
-      </button>
-    </div>
-
-    <div *ngIf="enviado" class="gov-success">
-      Su solicitud ha sido registrada correctamente.
-    </div>
-
-  </form>
+  }
 </section>

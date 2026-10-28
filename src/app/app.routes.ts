@@ -17,6 +17,7 @@ import { Usuarios } from './pages/admin/usuarios/usuarios';
 import { Configuracion } from './pages/admin/configuracion/configuracion';
 import { PqrsfAdminComponent as AdminPqrsf } from './pages/admin/pqrsf-admin/pqrsf-admin';
 import { AuthGuard } from './shared/guards/auth/auth-guard';
+import { moduloGuard } from './shared/guards/modulo/modulo-guard';
 import { CotizacionesPropuestasAdminComponent } from './pages/admin/cotizaciones-propuestas-admin/cotizaciones-propuestas-admin/cotizaciones-propuestas-admin';
 import { AccesibilidadAdmin } from './pages/admin/accesibilidad-admin/accesibilidad-admin';
 import { TrabajaNosotrosAdminComponent } from './pages/admin/trabaja-nosotros-admin/trabaja-nosotros-admin/trabaja-nosotros-admin';
@@ -42,12 +43,17 @@ export const routes: Routes = [
           { path: 'trabaja-con-nosotros', component: TrabajaNosotros, data: { breadcrumb: 'Trabaja con nosotros' } },
         ],
       },
-      { path: 'pqrsf', component: PqrsfComponent, data: { breadcrumb: 'PQRSF' } },
+      { path: 'pqrsf', component: PqrsfComponent, data: { breadcrumb: 'PQRSFD' } },
+      { path: 'solicitudes-contractuales', data: { breadcrumb: 'Solicitudes contractuales' },
+        loadComponent: () => import('./pages/solicitudes-contractuales/solicitudes-contractuales').then(m => m.SolicitudesContractuales) },
       { path: 'mapa-del-sitio', component: MapaDelSitio, data: { breadcrumb: 'Mapa del sitio' } },
       { path: 'buscar', component: Buscar, data: { breadcrumb: 'Buscar en el portal' } },
       { path: 'login', component: Login, data: { breadcrumb: 'Iniciar sesión' } },
 
       // Direcciones anteriores → nueva estructura (Res. 1519 de 2020)
+      // URL del portal anterior
+      { path: 'seguimiento-solicitudes', redirectTo: 'solicitudes-contractuales', pathMatch: 'full' },
+      { path: 'seguimiento-solicitudes/:id', redirectTo: 'solicitudes-contractuales', pathMatch: 'full' },
       { path: 'normatividad', redirectTo: 'transparencia/normativa', pathMatch: 'full' },
       { path: 'atencion-ciudadano', redirectTo: 'atencion-y-servicios-a-la-ciudadania', pathMatch: 'full' },
       { path: 'servicios', redirectTo: 'nuestro-hospital/portafolio-de-servicios', pathMatch: 'full' },
@@ -67,20 +73,26 @@ export const routes: Routes = [
     component: DashboardLayout,
     canActivate: [AuthGuard],
     children: [
-      { path: '', component: DashboardHomeComponent, data: { breadcrumb: 'Dashboard' } },
-      { path: 'pqrsf', component: AdminPqrsf, data: { breadcrumb: 'Administrar PQRSF' } },
-      { path: 'cotizaciones', component: CotizacionesPropuestasAdminComponent, data: { breadcrumb: 'Invitaciones a cotizar' } },
-      { path: 'vacantes', component: TrabajaNosotrosAdminComponent, data: { breadcrumb: 'Trabaja con nosotros' } },
-      { path: 'eventos', component: EventosAdmin, data: { breadcrumb: 'Calendario de eventos' } },
-      { path: 'slider', component: SliderAdmin, data: { breadcrumb: 'Slider del inicio' } },
-      { path: 'usuarios', component: Usuarios, data: { breadcrumb: 'Administrar Usuarios' } },
-      { path: 'accesibilidad-admin', component: AccesibilidadAdmin, data: { breadcrumb: 'Administrar Accesibilidad' } },
-      { path: 'configuracion', component: Configuracion, data: { breadcrumb: 'Configuración' } },
+      // Cada ruta exige su módulo (permisos por rol); si no lo tiene, va a su primera página permitida
+      { path: '', component: DashboardHomeComponent, canActivate: [moduloGuard], data: { breadcrumb: 'Dashboard', modulo: 'resumen' } },
+      { path: 'pqrsf', component: AdminPqrsf, canActivate: [moduloGuard], data: { breadcrumb: 'PQRSFD', modulo: 'pqrsfd' } },
+      { path: 'solicitudes-contractuales', canActivate: [moduloGuard], data: { breadcrumb: 'Solicitudes contractuales', modulo: 'contratacion' },
+        loadComponent: () => import('./pages/admin/contratacion-admin/contratacion-admin').then(m => m.ContratacionAdmin) },
+      { path: 'cotizaciones', component: CotizacionesPropuestasAdminComponent, canActivate: [moduloGuard], data: { breadcrumb: 'Invitaciones a cotizar', modulo: 'cotizaciones' } },
+      { path: 'vacantes', component: TrabajaNosotrosAdminComponent, canActivate: [moduloGuard], data: { breadcrumb: 'Trabaja con nosotros', modulo: 'vacantes' } },
+      { path: 'eventos', component: EventosAdmin, canActivate: [moduloGuard], data: { breadcrumb: 'Calendario de eventos', modulo: 'eventos' } },
+      { path: 'slider', component: SliderAdmin, canActivate: [moduloGuard], data: { breadcrumb: 'Slider del inicio', modulo: 'slider' } },
+      { path: 'usuarios', component: Usuarios, canActivate: [moduloGuard], data: { breadcrumb: 'Usuarios y permisos', modulo: 'usuarios' } },
+      { path: 'accesibilidad-admin', component: AccesibilidadAdmin, canActivate: [moduloGuard], data: { breadcrumb: 'Administrar Accesibilidad', modulo: 'accesibilidad' } },
+      { path: 'configuracion', component: Configuracion, canActivate: [moduloGuard], data: { breadcrumb: 'Configuración', modulo: 'configuracion' } },
+      // Cualquier usuario: sus datos y cambio de contraseña
+      { path: 'mi-cuenta', component: Configuracion, data: { breadcrumb: 'Mi cuenta', soloCuenta: true } },
 
       // 🧩 CMS: Menú → Páginas → Entradas → Multimedia
       {
         path: 'contenido',
-        data: { breadcrumb: 'Contenido' },
+        canActivate: [moduloGuard],
+        data: { breadcrumb: 'Contenido', modulo: 'contenido' },
         children: [
           { path: '', pathMatch: 'full', redirectTo: 'menus' },
           { path: 'menus', data: { breadcrumb: 'Menús y estructura' },

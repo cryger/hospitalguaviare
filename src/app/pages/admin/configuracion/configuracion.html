@@ -1,8 +1,8 @@
 <section class="cfg">
   <header class="cfg-head">
     <div>
-      <h1>Configuración</h1>
-      <p>Datos institucionales del portal, su cuenta, la seguridad de la sesión y el estado técnico del sistema.</p>
+      <h1>{{ soloCuenta ? 'Mi cuenta' : 'Configuración' }}</h1>
+      <p>{{ soloCuenta ? 'Sus datos de acceso y el cambio de contraseña.' : 'Datos institucionales del portal, su cuenta, la seguridad de la sesión y el estado técnico del sistema.' }}</p>
     </div>
     <span class="modo" [class.local]="!usaApi" [title]="usaApi ? config.apiUrl : 'Los datos se guardan solo en este navegador'">
       {{ usaApi ? 'Conectado a la API' : 'Modo local (sin API)' }}

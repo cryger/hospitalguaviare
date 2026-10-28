@@ -169,6 +169,9 @@ a.titulo-celda:hover { color: var(--c-primario-2); }
 .modal-head { display: flex; justify-content: space-between; align-items: center; padding: 1rem 1.25rem; border-bottom: 1px solid var(--c-borde); }
 .modal-head h2 { font-size: 1.05rem; margin: 0; color: var(--c-primario); }
 .modal-body { padding: 1.1rem 1.25rem; overflow: auto; }
+/* Cuando el formulario envuelve cuerpo y pie, el pie queda siempre visible */
+.modal-caja > form { display: flex; flex-direction: column; min-height: 0; flex: 1 1 auto; }
+.modal-caja > form > .modal-body { flex: 1 1 auto; min-height: 0; }
 .modal-foot { display: flex; justify-content: flex-end; gap: 0.5rem; padding: 0.9rem 1.25rem; border-top: 1px solid var(--c-borde); }
 
 /* ===== Accesibilidad ===== */

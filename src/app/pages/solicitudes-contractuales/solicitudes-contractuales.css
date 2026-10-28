@@ -1,0 +1,11 @@
+.sub { border: 0; padding: 0; margin: .9rem 0 0; }
+.sub legend { font-weight: 600; font-size: .938rem; padding: 0; color: var(--matterhorn); }
+.vigencias-opciones { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .5rem; }
+.vig {
+  display: inline-flex; align-items: center; gap: .4rem; border: 1px solid var(--tropical); border-radius: 1.5rem;
+  padding: .4rem .9rem; cursor: pointer; font-weight: 600; background: #fff; min-height: 2.5rem;
+}
+.vig.on { border-color: var(--cobalt); background: var(--solitude); color: var(--cobalt); }
+.vig input { width: 1.05rem; height: 1.05rem; accent-color: var(--cobalt); }
+.vig:has(input:focus-visible) { outline: .125rem solid #000; outline-offset: .125rem; }
+#vigencias[aria-describedby^='error'] .vig { border-color: var(--error); }

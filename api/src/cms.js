@@ -8,6 +8,26 @@ const { config } = require('./config');
 const { definicion, aJson, aFila } = require('./mapeo');
 const { sesionOpcional, requiereSesion } = require('./auth');
 const { ErrorApi } = require('./errores');
+const { tieneModulo, requiereModulo } = require('./permisos');
+
+/** Módulo del dashboard que administra cada colección */
+const MODULO_COLECCION = {
+  menus: ['contenido'],
+  paginas: ['contenido'],
+  entradas: ['contenido'],
+  // La biblioteca la usan todos los módulos que suben imágenes o documentos
+  multimedia: ['contenido', 'slider', 'eventos', 'cotizaciones', 'vacantes'],
+  eventos: ['eventos'],
+  banners: ['slider'],
+  vacantes: ['vacantes'],
+  cotizaciones: ['cotizaciones'],
+};
+const modulosDeColeccion = (col) => MODULO_COLECCION[col] || ['__ninguno__'];
+
+/** Exige el módulo que corresponde a :coleccion */
+function requiereModuloColeccion(req, res, next) {
+  return requiereModulo(...modulosDeColeccion(req.params.coleccion))(req, res, next);
+}
 
 const rutasCms = express.Router();
 
@@ -58,7 +78,8 @@ rutasCms.get('/:coleccion', sesionOpcional, async (req, res, next) => {
   try {
     const col = req.params.coleccion;
     const d = definicion(col);
-    const admin = !!req.usuario;
+    // Vista completa (borradores incluidos) solo para quien administra esa colección
+    const admin = !!req.usuario && (await tieneModulo(req, ...modulosDeColeccion(col)));
 
     if (col === 'entradas') {
       return res.json(await listarEntradas(admin ? 'SELECT * FROM cms_entradas' : CONSULTAS_PUBLICAS.entradas));
@@ -114,7 +135,7 @@ async function guardarRelacionMultimedia(cx, entradaId, ids) {
 }
 
 /** Reordenar árbol de páginas (debe ir antes de PUT /:coleccion/:id) */
-rutasCms.put('/paginas/orden', requiereSesion, async (req, res, next) => {
+rutasCms.put('/paginas/orden', requiereSesion, requiereModulo('contenido'), async (req, res, next) => {
   try {
     const cambios = Array.isArray(req.body) ? req.body : [];
     await transaccion(async (cx) => {
@@ -133,7 +154,7 @@ rutasCms.put('/paginas/orden', requiereSesion, async (req, res, next) => {
   }
 });
 
-rutasCms.post('/:coleccion', requiereSesion, async (req, res, next) => {
+rutasCms.post('/:coleccion', requiereSesion, requiereModuloColeccion, async (req, res, next) => {
   try {
     const col = req.params.coleccion;
     const d = definicion(col);
@@ -151,7 +172,7 @@ rutasCms.post('/:coleccion', requiereSesion, async (req, res, next) => {
   }
 });
 
-rutasCms.put('/:coleccion/:id', requiereSesion, async (req, res, next) => {
+rutasCms.put('/:coleccion/:id', requiereSesion, requiereModuloColeccion, async (req, res, next) => {
   try {
     const col = req.params.coleccion;
     const d = definicion(col);
@@ -177,7 +198,7 @@ rutasCms.put('/:coleccion/:id', requiereSesion, async (req, res, next) => {
   }
 });
 
-rutasCms.delete('/:coleccion/:id', requiereSesion, async (req, res, next) => {
+rutasCms.delete('/:coleccion/:id', requiereSesion, requiereModuloColeccion, async (req, res, next) => {
   try {
     const col = req.params.coleccion;
     const d = definicion(col);
@@ -245,7 +266,7 @@ const subir = multer({
   },
 });
 
-rutasCms.post('/multimedia/upload', requiereSesion, subir.single('archivo'), async (req, res, next) => {
+rutasCms.post('/multimedia/upload', requiereSesion, requiereModulo(...MODULO_COLECCION.multimedia), subir.single('archivo'), async (req, res, next) => {
   try {
     if (!req.file) throw new ErrorApi(400, 'No se recibió ningún archivo.');
     const ext = path.extname(req.file.originalname).slice(1).toLowerCase();

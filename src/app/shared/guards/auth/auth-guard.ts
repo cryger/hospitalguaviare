@@ -1,12 +1,14 @@
 import { inject, Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
 import { CmsAuthService } from '../../services/cms/cms-auth.service';
+import { PermisosService } from '../../services/permisos/permisos.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
   private cmsAuth = inject(CmsAuthService);
+  private permisos = inject(PermisosService);
 
   constructor(private router: Router) {}
 
@@ -23,6 +25,7 @@ export class AuthGuard implements CanActivate {
 
   logout(): void {
     this.cmsAuth.logout();
+    this.permisos.recargar();
     this.router.navigate(['/login']);
   }
 
@@ -33,6 +36,7 @@ export class AuthGuard implements CanActivate {
 
     if (!ok) {
       this.cmsAuth.logout();
+      this.permisos.recargar();
       this.router.navigate(['/login']);
       return false;
     }

@@ -5,19 +5,38 @@ import { RouterLink } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
 
 import { CotizacionesService } from '../../shared/services/cotizaciones/cotizaciones';
-import { PqrsfService } from '../../shared/services/pqrsf/pqrsf';
+import { ContratacionService, PqrsfdService } from '../../shared/services/solicitudes/solicitudes.service';
 import { TrabajaNosotrosService } from '../../shared/services/trabaja-nosotros/trabaja-nosotros-service';
 import { CmsService } from '../../shared/services/cms/cms.service';
-import { UsuariosService } from '../../shared/services/usuarios/usuarios';
+import { UsuariosApiService } from '../../shared/services/usuarios/usuarios-api.service';
+import { PermisosService } from '../../shared/services/permisos/permisos.service';
+import { Modulo } from '../../shared/models/permisos/permisos';
+import { ESTADOS_CONTRACTUAL, TIPOS_PQRSFD, nombreTipoPqrsfd } from '../../shared/models/solicitudes/solicitudes';
+import { diasHabilesEntre, semaforoDe } from '../../shared/utils/dias-habiles';
 
-import { PQRSF, TipoPQRSF, EstadoPQRSF } from '../../shared/models/pqrsf/pqrsf/pqrsf-module';
+type EstadoPQRSF = 'Recibida' | 'En proceso' | 'Respondida' | 'Cerrada';
+
+/** Vista resumida de una PQRSFD para el tablero */
+interface PQRSF {
+  id: number;
+  radicado: string;
+  tipo: string;
+  asunto: string;
+  estado: EstadoPQRSF;
+  fechaCreacion: string;
+  fechaVencimiento: string;
+  fechaRespuesta: string | null;
+}
+
+const ESTADO_TABLERO: Record<string, EstadoPQRSF> = {
+  radicada: 'Recibida',
+  en_tramite: 'En proceso',
+  respondida: 'Respondida',
+  cerrada: 'Cerrada',
+  trasladada: 'Cerrada',
+};
 
 registerLocaleData(localeEsCO, 'es-CO');
-
-/** Plazo legal de respuesta (Ley 1755 de 2015): 15 días hábiles */
-const PLAZO_PQRSF_DIAS_HABILES = 15;
-/** A partir de cuántos días hábiles se marca "por vencer" */
-const ALERTA_PQRSF_DIAS_HABILES = 10;
 
 type Semaforo = 'ok' | 'alerta' | 'vencida';
 
@@ -53,16 +72,44 @@ interface Alerta {
 })
 export class DashboardHomeComponent implements OnDestroy {
   private cotizacionesService = inject(CotizacionesService);
-  private pqrsfService = inject(PqrsfService);
+  private pqrsfdService = inject(PqrsfdService);
+  private contratacionService = inject(ContratacionService);
+  private permisos = inject(PermisosService);
   private vacantesService = inject(TrabajaNosotrosService);
   private cms = inject(CmsService);
-  private usuariosService = inject(UsuariosService);
+  private usuariosService = inject(UsuariosApiService);
+
+  /** Cada bloque del tablero se muestra solo si el usuario tiene ese módulo */
+  readonly ver = (m: Modulo) => this.permisos.puede(m);
 
   /* =========================
      FUENTES DE DATOS (reactivas)
   ========================== */
   readonly cotizaciones = toSignal(this.cotizacionesService.cotizaciones$, { initialValue: [] });
-  readonly pqrsf = toSignal(this.pqrsfService.pqrsf$, { initialValue: [] });
+  readonly pqrsf = computed<PQRSF[]>(() =>
+    this.pqrsfdService.lista().map((p) => ({
+      id: p.id,
+      radicado: p.radicado,
+      tipo: nombreTipoPqrsfd(p.tipo),
+      asunto: p.asunto,
+      estado: ESTADO_TABLERO[p.estado] ?? 'Recibida',
+      fechaCreacion: p.fechaRadicacion,
+      fechaVencimiento: p.fechaVencimiento,
+      fechaRespuesta: p.fechaRespuesta,
+    })),
+  );
+
+  /** Solicitudes contractuales pendientes y vencidas */
+  readonly kpiContratacion = computed(() => {
+    const abiertas = this.contratacionService
+      .lista()
+      .filter((s) => ESTADOS_CONTRACTUAL.find((e) => e.valor === s.estado)?.abierta);
+    return {
+      pendientes: abiertas.length,
+      vencidas: abiertas.filter((s) => semaforoDe(s.fechaVencimiento, true, this.ahora()).estado === 'vencida').length,
+      total: this.contratacionService.total(),
+    };
+  });
   readonly vacantes = toSignal(this.vacantesService.vacantesObservable(), { initialValue: [] });
 
   /** Noticias = entradas del CMS de tipo "noticia" */
@@ -94,7 +141,7 @@ export class DashboardHomeComponent implements OnDestroy {
     // hojas del árbol que no son enlaces: ahí va la información
     return this.cms.paginas().filter((p) => ids.has(p.id) && p.plantilla !== 'enlace' && !conHijas.has(p.id));
   });
-  readonly usuarios = signal(this.usuariosService.getAll());
+  readonly usuarios = this.usuariosService.usuarios;
 
   /* =========================
      ENCABEZADO
@@ -102,8 +149,7 @@ export class DashboardHomeComponent implements OnDestroy {
   readonly ahora = signal(new Date());
   private reloj = setInterval(() => this.ahora.set(new Date()), 60_000);
 
-  readonly nombreUsuario =
-    localStorage.getItem('username') || localStorage.getItem('usuario') || 'Administrador';
+  readonly nombreUsuario = this.permisos.usuario()?.nombre || 'Administrador';
 
   readonly saludo = computed(() => {
     const h = this.ahora().getHours();
@@ -179,24 +225,18 @@ export class DashboardHomeComponent implements OnDestroy {
   /* =========================
      PQRSF
   ========================== */
-  readonly tiposPqrsf: TipoPQRSF[] = ['Petición', 'Queja', 'Reclamo', 'Sugerencia', 'Felicitación'];
+  readonly tiposPqrsf: string[] = TIPOS_PQRSFD.map((t) => t.nombre);
   readonly estadosPqrsf: EstadoPQRSF[] = ['Recibida', 'En proceso', 'Respondida', 'Cerrada'];
 
   readonly pqrsfPendientes = computed<PqrsfPendiente[]>(() =>
     this.pqrsf()
       .filter((p) => p.estado === 'Recibida' || p.estado === 'En proceso')
       .map((item) => {
-        const diasHabiles = this.diasHabilesDesde(item.fechaCreacion);
-        const diasRestantes = PLAZO_PQRSF_DIAS_HABILES - diasHabiles;
-        const semaforo: Semaforo =
-          diasHabiles > PLAZO_PQRSF_DIAS_HABILES
-            ? 'vencida'
-            : diasHabiles >= ALERTA_PQRSF_DIAS_HABILES
-              ? 'alerta'
-              : 'ok';
-        return { item, diasHabiles, diasRestantes, semaforo };
+        const s = semaforoDe(item.fechaVencimiento, true, this.ahora());
+        const diasHabiles = diasHabilesEntre(item.fechaCreacion, this.ahora());
+        return { item, diasHabiles, diasRestantes: s.diasRestantes, semaforo: s.estado as Semaforo };
       })
-      .sort((a, b) => b.diasHabiles - a.diasHabiles),
+      .sort((a, b) => new Date(a.item.fechaVencimiento).getTime() - new Date(b.item.fechaVencimiento).getTime()),
   );
 
   readonly kpiPqrsf = computed(() => {
@@ -208,7 +248,7 @@ export class DashboardHomeComponent implements OnDestroy {
     const conRespuesta = respondidas.filter((p) => p.fechaRespuesta);
     const promedio = conRespuesta.length
       ? conRespuesta.reduce(
-          (acc, p) => acc + this.diasHabilesEntre(p.fechaCreacion, p.fechaRespuesta!),
+          (acc, p) => acc + diasHabilesEntre(p.fechaCreacion, p.fechaRespuesta!),
           0,
         ) / conRespuesta.length
       : null;
@@ -279,7 +319,7 @@ export class DashboardHomeComponent implements OnDestroy {
       })),
       ...this.pqrsf().map((p) => ({
         fecha: new Date(p.fechaRespuesta ?? p.fechaCreacion),
-        modulo: 'PQRSF',
+        modulo: 'PQRSFD',
         icono: '📬',
         titulo: `${p.tipo}: ${p.asunto}`,
         detalle: p.estado,
@@ -299,22 +339,33 @@ export class DashboardHomeComponent implements OnDestroy {
     const a: Alerta[] = [];
     const k = this.kpiPqrsf();
 
-    if (k.vencidas > 0) {
+    if (this.ver('pqrsfd') && k.vencidas > 0) {
       a.push({
         nivel: 'danger',
-        texto: `${k.vencidas} PQRSF superan el plazo legal de ${PLAZO_PQRSF_DIAS_HABILES} días hábiles.`,
+        texto: `${k.vencidas} PQRSFD superan el plazo legal de respuesta.`,
         ruta: '/admin/pqrsf',
         accion: 'Responder',
       });
     }
-    if (k.porVencer > 0) {
+    if (this.ver('pqrsfd') && k.porVencer > 0) {
       a.push({
         nivel: 'warning',
-        texto: `${k.porVencer} PQRSF están próximas a vencer.`,
+        texto: `${k.porVencer} PQRSFD vencen en 3 días hábiles o menos.`,
         ruta: '/admin/pqrsf',
         accion: 'Revisar',
       });
     }
+    const kc = this.kpiContratacion();
+    if (this.ver('contratacion') && kc.vencidas > 0) {
+      a.push({
+        nivel: 'danger',
+        texto: `${kc.vencidas} solicitud(es) contractual(es) superan el plazo de 10 días hábiles.`,
+        ruta: '/admin/solicitudes-contractuales',
+        accion: 'Responder',
+      });
+    }
+    // Las alertas de contenido solo para quien administra el contenido
+    if (!this.ver('contenido')) return a;
 
     const borradores = this.kpiNoticias().borradores;
     if (borradores > 0) {
@@ -374,15 +425,18 @@ export class DashboardHomeComponent implements OnDestroy {
   /* =========================
      ACCESOS RÁPIDOS
   ========================== */
-  readonly accesosRapidos = [
-    { icono: '📰', texto: 'Nueva entrada', ruta: '/admin/contenido/entradas/nueva' },
-    { icono: '📬', texto: 'Gestionar PQRSF', ruta: '/admin/pqrsf' },
-    { icono: '🧭', texto: 'Menús y páginas', ruta: '/admin/contenido/menus' },
-    { icono: '🖼️', texto: 'Multimedia', ruta: '/admin/contenido/multimedia' },
-    { icono: '💼', texto: 'Nueva cotización', ruta: '/admin/cotizaciones' },
-    { icono: '🧑‍⚕️', texto: 'Nueva vacante', ruta: '/admin/vacantes' },
-    { icono: '👥', texto: 'Usuarios', ruta: '/admin/usuarios' },
-  ];
+  readonly accesosRapidos = (
+    [
+      { icono: '📰', texto: 'Nueva entrada', ruta: '/admin/contenido/entradas/nueva', modulo: 'contenido' },
+      { icono: '📬', texto: 'Gestionar PQRSFD', ruta: '/admin/pqrsf', modulo: 'pqrsfd' },
+      { icono: '📄', texto: 'Solicitudes contractuales', ruta: '/admin/solicitudes-contractuales', modulo: 'contratacion' },
+      { icono: '🧭', texto: 'Menús y páginas', ruta: '/admin/contenido/menus', modulo: 'contenido' },
+      { icono: '🖼️', texto: 'Multimedia', ruta: '/admin/contenido/multimedia', modulo: 'contenido' },
+      { icono: '💼', texto: 'Nueva cotización', ruta: '/admin/cotizaciones', modulo: 'cotizaciones' },
+      { icono: '🧑‍⚕️', texto: 'Nueva vacante', ruta: '/admin/vacantes', modulo: 'vacantes' },
+      { icono: '👥', texto: 'Usuarios', ruta: '/admin/usuarios', modulo: 'usuarios' },
+    ] as { icono: string; texto: string; ruta: string; modulo: Modulo }[]
+  ).filter((x) => this.ver(x.modulo));
 
   /* =========================
      HELPERS
@@ -392,32 +446,11 @@ export class DashboardHomeComponent implements OnDestroy {
     return isNaN(t) ? 0 : t;
   }
 
-  /** Días hábiles (lunes a viernes) transcurridos desde la fecha hasta hoy */
-  private diasHabilesDesde(fecha: Date | string): number {
-    return this.diasHabilesEntre(fecha, new Date());
-  }
-
-  /** Cuenta días hábiles entre dos fechas (no descuenta festivos) */
-  private diasHabilesEntre(desde: Date | string, hasta: Date | string): number {
-    const inicio = new Date(desde);
-    const fin = new Date(hasta);
-    if (isNaN(inicio.getTime()) || isNaN(fin.getTime())) return 0;
-
-    inicio.setHours(0, 0, 0, 0);
-    fin.setHours(0, 0, 0, 0);
-
-    let dias = 0;
-    const cursor = new Date(inicio);
-    while (cursor < fin) {
-      cursor.setDate(cursor.getDate() + 1);
-      const d = cursor.getDay();
-      if (d !== 0 && d !== 6) dias++;
-    }
-    return dias;
-  }
-
   constructor() {
     this.cms.cargar();
+    if (this.ver('pqrsfd')) this.pqrsfdService.cargar(true);
+    if (this.ver('contratacion')) this.contratacionService.cargar(true);
+    if (this.ver('usuarios')) this.usuariosService.cargar().catch(() => {});
   }
 
   ngOnDestroy(): void {

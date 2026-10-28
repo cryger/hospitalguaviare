@@ -7,6 +7,7 @@ import { DashboardSidebar } from '../../componentes/dashboard/dashboard-sidebar/
 import { Accesibilidad } from '../../componentes/accesibilidad/accesibilidad';
 import { IdleService } from '../../shared/services/idle-service/idle-service';
 import { Breadcrumb } from '../../componentes/breadcrumb/breadcrumb';
+import { PermisosService } from '../../shared/services/permisos/permisos.service';
 
 /** Mismo punto de corte que el CSS (max-width: 991px) */
 const CONSULTA_MOVIL = '(max-width: 991px)';
@@ -29,6 +30,8 @@ export class DashboardLayout {
 
   constructor() {
     this.idleService.startWatching();
+    // Si el administrador cambió el rol de este usuario, el menú se actualiza al entrar
+    inject(PermisosService).refrescar();
 
     // Cambio de resolución / rotación del teléfono: se adapta de inmediato
     const alCambiar = (e: MediaQueryListEvent) => {

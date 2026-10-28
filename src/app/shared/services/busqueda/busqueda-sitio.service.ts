@@ -42,7 +42,8 @@ export const ETIQUETAS_TIPO: Record<TipoResultado, string> = {
 
 /** Páginas del sistema (fuera del CMS) que también se pueden encontrar */
 const PAGINAS_FIJAS: { titulo: string; url: string; texto: string }[] = [
-  { titulo: 'PQRSF – Peticiones, quejas, reclamos, sugerencias y felicitaciones', url: '/pqrsf', texto: 'Radique su petición, queja, reclamo, sugerencia, felicitación o denuncia en línea.' },
+  { titulo: 'PQRSFD – Peticiones, quejas, reclamos, sugerencias, felicitaciones y denuncias', url: '/pqrsf', texto: 'Radique su petición, queja, reclamo, sugerencia, felicitación o denuncia en línea y consulte su estado con el número de radicado.' },
+  { titulo: 'Solicitudes contractuales', url: '/solicitudes-contractuales', texto: 'Solicite certificaciones de contratos y consulte el estado de su solicitud con su cédula y el radicado.' },
   { titulo: 'Invitaciones a cotizar', url: '/informacion-de-interes/invitaciones-a-cotizar', texto: 'Procesos de cotización y propuestas abiertos por la E.S.E.' },
   { titulo: 'Trabaja con nosotros', url: '/informacion-de-interes/trabaja-con-nosotros', texto: 'Convocatorias laborales y vacantes vigentes.' },
   { titulo: 'Mapa del sitio', url: '/mapa-del-sitio', texto: 'Estructura completa del portal.' },

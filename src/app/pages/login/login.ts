@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { AuthGuard } from '../../shared/guards/auth/auth-guard';
 import { CmsAuthService } from '../../shared/services/cms/cms-auth.service';
 import { CmsService } from '../../shared/services/cms/cms.service';
+import { PermisosService } from '../../shared/services/permisos/permisos.service';
 
 @Component({
   selector: 'app-login',
@@ -19,6 +20,7 @@ export class Login {
   private cmsAuth = inject(CmsAuthService);
   private cms = inject(CmsService);
   private router = inject(Router);
+  private permisos = inject(PermisosService);
 
   loginForm: FormGroup = this.fb.group({
     username: ['', Validators.required],
@@ -46,8 +48,11 @@ export class Login {
       this.enviando.set(true);
       try {
         await this.cmsAuth.login(username, password);
-        await this.cms.cargar(true); // recarga con permisos de administrador
-        this.router.navigate(['/admin']);
+        this.permisos.recargar();
+        // Cada usuario entra a su primera página permitida (ej. PQRSFD → /admin/pqrsf)
+        const destino = this.permisos.rutaInicio();
+        if (this.permisos.puede('contenido')) await this.cms.cargar(true); // borradores incluidos
+        this.router.navigateByUrl(destino);
       } catch (e) {
         const err = e as HttpErrorResponse;
         this.error.set(
@@ -63,6 +68,7 @@ export class Login {
 
     // Modo local (desarrollo)
     if (this.authGuard.login(username, password)) {
+      this.permisos.recargar();
       this.router.navigate(['/admin']);
     } else {
       this.error.set('Usuario o contraseña incorrectos.');

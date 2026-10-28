@@ -1,0 +1,163 @@
+/* =====================================================================
+   Formularios de trámites del portal (PQRSFD, solicitudes contractuales)
+   Alineados a la BDC GOV.CO v5: entradas, desplegables, radios, alertas,
+   pestañas y botones. Tipografía y colores de la BDC.
+===================================================================== */
+:host {
+  --cobalt: #0943B5;
+  --havelock: #4672C8;
+  --tropical: #B5C7E9;
+  --solitude: #E5ECF8;
+  --matterhorn: #4C4C4C;
+  --gris: #7E7E7E;
+  --error: #A80521;
+  --error-bg: #FDECEE;
+  --exito: #069169;
+  --exito-bg: #E6F6F0;
+  display: block;
+  color: var(--matterhorn);
+  font-family: 'WorkSans-Regular', 'Work Sans', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+}
+
+.tramite { max-width: 960px; margin: 0 auto; padding: 1.5rem 1rem 3rem; }
+.tramite-head h1 { margin: 0 0 .5rem; font-size: 2rem; color: var(--cobalt); font-weight: 700; }
+.lead { margin: 0 0 1.25rem; font-size: 1.05rem; line-height: 1.55; max-width: 62ch; }
+
+/* Pestañas (BDC tab) */
+.tabs-govco { display: flex; gap: .25rem; border-bottom: 2px solid var(--solitude); margin-bottom: 1.5rem; flex-wrap: wrap; }
+.tabs-govco button {
+  border: 0; background: transparent; padding: .75rem 1.25rem; font: inherit; font-weight: 600; color: var(--matterhorn);
+  border-bottom: 3px solid transparent; margin-bottom: -2px; cursor: pointer;
+}
+.tabs-govco button.activa { color: var(--cobalt); border-bottom-color: var(--cobalt); }
+.tabs-govco button:hover { background: var(--solitude); color: var(--cobalt); }
+.tabs-govco button:focus-visible { outline: .125rem solid #000; outline-offset: -.125rem; }
+
+/* Alertas (BDC) */
+.alerta-govco { border-left: 6px solid var(--cobalt); background: var(--solitude); padding: .9rem 1.1rem; border-radius: .25rem; margin: 0 0 1.25rem; line-height: 1.5; }
+.alerta-govco.error { border-color: var(--error); background: var(--error-bg); color: #5e0313; }
+.alerta-govco.error a { color: #5e0313; font-weight: 600; }
+.alerta-govco ul { margin: .4rem 0 0; padding-left: 1.2rem; }
+.alerta-govco:focus { outline: .125rem solid #000; outline-offset: .125rem; }
+
+.obligatorios { font-size: .875rem; margin: 0 0 1rem; }
+.req { color: var(--error); font-weight: 700; }
+.opc { font-weight: 400; color: var(--gris); font-size: .85em; }
+
+/* Secciones del formulario */
+.seccion { border: 1px solid var(--tropical); border-radius: .5rem; padding: 1.1rem 1.25rem 1.25rem; margin: 0 0 1.25rem; background: #fff; }
+.seccion legend { font-weight: 700; color: var(--cobalt); font-size: 1.1rem; padding: 0 .4rem; display: flex; align-items: center; gap: .5rem; }
+.num { display: inline-grid; place-items: center; width: 1.7rem; height: 1.7rem; border-radius: 50%; background: var(--cobalt); color: #fff; font-size: .9rem; }
+
+.rejilla { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem 1.25rem; margin-top: .5rem; }
+.campo { display: flex; flex-direction: column; gap: .35rem; margin-top: .5rem; }
+.campo.ancho { grid-column: 1 / -1; }
+.campo label { font-weight: 600; font-size: .938rem; }
+.campo input:not([type='file']), .campo select, .campo textarea {
+  font: inherit; font-size: 1rem; color: var(--matterhorn); background: #fff;
+  border: 1px solid var(--gris); border-radius: .3rem; padding: .6rem .8rem; min-height: 2.75rem; width: 100%; box-sizing: border-box;
+}
+.campo textarea { resize: vertical; min-height: 9rem; line-height: 1.5; }
+.campo input:focus, .campo select:focus, .campo textarea:focus { outline: .125rem solid #000; outline-offset: 0; border-color: var(--cobalt); }
+.campo [aria-invalid='true'] { border: 2px solid var(--error); background: #fffafa; }
+.campo input[type='file'] { font: inherit; font-size: .9rem; }
+.ayuda { font-size: .82rem; color: #5f5f5f; margin: .1rem 0 0; line-height: 1.4; }
+.error-campo { color: var(--error); font-size: .85rem; font-weight: 600; margin: .1rem 0 0; }
+.error-campo::before { content: '⚠ '; }
+
+/* Tipos (tarjetas de radio) */
+.tipos { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: .6rem; margin-top: .4rem; }
+.tipo-opcion {
+  display: flex; gap: .6rem; align-items: flex-start; border: 1px solid var(--tropical); border-radius: .5rem;
+  padding: .7rem .8rem; cursor: pointer; background: #fff; transition: border-color .15s, background .15s;
+}
+.tipo-opcion:hover { border-color: var(--havelock); }
+.tipo-opcion.on { border-color: var(--cobalt); background: #f3f7fd; box-shadow: inset 0 0 0 1px var(--cobalt); }
+.tipo-opcion input { margin-top: .2rem; width: 1.1rem; height: 1.1rem; accent-color: var(--cobalt); flex: none; }
+.tipo-opcion input:focus-visible { outline: .125rem solid #000; outline-offset: .125rem; }
+.tipo-opcion span { display: grid; gap: .15rem; }
+.tipo-opcion b { color: #1f2937; font-size: .95rem; }
+.tipo-opcion small { font-size: .78rem; line-height: 1.35; }
+.tipo-opcion .plazo { color: var(--cobalt); font-weight: 600; }
+.tipos[aria-invalid='true'] .tipo-opcion { border-color: var(--error); }
+
+.check-govco { display: inline-flex; align-items: flex-start; gap: .55rem; font-size: .95rem; cursor: pointer; line-height: 1.45; }
+.check-govco input { width: 1.15rem; height: 1.15rem; margin-top: .15rem; accent-color: var(--cobalt); flex: none; }
+.check-govco input:focus-visible { outline: .125rem solid #000; outline-offset: .125rem; }
+.check-govco a { color: var(--cobalt); }
+.radios { display: flex; flex-wrap: wrap; gap: .6rem 2rem; }
+.anon { margin: .3rem 0 .2rem; font-weight: 600; }
+.autorizacion { margin: 0 0 1.25rem; padding: 1rem 1.25rem; border-radius: .5rem; background: var(--solitude); }
+
+.lista-archivos { list-style: none; margin: .5rem 0 0; padding: 0; display: grid; gap: .35rem; }
+.lista-archivos li { display: flex; align-items: center; justify-content: space-between; gap: .75rem; padding: .45rem .7rem; border: 1px solid var(--solitude); border-radius: .3rem; font-size: .9rem; }
+.lista-archivos small { color: var(--gris); }
+.btn-quitar, .btn-link-govco { border: 0; background: none; color: var(--cobalt); font: inherit; font-weight: 600; text-decoration: underline; cursor: pointer; padding: 0; }
+.btn-quitar:focus-visible, .btn-link-govco:focus-visible { outline: .125rem solid #000; outline-offset: .125rem; }
+
+/* Botones (BDC) */
+.acciones-govco { display: flex; flex-wrap: wrap; gap: .75rem; }
+.btn-bdc {
+  display: inline-flex; align-items: center; justify-content: center; min-height: 2.75rem; padding: .55rem 1.5rem;
+  border-radius: 1.5rem; border: .125rem solid var(--cobalt); font: inherit; font-weight: 600; font-size: 1rem; cursor: pointer;
+}
+.btn-bdc.fill-btn-govco { background: var(--cobalt); color: #fff; }
+.btn-bdc.fill-btn-govco:hover:not(:disabled) { background: var(--havelock); border-color: var(--havelock); }
+.btn-bdc.outline-btn-govco { background: #fff; color: var(--cobalt); }
+.btn-bdc.outline-btn-govco:hover { background: var(--solitude); }
+.btn-bdc:focus-visible { outline: .125rem solid #000; outline-offset: .125rem; }
+.btn-bdc:disabled { background: #c8c8c8; border-color: #c8c8c8; color: #4c4c4c; cursor: not-allowed; }
+
+/* Constancia */
+.constancia {
+  border: 2px solid var(--exito); border-radius: .75rem; padding: 1.5rem 1.75rem; background: #fff; position: relative;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, .06);
+}
+.constancia:focus { outline: .125rem solid #000; outline-offset: .25rem; }
+.constancia-ico { display: inline-grid; place-items: center; width: 2.5rem; height: 2.5rem; border-radius: 50%; background: var(--exito); color: #fff; font-size: 1.3rem; font-weight: 700; }
+.constancia h2 { margin: .5rem 0 1rem; color: #05694c; font-size: 1.4rem; }
+.constancia dl { display: grid; grid-template-columns: max-content 1fr; gap: .45rem 1.25rem; margin: 0 0 1rem; }
+.constancia dt { color: #5f5f5f; }
+.constancia dd { margin: 0; }
+.mono { font-family: ui-monospace, Consolas, 'Courier New', monospace; }
+.grande { font-size: 1.2rem; font-weight: 700; color: #1f2937; letter-spacing: .03em; }
+.importante { background: #fff4e0; color: #6b3a00; padding: .7rem 1rem; border-radius: .4rem; margin: 0 0 1.25rem; font-weight: 600; }
+
+/* Consulta */
+.consulta { display: grid; grid-template-columns: 1fr 1fr auto; gap: 1rem; align-items: end; }
+.consulta .campo { margin: 0; }
+.resultado { margin-top: 1.5rem; border: 1px solid var(--tropical); border-top: 4px solid var(--cobalt); border-radius: .5rem; padding: 1.25rem 1.5rem; background: #fff; }
+.resultado header h2 { margin: 0; font-size: 1.25rem; color: var(--cobalt); }
+.resultado header p { margin: .25rem 0 1rem; }
+.resultado h3 { margin: 1.25rem 0 .5rem; font-size: 1.05rem; color: #1f2937; }
+.respuesta { white-space: pre-wrap; line-height: 1.6; background: var(--solitude); border-radius: .4rem; padding: 1rem 1.15rem; }
+.pasos { list-style: none; display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; margin: 0 0 1rem; padding: 0; counter-reset: paso; }
+.pasos li { position: relative; padding-top: 2.1rem; text-align: center; font-size: .85rem; color: var(--gris); display: grid; gap: .1rem; }
+.pasos li::before {
+  counter-increment: paso; content: counter(paso); position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+  width: 1.7rem; height: 1.7rem; border-radius: 50%; background: #fff; border: 2px solid var(--tropical); display: grid; place-items: center;
+  font-weight: 700; color: var(--gris); z-index: 1;
+}
+.pasos li::after { content: ''; position: absolute; top: .8rem; left: 50%; width: 100%; height: 2px; background: var(--tropical); }
+.pasos li:last-child::after { display: none; }
+.pasos li.hecho { color: #1f2937; }
+.pasos li.hecho::before { content: '✓'; background: var(--cobalt); border-color: var(--cobalt); color: #fff; }
+.pasos li.hecho::after { background: var(--cobalt); }
+
+.trampa { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
+.visually-hidden { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; }
+
+@media (max-width: 640px) {
+  .tramite-head h1 { font-size: 1.6rem; }
+  .consulta { grid-template-columns: 1fr; }
+  .seccion { padding: 1rem; }
+  .constancia { padding: 1.25rem; }
+  .constancia dl { grid-template-columns: 1fr; gap: .1rem; }
+  .constancia dd { margin-bottom: .5rem; }
+  .btn-bdc { width: 100%; }
+}
+@media (prefers-reduced-motion: reduce) { .tipo-opcion { transition: none; } }
+@media print {
+  .tabs-govco, .acciones-govco, .lead, .alerta-govco { display: none !important; }
+  .constancia { border: 1px solid #000; box-shadow: none; }
+}

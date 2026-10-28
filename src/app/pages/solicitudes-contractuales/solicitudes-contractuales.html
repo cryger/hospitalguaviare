@@ -1,0 +1,187 @@
+<section class="tramite">
+  <header class="tramite-head">
+    <h1>Solicitudes contractuales</h1>
+    <p class="lead">Si tuvo o tiene un contrato con la E.S.E. Hospital San José del Guaviare, solicite aquí la certificación contractual.
+      La respuesta se entrega en un plazo máximo de {{ plazo }} días hábiles.</p>
+  </header>
+
+  <div class="tabs-govco" role="tablist" aria-label="Opciones de solicitudes contractuales">
+    <button type="button" role="tab" id="tab-sc-radicar" [attr.aria-selected]="pestana() === 'radicar'" aria-controls="panel-sc-radicar"
+            [class.activa]="pestana() === 'radicar'" (click)="pestana.set('radicar')">Nueva solicitud</button>
+    <button type="button" role="tab" id="tab-sc-consultar" [attr.aria-selected]="pestana() === 'consultar'" aria-controls="panel-sc-consultar"
+            [class.activa]="pestana() === 'consultar'" (click)="pestana.set('consultar')">Consultar y descargar</button>
+  </div>
+
+  @if (!svc.disponible) {
+    <div class="alerta-govco info" role="status">
+      <strong>La radicación en línea aún no está habilitada en esta versión del portal.</strong>
+      Mientras tanto, solicite su certificación al correo
+      <a href="mailto:contactenos@esehospitalguaviare.gov.co">contactenos&#64;esehospitalguaviare.gov.co</a>.
+    </div>
+  }
+
+  @if (pestana() === 'radicar') {
+    <div id="panel-sc-radicar" role="tabpanel" aria-labelledby="tab-sc-radicar">
+      @if (radicacion(); as r) {
+        <div class="constancia" tabindex="-1" #constancia role="status">
+          <span class="constancia-ico" aria-hidden="true">✓</span>
+          <h2>Su solicitud quedó radicada</h2>
+          <dl>
+            <dt>Número de radicado</dt><dd class="mono grande">{{ r.radicado }}</dd>
+            <dt>Fecha de radicación</dt><dd>{{ r.fechaRadicacion | date: "d 'de' MMMM 'de' y, h:mm a" : '-0500' : 'es-CO' }}</dd>
+            <dt>Respuesta a más tardar</dt><dd><b>{{ r.fechaVencimiento | date: "EEEE d 'de' MMMM 'de' y" : '-0500' : 'es-CO' }}</b> ({{ r.plazoDias }} días hábiles)</dd>
+          </dl>
+          <p class="importante">Guarde el número de radicado. Con él y su cédula puede consultar el estado y descargar la certificación.</p>
+          <div class="acciones-govco">
+            <button type="button" class="btn-bdc fill-btn-govco" (click)="irAConsulta(r)">Consultar mi solicitud</button>
+            <button type="button" class="btn-bdc outline-btn-govco" (click)="imprimir()">Imprimir constancia</button>
+            <button type="button" class="btn-bdc outline-btn-govco" (click)="nuevaSolicitud()">Hacer otra solicitud</button>
+          </div>
+        </div>
+      } @else {
+        <p class="obligatorios">Todos los campos son obligatorios.</p>
+
+        @if (intentado() && errores().length) {
+          <div class="alerta-govco error" tabindex="-1" #resumenErrores role="alert">
+            <strong>Revise {{ errores().length === 1 ? 'el siguiente dato' : 'los siguientes ' + errores().length + ' datos' }}:</strong>
+            <ul>
+              @for (e of errores(); track e.id) { <li><a [href]="'#' + e.id" (click)="irACampo($event, e.id)">{{ e.texto }}</a></li> }
+            </ul>
+          </div>
+        }
+
+        <form [formGroup]="form" (ngSubmit)="enviar()" novalidate>
+          <div class="trampa" aria-hidden="true">
+            <label for="sc-sitioWeb">No llene este campo</label>
+            <input id="sc-sitioWeb" formControlName="sitioWeb" tabindex="-1" autocomplete="off" />
+          </div>
+
+          <fieldset class="seccion">
+            <legend><span class="num">1</span> Sus datos</legend>
+            <div class="rejilla">
+              <div class="campo">
+                <label for="cedula">Número de cédula</label>
+                <input id="cedula" formControlName="cedula" inputmode="numeric" maxlength="15" autocomplete="off"
+                       [attr.aria-invalid]="!!error('cedula')" [attr.aria-describedby]="error('cedula') ? 'error-cedula' : null" />
+                @if (error('cedula')) { <p class="error-campo" id="error-cedula">{{ error('cedula') }}</p> }
+              </div>
+              <div class="campo">
+                <label for="nombre">Nombre completo</label>
+                <input id="nombre" formControlName="nombre" maxlength="150" autocomplete="name"
+                       [attr.aria-invalid]="!!error('nombre')" [attr.aria-describedby]="error('nombre') ? 'error-nombre' : null" />
+                @if (error('nombre')) { <p class="error-campo" id="error-nombre">{{ error('nombre') }}</p> }
+              </div>
+              <div class="campo">
+                <label for="correo">Correo electrónico</label>
+                <input id="correo" type="email" formControlName="correo" maxlength="150" autocomplete="email"
+                       [attr.aria-invalid]="!!error('correo')" [attr.aria-describedby]="error('correo') ? 'error-correo' : null" />
+                @if (error('correo')) { <p class="error-campo" id="error-correo">{{ error('correo') }}</p> }
+              </div>
+              <div class="campo">
+                <label for="telefono">Teléfono o celular</label>
+                <input id="telefono" type="tel" formControlName="telefono" maxlength="30" autocomplete="tel"
+                       [attr.aria-invalid]="!!error('telefono')" [attr.aria-describedby]="error('telefono') ? 'error-telefono' : null" />
+                @if (error('telefono')) { <p class="error-campo" id="error-telefono">{{ error('telefono') }}</p> }
+              </div>
+            </div>
+          </fieldset>
+
+          <fieldset class="seccion">
+            <legend><span class="num">2</span> Certificación que necesita</legend>
+            <fieldset class="sub" id="vigencias" [attr.aria-describedby]="error('vigencias') ? 'error-vigencias' : 'ayuda-vigencias'">
+              <legend>Vigencias (años de los contratos)</legend>
+              <p class="ayuda" id="ayuda-vigencias">Marque uno o varios años.</p>
+              <div class="vigencias-opciones">
+                @for (a of vigencias; track a) {
+                  <label class="vig" [class.on]="elegidas().includes(a)">
+                    <input type="checkbox" [checked]="elegidas().includes(a)" (change)="alternarVigencia(a, $any($event.target).checked)" />
+                    {{ a }}
+                  </label>
+                }
+              </div>
+              @if (error('vigencias')) { <p class="error-campo" id="error-vigencias">{{ error('vigencias') }}</p> }
+            </fieldset>
+            <div class="campo">
+              <label for="descripcion">Descripción</label>
+              <textarea id="descripcion" formControlName="descripcion" rows="5" maxlength="4000"
+                        placeholder="Ej. Certificación del contrato de prestación de servicios como auxiliar de enfermería, con objeto, valor y plazo."
+                        [attr.aria-invalid]="!!error('descripcion')" [attr.aria-describedby]="(error('descripcion') ? 'error-descripcion ' : '') + 'contador-desc'"></textarea>
+              <p class="ayuda" id="contador-desc">{{ caracteres() }} de 4000 caracteres. Indique el número de contrato si lo conoce.</p>
+              @if (error('descripcion')) { <p class="error-campo" id="error-descripcion">{{ error('descripcion') }}</p> }
+            </div>
+            <fieldset class="sub">
+              <legend>¿Cómo quiere recibirla?</legend>
+              <div class="radios">
+                <label class="check-govco"><input type="radio" formControlName="tipoEntrega" value="correo" /> Por correo electrónico y descarga en este portal</label>
+                <label class="check-govco"><input type="radio" formControlName="tipoEntrega" value="fisica" /> Física (la recojo en la entidad)</label>
+              </div>
+            </fieldset>
+          </fieldset>
+
+          <div class="autorizacion" id="aceptaDatos">
+            <label class="check-govco">
+              <input type="checkbox" formControlName="aceptaDatos" [attr.aria-invalid]="!!error('aceptaDatos')"
+                     [attr.aria-describedby]="error('aceptaDatos') ? 'error-aceptaDatos' : null" />
+              <span>Autorizo el tratamiento de mis datos personales para atender esta solicitud, según la
+                <a routerLink="/politicas-de-privacidad" target="_blank">política de privacidad y tratamiento de datos</a> (Ley 1581 de 2012).</span>
+            </label>
+            @if (error('aceptaDatos')) { <p class="error-campo" id="error-aceptaDatos">{{ error('aceptaDatos') }}</p> }
+          </div>
+
+          @if (errorEnvio()) { <div class="alerta-govco error" role="alert">{{ errorEnvio() }}</div> }
+
+          <div class="acciones-govco">
+            <button type="submit" class="btn-bdc fill-btn-govco" [disabled]="enviando() || !svc.disponible">{{ enviando() ? 'Radicando…' : 'Radicar solicitud' }}</button>
+          </div>
+        </form>
+      }
+    </div>
+  }
+
+  @if (pestana() === 'consultar') {
+    <div id="panel-sc-consultar" role="tabpanel" aria-labelledby="tab-sc-consultar">
+      <form class="consulta" [formGroup]="consulta" (ngSubmit)="consultar()" novalidate>
+        <div class="campo">
+          <label for="c-cedula">Número de cédula</label>
+          <input id="c-cedula" formControlName="cedula" inputmode="numeric" maxlength="15" autocomplete="off" />
+        </div>
+        <div class="campo">
+          <label for="c-radicado-sc">Número de radicado</label>
+          <input id="c-radicado-sc" formControlName="radicado" placeholder="SC-2026-000123" autocapitalize="characters" autocomplete="off" />
+        </div>
+        <button type="submit" class="btn-bdc fill-btn-govco" [disabled]="consultando() || !svc.disponible">{{ consultando() ? 'Consultando…' : 'Consultar' }}</button>
+      </form>
+
+      @if (errorConsulta()) { <div class="alerta-govco error" role="alert">{{ errorConsulta() }}</div> }
+
+      @if (resultado(); as c) {
+        <article class="resultado" aria-live="polite">
+          <header>
+            <h2><span class="mono">{{ c.radicado }}</span></h2>
+            <p>Certificación contractual · vigencias {{ c.vigencias?.join(', ') }}</p>
+          </header>
+          <ol class="pasos">
+            <li [class.hecho]="paso(c.estado) >= 1"><b>Radicada</b><small>{{ c.fechaRadicacion | date: 'd MMM y' : '-0500' : 'es-CO' }}</small></li>
+            <li [class.hecho]="paso(c.estado) >= 2"><b>En trámite</b></li>
+            <li [class.hecho]="paso(c.estado) >= 3"><b>{{ c.estado === 'rechazada' ? 'Rechazada' : 'Respondida' }}</b>
+              @if (c.fechaRespuesta) { <small>{{ c.fechaRespuesta | date: 'd MMM y' : '-0500' : 'es-CO' }}</small> }</li>
+          </ol>
+          <p>Estado actual: <b>{{ nombreEstado(c.estado) }}</b>.
+            @if (!c.respuesta) { Respuesta a más tardar el <b>{{ c.fechaVencimiento | date: "d 'de' MMMM 'de' y" : '-0500' : 'es-CO' }}</b>. }
+          </p>
+          @if (c.respuesta) {
+            <h3>Respuesta</h3>
+            <div class="respuesta">{{ c.respuesta }}</div>
+            @if (c.adjuntos.length) {
+              <ul class="lista-archivos">
+                @for (a of c.adjuntos; track a.id) {
+                  <li><button type="button" class="btn-link-govco" (click)="descargar(a)">📄 Descargar {{ a.nombre }}</button> <small>{{ tamano(a.tamano) }}</small></li>
+                }
+              </ul>
+            }
+          }
+        </article>
+      }
+    </div>
+  }
+</section>
