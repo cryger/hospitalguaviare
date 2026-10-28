@@ -40,7 +40,8 @@ export class CmsLocalDataSource extends CmsDataSource {
     this.sembrarEntradasFijas('entidad-semilla', ENTRADAS_ENTIDAD);
     this.semillaNoticias = this.sembrarDesdeArchivo('noticias-semilla', 'assets/semillas/noticias.json').then(() =>
       this.sembrarDesdeArchivo('nuestro-hospital-semilla', 'assets/semillas/nuestro-hospital.json'),
-    ).then(() => this.sembrarDesdeArchivo('atencion-participa-semilla', 'assets/semillas/atencion-y-participa.json'));
+    ).then(() => this.sembrarDesdeArchivo('atencion-participa-semilla', 'assets/semillas/atencion-y-participa.json'))
+      .then(() => this.sembrarDesdeArchivo('tramites-semilla', 'assets/semillas/tramites.json'));
   }
 
   /** Contenido migrado del portal anterior (se descarga una sola vez desde /assets/semillas) */
@@ -172,7 +173,7 @@ export class CmsLocalDataSource extends CmsDataSource {
   }
 
   /* ===== Estructura inicial (Resolución 1519 de 2020) ===== */
-  private readonly versionSemilla = 13;
+  private readonly versionSemilla = 14;
 
   private sembrarSiVacio(): void {
     if (localStorage.getItem(this.prefijo + 'menus')) return;
@@ -358,6 +359,7 @@ export class CmsLocalDataSource extends CmsDataSource {
    * - noticias.json        → api/migraciones/010-noticias.sql
    * - nuestro-hospital.json → api/migraciones/013-nuestro-hospital.sql
    * - atencion-y-participa.json → api/migraciones/014-atencion-y-participa.sql
+   * - tramites.json             → api/migraciones/002-tramites.sql (+ 020: enlaces al portal nuevo)
    */
   private async sembrarDesdeArchivo(nombre: string, ruta: string): Promise<void> {
     const clave = this.prefijo + nombre;
@@ -540,6 +542,7 @@ const ESTRUCTURA_1519: PaginaSemilla[] = [
   { id: 97, menuId: 1, parentId: 62, titulo: "Información para población vulnerable", slug: 'informacion-para-poblacion-vulnerable', plantilla: 'enlace', urlExterna: '/transparencia/informacion-especifica-para-grupos-de-interes', orden: 4 },
   { id: 98, menuId: 1, parentId: 62, titulo: "Boletines de salud", slug: 'boletines-de-salud', plantilla: 'listado', descripcion: "Boletines epidemiológicos, infografías y piezas informativas sobre fechas conmemorativas en salud.", orden: 5 },
   { id: 99, menuId: 1, parentId: 62, titulo: "Perfil epidemiológico", slug: 'perfil-epidemiologico', plantilla: 'documentos', descripcion: "Perfil epidemiológico institucional y boletines epidemiológicos trimestrales.", orden: 6 },
+  { id: 105, menuId: 1, parentId: 62, titulo: "Solicitudes contractuales", slug: 'solicitudes-contractuales', plantilla: 'enlace', urlExterna: '/solicitudes-contractuales', descripcion: "Solicite certificaciones de sus contratos con la E.S.E. y consulte el estado de su solicitud.", orden: 7 },
   { id: 67, menuId: 1, parentId: null, titulo: "Participa", slug: 'participa', plantilla: 'contenido', descripcion: "Espacios de participación ciudadana en la gestión de la E.S.E. Hospital San José del Guaviare (lineamientos del DAFP).", orden: 3 },
   { id: 68, menuId: 1, parentId: 67, titulo: "Participación para el diagnóstico de necesidades e identificación de problemas", slug: 'participacion-para-el-diagnostico-de-necesidades-e-identificacion-de-problemas', plantilla: 'contenido', descripcion: "Espacio para identificar y analizar las necesidades, expectativas y problemáticas de la comunidad en relación con los servicios de salud.", orden: 0 },
   { id: 69, menuId: 1, parentId: 67, titulo: "Planeación y presupuesto participativo", slug: 'planeacion-y-presupuesto-participativo', plantilla: 'contenido', descripcion: "La comunidad participa en la definición de prioridades, la asignación de recursos y la formulación de planes y proyectos institucionales.", orden: 1 },
