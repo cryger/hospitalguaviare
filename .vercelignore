@@ -1,0 +1,5 @@
+# La API (Node + MySQL) se publica en cPanel, no en Vercel.
+# Sin esto, Vercel toma cada archivo .js de /api como una función serverless
+# y el plan Hobby rechaza el despliegue (máximo 12 funciones).
+api
+database
