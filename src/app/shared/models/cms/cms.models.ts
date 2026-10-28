@@ -6,7 +6,7 @@
 
 export type UbicacionMenu = 'principal' | 'superior' | 'pie' | 'lateral';
 export type EstadoPagina = 'publicada' | 'borrador' | 'oculta';
-export type PlantillaPagina = 'contenido' | 'listado' | 'documentos' | 'galeria' | 'enlace' | 'calendario';
+export type PlantillaPagina = 'contenido' | 'listado' | 'documentos' | 'galeria' | 'enlace' | 'calendario' | 'historia';
 export type TipoEntrada = 'articulo' | 'noticia' | 'documento' | 'evento' | 'servicio' | 'enlace';
 export type EstadoEntrada = 'publicada' | 'borrador' | 'archivada';
 export type TipoMultimedia = 'imagen' | 'video' | 'documento' | 'audio' | 'otro';
@@ -92,6 +92,11 @@ export const PLANTILLAS_PAGINA: { valor: PlantillaPagina; etiqueta: string; ayud
   { valor: 'documentos', etiqueta: 'Documentos', ayuda: 'Tabla de archivos descargables (ej. Transparencia, Normatividad).' },
   { valor: 'galeria', etiqueta: 'Galería', ayuda: 'Cuadrícula de imágenes y videos.' },
   { valor: 'enlace', etiqueta: 'Enlace', ayuda: 'Solo redirige a una URL (interna o externa).' },
+  {
+    valor: 'historia',
+    etiqueta: 'Reseña histórica',
+    ayuda: 'Portada, línea de tiempo y galería. La 1.ª entrada es la introducción (su imagen destacada es la portada y sus imágenes adjuntas, la galería). Las entradas cuyo título empieza por un año o por «Hoy» (ej. «1990 · Abre la sede») son los hitos; su imagen destacada es la foto del hito.',
+  },
   { valor: 'calendario', etiqueta: 'Calendario de eventos', ayuda: 'Muestra el calendario institucional (los eventos se administran en Contenido › Calendario de eventos).' },
 ];
 

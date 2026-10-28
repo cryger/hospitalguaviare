@@ -222,6 +222,11 @@
       <app-calendario-eventos />
     }
 
+    @case ('historia') {
+      <!-- Reseña histórica: portada, línea de tiempo y galería (administrables en Entradas y Multimedia) -->
+      <app-resena-historica [entradas]="entradas()" [tituloPagina]="p.titulo" (ampliar)="lightbox.set($event)" />
+    }
+
     @case ('galeria') {
       @if (galeria().length) {
         <ul class="galeria">

@@ -10,6 +10,7 @@ import { CmsMediaPublica } from './cms-media-publica';
 import { esVistaPrevia } from './cms-publico.routes';
 import { BuscadorGovco } from '../../shared/components/buscador-govco/buscador-govco';
 import { CalendarioEventos } from '../../componentes/calendario-eventos/calendario-eventos';
+import { ResenaHistorica } from './resena-historica';
 import { normalizar, resaltar as resaltarTexto, terminosDe } from '../../shared/utils/busqueda';
 
 const POR_PAGINA = 9;
@@ -19,7 +20,7 @@ type Orden = 'predeterminado' | 'recientes' | 'antiguas' | 'az';
 
 @Component({
   selector: 'app-cms-pagina-publica',
-  imports: [RouterLink, DatePipe, CmsMediaPublica, BuscadorGovco, CalendarioEventos],
+  imports: [RouterLink, DatePipe, CmsMediaPublica, BuscadorGovco, CalendarioEventos, ResenaHistorica],
   templateUrl: './cms-pagina-publica.html',
   styleUrl: './cms-pagina-publica.css',
 })

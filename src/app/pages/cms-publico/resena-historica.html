@@ -1,0 +1,97 @@
+<div class="historia">
+  <!-- ===== Portada: imagen destacada de la introducción ===== -->
+  @if (intro(); as i) {
+    <section class="portada" [class.sin-foto]="!portada()">
+      @if (portada(); as img) {
+        <button type="button" class="portada-img" (click)="ampliar.emit(img)" [attr.aria-label]="'Ampliar imagen: ' + (img.alt || img.titulo)">
+          <img [src]="img.url" [alt]="img.alt || ''" fetchpriority="high" />
+        </button>
+      } @else {
+        <div class="portada-img placeholder" aria-hidden="true">
+          <svg viewBox="0 0 400 200" preserveAspectRatio="xMidYMax slice">
+            <path d="M0 160 Q100 130 200 150 T400 140 V200 H0Z" fill="currentColor" opacity=".18" />
+            <rect x="120" y="70" width="160" height="90" rx="6" fill="currentColor" opacity=".28" />
+            <rect x="180" y="40" width="40" height="40" rx="4" fill="currentColor" opacity=".35" />
+            <path d="M193 53h14v6h6v14h-6v6h-14v-6h-6V59h6z" fill="#fff" />
+          </svg>
+        </div>
+      }
+      <div class="portada-texto">
+        @if (desde()) { <span class="sello">Desde {{ desde() }}</span> }
+        <h2>{{ i.titulo !== tituloPagina() ? i.titulo : 'Nuestra historia' }}</h2>
+        @if (i.resumen) { <p>{{ i.resumen }}</p> }
+      </div>
+    </section>
+
+    <div class="intro">
+      @if (i.contenido) { <div class="contenido-html" [innerHTML]="i.contenido"></div> }
+      @if (anios()) {
+        <aside class="cifra" aria-label="Trayectoria">
+          <strong>{{ anios() }}</strong>
+          <span>años cuidando la salud del Guaviare y el sur del Meta</span>
+        </aside>
+      }
+    </div>
+  }
+
+  <!-- ===== Línea de tiempo ===== -->
+  @if (hitos().length) {
+    <section class="linea" aria-labelledby="titulo-linea">
+      <h2 id="titulo-linea" class="h-seccion">Línea de tiempo</h2>
+      <ol>
+        @for (h of hitos(); track h.entrada.id) {
+          <li class="hito">
+            <span class="punto" aria-hidden="true"></span>
+            <article>
+              <figure class="hito-foto" [class.vacia]="!h.imagen">
+                @if (h.imagen; as img) {
+                  <button type="button" (click)="ampliar.emit(img)" [attr.aria-label]="'Ampliar imagen: ' + (img.alt || img.titulo)">
+                    <img [src]="img.url" [alt]="img.alt || ''" loading="lazy" />
+                  </button>
+                } @else {
+                  <div class="foto-pendiente" aria-hidden="true">
+                    <svg viewBox="0 0 24 24"><path d="M4 7h3l2-2h6l2 2h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1Z" /><circle cx="12" cy="13" r="3.5" /></svg>
+                    <span>{{ h.anio }}</span>
+                  </div>
+                }
+              </figure>
+              <div class="hito-texto">
+                <span class="anio">{{ h.anio }}</span>
+                <h3>{{ h.titulo }}</h3>
+                @if (h.entrada.contenido) {
+                  <div class="contenido-html" [innerHTML]="h.entrada.contenido"></div>
+                } @else if (h.entrada.resumen) {
+                  <p>{{ h.entrada.resumen }}</p>
+                }
+              </div>
+            </article>
+          </li>
+        }
+      </ol>
+    </section>
+  }
+
+  <!-- ===== Galería: imágenes adjuntas a la introducción ===== -->
+  @if (galeria().length) {
+    <section class="galeria-historia" aria-labelledby="titulo-galeria">
+      <h2 id="titulo-galeria" class="h-seccion">Galería</h2>
+      <ul>
+        @for (m of galeria(); track m.id) {
+          <li>
+            <button type="button" (click)="ampliar.emit(m)" [attr.aria-label]="'Ampliar imagen: ' + (m.alt || m.titulo)">
+              <img [src]="m.url" [alt]="m.alt || ''" loading="lazy" />
+            </button>
+            @if (m.descripcion || m.titulo) { <span class="pie">{{ m.descripcion || m.titulo }}</span> }
+          </li>
+        }
+      </ul>
+    </section>
+  }
+
+  @for (e of otras(); track e.id) {
+    <section class="bloque-contenido">
+      <h2>{{ e.titulo }}</h2>
+      @if (e.contenido) { <div class="contenido-html" [innerHTML]="e.contenido"></div> }
+    </section>
+  }
+</div>

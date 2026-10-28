@@ -41,7 +41,8 @@ export class CmsLocalDataSource extends CmsDataSource {
     this.semillaNoticias = this.sembrarDesdeArchivo('noticias-semilla', 'assets/semillas/noticias.json').then(() =>
       this.sembrarDesdeArchivo('nuestro-hospital-semilla', 'assets/semillas/nuestro-hospital.json'),
     ).then(() => this.sembrarDesdeArchivo('atencion-participa-semilla', 'assets/semillas/atencion-y-participa.json'))
-      .then(() => this.sembrarDesdeArchivo('tramites-semilla', 'assets/semillas/tramites.json'));
+      .then(() => this.sembrarDesdeArchivo('tramites-semilla', 'assets/semillas/tramites.json'))
+      .then(() => this.sembrarDesdeArchivo('resena-historica-semilla', 'assets/semillas/resena-historica.json'));
   }
 
   /** Contenido migrado del portal anterior (se descarga una sola vez desde /assets/semillas) */
@@ -173,7 +174,7 @@ export class CmsLocalDataSource extends CmsDataSource {
   }
 
   /* ===== Estructura inicial (Resolución 1519 de 2020) ===== */
-  private readonly versionSemilla = 14;
+  private readonly versionSemilla = 15;
 
   private sembrarSiVacio(): void {
     if (localStorage.getItem(this.prefijo + 'menus')) return;
@@ -350,6 +351,12 @@ export class CmsLocalDataSource extends CmsDataSource {
         }
       }
     }
+    // Versión 15: Reseña histórica con portada, línea de tiempo y galería
+    if (version < 15) {
+      for (const p of paginas) {
+        if (p.slug === 'resena-historica' && p.plantilla === 'contenido') Object.assign(p, { plantilla: 'historia', actualizadoEn: t });
+      }
+    }
     this.escribir('paginas', paginas);
     localStorage.setItem(this.prefijo + 'version', String(this.versionSemilla));
   }
@@ -360,6 +367,7 @@ export class CmsLocalDataSource extends CmsDataSource {
    * - nuestro-hospital.json → api/migraciones/013-nuestro-hospital.sql
    * - atencion-y-participa.json → api/migraciones/014-atencion-y-participa.sql
    * - tramites.json             → api/migraciones/002-tramites.sql (+ 020: enlaces al portal nuevo)
+   * - resena-historica.json     → api/migraciones/021-resena-historica.sql (hitos, fotos y portada)
    */
   private async sembrarDesdeArchivo(nombre: string, ruta: string): Promise<void> {
     const clave = this.prefijo + nombre;
@@ -385,6 +393,8 @@ export class CmsLocalDataSource extends CmsDataSource {
         multimedia: { nombre: string; url: string; tipo: CmsMultimedia['tipo']; mime: string | null; titulo: string; alt: string | null }[];
         noticias?: Item[];
         entradas?: Item[];
+        /** Actualiza una entrada existente si nadie la ha editado (ej. introducción de la reseña) */
+        intro?: { slug: string; resumen: string; contenido: string; destacada: string | null; adjuntos: string[]; siContiene: string };
       } = await r.json();
       const items: Item[] = semilla.entradas ?? (semilla.noticias ?? []).map((n) => ({ ...n, paginaSlug: 'noticias', tipo: 'noticia' }));
 
@@ -424,6 +434,20 @@ export class CmsLocalDataSource extends CmsDataSource {
           creadoEn: t,
           actualizadoEn: t,
         });
+      }
+      if (semilla.intro) {
+        const it = semilla.intro;
+        const e = entradas.find((x) => x.slug === it.slug && x.contenido?.includes(it.siContiene) && !x.imagenDestacadaId);
+        if (e) {
+          Object.assign(e, {
+            resumen: it.resumen,
+            contenido: it.contenido,
+            orden: 0,
+            imagenDestacadaId: it.destacada ? porUrl.get(it.destacada) ?? null : null,
+            multimediaIds: it.adjuntos.map((u) => porUrl.get(u)).filter((x): x is number => x !== undefined),
+            actualizadoEn: t,
+          });
+        }
       }
       this.escribir('multimedia', multimedia);
       this.escribir('entradas', entradas);
@@ -557,7 +581,7 @@ const ESTRUCTURA_1519: PaginaSemilla[] = [
   { id: 104, menuId: 1, parentId: 67, titulo: "Divulgación de resultados", slug: 'divulgacion-de-resultados', plantilla: 'contenido', descripcion: "Avances y resultados de la gestión en el marco de la participación ciudadana.", orden: 10 },
   { id: 74, menuId: 1, parentId: null, titulo: "Nuestro Hospital", slug: 'nuestro-hospital', plantilla: 'contenido', orden: 0 },
   { id: 86, menuId: 1, parentId: 74, titulo: "Misión y visión", slug: 'mision-vision', plantilla: 'enlace', urlExterna: '/transparencia/informacion-de-la-entidad/mision-vision-funciones-y-deberes', orden: 0 },
-  { id: 75, menuId: 1, parentId: 74, titulo: "Reseña histórica", slug: 'resena-historica', plantilla: 'contenido', orden: 1 },
+  { id: 75, menuId: 1, parentId: 74, titulo: "Reseña histórica", slug: 'resena-historica', plantilla: 'historia', orden: 1 },
   { id: 87, menuId: 1, parentId: 74, titulo: "Estructura orgánica", slug: 'estructura-organica', plantilla: 'enlace', urlExterna: '/transparencia/informacion-de-la-entidad/estructura-organica-organigrama', orden: 2 },
   { id: 76, menuId: 1, parentId: 74, titulo: "Portafolio de servicios", slug: 'portafolio-de-servicios', plantilla: 'listado', orden: 3 },
   { id: 77, menuId: 1, parentId: 74, titulo: "Sedes y horarios de atención", slug: 'sedes-y-horarios', plantilla: 'contenido', orden: 4 },
