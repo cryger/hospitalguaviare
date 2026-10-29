@@ -63,6 +63,11 @@ export class CmsEntradaEditor {
     return this.cms.paginaPorId().get(Number(this.form.paginaId))?.plantilla === 'servicios';
   }
 
+  /** Páginas de documentos: la categoría es el tipo de documento (filtro de la izquierda) */
+  esDocumentos(): boolean {
+    return this.cms.paginaPorId().get(Number(this.form.paginaId))?.plantilla === 'documentos';
+  }
+
   /** Organigrama: la categoría es el nivel de la dependencia */
   readonly nivelesOrganigrama = NIVELES_ORGANIGRAMA;
   esOrganigrama(): boolean {

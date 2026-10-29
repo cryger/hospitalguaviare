@@ -26,7 +26,7 @@ type Orden = 'predeterminado' | 'recientes' | 'antiguas' | 'az';
   selector: 'app-cms-pagina-publica',
   imports: [RouterLink, DatePipe, NgTemplateOutlet, CmsMediaPublica, BuscadorGovco, CalendarioEventos, ResenaHistorica, ServiciosTarjetas, IconoCms, Organigrama],
   templateUrl: './cms-pagina-publica.html',
-  styleUrl: './cms-pagina-publica.css',
+  styleUrls: ['./cms-pagina-publica.css', './cms-listados.css'],
 })
 export class CmsPaginaPublica {
   readonly cms = inject(CmsService);
@@ -102,7 +102,8 @@ export class CmsPaginaPublica {
    * Solo se muestra el filtro lateral si hay al menos dos categorías.
    */
   readonly categorias = computed(() => {
-    if (this.pagina()?.plantilla !== 'listado') return [];
+    const plantilla = this.pagina()?.plantilla;
+    if (plantilla !== 'listado' && plantilla !== 'documentos') return [];
     const todas = new Map<string, { slug: string; nombre: string; total: number }>();
     for (const e of this.entradas()) {
       const nombre = e.categoria?.trim();
@@ -113,11 +114,20 @@ export class CmsPaginaPublica {
     if (todas.size < 2) return [];
     for (const e of this.entradas()) {
       const c = e.categoria?.trim();
-      if (c && this.coincide(e)) todas.get(slugCategoria(c))!.total++;
+      if (c && this.coincide(e)) todas.get(slugCategoria(c))!.total += this.peso(e);
     }
     return [...todas.values()].sort((a, b) => a.nombre.localeCompare(b.nombre, 'es'));
   });
-  readonly totalTodas = computed(() => this.entradas().filter((e) => this.coincide(e)).length);
+  readonly totalTodas = computed(() => this.entradas().filter((e) => this.coincide(e)).reduce((n, e) => n + this.peso(e), 0));
+
+  /** Totales para el texto "N documentos / N resultados" */
+  readonly conteoFiltrado = computed(() => this.entradasFiltradas().reduce((n, e) => n + this.peso(e), 0));
+  readonly conteoTotal = computed(() => this.entradas().reduce((n, e) => n + this.peso(e), 0));
+
+  /** En páginas de documentos se cuentan archivos; en noticias, publicaciones */
+  private peso(e: CmsEntrada): number {
+    return this.pagina()?.plantilla === 'documentos' ? Math.max(1, this.documentos(e).length) : 1;
+  }
   /** Categoría activa (solo si existe en esta página) */
   readonly categoriaActiva = computed(() => this.categorias().find((c) => c.slug === this.categoria()) ?? null);
 
@@ -303,6 +313,16 @@ export class CmsPaginaPublica {
 
   documentos(e: CmsEntrada): CmsMultimedia[] {
     return this.adjuntos(e).filter((m) => m.tipo === 'documento' || m.tipo === 'otro' || m.tipo === 'audio');
+  }
+
+  /** "informe.final.pdf" → "PDF" (para la insignia del listado de documentos) */
+  extension(m: CmsMultimedia): string {
+    const ext = (m.nombre || m.url).split('?')[0].split('.').pop() ?? '';
+    return ext.length > 0 && ext.length <= 4 ? ext.toUpperCase() : 'DOC';
+  }
+
+  tamanoLegible(bytes: number): string {
+    return bytes >= 1048576 ? (bytes / 1048576).toFixed(1).replace('.', ',') + ' MB' : Math.max(1, Math.round(bytes / 1024)) + ' KB';
   }
 
   visuales(e: CmsEntrada): CmsMultimedia[] {

@@ -149,12 +149,12 @@
     </app-buscador-govco>
     <p #resultadoBusqueda class="resultado-busqueda" role="status" aria-live="polite" tabindex="-1">
       @if (busqueda().trim() || anio() || categoriaActiva()) {
-        <strong>{{ entradasFiltradas().length }}</strong> {{ entradasFiltradas().length === 1 ? 'resultado' : 'resultados' }}
+        <strong>{{ conteoFiltrado() }}</strong> {{ conteoFiltrado() === 1 ? 'resultado' : 'resultados' }}
         @if (categoriaActiva(); as c) { en {{ c.nombre }} }
         @if (busqueda().trim()) { para «{{ busqueda().trim() }}» }
         @if (anio()) { en {{ anio() }} }
       } @else {
-        <strong>{{ entradas().length }}</strong> {{ nombre }}
+        <strong>{{ conteoTotal() }}</strong> {{ nombre }}
       }
     </p>
   }
@@ -164,26 +164,7 @@
       @if (entradas().length) {
         <div class="listado" [class.con-categorias]="categorias().length">
         <!-- Filtro lateral por categoría (Comunicados, Resoluciones, Procesos…) -->
-        @if (categorias().length) {
-          <nav class="filtro-categorias" aria-labelledby="titulo-categorias">
-            <h2 id="titulo-categorias">Categorías</h2>
-            <ul>
-              <li>
-                <button type="button" [class.activa]="!categoriaActiva()" [attr.aria-pressed]="!categoriaActiva()" (click)="filtrarCategoria('')">
-                  <span>Todas</span><span class="conteo">{{ totalTodas() }}</span>
-                </button>
-              </li>
-              @for (c of categorias(); track c.slug) {
-                <li>
-                  <button type="button" [class.activa]="c.slug === categoriaActiva()?.slug" [attr.aria-pressed]="c.slug === categoriaActiva()?.slug"
-                          [disabled]="!c.total && c.slug !== categoriaActiva()?.slug" (click)="filtrarCategoria(c.slug)">
-                    <span>{{ c.nombre }}</span><span class="conteo" [attr.aria-label]="c.total + (c.total === 1 ? ' publicación' : ' publicaciones')">{{ c.total }}</span>
-                  </button>
-                </li>
-              }
-            </ul>
-          </nav>
-        }
+        @if (categorias().length) { <ng-container [ngTemplateOutlet]="navCategorias" /> }
         <div class="listado-cuerpo">
         <ul class="lista-pub">
           @for (e of entradasFiltradas().slice(0, mostrar()); track e.id) {
@@ -231,7 +212,52 @@
     }
 
     @case ('documentos') {
-      @if (entradas().length) {
+      @if (entradas().length && categorias().length) {
+        <!-- Documentos clasificados por tipo: filtro a la izquierda y listado de archivos -->
+        <div class="listado con-categorias">
+          <ng-container [ngTemplateOutlet]="navCategorias" />
+          <div class="listado-cuerpo">
+            <ul class="lista-archivos">
+              @for (e of entradasFiltradas(); track e.id) {
+                @for (m of documentos(e); track m.id) {
+                  <li>
+                    <a class="archivo" [href]="m.url" target="_blank" rel="noopener">
+                      <span class="archivo-ext" [class]="'ext-' + extension(m).toLowerCase()" aria-hidden="true">{{ extension(m) }}</span>
+                      <span class="archivo-cuerpo">
+                        <span class="archivo-titulo" [innerHTML]="resaltar(m.titulo || m.nombre)"></span>
+                        <span class="archivo-meta">
+                          @if (e.categoria) { <span class="chip-cat">{{ e.categoria }}</span> }
+                          <span>{{ e.titulo }}</span>
+                          @if (m.tamano) { <span>· {{ tamanoLegible(m.tamano) }}</span> }
+                        </span>
+                      </span>
+                      <span class="archivo-ir">Descargar <span class="visually-hidden">{{ extension(m) }} (abre en una pestaña nueva)</span><span aria-hidden="true">↓</span></span>
+                    </a>
+                  </li>
+                } @empty {
+                  <li>
+                    <a class="archivo" [routerLink]="url(e)">
+                      <span class="archivo-ext" aria-hidden="true">INFO</span>
+                      <span class="archivo-cuerpo">
+                        <span class="archivo-titulo" [innerHTML]="resaltar(e.titulo)"></span>
+                        <span class="archivo-meta">@if (e.categoria) { <span class="chip-cat">{{ e.categoria }}</span> } @if (e.resumen) { <span>{{ e.resumen }}</span> }</span>
+                      </span>
+                      <span class="archivo-ir">Ver <span aria-hidden="true">→</span></span>
+                    </a>
+                  </li>
+                }
+              }
+            </ul>
+            @if (!entradasFiltradas().length) {
+              <div class="sin-resultados">
+                <p>No encontramos documentos con esos criterios.</p>
+                <p>Pruebe con otras palabras o quite el filtro de tipo o de año.</p>
+                <button type="button" class="btn-bdc fill-btn-govco" (click)="limpiarFiltros()">Ver todos los documentos</button>
+              </div>
+            }
+          </div>
+        </div>
+      } @else if (entradas().length) {
         <div class="docs">
           @for (e of entradasFiltradas(); track e.id) {
             <section class="doc-grupo">
@@ -431,3 +457,26 @@
     @if (m.descripcion || m.titulo) { <p>{{ m.descripcion || m.titulo }}</p> }
   </div>
 }
+
+<!-- Filtro lateral por categoría: noticias (listado) y documentos -->
+<ng-template #navCategorias>
+  @let esDocs = pagina()?.plantilla === 'documentos';
+  <nav class="filtro-categorias" aria-labelledby="titulo-categorias">
+    <h2 id="titulo-categorias">{{ esDocs ? 'Tipo de documento' : 'Categorías' }}</h2>
+    <ul>
+      <li>
+        <button type="button" [class.activa]="!categoriaActiva()" [attr.aria-pressed]="!categoriaActiva()" (click)="filtrarCategoria('')">
+          <span>{{ esDocs ? 'Todos' : 'Todas' }}</span><span class="conteo">{{ totalTodas() }}</span>
+        </button>
+      </li>
+      @for (c of categorias(); track c.slug) {
+        <li>
+          <button type="button" [class.activa]="c.slug === categoriaActiva()?.slug" [attr.aria-pressed]="c.slug === categoriaActiva()?.slug"
+                  [disabled]="!c.total && c.slug !== categoriaActiva()?.slug" (click)="filtrarCategoria(c.slug)">
+            <span>{{ c.nombre }}</span><span class="conteo" [attr.aria-label]="c.total + (esDocs ? (c.total === 1 ? ' documento' : ' documentos') : (c.total === 1 ? ' publicación' : ' publicaciones'))">{{ c.total }}</span>
+          </button>
+        </li>
+      }
+    </ul>
+  </nav>
+</ng-template>

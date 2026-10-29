@@ -46,7 +46,32 @@ export class CmsLocalDataSource extends CmsDataSource {
       .then(() => this.sembrarDesdeArchivo('resena-historica-semilla', 'assets/semillas/resena-historica.json'))
       .then(() => this.sembrarDesdeArchivo('portafolio-servicios-semilla', 'assets/semillas/portafolio-servicios.json'))
       .then(() => this.sembrarDesdeArchivo('organigrama-semilla', 'assets/semillas/organigrama.json'))
-      .then(() => this.clasificarPublicaciones());
+      .then(() => this.clasificarPublicaciones())
+      .then(() => this.clasificarDocumentosTalentoHumano());
+  }
+
+  /**
+   * Una sola vez: tipos de documento de "Talento humano" (filtro a la izquierda).
+   * Equivale a api/migraciones/027-tipos-documentos-talento-humano.sql
+   */
+  private clasificarDocumentosTalentoHumano(): void {
+    const clave = this.prefijo + 'tipos-talento-humano';
+    if (localStorage.getItem(clave) === '1') return;
+    const pagina = this.leer<CmsPagina>('paginas').find((p) => p.slug === 'talento-humano');
+    if (!pagina) return;
+    const tipos: Record<string, string> = {
+      'manual-de-funciones': 'Manual de funciones',
+      'comite-de-bienestar-social-e-incentivos': 'Comités y grupos',
+      'grupo-geicig': 'Comités y grupos',
+      'formato-de-confidencialidad': 'Formatos',
+      'plan-de-gestion-gerencial': 'Planes',
+    };
+    const entradas = this.leer<CmsEntrada>('entradas');
+    for (const e of entradas) {
+      if (e.paginaId === pagina.id && !e.categoria && tipos[e.slug]) e.categoria = tipos[e.slug];
+    }
+    this.escribir('entradas', entradas);
+    localStorage.setItem(clave, '1');
   }
 
   /**

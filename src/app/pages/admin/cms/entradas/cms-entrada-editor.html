@@ -101,6 +101,17 @@
         <input id="en-fecha" class="input" type="datetime-local" name="fecha" [(ngModel)]="fechaLocal" />
         <small>Vacía = se asigna al publicar.</small>
       </div>
+      @if (esDocumentos()) {
+        <div class="campo bloque">
+          <label for="en-tipo-doc">Tipo de documento</label>
+          <input id="en-tipo-doc" class="input" name="categoria" list="en-tipos-doc" maxlength="80" autocomplete="off"
+                 [(ngModel)]="form.categoria" placeholder="Ej. Manuales, Formatos, Planes" aria-describedby="en-tipo-doc-ayuda" />
+          <datalist id="en-tipos-doc">
+            @for (c of categoriasDePagina(); track c) { <option [value]="c"></option> }
+          </datalist>
+          <small id="en-tipo-doc-ayuda">Clasifica el documento en el filtro de la izquierda. Con dos o más tipos, la página se muestra como listado filtrable.</small>
+        </div>
+      }
       @if (esOrganigrama()) {
         <div class="campo bloque">
           <label for="en-nivel">Nivel en el organigrama</label>
