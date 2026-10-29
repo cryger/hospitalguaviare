@@ -19,6 +19,37 @@ import { slugCategoria } from '../../shared/utils/categorias';
 
 const POR_PAGINA = 9;
 
+/** Una fila del listado de documentos */
+interface FilaDoc {
+  id: string;
+  entrada: CmsEntrada;
+  archivo: CmsMultimedia | null;
+  titulo: string;
+  grupo: string;
+  slug: string;
+  texto: string;
+}
+
+/** Tipo de un documento según su nombre (para agrupar archivos de una misma entrada) */
+const TIPOS_ARCHIVO: [RegExp, string][] = [
+  [/\bresoluc/, 'Resoluciones'],
+  [/\bcircular/, 'Circulares'],
+  [/\bcomunicad/, 'Comunicados'],
+  [/\bactas?\b/, 'Actas'],
+  [/\boficio/, 'Oficios'],
+  [/\b(decreto|ley|acuerdo|ordenanza)\b/, 'Normatividad'],
+  [/\binforme/, 'Informes'],
+  [/\bbolet|infografi/, 'Boletines'],
+  [/\bplan(es)?\b/, 'Planes'],
+  [/\bformato/, 'Formatos'],
+  [/\b(manual|guia|protocolo|procedimiento)/, 'Manuales y guías'],
+  [/\bcontrat/, 'Contratos'],
+];
+function tipoDeArchivo(nombre: string): string {
+  const t = normalizar(nombre);
+  return TIPOS_ARCHIVO.find(([r]) => r.test(t))?.[1] ?? 'Otros documentos';
+}
+
 /** Orden de resultados: por fecha, alfabético o el definido en el CMS */
 type Orden = 'predeterminado' | 'recientes' | 'antiguas' | 'az';
 
@@ -98,12 +129,21 @@ export class CmsPaginaPublica {
   }
 
   /**
-   * Categorías del listado con su número de publicaciones (según búsqueda y año).
-   * Solo se muestra el filtro lateral si hay al menos dos categorías.
+   * Categorías del filtro lateral con su número de elementos (según búsqueda y año).
+   * - Noticias (listado): la categoría de cada publicación.
+   * - Documentos: el grupo de cada archivo (ver filasDocs).
+   * Solo se muestra el filtro si hay al menos dos categorías.
    */
   readonly categorias = computed(() => {
     const plantilla = this.pagina()?.plantilla;
-    if (plantilla !== 'listado' && plantilla !== 'documentos') return [];
+    if (plantilla === 'documentos') {
+      const todas = new Map<string, { slug: string; nombre: string; total: number }>();
+      for (const f of this.filasDocs()) if (!todas.has(f.slug)) todas.set(f.slug, { slug: f.slug, nombre: f.grupo, total: 0 });
+      if (todas.size < 2) return [];
+      for (const f of this.filasDocs()) if (this.coincideFila(f)) todas.get(f.slug)!.total++;
+      return [...todas.values()]; // en el orden de la sección
+    }
+    if (plantilla !== 'listado') return [];
     const todas = new Map<string, { slug: string; nombre: string; total: number }>();
     for (const e of this.entradas()) {
       const nombre = e.categoria?.trim();
@@ -114,20 +154,72 @@ export class CmsPaginaPublica {
     if (todas.size < 2) return [];
     for (const e of this.entradas()) {
       const c = e.categoria?.trim();
-      if (c && this.coincide(e)) todas.get(slugCategoria(c))!.total += this.peso(e);
+      if (c && this.coincide(e)) todas.get(slugCategoria(c))!.total++;
     }
     return [...todas.values()].sort((a, b) => a.nombre.localeCompare(b.nombre, 'es'));
   });
-  readonly totalTodas = computed(() => this.entradas().filter((e) => this.coincide(e)).reduce((n, e) => n + this.peso(e), 0));
+  readonly totalTodas = computed(() =>
+    this.pagina()?.plantilla === 'documentos'
+      ? this.filasDocs().filter((f) => this.coincideFila(f)).length
+      : this.entradas().filter((e) => this.coincide(e)).length,
+  );
+
+  /* ===== Páginas de documentos: un archivo por fila ===== */
+
+  /**
+   * Filas del listado de documentos (un archivo por fila; si una entrada no tiene
+   * archivos, una fila que lleva a la entrada). El grupo del filtro lateral es:
+   * 1. el "Tipo de documento" de la entrada (dashboard) o, si no tiene, su título;
+   * 2. si con eso queda un solo grupo, el tipo de cada archivo según su nombre
+   *    (Resoluciones, Comunicados, Actas…).
+   */
+  readonly filasDocs = computed<FilaDoc[]>(() => {
+    if (this.pagina()?.plantilla !== 'documentos') return [];
+    const base = this.entradas().flatMap((e) => {
+      const docs = this.documentos(e);
+      return docs.length ? docs.map((m) => ({ entrada: e, archivo: m as CmsMultimedia | null })) : [{ entrada: e, archivo: null }];
+    });
+    const deEntrada = (e: CmsEntrada) => e.categoria?.trim() || e.titulo;
+    const porArchivo =
+      new Set(base.map((f) => deEntrada(f.entrada))).size < 2 &&
+      new Set(base.map((f) => tipoDeArchivo(f.archivo?.titulo || f.archivo?.nombre || f.entrada.titulo))).size >= 2;
+    return base.map((f, i) => {
+      const grupo = porArchivo ? tipoDeArchivo(f.archivo?.titulo || f.archivo?.nombre || f.entrada.titulo) : deEntrada(f.entrada);
+      return {
+        ...f,
+        id: `${f.entrada.id}-${f.archivo?.id ?? 0}-${i}`,
+        titulo: f.archivo ? f.archivo.titulo || f.archivo.nombre : f.entrada.titulo,
+        grupo,
+        slug: slugCategoria(grupo),
+        texto: normalizar([f.entrada.titulo, f.entrada.resumen ?? '', f.archivo?.titulo ?? '', f.archivo?.nombre ?? '', grupo].join(' ')),
+      };
+    });
+  });
+
+  private coincideFila(f: FilaDoc): boolean {
+    const anio = this.anio();
+    if (anio && !(f.entrada.fechaPublicacion || f.entrada.creadoEn).startsWith(anio)) return false;
+    return this.terminos().every((t) => f.texto.includes(t));
+  }
+
+  readonly filasFiltradas = computed(() => {
+    const cat = this.categoriaActiva()?.slug;
+    let filas = this.filasDocs().filter((f) => this.coincideFila(f) && (!cat || f.slug === cat));
+    const fecha = (f: FilaDoc) => f.entrada.fechaPublicacion || f.entrada.creadoEn;
+    switch (this.orden()) {
+      case 'recientes': filas = [...filas].sort((a, b) => fecha(b).localeCompare(fecha(a))); break;
+      case 'antiguas': filas = [...filas].sort((a, b) => fecha(a).localeCompare(fecha(b))); break;
+      case 'az': filas = [...filas].sort((a, b) => a.titulo.localeCompare(b.titulo, 'es', { numeric: true })); break;
+    }
+    return filas;
+  });
 
   /** Totales para el texto "N documentos / N resultados" */
-  readonly conteoFiltrado = computed(() => this.entradasFiltradas().reduce((n, e) => n + this.peso(e), 0));
-  readonly conteoTotal = computed(() => this.entradas().reduce((n, e) => n + this.peso(e), 0));
+  readonly conteoFiltrado = computed(() =>
+    this.pagina()?.plantilla === 'documentos' ? this.filasFiltradas().length : this.entradasFiltradas().length,
+  );
+  readonly conteoTotal = computed(() => (this.pagina()?.plantilla === 'documentos' ? this.filasDocs().length : this.entradas().length));
 
-  /** En páginas de documentos se cuentan archivos; en noticias, publicaciones */
-  private peso(e: CmsEntrada): number {
-    return this.pagina()?.plantilla === 'documentos' ? Math.max(1, this.documentos(e).length) : 1;
-  }
   /** Categoría activa (solo si existe en esta página) */
   readonly categoriaActiva = computed(() => this.categorias().find((c) => c.slug === this.categoria()) ?? null);
 

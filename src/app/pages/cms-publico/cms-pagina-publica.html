@@ -212,43 +212,47 @@
     }
 
     @case ('documentos') {
-      @if (entradas().length && categorias().length) {
-        <!-- Documentos clasificados por tipo: filtro a la izquierda y listado de archivos -->
-        <div class="listado con-categorias">
-          <ng-container [ngTemplateOutlet]="navCategorias" />
+      @if (filasDocs().length) {
+        <!-- Documentos: filtro por tipo a la izquierda (si hay 2 o más) y un archivo por fila -->
+        <div class="listado" [class.con-categorias]="categorias().length">
+          @if (categorias().length) { <ng-container [ngTemplateOutlet]="navCategorias" /> }
           <div class="listado-cuerpo">
             <ul class="lista-archivos">
-              @for (e of entradasFiltradas(); track e.id) {
-                @for (m of documentos(e); track m.id) {
-                  <li>
+              @for (f of filasFiltradas().slice(0, mostrar() * 2); track f.id) {
+                <li>
+                  @if (f.archivo; as m) {
                     <a class="archivo" [href]="m.url" target="_blank" rel="noopener">
                       <span class="archivo-ext" [class]="'ext-' + extension(m).toLowerCase()" aria-hidden="true">{{ extension(m) }}</span>
                       <span class="archivo-cuerpo">
-                        <span class="archivo-titulo" [innerHTML]="resaltar(m.titulo || m.nombre)"></span>
+                        <span class="archivo-titulo" [innerHTML]="resaltar(f.titulo)"></span>
                         <span class="archivo-meta">
-                          @if (e.categoria) { <span class="chip-cat">{{ e.categoria }}</span> }
-                          <span>{{ e.titulo }}</span>
-                          @if (m.tamano) { <span>· {{ tamanoLegible(m.tamano) }}</span> }
+                          @if (categorias().length) { <span class="chip-cat">{{ f.grupo }}</span> }
+                          @if (f.entrada.titulo !== f.grupo && f.entrada.titulo !== f.titulo) { <span>{{ f.entrada.titulo }}</span> }
+                          @if (m.tamano) { <span>{{ tamanoLegible(m.tamano) }}</span> }
                         </span>
                       </span>
                       <span class="archivo-ir">Descargar <span class="visually-hidden">{{ extension(m) }} (abre en una pestaña nueva)</span><span aria-hidden="true">↓</span></span>
                     </a>
-                  </li>
-                } @empty {
-                  <li>
-                    <a class="archivo" [routerLink]="url(e)">
-                      <span class="archivo-ext" aria-hidden="true">INFO</span>
+                  } @else {
+                    <a class="archivo" [routerLink]="url(f.entrada)">
+                      <span class="archivo-ext ext-info" aria-hidden="true">INFO</span>
                       <span class="archivo-cuerpo">
-                        <span class="archivo-titulo" [innerHTML]="resaltar(e.titulo)"></span>
-                        <span class="archivo-meta">@if (e.categoria) { <span class="chip-cat">{{ e.categoria }}</span> } @if (e.resumen) { <span>{{ e.resumen }}</span> }</span>
+                        <span class="archivo-titulo" [innerHTML]="resaltar(f.titulo)"></span>
+                        <span class="archivo-meta">
+                          @if (categorias().length && f.grupo !== f.titulo) { <span class="chip-cat">{{ f.grupo }}</span> }
+                          @if (f.entrada.resumen) { <span [innerHTML]="resaltar(f.entrada.resumen)"></span> }
+                        </span>
                       </span>
                       <span class="archivo-ir">Ver <span aria-hidden="true">→</span></span>
                     </a>
-                  </li>
-                }
+                  }
+                </li>
               }
             </ul>
-            @if (!entradasFiltradas().length) {
+            @if (filasFiltradas().length > mostrar() * 2) {
+              <div class="centro"><button class="btn-bdc fill-btn-govco" type="button" (click)="mostrar.set(mostrar() + 9)">Cargar más ({{ filasFiltradas().length - mostrar() * 2 }} restantes)</button></div>
+            }
+            @if (!filasFiltradas().length) {
               <div class="sin-resultados">
                 <p>No encontramos documentos con esos criterios.</p>
                 <p>Pruebe con otras palabras o quite el filtro de tipo o de año.</p>
@@ -256,31 +260,6 @@
               </div>
             }
           </div>
-        </div>
-      } @else if (entradas().length) {
-        <div class="docs">
-          @for (e of entradasFiltradas(); track e.id) {
-            <section class="doc-grupo">
-              <h2>
-                <a [routerLink]="url(e)" [innerHTML]="resaltar(e.titulo)"></a>
-              </h2>
-              @if (e.resumen) { <p [innerHTML]="resaltar(e.resumen)"></p> }
-              @if (e.fechaPublicacion) {
-                <small>Publicado: {{ e.fechaPublicacion | date: 'dd/MM/yyyy' }}</small>
-              }
-              <div class="lista-docs">
-                @for (m of documentos(e); track m.id) {
-                  <app-cms-media-publica [media]="m" />
-                }
-              </div>
-            </section>
-          } @empty {
-            <div class="sin-resultados">
-              <p>No encontramos documentos con esos criterios.</p>
-              <p>Pruebe con otras palabras, revise la ortografía o quite el filtro de año.</p>
-              <button type="button" class="btn-bdc fill-btn-govco" (click)="limpiarFiltros()">Ver todos los documentos</button>
-            </div>
-          }
         </div>
       }
     }

@@ -109,7 +109,7 @@
           <datalist id="en-tipos-doc">
             @for (c of categoriasDePagina(); track c) { <option [value]="c"></option> }
           </datalist>
-          <small id="en-tipo-doc-ayuda">Clasifica el documento en el filtro de la izquierda. Con dos o más tipos, la página se muestra como listado filtrable.</small>
+          <small id="en-tipo-doc-ayuda">Agrupa los archivos en el filtro de la izquierda. Vacío = se usa el título de la entrada.</small>
         </div>
       }
       @if (esOrganigrama()) {
