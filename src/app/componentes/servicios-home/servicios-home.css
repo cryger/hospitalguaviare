@@ -3,7 +3,7 @@
 
 .servicios-home {
   position: relative; display: grid; gap: 1.75rem;
-  padding: 2.25rem clamp(1rem, 3vw, 2.25rem) 2rem; margin: 0 0 2rem;
+  padding: 2.25rem clamp(1rem, 3vw, 2.25rem) 2rem; margin: 2.5rem 0 2rem;
   border-radius: 20px; overflow: hidden;
   background:
     radial-gradient(circle at 100% 0, rgba(70, 114, 200, .14), transparent 40%),
