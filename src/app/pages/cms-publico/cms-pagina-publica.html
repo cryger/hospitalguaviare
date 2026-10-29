@@ -17,7 +17,7 @@
     <header class="entrada-head">
       <a class="volver" [routerLink]="cms.rutaPagina(pagina()!.id)">← {{ pagina()!.titulo }}</a>
       <h1>{{ e.titulo }}</h1>
-      @if (pagina()!.plantilla === 'servicios') {
+      @if (pagina()!.plantilla === 'servicios' || pagina()!.plantilla === 'organigrama') {
         <!-- Servicio del portafolio: sin fecha ni autor, solo su grupo -->
         @if (e.categoria || e.estado !== 'publicada') {
           <p class="meta">
@@ -288,6 +288,11 @@
       }
       <p class="visually-hidden" role="status" aria-live="polite">{{ serviciosVisibles().length }} servicios</p>
       <app-servicios-tarjetas [servicios]="serviciosVisibles()" [nivel]="2" />
+    }
+
+    @case ('organigrama') {
+      <!-- Estructura orgánica: árbol interactivo (cada dependencia es una entrada con su nivel) -->
+      <app-organigrama [entradas]="entradas()" />
     }
 
     @case ('historia') {

@@ -1,0 +1,177 @@
+/* Organigrama interactivo — BDC GOV.CO v5 */
+:host {
+  --cobalt: #0943B5; --marino: #004884; --havelock: #4672C8; --tropical: #B5C7E9; --solitude: #E5ECF8;
+  --verde: #05735A; --amarillo: #FFAB00; --linea: #8FA9D9;
+  --conector: 2rem;
+  display: block; color: #1f2937;
+}
+.organigrama-pagina { display: grid; gap: 1.75rem; }
+.intro { line-height: 1.7; }
+
+/* ===== Caja del organigrama ===== */
+.org-caja {
+  position: relative; overflow: hidden; border-radius: 18px; border: 1px solid var(--solitude);
+  padding: 1.75rem clamp(1rem, 3vw, 2.25rem) 1.25rem;
+  background:
+    radial-gradient(circle at 100% 0, rgba(70, 114, 200, .12), transparent 38%),
+    radial-gradient(circle at 0 100%, rgba(9, 67, 181, .07), transparent 42%),
+    linear-gradient(#F7F9FD, #F7F9FD);
+}
+.org-caja::before {
+  /* cuadrícula suave de fondo */
+  content: ''; position: absolute; inset: 0; pointer-events: none; opacity: .5;
+  background-image: radial-gradient(#d6e2f5 1px, transparent 1px); background-size: 22px 22px;
+}
+.org-cabecera { position: relative; text-align: center; margin-bottom: 1.5rem; }
+.org-cabecera h2 { margin: 0; font-size: 1.35rem; color: var(--marino); }
+.org-cabecera p { margin: .3rem 0 0; color: #4b5563; font-size: .92rem; }
+
+.org { position: relative; display: grid; max-width: 62rem; margin: 0 auto; }
+
+/* ===== Nodos ===== */
+.nodo {
+  position: relative; z-index: 1; display: inline-flex; align-items: center; gap: .65rem; cursor: pointer;
+  font: inherit; text-align: left; line-height: 1.25; font-weight: 600; font-size: .92rem;
+  padding: .7rem 1rem .7rem .7rem; border-radius: 12px; border: 1px solid #d5deec; background: #fff; color: var(--marino);
+  box-shadow: 0 3px 10px rgba(16, 24, 40, .07);
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+}
+.nodo:hover { transform: translateY(-2px); box-shadow: 0 10px 22px rgba(9, 67, 181, .16); border-color: var(--havelock); }
+.nodo:focus-visible { outline: .19rem solid #000; outline-offset: .19rem; }
+.nodo.activo { border-color: var(--amarillo); box-shadow: 0 0 0 3px rgba(255, 171, 0, .45), 0 10px 22px rgba(9, 67, 181, .16); }
+.nodo-icono {
+  flex: none; display: grid; place-items: center; width: 2.3rem; height: 2.3rem; border-radius: 9px;
+  background: var(--solitude); color: var(--cobalt); font-size: 1.1rem;
+}
+.nodo-texto { min-width: 0; }
+
+.nodo-direccion, .nodo-gerencia, .nodo-sub { color: #fff; border: 0; }
+.nodo-direccion { background: linear-gradient(135deg, #04286d, var(--marino)); padding: .85rem 1.4rem .85rem .85rem; font-size: 1rem; }
+.nodo-gerencia {
+  background: linear-gradient(135deg, var(--cobalt), var(--havelock)); padding: 1rem 1.75rem 1rem 1rem; font-size: 1.1rem;
+  box-shadow: 0 10px 26px rgba(9, 67, 181, .3);
+}
+.nodo-gerencia::after { content: ''; position: absolute; left: 1rem; right: 1rem; bottom: -4px; height: 4px; border-radius: 0 0 4px 4px; background: var(--amarillo); }
+.nodo-sub { background: linear-gradient(135deg, var(--marino), #3772B0); width: 100%; justify-content: flex-start; }
+.nodo-direccion .nodo-icono, .nodo-gerencia .nodo-icono, .nodo-sub .nodo-icono { background: rgba(255, 255, 255, .18); color: #fff; }
+.nodo-externo { border: 2px dashed var(--linea); background: #fff; }
+.nodo-staff { border-left: 4px solid var(--havelock); }
+.nodo-control { border-left: 4px solid var(--verde); }
+.nodo-control .nodo-icono { background: #E2F4EF; color: var(--verde); }
+
+/* ===== Niveles y conectores ===== */
+.nivel { position: relative; padding-top: var(--conector); }
+.nivel:first-child { padding-top: 0; }
+/* Línea vertical que une cada nivel con el anterior */
+.nivel:not(:first-child)::before {
+  content: ''; position: absolute; top: 0; left: 50%; width: 2px; height: var(--conector); margin-left: -1px; background: var(--linea);
+}
+.centro { display: flex; justify-content: center; }
+
+/* Dirección + Revisoría fiscal (al lado, con línea punteada) */
+.nivel-direccion { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; }
+.nivel-direccion .centro { grid-column: 2; }
+.lado-revisoria { grid-column: 3; display: flex; align-items: center; padding-left: var(--conector); position: relative; }
+.lado-revisoria::before {
+  content: ''; position: absolute; left: 0; top: 50%; width: var(--conector); border-top: 2px dashed var(--linea);
+}
+
+/* Asesoría | eje | Control */
+.nivel-staff { display: grid; grid-template-columns: 1fr 2px 1fr; column-gap: 0; }
+.eje { background: var(--linea); }
+.staff { display: flex; flex-direction: column; gap: .75rem; padding: .25rem 0 .9rem; }
+.staff-izq { align-items: flex-end; padding-right: var(--conector); }
+.staff-der { align-items: flex-start; padding-left: var(--conector); }
+.staff .nodo { max-width: 19rem; width: 100%; }
+.staff-izq .nodo::after, .staff-der .nodo::before {
+  content: ''; position: absolute; top: 50%; width: var(--conector); height: 2px; background: var(--linea);
+}
+.staff-izq .nodo::after { right: calc(-1 * var(--conector) - 1px); }
+.staff-der .nodo::before { left: calc(-1 * var(--conector) - 5px); }
+.etiqueta-grupo {
+  font-size: .7rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #6b7280;
+}
+
+/* Subgerencias: barra horizontal y ramas */
+.nivel-sub { --n: 2; display: grid; grid-template-columns: repeat(var(--n), minmax(0, 1fr)); gap: 1.25rem; padding-top: calc(var(--conector) * 2); }
+.nivel-sub::after {
+  /* barra que une las ramas: del centro de la primera al centro de la última */
+  content: ''; position: absolute; top: var(--conector); height: 2px; background: var(--linea);
+  left: calc((100% - (var(--n) - 1) * 1.25rem) / var(--n) / 2);
+  right: calc((100% - (var(--n) - 1) * 1.25rem) / var(--n) / 2);
+}
+.rama { position: relative; display: flex; justify-content: center; }
+.rama::before {
+  content: ''; position: absolute; top: calc(-1 * var(--conector)); left: 50%; width: 2px; height: var(--conector); margin-left: -1px; background: var(--linea);
+}
+.rama .nodo { max-width: 22rem; }
+
+.nivel-otras { display: flex; flex-wrap: wrap; justify-content: center; gap: .75rem; }
+
+/* Convenciones */
+.leyenda { position: relative; list-style: none; margin: 1.5rem 0 0; padding: .75rem 0 0; border-top: 1px solid var(--solitude); display: flex; justify-content: center; flex-wrap: wrap; gap: .5rem 1.5rem; font-size: .8rem; color: #4b5563; }
+.leyenda li { display: inline-flex; align-items: center; gap: .5rem; }
+.linea { display: inline-block; width: 2rem; }
+.linea.continua { border-top: 2px solid var(--linea); }
+.linea.punteada { border-top: 2px dashed var(--linea); }
+
+/* ===== Detalle ===== */
+.detalle {
+  display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 1.1rem; align-items: start;
+  padding: 1.4rem 1.5rem; border-radius: 16px; background: #fff; border: 1px solid #e3e9f3;
+  border-top: 4px solid var(--cobalt); box-shadow: 0 6px 20px rgba(16, 24, 40, .07); scroll-margin-top: 1rem;
+  animation: aparecer .25s ease;
+}
+.detalle:focus { outline: none; }
+.detalle-icono {
+  display: grid; place-items: center; width: 3.6rem; height: 3.6rem; border-radius: 14px; font-size: 1.7rem;
+  color: #fff; background: linear-gradient(135deg, var(--cobalt), var(--havelock));
+}
+.detalle-nivel { font-size: .72rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #3366CC; }
+.detalle h2 { margin: .2rem 0 .6rem; font-size: 1.3rem; color: var(--marino); }
+.detalle .contenido-html { line-height: 1.7; color: #374151; }
+.detalle .contenido-html ::ng-deep p { margin: 0 0 .7rem; }
+.detalle .contenido-html ::ng-deep p:last-child { margin-bottom: 0; }
+.detalle .contenido-html ::ng-deep a { color: #3366CC; font-weight: 600; }
+@keyframes aparecer { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+/* ===== Descarga del PDF oficial ===== */
+.descargas h2 { margin: 0 0 .75rem; font-size: 1.15rem; color: var(--marino); }
+.descargas ul { list-style: none; margin: 0; padding: 0; display: grid; gap: .6rem; }
+.descarga {
+  display: flex; align-items: center; gap: 1rem; padding: .85rem 1.1rem; border-radius: 12px;
+  border: 1px solid #e3e9f3; background: #fff; text-decoration: none; color: #1f2937; transition: border-color .15s, box-shadow .15s;
+}
+.descarga:hover { border-color: var(--havelock); box-shadow: 0 6px 16px rgba(9, 67, 181, .12); }
+.descarga:focus-visible { outline: .19rem solid #000; outline-offset: .19rem; }
+.descarga-ext {
+  flex: none; display: grid; place-items: center; width: 3rem; height: 3rem; border-radius: 10px;
+  background: #FCE8EA; color: #A80521; font-weight: 800; font-size: .78rem;
+}
+.descarga strong { display: block; color: var(--marino); }
+.descarga small { display: block; color: #6b7280; margin-top: .15rem; }
+.descarga-ir { margin-left: auto; font-weight: 700; color: #3366CC; white-space: nowrap; }
+.visually-hidden { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; }
+
+/* ===== Pantallas pequeñas: árbol vertical ===== */
+@media (max-width: 760px) {
+  :host { --conector: 1.1rem; }
+  .org { padding-left: 1.1rem; border-left: 2px solid var(--linea); gap: .6rem; }
+  .nivel, .nivel-sub { padding-top: 0; display: flex; flex-direction: column; align-items: stretch; gap: .6rem; }
+  .nivel::before, .nivel:not(:first-child)::before, .nivel-sub::after, .rama::before, .eje,
+  .staff-izq .nodo::after, .lado-revisoria::before { display: none; }
+  .nivel-direccion, .nivel-staff { display: flex; flex-direction: column; }
+  .lado-revisoria, .staff-izq, .staff-der { padding: 0; align-items: stretch; }
+  .staff { padding: 0; gap: .6rem; }
+  .centro, .rama { justify-content: flex-start; }
+  .nodo, .staff .nodo, .rama .nodo { width: 100%; max-width: none; }
+  .nodo::before, .staff-der .nodo::before { content: ''; position: absolute; left: calc(-1.1rem - 3px); top: 50%; width: 1.1rem; height: 2px; background: var(--linea); }
+  .nodo-staff::before, .nodo-control::before, .staff-der .nodo::before { left: calc(-1.1rem - 6px); }
+  .nodo-externo::before { background: none; border-top: 2px dashed var(--linea); height: 0; }
+  .etiqueta-grupo { margin-top: .4rem; }
+  .detalle { grid-template-columns: 1fr; padding: 1.1rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .nodo, .detalle { transition: none; animation: none; }
+  .nodo:hover { transform: none; }
+}

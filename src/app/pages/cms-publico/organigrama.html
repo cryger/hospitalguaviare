@@ -1,0 +1,132 @@
+<ng-template #nodo let-d let-clase="clase">
+  <button type="button" class="nodo" [class]="clase" [class.activo]="esElegida(d.entrada)"
+          [attr.aria-pressed]="esElegida(d.entrada)" aria-controls="org-detalle" (click)="elegir(d.entrada)">
+    <span class="nodo-icono"><app-icono-cms [valor]="d.icono" /></span>
+    <span class="nodo-texto">{{ d.entrada.titulo }}</span>
+  </button>
+</ng-template>
+
+<div class="organigrama-pagina">
+  @for (t of textos(); track t.id) {
+    <div class="contenido-html intro" [innerHTML]="t.contenido"></div>
+  }
+
+  @if (total()) {
+    <section class="org-caja" aria-labelledby="org-titulo">
+      <div class="org-cabecera">
+        <h2 id="org-titulo">Organigrama</h2>
+        <p>Seleccione una dependencia para conocer sus funciones.</p>
+      </div>
+
+      <div class="org">
+        <!-- Nivel 1: Dirección + Revisoría fiscal -->
+        @if (direccion().length) {
+          <div class="nivel nivel-direccion">
+            <div class="centro">
+              @for (d of direccion(); track d.entrada.id) {
+                <ng-container [ngTemplateOutlet]="nodo" [ngTemplateOutletContext]="{ $implicit: d, clase: 'nodo-direccion' }" />
+              }
+            </div>
+            @if (revisoria().length) {
+              <div class="lado lado-revisoria">
+                @for (d of revisoria(); track d.entrada.id) {
+                  <ng-container [ngTemplateOutlet]="nodo" [ngTemplateOutletContext]="{ $implicit: d, clase: 'nodo-externo' }" />
+                }
+              </div>
+            }
+          </div>
+        }
+
+        <!-- Nivel 2: Gerencia -->
+        @if (gerencia().length) {
+          <div class="nivel nivel-gerencia">
+            <div class="centro">
+              @for (d of gerencia(); track d.entrada.id) {
+                <ng-container [ngTemplateOutlet]="nodo" [ngTemplateOutletContext]="{ $implicit: d, clase: 'nodo-gerencia' }" />
+              }
+            </div>
+          </div>
+        }
+
+        <!-- Nivel 3: Oficinas asesoras (izquierda) y de control (derecha) -->
+        @if (asesoria().length || control().length) {
+          <div class="nivel nivel-staff">
+            <div class="staff staff-izq">
+              @if (asesoria().length) { <span class="etiqueta-grupo">Asesoría</span> }
+              @for (d of asesoria(); track d.entrada.id) {
+                <ng-container [ngTemplateOutlet]="nodo" [ngTemplateOutletContext]="{ $implicit: d, clase: 'nodo-staff' }" />
+              }
+            </div>
+            <div class="eje" aria-hidden="true"></div>
+            <div class="staff staff-der">
+              @if (control().length) { <span class="etiqueta-grupo">Control</span> }
+              @for (d of control(); track d.entrada.id) {
+                <ng-container [ngTemplateOutlet]="nodo" [ngTemplateOutletContext]="{ $implicit: d, clase: 'nodo-control' }" />
+              }
+            </div>
+          </div>
+        }
+
+        <!-- Nivel 4: Subgerencias -->
+        @if (subgerencias().length) {
+          <div class="nivel nivel-sub" [style.--n]="subgerencias().length">
+            @for (d of subgerencias(); track d.entrada.id) {
+              <div class="rama">
+                <ng-container [ngTemplateOutlet]="nodo" [ngTemplateOutletContext]="{ $implicit: d, clase: 'nodo-sub' }" />
+              </div>
+            }
+          </div>
+        }
+
+        @if (otras().length) {
+          <div class="nivel nivel-otras">
+            @for (d of otras(); track d.entrada.id) {
+              <ng-container [ngTemplateOutlet]="nodo" [ngTemplateOutletContext]="{ $implicit: d, clase: 'nodo-staff' }" />
+            }
+          </div>
+        }
+      </div>
+
+      <ul class="leyenda" aria-label="Convenciones">
+        <li><span class="linea continua" aria-hidden="true"></span> Dependencia jerárquica</li>
+        <li><span class="linea punteada" aria-hidden="true"></span> Fiscalización externa</li>
+      </ul>
+    </section>
+
+    <!-- Detalle de la dependencia elegida -->
+    @if (elegida(); as e) {
+      <section id="org-detalle" class="detalle" aria-live="polite" tabindex="-1" aria-labelledby="org-detalle-titulo">
+        <span class="detalle-icono" aria-hidden="true"><app-icono-cms [valor]="e.icono || 'govco:building'" /></span>
+        <div class="detalle-cuerpo">
+          <span class="detalle-nivel">{{ nivel(e) }}</span>
+          <h2 id="org-detalle-titulo">{{ e.titulo }}</h2>
+          @if (e.contenido) {
+            <div class="contenido-html" [innerHTML]="e.contenido"></div>
+          } @else if (e.resumen) {
+            <p>{{ e.resumen }}</p>
+          }
+        </div>
+      </section>
+    }
+  }
+
+  @if (documentos().length) {
+    <section class="descargas" aria-labelledby="org-docs">
+      <h2 id="org-docs">Documento oficial</h2>
+      <ul>
+        @for (d of documentos(); track d.archivo.id) {
+          <li>
+            <a class="descarga" [href]="d.archivo.url" target="_blank" rel="noopener">
+              <span class="descarga-ext" aria-hidden="true">{{ extension(d.archivo) }}</span>
+              <span>
+                <strong>{{ d.archivo.titulo || d.entrada.titulo }}</strong>
+                @if (d.entrada.resumen) { <small>{{ d.entrada.resumen }}</small> }
+              </span>
+              <span class="descarga-ir">Descargar <span class="visually-hidden">(abre en una pestaña nueva)</span><span aria-hidden="true">↓</span></span>
+            </a>
+          </li>
+        }
+      </ul>
+    </section>
+  }
+</div>

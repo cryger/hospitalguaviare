@@ -45,6 +45,7 @@ export class CmsLocalDataSource extends CmsDataSource {
       .then(() => this.sembrarDesdeArchivo('tramites-semilla', 'assets/semillas/tramites.json'))
       .then(() => this.sembrarDesdeArchivo('resena-historica-semilla', 'assets/semillas/resena-historica.json'))
       .then(() => this.sembrarDesdeArchivo('portafolio-servicios-semilla', 'assets/semillas/portafolio-servicios.json'))
+      .then(() => this.sembrarDesdeArchivo('organigrama-semilla', 'assets/semillas/organigrama.json'))
       .then(() => this.clasificarPublicaciones());
   }
 
@@ -193,7 +194,7 @@ export class CmsLocalDataSource extends CmsDataSource {
   }
 
   /* ===== Estructura inicial (Resolución 1519 de 2020) ===== */
-  private readonly versionSemilla = 17;
+  private readonly versionSemilla = 18;
 
   private sembrarSiVacio(): void {
     if (localStorage.getItem(this.prefijo + 'menus')) return;
@@ -392,6 +393,14 @@ export class CmsLocalDataSource extends CmsDataSource {
         }
       }
     }
+    // Versión 18: Estructura orgánica con organigrama interactivo
+    if (version < 18) {
+      for (const p of paginas) {
+        if (p.slug === 'estructura-organica-organigrama' && (p.plantilla === 'contenido' || p.plantilla === 'documentos')) {
+          Object.assign(p, { plantilla: 'organigrama', actualizadoEn: t });
+        }
+      }
+    }
     this.escribir('paginas', paginas);
     localStorage.setItem(this.prefijo + 'version', String(this.versionSemilla));
   }
@@ -404,6 +413,7 @@ export class CmsLocalDataSource extends CmsDataSource {
    * - tramites.json             → api/migraciones/002-tramites.sql (+ 020: enlaces al portal nuevo)
    * - resena-historica.json     → api/migraciones/021-resena-historica.sql (hitos, fotos y portada)
    * - portafolio-servicios.json → api/migraciones/024-portafolio-de-servicios.sql (12 servicios del portafolio)
+   * - organigrama.json          → api/migraciones/026-organigrama.sql (dependencias del organigrama)
    */
   private async sembrarDesdeArchivo(nombre: string, ruta: string): Promise<void> {
     const clave = this.prefijo + nombre;
@@ -425,6 +435,7 @@ export class CmsLocalDataSource extends CmsDataSource {
         /** URL de la imagen destacada */
         destacada: string | null;
         categoria?: string;
+        icono?: string;
         /** «Destacar en portada» (servicios del inicio) */
         portada?: boolean;
       };
@@ -464,6 +475,7 @@ export class CmsLocalDataSource extends CmsDataSource {
           contenido: n.contenido,
           tipo: n.tipo ?? 'articulo',
           categoria: n.categoria ?? (pagina.plantilla === 'listado' ? categoriaSugerida(n.titulo) : null),
+          icono: n.icono ?? null,
           estado: 'publicada',
           destacada: n.portada ?? false,
           imagenDestacadaId: n.destacada ? porUrl.get(n.destacada) ?? null : null,
@@ -541,7 +553,7 @@ const ESTRUCTURA_1519: PaginaSemilla[] = [
   { id: 1, menuId: 1, parentId: null, titulo: "Transparencia y acceso a la información pública", slug: 'transparencia', plantilla: 'contenido', descripcion: "Información pública de la E.S.E. Hospital San José del Guaviare, organizada según la Ley 1712 de 2014 y la Resolución 1519 de 2020 de MinTIC.", orden: 1 },
   { id: 2, menuId: 1, parentId: 1, titulo: "1. Información de la entidad", slug: 'informacion-de-la-entidad', plantilla: 'contenido', descripcion: "Conozca quiénes somos, cómo estamos organizados, cómo contactarnos, quién nos vigila y cómo tomamos las decisiones que le afectan.", orden: 0 },
   { id: 3, menuId: 1, parentId: 2, titulo: "1.1 Misión, visión, funciones y deberes", slug: 'mision-vision-funciones-y-deberes', plantilla: 'contenido', descripcion: "Plataforma estratégica de la E.S.E. Hospital San José del Guaviare: misión, visión y valores corporativos.", orden: 0 },
-  { id: 4, menuId: 1, parentId: 2, titulo: "1.2 Estructura orgánica - Organigrama", slug: 'estructura-organica-organigrama', plantilla: 'contenido', descripcion: "Organigrama y estructura administrativa de la E.S.E. Hospital San José del Guaviare.", orden: 1 },
+  { id: 4, menuId: 1, parentId: 2, titulo: "1.2 Estructura orgánica - Organigrama", slug: 'estructura-organica-organigrama', plantilla: 'organigrama', descripcion: "Organigrama y estructura administrativa de la E.S.E. Hospital San José del Guaviare.", orden: 1 },
   { id: 5, menuId: 1, parentId: 2, titulo: "1.3 Mapas y cartas descriptivas de los procesos", slug: 'mapas-y-cartas-descriptivas-de-los-procesos', plantilla: 'documentos', descripcion: "Mapa de procesos y caracterizaciones de los procesos institucionales.", orden: 2 },
   { id: 6, menuId: 1, parentId: 2, titulo: "1.4 Directorio institucional", slug: 'directorio-institucional', plantilla: 'contenido', descripcion: "Dependencias, responsables, teléfonos y correos para comunicarse con el hospital.", orden: 3 },
   { id: 7, menuId: 1, parentId: 2, titulo: "1.5 Directorio de servidores públicos, empleados o contratistas", slug: 'directorio-de-servidores-publicos-empleados-o-contratistas', plantilla: 'documentos', descripcion: "Servidores públicos y contratistas de la entidad, con su cargo e información de contacto.", orden: 4 },

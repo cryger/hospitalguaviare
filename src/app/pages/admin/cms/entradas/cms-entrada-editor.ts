@@ -6,11 +6,13 @@ import { CmsEntrada, CmsMultimedia, TIPOS_ENTRADA } from '../../../../shared/mod
 import { MediaPicker } from '../shared/media-picker';
 import { MediaThumb } from '../shared/media-thumb';
 import { RichEditor } from '../shared/rich-editor';
+import { SelectorIcono } from '../../../../shared/components/selector-icono/selector-icono';
+import { NIVELES_ORGANIGRAMA } from '../../../cms-publico/organigrama';
 import { CATEGORIAS_SUGERIDAS, categoriaSugerida } from '../../../../shared/utils/categorias';
 
 @Component({
   selector: 'app-cms-entrada-editor',
-  imports: [FormsModule, RouterLink, MediaPicker, MediaThumb, RichEditor],
+  imports: [FormsModule, RouterLink, MediaPicker, MediaThumb, RichEditor, SelectorIcono],
   templateUrl: './cms-entrada-editor.html',
   styleUrls: ['../cms-admin.css', './cms-entrada-editor.css'],
 })
@@ -59,6 +61,15 @@ export class CmsEntradaEditor {
   /** Portafolio de servicios: la categoría agrupa los servicios (Urgencias, Internación…) */
   esServicios(): boolean {
     return this.cms.paginaPorId().get(Number(this.form.paginaId))?.plantilla === 'servicios';
+  }
+
+  /** Organigrama: la categoría es el nivel de la dependencia */
+  readonly nivelesOrganigrama = NIVELES_ORGANIGRAMA;
+  esOrganigrama(): boolean {
+    return this.cms.paginaPorId().get(Number(this.form.paginaId))?.plantilla === 'organigrama';
+  }
+  ayudaNivel(): string {
+    return NIVELES_ORGANIGRAMA.find((n) => n.clave === this.form.categoria)?.ayuda ?? 'Sin nivel: se muestra como texto o, si tiene archivos, como documento para descargar.';
   }
 
   /** Categorías ya usadas en la misma página (para el portafolio) */

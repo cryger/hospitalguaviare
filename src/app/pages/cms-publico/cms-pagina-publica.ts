@@ -13,6 +13,7 @@ import { CalendarioEventos } from '../../componentes/calendario-eventos/calendar
 import { ResenaHistorica } from './resena-historica';
 import { ServiciosTarjetas } from '../../componentes/servicios-tarjetas/servicios-tarjetas';
 import { IconoCms } from '../../shared/components/icono-cms/icono-cms';
+import { Organigrama } from './organigrama';
 import { normalizar, resaltar as resaltarTexto, terminosDe } from '../../shared/utils/busqueda';
 import { slugCategoria } from '../../shared/utils/categorias';
 
@@ -23,7 +24,7 @@ type Orden = 'predeterminado' | 'recientes' | 'antiguas' | 'az';
 
 @Component({
   selector: 'app-cms-pagina-publica',
-  imports: [RouterLink, DatePipe, NgTemplateOutlet, CmsMediaPublica, BuscadorGovco, CalendarioEventos, ResenaHistorica, ServiciosTarjetas, IconoCms],
+  imports: [RouterLink, DatePipe, NgTemplateOutlet, CmsMediaPublica, BuscadorGovco, CalendarioEventos, ResenaHistorica, ServiciosTarjetas, IconoCms, Organigrama],
   templateUrl: './cms-pagina-publica.html',
   styleUrl: './cms-pagina-publica.css',
 })
@@ -398,6 +399,7 @@ export class CmsPaginaPublica {
       case 'calendario': return 'Calendario';
       case 'historia': return 'Historia';
       case 'servicios': return 'Servicios';
+      case 'organigrama': return 'Organigrama';
       case 'enlace': return 'Ir al servicio';
       default: return 'Información';
     }

@@ -6,7 +6,7 @@
 
 export type UbicacionMenu = 'principal' | 'superior' | 'pie' | 'lateral';
 export type EstadoPagina = 'publicada' | 'borrador' | 'oculta';
-export type PlantillaPagina = 'contenido' | 'listado' | 'documentos' | 'galeria' | 'enlace' | 'calendario' | 'historia' | 'servicios';
+export type PlantillaPagina = 'contenido' | 'listado' | 'documentos' | 'galeria' | 'enlace' | 'calendario' | 'historia' | 'servicios' | 'organigrama';
 export type TipoEntrada = 'articulo' | 'noticia' | 'documento' | 'evento' | 'servicio' | 'enlace';
 export type EstadoEntrada = 'publicada' | 'borrador' | 'archivada';
 export type TipoMultimedia = 'imagen' | 'video' | 'documento' | 'audio' | 'otro';
@@ -105,6 +105,11 @@ export const PLANTILLAS_PAGINA: { valor: PlantillaPagina; etiqueta: string; ayud
     valor: 'servicios',
     etiqueta: 'Portafolio de servicios',
     ayuda: 'Tarjetas con imagen agrupadas por categoría (ej. Urgencias, Internación). Las entradas marcadas «Destacar en portada» se muestran en «Nuestros servicios» del inicio.',
+  },
+  {
+    valor: 'organigrama',
+    etiqueta: 'Organigrama',
+    ayuda: 'Árbol visual de la estructura orgánica. Cada dependencia es una entrada con su nivel (Dirección, Gerencia, Asesoría, Control, Subgerencias) e ícono; las entradas con archivos se ofrecen para descargar.',
   },
   { valor: 'calendario', etiqueta: 'Calendario de eventos', ayuda: 'Muestra el calendario institucional (los eventos se administran en Contenido › Calendario de eventos).' },
 ];

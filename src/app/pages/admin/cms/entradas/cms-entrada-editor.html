@@ -101,6 +101,22 @@
         <input id="en-fecha" class="input" type="datetime-local" name="fecha" [(ngModel)]="fechaLocal" />
         <small>Vacía = se asigna al publicar.</small>
       </div>
+      @if (esOrganigrama()) {
+        <div class="campo bloque">
+          <label for="en-nivel">Nivel en el organigrama</label>
+          <select id="en-nivel" class="select" name="categoria" [(ngModel)]="form.categoria" aria-describedby="en-nivel-ayuda">
+            <option [ngValue]="null">— No es una dependencia (texto o documento) —</option>
+            @for (n of nivelesOrganigrama; track n.clave) { <option [ngValue]="n.clave">{{ n.clave }}</option> }
+          </select>
+          <small id="en-nivel-ayuda">{{ ayudaNivel() }}</small>
+        </div>
+      }
+      @if (esServicios() || esOrganigrama()) {
+        <div class="campo bloque">
+          <label for="en-icono">Ícono</label>
+          <app-selector-icono idCampo="en-icono" [(valor)]="form.icono" />
+        </div>
+      }
       @if (esServicios()) {
         <div class="campo bloque">
           <label for="en-grupo">Grupo del servicio</label>
