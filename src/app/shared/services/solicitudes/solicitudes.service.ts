@@ -132,3 +132,26 @@ export class PqrsfdService extends ServicioSolicitudes<Pqrsfd, PqrsfdDetalle> {
 export class ContratacionService extends ServicioSolicitudes<SolicitudContractual, SolicitudContractualDetalle> {
   protected readonly recurso = 'contratacion' as const;
 }
+
+/** Respuesta del canal anticorrupción al enviar un reporte */
+export interface ReporteSicof {
+  radicado: string;
+  /** false si el correo al Oficial de Cumplimiento quedó pendiente (se reintenta en el servidor) */
+  correoEnviado: boolean;
+  fecha: string;
+}
+
+/**
+ * Canal anticorrupción – SICOF: el reporte se guarda en la API y se envía
+ * por correo al Oficial de Cumplimiento. Requiere la API (modo 'api').
+ */
+@Injectable({ providedIn: 'root' })
+export class SicofService {
+  private http = inject(HttpClient);
+  private config = inject(CMS_CONFIG);
+  readonly disponible = this.config.modo === 'api';
+
+  reportar(datos: FormData): Promise<ReporteSicof> {
+    return firstValueFrom(this.http.post<ReporteSicof>(`${this.config.apiUrl}/sicof`, datos));
+  }
+}

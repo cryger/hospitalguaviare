@@ -65,7 +65,7 @@ const EXT_PERMITIDAS = ['pdf', 'jpg', 'jpeg', 'png', 'doc', 'docx', 'xls', 'xlsx
 const MAX_MB = 10;
 const MAX_ARCHIVOS = 5;
 
-function subidaPrivada(carpeta) {
+function subidaPrivada(carpeta, extensiones = EXT_PERMITIDAS) {
   const almacenamiento = multer.diskStorage({
     destination: (_req, _file, cb) => {
       const ahora = new Date();
@@ -83,8 +83,8 @@ function subidaPrivada(carpeta) {
     limits: { fileSize: MAX_MB * 1024 * 1024, files: MAX_ARCHIVOS, fields: 40 },
     fileFilter: (_req, file, cb) => {
       const ext = path.extname(file.originalname).slice(1).toLowerCase();
-      if (!EXT_PERMITIDAS.includes(ext)) {
-        return cb(new ErrorApi(400, `Tipo de archivo no permitido (.${ext}). Use PDF, imagen JPG/PNG, Word o Excel.`));
+      if (!extensiones.includes(ext)) {
+        return cb(new ErrorApi(400, `Tipo de archivo no permitido (.${ext}). Formatos aceptados: ${extensiones.join(', ')}.`));
       }
       cb(null, true);
     },
@@ -92,8 +92,8 @@ function subidaPrivada(carpeta) {
 }
 
 /** Middleware multer que convierte sus errores en mensajes claros */
-function conArchivos(carpeta) {
-  const subir = subidaPrivada(carpeta);
+function conArchivos(carpeta, extensiones) {
+  const subir = subidaPrivada(carpeta, extensiones);
   return (req, res, next) =>
     subir(req, res, (err) => {
       if (!err) return next();

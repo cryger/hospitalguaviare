@@ -1,0 +1,214 @@
+<section class="tramite sicof">
+  <header class="tramite-head">
+    <p class="antetitulo">Canal anticorrupción</p>
+    <h1>SICOF – Subsistema del Riesgo de Corrupción, Opacidad y Fraude</h1>
+    <p class="lead">A través de este canal puede poner en conocimiento de la entidad un evento o conducta posiblemente irregular,
+      indicando las circunstancias de tiempo, modo y lugar. Su reporte llega directamente al <b>Oficial de Cumplimiento</b>
+      y se trata de manera reservada.</p>
+  </header>
+
+  <!-- Conceptos -->
+  <ul class="conceptos" aria-label="Conceptos">
+    <li>
+      <span class="c-ico" aria-hidden="true">⚖️</span>
+      <h2>Corrupción</h2>
+      <p>Obtención de un beneficio particular por acción u omisión, uso indebido de una posición o poder, o de los recursos o de la información.</p>
+    </li>
+    <li>
+      <span class="c-ico" aria-hidden="true">🔍</span>
+      <h2>Opacidad</h2>
+      <p>Falta de claridad o transparencia, especialmente en la gestión pública.</p>
+    </li>
+    <li>
+      <span class="c-ico" aria-hidden="true">🛡️</span>
+      <h2>Fraude</h2>
+      <p>Acto ilegal de engaño, ocultación o violación de confianza, sin amenaza ni violencia, cometido por personas u organizaciones
+        internas o externas para apropiarse de dinero, bienes o servicios.</p>
+    </li>
+  </ul>
+
+  <div class="garantias">
+    <span aria-hidden="true">🔒</span>
+    <p><b>Puede reportar de forma anónima:</b> no le pedimos nombre ni documento. Si deja su correo, recibirá el número de radicado
+      y el Oficial de Cumplimiento podrá contactarle si necesita ampliar la información.</p>
+  </div>
+
+  @if (!svc.disponible) {
+    <div class="alerta-govco info" role="status">
+      <strong>El envío en línea se habilita cuando el portal se publica con su servidor.</strong>
+      Mientras tanto, envíe su reporte al correo
+      <a [href]="'mailto:' + correoOficial">{{ correoOficial }}</a>.
+    </div>
+  }
+
+  @if (reporte(); as r) {
+    <!-- ===== Constancia ===== -->
+    <div class="constancia" tabindex="-1" #constancia role="status">
+      <span class="constancia-ico" aria-hidden="true">✓</span>
+      <h2>Recibimos su reporte</h2>
+      <dl>
+        <dt>Número de radicado</dt><dd class="mono grande">{{ r.radicado }}</dd>
+        <dt>Fecha</dt><dd>{{ r.fecha | date: "d 'de' MMMM 'de' y, h:mm a" : '-0500' : 'es-CO' }}</dd>
+      </dl>
+      <p>
+        @if (r.correoEnviado) { El reporte fue enviado al Oficial de Cumplimiento, quien lo revisará de manera reservada. }
+        @else { El reporte quedó registrado y se enviará al Oficial de Cumplimiento en los próximos minutos. }
+        @if (form.controls.correo.value) { Le enviamos la constancia a su correo. }</p>
+      <p class="importante">Guarde el número de radicado: le servirá si necesita ampliar la información.</p>
+      <div class="acciones-govco">
+        <button type="button" class="btn-bdc outline-btn-govco" (click)="imprimir()">Imprimir constancia</button>
+        <button type="button" class="btn-bdc outline-btn-govco" (click)="nuevo()">Hacer otro reporte</button>
+        <a class="btn-bdc outline-btn-govco" routerLink="/">Volver al inicio</a>
+      </div>
+    </div>
+  } @else {
+    <!-- ===== Pasos ===== -->
+    <ol class="pasos-sicof" aria-label="Pasos del reporte">
+      @for (t of pasos; track t; let i = $index) {
+        <li [class.actual]="i === paso()" [class.hecho]="pasoCompleto(i)" [attr.aria-current]="i === paso() ? 'step' : null">
+          @if (pasoCompleto(i)) {
+            <button type="button" class="p-num" (click)="irAPaso(i)" [attr.aria-label]="'Volver al paso ' + (i + 1) + ': ' + t">✓</button>
+          } @else {
+            <span class="p-num" aria-hidden="true">{{ i + 1 }}</span>
+          }
+          <span class="p-txt"><span class="visually-hidden">Paso {{ i + 1 }} de {{ pasos.length }}: </span>{{ t }}</span>
+        </li>
+      }
+    </ol>
+
+    @if (errores().length) {
+      <div class="alerta-govco error" tabindex="-1" #resumen role="alert">
+        <strong>Revise {{ errores().length === 1 ? 'el siguiente dato' : 'los siguientes ' + errores().length + ' datos' }}:</strong>
+        <ul>
+          @for (e of errores(); track e.id) { <li><a [href]="'#' + e.id" (click)="irACampo($event, e.id)">{{ e.texto }}</a></li> }
+        </ul>
+      </div>
+    }
+
+    <form [formGroup]="form" (ngSubmit)="siguiente()" novalidate>
+      <div class="trampa" aria-hidden="true">
+        <label for="sicof-sitioWeb">No llene este campo</label>
+        <input id="sicof-sitioWeb" formControlName="sitioWeb" tabindex="-1" autocomplete="off" />
+      </div>
+
+      <fieldset class="seccion">
+        <legend #tituloPaso tabindex="-1"><span class="num">{{ paso() + 1 }}</span> {{ pasos[paso()] }}</legend>
+
+        @switch (paso()) {
+          @case (0) {
+            <div class="campo">
+              <label for="descripcion">1. Realice la descripción del acto indebido <span class="req">*</span></label>
+              <textarea id="descripcion" formControlName="descripcion" rows="6" maxlength="6000"
+                        placeholder="¿Qué ocurrió? Incluya las circunstancias de tiempo, modo y lugar."
+                        [attr.aria-invalid]="!!error('descripcion')" [attr.aria-describedby]="(error('descripcion') ? 'error-descripcion ' : '') + 'ayuda-descripcion'"></textarea>
+              <p class="ayuda" id="ayuda-descripcion">{{ caracteres() }} de 6000 caracteres.</p>
+              @if (error('descripcion')) { <p class="error-campo" id="error-descripcion">{{ error('descripcion') }}</p> }
+            </div>
+            <div class="campo">
+              <label for="comoSeDioCuenta">2. ¿Cómo se dio cuenta de esta situación? <span class="req">*</span></label>
+              <textarea id="comoSeDioCuenta" formControlName="comoSeDioCuenta" rows="3" maxlength="2000"
+                        [attr.aria-invalid]="!!error('comoSeDioCuenta')" [attr.aria-describedby]="error('comoSeDioCuenta') ? 'error-comoSeDioCuenta' : null"></textarea>
+              @if (error('comoSeDioCuenta')) { <p class="error-campo" id="error-comoSeDioCuenta">{{ error('comoSeDioCuenta') }}</p> }
+            </div>
+            <div class="campo">
+              <label for="tiempo">3. ¿Hace cuánto tiempo se viene presentando la situación? <span class="req">*</span></label>
+              <input id="tiempo" formControlName="tiempo" maxlength="200" placeholder="Ej. Desde hace 3 meses, una sola vez…"
+                     [attr.aria-invalid]="!!error('tiempo')" [attr.aria-describedby]="error('tiempo') ? 'error-tiempo' : null" />
+              @if (error('tiempo')) { <p class="error-campo" id="error-tiempo">{{ error('tiempo') }}</p> }
+            </div>
+          }
+          @case (1) {
+            <div class="rejilla">
+              <div class="campo">
+                <label for="fechaConocimiento">4. ¿En qué fecha se dio cuenta de la conducta irregular? <span class="req">*</span></label>
+                <input id="fechaConocimiento" type="date" formControlName="fechaConocimiento" [max]="hoy"
+                       [attr.aria-invalid]="!!error('fechaConocimiento')" [attr.aria-describedby]="error('fechaConocimiento') ? 'error-fechaConocimiento' : null" />
+                @if (error('fechaConocimiento')) { <p class="error-campo" id="error-fechaConocimiento">{{ error('fechaConocimiento') }}</p> }
+              </div>
+              <div class="campo">
+                <label for="area">6. ¿Área o proceso donde ocurrió? <span class="req">*</span></label>
+                <input id="area" formControlName="area" maxlength="300" placeholder="Ej. Facturación, Urgencias, Almacén…"
+                       [attr.aria-invalid]="!!error('area')" [attr.aria-describedby]="error('area') ? 'error-area' : null" />
+                @if (error('area')) { <p class="error-campo" id="error-area">{{ error('area') }}</p> }
+              </div>
+            </div>
+            <div class="campo">
+              <label for="involucrados">5. Nombre de los servidores y/o contratistas involucrados <span class="opc">(opcional)</span></label>
+              <textarea id="involucrados" formControlName="involucrados" rows="3" maxlength="1000" aria-describedby="ayuda-involucrados"></textarea>
+              <p class="ayuda" id="ayuda-involucrados">Si no los conoce, puede describir su cargo o dejarlo en blanco.</p>
+            </div>
+          }
+          @case (2) {
+            <div class="campo">
+              <label for="tipoEvento">7. Seleccione el tipo de evento <span class="req">*</span></label>
+              <select id="tipoEvento" formControlName="tipoEvento"
+                      [attr.aria-invalid]="!!error('tipoEvento')" [attr.aria-describedby]="error('tipoEvento') ? 'error-tipoEvento' : null">
+                <option value="">— Seleccione —</option>
+                @for (t of tipos; track t) { <option [value]="t">{{ t }}</option> }
+              </select>
+              @if (error('tipoEvento')) { <p class="error-campo" id="error-tipoEvento">{{ error('tipoEvento') }}</p> }
+            </div>
+            <div class="campo" id="evidencias">
+              <label for="archivos">8. Evidencias <span class="opc">(opcional)</span></label>
+              <input id="archivos" type="file" multiple accept=".pdf,.jpg,.jpeg,.png,.webp,application/pdf,image/jpeg,image/png,image/webp"
+                     (change)="agregarArchivos($any($event.target))" [attr.aria-describedby]="'ayuda-archivos' + (errorArchivos() ? ' error-archivos' : '')" />
+              <p class="ayuda" id="ayuda-archivos">PDF, JPG, JPEG, PNG o WEBP. Máximo {{ maxArchivos }} archivos de {{ maxMb }} MB cada uno.</p>
+              @if (errorArchivos()) { <p class="error-campo" id="error-archivos" role="alert">{{ errorArchivos() }}</p> }
+              @if (archivos().length) {
+                <ul class="lista-archivos">
+                  @for (f of archivos(); track $index; let i = $index) {
+                    <li><span>{{ f.name }} <small>({{ tamano(f.size) }})</small></span>
+                      <button type="button" class="btn-quitar" (click)="quitarArchivo(i)" [attr.aria-label]="'Quitar ' + f.name">Quitar</button></li>
+                  }
+                </ul>
+              }
+            </div>
+          }
+          @case (3) {
+            <div class="campo">
+              <label for="correo">9. Correo electrónico <span class="opc">(opcional)</span></label>
+              <input id="correo" type="email" formControlName="correo" maxlength="150" autocomplete="email"
+                     [attr.aria-invalid]="!!error('correo')" [attr.aria-describedby]="'ayuda-correo' + (error('correo') ? ' error-correo' : '')" />
+              <p class="ayuda" id="ayuda-correo">Déjelo vacío para reportar de forma anónima. Si lo escribe, le enviaremos la constancia con el número de radicado.</p>
+              @if (error('correo')) { <p class="error-campo" id="error-correo">{{ error('correo') }}</p> }
+            </div>
+
+            <div class="resumen-envio">
+              <h3>Resumen</h3>
+              <dl>
+                <dt>Tipo de evento</dt><dd>{{ form.controls.tipoEvento.value }}</dd>
+                <dt>Área o proceso</dt><dd>{{ form.controls.area.value }}</dd>
+                <dt>Fecha en que se dio cuenta</dt><dd>{{ form.controls.fechaConocimiento.value | date: "d 'de' MMMM 'de' y" : '' : 'es-CO' }}</dd>
+                <dt>Evidencias</dt><dd>{{ archivos().length ? archivos().length + ' archivo(s)' : 'Ninguna' }}</dd>
+                <dt>Envío</dt><dd>{{ form.controls.correo.value ? 'Con correo de contacto' : 'Anónimo' }}</dd>
+              </dl>
+            </div>
+
+            <div class="autorizacion" id="declaracion">
+              <label class="check-govco">
+                <input type="checkbox" formControlName="declaracion" [attr.aria-invalid]="!!error('declaracion')"
+                       [attr.aria-describedby]="error('declaracion') ? 'error-declaracion' : null" />
+                <span>Declaro que la información reportada es veraz y entiendo que será tratada de manera reservada por el Oficial de Cumplimiento.
+                  Si incluyo datos personales, autorizo su tratamiento para atender este reporte (Ley 1581 de 2012).</span>
+              </label>
+              @if (error('declaracion')) { <p class="error-campo" id="error-declaracion">{{ error('declaracion') }}</p> }
+            </div>
+
+            @if (errorEnvio()) { <div class="alerta-govco error" role="alert">{{ errorEnvio() }}</div> }
+          }
+        }
+      </fieldset>
+
+      <div class="acciones-govco navegacion">
+        @if (paso() > 0) {
+          <button type="button" class="btn-bdc outline-btn-govco" (click)="anterior()">← Atrás</button>
+        }
+        @if (paso() < pasos.length - 1) {
+          <button type="submit" class="btn-bdc fill-btn-govco">Siguiente →</button>
+        } @else {
+          <button type="submit" class="btn-bdc fill-btn-govco" [disabled]="enviando() || !svc.disponible">{{ enviando() ? 'Enviando…' : 'Enviar reporte' }}</button>
+        }
+      </div>
+    </form>
+  }
+</section>

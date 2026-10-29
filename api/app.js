@@ -15,6 +15,7 @@ const { rutasConfiguracion } = require('./src/configuracion');
 const { rutasUsuarios } = require('./src/usuarios');
 const { rutasPqrsfd } = require('./src/pqrsfd');
 const { rutasContratacion } = require('./src/contratacion');
+const { rutasSicof, iniciarReintentos } = require('./src/sicof');
 const { manejarErrores } = require('./src/errores');
 const { aplicarMigraciones } = require('./src/migraciones');
 
@@ -46,6 +47,7 @@ router.use('/', rutasConfiguracion);
 router.use('/', rutasUsuarios);
 router.use('/', rutasPqrsfd);
 router.use('/', rutasContratacion);
+router.use('/', rutasSicof);
 router.use(
   '/uploads',
   express.static(path.resolve(config.uploadDir), { maxAge: '30d', fallthrough: false }),
@@ -60,6 +62,9 @@ const puerto = process.env.PORT || 3000;
 // Aplica las migraciones pendientes (estructura del portal) y luego inicia el servidor
 aplicarMigraciones()
   .catch((e) => console.error('⚠ No se pudieron aplicar las migraciones:', e.message))
-  .finally(() => app.listen(puerto, () => console.log(`API CMS escuchando en el puerto ${puerto}`)));
+  .finally(() => {
+    app.listen(puerto, () => console.log(`API CMS escuchando en el puerto ${puerto}`));
+    iniciarReintentos(); // correos del canal SICOF que no se pudieron enviar
+  });
 
 module.exports = app;

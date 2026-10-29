@@ -1,0 +1,64 @@
+/* Canal anticorrupción – SICOF */
+.antetitulo { margin: 0 0 .3rem; font-size: .78rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #A80521; }
+
+.conceptos { list-style: none; margin: 0 0 1.25rem; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); gap: .9rem; }
+.conceptos li { padding: 1rem 1.1rem; border-radius: .6rem; background: #fff; border: 1px solid #e3e9f3; border-top: 4px solid var(--cobalt); }
+.conceptos li:nth-child(2) { border-top-color: #3366CC; }
+.conceptos li:nth-child(3) { border-top-color: #A80521; }
+.c-ico { font-size: 1.4rem; }
+.conceptos h2 { margin: .35rem 0 .3rem; font-size: 1.05rem; color: var(--cobalt); }
+.conceptos p { margin: 0; font-size: .9rem; line-height: 1.5; color: #4b5563; }
+
+.garantias { display: flex; gap: .8rem; align-items: flex-start; margin: 0 0 1.5rem; padding: .9rem 1.1rem; border-radius: .5rem; background: #E2F4EF; color: #05473a; }
+.garantias span { font-size: 1.3rem; }
+.garantias p { margin: 0; line-height: 1.5; }
+
+/* ===== Indicador de pasos ===== */
+.pasos-sicof { list-style: none; margin: 0 0 1.25rem; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); counter-reset: paso; }
+.pasos-sicof li { position: relative; display: flex; flex-direction: column; align-items: center; gap: .4rem; text-align: center; font-size: .85rem; color: #6b7280; }
+.pasos-sicof li::before { content: ''; position: absolute; top: 1.05rem; left: -50%; right: 50%; height: 3px; background: #d6e2f5; z-index: 0; }
+.pasos-sicof li:first-child::before { display: none; }
+.pasos-sicof li.hecho::before, .pasos-sicof li.actual::before { background: var(--cobalt); }
+.p-num {
+  position: relative; z-index: 1; display: grid; place-items: center; width: 2.2rem; height: 2.2rem; border-radius: 50%;
+  font: inherit; font-weight: 700; color: #6b7280; background: #fff; border: 3px solid #d6e2f5;
+}
+button.p-num { cursor: pointer; }
+button.p-num:focus-visible { outline: .125rem solid #000; outline-offset: .15rem; }
+.actual .p-num { color: #fff; background: var(--cobalt); border-color: var(--cobalt); box-shadow: 0 0 0 4px #E5ECF8; }
+.hecho .p-num { color: #fff; background: #069169; border-color: #069169; }
+.actual .p-txt { color: var(--cobalt); font-weight: 700; }
+.hecho .p-txt { color: #05694c; }
+
+.seccion legend:focus { outline: none; }
+.seccion legend:focus-visible { outline: .125rem solid #000; outline-offset: .2rem; }
+.navegacion { justify-content: space-between; }
+.navegacion :only-child { margin-left: auto; }
+
+.resumen-envio { margin: 1rem 0; padding: 1rem 1.1rem; border-radius: .5rem; background: #F7F9FD; border: 1px solid #e3e9f3; }
+.resumen-envio h3 { margin: 0 0 .6rem; font-size: 1rem; color: var(--cobalt); }
+.resumen-envio dl { display: grid; grid-template-columns: max-content 1fr; gap: .35rem 1.25rem; margin: 0; font-size: .92rem; }
+.resumen-envio dt { color: #5f5f5f; }
+.resumen-envio dd { margin: 0; font-weight: 600; }
+
+.constancia { background: #fff; border: 1px solid #b9e4d6; border-left: 6px solid #069169; border-radius: .5rem; padding: 1.5rem; }
+.constancia:focus { outline: .125rem solid #000; outline-offset: .25rem; }
+.constancia-ico { display: inline-grid; place-items: center; width: 2.5rem; height: 2.5rem; border-radius: 50%; background: #069169; color: #fff; font-size: 1.3rem; font-weight: 700; }
+.constancia h2 { margin: .5rem 0 1rem; color: #05694c; font-size: 1.4rem; }
+.constancia dl { display: grid; grid-template-columns: max-content 1fr; gap: .45rem 1.25rem; margin: 0 0 1rem; }
+.constancia dt { color: #5f5f5f; }
+.constancia dd { margin: 0; }
+.mono { font-family: ui-monospace, Consolas, 'Courier New', monospace; }
+.grande { font-size: 1.35rem; font-weight: 700; color: var(--cobalt); letter-spacing: .03em; }
+.importante { background: #fff4e0; color: #6b3a00; padding: .7rem 1rem; border-radius: .4rem; margin: 0 0 1.25rem; font-weight: 600; }
+.trampa { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
+.visually-hidden { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; }
+
+@media (max-width: 560px) {
+  .p-txt { font-size: .72rem; }
+  .resumen-envio dl, .constancia dl { grid-template-columns: 1fr; gap: .1rem; }
+  .resumen-envio dd, .constancia dd { margin-bottom: .45rem; }
+}
+@media print {
+  .conceptos, .garantias, .acciones-govco { display: none; }
+}

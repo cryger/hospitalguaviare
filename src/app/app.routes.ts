@@ -44,6 +44,8 @@ export const routes: Routes = [
         ],
       },
       { path: 'pqrsf', component: PqrsfComponent, data: { breadcrumb: 'PQRSFD' } },
+      { path: 'sicof', data: { breadcrumb: 'Canal anticorrupción – SICOF' },
+        loadComponent: () => import('./pages/sicof/sicof').then(m => m.Sicof) },
       { path: 'solicitudes-contractuales', data: { breadcrumb: 'Solicitudes contractuales' },
         loadComponent: () => import('./pages/solicitudes-contractuales/solicitudes-contractuales').then(m => m.SolicitudesContractuales) },
       { path: 'mapa-del-sitio', component: MapaDelSitio, data: { breadcrumb: 'Mapa del sitio' } },

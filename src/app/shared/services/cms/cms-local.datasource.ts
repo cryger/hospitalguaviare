@@ -271,7 +271,7 @@ export class CmsLocalDataSource extends CmsDataSource {
   }
 
   /* ===== Estructura inicial (Resolución 1519 de 2020) ===== */
-  private readonly versionSemilla = 18;
+  private readonly versionSemilla = 19;
 
   private sembrarSiVacio(): void {
     if (localStorage.getItem(this.prefijo + 'menus')) return;
@@ -476,6 +476,12 @@ export class CmsLocalDataSource extends CmsDataSource {
         if (p.slug === 'estructura-organica-organigrama' && (p.plantilla === 'contenido' || p.plantilla === 'documentos')) {
           Object.assign(p, { plantilla: 'organigrama', actualizadoEn: t });
         }
+      }
+    }
+    // Versión 19: el Canal anticorrupción – SICOF lleva al formulario /sicof
+    if (version < 19) {
+      for (const p of paginas) {
+        if (p.slug === 'canal-anticorrupcion-sicof' && p.plantilla === 'contenido') Object.assign(p, { plantilla: 'enlace', urlExterna: '/sicof', actualizadoEn: t });
       }
     }
     this.escribir('paginas', paginas);
@@ -721,7 +727,7 @@ const ESTRUCTURA_1519: PaginaSemilla[] = [
   { id: 90, menuId: 1, parentId: 74, titulo: "Comité de convivencia laboral", slug: 'comite-de-convivencia-laboral', plantilla: 'documentos', descripcion: "Instancia que promueve un buen ambiente laboral y previene y atiende las situaciones que pueden constituir acoso laboral (Ley 1010 de 2006). Aquí se publican su conformación, comunicados y los documentos de elección de sus integrantes.", orden: 7 },
   { id: 91, menuId: 1, parentId: 74, titulo: "Talento humano", slug: 'talento-humano', plantilla: 'documentos', descripcion: "Manual de funciones, planes de gestión gerencial y documentos del área de Talento Humano.", orden: 8 },
   { id: 92, menuId: 1, parentId: 74, titulo: "Planes Decreto 612 de 2018", slug: 'planes-decreto-612-de-2018', plantilla: 'documentos', descripcion: "Planes institucionales y estratégicos que la entidad debe publicar según el Decreto 612 de 2018.", orden: 9 },
-  { id: 93, menuId: 1, parentId: 74, titulo: "Canal anticorrupción – SICOF", slug: 'canal-anticorrupcion-sicof', plantilla: 'contenido', descripcion: "Subsistema del Riesgo de Corrupción, Opacidad y Fraude: cómo reportar una conducta posiblemente irregular.", orden: 10 },
+  { id: 93, menuId: 1, parentId: 74, titulo: "Canal anticorrupción – SICOF", slug: 'canal-anticorrupcion-sicof', plantilla: 'enlace', urlExterna: '/sicof', descripcion: "Subsistema del Riesgo de Corrupción, Opacidad y Fraude: cómo reportar una conducta posiblemente irregular.", orden: 10 },
   { id: 94, menuId: 1, parentId: 74, titulo: "Sistema SARLAFT", slug: 'sistema-sarlaft', plantilla: 'enlace', urlExterna: 'https://esehospitalguaviare.gov.co/sistema-sarlaft/', orden: 11 },
   { id: 95, menuId: 1, parentId: 74, titulo: "Acceso ALMERA", slug: 'acceso-almera', plantilla: 'enlace', urlExterna: 'https://sgi.almeraim.com/sgi/index.php?conid=sgiesehospitalguaviare', orden: 12 },
   { id: 96, menuId: 1, parentId: 74, titulo: "Acceso Outlook", slug: 'acceso-outlook', plantilla: 'enlace', urlExterna: 'https://outlook.office.com/mail/', orden: 13 },

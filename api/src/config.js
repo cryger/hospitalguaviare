@@ -22,6 +22,17 @@ const config = {
   /** Adjuntos con datos personales (PQRSFD, solicitudes contractuales): NO se publican */
   privadoDir: path.resolve(process.env.PRIVADO_DIR || './privado'),
   maxArchivoMb: Number(process.env.MAX_ARCHIVO_MB || 20),
+  /** Correo saliente (SMTP). Si falta SMTP_HOST, los mensajes quedan pendientes y se reintentan */
+  smtp: {
+    host: process.env.SMTP_HOST || '',
+    port: Number(process.env.SMTP_PORT || 465),
+    seguro: (process.env.SMTP_SEGURO || (Number(process.env.SMTP_PORT || 465) === 465 ? 'true' : 'false')) === 'true',
+    usuario: process.env.SMTP_USUARIO || '',
+    clave: process.env.SMTP_CLAVE || '',
+    remitente: process.env.SMTP_REMITENTE || process.env.SMTP_USUARIO || '',
+  },
+  /** Destino de los reportes del canal anticorrupción (SICOF) */
+  sicofCorreo: process.env.SICOF_CORREO || 'oficialdecumplimiento@esehospitalguaviare.gov.co',
 };
 
 if (config.jwtSecret.length < 32) {
