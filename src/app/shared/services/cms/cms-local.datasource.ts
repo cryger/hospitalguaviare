@@ -48,7 +48,58 @@ export class CmsLocalDataSource extends CmsDataSource {
       .then(() => this.sembrarDesdeArchivo('organigrama-semilla', 'assets/semillas/organigrama.json'))
       .then(() => this.sembrarDesdeArchivo('normatividad-semilla', 'assets/semillas/normatividad.json'))
       .then(() => this.clasificarPublicaciones())
-      .then(() => this.clasificarDocumentosTalentoHumano());
+      .then(() => this.clasificarDocumentosTalentoHumano())
+      .then(() => this.organizarComiteConvivencia());
+  }
+
+  /**
+   * Una sola vez: Comité de Convivencia Laboral con los grupos del portal anterior
+   * ("Comité de convivencia 2026" y "Anuncios 2026"). Equivale a api/migraciones/029-comite-de-convivencia.sql
+   */
+  private organizarComiteConvivencia(): void {
+    const clave = this.prefijo + 'comite-convivencia-v2';
+    if (localStorage.getItem(clave) === '1') return;
+    const paginas = this.leer<CmsPagina>('paginas');
+    const pagina = paginas.find((p) => p.slug === 'comite-de-convivencia-laboral');
+    const entradas = this.leer<CmsEntrada>('entradas');
+    const base = pagina && entradas.find((e) => e.paginaId === pagina.id && e.slug === 'conformacion-comite-convivencia-2026');
+    if (!pagina || !base || base.categoria) return;
+    const t = this.ahora();
+    if (!pagina.descripcion || pagina.descripcion.startsWith('Resoluciones, comunicados y actas del proceso de conformación')) {
+      pagina.descripcion =
+        'Instancia que promueve un buen ambiente laboral y previene y atiende las situaciones que pueden constituir acoso laboral (Ley 1010 de 2006). Aquí se publican su conformación, comunicados y los documentos de elección de sus integrantes.';
+      this.escribir('paginas', paginas);
+    }
+    const urlsAnuncios = [
+      'OFICIO%20DE%20GERENCIA.pdf',
+      'ACTA%20DE%20CIERRE%20ELECCI%C3%93N%20COMITE%20DE%20CONVIVENCIA%20LABORAL.pdf',
+      'ACTA%20DE%20APERTURA%20ELECCI%C3%93N%20COMITE%20CONVIVENCIA%20LABORAL.pdf',
+      'Aspirantes%20Inscritos%20comite%20de%20convivencia%20laboral.pdf',
+    ].map((n) => 'https://esehospitalguaviare.gov.co/resourses/archivos/pdf/' + n);
+    const multimedia = this.leer<CmsMultimedia>('multimedia');
+    const idsAnuncios = urlsAnuncios.map((u) => multimedia.find((m) => m.url === u)?.id).filter((x): x is number => x !== undefined);
+    Object.assign(base, {
+      titulo: 'Comité de Convivencia Laboral 2026',
+      resumen: 'Resolución de conformación y comunicados del proceso.',
+      categoria: 'Comité de convivencia 2026',
+      fechaPublicacion: '2026-08-03T12:00:00.000Z',
+      multimediaIds: base.multimediaIds.filter((id) => !idsAnuncios.includes(id)),
+      orden: 0,
+      actualizadoEn: t,
+    });
+    entradas.push({
+      ...base,
+      id: this.nuevoId(entradas),
+      titulo: 'Anuncios de la elección 2026',
+      slug: 'anuncios-eleccion-comite-convivencia-2026',
+      resumen: 'Oficio de Gerencia, actas de apertura y cierre de la elección y aspirantes inscritos.',
+      categoria: 'Anuncios 2026',
+      multimediaIds: idsAnuncios,
+      orden: 1,
+      creadoEn: t,
+    });
+    this.escribir('entradas', entradas);
+    localStorage.setItem(clave, '1');
   }
 
   /**
@@ -667,7 +718,7 @@ const ESTRUCTURA_1519: PaginaSemilla[] = [
   { id: 77, menuId: 1, parentId: 74, titulo: "Sedes y horarios de atención", slug: 'sedes-y-horarios', plantilla: 'contenido', orden: 4 },
   { id: 88, menuId: 1, parentId: 74, titulo: "Calendario de eventos", slug: 'calendario-de-eventos', plantilla: 'enlace', urlExterna: '/transparencia/informacion-de-la-entidad/calendario-de-actividades-y-eventos', orden: 5 },
   { id: 89, menuId: 1, parentId: 74, titulo: "Alianza de usuarios", slug: 'alianza-de-usuarios', plantilla: 'contenido', descripcion: "Asociación de usuarios que representa a la comunidad ante la E.S.E. Hospital San José del Guaviare.", orden: 6 },
-  { id: 90, menuId: 1, parentId: 74, titulo: "Comité de convivencia laboral", slug: 'comite-de-convivencia-laboral', plantilla: 'documentos', descripcion: "Resoluciones, comunicados y actas del proceso de conformación del Comité de Convivencia Laboral.", orden: 7 },
+  { id: 90, menuId: 1, parentId: 74, titulo: "Comité de convivencia laboral", slug: 'comite-de-convivencia-laboral', plantilla: 'documentos', descripcion: "Instancia que promueve un buen ambiente laboral y previene y atiende las situaciones que pueden constituir acoso laboral (Ley 1010 de 2006). Aquí se publican su conformación, comunicados y los documentos de elección de sus integrantes.", orden: 7 },
   { id: 91, menuId: 1, parentId: 74, titulo: "Talento humano", slug: 'talento-humano', plantilla: 'documentos', descripcion: "Manual de funciones, planes de gestión gerencial y documentos del área de Talento Humano.", orden: 8 },
   { id: 92, menuId: 1, parentId: 74, titulo: "Planes Decreto 612 de 2018", slug: 'planes-decreto-612-de-2018', plantilla: 'documentos', descripcion: "Planes institucionales y estratégicos que la entidad debe publicar según el Decreto 612 de 2018.", orden: 9 },
   { id: 93, menuId: 1, parentId: 74, titulo: "Canal anticorrupción – SICOF", slug: 'canal-anticorrupcion-sicof', plantilla: 'contenido', descripcion: "Subsistema del Riesgo de Corrupción, Opacidad y Fraude: cómo reportar una conducta posiblemente irregular.", orden: 10 },
