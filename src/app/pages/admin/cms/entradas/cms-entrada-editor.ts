@@ -8,6 +8,7 @@ import { MediaThumb } from '../shared/media-thumb';
 import { RichEditor } from '../shared/rich-editor';
 import { SelectorIcono } from '../../../../shared/components/selector-icono/selector-icono';
 import { NIVELES_ORGANIGRAMA } from '../../../cms-publico/organigrama';
+import { SECCIONES_PLATAFORMA } from '../../../cms-publico/plataforma-estrategica';
 import { CATEGORIAS_SUGERIDAS, categoriaSugerida } from '../../../../shared/utils/categorias';
 
 @Component({
@@ -71,6 +72,15 @@ export class CmsEntradaEditor {
   /** Sedes y horarios: la categoría indica si la entrada es una sede o un horario */
   esSedes(): boolean {
     return this.cms.paginaPorId().get(Number(this.form.paginaId))?.plantilla === 'sedes';
+  }
+
+  /** Plataforma estratégica: la categoría es la sección (Misión, Visión, Valores…) */
+  readonly seccionesPlataforma = SECCIONES_PLATAFORMA;
+  esPlataforma(): boolean {
+    return this.cms.paginaPorId().get(Number(this.form.paginaId))?.plantilla === 'plataforma';
+  }
+  ayudaSeccion(): string {
+    return SECCIONES_PLATAFORMA.find((s) => s.clave === this.form.categoria)?.ayuda ?? 'Sin sección: se muestra como texto al final de la página (los archivos adjuntos se ofrecen para ver y descargar).';
   }
 
   /** Organigrama: la categoría es el nivel de la dependencia */

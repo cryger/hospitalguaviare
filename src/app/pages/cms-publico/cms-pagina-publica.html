@@ -17,7 +17,7 @@
     <header class="entrada-head">
       <a class="volver" [routerLink]="cms.rutaPagina(pagina()!.id)">← {{ pagina()!.titulo }}</a>
       <h1>{{ e.titulo }}</h1>
-      @if (pagina()!.plantilla === 'servicios' || pagina()!.plantilla === 'organigrama') {
+      @if (pagina()!.plantilla === 'servicios' || pagina()!.plantilla === 'organigrama' || pagina()!.plantilla === 'plataforma') {
         <!-- Servicio del portafolio: sin fecha ni autor, solo su grupo -->
         @if (e.categoria || e.estado !== 'publicada') {
           <p class="meta">
@@ -308,6 +308,11 @@
     @case ('sedes') {
       <!-- Sedes (mapa y contactos) y horarios con estado en vivo: grupos «Sede» y «Horario» en Entradas -->
       <app-sedes-horarios [entradas]="entradas()" />
+    }
+
+    @case ('plataforma') {
+      <!-- Plataforma estratégica: misión, visión, valores, objetivos, funciones y deberes (campo «Sección» en Entradas) -->
+      <app-plataforma-estrategica [entradas]="entradas()" />
     }
 
     @case ('organigrama') {

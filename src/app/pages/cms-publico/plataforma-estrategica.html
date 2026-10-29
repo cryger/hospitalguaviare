@@ -1,0 +1,123 @@
+<div class="plataforma">
+  <!-- ===== Misión y visión: de lo que somos hoy a lo que seremos ===== -->
+  @if (mision() || vision()) {
+    <section class="mv" aria-labelledby="pe-titulo">
+      <header class="mv-cabecera">
+        <p class="antetitulo">Plataforma estratégica</p>
+        <h2 id="pe-titulo">Lo que somos y hacia dónde vamos</h2>
+      </header>
+
+      <div class="mv-ruta" [class.dos]="mision() && vision()">
+        @if (mision(); as m) {
+          <article class="declaracion mision" aria-labelledby="pe-mision">
+            <div class="d-top">
+              <span class="d-icono" aria-hidden="true"><app-icono-cms [valor]="m.icono" /></span>
+              <div>
+                <p class="d-cuando">Hoy</p>
+                <h3 id="pe-mision">{{ m.entrada.titulo }}</h3>
+              </div>
+            </div>
+            <blockquote class="d-texto"><p>{{ m.texto }}</p></blockquote>
+            @if (m.ejes.length) {
+              <div class="d-ejes">
+                <h4>Nuestros ejes</h4>
+                <ul>@for (x of m.ejes; track x) { <li>{{ x }}</li> }</ul>
+              </div>
+            }
+          </article>
+        }
+
+        @if (mision() && vision()) {
+          <div class="mv-flecha" aria-hidden="true">
+            <span class="linea"></span>
+            <span class="punta"><app-icono-cms valor="govco:route" /></span>
+            <span class="linea"></span>
+          </div>
+        }
+
+        @if (vision(); as v) {
+          <article class="declaracion vision" aria-labelledby="pe-vision">
+            <div class="d-top">
+              <span class="d-icono" aria-hidden="true"><app-icono-cms [valor]="v.icono" /></span>
+              <div>
+                <p class="d-cuando">{{ meta() ? 'Hacia ' + meta()!.anio : 'Futuro' }}</p>
+                <h3 id="pe-vision">{{ v.entrada.titulo }}</h3>
+              </div>
+              @if (meta(); as mt) {
+                <p class="d-meta"><b>{{ mt.anio }}</b><span>{{ mt.texto }}</span></p>
+              }
+            </div>
+            <blockquote class="d-texto"><p>{{ v.texto }}</p></blockquote>
+            @if (v.ejes.length) {
+              <div class="d-ejes">
+                <h4>Así seremos</h4>
+                <ul>@for (x of v.ejes; track x) { <li>{{ x }}</li> }</ul>
+              </div>
+            }
+          </article>
+        }
+      </div>
+    </section>
+  }
+
+  <!-- ===== Valores y principios ===== -->
+  @for (g of [{ id: 'valores', titulo: 'Valores corporativos', lista: valores() }, { id: 'principios', titulo: 'Principios', lista: principios() }]; track g.id) {
+    @if (g.lista.length) {
+      <section class="valores" [attr.aria-labelledby]="'pe-' + g.id">
+        <header class="v-cabecera">
+          <span class="v-num" aria-hidden="true">{{ g.lista.length }}</span>
+          <div>
+            <h2 [id]="'pe-' + g.id">{{ g.titulo }}</h2>
+            <p>{{ g.id === 'valores' ? 'Guían el actuar de quienes trabajamos en el hospital, en cada atención y cada decisión.' : 'Orientan la gestión institucional.' }}</p>
+          </div>
+        </header>
+        <ul class="v-grilla">
+          @for (it of g.lista; track it.nombre; let i = $index) {
+            <li class="v-tarjeta" [style.--i]="i">
+              <span class="v-icono" aria-hidden="true"><app-icono-cms [valor]="it.icono" /></span>
+              <h3>{{ it.nombre }}</h3>
+              @if (it.descripcion) { <p>{{ it.descripcion }}</p> }
+            </li>
+          }
+        </ul>
+      </section>
+    }
+  }
+
+  <!-- ===== Objetivos, funciones y deberes ===== -->
+  @if (listas().length) {
+    <div class="listas" [class.varias]="listas().length > 1">
+      @for (l of listas(); track l.seccion) {
+        <section class="lista" [attr.aria-labelledby]="'pe-l-' + l.seccion">
+          <h2 [id]="'pe-l-' + l.seccion"><span class="l-icono" aria-hidden="true"><app-icono-cms [valor]="l.icono" /></span>{{ l.titulo }}</h2>
+          <ol>@for (x of l.items; track $index) { <li>{{ x }}</li> }</ol>
+        </section>
+      }
+    </div>
+  }
+
+  @for (e of otras(); track e.id) {
+    <section class="bloque">
+      <h2>{{ e.titulo }}</h2>
+      <div class="contenido-html" [innerHTML]="e.contenido"></div>
+    </section>
+  }
+
+  @if (documentos().length) {
+    <section class="descargas" aria-labelledby="pe-docs">
+      <h2 id="pe-docs">Documentos</h2>
+      <ul>
+        @for (d of documentos(); track d.archivo.id) {
+          <li>
+            <div class="descarga">
+              <span class="descarga-ext" aria-hidden="true">{{ extension(d.archivo) }}</span>
+              <span class="descarga-texto"><strong>{{ d.archivo.titulo || d.entrada.titulo }}</strong></span>
+              <button type="button" class="descarga-btn principal" (click)="ver(d.archivo)">Ver documento</button>
+              <a class="descarga-btn" [href]="d.archivo.url" target="_blank" rel="noopener" [attr.download]="d.archivo.nombre || ''">Descargar <span class="visually-hidden">{{ d.archivo.titulo || d.entrada.titulo }}</span></a>
+            </div>
+          </li>
+        }
+      </ul>
+    </section>
+  }
+</div>

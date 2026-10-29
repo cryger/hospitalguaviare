@@ -137,7 +137,17 @@
           </small>
         </div>
       }
-      @if (esServicios() || esOrganigrama() || esSedes()) {
+      @if (esPlataforma()) {
+        <div class="campo bloque">
+          <label for="en-seccion">Sección de la plataforma</label>
+          <select id="en-seccion" class="select" name="categoria" [(ngModel)]="form.categoria" aria-describedby="en-seccion-ayuda">
+            <option [ngValue]="null">— Texto adicional o documento —</option>
+            @for (s of seccionesPlataforma; track s.clave) { <option [ngValue]="s.clave">{{ s.clave }}</option> }
+          </select>
+          <small id="en-seccion-ayuda">{{ ayudaSeccion() }}</small>
+        </div>
+      }
+      @if (esServicios() || esOrganigrama() || esSedes() || esPlataforma()) {
         <div class="campo bloque">
           <label for="en-icono">Ícono</label>
           <app-selector-icono idCampo="en-icono" [(valor)]="form.icono" />

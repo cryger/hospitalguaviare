@@ -6,7 +6,7 @@
 
 export type UbicacionMenu = 'principal' | 'superior' | 'pie' | 'lateral';
 export type EstadoPagina = 'publicada' | 'borrador' | 'oculta';
-export type PlantillaPagina = 'contenido' | 'listado' | 'documentos' | 'galeria' | 'enlace' | 'calendario' | 'historia' | 'servicios' | 'organigrama' | 'sedes';
+export type PlantillaPagina = 'contenido' | 'listado' | 'documentos' | 'galeria' | 'enlace' | 'calendario' | 'historia' | 'servicios' | 'organigrama' | 'sedes' | 'plataforma';
 export type TipoEntrada = 'articulo' | 'noticia' | 'documento' | 'evento' | 'servicio' | 'enlace';
 export type EstadoEntrada = 'publicada' | 'borrador' | 'archivada';
 export type TipoMultimedia = 'imagen' | 'video' | 'documento' | 'audio' | 'otro';
@@ -115,6 +115,11 @@ export const PLANTILLAS_PAGINA: { valor: PlantillaPagina; etiqueta: string; ayud
     valor: 'sedes',
     etiqueta: 'Sedes y horarios',
     ayuda: 'Entradas del grupo «Sede» (resumen = dirección; contenido = lista «Etiqueta: valor» con teléfonos y correos y, opcional, «Coordenadas: lat, lng») se muestran con mapa. Las del grupo «Horario» (resumen = «Lunes a viernes 7:00-12:00, 14:00-18:00; Sábados 8:00-13:00» o «Todos los días 24 horas») muestran si está abierto ahora.',
+  },
+  {
+    valor: 'plataforma',
+    etiqueta: 'Plataforma estratégica',
+    ayuda: 'Misión y visión destacadas (con sus ejes como etiquetas y el año meta de la visión), valores y principios en tarjetas con ícono, y objetivos, funciones y deberes en listas numeradas. Cada entrada indica su «Sección»; las listas se escriben con viñetas «Nombre: descripción».',
   },
   { valor: 'calendario', etiqueta: 'Calendario de eventos', ayuda: 'Muestra el calendario institucional (los eventos se administran en Contenido › Calendario de eventos).' },
 ];

@@ -39,6 +39,7 @@ export class CmsLocalDataSource extends CmsDataSource {
     this.actualizarSemilla();
     this.sembrarEntradasFijas('pie-semilla', ENTRADAS_PIE);
     this.sembrarEntradasFijas('entidad-semilla', ENTRADAS_ENTIDAD);
+    this.organizarPlataformaEstrategica();
     this.semillaNoticias = this.sembrarDesdeArchivo('noticias-semilla', 'assets/semillas/noticias.json').then(() =>
       this.sembrarDesdeArchivo('nuestro-hospital-semilla', 'assets/semillas/nuestro-hospital.json'),
     ).then(() => this.sembrarDesdeArchivo('atencion-participa-semilla', 'assets/semillas/atencion-y-participa.json'))
@@ -57,6 +58,42 @@ export class CmsLocalDataSource extends CmsDataSource {
    * Una sola vez: Comité de Convivencia Laboral con los grupos del portal anterior
    * ("Comité de convivencia 2026" y "Anuncios 2026"). Equivale a api/migraciones/029-comite-de-convivencia.sql
    */
+  /**
+   * Plataforma estratégica (igual que api/migraciones/032-plataforma-estrategica.sql):
+   * sección, ícono y ejes (viñetas) de la misión y la visión, si aún no los tienen.
+   */
+  private organizarPlataformaEstrategica(): void {
+    const clave = this.prefijo + 'plataforma-estrategica-v1';
+    if (localStorage.getItem(clave) === '1') return;
+    const pagina = this.leer<CmsPagina>('paginas').find((p) => p.slug === 'mision-vision-funciones-y-deberes');
+    if (!pagina) return;
+    const ejes: Record<string, { categoria: string; icono: string | null; lista: string[] }> = {
+      mision: {
+        categoria: 'Misión',
+        icono: 'govco:bullseye',
+        lista: ['Servicios integrales', 'Eficiencia', 'Calidad', 'Enfoque diferencial', 'Calidez humana', 'Desarrollo profesional', 'Bienestar de usuarios, colaboradores y familias'],
+      },
+      vision: {
+        categoria: 'Visión',
+        icono: 'govco:eye',
+        lista: ['Referente de la región', 'Acreditado', 'Innovador', 'Competitivo', 'Sostenibilidad financiera', 'Cultura organizacional sólida', 'Mediana y alta complejidad', 'Amigable con el medio ambiente'],
+      },
+      'valores-corporativos': { categoria: 'Valores', icono: null, lista: [] },
+    };
+    const entradas = this.leer<CmsEntrada>('entradas');
+    const t = this.ahora();
+    for (const e of entradas) {
+      const x = e.paginaId === pagina.id ? ejes[e.slug] : undefined;
+      if (!x) continue;
+      e.categoria ??= x.categoria;
+      e.icono ??= x.icono;
+      if (x.lista.length && !(e.contenido ?? '').includes('<ul')) e.contenido = (e.contenido ?? '') + '\n<ul>' + x.lista.map((l) => `<li>${l}</li>`).join('') + '</ul>';
+      e.actualizadoEn = t;
+    }
+    this.escribir('entradas', entradas);
+    localStorage.setItem(clave, '1');
+  }
+
   private organizarComiteConvivencia(): void {
     const clave = this.prefijo + 'comite-convivencia-v2';
     if (localStorage.getItem(clave) === '1') return;
@@ -272,7 +309,7 @@ export class CmsLocalDataSource extends CmsDataSource {
   }
 
   /* ===== Estructura inicial (Resolución 1519 de 2020) ===== */
-  private readonly versionSemilla = 20;
+  private readonly versionSemilla = 21;
 
   private sembrarSiVacio(): void {
     if (localStorage.getItem(this.prefijo + 'menus')) return;
@@ -486,6 +523,12 @@ export class CmsLocalDataSource extends CmsDataSource {
         if (p.slug === 'sedes-y-horarios' && p.plantilla === 'contenido') Object.assign(p, { plantilla: 'sedes', descripcion: p.descripcion || sd?.descripcion, actualizadoEn: t });
       }
     }
+    // Versión 21: Misión y visión con la plantilla "plataforma" (misión, visión y valores visuales)
+    if (version < 21) {
+      for (const p of paginas) {
+        if (p.slug === 'mision-vision-funciones-y-deberes' && p.plantilla === 'contenido') Object.assign(p, { plantilla: 'plataforma', actualizadoEn: t });
+      }
+    }
     // Versión 19: el Canal anticorrupción – SICOF lleva al formulario /sicof
     if (version < 19) {
       for (const p of paginas) {
@@ -645,7 +688,7 @@ type PaginaSemilla = Omit<CmsPagina, 'creadoEn' | 'actualizadoEn' | 'visibleEnMe
 const ESTRUCTURA_1519: PaginaSemilla[] = [
   { id: 1, menuId: 1, parentId: null, titulo: "Transparencia y acceso a la información pública", slug: 'transparencia', plantilla: 'contenido', descripcion: "Información pública de la E.S.E. Hospital San José del Guaviare, organizada según la Ley 1712 de 2014 y la Resolución 1519 de 2020 de MinTIC.", orden: 1 },
   { id: 2, menuId: 1, parentId: 1, titulo: "1. Información de la entidad", slug: 'informacion-de-la-entidad', plantilla: 'contenido', descripcion: "Conozca quiénes somos, cómo estamos organizados, cómo contactarnos, quién nos vigila y cómo tomamos las decisiones que le afectan.", orden: 0 },
-  { id: 3, menuId: 1, parentId: 2, titulo: "1.1 Misión, visión, funciones y deberes", slug: 'mision-vision-funciones-y-deberes', plantilla: 'contenido', descripcion: "Plataforma estratégica de la E.S.E. Hospital San José del Guaviare: misión, visión y valores corporativos.", orden: 0 },
+  { id: 3, menuId: 1, parentId: 2, titulo: "1.1 Misión, visión, funciones y deberes", slug: 'mision-vision-funciones-y-deberes', plantilla: 'plataforma', descripcion: "Plataforma estratégica de la E.S.E. Hospital San José del Guaviare: misión, visión y valores corporativos.", orden: 0 },
   { id: 4, menuId: 1, parentId: 2, titulo: "1.2 Estructura orgánica - Organigrama", slug: 'estructura-organica-organigrama', plantilla: 'organigrama', descripcion: "Organigrama y estructura administrativa de la E.S.E. Hospital San José del Guaviare.", orden: 1 },
   { id: 5, menuId: 1, parentId: 2, titulo: "1.3 Mapas y cartas descriptivas de los procesos", slug: 'mapas-y-cartas-descriptivas-de-los-procesos', plantilla: 'documentos', descripcion: "Mapa de procesos y caracterizaciones de los procesos institucionales.", orden: 2 },
   { id: 6, menuId: 1, parentId: 2, titulo: "1.4 Directorio institucional", slug: 'directorio-institucional', plantilla: 'contenido', descripcion: "Dependencias, responsables, teléfonos y correos para comunicarse con el hospital.", orden: 3 },
