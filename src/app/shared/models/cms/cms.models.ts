@@ -6,7 +6,7 @@
 
 export type UbicacionMenu = 'principal' | 'superior' | 'pie' | 'lateral';
 export type EstadoPagina = 'publicada' | 'borrador' | 'oculta';
-export type PlantillaPagina = 'contenido' | 'listado' | 'documentos' | 'galeria' | 'enlace' | 'calendario' | 'historia' | 'servicios' | 'organigrama' | 'sedes' | 'plataforma';
+export type PlantillaPagina = 'contenido' | 'listado' | 'documentos' | 'galeria' | 'enlace' | 'calendario' | 'historia' | 'servicios' | 'organigrama' | 'sedes' | 'plataforma' | 'directorio';
 export type TipoEntrada = 'articulo' | 'noticia' | 'documento' | 'evento' | 'servicio' | 'enlace';
 export type EstadoEntrada = 'publicada' | 'borrador' | 'archivada';
 export type TipoMultimedia = 'imagen' | 'video' | 'documento' | 'audio' | 'otro';
@@ -120,6 +120,11 @@ export const PLANTILLAS_PAGINA: { valor: PlantillaPagina; etiqueta: string; ayud
     valor: 'plataforma',
     etiqueta: 'Plataforma estratégica',
     ayuda: 'Misión y visión destacadas (con sus ejes como etiquetas y el año meta de la visión), valores y principios en tarjetas con ícono, y objetivos, funciones y deberes en listas numeradas. Cada entrada indica su «Sección»; las listas se escriben con viñetas «Nombre: descripción».',
+  },
+  {
+    valor: 'directorio',
+    etiqueta: 'Directorio institucional',
+    ayuda: 'Las entradas del grupo «Líneas principales» se destacan arriba (conmutador, urgencias, PQRSFD, notificaciones judiciales). Las demás son dependencias con buscador y filtro por área (el grupo). Contenido = líneas «Correo: …», «Teléfono: …», «Celular: …» o «WhatsApp: …»; se vuelven enlaces.',
   },
   { valor: 'calendario', etiqueta: 'Calendario de eventos', ayuda: 'Muestra el calendario institucional (los eventos se administran en Contenido › Calendario de eventos).' },
 ];

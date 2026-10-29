@@ -18,7 +18,7 @@
             @for (c of s.contactos; track c.etiqueta) {
               <li>
                 <span class="ico" aria-hidden="true">
-                  <app-icono-cms [valor]="c.tipo === 'correo' ? 'govco:envelope' : c.tipo === 'tel' ? (c.etiqueta.toLowerCase().includes('urgencia') || c.etiqueta.toLowerCase().includes('ambulancia') ? 'govco:ambulance' : 'govco:phone-alt') : 'govco:info-circle'" />
+                  <app-icono-cms [valor]="c.tipo === 'correo' ? 'govco:envelope' : c.tipo === 'whatsapp' ? 'govco:whatsapp' : c.tipo === 'tel' ? (c.etiqueta.toLowerCase().includes('urgencia') || c.etiqueta.toLowerCase().includes('ambulancia') ? 'govco:ambulance' : 'govco:phone-alt') : 'govco:info-circle'" />
                 </span>
                 <span class="c-texto">
                   <span class="c-etiqueta">{{ c.etiqueta }}</span>

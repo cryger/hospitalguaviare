@@ -16,6 +16,7 @@ import { IconoCms } from '../../shared/components/icono-cms/icono-cms';
 import { Organigrama } from './organigrama';
 import { SedesHorarios } from './sedes-horarios';
 import { PlataformaEstrategica } from './plataforma-estrategica';
+import { DirectorioInstitucional } from './directorio-institucional';
 import { VisorDocumentos, sePuedeVer } from '../../shared/components/visor-documentos/visor-documentos.service';
 import { normalizar, resaltar as resaltarTexto, terminosDe } from '../../shared/utils/busqueda';
 import { slugCategoria } from '../../shared/utils/categorias';
@@ -58,7 +59,7 @@ type Orden = 'predeterminado' | 'recientes' | 'antiguas' | 'az';
 
 @Component({
   selector: 'app-cms-pagina-publica',
-  imports: [RouterLink, DatePipe, NgTemplateOutlet, CmsMediaPublica, BuscadorGovco, CalendarioEventos, ResenaHistorica, ServiciosTarjetas, IconoCms, Organigrama, SedesHorarios, PlataformaEstrategica],
+  imports: [RouterLink, DatePipe, NgTemplateOutlet, CmsMediaPublica, BuscadorGovco, CalendarioEventos, ResenaHistorica, ServiciosTarjetas, IconoCms, Organigrama, SedesHorarios, PlataformaEstrategica, DirectorioInstitucional],
   templateUrl: './cms-pagina-publica.html',
   styleUrls: ['./cms-pagina-publica.css', './cms-listados.css'],
 })
@@ -529,6 +530,7 @@ export class CmsPaginaPublica {
       case 'organigrama': return 'Organigrama';
       case 'sedes': return 'Sedes y horarios';
       case 'plataforma': return 'Plataforma estratégica';
+      case 'directorio': return 'Directorio';
       case 'enlace': return 'Ir al servicio';
       default: return 'Información';
     }

@@ -74,6 +74,11 @@ export class CmsEntradaEditor {
     return this.cms.paginaPorId().get(Number(this.form.paginaId))?.plantilla === 'sedes';
   }
 
+  /** Directorio institucional: la categoría es el área (o «Líneas principales») */
+  esDirectorio(): boolean {
+    return this.cms.paginaPorId().get(Number(this.form.paginaId))?.plantilla === 'directorio';
+  }
+
   /** Plataforma estratégica: la categoría es la sección (Misión, Visión, Valores…) */
   readonly seccionesPlataforma = SECCIONES_PLATAFORMA;
   esPlataforma(): boolean {

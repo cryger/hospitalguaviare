@@ -49,6 +49,7 @@ export class CmsLocalDataSource extends CmsDataSource {
       .then(() => this.sembrarDesdeArchivo('organigrama-semilla', 'assets/semillas/organigrama.json'))
       .then(() => this.sembrarDesdeArchivo('normatividad-semilla', 'assets/semillas/normatividad.json'))
       .then(() => this.sembrarDesdeArchivo('sedes-semilla', 'assets/semillas/sedes-y-horarios.json'))
+      .then(() => this.sembrarDesdeArchivo('directorio-semilla', 'assets/semillas/directorio-institucional.json'))
       .then(() => this.clasificarPublicaciones())
       .then(() => this.clasificarDocumentosTalentoHumano())
       .then(() => this.organizarComiteConvivencia());
@@ -309,7 +310,7 @@ export class CmsLocalDataSource extends CmsDataSource {
   }
 
   /* ===== Estructura inicial (Resolución 1519 de 2020) ===== */
-  private readonly versionSemilla = 21;
+  private readonly versionSemilla = 22;
 
   private sembrarSiVacio(): void {
     if (localStorage.getItem(this.prefijo + 'menus')) return;
@@ -529,6 +530,12 @@ export class CmsLocalDataSource extends CmsDataSource {
         if (p.slug === 'mision-vision-funciones-y-deberes' && p.plantilla === 'contenido') Object.assign(p, { plantilla: 'plataforma', actualizadoEn: t });
       }
     }
+    // Versión 22: Directorio institucional con buscador (plantilla "directorio")
+    if (version < 22) {
+      for (const p of paginas) {
+        if (p.slug === 'directorio-institucional' && p.plantilla === 'contenido') Object.assign(p, { plantilla: 'directorio', actualizadoEn: t });
+      }
+    }
     // Versión 19: el Canal anticorrupción – SICOF lleva al formulario /sicof
     if (version < 19) {
       for (const p of paginas) {
@@ -550,6 +557,7 @@ export class CmsLocalDataSource extends CmsDataSource {
    * - organigrama.json          → api/migraciones/026-organigrama.sql (dependencias del organigrama)
    * - normatividad.json         → api/migraciones/028-normatividad.sql (resoluciones, acuerdos, políticas…)
    * - sedes-y-horarios.json     → api/migraciones/031-sedes-y-horarios.sql (sede principal y horarios)
+   * - directorio-institucional.json → api/migraciones/033-directorio-institucional.sql (1.4 directorio y 1.8 servicio al público)
    */
   private async sembrarDesdeArchivo(nombre: string, ruta: string): Promise<void> {
     const clave = this.prefijo + nombre;
@@ -691,7 +699,7 @@ const ESTRUCTURA_1519: PaginaSemilla[] = [
   { id: 3, menuId: 1, parentId: 2, titulo: "1.1 Misión, visión, funciones y deberes", slug: 'mision-vision-funciones-y-deberes', plantilla: 'plataforma', descripcion: "Plataforma estratégica de la E.S.E. Hospital San José del Guaviare: misión, visión y valores corporativos.", orden: 0 },
   { id: 4, menuId: 1, parentId: 2, titulo: "1.2 Estructura orgánica - Organigrama", slug: 'estructura-organica-organigrama', plantilla: 'organigrama', descripcion: "Organigrama y estructura administrativa de la E.S.E. Hospital San José del Guaviare.", orden: 1 },
   { id: 5, menuId: 1, parentId: 2, titulo: "1.3 Mapas y cartas descriptivas de los procesos", slug: 'mapas-y-cartas-descriptivas-de-los-procesos', plantilla: 'documentos', descripcion: "Mapa de procesos y caracterizaciones de los procesos institucionales.", orden: 2 },
-  { id: 6, menuId: 1, parentId: 2, titulo: "1.4 Directorio institucional", slug: 'directorio-institucional', plantilla: 'contenido', descripcion: "Dependencias, responsables, teléfonos y correos para comunicarse con el hospital.", orden: 3 },
+  { id: 6, menuId: 1, parentId: 2, titulo: "1.4 Directorio institucional", slug: 'directorio-institucional', plantilla: 'directorio', descripcion: "Dependencias, responsables, teléfonos y correos para comunicarse con el hospital.", orden: 3 },
   { id: 7, menuId: 1, parentId: 2, titulo: "1.5 Directorio de servidores públicos, empleados o contratistas", slug: 'directorio-de-servidores-publicos-empleados-o-contratistas', plantilla: 'documentos', descripcion: "Servidores públicos y contratistas de la entidad, con su cargo e información de contacto.", orden: 4 },
   { id: 8, menuId: 1, parentId: 2, titulo: "1.6 Directorio de entidades", slug: 'directorio-de-entidades', plantilla: 'contenido', descripcion: "Entidades del sector salud y del Estado con las que se relaciona la E.S.E.", orden: 5 },
   { id: 9, menuId: 1, parentId: 2, titulo: "1.7 Directorio de agremiaciones, asociaciones y otros grupos de interés", slug: 'directorio-de-agremiaciones-asociaciones-y-otros-grupos-de-interes', plantilla: 'contenido', descripcion: "Asociaciones de usuarios, agremiaciones y grupos de interés relacionados con el hospital.", orden: 6 },

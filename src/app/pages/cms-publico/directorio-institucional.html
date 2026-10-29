@@ -1,0 +1,136 @@
+<div class="directorio">
+  @for (e of textos(); track e.id) {
+    <div class="contenido-html intro" [innerHTML]="e.contenido"></div>
+  }
+
+  <!-- ===== Líneas principales ===== -->
+  @if (principales().length || sedes()) {
+    <section aria-labelledby="dir-principales">
+      <h2 id="dir-principales" class="h-dir">Líneas principales de contacto</h2>
+      <ul class="principales">
+        @for (d of principales(); track d.entrada.id) {
+          <li class="linea" [class.judicial]="esJudicial(d)">
+            <span class="l-icono" aria-hidden="true"><app-icono-cms [valor]="d.icono" /></span>
+            <div class="l-cuerpo">
+              <h3>{{ d.entrada.titulo }}</h3>
+              @for (c of d.contactos; track $index) {
+                <p class="l-dato">
+                  @if (d.contactos.length > 1 || c.tipo === 'whatsapp') { <span class="l-etiqueta">{{ c.etiqueta }}</span> }
+                  @if (c.href) {
+                    <a [href]="c.href" [class.correo]="c.tipo === 'correo'" [attr.target]="c.tipo === 'whatsapp' ? '_blank' : null" [attr.rel]="c.tipo === 'whatsapp' ? 'noopener' : null">
+                      {{ c.valor }}@if (c.tipo === 'whatsapp') { <span class="visually-hidden"> (WhatsApp, abre en una pestaña nueva)</span> }
+                    </a>
+                  } @else { {{ c.valor }} }
+                </p>
+              }
+              @for (n of d.notas; track $index) { <p class="l-nota">{{ n }}</p> }
+            </div>
+          </li>
+        }
+        @if (sedes(); as s) {
+          <li class="linea sede">
+            <span class="l-icono" aria-hidden="true"><app-icono-cms valor="govco:map-marked-alt" /></span>
+            <div class="l-cuerpo">
+              <h3>Dirección y horarios</h3>
+              <p class="l-nota">Sede principal, mapa de ubicación y horarios de atención al público.</p>
+              <a class="l-ir" [routerLink]="cms.rutaPagina(s.id)">Ver sedes y horarios <span aria-hidden="true">→</span></a>
+            </div>
+          </li>
+        }
+      </ul>
+    </section>
+  }
+
+  <!-- ===== Directorio de dependencias ===== -->
+  @if (total()) {
+    <section class="dependencias" aria-labelledby="dir-dependencias">
+      <div class="d-cabecera">
+        <div>
+          <h2 id="dir-dependencias" class="h-dir">Dependencias</h2>
+          <p class="d-sub">{{ total() }} dependencias con su correo institucional y teléfonos.</p>
+        </div>
+        <div class="buscador">
+          <label for="dir-buscar" class="visually-hidden">Buscar dependencia, correo o teléfono</label>
+          <span class="b-icono" aria-hidden="true"><app-icono-cms valor="govco:search" /></span>
+          <input id="dir-buscar" type="search" autocomplete="off" placeholder="Buscar dependencia, correo o teléfono"
+                 [value]="busqueda()" (input)="busqueda.set($any($event.target).value)" />
+        </div>
+      </div>
+
+      <div class="d-cuerpo">
+        <nav class="areas" aria-label="Filtrar por área">
+          <p class="areas-titulo" aria-hidden="true">Área</p>
+          <ul>
+            <li>
+              <button type="button" [class.activa]="!area()" [attr.aria-pressed]="!area()" (click)="area.set('')">
+                <span class="a-icono" aria-hidden="true"><app-icono-cms valor="govco:address-book" /></span>
+                <span class="a-nombre">Todas</span><span class="a-conteo">{{ total() }}</span>
+              </button>
+            </li>
+            @for (a of areas(); track a.nombre) {
+              <li>
+                <button type="button" [class.activa]="area() === a.nombre" [attr.aria-pressed]="area() === a.nombre" (click)="elegirArea(a.nombre)">
+                  <span class="a-icono" aria-hidden="true"><app-icono-cms [valor]="a.icono" /></span>
+                  <span class="a-nombre">{{ a.nombre }}</span><span class="a-conteo">{{ a.total }}</span>
+                </button>
+              </li>
+            }
+          </ul>
+        </nav>
+
+        <div class="resultados">
+          <p class="estado" role="status" aria-live="polite">
+            @if (busqueda().trim() || area()) {
+              {{ filtradas().length }} {{ filtradas().length === 1 ? 'resultado' : 'resultados' }}
+              @if (area()) { en <b>{{ area() }}</b> }
+              <button type="button" class="limpiar" (click)="limpiar()">Quitar filtros</button>
+            }
+          </p>
+
+          @for (g of grupos(); track g.nombre) {
+            @if (g.items.length) {
+              @if (g.nombre) { <h3 class="g-titulo">{{ g.nombre }} <span>{{ g.items.length }}</span></h3> }
+              <ul class="lista">
+                @for (d of g.items; track d.entrada.id) {
+                  <li class="dep">
+                    <span class="dep-icono" aria-hidden="true"><app-icono-cms [valor]="d.icono" /></span>
+                    <div class="dep-info">
+                      <p class="dep-nombre">{{ d.entrada.titulo }}</p>
+                      @if (!g.nombre) { <p class="dep-area">{{ d.area }}</p> }
+                      @for (n of d.notas; track $index) { <p class="dep-nota">{{ n }}</p> }
+                    </div>
+                    <ul class="dep-contactos">
+                      @for (c of d.contactos; track $index) {
+                        <li [class]="'c-' + c.tipo">
+                          <span class="c-icono" aria-hidden="true"><app-icono-cms [valor]="iconoContacto(c)" /></span>
+                          @if (c.href) {
+                            <a [href]="c.href" [attr.title]="c.etiqueta" [attr.target]="c.tipo === 'whatsapp' ? '_blank' : null" [attr.rel]="c.tipo === 'whatsapp' ? 'noopener' : null">
+                              <span class="visually-hidden">{{ c.etiqueta }}: </span>{{ c.valor }}
+                            </a>
+                          } @else { <span>{{ c.etiqueta }}: {{ c.valor }}</span> }
+                          @if (c.tipo === 'correo') {
+                            <button type="button" class="copiar" (click)="copiar(c.valor)" [attr.aria-label]="'Copiar correo ' + c.valor">
+                              <app-icono-cms [valor]="copiado() === c.valor ? 'govco:check' : 'govco:copy'" />
+                            </button>
+                          }
+                        </li>
+                      }
+                    </ul>
+                  </li>
+                }
+              </ul>
+            }
+          }
+
+          @if (!filtradas().length) {
+            <div class="sin-resultados">
+              <p>No encontramos dependencias con «{{ busqueda() }}».</p>
+              <button type="button" class="limpiar" (click)="limpiar()">Ver todas</button>
+            </div>
+          }
+        </div>
+      </div>
+      <p class="visually-hidden" role="status" aria-live="polite">{{ copiado() ? 'Correo copiado: ' + copiado() : '' }}</p>
+    </section>
+  }
+</div>

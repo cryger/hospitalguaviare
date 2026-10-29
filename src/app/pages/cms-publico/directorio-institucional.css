@@ -1,0 +1,118 @@
+/* Directorio institucional (Res. 1519 · 1.4) — BDC GOV.CO v5 */
+:host { --cobalt: #0943B5; --marino: #004884; --havelock: #4672C8; --solitude: #E5ECF8; --verde: #069169; display: block; color: #1f2937; }
+.directorio { display: grid; grid-template-columns: minmax(0, 1fr); gap: 2.25rem; }
+.directorio > * { min-width: 0; }
+.h-dir { margin: 0 0 1rem; font-size: 1.35rem; color: var(--marino); }
+.intro { max-width: 70ch; }
+
+/* ===== Líneas principales ===== */
+.principales { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+.linea {
+  display: flex; gap: .85rem; padding: 1.1rem 1.15rem; border-radius: 16px; background: #fff;
+  border: 1px solid #e3e9f3; border-top: 4px solid var(--cobalt); box-shadow: 0 4px 14px rgba(16, 24, 40, .05);
+}
+.linea:nth-child(2) { border-top-color: #A80521; }
+.linea:nth-child(3) { border-top-color: var(--verde); }
+.l-icono {
+  flex: none; display: grid; place-items: center; width: 2.8rem; height: 2.8rem; border-radius: 12px;
+  font-size: 1.25rem; color: var(--cobalt); background: var(--solitude);
+}
+.linea:nth-child(2) .l-icono { color: #A80521; background: #FCE8EA; }
+.linea:nth-child(3) .l-icono { color: #05694c; background: #E2F4EF; }
+.l-cuerpo { min-width: 0; display: flex; flex-direction: column; gap: .25rem; }
+.linea h3 { margin: 0 0 .15rem; font-size: 1rem; line-height: 1.3; color: var(--marino); }
+.l-dato { margin: 0; display: flex; flex-direction: column; }
+.l-etiqueta { font-size: .76rem; color: #6b7280; }
+.l-dato a { font-size: 1.12rem; font-weight: 800; color: var(--cobalt); text-decoration: none; overflow-wrap: anywhere; }
+.l-dato a:hover { text-decoration: underline; }
+.l-dato a.correo { font-size: .95rem; font-weight: 700; }
+.l-nota { margin: .2rem 0 0; font-size: .85rem; line-height: 1.5; color: #4b5563; }
+.l-ir { margin-top: auto; padding-top: .35rem; font-weight: 700; color: var(--cobalt); }
+
+/* Notificaciones judiciales: tarjeta ancha con aviso */
+.linea.judicial { order: 1; grid-column: 1 / -1; border-top-color: #F3561F; background: linear-gradient(90deg, #FFF6F1, #fff 40%); }
+.linea.judicial .l-icono { color: #b33d0f; background: #FFE5D9; }
+.linea.judicial .l-dato a { font-size: 1.05rem; }
+.linea.sede { border-top-color: var(--havelock); background: linear-gradient(135deg, #F2F6FD, #fff); }
+
+/* ===== Dependencias ===== */
+.d-cabecera { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 1rem; margin-bottom: 1rem; }
+.d-cabecera .h-dir { margin: 0; }
+.d-sub { margin: .2rem 0 0; color: #4b5563; font-size: .92rem; }
+.buscador { position: relative; flex: 1 1 20rem; max-width: 28rem; }
+.buscador input {
+  width: 100%; box-sizing: border-box; padding: .7rem 1rem .7rem 2.6rem; border-radius: 999px; font: inherit;
+  border: 1px solid #b9c7e0; background: #fff; color: #1f2937;
+}
+.buscador input:focus { outline: .19rem solid #000; outline-offset: .1rem; border-color: var(--cobalt); }
+.b-icono { position: absolute; left: .95rem; top: 50%; transform: translateY(-50%); color: var(--cobalt); pointer-events: none; }
+
+.d-cuerpo { display: grid; grid-template-columns: 15.5rem minmax(0, 1fr); gap: 1.5rem; align-items: start; }
+.areas { position: sticky; top: 1rem; padding: .75rem; border-radius: 14px; background: #F7F9FD; border: 1px solid #e3e9f3; }
+.areas-titulo { margin: .1rem .4rem .5rem; font-size: .74rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #6b7280; }
+.areas ul { list-style: none; margin: 0; padding: 0; display: grid; gap: .15rem; }
+.areas button {
+  width: 100%; display: flex; align-items: center; gap: .55rem; padding: .45rem .55rem; border: 0; border-radius: 9px;
+  font: inherit; font-size: .9rem; text-align: left; color: #1f2937; background: transparent; cursor: pointer;
+}
+.areas button:hover { background: #fff; }
+.areas button:focus-visible { outline: .19rem solid #000; outline-offset: .05rem; }
+.areas button.activa { color: #fff; background: var(--cobalt); }
+.a-icono { flex: none; display: grid; place-items: center; width: 1.7rem; height: 1.7rem; border-radius: 7px; color: var(--cobalt); background: #fff; font-size: .85rem; }
+.activa .a-icono { color: var(--cobalt); }
+.a-nombre { flex: 1; min-width: 0; }
+.a-conteo { font-size: .76rem; font-weight: 700; padding: .05rem .45rem; border-radius: 999px; color: var(--marino); background: var(--solitude); }
+.activa .a-conteo { color: var(--marino); background: #fff; }
+
+.estado { margin: 0 0 .5rem; min-height: 1.4rem; font-size: .9rem; color: #4b5563; display: flex; align-items: center; flex-wrap: wrap; gap: .35rem; }
+.limpiar { border: 0; background: none; padding: 0 .25rem; font: inherit; font-weight: 700; color: var(--cobalt); text-decoration: underline; cursor: pointer; }
+.limpiar:focus-visible { outline: .19rem solid #000; }
+
+.g-titulo { display: flex; align-items: center; gap: .5rem; margin: 1.25rem 0 .55rem; font-size: 1.02rem; color: var(--marino); }
+.g-titulo:first-of-type { margin-top: 0; }
+.g-titulo span { font-size: .74rem; font-weight: 700; padding: .05rem .5rem; border-radius: 999px; background: var(--solitude); }
+
+.lista { list-style: none; margin: 0; padding: 0; display: grid; gap: .5rem; }
+.dep {
+  display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: .85rem;
+  padding: .75rem 1rem; border-radius: 12px; background: #fff; border: 1px solid #e8eef8; transition: border-color .15s, box-shadow .15s;
+}
+.dep:hover { border-color: #B5C7E9; box-shadow: 0 6px 16px rgba(16, 24, 40, .06); }
+.dep-icono { display: grid; place-items: center; width: 2.4rem; height: 2.4rem; border-radius: 10px; color: var(--cobalt); background: var(--solitude); font-size: 1.05rem; }
+.dep-nombre { margin: 0; font-weight: 700; color: var(--marino); line-height: 1.3; }
+.dep-area { margin: .1rem 0 0; font-size: .8rem; color: #6b7280; }
+.dep-nota { margin: .15rem 0 0; font-size: .82rem; color: #4b5563; }
+.dep-contactos { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; align-items: flex-end; gap: .25rem; }
+.dep-contactos li { display: flex; align-items: center; gap: .4rem; font-size: .9rem; }
+.c-icono { color: #6b7280; font-size: .85rem; }
+.c-correo .c-icono { color: var(--cobalt); }
+.c-whatsapp .c-icono { color: var(--verde); }
+.dep-contactos a { color: var(--cobalt); font-weight: 600; text-decoration: none; overflow-wrap: anywhere; }
+.dep-contactos a:hover { text-decoration: underline; }
+.dep-contactos a:focus-visible, .l-dato a:focus-visible, .l-ir:focus-visible { outline: .19rem solid #000; outline-offset: .1rem; }
+.c-tel a, .c-whatsapp a { color: #1f2937; font-variant-numeric: tabular-nums; }
+.copiar {
+  display: grid; place-items: center; width: 1.9rem; height: 1.9rem; border-radius: 7px; cursor: pointer;
+  border: 1px solid #d6e2f5; background: #fff; color: var(--cobalt); font-size: .8rem;
+}
+.copiar:hover { background: var(--solitude); }
+.copiar:focus-visible { outline: .19rem solid #000; outline-offset: .1rem; }
+
+.sin-resultados { padding: 2rem 1rem; text-align: center; border-radius: 12px; background: #F7F9FD; color: #4b5563; }
+.sin-resultados p { margin: 0 0 .5rem; }
+.visually-hidden { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; }
+
+@media (max-width: 1050px) { .principales { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 600px) { .principales { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 900px) {
+  .d-cuerpo { grid-template-columns: 1fr; }
+  .areas { position: static; padding: .5rem; }
+  .areas-titulo { display: none; }
+  .areas ul { display: flex; gap: .4rem; overflow-x: auto; padding-bottom: .25rem; }
+  .areas li { flex: none; }
+  .areas button { width: auto; white-space: nowrap; background: #fff; border: 1px solid #e3e9f3; }
+}
+@media (max-width: 640px) {
+  .dep { grid-template-columns: auto minmax(0, 1fr); }
+  .dep-contactos { grid-column: 1 / -1; align-items: flex-start; padding-left: 3.25rem; }
+}

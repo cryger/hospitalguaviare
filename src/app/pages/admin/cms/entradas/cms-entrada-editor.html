@@ -147,7 +147,19 @@
           <small id="en-seccion-ayuda">{{ ayudaSeccion() }}</small>
         </div>
       }
-      @if (esServicios() || esOrganigrama() || esSedes() || esPlataforma()) {
+      @if (esDirectorio()) {
+        <div class="campo bloque">
+          <label for="en-area-dir">Área o grupo</label>
+          <input id="en-area-dir" class="input" name="categoria" list="en-areas-dir" maxlength="80" autocomplete="off"
+                 [(ngModel)]="form.categoria" placeholder="Ej. Asistencial, Financiera, Líneas principales" aria-describedby="en-area-dir-ayuda" />
+          <datalist id="en-areas-dir">
+            <option value="Líneas principales"></option>
+            @for (c of categoriasDePagina(); track c) { <option [value]="c"></option> }
+          </datalist>
+          <small id="en-area-dir-ayuda">«Líneas principales» se destaca arriba de la página. En el contenido escriba una línea por dato: «Correo: …», «Teléfono: …», «Celular: …» o «WhatsApp: …».</small>
+        </div>
+      }
+      @if (esServicios() || esOrganigrama() || esSedes() || esPlataforma() || esDirectorio()) {
         <div class="campo bloque">
           <label for="en-icono">Ícono</label>
           <app-selector-icono idCampo="en-icono" [(valor)]="form.icono" />

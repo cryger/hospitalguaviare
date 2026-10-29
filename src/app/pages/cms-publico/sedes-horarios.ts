@@ -5,13 +5,7 @@ import { CmsEntrada, CmsMultimedia } from '../../shared/models/cms/cms.models';
 import { normalizar } from '../../shared/utils/busqueda';
 import { EstadoHorario, TramoHorario, ahoraColombia, estadoHorario, horaLegible, leerHorario } from '../../shared/utils/horarios';
 import { IconoCms } from '../../shared/components/icono-cms/icono-cms';
-
-interface Contacto {
-  etiqueta: string;
-  valor: string;
-  href: string | null;
-  tipo: 'tel' | 'correo' | 'texto';
-}
+import { Contacto, leerContactos } from '../../shared/utils/contactos';
 
 interface Sede {
   entrada: CmsEntrada;
@@ -99,33 +93,7 @@ export class SedesHorarios implements OnDestroy {
 
   /** Contenido de la sede: «Etiqueta: valor» por línea; teléfonos y correos se vuelven enlaces */
   private leerSede(e: CmsEntrada): Sede {
-    const div = document.createElement('div');
-    div.innerHTML = e.contenido ?? '';
-    const lineas = Array.from(div.querySelectorAll('li, p'))
-      .map((n) => n.textContent?.replace(/\s+/g, ' ').trim() ?? '')
-      .filter(Boolean);
-    let coordenadas: string | null = null;
-    const contactos: Contacto[] = [];
-    const notas: string[] = [];
-    for (const l of lineas) {
-      const m = l.match(/^([^:]{2,60}):\s*(.+)$/);
-      if (!m) { notas.push(l); continue; }
-      const [, etiqueta, valor] = m;
-      if (/^coordenadas$/i.test(etiqueta.trim())) {
-        const c = valor.match(/(-?\d+(?:\.\d+)?)\s*,\s*(-?\d+(?:\.\d+)?)/);
-        if (c) coordenadas = `${c[1]},${c[2]}`;
-        continue;
-      }
-      if (/@/.test(valor)) {
-        contactos.push({ etiqueta, valor, href: 'mailto:' + valor.trim(), tipo: 'correo' });
-      } else if (/^[+()\d\s-]{7,}$/.test(valor.trim())) {
-        const digitos = valor.replace(/\D/g, '');
-        const tel = digitos.length === 10 ? '+57' + digitos : digitos.startsWith('57') ? '+' + digitos : digitos;
-        contactos.push({ etiqueta, valor, href: 'tel:' + tel, tipo: 'tel' });
-      } else {
-        contactos.push({ etiqueta, valor, href: null, tipo: 'texto' });
-      }
-    }
+    const { contactos, notas, coordenadas } = leerContactos(e.contenido);
     const direccion = e.resumen ?? '';
     const destino = coordenadas ?? `${direccion}, San José del Guaviare, Guaviare, Colombia`;
     const m = e.imagenDestacadaId ? this.cms.multimediaPorId().get(e.imagenDestacadaId) : undefined;
