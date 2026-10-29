@@ -6,7 +6,7 @@
 
 export type UbicacionMenu = 'principal' | 'superior' | 'pie' | 'lateral';
 export type EstadoPagina = 'publicada' | 'borrador' | 'oculta';
-export type PlantillaPagina = 'contenido' | 'listado' | 'documentos' | 'galeria' | 'enlace' | 'calendario' | 'historia' | 'servicios' | 'organigrama';
+export type PlantillaPagina = 'contenido' | 'listado' | 'documentos' | 'galeria' | 'enlace' | 'calendario' | 'historia' | 'servicios' | 'organigrama' | 'sedes';
 export type TipoEntrada = 'articulo' | 'noticia' | 'documento' | 'evento' | 'servicio' | 'enlace';
 export type EstadoEntrada = 'publicada' | 'borrador' | 'archivada';
 export type TipoMultimedia = 'imagen' | 'video' | 'documento' | 'audio' | 'otro';
@@ -110,6 +110,11 @@ export const PLANTILLAS_PAGINA: { valor: PlantillaPagina; etiqueta: string; ayud
     valor: 'organigrama',
     etiqueta: 'Organigrama',
     ayuda: 'Árbol visual de la estructura orgánica. Cada dependencia es una entrada con su nivel (Dirección, Gerencia, Asesoría, Control, Subgerencias) e ícono; las entradas con archivos se ofrecen para descargar.',
+  },
+  {
+    valor: 'sedes',
+    etiqueta: 'Sedes y horarios',
+    ayuda: 'Entradas del grupo «Sede» (resumen = dirección; contenido = lista «Etiqueta: valor» con teléfonos y correos y, opcional, «Coordenadas: lat, lng») se muestran con mapa. Las del grupo «Horario» (resumen = «Lunes a viernes 7:00-12:00, 14:00-18:00; Sábados 8:00-13:00» o «Todos los días 24 horas») muestran si está abierto ahora.',
   },
   { valor: 'calendario', etiqueta: 'Calendario de eventos', ayuda: 'Muestra el calendario institucional (los eventos se administran en Contenido › Calendario de eventos).' },
 ];

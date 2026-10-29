@@ -122,7 +122,22 @@
           <small id="en-nivel-ayuda">{{ ayudaNivel() }}</small>
         </div>
       }
-      @if (esServicios() || esOrganigrama()) {
+      @if (esSedes()) {
+        <div class="campo bloque">
+          <label for="en-grupo-sede">Tipo de información</label>
+          <select id="en-grupo-sede" class="select" name="categoria" [(ngModel)]="form.categoria" aria-describedby="en-grupo-sede-ayuda">
+            <option [ngValue]="null">— Texto adicional —</option>
+            <option ngValue="Sede">Sede (dirección, contactos y mapa)</option>
+            <option ngValue="Horario">Horario de atención</option>
+          </select>
+          <small id="en-grupo-sede-ayuda">
+            @if (form.categoria === 'Sede') { Resumen = dirección. Contenido = lista «Etiqueta: valor» (teléfonos y correos se vuelven enlaces) y, opcional, «Coordenadas: lat, lng». }
+            @else if (form.categoria === 'Horario') { Resumen = horario, ej. «Lunes a viernes 7:00-12:00, 14:00-18:00; Sábados 8:00-13:00» o «Todos los días 24 horas». }
+            @else { Se muestra como texto al final de la página. }
+          </small>
+        </div>
+      }
+      @if (esServicios() || esOrganigrama() || esSedes()) {
         <div class="campo bloque">
           <label for="en-icono">Ícono</label>
           <app-selector-icono idCampo="en-icono" [(valor)]="form.icono" />

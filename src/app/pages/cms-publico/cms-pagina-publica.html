@@ -305,6 +305,11 @@
       <app-servicios-tarjetas [servicios]="serviciosVisibles()" [nivel]="2" />
     }
 
+    @case ('sedes') {
+      <!-- Sedes (mapa y contactos) y horarios con estado en vivo: grupos «Sede» y «Horario» en Entradas -->
+      <app-sedes-horarios [entradas]="entradas()" />
+    }
+
     @case ('organigrama') {
       <!-- Estructura orgánica: árbol interactivo (cada dependencia es una entrada con su nivel) -->
       <app-organigrama [entradas]="entradas()" />

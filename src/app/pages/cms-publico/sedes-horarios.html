@@ -1,0 +1,118 @@
+<div class="sedes-pagina">
+  <!-- ===== Sedes ===== -->
+  @for (s of sedes(); track s.entrada.id) {
+    <section class="sede" [attr.aria-labelledby]="'sede-' + s.entrada.id">
+      <div class="sede-info">
+        <span class="sede-etiqueta">Sede</span>
+        <h2 [id]="'sede-' + s.entrada.id">{{ s.entrada.titulo }}</h2>
+
+        @if (s.direccion) {
+          <p class="direccion">
+            <span class="ico" aria-hidden="true"><app-icono-cms valor="govco:map-marker-alt" /></span>
+            <span>{{ s.direccion }}</span>
+          </p>
+        }
+
+        @if (s.contactos.length) {
+          <ul class="contactos">
+            @for (c of s.contactos; track c.etiqueta) {
+              <li>
+                <span class="ico" aria-hidden="true">
+                  <app-icono-cms [valor]="c.tipo === 'correo' ? 'govco:envelope' : c.tipo === 'tel' ? (c.etiqueta.toLowerCase().includes('urgencia') || c.etiqueta.toLowerCase().includes('ambulancia') ? 'govco:ambulance' : 'govco:phone-alt') : 'govco:info-circle'" />
+                </span>
+                <span class="c-texto">
+                  <span class="c-etiqueta">{{ c.etiqueta }}</span>
+                  @if (c.href) { <a [href]="c.href">{{ c.valor }}</a> } @else { <span>{{ c.valor }}</span> }
+                </span>
+              </li>
+            }
+          </ul>
+        }
+        @if (s.notas) { <p class="notas">{{ s.notas }}</p> }
+
+        <a class="btn-llegar" [href]="s.comoLlegar" target="_blank" rel="noopener">
+          <app-icono-cms valor="govco:directions" /> Cómo llegar <span class="visually-hidden">(abre Google Maps en una pestaña nueva)</span>
+        </a>
+      </div>
+
+      <div class="sede-mapa">
+        @if (s.foto; as f) {
+          <img class="sede-foto" [src]="f.url" [alt]="f.alt || ''" loading="lazy" />
+        }
+        <iframe [src]="s.mapa" [title]="'Mapa de ubicación: ' + s.entrada.titulo" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </section>
+  }
+
+  <!-- ===== Horarios ===== -->
+  @if (horarios().length) {
+    <section class="horarios" aria-labelledby="titulo-horarios">
+      <header class="h-cabecera">
+        <h2 id="titulo-horarios">Horarios de atención</h2>
+        <p>El estado se calcula con la hora de Colombia y se actualiza solo.</p>
+      </header>
+      <div class="h-cuerpo" [class.ambos]="conHorario().length && continuos().length">
+      @if (conHorario().length) {
+        <ul class="h-grilla">
+          @for (h of conHorario(); track h.entrada.id) {
+            <li class="h-tarjeta" [class.abierto]="h.estado?.abierto" [class.festivo]="h.estado?.festivo">
+              <div class="h-top">
+                <span class="h-icono" aria-hidden="true"><app-icono-cms [valor]="h.icono" /></span>
+                <h3>{{ h.entrada.titulo }}</h3>
+              </div>
+              @if (h.estado; as e) {
+                <p class="estado"><span class="punto" aria-hidden="true"></span>{{ e.texto }}</p>
+              }
+              @if (h.tramos.length) {
+                <dl class="tramos">
+                  @for (t of h.tramos; track $index) {
+                    <div class="tramo" [class.hoy]="esHoy(t)">
+                      <dt>{{ t.etiquetaDias }} @if (esHoy(t)) { <span class="chip-hoy">Hoy</span> }</dt>
+                      <dd>
+                        @for (r of t.rangos; track $index) { <span class="rango">{{ rangoTexto(r) }}</span> }
+                      </dd>
+                    </div>
+                  }
+                </dl>
+              } @else if (h.entrada.resumen) {
+                <p class="h-texto">{{ h.entrada.resumen }}</p>
+              }
+              @if (h.entrada.contenido) { <div class="h-nota contenido-html" [innerHTML]="h.entrada.contenido"></div> }
+            </li>
+          }
+        </ul>
+      }
+
+      @if (continuos().length) {
+        <div class="continuos" aria-labelledby="titulo-24h">
+          <div class="c24-cabecera">
+            <span class="c24-reloj" aria-hidden="true">24<small>h</small></span>
+            <div>
+              <h3 id="titulo-24h">Abiertos las 24 horas, todos los días</h3>
+              <p><span class="punto" aria-hidden="true"></span> Atención permanente, incluidos fines de semana y festivos.</p>
+            </div>
+          </div>
+          <ul class="c24-lista">
+            @for (h of continuos(); track h.entrada.id) {
+              <li>
+                <span class="h-icono" aria-hidden="true"><app-icono-cms [valor]="h.icono" /></span>
+                <span>
+                  <b>{{ h.entrada.titulo }}</b>
+                  @if (h.entrada.contenido) { <span class="c24-nota contenido-html" [innerHTML]="h.entrada.contenido"></span> }
+                </span>
+              </li>
+            }
+          </ul>
+        </div>
+      }
+      </div>
+    </section>
+  }
+
+  @for (e of otras(); track e.id) {
+    <section class="bloque">
+      <h2>{{ e.titulo }}</h2>
+      @if (e.contenido) { <div class="contenido-html" [innerHTML]="e.contenido"></div> }
+    </section>
+  }
+</div>

@@ -68,6 +68,11 @@ export class CmsEntradaEditor {
     return this.cms.paginaPorId().get(Number(this.form.paginaId))?.plantilla === 'documentos';
   }
 
+  /** Sedes y horarios: la categoría indica si la entrada es una sede o un horario */
+  esSedes(): boolean {
+    return this.cms.paginaPorId().get(Number(this.form.paginaId))?.plantilla === 'sedes';
+  }
+
   /** Organigrama: la categoría es el nivel de la dependencia */
   readonly nivelesOrganigrama = NIVELES_ORGANIGRAMA;
   esOrganigrama(): boolean {

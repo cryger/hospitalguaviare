@@ -47,6 +47,7 @@ export class CmsLocalDataSource extends CmsDataSource {
       .then(() => this.sembrarDesdeArchivo('portafolio-servicios-semilla', 'assets/semillas/portafolio-servicios.json'))
       .then(() => this.sembrarDesdeArchivo('organigrama-semilla', 'assets/semillas/organigrama.json'))
       .then(() => this.sembrarDesdeArchivo('normatividad-semilla', 'assets/semillas/normatividad.json'))
+      .then(() => this.sembrarDesdeArchivo('sedes-semilla', 'assets/semillas/sedes-y-horarios.json'))
       .then(() => this.clasificarPublicaciones())
       .then(() => this.clasificarDocumentosTalentoHumano())
       .then(() => this.organizarComiteConvivencia());
@@ -271,7 +272,7 @@ export class CmsLocalDataSource extends CmsDataSource {
   }
 
   /* ===== Estructura inicial (Resolución 1519 de 2020) ===== */
-  private readonly versionSemilla = 19;
+  private readonly versionSemilla = 20;
 
   private sembrarSiVacio(): void {
     if (localStorage.getItem(this.prefijo + 'menus')) return;
@@ -478,6 +479,13 @@ export class CmsLocalDataSource extends CmsDataSource {
         }
       }
     }
+    // Versión 20: Sedes y horarios con mapa y horarios en vivo (plantilla "sedes")
+    if (version < 20) {
+      const sd = ESTRUCTURA_1519.find((x) => x.slug === 'sedes-y-horarios');
+      for (const p of paginas) {
+        if (p.slug === 'sedes-y-horarios' && p.plantilla === 'contenido') Object.assign(p, { plantilla: 'sedes', descripcion: p.descripcion || sd?.descripcion, actualizadoEn: t });
+      }
+    }
     // Versión 19: el Canal anticorrupción – SICOF lleva al formulario /sicof
     if (version < 19) {
       for (const p of paginas) {
@@ -498,6 +506,7 @@ export class CmsLocalDataSource extends CmsDataSource {
    * - portafolio-servicios.json → api/migraciones/024-portafolio-de-servicios.sql (12 servicios del portafolio)
    * - organigrama.json          → api/migraciones/026-organigrama.sql (dependencias del organigrama)
    * - normatividad.json         → api/migraciones/028-normatividad.sql (resoluciones, acuerdos, políticas…)
+   * - sedes-y-horarios.json     → api/migraciones/031-sedes-y-horarios.sql (sede principal y horarios)
    */
   private async sembrarDesdeArchivo(nombre: string, ruta: string): Promise<void> {
     const clave = this.prefijo + nombre;
@@ -721,7 +730,7 @@ const ESTRUCTURA_1519: PaginaSemilla[] = [
   { id: 75, menuId: 1, parentId: 74, titulo: "Reseña histórica", slug: 'resena-historica', plantilla: 'historia', orden: 1 },
   { id: 87, menuId: 1, parentId: 74, titulo: "Estructura orgánica", slug: 'estructura-organica', plantilla: 'enlace', urlExterna: '/transparencia/informacion-de-la-entidad/estructura-organica-organigrama', orden: 2 },
   { id: 76, menuId: 1, parentId: 74, titulo: "Portafolio de servicios", slug: 'portafolio-de-servicios', plantilla: 'servicios', descripcion: "Conozca los servicios de salud que presta la E.S.E. Hospital San José del Guaviare, hospital de II nivel de complejidad y centro de referencia del departamento.", orden: 3 },
-  { id: 77, menuId: 1, parentId: 74, titulo: "Sedes y horarios de atención", slug: 'sedes-y-horarios', plantilla: 'contenido', orden: 4 },
+  { id: 77, menuId: 1, parentId: 74, titulo: "Sedes y horarios de atención", slug: 'sedes-y-horarios', plantilla: 'sedes', descripcion: "Dirección, teléfonos, ubicación en el mapa y horarios de atención de la E.S.E. Hospital San José del Guaviare.", orden: 4 },
   { id: 88, menuId: 1, parentId: 74, titulo: "Calendario de eventos", slug: 'calendario-de-eventos', plantilla: 'enlace', urlExterna: '/transparencia/informacion-de-la-entidad/calendario-de-actividades-y-eventos', orden: 5 },
   { id: 89, menuId: 1, parentId: 74, titulo: "Alianza de usuarios", slug: 'alianza-de-usuarios', plantilla: 'contenido', descripcion: "Asociación de usuarios que representa a la comunidad ante la E.S.E. Hospital San José del Guaviare.", orden: 6 },
   { id: 90, menuId: 1, parentId: 74, titulo: "Comité de convivencia laboral", slug: 'comite-de-convivencia-laboral', plantilla: 'documentos', descripcion: "Instancia que promueve un buen ambiente laboral y previene y atiende las situaciones que pueden constituir acoso laboral (Ley 1010 de 2006). Aquí se publican su conformación, comunicados y los documentos de elección de sus integrantes.", orden: 7 },
