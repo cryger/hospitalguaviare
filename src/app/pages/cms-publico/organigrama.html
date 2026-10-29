@@ -116,14 +116,15 @@
       <ul>
         @for (d of documentos(); track d.archivo.id) {
           <li>
-            <a class="descarga" [href]="d.archivo.url" target="_blank" rel="noopener">
+            <div class="descarga">
               <span class="descarga-ext" aria-hidden="true">{{ extension(d.archivo) }}</span>
-              <span>
+              <span class="descarga-texto">
                 <strong>{{ d.archivo.titulo || d.entrada.titulo }}</strong>
                 @if (d.entrada.resumen) { <small>{{ d.entrada.resumen }}</small> }
               </span>
-              <span class="descarga-ir">Descargar <span class="visually-hidden">(abre en una pestaña nueva)</span><span aria-hidden="true">↓</span></span>
-            </a>
+              <button type="button" class="descarga-btn principal" (click)="ver(d.archivo)">Ver documento</button>
+              <a class="descarga-btn" [href]="d.archivo.url" target="_blank" rel="noopener" [attr.download]="d.archivo.nombre || ''">Descargar <span class="visually-hidden">{{ d.archivo.titulo || d.entrada.titulo }}</span></a>
+            </div>
           </li>
         }
       </ul>

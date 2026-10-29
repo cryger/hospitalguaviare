@@ -142,15 +142,22 @@
   display: flex; align-items: center; gap: 1rem; padding: .85rem 1.1rem; border-radius: 12px;
   border: 1px solid #e3e9f3; background: #fff; text-decoration: none; color: #1f2937; transition: border-color .15s, box-shadow .15s;
 }
-.descarga:hover { border-color: var(--havelock); box-shadow: 0 6px 16px rgba(9, 67, 181, .12); }
-.descarga:focus-visible { outline: .19rem solid #000; outline-offset: .19rem; }
+.descarga { flex-wrap: wrap; }
 .descarga-ext {
   flex: none; display: grid; place-items: center; width: 3rem; height: 3rem; border-radius: 10px;
   background: #FCE8EA; color: #A80521; font-weight: 800; font-size: .78rem;
 }
 .descarga strong { display: block; color: var(--marino); }
 .descarga small { display: block; color: #6b7280; margin-top: .15rem; }
-.descarga-ir { margin-left: auto; font-weight: 700; color: #3366CC; white-space: nowrap; }
+.descarga-texto { flex: 1; min-width: 0; }
+.descarga-btn {
+  flex: none; display: inline-flex; align-items: center; padding: .5rem .95rem; border-radius: 8px; cursor: pointer;
+  font: inherit; font-size: .88rem; font-weight: 700; text-decoration: none; color: #004884; background: #fff; border: 1px solid #c9d6ec;
+}
+.descarga-btn:hover { background: var(--solitude); border-color: #3366CC; }
+.descarga-btn.principal { color: #fff; background: #3366CC; border-color: #3366CC; }
+.descarga-btn.principal:hover { background: var(--marino); }
+.descarga-btn:focus-visible { outline: .19rem solid #000; outline-offset: .15rem; }
 .visually-hidden { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; }
 
 /* ===== Pantallas pequeñas: árbol vertical ===== */

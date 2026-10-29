@@ -1,6 +1,7 @@
 import { Component, computed, inject, input } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { CmsMultimedia, ICONOS_MULTIMEDIA } from '../../shared/models/cms/cms.models';
+import { VisorDocumentos, sePuedeVer } from '../../shared/components/visor-documentos/visor-documentos.service';
 
 /** Muestra un archivo multimedia en el sitio público según su tipo */
 @Component({
@@ -34,14 +35,28 @@ import { CmsMultimedia, ICONOS_MULTIMEDIA } from '../../shared/models/cms/cms.mo
           </figure>
         }
         @default {
-          <a class="archivo" [href]="m.url" target="_blank" rel="noopener" [attr.download]="esLocal() ? m.nombre : null">
-            <span class="archivo-icono" aria-hidden="true">{{ iconos[m.tipo] }}</span>
-            <span class="archivo-info">
-              <strong>{{ m.titulo || m.nombre }}</strong>
-              <small>{{ extension() }}{{ peso() ? ' · ' + peso() : '' }}</small>
-            </span>
-            <span class="archivo-accion">Descargar</span>
-          </a>
+          <div class="archivo">
+            @if (visible()) {
+              <button type="button" class="archivo-abrir" (click)="ver()" [attr.aria-label]="'Ver ' + (m.titulo || m.nombre)">
+                <span class="archivo-icono" aria-hidden="true">{{ iconos[m.tipo] }}</span>
+                <span class="archivo-info">
+                  <strong>{{ m.titulo || m.nombre }}</strong>
+                  <small>{{ extension() }}{{ peso() ? ' · ' + peso() : '' }}</small>
+                </span>
+                <span class="archivo-accion">Ver</span>
+              </button>
+            } @else {
+              <span class="archivo-abrir">
+                <span class="archivo-icono" aria-hidden="true">{{ iconos[m.tipo] }}</span>
+                <span class="archivo-info">
+                  <strong>{{ m.titulo || m.nombre }}</strong>
+                  <small>{{ extension() }}{{ peso() ? ' · ' + peso() : '' }}</small>
+                </span>
+              </span>
+            }
+            <a class="archivo-descargar" [href]="m.url" target="_blank" rel="noopener" [attr.download]="m.nombre || ''"
+               [attr.aria-label]="'Descargar ' + (m.titulo || m.nombre)">Descargar</a>
+          </div>
         }
       }
     }
@@ -55,11 +70,22 @@ import { CmsMultimedia, ICONOS_MULTIMEDIA } from '../../shared/models/cms/cms.mo
     .video { position: relative; padding-top: 56.25%; border-radius: 8px; overflow: hidden; background: #000; }
     .video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
     .archivo {
-      display: flex; align-items: center; gap: .85rem; padding: .8rem 1rem; border: 1px solid #d0d7de;
-      border-radius: 8px; text-decoration: none; color: #004884; background: #fff; transition: background .15s, border-color .15s;
+      display: flex; align-items: stretch; border: 1px solid #d0d7de; border-radius: 8px; overflow: hidden;
+      color: #004884; background: #fff; transition: border-color .15s;
     }
-    .archivo:hover { background: #e8f0fb; border-color: #3366cc; }
-    .archivo:focus-visible { outline: 3px solid #ffab00; outline-offset: 2px; }
+    .archivo:hover { border-color: #3366cc; }
+    .archivo-abrir {
+      flex: 1; min-width: 0; display: flex; align-items: center; gap: .85rem; padding: .8rem 1rem;
+      font: inherit; text-align: left; color: inherit; background: none; border: 0;
+    }
+    button.archivo-abrir { cursor: pointer; }
+    button.archivo-abrir:hover { background: #e8f0fb; }
+    .archivo-abrir:focus-visible, .archivo-descargar:focus-visible { outline: 3px solid #ffab00; outline-offset: -3px; }
+    .archivo-descargar {
+      flex: none; display: flex; align-items: center; padding: 0 .9rem; border-left: 1px solid #d0d7de;
+      font-size: .82rem; font-weight: 600; color: #004884; text-decoration: underline;
+    }
+    .archivo-descargar:hover { background: #e8f0fb; }
     .archivo-icono { font-size: 1.6rem; }
     .archivo-info { flex: 1; min-width: 0; display: flex; flex-direction: column; }
     .archivo-info strong { font-size: .92rem; line-height: 1.3; overflow-wrap: anywhere; display: -webkit-box; -webkit-line-clamp: 3; line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
@@ -69,6 +95,15 @@ import { CmsMultimedia, ICONOS_MULTIMEDIA } from '../../shared/models/cms/cms.mo
 })
 export class CmsMediaPublica {
   private sanitizer = inject(DomSanitizer);
+  private visor = inject(VisorDocumentos);
+
+  /** ¿Se puede ver en el visor del portal? (PDF, Office, texto…) */
+  readonly visible = computed(() => !!this.media() && sePuedeVer(this.media()!));
+
+  ver(): void {
+    const m = this.media();
+    if (m) this.visor.abrir(m);
+  }
   readonly media = input<CmsMultimedia | null | undefined>(null);
   readonly iconos = ICONOS_MULTIMEDIA;
 

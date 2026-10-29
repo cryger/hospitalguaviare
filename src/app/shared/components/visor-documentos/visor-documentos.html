@@ -1,0 +1,91 @@
+@if (doc(); as d) {
+  <div class="visor-fondo" (click)="visor.cerrar()">
+    <div class="visor-caja" role="dialog" aria-modal="true" aria-labelledby="visor-titulo" (click)="$event.stopPropagation()">
+      <header class="visor-cabecera">
+        <span class="visor-ext" [class]="'ext-' + ext().toLowerCase()" aria-hidden="true">{{ ext() }}</span>
+        <div class="visor-datos">
+          <h2 id="visor-titulo">{{ titulo() }}</h2>
+          <p>
+            @if (visor.lista().length > 1) { <span>Documento {{ visor.indice() + 1 }} de {{ visor.lista().length }}</span> }
+            @if (d.tamano) { <span>{{ tamano(d.tamano) }}</span> }
+            @if (nombreVisor()) { <span>{{ nombreVisor() }}</span> }
+          </p>
+        </div>
+        <div class="visor-acciones">
+          @if (visor.lista().length > 1) {
+            <button type="button" class="visor-btn icono" (click)="visor.mover(-1)" aria-label="Documento anterior" title="Anterior (←)">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18l-6-6 6-6" /></svg>
+            </button>
+            <button type="button" class="visor-btn icono" (click)="visor.mover(1)" aria-label="Documento siguiente" title="Siguiente (→)">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6" /></svg>
+            </button>
+          }
+          <a class="visor-btn" [href]="d.url" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5" /></svg>
+            <span class="txt">Pestaña nueva</span><span class="visually-hidden"> (abre {{ titulo() }} en una pestaña nueva)</span>
+          </a>
+          <a class="visor-btn principal" [href]="d.url" [attr.download]="d.nombre || ''" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14" /></svg>
+            <span class="txt">Descargar</span>
+          </a>
+          <button #cerrarBtn type="button" class="visor-btn icono cerrar" (click)="visor.cerrar()" aria-label="Cerrar el visor" title="Cerrar (Esc)">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" /></svg>
+          </button>
+        </div>
+      </header>
+
+      <div class="visor-cuerpo" [class.oscuro]="modo() === 'imagen' || modo() === 'video'">
+        @if (sinVistaPrevia()) {
+          <div class="visor-aviso">
+            <span class="visor-aviso-ext" aria-hidden="true">{{ ext() }}</span>
+            @if (modo() === 'ninguno') {
+              <h3>Este tipo de archivo no se puede ver en el portal</h3>
+              <p>Descárguelo para abrirlo con el programa correspondiente.</p>
+            } @else {
+              <h3>Vista previa no disponible en este equipo</h3>
+              <p>La vista previa de documentos de Office funciona cuando el portal está publicado en internet. Puede descargar el archivo para leerlo.</p>
+            }
+            <a class="visor-btn principal" [href]="d.url" [attr.download]="d.nombre || ''" target="_blank" rel="noopener">Descargar {{ ext() }}</a>
+          </div>
+        } @else {
+          @if (cargando() && modo() !== 'imagen' && modo() !== 'video' && modo() !== 'audio') {
+            <div class="visor-cargando" role="status">
+              <span class="giro" aria-hidden="true"></span>
+              <span>Cargando documento…</span>
+              @if (tarda()) {
+                <small>¿Tarda demasiado? <a [href]="d.url" target="_blank" rel="noopener">Abra el archivo en una pestaña nueva</a>.</small>
+              }
+            </div>
+          }
+          @switch (modo()) {
+            @case ('imagen') {
+              <img class="visor-imagen" [src]="d.url" [alt]="titulo()" (load)="alCargar()" />
+            }
+            @case ('video') {
+              <video class="visor-video" [src]="d.url" controls autoplay (loadeddata)="alCargar()"></video>
+            }
+            @case ('audio') {
+              <div class="visor-audio"><audio [src]="d.url" controls autoplay (loadeddata)="alCargar()"></audio></div>
+            }
+            @case ('texto') {
+              @if (errorTexto()) {
+                <div class="visor-aviso">
+                  <h3>No se pudo leer el archivo aquí</h3>
+                  <p>Ábralo en una pestaña nueva o descárguelo.</p>
+                </div>
+              } @else if (texto() !== null) {
+                <pre class="visor-texto" tabindex="0">{{ texto() }}</pre>
+              }
+            }
+            @default {
+              @if (fuente(); as src) {
+                <iframe class="visor-marco" [src]="src" [title]="'Vista previa: ' + titulo()" (load)="alCargar()"
+                        allowfullscreen referrerpolicy="no-referrer"></iframe>
+              }
+            }
+          }
+        }
+      </div>
+    </div>
+  </div>
+}

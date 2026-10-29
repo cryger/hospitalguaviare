@@ -11,11 +11,11 @@ import { NgbPagination,
 	NgbPaginationNumber,
 	NgbPaginationPrevious,
 	NgbPaginationPages, } from '@ng-bootstrap/ng-bootstrap';
-  import { Home } from './componentes/home/home';
+import { VisorDocumentosComponent } from './shared/components/visor-documentos/visor-documentos';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet,NgbAlertModule,NgbPaginationModule,ReactiveFormsModule],
+  imports: [RouterOutlet,NgbAlertModule,NgbPaginationModule,ReactiveFormsModule,VisorDocumentosComponent],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })

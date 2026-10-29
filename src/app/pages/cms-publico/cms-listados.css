@@ -69,9 +69,32 @@
 .archivo-meta { display: flex; flex-wrap: wrap; align-items: center; gap: .3rem .55rem; font-size: .8rem; color: var(--texto-2); }
 .archivo-ir { flex: none; font-weight: 700; font-size: .88rem; color: #3366CC; white-space: nowrap; }
 .archivo:hover .archivo-ir { text-decoration: underline; }
+/* Fila con visor: el botón abre la vista previa; el ícono descarga */
+.archivo.con-visor { padding: 0; gap: 0; overflow: hidden; }
+.archivo.con-visor:hover { transform: none; }
+.archivo-abrir {
+  flex: 1; min-width: 0; display: flex; align-items: center; gap: 1rem; padding: .85rem 1rem .85rem 1.1rem;
+  font: inherit; text-align: left; color: inherit; background: none; border: 0; cursor: pointer;
+}
+.archivo-abrir:hover { background: #F7F9FD; }
+.archivo-abrir:hover .archivo-ver { background: #3366CC; color: #fff; }
+.archivo-abrir:focus-visible, .archivo-descargar:focus-visible { outline: .19rem solid #000; outline-offset: -.25rem; }
+.archivo-ver {
+  flex: none; display: inline-flex; align-items: center; gap: .35rem; padding: .35rem .75rem; border-radius: 999px;
+  font-weight: 700; font-size: .85rem; color: #3366CC; background: #E5ECF8; transition: background .15s, color .15s;
+}
+.archivo-ver svg, .archivo-descargar svg { width: 1.05rem; height: 1.05rem; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.archivo-descargar {
+  flex: none; align-self: stretch; display: grid; place-items: center; width: 3.2rem; color: #3366CC;
+  border-left: 1px solid #e3e9f3; text-decoration: none; transition: background .15s;
+}
+.archivo-descargar:hover { background: #E5ECF8; color: #004884; }
 :host ::ng-deep .archivo mark { background: #fff3b0; color: inherit; border-radius: 2px; }
 @media (max-width: 560px) {
   .archivo { align-items: flex-start; padding: .8rem; gap: .75rem; }
   .archivo-ext { width: 2.5rem; height: 2.9rem; }
   .archivo-ir { display: none; }
+  .archivo-abrir { padding: .8rem; gap: .75rem; align-items: flex-start; }
+  .archivo-ver { display: none; }
+  .archivo-descargar { width: 2.8rem; }
 }

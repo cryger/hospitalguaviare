@@ -4,6 +4,7 @@ import { CmsService } from '../../shared/services/cms/cms.service';
 import { CmsEntrada, CmsMultimedia } from '../../shared/models/cms/cms.models';
 import { normalizar } from '../../shared/utils/busqueda';
 import { IconoCms } from '../../shared/components/icono-cms/icono-cms';
+import { VisorDocumentos } from '../../shared/components/visor-documentos/visor-documentos.service';
 
 /**
  * Niveles del organigrama. Cada dependencia es una entrada de la página y su
@@ -36,6 +37,11 @@ export interface Dependencia {
 })
 export class Organigrama {
   private cms = inject(CmsService);
+  private visor = inject(VisorDocumentos);
+
+  ver(m: CmsMultimedia): void {
+    this.visor.abrir(m, this.documentos().map((d) => d.archivo));
+  }
 
   readonly entradas = input.required<CmsEntrada[]>();
 

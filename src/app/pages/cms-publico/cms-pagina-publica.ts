@@ -14,6 +14,7 @@ import { ResenaHistorica } from './resena-historica';
 import { ServiciosTarjetas } from '../../componentes/servicios-tarjetas/servicios-tarjetas';
 import { IconoCms } from '../../shared/components/icono-cms/icono-cms';
 import { Organigrama } from './organigrama';
+import { VisorDocumentos, sePuedeVer } from '../../shared/components/visor-documentos/visor-documentos.service';
 import { normalizar, resaltar as resaltarTexto, terminosDe } from '../../shared/utils/busqueda';
 import { slugCategoria } from '../../shared/utils/categorias';
 
@@ -64,6 +65,8 @@ export class CmsPaginaPublica {
   private route = inject(ActivatedRoute);
   private router = inject(Router);
   private title = inject(Title);
+  private visor = inject(VisorDocumentos);
+  readonly sePuedeVer = sePuedeVer;
 
   readonly vistaPrevia = esVistaPrevia();
 
@@ -405,6 +408,16 @@ export class CmsPaginaPublica {
 
   documentos(e: CmsEntrada): CmsMultimedia[] {
     return this.adjuntos(e).filter((m) => m.tipo === 'documento' || m.tipo === 'otro' || m.tipo === 'audio');
+  }
+
+  /** Abre el visor con el archivo; las flechas recorren los demás archivos del listado filtrado */
+  verDocumento(m: CmsMultimedia): void {
+    if (!sePuedeVer(m)) {
+      window.open(m.url, '_blank', 'noopener');
+      return;
+    }
+    const lista = this.filasFiltradas().map((f) => f.archivo).filter((x): x is CmsMultimedia => !!x);
+    this.visor.abrir(m, lista.length ? lista : [m]);
   }
 
   /** "informe.final.pdf" → "PDF" (para la insignia del listado de documentos) */

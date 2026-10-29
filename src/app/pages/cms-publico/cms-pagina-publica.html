@@ -221,18 +221,28 @@
               @for (f of filasFiltradas().slice(0, mostrar() * 2); track f.id) {
                 <li>
                   @if (f.archivo; as m) {
-                    <a class="archivo" [href]="m.url" target="_blank" rel="noopener">
-                      <span class="archivo-ext" [class]="'ext-' + extension(m).toLowerCase()" aria-hidden="true">{{ extension(m) }}</span>
-                      <span class="archivo-cuerpo">
-                        <span class="archivo-titulo" [innerHTML]="resaltar(f.titulo)"></span>
-                        <span class="archivo-meta">
-                          @if (categorias().length) { <span class="chip-cat">{{ f.grupo }}</span> }
-                          @if (f.entrada.titulo !== f.grupo && f.entrada.titulo !== f.titulo) { <span>{{ f.entrada.titulo }}</span> }
-                          @if (m.tamano) { <span>{{ tamanoLegible(m.tamano) }}</span> }
+                    <div class="archivo con-visor">
+                      <button type="button" class="archivo-abrir" (click)="verDocumento(m)" [attr.aria-label]="(sePuedeVer(m) ? 'Ver ' : 'Descargar ') + f.titulo">
+                        <span class="archivo-ext" [class]="'ext-' + extension(m).toLowerCase()" aria-hidden="true">{{ extension(m) }}</span>
+                        <span class="archivo-cuerpo">
+                          <span class="archivo-titulo" [innerHTML]="resaltar(f.titulo)"></span>
+                          <span class="archivo-meta">
+                            @if (categorias().length) { <span class="chip-cat">{{ f.grupo }}</span> }
+                            @if (f.entrada.titulo !== f.grupo && f.entrada.titulo !== f.titulo) { <span>{{ f.entrada.titulo }}</span> }
+                            @if (m.tamano) { <span>{{ tamanoLegible(m.tamano) }}</span> }
+                          </span>
                         </span>
-                      </span>
-                      <span class="archivo-ir">Descargar <span class="visually-hidden">{{ extension(m) }} (abre en una pestaña nueva)</span><span aria-hidden="true">↓</span></span>
-                    </a>
+                        @if (sePuedeVer(m)) {
+                          <span class="archivo-ver" aria-hidden="true">
+                            <svg viewBox="0 0 24 24"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z" /><circle cx="12" cy="12" r="3" /></svg>Ver
+                          </span>
+                        }
+                      </button>
+                      <a class="archivo-descargar" [href]="m.url" [attr.download]="m.nombre || ''" target="_blank" rel="noopener"
+                         [attr.aria-label]="'Descargar ' + f.titulo + ' (' + extension(m) + ')'" title="Descargar">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14" /></svg>
+                      </a>
+                    </div>
                   } @else {
                     <a class="archivo" [routerLink]="url(f.entrada)">
                       <span class="archivo-ext ext-info" aria-hidden="true">INFO</span>
