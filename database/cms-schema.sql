@@ -80,6 +80,7 @@ CREATE TABLE cms_entradas (
   contenido            MEDIUMTEXT NULL COMMENT 'HTML',
   tipo                 ENUM('articulo','noticia','documento','evento','servicio','enlace') NOT NULL DEFAULT 'articulo',
   categoria            VARCHAR(80) NULL COMMENT 'Ej. Comunicados, Resoluciones (filtro de Noticias)',
+  icono                VARCHAR(60) NULL COMMENT 'Ícono GOV.CO: govco:<nombre>',
   estado               ENUM('publicada','borrador','archivada') NOT NULL DEFAULT 'borrador',
   destacada            TINYINT(1) NOT NULL DEFAULT 0,
   imagen_destacada_id  INT UNSIGNED NULL,

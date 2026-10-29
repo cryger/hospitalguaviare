@@ -45,6 +45,7 @@ export const MODULOS: DefinicionModulo[] = [
       { ruta: '/admin/contenido/paginas', texto: 'Páginas', icono: '📑' },
       { ruta: '/admin/contenido/entradas', texto: 'Entradas', icono: '📝' },
       { ruta: '/admin/contenido/multimedia', texto: 'Multimedia', icono: '🖼️' },
+      { ruta: '/admin/contenido/servicios', texto: 'Portafolio de servicios', icono: '🩺' },
     ],
   },
   {

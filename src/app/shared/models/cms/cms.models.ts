@@ -46,6 +46,8 @@ export interface CmsEntrada {
   tipo: TipoEntrada;
   /** Ej. Comunicados, Resoluciones: filtro lateral de Noticias */
   categoria?: string | null;
+  /** Ícono nativo GOV.CO ("govco:<nombre>"), usado en las tarjetas de servicios */
+  icono?: string | null;
   estado: EstadoEntrada;
   destacada: boolean;
   imagenDestacadaId: number | null;

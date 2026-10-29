@@ -1,0 +1,236 @@
+<header class="cms-head">
+  <div>
+    <h1>Portafolio de servicios</h1>
+    <p>Los servicios que aparecen en «Nuestros servicios» del inicio y en la página del portafolio.</p>
+  </div>
+  @if (pagina()) {
+    <div class="cms-head-actions">
+      @if (rutaPublica(); as r) { <a class="btn" [routerLink]="r" target="_blank" rel="noopener">Ver en el sitio ↗</a> }
+      <button class="btn btn-primario" type="button" (click)="nuevo()">+ Nuevo servicio</button>
+    </div>
+  }
+</header>
+
+@if (cms.error()) {
+  <div class="aviso aviso-error" role="alert">
+    {{ cms.error() }}
+    <button class="btn-link" type="button" (click)="cms.error.set(null)">Cerrar</button>
+  </div>
+}
+<p class="aviso aviso-ok" role="status" [class.oculto]="!mensaje()">{{ mensaje() }}</p>
+
+@if (!pagina()) {
+  <section class="panel sin-pagina">
+    <h2>Aún no existe la página del portafolio</h2>
+    <p>Se creará «Portafolio de servicios» dentro de «Nuestro Hospital», con la plantilla de tarjetas de servicios.</p>
+    <button class="btn btn-primario" type="button" (click)="crearPagina()">Crear la página del portafolio</button>
+  </section>
+} @else {
+  <!-- ===== Resumen ===== -->
+  <ul class="resumen" aria-label="Resumen del portafolio">
+    <li><strong>{{ servicios().length }}</strong><span>servicios</span></li>
+    <li><strong>{{ publicados() }}</strong><span>publicados</span></li>
+    <li [class.lleno]="enInicio().length >= maximoInicio">
+      <strong>{{ enInicio().length }}<small>/{{ maximoInicio }}</small></strong><span>en el inicio</span>
+    </li>
+    <li><strong>{{ grupos().length }}</strong><span>grupos</span></li>
+  </ul>
+
+  <section class="panel">
+    <div class="filtros-servicios">
+      <div class="campo">
+        <label for="sv-buscar">Buscar servicio</label>
+        <input id="sv-buscar" class="input" type="search" placeholder="Ej. urgencias, laboratorio…"
+               [value]="busqueda()" (input)="busqueda.set($any($event.target).value)" />
+      </div>
+      <div class="campo">
+        <label for="sv-grupo">Grupo</label>
+        <select id="sv-grupo" class="select" [value]="grupo()" (change)="grupo.set($any($event.target).value)">
+          <option value="">Todos los grupos</option>
+          @for (g of grupos(); track g) { <option [value]="g">{{ g }}</option> }
+        </select>
+      </div>
+    </div>
+    @if (filtrando()) {
+      <p class="nota">Mostrando {{ visibles().length }} de {{ servicios().length }}. Para cambiar el orden, quite los filtros.</p>
+    }
+
+    <ol class="lista-servicios">
+      @for (e of visibles(); track e.id; let primero = $first, ultimo = $last) {
+        @let a = aspecto(e);
+        <li class="fila" [class.borrador]="e.estado !== 'publicada'">
+          <span class="miniatura" [class]="'tono-' + a.tono" aria-hidden="true">
+            @if (imagenDe(e); as img) {
+              <img [src]="img.url" alt="" loading="lazy" />
+            } @else if (a.govco) {
+              <span class="icono-govco">{{ a.govco }}</span>
+            } @else {
+              <svg viewBox="0 0 24 24"><path [attr.d]="a.icono" /></svg>
+            }
+          </span>
+
+          <div class="datos">
+            <div class="titulo-linea">
+              <button type="button" class="titulo-servicio" (click)="editar(e)">{{ e.titulo }}</button>
+              @if (e.categoria) { <span class="badge badge-info badge-grupo">{{ e.categoria }}</span> }
+              <span class="badge" [class]="'badge-' + e.estado">{{ e.estado }}</span>
+            </div>
+            @if (e.resumen) { <p class="resumen-servicio">{{ e.resumen }}</p> }
+            @else { <p class="resumen-servicio falta">Sin resumen: agréguelo para que la tarjeta se vea completa.</p> }
+          </div>
+
+          <button type="button" class="interruptor" role="switch" [attr.aria-checked]="e.destacada"
+                  [attr.aria-label]="'Mostrar ' + e.titulo + ' en el inicio'" (click)="alternarInicio(e)">
+            <span class="pista" aria-hidden="true"><span class="bola"></span></span>
+            <span class="interruptor-texto">Inicio</span>
+          </button>
+
+          <div class="acciones-fila">
+            @if (!filtrando()) {
+              <button class="btn btn-icono" type="button" [id]="'mover-arriba-' + e.id" [disabled]="primero"
+                      [attr.aria-label]="'Subir ' + e.titulo" title="Subir" (click)="mover(e, -1)">↑</button>
+              <button class="btn btn-icono" type="button" [id]="'mover-abajo-' + e.id" [disabled]="ultimo"
+                      [attr.aria-label]="'Bajar ' + e.titulo" title="Bajar" (click)="mover(e, 1)">↓</button>
+            }
+            <button class="btn btn-sm" type="button" (click)="editar(e)">Editar</button>
+            <button class="btn btn-sm" type="button" (click)="alternarEstado(e)">{{ e.estado === 'publicada' ? 'Despublicar' : 'Publicar' }}</button>
+            <a class="btn btn-icono" [routerLink]="urlPublica(e)" [queryParams]="e.estado === 'publicada' ? {} : { 'vista-previa': 1 }"
+               target="_blank" rel="noopener" [attr.aria-label]="'Ver ' + e.titulo + ' en el sitio'" title="Ver en el sitio">↗</a>
+            <button class="btn btn-icono btn-peligro" type="button" [attr.aria-label]="'Eliminar ' + e.titulo" title="Eliminar"
+                    (click)="porEliminar.set(e)">✕</button>
+          </div>
+        </li>
+      } @empty {
+        <li class="vacio">
+          @if (filtrando()) { No hay servicios con esos filtros. }
+          @else { Aún no hay servicios. Use «+ Nuevo servicio» para agregar el primero. }
+        </li>
+      }
+    </ol>
+  </section>
+}
+
+<!-- ===== Editor de servicio ===== -->
+@if (editando()) {
+  <div class="modal-fondo" (click)="cerrarEditor()">
+    <div class="modal-caja grande" role="dialog" aria-modal="true" aria-labelledby="sv-editor-titulo" (click)="$event.stopPropagation()" (keydown.escape)="picker() || cerrarEditor()">
+      <form (ngSubmit)="guardar()">
+        <div class="modal-head">
+          <h2 id="sv-editor-titulo">{{ form.id ? 'Editar servicio' : 'Nuevo servicio' }}</h2>
+          <button class="btn btn-icono" type="button" aria-label="Cerrar" (click)="cerrarEditor()">✕</button>
+        </div>
+
+        <div class="modal-body editor">
+          <div class="editor-principal">
+            <div class="form-grid">
+              <div class="campo full">
+                <label for="sv-titulo">Nombre del servicio *</label>
+                <input id="sv-titulo" class="input" name="titulo" required [(ngModel)]="form.titulo" (ngModelChange)="alCambiarTitulo()" />
+              </div>
+              <div class="campo">
+                <label for="sv-grupo-ed">Grupo</label>
+                <input id="sv-grupo-ed" class="input" name="categoria" list="sv-grupos" [(ngModel)]="form.categoria" (ngModelChange)="refrescar()"
+                       placeholder="Ej. Urgencias, Internación" autocomplete="off" />
+                <datalist id="sv-grupos">@for (g of grupos(); track g) { <option [value]="g"></option> }</datalist>
+              </div>
+              <div class="campo">
+                <label for="sv-slug">Dirección (URL)</label>
+                <input id="sv-slug" class="input" name="slug" [(ngModel)]="form.slug" (ngModelChange)="marcarSlugManual()" />
+                <small class="slug-preview">{{ rutaPublica() }}/{{ form.slug || '…' }}</small>
+              </div>
+              <div class="campo full">
+                <label for="sv-resumen">Resumen para la tarjeta</label>
+                <textarea id="sv-resumen" class="textarea" name="resumen" rows="2" [(ngModel)]="form.resumen" (ngModelChange)="refrescar()"
+                          [class.invalido]="form.resumen.length > maxResumen" aria-describedby="sv-resumen-cuenta"></textarea>
+                <small id="sv-resumen-cuenta" [class.excede]="form.resumen.length > maxResumen">{{ form.resumen.length }}/{{ maxResumen }} caracteres · una o dos frases.</small>
+              </div>
+              <div class="campo full">
+                <span class="label" id="sv-contenido-label">Información del servicio</span>
+                <app-rich-editor [(valor)]="contenido" />
+                <small>Horarios, especialidades, requisitos, teléfonos… Se muestra al entrar al servicio.</small>
+              </div>
+            </div>
+          </div>
+
+          <aside class="editor-lateral">
+            <div class="campo">
+              <span class="label">Imagen</span>
+              @if (imagenDe({ imagenDestacadaId: imagenId() }); as img) {
+                <div class="imagen-elegida">
+                  <img [src]="img.url" [alt]="img.alt || ''" />
+                  <div>
+                    <button class="btn btn-sm" type="button" (click)="picker.set(true)">Cambiar</button>
+                    <button class="btn btn-sm btn-peligro" type="button" (click)="imagenId.set(null); refrescar()">Quitar</button>
+                  </div>
+                </div>
+              } @else {
+                <button class="vacio-media" type="button" (click)="picker.set(true)">Elegir imagen de Multimedia</button>
+                <small>Sin imagen, la tarjeta muestra un fondo de color con el ícono.</small>
+              }
+            </div>
+
+            <div class="campo">
+              <label for="sv-icono">Ícono</label>
+              <app-selector-icono idCampo="sv-icono" [(valor)]="form.icono" (valorChange)="refrescar()" />
+              <small>Opcional. Si no elige uno, se usa un ícono según el nombre del servicio.</small>
+            </div>
+
+            <div class="campo">
+              <label for="sv-estado">Estado</label>
+              <select id="sv-estado" class="select" name="estado" [(ngModel)]="form.estado" (ngModelChange)="refrescar()">
+                <option value="publicada">Publicado</option>
+                <option value="borrador">Borrador (no se ve en el sitio)</option>
+              </select>
+            </div>
+
+            <label class="check">
+              <input type="checkbox" name="destacada" [(ngModel)]="form.destacada" (ngModelChange)="refrescar()" />
+              Mostrar en «Nuestros servicios» del inicio
+            </label>
+            @if (form.destacada && cuposInicio() <= 0) {
+              <p class="aviso aviso-error">Ya hay {{ maximoInicio }} servicios en el inicio. Quite uno de la lista primero.</p>
+            } @else {
+              <small class="cupos">Cupos libres en el inicio: {{ cuposInicio() - (form.destacada ? 1 : 0) }} de {{ maximoInicio }}</small>
+            }
+
+            <div class="vista-previa">
+              <span class="label">Vista previa de la tarjeta</span>
+              <div class="vista-previa-caja" inert>
+                <app-servicios-tarjetas [servicios]="vistaPrevia()" />
+              </div>
+            </div>
+          </aside>
+        </div>
+
+        <div class="modal-foot">
+          <button class="btn" type="button" (click)="cerrarEditor()">Cancelar</button>
+          <button class="btn btn-primario" type="submit" [disabled]="guardando() || !valido()">{{ form.id ? 'Guardar cambios' : 'Crear servicio' }}</button>
+        </div>
+      </form>
+    </div>
+  </div>
+}
+
+@if (picker()) {
+  <app-media-picker titulo="Imagen del servicio" [multiple]="false" soloTipo="imagen"
+    (seleccionar)="alElegirImagen($event); refrescar()" (cerrar)="picker.set(false)" />
+}
+
+<!-- ===== Confirmar eliminación ===== -->
+@if (porEliminar(); as e) {
+  <div class="modal-fondo">
+    <div class="modal-caja" role="alertdialog" aria-modal="true" aria-labelledby="sv-borrar-titulo" aria-describedby="sv-borrar-texto">
+      <div class="modal-head">
+        <h2 id="sv-borrar-titulo">¿Eliminar «{{ e.titulo }}»?</h2>
+        <button class="btn btn-icono" type="button" aria-label="Cerrar" (click)="porEliminar.set(null)">✕</button>
+      </div>
+      <div class="modal-body">
+        <p id="sv-borrar-texto">El servicio desaparecerá del portafolio y del inicio, y su dirección dejará de funcionar. Si solo quiere ocultarlo por un tiempo, use «Despublicar».</p>
+      </div>
+      <div class="modal-foot">
+        <button class="btn" type="button" (click)="alternarEstado(e); porEliminar.set(null)">Despublicar</button>
+        <button class="btn btn-peligro" type="button" (click)="confirmarEliminar()">Eliminar definitivamente</button>
+      </div>
+    </div>
+  </div>
+}

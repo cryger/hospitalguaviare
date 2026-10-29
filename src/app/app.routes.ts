@@ -103,6 +103,8 @@ export const routes: Routes = [
             loadComponent: () => import('./pages/admin/cms/paginas/cms-pagina-editor').then(m => m.CmsPaginaEditor) },
           { path: 'paginas/:id', data: { breadcrumb: 'Editar página' },
             loadComponent: () => import('./pages/admin/cms/paginas/cms-pagina-editor').then(m => m.CmsPaginaEditor) },
+          { path: 'servicios', data: { breadcrumb: 'Portafolio de servicios' },
+            loadComponent: () => import('./pages/admin/cms/servicios/cms-servicios').then(m => m.CmsServicios) },
           { path: 'entradas', data: { breadcrumb: 'Entradas' },
             loadComponent: () => import('./pages/admin/cms/entradas/cms-entradas').then(m => m.CmsEntradas) },
           { path: 'entradas/nueva', data: { breadcrumb: 'Nueva entrada' },

@@ -3,6 +3,7 @@ import { RouterLink } from '@angular/router';
 import { CmsService } from '../../shared/services/cms/cms.service';
 import { CmsEntrada } from '../../shared/models/cms/cms.models';
 import { normalizar } from '../../shared/utils/busqueda';
+import { leerIcono } from '../../shared/iconos/iconos';
 
 /** Íconos de línea (24×24) por servicio; si no hay uno propio se usa el de su categoría */
 const ICONOS: Record<string, string> = {
@@ -54,7 +55,22 @@ export interface TarjetaServicio {
   imagen: string | null;
   alt: string;
   icono: string;
+  /** Carácter del ícono GOV.CO elegido en el dashboard (si lo hay) */
+  govco: string | null;
   tono: string;
+}
+
+/** Ícono (trazo SVG), ícono GOV.CO elegido y color de un servicio: se usa en las tarjetas y en el dashboard */
+export function aspectoServicio(e: Pick<CmsEntrada, 'slug' | 'titulo' | 'categoria' | 'icono'>): { icono: string; govco: string | null; tono: string } {
+  const clave = normalizar(`${e.slug} ${e.titulo}`);
+  const cat = normalizar(e.categoria ?? '');
+  const nombre = POR_SLUG.find(([r]) => r.test(clave))?.[1] ?? POR_SLUG.find(([r]) => r.test(cat))?.[1] ?? 'hospital';
+  const elegido = leerIcono(e.icono);
+  return {
+    icono: ICONOS[nombre],
+    govco: elegido?.tipo === 'govco' ? elegido.caracter : null,
+    tono: TONOS.find(([r]) => r.test(cat || clave))?.[1] ?? 'azul',
+  };
 }
 
 /**
@@ -80,9 +96,6 @@ export class ServiciosTarjetas {
     const multimedia = this.cms.multimediaPorId();
     return this.servicios().map((e) => {
       const m = e.imagenDestacadaId ? multimedia.get(e.imagenDestacadaId) : undefined;
-      const clave = normalizar(`${e.slug} ${e.titulo}`);
-      const cat = normalizar(e.categoria ?? '');
-      const icono = POR_SLUG.find(([r]) => r.test(clave))?.[1] ?? POR_SLUG.find(([r]) => r.test(cat))?.[1] ?? 'hospital';
       return {
         id: e.id,
         titulo: e.titulo,
@@ -91,8 +104,7 @@ export class ServiciosTarjetas {
         url: this.cms.urlEntrada(e),
         imagen: m?.tipo === 'imagen' ? m.url : null,
         alt: m?.alt ?? '',
-        icono: ICONOS[icono],
-        tono: TONOS.find(([r]) => r.test(cat || clave))?.[1] ?? 'azul',
+        ...aspectoServicio(e),
       };
     });
   });

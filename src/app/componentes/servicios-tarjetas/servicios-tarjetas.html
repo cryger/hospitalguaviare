@@ -7,11 +7,15 @@
             <img [src]="s.imagen" [alt]="s.alt" loading="lazy" />
           } @else {
             <span class="srv-fondo" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path [attr.d]="s.icono" /></svg>
+              @if (s.govco) { <span class="icono-govco srv-glifo">{{ s.govco }}</span> }
+              @else { <svg viewBox="0 0 24 24"><path [attr.d]="s.icono" /></svg> }
             </span>
           }
         </span>
-        <span class="srv-icono" aria-hidden="true"><svg viewBox="0 0 24 24"><path [attr.d]="s.icono" /></svg></span>
+        <span class="srv-icono" aria-hidden="true">
+          @if (s.govco) { <span class="icono-govco">{{ s.govco }}</span> }
+          @else { <svg viewBox="0 0 24 24"><path [attr.d]="s.icono" /></svg> }
+        </span>
         <span class="srv-cuerpo">
           @if (mostrarCategoria() && s.categoria) { <span class="srv-cat">{{ s.categoria }}</span> }
           @if (nivel() === 2) { <h2>{{ s.titulo }}</h2> } @else { <h3>{{ s.titulo }}</h3> }

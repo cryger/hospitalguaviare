@@ -36,6 +36,7 @@ const TABLAS = {
       contenido: 'contenido',
       tipo: 'tipo',
       categoria: 'categoria',
+      icono: 'icono',
       estado: 'estado',
       destacada: 'destacada',
       imagenDestacadaId: 'imagen_destacada_id',
