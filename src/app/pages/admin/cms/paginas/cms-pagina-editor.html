@@ -103,7 +103,8 @@
 
       <div class="campo">
         <label for="pg-icono">Icono (opcional)</label>
-        <input id="pg-icono" class="input" name="icono" placeholder="Ej: 🏥" [(ngModel)]="form.icono" />
+        <app-selector-icono idCampo="pg-icono" [(valor)]="form.icono" />
+        <small>Íconos nativos GOV.CO. Se muestra junto al título y en las tarjetas de «En esta sección».</small>
       </div>
 
       <div class="campo">

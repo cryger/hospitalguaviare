@@ -479,3 +479,18 @@ body.high-contrast .barra-accesbilidad-govco a:hover {
 @media (prefers-reduced-motion: reduce) {
   .btn-bdc { transition: none; }
 }
+
+/* ===== Íconos nativos GOV.CO (selector de íconos del CMS: valor "govco:<nombre>") ===== */
+@font-face {
+  font-family: "govco-font";
+  src: url("./app/shared/assets/icons/fonts/govco-font-icons.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+.icono-govco {
+  font-family: "govco-font" !important;
+  font-style: normal; font-weight: normal; font-variant: normal; text-transform: none;
+  line-height: 1; speak: never;
+  -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+}

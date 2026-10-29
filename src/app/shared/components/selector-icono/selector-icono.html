@@ -1,0 +1,59 @@
+<div class="si">
+  <button #boton type="button" class="si-boton" [id]="idCampo()" (click)="alternar()"
+          aria-haspopup="dialog" [attr.aria-expanded]="abierto()" [attr.aria-controls]="idCampo() + '-panel'">
+    <span class="si-vista" aria-hidden="true">
+      @switch (actual()?.tipo) {
+        @case ('govco') { <span class="icono-govco">{{ $any(actual()).caracter }}</span> }
+        @case ('texto') { <span>{{ $any(actual()).texto }}</span> }
+        @default { <span class="si-vacio">—</span> }
+      }
+    </span>
+    <span class="si-texto">
+      @if (nombreActual()) { {{ legible(nombreActual()) }} }
+      @else if (actual()?.tipo === 'texto') { Emoji (formato anterior) }
+      @else { Sin icono · elegir de la galería }
+    </span>
+    <svg class="si-flecha" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6" /></svg>
+  </button>
+
+  @if (abierto()) {
+    <div class="si-panel" role="dialog" [id]="idCampo() + '-panel'" aria-label="Galería de íconos">
+      <div class="si-buscar">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="m20 20-4-4" /></svg>
+        <input #buscador type="search" [value]="busqueda()" (input)="busqueda.set($any($event.target).value)"
+               (keydown.arrowdown)="aGaleria($event)" placeholder="Buscar: ambulancia, calendario, documento…"
+               aria-label="Buscar ícono" [attr.aria-describedby]="idCampo() + '-conteo'" />
+      </div>
+
+      @if (!busqueda().trim()) {
+        <div class="si-categorias" role="group" aria-label="Categorías de íconos">
+          @for (c of categorias; track c.nombre) {
+            <button type="button" [class.activa]="categoria() === c.nombre" [attr.aria-pressed]="categoria() === c.nombre"
+                    (click)="verCategoria(c.nombre)">{{ c.nombre }}</button>
+          }
+          <button type="button" [class.activa]="categoria() === TODOS" [attr.aria-pressed]="categoria() === TODOS"
+                  (click)="verCategoria(TODOS)">Todos ({{ totalTodos }})</button>
+        </div>
+      }
+
+      <div #rejilla class="si-rejilla" (keydown)="navegar($event)">
+        @for (i of visibles(); track i.nombre) {
+          <button type="button" class="si-icono" [class.elegido]="i.nombre === nombreActual()"
+                  [attr.aria-pressed]="i.nombre === nombreActual()" [title]="legible(i.nombre)"
+                  [attr.aria-label]="legible(i.nombre)" (click)="elegir(i)">
+            <span class="icono-govco" aria-hidden="true">{{ caracter(i) }}</span>
+          </button>
+        } @empty {
+          <p class="si-nada">No hay íconos con «{{ busqueda() }}». Pruebe en inglés (ej. «hospital», «user», «file») o elija una categoría.</p>
+        }
+      </div>
+
+      <div class="si-pie">
+        <span [id]="idCampo() + '-conteo'" role="status">{{ visibles().length }} {{ visibles().length === 1 ? 'ícono' : 'íconos' }}</span>
+        @if (valor()) {
+          <button type="button" class="si-quitar" (click)="quitar()">Quitar ícono</button>
+        }
+      </div>
+    </div>
+  }
+</div>

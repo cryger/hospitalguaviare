@@ -86,7 +86,7 @@
     @if (padre(); as pa) {
       <a class="antetitulo" [routerLink]="cms.rutaPagina(pa.id)">{{ pa.titulo }}</a>
     }
-    <h1>{{ p.icono ? p.icono + ' ' : '' }}{{ p.titulo }}</h1>
+    <h1>@if (p.icono) { <app-icono-cms class="h1-icono" [valor]="p.icono" /> }{{ p.titulo }}</h1>
     @if (p.descripcion) { <p class="lead">{{ p.descripcion }}</p> }
   </header>
 
@@ -392,7 +392,7 @@
           @let num = numeroDe(s.titulo);
           <li>
             <ng-template #tarjetaSeccion>
-              <span class="sec-icono" aria-hidden="true">{{ iconoPagina(s) }}</span>
+              <span class="sec-icono" aria-hidden="true"><app-icono-cms [valor]="iconoPagina(s)" /></span>
               <span class="sec-cuerpo">
                 <span class="sec-titulo">
                   @if (num) { <span class="sec-num">{{ num }}</span> }

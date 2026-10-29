@@ -12,6 +12,7 @@ import { BuscadorGovco } from '../../shared/components/buscador-govco/buscador-g
 import { CalendarioEventos } from '../../componentes/calendario-eventos/calendario-eventos';
 import { ResenaHistorica } from './resena-historica';
 import { ServiciosTarjetas } from '../../componentes/servicios-tarjetas/servicios-tarjetas';
+import { IconoCms } from '../../shared/components/icono-cms/icono-cms';
 import { normalizar, resaltar as resaltarTexto, terminosDe } from '../../shared/utils/busqueda';
 import { slugCategoria } from '../../shared/utils/categorias';
 
@@ -22,7 +23,7 @@ type Orden = 'predeterminado' | 'recientes' | 'antiguas' | 'az';
 
 @Component({
   selector: 'app-cms-pagina-publica',
-  imports: [RouterLink, DatePipe, NgTemplateOutlet, CmsMediaPublica, BuscadorGovco, CalendarioEventos, ResenaHistorica, ServiciosTarjetas],
+  imports: [RouterLink, DatePipe, NgTemplateOutlet, CmsMediaPublica, BuscadorGovco, CalendarioEventos, ResenaHistorica, ServiciosTarjetas, IconoCms],
   templateUrl: './cms-pagina-publica.html',
   styleUrl: './cms-pagina-publica.css',
 })

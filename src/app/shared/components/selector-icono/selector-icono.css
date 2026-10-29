@@ -1,0 +1,65 @@
+/* Selector de íconos nativos (fuente GOV.CO) */
+:host { display: block; position: relative; }
+.si { position: relative; }
+
+.si-boton {
+  width: 100%; display: flex; align-items: center; gap: .65rem; cursor: pointer; text-align: left;
+  font: inherit; color: #1f2937; background: #fff; border: 1px solid #c9d3e3; border-radius: 8px; padding: .4rem .7rem .4rem .45rem;
+  transition: border-color .15s, box-shadow .15s;
+}
+.si-boton:hover { border-color: #3366CC; }
+.si-boton:focus-visible { outline: none; border-color: #3366CC; box-shadow: 0 0 0 3px rgba(51, 102, 204, .25); }
+.si-boton[aria-expanded='true'] { border-color: #3366CC; }
+.si-vista {
+  flex: none; display: grid; place-items: center; width: 2.2rem; height: 2.2rem; border-radius: 7px;
+  background: #E5ECF8; color: #0943B5; font-size: 1.25rem;
+}
+.si-vacio { color: #9aa3af; font-size: 1rem; }
+.si-texto { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: .92rem; }
+.si-flecha { flex: none; width: 1rem; height: 1rem; fill: none; stroke: #4b5563; stroke-width: 2; transition: transform .15s; }
+.si-boton[aria-expanded='true'] .si-flecha { transform: rotate(180deg); }
+
+/* ===== Panel desplegable ===== */
+.si-panel {
+  position: absolute; z-index: 50; top: calc(100% + .35rem); left: 0;
+  width: min(30rem, calc(100vw - 2rem)); display: flex; flex-direction: column; gap: .6rem;
+  background: #fff; border: 1px solid #d5deec; border-radius: 12px; padding: .75rem;
+  box-shadow: 0 16px 40px rgba(16, 24, 40, .18);
+}
+.si-buscar { position: relative; }
+.si-buscar svg { position: absolute; left: .65rem; top: 50%; transform: translateY(-50%); width: 1rem; height: 1rem; fill: none; stroke: #6b7280; stroke-width: 2; }
+.si-buscar input {
+  width: 100%; font: inherit; font-size: .92rem; padding: .5rem .7rem .5rem 2.1rem; border: 1px solid #c9d3e3; border-radius: 8px;
+}
+.si-buscar input:focus { outline: none; border-color: #3366CC; box-shadow: 0 0 0 3px rgba(51, 102, 204, .2); }
+
+.si-categorias { display: flex; flex-wrap: wrap; gap: .35rem; }
+.si-categorias button {
+  font: inherit; font-size: .8rem; cursor: pointer; color: #004884; background: #fff;
+  border: 1px solid #B5C7E9; border-radius: 999px; padding: .2rem .65rem;
+}
+.si-categorias button:hover { background: #F2F6FC; }
+.si-categorias button.activa { background: #0943B5; border-color: #0943B5; color: #fff; }
+.si-categorias button:focus-visible { outline: .15rem solid #000; outline-offset: .1rem; }
+
+.si-rejilla {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(2.6rem, 1fr)); gap: 4px;
+  max-height: 15.5rem; overflow-y: auto; padding: 2px; overscroll-behavior: contain;
+}
+.si-icono {
+  aspect-ratio: 1; display: grid; place-items: center; cursor: pointer; font-size: 1.2rem;
+  color: #1f2937; background: #F7F9FC; border: 1px solid transparent; border-radius: 8px;
+  transition: background .12s, color .12s, transform .12s;
+}
+.si-icono:hover { background: #E5ECF8; color: #0943B5; transform: scale(1.08); }
+.si-icono:focus-visible { outline: .15rem solid #000; outline-offset: 1px; background: #E5ECF8; color: #0943B5; }
+.si-icono.elegido { background: #0943B5; color: #fff; border-color: #0943B5; }
+.si-nada { grid-column: 1 / -1; margin: .5rem 0; font-size: .88rem; color: #4b5563; }
+
+.si-pie { display: flex; align-items: center; justify-content: space-between; gap: .5rem; font-size: .8rem; color: #6b7280; border-top: 1px solid #eef2f7; padding-top: .5rem; }
+.si-quitar { font: inherit; font-size: .82rem; cursor: pointer; color: #A80521; background: none; border: 0; text-decoration: underline; padding: .2rem; }
+
+@media (prefers-reduced-motion: reduce) {
+  .si-icono, .si-flecha { transition: none; }
+  .si-icono:hover { transform: none; }
+}

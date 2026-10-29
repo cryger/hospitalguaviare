@@ -3,6 +3,7 @@ import { DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { CmsService } from '../../../../shared/services/cms/cms.service';
+import { SelectorIcono } from '../../../../shared/components/selector-icono/selector-icono';
 import {
   CmsEntrada,
   CmsPagina,
@@ -12,7 +13,7 @@ import {
 
 @Component({
   selector: 'app-cms-pagina-editor',
-  imports: [FormsModule, RouterLink, DatePipe],
+  imports: [FormsModule, RouterLink, DatePipe, SelectorIcono],
   templateUrl: './cms-pagina-editor.html',
   styleUrls: ['../cms-admin.css', './cms-pagina-editor.css'],
 })
