@@ -1,0 +1,70 @@
+/* "Nuestros servicios" del inicio — BDC GOV.CO v5 */
+:host { display: block; font-family: 'WorkSans-Regular', 'Work Sans', 'Montserrat', system-ui, -apple-system, 'Segoe UI', sans-serif; }
+
+.servicios-home {
+  position: relative; display: grid; gap: 1.75rem;
+  padding: 2.25rem clamp(1rem, 3vw, 2.25rem) 2rem; margin: 0 0 2rem;
+  border-radius: 20px; overflow: hidden;
+  background:
+    radial-gradient(circle at 100% 0, rgba(70, 114, 200, .14), transparent 40%),
+    radial-gradient(circle at 0 100%, rgba(9, 67, 181, .08), transparent 45%),
+    #F5F8FD;
+  border: 1px solid #E5ECF8;
+}
+
+/* ===== Encabezado ===== */
+.sh-encabezado { display: flex; align-items: flex-end; justify-content: space-between; gap: 1rem 2rem; flex-wrap: wrap; }
+.sh-encabezado > div { max-width: 46rem; }
+.sh-antetitulo {
+  display: inline-flex; align-items: center; gap: .5rem;
+  font-size: .78rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #3366CC;
+}
+.sh-antetitulo::before { content: ''; width: 1.75rem; height: 3px; border-radius: 2px; background: #3366CC; }
+.sh-encabezado h2 { font-family: 'WorkSans-SemiBold', 'Work Sans', 'Montserrat', system-ui, sans-serif; font-weight: 600; margin: .35rem 0 .45rem; font-size: clamp(1.6rem, 3vw, 2.1rem); line-height: 1.15; color: #004884; }
+.sh-encabezado p { margin: 0; color: #4b5563; font-size: 1rem; line-height: 1.55; }
+
+.sh-todos { display: inline-flex; align-items: center; gap: .55rem; white-space: nowrap; text-decoration: none; }
+.sh-total {
+  display: inline-grid; place-items: center; min-width: 1.6rem; height: 1.6rem; padding: 0 .35rem;
+  border-radius: 999px; background: #3366CC; color: #fff; font-size: .78rem; font-weight: 700;
+}
+.sh-todos:hover .sh-total { background: #fff; color: #3366CC; }
+
+/* ===== Franja de emergencias ===== */
+.sh-emergencia {
+  display: flex; align-items: center; gap: 1rem 1.25rem; flex-wrap: wrap;
+  padding: 1rem 1.25rem; border-radius: 14px; color: #fff;
+  background: linear-gradient(110deg, #A80521, #D8303D);
+  box-shadow: 0 8px 22px rgba(168, 5, 33, .22);
+}
+.sh-emergencia-icono {
+  flex: none; display: grid; place-items: center; width: 2.9rem; height: 2.9rem; border-radius: 50%;
+  background: rgba(255, 255, 255, .18); animation: latido 2.4s ease-in-out infinite;
+}
+.sh-emergencia-icono svg { width: 1.5rem; height: 1.5rem; fill: #fff; }
+.sh-emergencia p { flex: 1 1 18rem; margin: 0; line-height: 1.45; }
+.sh-emergencia strong { display: block; font-size: 1.08rem; }
+.sh-emergencia-acciones { display: flex; align-items: center; gap: .5rem 1.1rem; flex-wrap: wrap; }
+.sh-llamar {
+  display: inline-flex; align-items: center; gap: .5rem; padding: .55rem 1.1rem; border-radius: 999px;
+  background: #fff; color: #A80521; font-weight: 800; font-size: 1.05rem; text-decoration: none; letter-spacing: .02em;
+}
+.sh-llamar svg { width: 1.15rem; height: 1.15rem; fill: none; stroke: currentColor; stroke-width: 2; stroke-linejoin: round; }
+.sh-llamar:hover { background: #FCE8EA; }
+.sh-ver { color: #fff; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
+.sh-emergencia a:focus-visible { outline: .19rem solid #fff; outline-offset: .19rem; }
+
+@keyframes latido {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, .35); }
+  50% { box-shadow: 0 0 0 .55rem rgba(255, 255, 255, 0); }
+}
+
+@media (max-width: 560px) {
+  .servicios-home { padding: 1.5rem 1rem; border-radius: 14px; }
+  .sh-todos { width: 100%; justify-content: center; }
+  .sh-emergencia-acciones { width: 100%; }
+  .sh-llamar { flex: 1; justify-content: center; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sh-emergencia-icono { animation: none; }
+}

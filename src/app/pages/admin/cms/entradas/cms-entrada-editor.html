@@ -101,6 +101,17 @@
         <input id="en-fecha" class="input" type="datetime-local" name="fecha" [(ngModel)]="fechaLocal" />
         <small>Vacía = se asigna al publicar.</small>
       </div>
+      @if (esServicios()) {
+        <div class="campo bloque">
+          <label for="en-grupo">Grupo del servicio</label>
+          <input id="en-grupo" class="input" name="categoria" list="en-grupos" maxlength="80" autocomplete="off"
+                 [(ngModel)]="form.categoria" placeholder="Ej. Urgencias, Internación" aria-describedby="en-grupo-ayuda" />
+          <datalist id="en-grupos">
+            @for (c of categoriasDePagina(); track c) { <option [value]="c"></option> }
+          </datalist>
+          <small id="en-grupo-ayuda">Agrupa los servicios en la página del portafolio. Marque «Destacar en portada» para mostrarlo en el inicio.</small>
+        </div>
+      }
       @if (esListado()) {
         <div class="campo bloque">
           <label for="en-categoria">Categoría</label>

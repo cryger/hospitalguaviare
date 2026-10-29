@@ -482,3 +482,16 @@ h1, h2, h3, .srv-titulo, .tarjeta-cuerpo h2, .tarjeta-cuerpo h3, .subpagina stro
   .pub:hover, .seccion:hover { transform: none; }
   .pub:hover .pub-img img { transform: none; }
 }
+
+/* ===== Portafolio de servicios (plantilla "servicios") ===== */
+.filtro-grupos { display: flex; flex-wrap: wrap; gap: .5rem; margin: 0 0 1.5rem; }
+.filtro-grupos button {
+  display: inline-flex; align-items: center; gap: .45rem; font: inherit; font-size: .92rem; cursor: pointer;
+  color: #004884; background: #fff; border: 1px solid #B5C7E9; border-radius: 999px; padding: .4rem .55rem .4rem .95rem;
+  transition: background .15s, border-color .15s, color .15s;
+}
+.filtro-grupos button:hover { background: #F2F6FC; border-color: #4672C8; }
+.filtro-grupos button:focus-visible { outline: .19rem solid #000; outline-offset: .15rem; }
+.filtro-grupos button.activa { background: #0943B5; border-color: #0943B5; color: #fff; font-weight: 600; }
+.filtro-grupos .conteo { background: #E5ECF8; color: #0943B5; }
+.filtro-grupos .activa .conteo { background: #fff; }

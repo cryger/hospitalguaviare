@@ -1,0 +1,24 @@
+<ul class="servicios">
+  @for (s of tarjetas(); track s.id) {
+    <li>
+      <a class="srv" [class]="'tono-' + s.tono" [routerLink]="s.url">
+        <span class="srv-media">
+          @if (s.imagen) {
+            <img [src]="s.imagen" [alt]="s.alt" loading="lazy" />
+          } @else {
+            <span class="srv-fondo" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path [attr.d]="s.icono" /></svg>
+            </span>
+          }
+        </span>
+        <span class="srv-icono" aria-hidden="true"><svg viewBox="0 0 24 24"><path [attr.d]="s.icono" /></svg></span>
+        <span class="srv-cuerpo">
+          @if (mostrarCategoria() && s.categoria) { <span class="srv-cat">{{ s.categoria }}</span> }
+          @if (nivel() === 2) { <h2>{{ s.titulo }}</h2> } @else { <h3>{{ s.titulo }}</h3> }
+          @if (s.resumen) { <span class="srv-resumen">{{ s.resumen }}</span> }
+          <span class="srv-ir">Conocer el servicio <span aria-hidden="true">→</span></span>
+        </span>
+      </a>
+    </li>
+  }
+</ul>

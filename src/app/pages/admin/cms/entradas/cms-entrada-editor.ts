@@ -56,6 +56,19 @@ export class CmsEntradaEditor {
     return this.cms.paginaPorId().get(Number(this.form.paginaId))?.plantilla === 'listado';
   }
 
+  /** Portafolio de servicios: la categoría agrupa los servicios (Urgencias, Internación…) */
+  esServicios(): boolean {
+    return this.cms.paginaPorId().get(Number(this.form.paginaId))?.plantilla === 'servicios';
+  }
+
+  /** Categorías ya usadas en la misma página (para el portafolio) */
+  categoriasDePagina(): string[] {
+    const id = Number(this.form.paginaId);
+    return [...new Set(this.cms.entradas().filter((e) => e.paginaId === id && e.categoria?.trim()).map((e) => e.categoria!.trim()))].sort((a, b) =>
+      a.localeCompare(b, 'es'),
+    );
+  }
+
   sugerida(): string {
     return categoriaSugerida(this.form.titulo ?? '');
   }

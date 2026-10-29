@@ -44,6 +44,7 @@ export class CmsLocalDataSource extends CmsDataSource {
     ).then(() => this.sembrarDesdeArchivo('atencion-participa-semilla', 'assets/semillas/atencion-y-participa.json'))
       .then(() => this.sembrarDesdeArchivo('tramites-semilla', 'assets/semillas/tramites.json'))
       .then(() => this.sembrarDesdeArchivo('resena-historica-semilla', 'assets/semillas/resena-historica.json'))
+      .then(() => this.sembrarDesdeArchivo('portafolio-servicios-semilla', 'assets/semillas/portafolio-servicios.json'))
       .then(() => this.clasificarPublicaciones());
   }
 
@@ -192,7 +193,7 @@ export class CmsLocalDataSource extends CmsDataSource {
   }
 
   /* ===== Estructura inicial (Resolución 1519 de 2020) ===== */
-  private readonly versionSemilla = 16;
+  private readonly versionSemilla = 17;
 
   private sembrarSiVacio(): void {
     if (localStorage.getItem(this.prefijo + 'menus')) return;
@@ -382,6 +383,15 @@ export class CmsLocalDataSource extends CmsDataSource {
         if (p.slug === 'resena-historica' && p.plantilla === 'contenido') Object.assign(p, { plantilla: 'historia', actualizadoEn: t });
       }
     }
+    // Versión 17: Portafolio de servicios con tarjetas (plantilla "servicios", destacados en el inicio)
+    if (version < 17) {
+      const s = ESTRUCTURA_1519.find((x) => x.slug === 'portafolio-de-servicios');
+      for (const p of paginas) {
+        if (p.slug === 'portafolio-de-servicios' && (p.plantilla === 'listado' || p.plantilla === 'contenido')) {
+          Object.assign(p, { plantilla: 'servicios', descripcion: p.descripcion || s?.descripcion, actualizadoEn: t });
+        }
+      }
+    }
     this.escribir('paginas', paginas);
     localStorage.setItem(this.prefijo + 'version', String(this.versionSemilla));
   }
@@ -393,6 +403,7 @@ export class CmsLocalDataSource extends CmsDataSource {
    * - atencion-y-participa.json → api/migraciones/014-atencion-y-participa.sql
    * - tramites.json             → api/migraciones/002-tramites.sql (+ 020: enlaces al portal nuevo)
    * - resena-historica.json     → api/migraciones/021-resena-historica.sql (hitos, fotos y portada)
+   * - portafolio-servicios.json → api/migraciones/024-portafolio-de-servicios.sql (12 servicios del portafolio)
    */
   private async sembrarDesdeArchivo(nombre: string, ruta: string): Promise<void> {
     const clave = this.prefijo + nombre;
@@ -411,7 +422,11 @@ export class CmsLocalDataSource extends CmsDataSource {
         soloSiVacia?: boolean;
         fecha: string | null;
         adjuntos: string[];
+        /** URL de la imagen destacada */
         destacada: string | null;
+        categoria?: string;
+        /** «Destacar en portada» (servicios del inicio) */
+        portada?: boolean;
       };
       const semilla: {
         origen: string;
@@ -448,9 +463,9 @@ export class CmsLocalDataSource extends CmsDataSource {
           resumen: n.resumen,
           contenido: n.contenido,
           tipo: n.tipo ?? 'articulo',
-          categoria: pagina.plantilla === 'listado' ? categoriaSugerida(n.titulo) : null,
+          categoria: n.categoria ?? (pagina.plantilla === 'listado' ? categoriaSugerida(n.titulo) : null),
           estado: 'publicada',
-          destacada: false,
+          destacada: n.portada ?? false,
           imagenDestacadaId: n.destacada ? porUrl.get(n.destacada) ?? null : null,
           multimediaIds: n.adjuntos.map((u) => porUrl.get(u)).filter((x): x is number => x !== undefined),
           autor: 'E.S.E. Hospital San José del Guaviare',
@@ -609,7 +624,7 @@ const ESTRUCTURA_1519: PaginaSemilla[] = [
   { id: 86, menuId: 1, parentId: 74, titulo: "Misión y visión", slug: 'mision-vision', plantilla: 'enlace', urlExterna: '/transparencia/informacion-de-la-entidad/mision-vision-funciones-y-deberes', orden: 0 },
   { id: 75, menuId: 1, parentId: 74, titulo: "Reseña histórica", slug: 'resena-historica', plantilla: 'historia', orden: 1 },
   { id: 87, menuId: 1, parentId: 74, titulo: "Estructura orgánica", slug: 'estructura-organica', plantilla: 'enlace', urlExterna: '/transparencia/informacion-de-la-entidad/estructura-organica-organigrama', orden: 2 },
-  { id: 76, menuId: 1, parentId: 74, titulo: "Portafolio de servicios", slug: 'portafolio-de-servicios', plantilla: 'listado', orden: 3 },
+  { id: 76, menuId: 1, parentId: 74, titulo: "Portafolio de servicios", slug: 'portafolio-de-servicios', plantilla: 'servicios', descripcion: "Conozca los servicios de salud que presta la E.S.E. Hospital San José del Guaviare, hospital de II nivel de complejidad y centro de referencia del departamento.", orden: 3 },
   { id: 77, menuId: 1, parentId: 74, titulo: "Sedes y horarios de atención", slug: 'sedes-y-horarios', plantilla: 'contenido', orden: 4 },
   { id: 88, menuId: 1, parentId: 74, titulo: "Calendario de eventos", slug: 'calendario-de-eventos', plantilla: 'enlace', urlExterna: '/transparencia/informacion-de-la-entidad/calendario-de-actividades-y-eventos', orden: 5 },
   { id: 89, menuId: 1, parentId: 74, titulo: "Alianza de usuarios", slug: 'alianza-de-usuarios', plantilla: 'contenido', descripcion: "Asociación de usuarios que representa a la comunidad ante la E.S.E. Hospital San José del Guaviare.", orden: 6 },

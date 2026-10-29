@@ -11,6 +11,7 @@ import { esVistaPrevia } from './cms-publico.routes';
 import { BuscadorGovco } from '../../shared/components/buscador-govco/buscador-govco';
 import { CalendarioEventos } from '../../componentes/calendario-eventos/calendario-eventos';
 import { ResenaHistorica } from './resena-historica';
+import { ServiciosTarjetas } from '../../componentes/servicios-tarjetas/servicios-tarjetas';
 import { normalizar, resaltar as resaltarTexto, terminosDe } from '../../shared/utils/busqueda';
 import { slugCategoria } from '../../shared/utils/categorias';
 
@@ -21,7 +22,7 @@ type Orden = 'predeterminado' | 'recientes' | 'antiguas' | 'az';
 
 @Component({
   selector: 'app-cms-pagina-publica',
-  imports: [RouterLink, DatePipe, NgTemplateOutlet, CmsMediaPublica, BuscadorGovco, CalendarioEventos, ResenaHistorica],
+  imports: [RouterLink, DatePipe, NgTemplateOutlet, CmsMediaPublica, BuscadorGovco, CalendarioEventos, ResenaHistorica, ServiciosTarjetas],
   templateUrl: './cms-pagina-publica.html',
   styleUrl: './cms-pagina-publica.css',
 })
@@ -141,6 +142,22 @@ export class CmsPaginaPublica {
     return lista;
   });
 
+  /** Portafolio de servicios: tarjetas agrupadas por categoría, en el orden del CMS */
+  readonly gruposServicios = computed(() => {
+    if (this.pagina()?.plantilla !== 'servicios') return [];
+    const grupos = new Map<string, CmsEntrada[]>();
+    for (const e of this.entradas()) {
+      const g = e.categoria?.trim() || 'Otros servicios';
+      grupos.set(g, [...(grupos.get(g) ?? []), e]);
+    }
+    return [...grupos].map(([nombre, servicios]) => ({ nombre, id: slugCategoria(nombre), servicios }));
+  });
+  readonly grupoServicio = signal('');
+  readonly serviciosVisibles = computed(() => {
+    const g = this.gruposServicios().find((x) => x.id === this.grupoServicio());
+    return g ? g.servicios : this.entradas();
+  });
+
   /** Entradas de tipo "servicio" (trámites): se muestran como tarjetas desplegables */
   readonly servicios = computed(() => this.entradas().filter((e) => e.tipo === 'servicio'));
   readonly noServicios = computed(() => this.entradas().filter((e) => e.tipo !== 'servicio'));
@@ -211,6 +228,7 @@ export class CmsPaginaPublica {
       if (id === null || id === previa) return;
       untracked(() => {
         this.mostrar.set(POR_PAGINA);
+        this.grupoServicio.set('');
         if (previa !== null) {
           this.busqueda.set('');
           this.anio.set('');
@@ -378,6 +396,7 @@ export class CmsPaginaPublica {
       case 'galeria': return 'Galería';
       case 'calendario': return 'Calendario';
       case 'historia': return 'Historia';
+      case 'servicios': return 'Servicios';
       case 'enlace': return 'Ir al servicio';
       default: return 'Información';
     }
@@ -389,6 +408,7 @@ export class CmsPaginaPublica {
       case 'documentos': return 'Consulte y descargue los documentos publicados.';
       case 'listado': return 'Consulte las publicaciones más recientes.';
       case 'calendario': return 'Consulte las actividades y eventos programados.';
+      case 'servicios': return 'Conozca los servicios de salud que prestamos.';
       case 'enlace': return 'Acceda directamente al servicio.';
       default: return 'Consulte la información de esta sección.';
     }

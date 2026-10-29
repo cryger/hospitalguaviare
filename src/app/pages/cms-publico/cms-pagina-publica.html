@@ -17,11 +17,21 @@
     <header class="entrada-head">
       <a class="volver" [routerLink]="cms.rutaPagina(pagina()!.id)">← {{ pagina()!.titulo }}</a>
       <h1>{{ e.titulo }}</h1>
-      <p class="meta">
-        @if (e.fechaPublicacion) { <time [attr.datetime]="e.fechaPublicacion">{{ e.fechaPublicacion | date: "d 'de' MMMM 'de' y" : '' : 'es-CO' }}</time> }
-        @if (e.autor) { · {{ e.autor }} }
-        @if (e.estado !== 'publicada') { · <span class="chip-borrador">{{ e.estado }}</span> }
-      </p>
+      @if (pagina()!.plantilla === 'servicios') {
+        <!-- Servicio del portafolio: sin fecha ni autor, solo su grupo -->
+        @if (e.categoria || e.estado !== 'publicada') {
+          <p class="meta">
+            @if (e.categoria) { <span class="chip-cat">{{ e.categoria }}</span> }
+            @if (e.estado !== 'publicada') { <span class="chip-borrador">{{ e.estado }}</span> }
+          </p>
+        }
+      } @else {
+        <p class="meta">
+          @if (e.fechaPublicacion) { <time [attr.datetime]="e.fechaPublicacion">{{ e.fechaPublicacion | date: "d 'de' MMMM 'de' y" : '' : 'es-CO' }}</time> }
+          @if (e.autor) { · {{ e.autor }} }
+          @if (e.estado !== 'publicada') { · <span class="chip-borrador">{{ e.estado }}</span> }
+        </p>
+      }
       @if (mostrarResumen(e)) { <p class="lead">{{ e.resumen }}</p> }
     </header>
 
@@ -260,6 +270,24 @@
         }
       }
       <app-calendario-eventos />
+    }
+
+    @case ('servicios') {
+      <!-- Portafolio de servicios: tarjetas filtrables por grupo (Entradas › Grupo del servicio) -->
+      @if (gruposServicios().length > 1) {
+        <nav class="filtro-grupos" aria-label="Filtrar servicios por grupo">
+          <button type="button" [class.activa]="!grupoServicio()" [attr.aria-pressed]="!grupoServicio()" (click)="grupoServicio.set('')">
+            Todos <span class="conteo">{{ entradas().length }}</span>
+          </button>
+          @for (g of gruposServicios(); track g.id) {
+            <button type="button" [class.activa]="grupoServicio() === g.id" [attr.aria-pressed]="grupoServicio() === g.id" (click)="grupoServicio.set(g.id)">
+              {{ g.nombre }} <span class="conteo">{{ g.servicios.length }}</span>
+            </button>
+          }
+        </nav>
+      }
+      <p class="visually-hidden" role="status" aria-live="polite">{{ serviciosVisibles().length }} servicios</p>
+      <app-servicios-tarjetas [servicios]="serviciosVisibles()" [nivel]="2" />
     }
 
     @case ('historia') {

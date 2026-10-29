@@ -1,0 +1,38 @@
+@if (servicios().length) {
+  <section class="servicios-home" aria-labelledby="titulo-servicios">
+    <header class="sh-encabezado">
+      <div>
+        <span class="sh-antetitulo">Portafolio de servicios</span>
+        <h2 id="titulo-servicios">Nuestros servicios</h2>
+        <p>Único hospital de II nivel de complejidad del Guaviare y centro de referencia para el sur del Meta y los departamentos vecinos.</p>
+      </div>
+      @if (ruta(); as r) {
+        <a class="btn-bdc outline-btn-govco sh-todos" [routerLink]="r">
+          Ver todos los servicios <span class="sh-total">{{ todos().length }}</span>
+        </a>
+      }
+    </header>
+
+    <app-servicios-tarjetas [servicios]="servicios()" />
+
+    <!-- Franja de emergencias (24 horas) -->
+    <div class="sh-emergencia">
+      <span class="sh-emergencia-icono" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M10 3h4v7h7v4h-7v7h-4v-7H3v-4h7z" /></svg>
+      </span>
+      <p>
+        <strong>¿Una emergencia?</strong>
+        Urgencias atiende las 24 horas, con ambulancia, laboratorio, imágenes y farmacia permanentes.
+      </p>
+      <div class="sh-emergencia-acciones">
+        <a class="sh-llamar" href="tel:+573167440324" aria-label="Llamar a la línea de emergencias 316 744 0324">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2" /></svg>
+          316 744 0324
+        </a>
+        @if (urlUrgencias(); as u) {
+          <a class="sh-ver" [routerLink]="u">Conocer Urgencias <span aria-hidden="true">→</span></a>
+        }
+      </div>
+    </div>
+  </section>
+}
