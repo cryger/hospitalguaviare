@@ -1,0 +1,3588 @@
+{
+ "origen": "esehospitalguaviare.gov.co (Normatividad)",
+ "multimedia": [
+  {
+   "nombre": "NORMOGRAMA HOSPITAL.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/NORMOGRAMA%20HOSPITAL.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Normograma de la E.S.E. Hospital San José del Guaviare",
+   "alt": null
+  },
+  {
+   "nombre": "ACUERDO 013-2024 ESTATUTO.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/ACUERDO%20013-2024%20ESTATUTO.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Estatutos de Contratación – Acuerdo 013 de 2024",
+   "alt": null
+  },
+  {
+   "nombre": "ACUERDO 005-2024.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/ACUERDO%20005-2024.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Estatutos Institucionales ESE Hospital San José del Guaviare: Acuerdo Nº 005 de 2024",
+   "alt": null
+  },
+  {
+   "nombre": "ESTATUTOS APROBADOS 2016.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/ESTATUTOS%20APROBADOS%202016.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Estatutos ESE Hospital San José del Guaviare: Acuerdo Nº 008 de 2016",
+   "alt": null
+  },
+  {
+   "nombre": "Acuerdo 0015 2008- deroga el acuerdo 01.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%200015%202008-%20deroga%20el%20acuerdo%2001.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Estatutos ESE Hospital San José del Guaviare: Acuerdo Nº 0015 de 2008",
+   "alt": null
+  },
+  {
+   "nombre": "ESTATUTOS 003 DE 1998.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/ESTATUTOS%20003%20DE%201998.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Estatutos ESE Hospital San José del Guaviare: Acuerdo Nº 003 de 1998",
+   "alt": null
+  },
+  {
+   "nombre": "ORDENANZA 002 ESE HOSPITAL SAN JOSE GUAVIARE.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/ORDENANZA%20002%20ESE%20HOSPITAL%20SAN%20JOSE%20GUAVIARE.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Ordenanza Nº 002 de 1996: Por medio de la cual se crea la Empresa Social del Estado Hospital San José del Guaviare, como una entidad pública del departamento del Guaviare",
+   "alt": null
+  },
+  {
+   "nombre": "21. NOMBRAMIENTO YENNY MURCIA ESTRADA.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/21.%20NOMBRAMIENTO%20YENNY%20MURCIA%20ESTRADA.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Acto administrativo de nombramiento Dra. Yenny Murcia Estrada",
+   "alt": null
+  },
+  {
+   "nombre": "20. NOMBRAMIENTO DRO JOSE SEGUNDO POLO MORENO.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/20.%20NOMBRAMIENTO%20DRO%20JOSE%20SEGUNDO%20POLO%20MORENO.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Acto administrativo de nombramiento Dr. José Segundo Polo Moreno",
+   "alt": null
+  },
+  {
+   "nombre": "18. ACTOS NOMBRAMIENTO YERID NATALY SAAVEDRA.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/18.%20ACTOS%20NOMBRAMIENTO%20YERID%20NATALY%20SAAVEDRA.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Acto administrativo de nombramiento Dra. Yerid Nataly Saavedra",
+   "alt": null
+  },
+  {
+   "nombre": "17. ACTOS NOMBRAMIENTO ANA MARCELA MARTINEZ TORRES.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/17.%20ACTOS%20NOMBRAMIENTO%20ANA%20MARCELA%20MARTINEZ%20TORRES.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Acto administrativo de nombramiento Dra. Ana Marcela Martínez Torres",
+   "alt": null
+  },
+  {
+   "nombre": "16. ACTOS NOMBRAMIENTO MARIA FERNANDA GOMEZ CARO.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/16.%20ACTOS%20NOMBRAMIENTO%20MARIA%20FERNANDA%20GOMEZ%20CARO.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Acto administrativo de nombramiento Dra. María Fernanda Gómez Caro",
+   "alt": null
+  },
+  {
+   "nombre": "15. ACTOS NOMBRAMIENTO LEIDI KORAIMA BARRIOS CARDENAS.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/15.%20ACTOS%20NOMBRAMIENTO%20LEIDI%20KORAIMA%20BARRIOS%20CARDENAS.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Acto administrativo de nombramiento Leidi Koraima Barrios Cárdenas",
+   "alt": null
+  },
+  {
+   "nombre": "14. ACTOS NOMBRAMIENTO LINDHEY KARINA TORRES LOPEZ.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/14.%20ACTOS%20NOMBRAMIENTO%20LINDHEY%20KARINA%20TORRES%20LOPEZ.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Acto administrativo de nombramiento Lindhey Karina Torres López",
+   "alt": null
+  },
+  {
+   "nombre": "13. ACTOS NOMBRAMIENTO DERLLY BUITRAGO.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/13.%20ACTOS%20NOMBRAMIENTO%20DERLLY%20BUITRAGO.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Acto administrativo de nombramiento Dra. Derlly Buitrago",
+   "alt": null
+  },
+  {
+   "nombre": "12. ACTOS NOMBRAMIENTO RODRIGO MIRANDA.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/12.%20ACTOS%20NOMBRAMIENTO%20RODRIGO%20MIRANDA.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Acto administrativo de nombramiento Dr. Rodrigo Miranda",
+   "alt": null
+  },
+  {
+   "nombre": "11. RESOLUCIÓN NOMBRAMIENTO SANDRA JULIETH MARTINEZ.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/11.%20RESOLUCI%C3%93N%20NOMBRAMIENTO%20SANDRA%20JULIETH%20MARTINEZ.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Acto administrativo de nombramiento Dra. Sandra Julieth Martínez",
+   "alt": null
+  },
+  {
+   "nombre": "10. ACTOS NOMBRAMIENTO DRA. ROSA EMILIANA MELO LOAIZA.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/10.%20ACTOS%20NOMBRAMIENTO%20DRA.%20ROSA%20EMILIANA%20MELO%20LOAIZA.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Acto administrativo de nombramiento Dra. Rosa Emiliana Melo Loaiza",
+   "alt": null
+  },
+  {
+   "nombre": "9. ACTOS DE NOMBRAMIENTO MARTHA ANDREA PARRA PENAGOS.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/9.%20ACTOS%20DE%20NOMBRAMIENTO%20MARTHA%20ANDREA%20PARRA%20PENAGOS.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Acto administrativo de nombramiento Dra. Martha Andrea Parra Penagos",
+   "alt": null
+  },
+  {
+   "nombre": "8. NOMBRAMIENTO ERIKA JULIETH PINTO REYES_20260401_175616.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/8.%20NOMBRAMIENTO%20ERIKA%20JULIETH%20PINTO%20REYES_20260401_175616.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Acto administrativo de nombramiento Dra. Erika Julieth Pinto Reyes",
+   "alt": null
+  },
+  {
+   "nombre": "7. ACTOS DE POSESIÓN DRA. JENNY PATRICIA ERASO.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/7.%20ACTOS%20DE%20POSESI%C3%93N%20DRA.%20JENNY%20PATRICIA%20ERASO.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Acto administrativo de nombramiento Dra. Jenny Patricia Eraso",
+   "alt": null
+  },
+  {
+   "nombre": "6. ACTOS DE POSESIÓN DRO. JONHATAN MONTALVO VERGARA.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/6.%20ACTOS%20DE%20POSESI%C3%93N%20DRO.%20JONHATAN%20MONTALVO%20VERGARA.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Acto administrativo de nombramiento Dr. Johnatan Montalvo Vergara",
+   "alt": null
+  },
+  {
+   "nombre": "5. ACTOS DE NOMBRAMIENTO DRA. LAURA FERNANDA ARCE.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/5.%20ACTOS%20DE%20NOMBRAMIENTO%20DRA.%20LAURA%20FERNANDA%20ARCE.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Acto administrativo de nombramiento Dra. Laura Fernanda Arce",
+   "alt": null
+  },
+  {
+   "nombre": "4. ACTOS DE NOMBRAMIENTO DRA. DIANA SOFIA GONZALEZ.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/4.%20ACTOS%20DE%20NOMBRAMIENTO%20DRA.%20DIANA%20SOFIA%20GONZALEZ.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Acto administrativo de nombramiento Dra. Diana Sofía González",
+   "alt": null
+  },
+  {
+   "nombre": "3. ACTOS  DE NOMBRAMIENTO HELVER FERNEY MARIN VILLAR.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/3.%20ACTOS%20%20DE%20NOMBRAMIENTO%20HELVER%20FERNEY%20MARIN%20VILLAR.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Acto administrativo de nombramiento Dr. Helver Ferney Marín Villar",
+   "alt": null
+  },
+  {
+   "nombre": "ACTOS DE NOMBRAMIENTO DRA. ELSA CASTRO SALCEDO.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/ACTOS%20DE%20NOMBRAMIENTO%20DRA.%20ELSA%20CASTRO%20SALCEDO.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Acto administrativo de nombramiento Dra. Elsa Castro Salcedo",
+   "alt": null
+  },
+  {
+   "nombre": "ACTOS DE NOMBRAMIENTO DRA. ADRIANA RODRIGUEZ ESQUI.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/ACTOS%20DE%20NOMBRAMIENTO%20DRA.%20ADRIANA%20RODRIGUEZ%20ESQUI.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Acto administrativo de nombramiento Dra. Adriana Rodríguez Esquivel",
+   "alt": null
+  },
+  {
+   "nombre": "Resolucion 906 de 2026.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resolucion%20906%20de%202026.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución 0906 de 2026 – Asignación de funciones",
+   "alt": null
+  },
+  {
+   "nombre": "Resolución 822 de 2026.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resoluci%C3%B3n%20822%20de%202026.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución 0822 de 2026 – Conformación de terna del personal profesional de la salud para el segundo representante del estamento científico ante la Junta Directiva",
+   "alt": null
+  },
+  {
+   "nombre": "RESOLUCIÓN INCREMENTO SALARIA 2026_CON ORDENANZA.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/RESOLUCI%C3%93N%20INCREMENTO%20SALARIA%202026_CON%20ORDENANZA.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución 0733 de 2026 – Aprobación de incremento salarial",
+   "alt": null
+  },
+  {
+   "nombre": "RESOLUCION 0083.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/RESOLUCION%200083.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución 0083 de 2026 – Compraventa de equipos biomédicos y mobiliario hospitalario",
+   "alt": null
+  },
+  {
+   "nombre": "Resolución No. 0610 COMITÉ COPASST.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resoluci%C3%B3n%20No.%200610%20COMIT%C3%89%20COPASST.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución 0610 de 2025 – Conformación del Comité COPASST 2025-2027",
+   "alt": null
+  },
+  {
+   "nombre": "RESOLUCION 768-2025.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/RESOLUCION%20768-2025.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución 0768 de 2025 – Creación del Comité Paritario de Seguridad y Salud en el Trabajo (COPASST)",
+   "alt": null
+  },
+  {
+   "nombre": "INCREMENTO SALARIAL VIGENCIA 2025.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/INCREMENTO%20SALARIAL%20VIGENCIA%202025.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución No. 0734 del 25 de julio de 2025 – Incremento salarial",
+   "alt": null
+  },
+  {
+   "nombre": "RESOLUCION REACTIVOVIGILANCIA.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/RESOLUCION%20REACTIVOVIGILANCIA.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución del programa de reactivovigilancia",
+   "alt": null
+  },
+  {
+   "nombre": "Resoluciòn 419_Plan de Acciòn_V2.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resoluci%C3%B2n%20419_Plan%20de%20Acci%C3%B2n_V2.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución 0419 de 2025 – Plan de Acción",
+   "alt": null
+  },
+  {
+   "nombre": "RES 1329  actuali Código de Etica..pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/RES%201329%20%20actuali%20C%C3%B3digo%20de%20Etica..pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución 1329 de 2024 – Actualización del Código de Ética",
+   "alt": null
+  },
+  {
+   "nombre": "Resolucion derechos y deberes.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resolucion%20derechos%20y%20deberes.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución de derechos y deberes",
+   "alt": null
+  },
+  {
+   "nombre": "INCREMENTO SALARIAL VIGENCIA 2024 SERVIDORES PUBLICOS.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/INCREMENTO%20SALARIAL%20VIGENCIA%202024%20SERVIDORES%20PUBLICOS.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución No. 0326 del 27 de marzo de 2024 – Incremento salarial",
+   "alt": null
+  },
+  {
+   "nombre": "Resolucion 0236 por medio de la cual se adopta la planta de empleos.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resolucion%200236%20por%20medio%20de%20la%20cual%20se%20adopta%20la%20planta%20de%20empleos.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución 0236 de 2023 – Por medio de la cual se adopta la planta de empleos",
+   "alt": null
+  },
+  {
+   "nombre": "Resolucion 0234 por medio de la cual se suprimen unos empleos.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resolucion%200234%20por%20medio%20de%20la%20cual%20se%20suprimen%20unos%20empleos.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución 0234 de 2023 – Por medio de la cual se suprimen unos empleos",
+   "alt": null
+  },
+  {
+   "nombre": "Resolucion 0235 por medio de la cual se crean unos empleos.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resolucion%200235%20por%20medio%20de%20la%20cual%20se%20crean%20unos%20empleos.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución 0235 de 2023 – Por medio de la cual se crean unos empleos",
+   "alt": null
+  },
+  {
+   "nombre": "Resolucion-110.-Plan-de-Accion-Institucional.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resolucion-110.-Plan-de-Accion-Institucional.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución Nº 0110 de 2022: Por medio de la cual se adopta el plan de acción institucional de la ESE Hospital San José del Guaviare para la vigencia 2022",
+   "alt": null
+  },
+  {
+   "nombre": "RESOLUCIÓN No. 0737 DE 2022_INCREMENTO SALARIAL.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/RESOLUCI%C3%93N%20No.%200737%20DE%202022_INCREMENTO%20SALARIAL.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución No. 0737 del 15 de julio de 2022 – Incremento salarial",
+   "alt": null
+  },
+  {
+   "nombre": "Resolucion N.1151 convocatoria a eleccion copasst.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resolucion%20N.1151%20convocatoria%20a%20eleccion%20copasst.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución Nº 1151 de 2022: Convocatoria a elección COPASST",
+   "alt": null
+  },
+  {
+   "nombre": "Resolucion-0836-politicas.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resolucion-0836-politicas.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución Nº 0836 de 2020: Por la cual se adoptan las políticas de MIPG en la Empresa Social del Estado Hospital San José del Guaviare",
+   "alt": null
+  },
+  {
+   "nombre": "resolucion-0620-28-octubre-de-2020-adopcion-medelo-MIPG.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/resolucion-0620-28-octubre-de-2020-adopcion-medelo-MIPG.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución Nº 0620 de 2020: Por la cual se adoptan las políticas de MIPG en la Empresa Social del Estado Hospital San José del Guaviare",
+   "alt": null
+  },
+  {
+   "nombre": "RESOLUCIÓN No. 0794 DE 2021_INCREMENTO SALARIAL.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/RESOLUCI%C3%93N%20No.%200794%20DE%202021_INCREMENTO%20SALARIAL.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución No. 0794 del 30 de septiembre de 2021",
+   "alt": null
+  },
+  {
+   "nombre": "Resolucion-activacion-equipo-multidisciplinario.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resolucion-activacion-equipo-multidisciplinario.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución Nº 0521 de 2021: Por medio de la cual se adiciona un capítulo transitorio a la Resolución Nº 1382 del 21 de noviembre de 2018",
+   "alt": null
+  },
+  {
+   "nombre": "RESOLUCIÓN  INCREMENTO SALARIAL VIGENCIA 2020.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/RESOLUCI%C3%93N%20%20INCREMENTO%20SALARIAL%20VIGENCIA%202020.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución No. 0453 del 11 de agosto de 2020 – Incremento salarial",
+   "alt": null
+  },
+  {
+   "nombre": "Resolución 0159 de 2020.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resoluci%C3%B3n%200159%20de%202020.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución 0159 de 2020: Por medio de la cual se definen lineamientos institucionales para que la Oficina de Control Interno de Gestión cumpla con las actividades de evaluación independiente, auditoría interna y auditoría para el mejoramiento de…",
+   "alt": null
+  },
+  {
+   "nombre": "Resolución Adopción Política Gestión Documental.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resoluci%C3%B3n%20Adopci%C3%B3n%20Pol%C3%ADtica%20Gesti%C3%B3n%20Documental.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución Nº 1388 de 2019: Por medio de la cual se adopta la Política de Gestión Documental",
+   "alt": null
+  },
+  {
+   "nombre": "PETI y Resolución Hospital San José del Guaviare.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/PETI%20y%20Resoluci%C3%B3n%20Hospital%20San%20Jos%C3%A9%20del%20Guaviare.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución Nº 1385 de 2019: Por medio de la cual se adopta el Plan Estratégico de Tecnologías de la Información y las Comunicaciones PETI 2019 – 2022",
+   "alt": null
+  },
+  {
+   "nombre": "Resolución Nº 1042 de 2019 Convocatoria comision de personal.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resoluci%C3%B3n%20N%C2%BA%201042%20de%202019%20Convocatoria%20comision%20de%20personal.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución Nº 1042 de 2019: Por medio de la cual se convoca a elección de los representantes de los empleados a la Comisión de Personal para la vigencia 2019 – 2021",
+   "alt": null
+  },
+  {
+   "nombre": "Resolución Nº 1041 Elección representante COPASST.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resoluci%C3%B3n%20N%C2%BA%201041%20Elecci%C3%B3n%20representante%20COPASST.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución Nº 1041 de 2019: Por medio de la cual se convoca a elección de los representantes de los empleados ante el COPASST para la vigencia 2019 – 2021",
+   "alt": null
+  },
+  {
+   "nombre": "RESOLUCION 335 de 2019 PAMEC (2).pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/RESOLUCION%20335%20de%202019%20PAMEC%20(2).pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución Nº 0335 de 2019: Por medio de la cual se establece la metodología para la autoevaluación de los estándares de acreditación en el ciclo del mejoramiento continuo",
+   "alt": null
+  },
+  {
+   "nombre": "Resolución Nº 0333.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resoluci%C3%B3n%20N%C2%BA%200333.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución Nº 0333 de 2019: Por la cual se ordena un encargo",
+   "alt": null
+  },
+  {
+   "nombre": "RESOLUCION N°0164.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/RESOLUCION%20N%C2%B00164.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución Nº 0164 de 2019: Por medio de la cual se unifica y actualiza la normatividad del Comité de Conciliación y Defensa Judicial",
+   "alt": null
+  },
+  {
+   "nombre": "RESOLUSION Nº 0169.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/RESOLUSION%20N%C2%BA%200169.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución Nº 0169 de 2019: Por la cual se declara la apertura del proceso de convocatoria pública Nº 01 de 2019 – Prestación de servicio de raciones alimentarias",
+   "alt": null
+  },
+  {
+   "nombre": "Resolución Nº 0231 de 2019.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resoluci%C3%B3n%20N%C2%BA%200231%20de%202019.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución Nº 0231 de 2019: Por medio de la cual se convoca a la elección del Representante del Estamento Científico ante la Junta Directiva",
+   "alt": null
+  },
+  {
+   "nombre": "Resolución Nº 1611 de 2018 Política de Gestión del Riesgo.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resoluci%C3%B3n%20N%C2%BA%201611%20de%202018%20Pol%C3%ADtica%20de%20Gesti%C3%B3n%20del%20Riesgo.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución Nº 1611 de 2018: Por medio de la cual se adopta la Política de Gestión del Riesgo",
+   "alt": null
+  },
+  {
+   "nombre": "Resolución 1382 de 2018 MIPG.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resoluci%C3%B3n%201382%20de%202018%20MIPG.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución Nº 1382 de 2018: Por medio de la cual se integra el Comité Institucional de Gestión y Desempeño",
+   "alt": null
+  },
+  {
+   "nombre": "RESOLUCIÓN No. 0862 DE 2018_INCREMENTO SALARIAL.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/RESOLUCI%C3%93N%20No.%200862%20DE%202018_INCREMENTO%20SALARIAL.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución No. 0862 de 2018 – Incremento salarial",
+   "alt": null
+  },
+  {
+   "nombre": "Resolucion 1285 de 2017.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resolucion%201285%20de%202017.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución 1285 de 2017: Por medio de la cual se adopta el Sistema Institucional de Control Interno y se modifica el Comité Institucional de Coordinación del Sistema de Control Interno",
+   "alt": null
+  },
+  {
+   "nombre": "Resolución No. 1325 2017 - (Desagregación Presupuesto Vigencia 2018).pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resoluci%C3%B3n%20No.%201325%202017%20-%20(Desagregaci%C3%B3n%20Presupuesto%20Vigencia%202018).pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución Nº 1325 de 2017: Desagregación del Presupuesto de Ingresos y Gastos para la vigencia 2018",
+   "alt": null
+  },
+  {
+   "nombre": "Red 0890 2017 admción del riesgo.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Red%200890%202017%20admci%C3%B3n%20del%20riesgo.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución Nº 0890 de 2017: Por medio de la cual se actualiza la Política de Administración del Riesgo",
+   "alt": null
+  },
+  {
+   "nombre": "Resolucion 0463 de 2017, Ajuste  Tarifa GLUCOMETRIA.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resolucion%200463%20de%202017,%20Ajuste%20%20Tarifa%20GLUCOMETRIA.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución Nº 0463 de 2017: Actualización de la tarifa del examen de glucometría",
+   "alt": null
+  },
+  {
+   "nombre": "4. Res 0448 2017 austeridad y gasto público.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/4.%20Res%200448%202017%20austeridad%20y%20gasto%20p%C3%BAblico.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución Nº 0448 de 2017: Políticas de Austeridad, Racionalización de Costos y Gastos y Eficiencia Administrativa",
+   "alt": null
+  },
+  {
+   "nombre": "Resolucion DE  AMBULANCIA 004 de 1 de enero de 2017.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resolucion%20DE%20%20AMBULANCIA%20004%20de%201%20de%20enero%20de%202017.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución Nº 0004 de 2017: Actualización de tarifas de traslado de pacientes en ambulancia básica, medicalizada y neonatal para la vigencia 2017",
+   "alt": null
+  },
+  {
+   "nombre": "Resolución No. 1316 de 2016 - (Desagregación Presupuesto Vigencia 2017).pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resoluci%C3%B3n%20No.%201316%20de%202016%20-%20(Desagregaci%C3%B3n%20Presupuesto%20Vigencia%202017).pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución Nº 1316 de 2016: Desagregación del Presupuesto de Ingresos y Gastos para la vigencia 2017",
+   "alt": null
+  },
+  {
+   "nombre": "Resolución Ambulancia Urbano Redondo 2016.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resoluci%C3%B3n%20Ambulancia%20Urbano%20Redondo%202016.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución Nº 1109 de 2016: Tarifa de transporte terrestre en ambulancia básica y medicalizada urbano redondo",
+   "alt": null
+  },
+  {
+   "nombre": "Res 0943 2016 admcion del riesgo.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Res%200943%202016%20admcion%20del%20riesgo.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución Nº 0943 de 2016: Modificación de la Política de Administración del Riesgo",
+   "alt": null
+  },
+  {
+   "nombre": "3. Res 0663 de 2016 Polítca de calidad.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/3.%20Res%200663%20de%202016%20Pol%C3%ADtca%20de%20calidad.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución Nº 0663 de 2016: Por medio de la cual se adopta la Política y Objetivos de la Calidad",
+   "alt": null
+  },
+  {
+   "nombre": "RESOLUCION MEDICAMENTOS 470   2016.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/RESOLUCION%20MEDICAMENTOS%20470%20%20%202016.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución Nº 0470 de 2016: Actualización de precios de medicamentos, dispositivos médicos e insumos para la vigencia 2016",
+   "alt": null
+  },
+  {
+   "nombre": "AMBULANCIA 383 DE 2016 REDONDO.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/AMBULANCIA%20383%20DE%202016%20REDONDO.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución Nº 0383 de 2016: Tarifas para el traslado redondo de pacientes en ambulancia básica, medicalizada y neonatal",
+   "alt": null
+  },
+  {
+   "nombre": "RESOLUCION AMBULANCIA  2016.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/RESOLUCION%20AMBULANCIA%20%202016.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución Nº 0202 de 2016: Actualización de tarifas de traslado de pacientes en ambulancia para la vigencia 2016",
+   "alt": null
+  },
+  {
+   "nombre": "LABORATORIOS Y PROCEDIMIENTOS 154 DEL 2016.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/LABORATORIOS%20Y%20PROCEDIMIENTOS%20154%20DEL%202016.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución Nº 0154 de 2016: Exámenes de laboratorio clínico y procedimientos no definidos en el Manual Tarifario SOAT",
+   "alt": null
+  },
+  {
+   "nombre": "Resolución 1155 creación Ventanilla ünica.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resoluci%C3%B3n%201155%20creaci%C3%B3n%20Ventanilla%20%C3%BCnica.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución Nº 1155 de 2015: Por medio de la cual se crea la Ventanilla Única de Correspondencia",
+   "alt": null
+  },
+  {
+   "nombre": "resolucion 1000.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/resolucion%201000.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución Nº 1000 de 2015: Exámenes de laboratorio clínico y procedimientos no definidos en el Manual Tarifario SOAT",
+   "alt": null
+  },
+  {
+   "nombre": "PROCEDIMIENTOS Y LABORATORIOS 872 DEL 2015.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/PROCEDIMIENTOS%20Y%20LABORATORIOS%20872%20DEL%202015.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución Nº 0872 de 2015: Exámenes de laboratorio clínico y procedimientos no definidos en el Manual Tarifario SOAT",
+   "alt": null
+  },
+  {
+   "nombre": "LABORATORIOS Y PROCEDIMIENTOS 770 DEL 2015.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/LABORATORIOS%20Y%20PROCEDIMIENTOS%20770%20DEL%202015.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución Nº 0770 de 2015: Exámenes de laboratorio clínico y procedimientos no definidos en el Manual Tarifario SOAT",
+   "alt": null
+  },
+  {
+   "nombre": "0735 DE 30 SEPTIEMBRE 2015 TARIFAS AMBULANCIA 2015.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/0735%20DE%2030%20SEPTIEMBRE%202015%20TARIFAS%20AMBULANCIA%202015.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución Nº 0735 de 2015: Tarifa de transporte de víctimas de accidentes de tránsito y eventos catastróficos y de ambulancia medicalizada urbana",
+   "alt": null
+  },
+  {
+   "nombre": "1094864 RESOLUCION_0520_TARIFA_AMBULANCIA  JULIO 2015.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/1094864%20RESOLUCION_0520_TARIFA_AMBULANCIA%20%20JULIO%202015.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución Nº 0520 de 2015: Modificación de la Resolución Nº 0211 de 2015 sobre tarifas de traslado de pacientes en ambulancia",
+   "alt": null
+  },
+  {
+   "nombre": "LABORATORIOS Y PROCEDIMIENTOS 474 DEL 2015.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/LABORATORIOS%20Y%20PROCEDIMIENTOS%20474%20DEL%202015.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución Nº 0474 de 2015: Exámenes de laboratorio clínico y procedimientos no definidos en el Manual Tarifario SOAT",
+   "alt": null
+  },
+  {
+   "nombre": "Resolución Nº 0372.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resoluci%C3%B3n%20N%C2%BA%200372.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución Nº 0372 de 2015: Por la cual se adopta el programa de seguridad del paciente",
+   "alt": null
+  },
+  {
+   "nombre": "Res 0303 2015 admcion riesgo.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Res%200303%202015%20admcion%20riesgo.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución Nº 0303 de 2015: Actualización de la Política de Administración del Riesgo",
+   "alt": null
+  },
+  {
+   "nombre": "RESOLUCION 211 TARIFAS AMBULANCIA  2015.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/RESOLUCION%20211%20TARIFAS%20AMBULANCIA%20%202015.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución Nº 0211 de 2015: Tarifa de traslado de pacientes en ambulancia básica, medicalizada y neonatal",
+   "alt": null
+  },
+  {
+   "nombre": "LABORATORIOS 008 DEL 2015.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/LABORATORIOS%20008%20DEL%202015.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución Nº 0008 de 2015: Tarifas de laboratorio clínico no definidas en el Manual Tarifario SOAT",
+   "alt": null
+  },
+  {
+   "nombre": "1er-trimestre.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/1er-trimestre.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resoluciones del primer trimestre de 2015",
+   "alt": null
+  },
+  {
+   "nombre": "2do-trimestre.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/2do-trimestre.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resoluciones del segundo trimestre de 2015",
+   "alt": null
+  },
+  {
+   "nombre": "3er-trimestre.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/3er-trimestre.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resoluciones del tercer trimestre de 2015",
+   "alt": null
+  },
+  {
+   "nombre": "4to-trimestre.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/4to-trimestre.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resoluciones del cuarto trimestre de 2015",
+   "alt": null
+  },
+  {
+   "nombre": "Resolución Nº 0807.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resoluci%C3%B3n%20N%C2%BA%200807.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución Nº 0807 de 2014: Modificación del Comité de Infecciones",
+   "alt": null
+  },
+  {
+   "nombre": "Resolución Nº 0806.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resoluci%C3%B3n%20N%C2%BA%200806.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución Nº 0806 de 2014: Por la cual se adopta el Comité de Seguridad del Paciente y Eventos Adversos",
+   "alt": null
+  },
+  {
+   "nombre": "Resolución Nº 0805.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resoluci%C3%B3n%20N%C2%BA%200805.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución Nº 0805 de 2014: Modificación del Comité de Ética Hospitalaria",
+   "alt": null
+  },
+  {
+   "nombre": "LABORATORIOS 804 DEL 2014.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/LABORATORIOS%20804%20DEL%202014.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución Nº 0804 de 2014: Exámenes de laboratorio clínico no definidos en el Manual Tarifario SOAT",
+   "alt": null
+  },
+  {
+   "nombre": "resolucion  0772 tarifas ambulancia 2013 y  2014.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/resolucion%20%200772%20tarifas%20ambulancia%202013%20y%20%202014.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución Nº 0772 de 2014: Aclaración de tarifas de transporte terrestre de pacientes en ambulancia 2013 y 2014",
+   "alt": null
+  },
+  {
+   "nombre": "LABORATORIOS 0738 DEL 2014.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/LABORATORIOS%200738%20DEL%202014.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución Nº 0738 de 2014: Exámenes de laboratorio clínico no definidos en el Manual Tarifario SOAT",
+   "alt": null
+  },
+  {
+   "nombre": "Resolución Nº 0643.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resoluci%C3%B3n%20N%C2%BA%200643.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución Nº 0643 de 2014: Por la cual se crea el Comité Antitrámites y de Gobierno en Línea",
+   "alt": null
+  },
+  {
+   "nombre": "PROCEDIMIENTOS QUIRURGICOS 594 DEL 2014.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/PROCEDIMIENTOS%20QUIRURGICOS%20594%20DEL%202014.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución Nº 0594 de 2014: Procedimientos quirúrgicos no definidos en el Manual Tarifario SOAT",
+   "alt": null
+  },
+  {
+   "nombre": "PROCEDIMEINTOS QUIRURGICOS MODIFICACION R 451 No 562.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/PROCEDIMEINTOS%20QUIRURGICOS%20MODIFICACION%20R%20451%20No%20562.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución Nº 0562 de 2014: Modificación de la Resolución 0451 de 2014 sobre nomenclatura de procedimientos quirúrgicos",
+   "alt": null
+  },
+  {
+   "nombre": "EXAMENES DE LABORATORIOS 0518.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/EXAMENES%20DE%20LABORATORIOS%200518.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución Nº 0518 de 2014: Exámenes de laboratorio clínico no definidos en el Manual Tarifario SOAT",
+   "alt": null
+  },
+  {
+   "nombre": "PROCEDIMIENTOS QUIRURGICOS 0451.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/PROCEDIMIENTOS%20QUIRURGICOS%200451.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución Nº 0451 de 2014: Procedimientos quirúrgicos no definidos en el Manual Tarifario SOAT",
+   "alt": null
+  },
+  {
+   "nombre": "Resolución Nº 0449.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resoluci%C3%B3n%20N%C2%BA%200449.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución Nº 0449 de 2014: Funciones del Comité de Contratación conforme al Estatuto de Contratación",
+   "alt": null
+  },
+  {
+   "nombre": "Resolución Nº 1014 de 2013.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resoluci%C3%B3n%20N%C2%BA%201014%20de%202013.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución Nº 1014 de 2013: Por medio de la cual se adopta el Mapa de Procesos y el Manual de Procesos y Procedimientos",
+   "alt": null
+  },
+  {
+   "nombre": "LABORATORIO CLINICO LESMANIASIS 0893.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/LABORATORIO%20CLINICO%20LESMANIASIS%200893.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución Nº 0893 de 2013: Creación de exámenes de laboratorio clínico de Leishmania",
+   "alt": null
+  },
+  {
+   "nombre": "Resolución Nº 0845.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resoluci%C3%B3n%20N%C2%BA%200845.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución Nº 0845 de 2013: Por la cual se adopta la guía para el manejo médico de código rojo",
+   "alt": null
+  },
+  {
+   "nombre": "Resolución Nº 0672.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resoluci%C3%B3n%20N%C2%BA%200672.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución Nº 0672 de 2013: Por la cual se adoptan las guías y protocolos para el manejo médico",
+   "alt": null
+  },
+  {
+   "nombre": "Resolución Nº 0662.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resoluci%C3%B3n%20N%C2%BA%200662.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución Nº 0662 de 2013: Por la cual se adoptan las guías prehospitalarias para atención de pacientes",
+   "alt": null
+  },
+  {
+   "nombre": "Resolución Nº 0493.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resoluci%C3%B3n%20N%C2%BA%200493.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución Nº 0493 de 2013: Guía para el manejo inicial del trauma de tórax",
+   "alt": null
+  },
+  {
+   "nombre": "Resolución Nº 0492.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resoluci%C3%B3n%20N%C2%BA%200492.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución Nº 0492 de 2013: Guía para el manejo inicial de trauma craneoencefálico",
+   "alt": null
+  },
+  {
+   "nombre": "Resolución Nº 0490.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resoluci%C3%B3n%20N%C2%BA%200490.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución Nº 0490 de 2013: Por la cual se adopta el Comité AIEPI o Equipo para Bienestar y Salud de la Infancia",
+   "alt": null
+  },
+  {
+   "nombre": "Resolución N 0489.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resoluci%C3%B3n%20N%200489.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución Nº 0489 de 2013: Guía para el manejo de infección urinaria en el adulto",
+   "alt": null
+  },
+  {
+   "nombre": "Resolución Nº 0485.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resoluci%C3%B3n%20N%C2%BA%200485.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución Nº 0485 de 2013: Guía para el manejo de hipertensión arterial primaria",
+   "alt": null
+  },
+  {
+   "nombre": "Resolución Nº 0484.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resoluci%C3%B3n%20N%C2%BA%200484.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución Nº 0484 de 2013: Guía para el manejo de trauma musculoesquelético",
+   "alt": null
+  },
+  {
+   "nombre": "Resolución Nº 0482.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resoluci%C3%B3n%20N%C2%BA%200482.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución Nº 0482 de 2013: Guía para el manejo inicial de trauma",
+   "alt": null
+  },
+  {
+   "nombre": "Resolución Nº 0481.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resoluci%C3%B3n%20N%C2%BA%200481.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución Nº 0481 de 2013: Guía para el manejo de trauma abdominal",
+   "alt": null
+  },
+  {
+   "nombre": "Resolución Nº 0480.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resoluci%C3%B3n%20N%C2%BA%200480.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución Nº 0480 de 2013: Guía para el manejo inicial de trauma de cuello",
+   "alt": null
+  },
+  {
+   "nombre": "Resolución Nº 0479.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resoluci%C3%B3n%20N%C2%BA%200479.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución Nº 0479 de 2013: Guía para el manejo del trauma en la gestante",
+   "alt": null
+  },
+  {
+   "nombre": "Resolución Nº 0469.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resoluci%C3%B3n%20N%C2%BA%200469.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución Nº 0469 de 2013: Programa, subprogramas y política de salud ocupacional",
+   "alt": null
+  },
+  {
+   "nombre": "Resolución Nº 0392.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resoluci%C3%B3n%20N%C2%BA%200392.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución Nº 0392 de 2013: Por medio de la cual se adopta la Política y Objetivos de Seguridad del Paciente",
+   "alt": null
+  },
+  {
+   "nombre": "RESOLUCION N°. 353_1.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/RESOLUCION%20N%C2%B0.%20353_1.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución Nº 0353 de 2013: Por medio de la cual se adopta la Política de Responsabilidad Social",
+   "alt": null
+  },
+  {
+   "nombre": "RESOLUCION N° 0318 DE 2013_1.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/RESOLUCION%20N%C2%B0%200318%20DE%202013_1.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución Nº 0318 de 2013: Por medio de la cual se adopta la Política y los Objetivos de Calidad",
+   "alt": null
+  },
+  {
+   "nombre": "resolucion 0265 de 2013- 30-04-2013 04.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/resolucion%200265%20de%202013-%2030-04-2013%2004.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución Nº 0265 de 2013: Por medio de la cual se revoca la Resolución Nº 0879 de 2010",
+   "alt": null
+  },
+  {
+   "nombre": "resolucion 0260 Manual de Tarifas Institucional_compressed.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/resolucion%200260%20Manual%20de%20Tarifas%20Institucional_compressed.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución Nº 0260 de 2013: Manual tarifario institucional de medicamentos y dispositivos médicos",
+   "alt": null
+  },
+  {
+   "nombre": "RESOLUCION N° 0248 DE 2013_1.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/RESOLUCION%20N%C2%B0%200248%20DE%202013_1.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución Nº 0248 de 2013: Por medio de la cual se modifica y actualiza la Resolución Nº 0477 de 2011",
+   "alt": null
+  },
+  {
+   "nombre": "Resolución Nº 0473.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resoluci%C3%B3n%20N%C2%BA%200473.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución Nº 0437 de 2012: Por la cual se crea el Comité Docencia-Servicio",
+   "alt": null
+  },
+  {
+   "nombre": "Resolución Nº 0195.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resoluci%C3%B3n%20N%C2%BA%200195.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución Nº 0195 de 2012: Por la cual se crea el Comité de Urgencias",
+   "alt": null
+  },
+  {
+   "nombre": "Resolución Nº 0194.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resoluci%C3%B3n%20N%C2%BA%200194.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución Nº 0194 de 2012: Por la cual se crea el Comité de Mortalidad Materno Perinatal",
+   "alt": null
+  },
+  {
+   "nombre": "resolucion ambulancia 0084   2012.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/resolucion%20ambulancia%200084%20%20%202012.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución Nº 0084 de 2012: Actualización de tarifas de transporte terrestre de pacientes",
+   "alt": null
+  },
+  {
+   "nombre": "RESOLUCION N° 0020_1.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/RESOLUCION%20N%C2%B0%200020_1.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución Nº 0020 de 2012: Por la cual se adopta la Política de Administración del Riesgo",
+   "alt": null
+  },
+  {
+   "nombre": "RESOLUCION N° 0477_1.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/RESOLUCION%20N%C2%B0%200477_1.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución Nº 0477 de 2011: Por medio de la cual se adoptan los formatos de procesos y procedimientos",
+   "alt": null
+  },
+  {
+   "nombre": "RESOL 0879 PLAT ESTRATEGICA 29-10-2010 derogado acuerdo 02.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/RESOL%200879%20PLAT%20ESTRATEGICA%2029-10-2010%20derogado%20acuerdo%2002.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución Nº 0879 de 2010: Por medio de la cual se modifica el Acuerdo Nº 0015 de 2008",
+   "alt": null
+  },
+  {
+   "nombre": "9. Resolucion comite IAMI.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/9.%20Resolucion%20comite%20IAMI.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución Nº 0211 de 2010: Por medio de la cual se crea el comité de la IIAMI Integral",
+   "alt": null
+  },
+  {
+   "nombre": "RESOLUCION AMBULANCIA  2009.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/RESOLUCION%20AMBULANCIA%20%202009.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución Nº 0567 de 2009: Nuevos códigos de las tarifas para el cobro de traslados de pacientes en remisión",
+   "alt": null
+  },
+  {
+   "nombre": "RESOLUCION N° 1426_1.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/RESOLUCION%20N%C2%B0%201426_1.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución Nº 1426 de 2008: Por la cual se adopta el manual de procesos y procedimientos",
+   "alt": null
+  },
+  {
+   "nombre": "Resolución Nº 0356.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resoluci%C3%B3n%20N%C2%BA%200356.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución Nº 0356 de 2007: Por la cual se crea el Comité de Farmacia y Terapéutica",
+   "alt": null
+  },
+  {
+   "nombre": "Resolución Nº 0731.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resoluci%C3%B3n%20N%C2%BA%200731.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución Nº 0731 de 2003: Por medio de la cual se crea y conforma el Comité Científico Técnico",
+   "alt": null
+  },
+  {
+   "nombre": "Acuerdo 02-2025.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%2002-2025.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Acuerdo Nº 002 de 2025",
+   "alt": null
+  },
+  {
+   "nombre": "Acuerdo Nº 001 de 2019.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%20N%C2%BA%20001%20de%202019.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Acuerdo Nº 001 de 2019: Adición al Presupuesto de Ingresos y Gastos para la vigencia 2019",
+   "alt": null
+  },
+  {
+   "nombre": "Acuerdo Nº 01 de 2018.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%20N%C2%BA%2001%20de%202018.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Acuerdo Nº 01 de 2018: Adición al Presupuesto de Ingresos y Gastos para la vigencia 2018",
+   "alt": null
+  },
+  {
+   "nombre": "Acuerdo Nº 02 de 2018.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%20N%C2%BA%2002%20de%202018.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Acuerdo Nº 02 de 2018: Manual de manejo, control, custodia y baja de la propiedad, planta y equipo",
+   "alt": null
+  },
+  {
+   "nombre": "Acuerdo Nº 03 de 2018.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%20N%C2%BA%2003%20de%202018.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Acuerdo Nº 03 de 2018: Por medio del cual se expide el nuevo manual de contratación",
+   "alt": null
+  },
+  {
+   "nombre": "Acuerdo Nº 04 de 2018.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%20N%C2%BA%2004%20de%202018.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Acuerdo Nº 04 de 2018: Por medio del cual se aprueba el Plan de Gestión Institucional del Gerente para el periodo 2018-2019",
+   "alt": null
+  },
+  {
+   "nombre": "Acuerdo Nº 05 de 2018.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%20N%C2%BA%2005%20de%202018.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Acuerdo Nº 05 de 2018: Adición al Presupuesto de Ingresos y Gastos para la vigencia 2018",
+   "alt": null
+  },
+  {
+   "nombre": "Acuerdo Nº 06 de 2018.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%20N%C2%BA%2006%20de%202018.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Acuerdo Nº 06 de 2018: Actualización del manual de funciones, requisitos mínimos y competencias laborales",
+   "alt": null
+  },
+  {
+   "nombre": "Acuerdo Nº 07 de 2018.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%20N%C2%BA%2007%20de%202018.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Acuerdo Nº 07 de 2018: Creación de las coordinaciones de los grupos internos de trabajo",
+   "alt": null
+  },
+  {
+   "nombre": "Acuerdo Nº 09 de 2018.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%20N%C2%BA%2009%20de%202018.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Acuerdo Nº 09 de 2018: Creación de un rubro en el Presupuesto de Gastos para la vigencia 2018",
+   "alt": null
+  },
+  {
+   "nombre": "Acuerdo Nº 010 de 2018.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%20N%C2%BA%20010%20de%202018.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Acuerdo Nº 010 de 2018: Aprobación del Presupuesto de Ingresos y Gastos para la vigencia 2019",
+   "alt": null
+  },
+  {
+   "nombre": "Acto Administrativo Aprobación Presupuesto Ingresos y Gastos 2018 - ESE HSJG.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acto%20Administrativo%20Aprobaci%C3%B3n%20Presupuesto%20Ingresos%20y%20Gastos%202018%20-%20ESE%20HSJG.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Acuerdo Nº 007 de 2017: Aprobación del presupuesto de ingresos y gastos para la vigencia 2018",
+   "alt": null
+  },
+  {
+   "nombre": "ESTATUTOS APROBADOS 2016 (1).pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/ESTATUTOS%20APROBADOS%202016%20(1).pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Acuerdo Nº 008 de 2016: Por medio del cual se adoptan los nuevos estatutos de la ESE Hospital San José del Guaviare",
+   "alt": null
+  },
+  {
+   "nombre": "Acto Administrativo Aprobación Presupuesto Ingresos y Gastos 2017 - ESE HSJG.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acto%20Administrativo%20Aprobaci%C3%B3n%20Presupuesto%20Ingresos%20y%20Gastos%202017%20-%20ESE%20HSJG.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Acuerdo Nº 009 de 2016: Aprobación del presupuesto de ingresos y gastos para la vigencia 2017",
+   "alt": null
+  },
+  {
+   "nombre": "decreto306actaposecion713.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/decreto306actaposecion713.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Decreto Nº 306 de 2016: Encargo de un servidor público de libre nombramiento y remoción en un cargo de periodo",
+   "alt": null
+  },
+  {
+   "nombre": "estatuto-contratacion-ese-hospital-san-jose-acuerdo-005-2014.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/estatuto-contratacion-ese-hospital-san-jose-acuerdo-005-2014.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Acuerdo Nº 005 de 2014: Por medio del cual se expide el nuevo estatuto de contratación",
+   "alt": null
+  },
+  {
+   "nombre": "circular N° 10 de 2023 (1).pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/circular%20N%C2%B0%2010%20de%202023%20(1).pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Circular Nº 10 de 2023: Entrega de formularios de afiliación a fondos de pensión y actualización de datos",
+   "alt": null
+  },
+  {
+   "nombre": "CIRCULAR O.7...pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/CIRCULAR%20O.7...pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Circular Nº 07 de 2023: Permiso del miércoles 5 de abril para los servidores de la E.S.E.",
+   "alt": null
+  },
+  {
+   "nombre": "CIRCULAR N° 006 DE 2023.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/CIRCULAR%20N%C2%B0%20006%20DE%202023.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Circular Nº 06 de 2023: Actualización de hojas de vida y declaración de bienes y rentas en SIGEP II",
+   "alt": null
+  },
+  {
+   "nombre": "a173-12.htm",
+   "url": "https://www.corteconstitucional.gov.co/relatoria/autos/2012/a173-12.htm",
+   "tipo": "otro",
+   "mime": null,
+   "titulo": "Auto 173 de 2012 – Corte Constitucional",
+   "alt": null
+  },
+  {
+   "nombre": "Acuerdo 05 de 2024.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%2005%20de%202024.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Acuerdo 05 de 2024",
+   "alt": null
+  },
+  {
+   "nombre": "Acuerdo 04 de 2024.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%2004%20de%202024.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Acuerdo 04 de 2024",
+   "alt": null
+  },
+  {
+   "nombre": "Acuerdo 01 de 2024.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%2001%20de%202024.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Acuerdo 01 de 2024",
+   "alt": null
+  },
+  {
+   "nombre": "Acuerdo 08 de 2023.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%2008%20de%202023.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Acuerdo 08 de 2023",
+   "alt": null
+  },
+  {
+   "nombre": "Acuerdo 07 de 2023.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%2007%20de%202023.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Acuerdo 07 de 2023",
+   "alt": null
+  },
+  {
+   "nombre": "Acuerdo 06 de 2023.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%2006%20de%202023.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Acuerdo 06 de 2023",
+   "alt": null
+  },
+  {
+   "nombre": "Acuerdo 05 de 2023.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%2005%20de%202023.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Acuerdo 05 de 2023",
+   "alt": null
+  },
+  {
+   "nombre": "Acuerdo 03 de 2023.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%2003%20de%202023.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Acuerdo 03 de 2023",
+   "alt": null
+  },
+  {
+   "nombre": "Acuerdo 02 de 2023.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%2002%20de%202023.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Acuerdo 02 de 2023",
+   "alt": null
+  },
+  {
+   "nombre": "Acuerdo 01 de 2023.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%2001%20de%202023.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Acuerdo 01 de 2023",
+   "alt": null
+  },
+  {
+   "nombre": "Acuerdo 05 de 2022.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%2005%20de%202022.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Acuerdo 05 de 2022",
+   "alt": null
+  },
+  {
+   "nombre": "Acuerdo 04 de 2022.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%2004%20de%202022.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Acuerdo 04 de 2022",
+   "alt": null
+  },
+  {
+   "nombre": "Acuerdo 03 de 20222.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%2003%20de%2020222.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Acuerdo 03 de 2022",
+   "alt": null
+  },
+  {
+   "nombre": "Acuerdo 02 de 2022.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%2002%20de%202022.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Acuerdo 02 de 2022",
+   "alt": null
+  },
+  {
+   "nombre": "Acuerdo 01 de 2022.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%2001%20de%202022.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Acuerdo 01 de 2022",
+   "alt": null
+  },
+  {
+   "nombre": "Acuerdo 07 de 2021.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%2007%20de%202021.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Acuerdo 07 de 2021",
+   "alt": null
+  },
+  {
+   "nombre": "Acuerdo 06 de 2021.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%2006%20de%202021.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Acuerdo 06 de 2021",
+   "alt": null
+  },
+  {
+   "nombre": "Acuerdo 05 de 2021.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%2005%20de%202021.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Acuerdo 05 de 2021",
+   "alt": null
+  },
+  {
+   "nombre": "Acuerdo 04 de 2021.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%2004%20de%202021.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Acuerdo 04 de 2021",
+   "alt": null
+  },
+  {
+   "nombre": "Acuerdo 03 de 2021.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%2003%20de%202021.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Acuerdo 03 de 2021",
+   "alt": null
+  },
+  {
+   "nombre": "Acuerdo 02 de 2021.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%2002%20de%202021.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Acuerdo 02 de 2021",
+   "alt": null
+  },
+  {
+   "nombre": "Acuerdo 01 de 2021.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%2001%20de%202021.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Acuerdo 01 de 2021",
+   "alt": null
+  },
+  {
+   "nombre": "Acuerdo 12 de 2020.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%2012%20de%202020.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Acuerdo 12 de 2020",
+   "alt": null
+  },
+  {
+   "nombre": "Acuerdo 11 de 2020.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%2011%20de%202020.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Acuerdo 11 de 2020",
+   "alt": null
+  },
+  {
+   "nombre": "Acuerdo 10 de 2020.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%2010%20de%202020.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Acuerdo 10 de 2020",
+   "alt": null
+  },
+  {
+   "nombre": "Acuerdo 09 de 2020.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%2009%20de%202020.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Acuerdo 09 de 2020",
+   "alt": null
+  },
+  {
+   "nombre": "Acuerdo 08 de 2020.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%2008%20de%202020.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Acuerdo 08 de 2020",
+   "alt": null
+  },
+  {
+   "nombre": "Acuerdo 07 de 2020.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%2007%20de%202020.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Acuerdo 07 de 2020",
+   "alt": null
+  },
+  {
+   "nombre": "Acuerdo 06 de 2020.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%2006%20de%202020.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Acuerdo 06 de 2020",
+   "alt": null
+  },
+  {
+   "nombre": "Acuerdo 05 de 2020.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%2005%20de%202020.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Acuerdo 05 de 2020",
+   "alt": null
+  },
+  {
+   "nombre": "Acuerdo 04 de 2020.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%2004%20de%202020.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Acuerdo 04 de 2020",
+   "alt": null
+  },
+  {
+   "nombre": "Acuerdo 03 de 2020.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%2003%20de%202020.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Acuerdo 03 de 2020",
+   "alt": null
+  },
+  {
+   "nombre": "Acuerdo 02 de 2020.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%2002%20de%202020.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Acuerdo 02 de 2020",
+   "alt": null
+  },
+  {
+   "nombre": "Acuerdo 01 de 2020.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%2001%20de%202020.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Acuerdo 01 de 2020",
+   "alt": null
+  },
+  {
+   "nombre": "Acuerdo 09 2019.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%2009%202019.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Acuerdo 09 de 2019",
+   "alt": null
+  },
+  {
+   "nombre": "Acuerdo 08 2019.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%2008%202019.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Acuerdo 08 de 2019",
+   "alt": null
+  },
+  {
+   "nombre": "Acuerdo 07 2019.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%2007%202019.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Acuerdo 07 de 2019",
+   "alt": null
+  },
+  {
+   "nombre": "Acuerdo 06 2019.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%2006%202019.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Acuerdo 06 de 2019",
+   "alt": null
+  },
+  {
+   "nombre": "Acuerdo 05 2019.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%2005%202019.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Acuerdo 05 de 2019",
+   "alt": null
+  },
+  {
+   "nombre": "acuerdo 04 2019.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/acuerdo%2004%202019.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Acuerdo 04 de 2019",
+   "alt": null
+  },
+  {
+   "nombre": "Acuerdo 03 2019.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%2003%202019.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Acuerdo 03 de 2019",
+   "alt": null
+  },
+  {
+   "nombre": "Acuerdo 02 2019.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%2002%202019.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Acuerdo 02 de 2019",
+   "alt": null
+  },
+  {
+   "nombre": "Acuerdo 01 2019.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%2001%202019.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Acuerdo 01 de 2019",
+   "alt": null
+  },
+  {
+   "nombre": "Decreto_780_de_2016_Sector_Salud_y_Protección_Social.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Decreto_780_de_2016_Sector_Salud_y_Protecci%C3%B3n_Social.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Decreto 780 de 2016 – Sector Salud y Protección Social",
+   "alt": null
+  },
+  {
+   "nombre": "POLITICA DE GESTION DE LA TECNOLOGIA BIOMEDICA V2.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/POLITICA%20DE%20GESTION%20DE%20LA%20TECNOLOGIA%20BIOMEDICA%20V2.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Política de Gestión de la Tecnología Biomédica V2",
+   "alt": null
+  },
+  {
+   "nombre": "RESOLUCIÓN 1351 Política de gestión de la Tecnolo.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/RESOLUCI%C3%93N%201351%20Pol%C3%ADtica%20de%20gesti%C3%B3n%20de%20la%20Tecnolo.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución 1351 de 2025",
+   "alt": null
+  },
+  {
+   "nombre": "POLITICA DE PRESTACIÓN DE SERVICIOS DE SALUD V2.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/POLITICA%20DE%20PRESTACI%C3%93N%20DE%20SERVICIOS%20DE%20SALUD%20V2.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Política de Prestación de Servicios de Salud V2",
+   "alt": null
+  },
+  {
+   "nombre": "Resolución 1350 Política de Prestación de Servicios de Salud.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resoluci%C3%B3n%201350%20Pol%C3%ADtica%20de%20Prestaci%C3%B3n%20de%20Servicios%20de%20Salud.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución 1350 de 2025",
+   "alt": null
+  },
+  {
+   "nombre": "Politica de Planeación Institucional.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Politica%20de%20Planeaci%C3%B3n%20Institucional.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Política de Planeación Institucional",
+   "alt": null
+  },
+  {
+   "nombre": "RESOLUCIÓN 1639 DE 2024 POLITICAS INSTITUCIONALES.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/RESOLUCI%C3%93N%201639%20DE%202024%20POLITICAS%20INSTITUCIONALES.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución 1639 de 2024",
+   "alt": null
+  },
+  {
+   "nombre": "POLITICA DE RACIONALIZACIÓN.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/POLITICA%20DE%20RACIONALIZACI%C3%93N.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Política de Racionalización",
+   "alt": null
+  },
+  {
+   "nombre": "Politica de SEGUIMIENTO Y EVALUACIÓN INSTITUCIONAL.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Politica%20de%20SEGUIMIENTO%20Y%20EVALUACI%C3%93N%20INSTITUCIONAL.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Política de Seguimiento y Evaluación Institucional",
+   "alt": null
+  },
+  {
+   "nombre": "POLITICAS DE COMPRAS Y CONTRATACIÓN.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/POLITICAS%20DE%20COMPRAS%20Y%20CONTRATACI%C3%93N.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Políticas de Compras y Contratación",
+   "alt": null
+  },
+  {
+   "nombre": "POLITICAS GESTION PRESUPUESTAL Y EFICIENCIA DEL GASTO PUBLICO.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/POLITICAS%20GESTION%20PRESUPUESTAL%20Y%20EFICIENCIA%20DEL%20GASTO%20PUBLICO.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Políticas de Gestión Presupuestal y Eficiencia del Gasto Público",
+   "alt": null
+  },
+  {
+   "nombre": "POLITICA DE GESTION DE LA INFORMACION ESTADISTICA.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/POLITICA%20DE%20GESTION%20DE%20LA%20INFORMACION%20ESTADISTICA.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Política de Gestión de la Información Estadística",
+   "alt": null
+  },
+  {
+   "nombre": "POLITICA DE SERVICIO AL CIUDADANO (1).pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/POLITICA%20DE%20SERVICIO%20AL%20CIUDADANO%20(1).pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Política de Servicio al Ciudadano",
+   "alt": null
+  },
+  {
+   "nombre": "Resolucion 1620 Politicas MIPG.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resolucion%201620%20Politicas%20MIPG.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución 1620 – Políticas MIPG",
+   "alt": null
+  },
+  {
+   "nombre": "01 POLITICA DE FORTALECIMIENTO ORGANIZACIONAL Y SIMPLIFICACION DE PROCESOS.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/01%20POLITICA%20DE%20FORTALECIMIENTO%20ORGANIZACIONAL%20Y%20SIMPLIFICACION%20DE%20PROCESOS.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Actualización de la Política de Fortalecimiento Organizacional y Simplificación de Procesos",
+   "alt": null
+  },
+  {
+   "nombre": "FORMATO POLITICAS-Politica de Fortalecimiento organizacional y Simplificación de Procesos -Claudia.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/FORMATO%20POLITICAS-Politica%20de%20Fortalecimiento%20organizacional%20y%20Simplificaci%C3%B3n%20de%20Procesos%20-Claudia.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Política de Fortalecimiento Organizacional y Simplificación de Procesos",
+   "alt": null
+  },
+  {
+   "nombre": "Resolución 1107 adopción políticas Mipg de 2022.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resoluci%C3%B3n%201107%20adopci%C3%B3n%20pol%C3%ADticas%20Mipg%20de%202022.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución 1107 de 2022 – Adopción de políticas MIPG",
+   "alt": null
+  },
+  {
+   "nombre": "POLITICA DE COMUNICACIONES 2024.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/POLITICA%20DE%20COMUNICACIONES%202024.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Política de Comunicaciones 2024",
+   "alt": null
+  },
+  {
+   "nombre": "POLITICA-DE-COMUNICACIONES-.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/POLITICA-DE-COMUNICACIONES-.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Política de Comunicaciones",
+   "alt": null
+  },
+  {
+   "nombre": "Resolucion-politicas-2021-MIPG-1.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resolucion-politicas-2021-MIPG-1.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución de políticas MIPG 2021",
+   "alt": null
+  },
+  {
+   "nombre": "POLITICA DE GESTION DEL CONOCIMIENTO Y LA INNOVACION.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/POLITICA%20DE%20GESTION%20DEL%20CONOCIMIENTO%20Y%20LA%20INNOVACION.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Política de Gestión del Conocimiento y la Innovación 2026",
+   "alt": null
+  },
+  {
+   "nombre": "RESOLUCION 0099 DE 2026.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/RESOLUCION%200099%20DE%202026.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución 0099 de 2026",
+   "alt": null
+  },
+  {
+   "nombre": "Politica-de-Gestion-del-Conocimiento-y-la-Innvacion-ESE.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Politica-de-Gestion-del-Conocimiento-y-la-Innvacion-ESE.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Política de Gestión del Conocimiento y la Innovación",
+   "alt": null
+  },
+  {
+   "nombre": "Resolucion-politicas-2021-MIPG.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resolucion-politicas-2021-MIPG.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución de políticas MIPG 2021",
+   "alt": null
+  },
+  {
+   "nombre": "POLITICA-DE-PREVENCION-DEL-DANO-ANTIJURIDICO.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/POLITICA-DE-PREVENCION-DEL-DANO-ANTIJURIDICO.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Política de Prevención del Daño Antijurídico",
+   "alt": null
+  },
+  {
+   "nombre": "RESOLUCION ANTIJURIDICO 0520 DE 2020.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/RESOLUCION%20ANTIJURIDICO%200520%20DE%202020.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución Nº 0520 de 2020",
+   "alt": null
+  },
+  {
+   "nombre": "POLITICA-DE-EMERGENCIAS-2020.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/POLITICA-DE-EMERGENCIAS-2020.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Política de Emergencias 2020",
+   "alt": null
+  },
+  {
+   "nombre": "Resolucion-0836-politicas (2).pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resolucion-0836-politicas%20(2).pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución Nº 0836 de 2020",
+   "alt": null
+  },
+  {
+   "nombre": "POLITICA-DE-GOBIERNO-DIGITAL 2024.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/POLITICA-DE-GOBIERNO-DIGITAL%202024.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Política de Gobierno Digital 2024",
+   "alt": null
+  },
+  {
+   "nombre": "POLITICA-DE-GOBIERNO-DIGITAL-PLANEACION-2020-1.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/POLITICA-DE-GOBIERNO-DIGITAL-PLANEACION-2020-1.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Política de Gobierno Digital 2020",
+   "alt": null
+  },
+  {
+   "nombre": "POLITICA-DE-SEGURIDAD-DE-LA-INFORMACION-DEF.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/POLITICA-DE-SEGURIDAD-DE-LA-INFORMACION-DEF.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Política de Seguridad de la Información 2020",
+   "alt": null
+  },
+  {
+   "nombre": "POLITICA-EDL-2020.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/POLITICA-EDL-2020.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Política de Evaluación del Desempeño Laboral 2020",
+   "alt": null
+  },
+  {
+   "nombre": "POLITICA-CONTROL-INTERNO.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/POLITICA-CONTROL-INTERNO.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Política de Control Interno de Gestión 2020",
+   "alt": null
+  },
+  {
+   "nombre": "Resolucion-1463-POLITICA-CONTROL-INTERNO-2020.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resolucion-1463-POLITICA-CONTROL-INTERNO-2020.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución Nº 1463 de 2019",
+   "alt": null
+  },
+  {
+   "nombre": "POLITICA DE HUMANIZACIÓN DE LA ATENCIÓN EN SALUD V2.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/POLITICA%20DE%20HUMANIZACI%C3%93N%20DE%20LA%20ATENCI%C3%93N%20EN%20SALUD%20V2.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Política de Humanización de la Atención en Salud V2",
+   "alt": null
+  },
+  {
+   "nombre": "RESOLUCION 1230 POLITICA DE HUMANIZACION .pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/RESOLUCION%201230%20POLITICA%20DE%20HUMANIZACION%20.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución 1230 del 21 de noviembre de 2025",
+   "alt": null
+  },
+  {
+   "nombre": "01 POLÍTICA DE GESTIÓN DEL RIESGO.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/01%20POL%C3%8DTICA%20DE%20GESTI%C3%93N%20DEL%20RIESGO.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Política de Gestión del Riesgo 2024",
+   "alt": null
+  },
+  {
+   "nombre": "POLITICA DE GESTIÓN DEL RIESGO HSJG 1 (3).pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/POLITICA%20DE%20GESTI%C3%93N%20DEL%20RIESGO%20HSJG%201%20(3).pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Política de Gestión del Riesgo 2018",
+   "alt": null
+  },
+  {
+   "nombre": "Res 0303 2015 admcion riesgo (1).pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Res%200303%202015%20admcion%20riesgo%20(1).pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución Nº 0303 de 2015",
+   "alt": null
+  },
+  {
+   "nombre": "Res 0943 2016 admcion del riesgo (1).pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Res%200943%202016%20admcion%20del%20riesgo%20(1).pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución Nº 0943 de 2016",
+   "alt": null
+  },
+  {
+   "nombre": "POLITICA DE GESTION ESTRATEGICA DE TALENTO HUMANO 2024.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/POLITICA%20DE%20GESTION%20ESTRATEGICA%20DE%20TALENTO%20HUMANO%202024.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Política de Gestión Estratégica de Talento Humano 2024",
+   "alt": null
+  },
+  {
+   "nombre": "POLITICA-GESTION-TALENTO-HUMANO.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/POLITICA-GESTION-TALENTO-HUMANO.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Política de Gestión del Talento Humano 2020",
+   "alt": null
+  },
+  {
+   "nombre": "resolucion-politicas-2020.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/resolucion-politicas-2020.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución Nº 0620 de 2020",
+   "alt": null
+  },
+  {
+   "nombre": "POLITICA DE GESTION DOCUMENTAL - 2024.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/POLITICA%20DE%20GESTION%20DOCUMENTAL%20-%202024.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Política de Gestión Documental 2024",
+   "alt": null
+  },
+  {
+   "nombre": "RESOLUCIÓN 1639 DE 2024 POLITICAS INSTITUCIONALES_2024.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/RESOLUCI%C3%93N%201639%20DE%202024%20POLITICAS%20INSTITUCIONALES_2024.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución 1639 de 2024",
+   "alt": null
+  },
+  {
+   "nombre": "RESOLUCIÓN 0647 ADOPCIÓN DE POLITICA GESTIOÓN DOCUMENTAL.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/RESOLUCI%C3%93N%200647%20ADOPCI%C3%93N%20DE%20POLITICA%20GESTIO%C3%93N%20DOCUMENTAL.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución 0647 – Adopción de la Política de Gestión Documental 2024",
+   "alt": null
+  },
+  {
+   "nombre": "POLITICA-GESTION-DOCUMENTAL-2019.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/POLITICA-GESTION-DOCUMENTAL-2019.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Política de Gestión Documental 2019",
+   "alt": null
+  },
+  {
+   "nombre": "resolucion-1388-de-2019.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/resolucion-1388-de-2019.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución Nº 1388 de 2019",
+   "alt": null
+  },
+  {
+   "nombre": "POLITICA-DE-TRANSPARENCIA-ACCESO-A-LA-INFORMACION-PUBLICA-Y-LUCHA-CONTRA-LA-CORRUPCION.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/POLITICA-DE-TRANSPARENCIA-ACCESO-A-LA-INFORMACION-PUBLICA-Y-LUCHA-CONTRA-LA-CORRUPCION.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Política de Transparencia, Acceso a la Información Pública y Lucha contra la Corrupción 2020",
+   "alt": null
+  },
+  {
+   "nombre": "resolucion-politicas-2020 (1).pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/resolucion-politicas-2020%20(1).pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución Nº 0620 de 2020",
+   "alt": null
+  },
+  {
+   "nombre": "POLITICA DE GESTION Y DESEMPEÑO ajustada.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/POLITICA%20DE%20GESTION%20Y%20DESEMPE%C3%91O%20ajustada.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Política de Gestión y Desempeño 2020",
+   "alt": null
+  },
+  {
+   "nombre": "resolucion-politicas-2020 (2).pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/resolucion-politicas-2020%20(2).pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución Nº 0620 de 2020",
+   "alt": null
+  },
+  {
+   "nombre": "POLITICA-DE-PARTICIPACION-CIUDADANA.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/POLITICA-DE-PARTICIPACION-CIUDADANA.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Política de Participación Ciudadana 2020",
+   "alt": null
+  },
+  {
+   "nombre": "POLITICA DE INTEGRIDAD 2024.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/POLITICA%20DE%20INTEGRIDAD%202024.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Política de Integridad 2024",
+   "alt": null
+  },
+  {
+   "nombre": "POLITICA-DE-INTEGRIDAD.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/POLITICA-DE-INTEGRIDAD.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Política de Integridad 2020",
+   "alt": null
+  },
+  {
+   "nombre": "Anexo polit SST.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Anexo%20polit%20SST.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Política del Sistema de Gestión de la Seguridad y Salud en el Trabajo",
+   "alt": null
+  },
+  {
+   "nombre": "Res 0467 de 2017 SST.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Res%200467%20de%202017%20SST.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución Nº 0469 de 2013",
+   "alt": null
+  },
+  {
+   "nombre": "POLITICA-DE-SIGC-2020.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/POLITICA-DE-SIGC-2020.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Política de Calidad 0016 de 2020",
+   "alt": null
+  },
+  {
+   "nombre": "RESOLUCION N° 0318 DE 2013_1 (1).pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/RESOLUCION%20N%C2%B0%200318%20DE%202013_1%20(1).pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución Nº 0318 de 2013",
+   "alt": null
+  },
+  {
+   "nombre": "POLÍTICA DE AUSTERIDAD, RACIONALIZACION DE COSTOS Y GASTOS Y EFICIENCIA ADMINISTRATIVA.doc",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/word/POL%C3%8DTICA%20DE%20AUSTERIDAD,%20RACIONALIZACION%20DE%20COSTOS%20Y%20GASTOS%20Y%20EFICIENCIA%20ADMINISTRATIVA.doc",
+   "tipo": "documento",
+   "mime": "application/msword",
+   "titulo": "Política de Austeridad, Racionalización de Costos y Gastos y Eficiencia Administrativa",
+   "alt": null
+  },
+  {
+   "nombre": "RESOLUCIÓN No. 1204 APROBACIÓN POLITICA DE AUSTERIDAD DEL GASTO 2021.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/RESOLUCI%C3%93N%20No.%201204%20APROBACI%C3%93N%20POLITICA%20DE%20AUSTERIDAD%20DEL%20GASTO%202021.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución No. 1204 de 2021 – Aprobación de la Política de Austeridad del Gasto",
+   "alt": null
+  },
+  {
+   "nombre": "4. Res 0448 2017 austeridad y gasto pгblico (1).pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/4.%20Res%200448%202017%20austeridad%20y%20gasto%20p%D0%B3blico%20(1).pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Política y Resolución Nº 0448 de 2017",
+   "alt": null
+  },
+  {
+   "nombre": "MANUAL DE POLITICAS CONTABLES DEFINITIVO 2020.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/MANUAL%20DE%20POLITICAS%20CONTABLES%20DEFINITIVO%202020.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Manual de Políticas Contables 2020",
+   "alt": null
+  },
+  {
+   "nombre": "POLITICA DE SEGURIDAD DEL PACIENTE V3.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/POLITICA%20DE%20SEGURIDAD%20DEL%20PACIENTE%20V3.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Política de Seguridad del Paciente V3",
+   "alt": null
+  },
+  {
+   "nombre": "Resolución 1209 Politica de seguridad del paciente.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resoluci%C3%B3n%201209%20Politica%20de%20seguridad%20del%20paciente.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución 1209 del 14 de noviembre de 2025",
+   "alt": null
+  },
+  {
+   "nombre": "7. Res 876 de 2018 Alcohol, tabaco, sust psicoat.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/7.%20Res%20876%20de%202018%20Alcohol,%20tabaco,%20sust%20psicoat.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución Nº 0876 de 2018",
+   "alt": null
+  },
+  {
+   "nombre": "8. Res 0486 de 2013 AIEPI.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/8.%20Res%200486%20de%202013%20AIEPI.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución Nº 0486 de 2013",
+   "alt": null
+  },
+  {
+   "nombre": "9. Resolucion comite IAMI (1).pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/9.%20Resolucion%20comite%20IAMI%20(1).pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución Nº 0211 de 2010",
+   "alt": null
+  }
+ ],
+ "entradas": [
+  {
+   "paginaSlug": "normativa-aplicable",
+   "slug": "normograma",
+   "titulo": "Normograma",
+   "resumen": "Compilación de las normas que rigen a la entidad.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 10,
+   "soloSiVacia": false,
+   "fecha": null,
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/NORMOGRAMA%20HOSPITAL.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Normograma"
+  },
+  {
+   "paginaSlug": "normativa-aplicable",
+   "slug": "estatutos",
+   "titulo": "Estatutos",
+   "resumen": "Estatutos institucionales y de contratación de la E.S.E.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 20,
+   "soloSiVacia": false,
+   "fecha": "2025-01-07T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/ACUERDO%20013-2024%20ESTATUTO.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/ACUERDO%20005-2024.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/ESTATUTOS%20APROBADOS%202016.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%200015%202008-%20deroga%20el%20acuerdo%2001.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/ESTATUTOS%20003%20DE%201998.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Estatutos"
+  },
+  {
+   "paginaSlug": "normativa-aplicable",
+   "slug": "ordenanzas",
+   "titulo": "Ordenanzas",
+   "resumen": "Ordenanza departamental de creación de la E.S.E.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 30,
+   "soloSiVacia": false,
+   "fecha": "2022-08-03T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/ORDENANZA%20002%20ESE%20HOSPITAL%20SAN%20JOSE%20GUAVIARE.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Ordenanzas"
+  },
+  {
+   "paginaSlug": "normativa-aplicable",
+   "slug": "nombramientos-2026",
+   "titulo": "Nombramientos 2026",
+   "resumen": "Actos administrativos de nombramiento.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 40,
+   "soloSiVacia": false,
+   "fecha": "2026-10-09T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/21.%20NOMBRAMIENTO%20YENNY%20MURCIA%20ESTRADA.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/20.%20NOMBRAMIENTO%20DRO%20JOSE%20SEGUNDO%20POLO%20MORENO.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/18.%20ACTOS%20NOMBRAMIENTO%20YERID%20NATALY%20SAAVEDRA.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/17.%20ACTOS%20NOMBRAMIENTO%20ANA%20MARCELA%20MARTINEZ%20TORRES.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/16.%20ACTOS%20NOMBRAMIENTO%20MARIA%20FERNANDA%20GOMEZ%20CARO.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/15.%20ACTOS%20NOMBRAMIENTO%20LEIDI%20KORAIMA%20BARRIOS%20CARDENAS.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/14.%20ACTOS%20NOMBRAMIENTO%20LINDHEY%20KARINA%20TORRES%20LOPEZ.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/13.%20ACTOS%20NOMBRAMIENTO%20DERLLY%20BUITRAGO.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/12.%20ACTOS%20NOMBRAMIENTO%20RODRIGO%20MIRANDA.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/11.%20RESOLUCI%C3%93N%20NOMBRAMIENTO%20SANDRA%20JULIETH%20MARTINEZ.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/10.%20ACTOS%20NOMBRAMIENTO%20DRA.%20ROSA%20EMILIANA%20MELO%20LOAIZA.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/9.%20ACTOS%20DE%20NOMBRAMIENTO%20MARTHA%20ANDREA%20PARRA%20PENAGOS.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/8.%20NOMBRAMIENTO%20ERIKA%20JULIETH%20PINTO%20REYES_20260401_175616.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/7.%20ACTOS%20DE%20POSESI%C3%93N%20DRA.%20JENNY%20PATRICIA%20ERASO.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/6.%20ACTOS%20DE%20POSESI%C3%93N%20DRO.%20JONHATAN%20MONTALVO%20VERGARA.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/5.%20ACTOS%20DE%20NOMBRAMIENTO%20DRA.%20LAURA%20FERNANDA%20ARCE.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/4.%20ACTOS%20DE%20NOMBRAMIENTO%20DRA.%20DIANA%20SOFIA%20GONZALEZ.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/3.%20ACTOS%20%20DE%20NOMBRAMIENTO%20HELVER%20FERNEY%20MARIN%20VILLAR.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/ACTOS%20DE%20NOMBRAMIENTO%20DRA.%20ELSA%20CASTRO%20SALCEDO.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/ACTOS%20DE%20NOMBRAMIENTO%20DRA.%20ADRIANA%20RODRIGUEZ%20ESQUI.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Nombramientos"
+  },
+  {
+   "paginaSlug": "normativa-aplicable",
+   "slug": "resoluciones-2026",
+   "titulo": "Resoluciones 2026",
+   "resumen": "Resoluciones expedidas por la Gerencia.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 50,
+   "soloSiVacia": false,
+   "fecha": "2026-09-10T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resolucion%20906%20de%202026.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resoluci%C3%B3n%20822%20de%202026.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/RESOLUCI%C3%93N%20INCREMENTO%20SALARIA%202026_CON%20ORDENANZA.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/RESOLUCION%200083.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Resoluciones"
+  },
+  {
+   "paginaSlug": "normativa-aplicable",
+   "slug": "resoluciones-2025",
+   "titulo": "Resoluciones 2025",
+   "resumen": "Resoluciones expedidas por la Gerencia.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 60,
+   "soloSiVacia": false,
+   "fecha": "2025-09-11T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resoluci%C3%B3n%20No.%200610%20COMIT%C3%89%20COPASST.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/RESOLUCION%20768-2025.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/INCREMENTO%20SALARIAL%20VIGENCIA%202025.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/RESOLUCION%20REACTIVOVIGILANCIA.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resoluci%C3%B2n%20419_Plan%20de%20Acci%C3%B2n_V2.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Resoluciones"
+  },
+  {
+   "paginaSlug": "normativa-aplicable",
+   "slug": "resoluciones-2024",
+   "titulo": "Resoluciones 2024",
+   "resumen": "Resoluciones expedidas por la Gerencia.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 70,
+   "soloSiVacia": false,
+   "fecha": "2024-11-07T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/RES%201329%20%20actuali%20C%C3%B3digo%20de%20Etica..pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resolucion%20derechos%20y%20deberes.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/INCREMENTO%20SALARIAL%20VIGENCIA%202024%20SERVIDORES%20PUBLICOS.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Resoluciones"
+  },
+  {
+   "paginaSlug": "normativa-aplicable",
+   "slug": "resoluciones-2023",
+   "titulo": "Resoluciones 2023",
+   "resumen": "Resoluciones expedidas por la Gerencia.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 80,
+   "soloSiVacia": false,
+   "fecha": "2023-04-03T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resolucion%200236%20por%20medio%20de%20la%20cual%20se%20adopta%20la%20planta%20de%20empleos.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resolucion%200234%20por%20medio%20de%20la%20cual%20se%20suprimen%20unos%20empleos.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resolucion%200235%20por%20medio%20de%20la%20cual%20se%20crean%20unos%20empleos.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Resoluciones"
+  },
+  {
+   "paginaSlug": "normativa-aplicable",
+   "slug": "resoluciones-2022",
+   "titulo": "Resoluciones 2022",
+   "resumen": "Resoluciones expedidas por la Gerencia.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 90,
+   "soloSiVacia": false,
+   "fecha": "2022-10-31T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resolucion-110.-Plan-de-Accion-Institucional.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/RESOLUCI%C3%93N%20No.%200737%20DE%202022_INCREMENTO%20SALARIAL.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resolucion%20N.1151%20convocatoria%20a%20eleccion%20copasst.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resolucion-0836-politicas.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/resolucion-0620-28-octubre-de-2020-adopcion-medelo-MIPG.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Resoluciones"
+  },
+  {
+   "paginaSlug": "normativa-aplicable",
+   "slug": "resoluciones-2021",
+   "titulo": "Resoluciones 2021",
+   "resumen": "Resoluciones expedidas por la Gerencia.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 100,
+   "soloSiVacia": false,
+   "fecha": "2021-12-31T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/RESOLUCI%C3%93N%20No.%200794%20DE%202021_INCREMENTO%20SALARIAL.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resolucion-activacion-equipo-multidisciplinario.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Resoluciones"
+  },
+  {
+   "paginaSlug": "normativa-aplicable",
+   "slug": "resoluciones-2020",
+   "titulo": "Resoluciones 2020",
+   "resumen": "Resoluciones expedidas por la Gerencia.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 110,
+   "soloSiVacia": false,
+   "fecha": "2020-02-03T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/RESOLUCI%C3%93N%20%20INCREMENTO%20SALARIAL%20VIGENCIA%202020.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resoluci%C3%B3n%200159%20de%202020.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Resoluciones"
+  },
+  {
+   "paginaSlug": "normativa-aplicable",
+   "slug": "resoluciones-2019",
+   "titulo": "Resoluciones 2019",
+   "resumen": "Resoluciones expedidas por la Gerencia.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 120,
+   "soloSiVacia": false,
+   "fecha": "2019-12-31T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resoluci%C3%B3n%20Adopci%C3%B3n%20Pol%C3%ADtica%20Gesti%C3%B3n%20Documental.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/PETI%20y%20Resoluci%C3%B3n%20Hospital%20San%20Jos%C3%A9%20del%20Guaviare.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resoluci%C3%B3n%20N%C2%BA%201042%20de%202019%20Convocatoria%20comision%20de%20personal.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resoluci%C3%B3n%20N%C2%BA%201041%20Elecci%C3%B3n%20representante%20COPASST.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/RESOLUCION%20335%20de%202019%20PAMEC%20(2).pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resoluci%C3%B3n%20N%C2%BA%200333.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/RESOLUCION%20N%C2%B00164.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/RESOLUSION%20N%C2%BA%200169.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resoluci%C3%B3n%20N%C2%BA%200231%20de%202019.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Resoluciones"
+  },
+  {
+   "paginaSlug": "normativa-aplicable",
+   "slug": "resoluciones-2018",
+   "titulo": "Resoluciones 2018",
+   "resumen": "Resoluciones expedidas por la Gerencia.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 130,
+   "soloSiVacia": false,
+   "fecha": "2018-12-31T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resoluci%C3%B3n%20N%C2%BA%201611%20de%202018%20Pol%C3%ADtica%20de%20Gesti%C3%B3n%20del%20Riesgo.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resoluci%C3%B3n%201382%20de%202018%20MIPG.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/RESOLUCI%C3%93N%20No.%200862%20DE%202018_INCREMENTO%20SALARIAL.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Resoluciones"
+  },
+  {
+   "paginaSlug": "normativa-aplicable",
+   "slug": "resoluciones-2017",
+   "titulo": "Resoluciones 2017",
+   "resumen": "Resoluciones expedidas por la Gerencia.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 140,
+   "soloSiVacia": false,
+   "fecha": "2017-12-31T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resolucion%201285%20de%202017.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resoluci%C3%B3n%20No.%201325%202017%20-%20(Desagregaci%C3%B3n%20Presupuesto%20Vigencia%202018).pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Red%200890%202017%20admci%C3%B3n%20del%20riesgo.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resolucion%200463%20de%202017,%20Ajuste%20%20Tarifa%20GLUCOMETRIA.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/4.%20Res%200448%202017%20austeridad%20y%20gasto%20p%C3%BAblico.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resolucion%20DE%20%20AMBULANCIA%20004%20de%201%20de%20enero%20de%202017.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Resoluciones"
+  },
+  {
+   "paginaSlug": "normativa-aplicable",
+   "slug": "resoluciones-2016",
+   "titulo": "Resoluciones 2016",
+   "resumen": "Resoluciones expedidas por la Gerencia.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 150,
+   "soloSiVacia": false,
+   "fecha": "2016-12-31T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resoluci%C3%B3n%20No.%201316%20de%202016%20-%20(Desagregaci%C3%B3n%20Presupuesto%20Vigencia%202017).pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resoluci%C3%B3n%20Ambulancia%20Urbano%20Redondo%202016.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Res%200943%202016%20admcion%20del%20riesgo.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/3.%20Res%200663%20de%202016%20Pol%C3%ADtca%20de%20calidad.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/RESOLUCION%20MEDICAMENTOS%20470%20%20%202016.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/AMBULANCIA%20383%20DE%202016%20REDONDO.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/RESOLUCION%20AMBULANCIA%20%202016.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/LABORATORIOS%20Y%20PROCEDIMIENTOS%20154%20DEL%202016.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Resoluciones"
+  },
+  {
+   "paginaSlug": "normativa-aplicable",
+   "slug": "resoluciones-2015",
+   "titulo": "Resoluciones 2015",
+   "resumen": "Resoluciones expedidas por la Gerencia.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 160,
+   "soloSiVacia": false,
+   "fecha": "2015-12-31T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resoluci%C3%B3n%201155%20creaci%C3%B3n%20Ventanilla%20%C3%BCnica.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/resolucion%201000.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/PROCEDIMIENTOS%20Y%20LABORATORIOS%20872%20DEL%202015.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/LABORATORIOS%20Y%20PROCEDIMIENTOS%20770%20DEL%202015.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/0735%20DE%2030%20SEPTIEMBRE%202015%20TARIFAS%20AMBULANCIA%202015.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/1094864%20RESOLUCION_0520_TARIFA_AMBULANCIA%20%20JULIO%202015.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/LABORATORIOS%20Y%20PROCEDIMIENTOS%20474%20DEL%202015.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resoluci%C3%B3n%20N%C2%BA%200372.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Res%200303%202015%20admcion%20riesgo.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/RESOLUCION%20211%20TARIFAS%20AMBULANCIA%20%202015.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/LABORATORIOS%20008%20DEL%202015.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/1er-trimestre.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/2do-trimestre.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/3er-trimestre.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/4to-trimestre.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Resoluciones"
+  },
+  {
+   "paginaSlug": "normativa-aplicable",
+   "slug": "resoluciones-2014",
+   "titulo": "Resoluciones 2014",
+   "resumen": "Resoluciones expedidas por la Gerencia.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 170,
+   "soloSiVacia": false,
+   "fecha": "2014-12-31T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resoluci%C3%B3n%20N%C2%BA%200807.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resoluci%C3%B3n%20N%C2%BA%200806.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resoluci%C3%B3n%20N%C2%BA%200805.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/LABORATORIOS%20804%20DEL%202014.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/resolucion%20%200772%20tarifas%20ambulancia%202013%20y%20%202014.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/LABORATORIOS%200738%20DEL%202014.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resoluci%C3%B3n%20N%C2%BA%200643.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/PROCEDIMIENTOS%20QUIRURGICOS%20594%20DEL%202014.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/PROCEDIMEINTOS%20QUIRURGICOS%20MODIFICACION%20R%20451%20No%20562.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/EXAMENES%20DE%20LABORATORIOS%200518.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/PROCEDIMIENTOS%20QUIRURGICOS%200451.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resoluci%C3%B3n%20N%C2%BA%200449.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Resoluciones"
+  },
+  {
+   "paginaSlug": "normativa-aplicable",
+   "slug": "resoluciones-2013",
+   "titulo": "Resoluciones 2013",
+   "resumen": "Resoluciones expedidas por la Gerencia.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 180,
+   "soloSiVacia": false,
+   "fecha": "2013-12-31T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resoluci%C3%B3n%20N%C2%BA%201014%20de%202013.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/LABORATORIO%20CLINICO%20LESMANIASIS%200893.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resoluci%C3%B3n%20N%C2%BA%200845.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resoluci%C3%B3n%20N%C2%BA%200672.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resoluci%C3%B3n%20N%C2%BA%200662.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resoluci%C3%B3n%20N%C2%BA%200493.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resoluci%C3%B3n%20N%C2%BA%200492.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resoluci%C3%B3n%20N%C2%BA%200490.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resoluci%C3%B3n%20N%200489.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resoluci%C3%B3n%20N%C2%BA%200485.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resoluci%C3%B3n%20N%C2%BA%200484.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resoluci%C3%B3n%20N%C2%BA%200482.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resoluci%C3%B3n%20N%C2%BA%200481.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resoluci%C3%B3n%20N%C2%BA%200480.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resoluci%C3%B3n%20N%C2%BA%200479.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resoluci%C3%B3n%20N%C2%BA%200469.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resoluci%C3%B3n%20N%C2%BA%200392.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/RESOLUCION%20N%C2%B0.%20353_1.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/RESOLUCION%20N%C2%B0%200318%20DE%202013_1.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/resolucion%200265%20de%202013-%2030-04-2013%2004.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/resolucion%200260%20Manual%20de%20Tarifas%20Institucional_compressed.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/RESOLUCION%20N%C2%B0%200248%20DE%202013_1.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Resoluciones"
+  },
+  {
+   "paginaSlug": "normativa-aplicable",
+   "slug": "resoluciones-2012",
+   "titulo": "Resoluciones 2012",
+   "resumen": "Resoluciones expedidas por la Gerencia.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 190,
+   "soloSiVacia": false,
+   "fecha": "2012-12-31T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resoluci%C3%B3n%20N%C2%BA%200473.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resoluci%C3%B3n%20N%C2%BA%200195.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resoluci%C3%B3n%20N%C2%BA%200194.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/resolucion%20ambulancia%200084%20%20%202012.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/RESOLUCION%20N%C2%B0%200020_1.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Resoluciones"
+  },
+  {
+   "paginaSlug": "normativa-aplicable",
+   "slug": "resoluciones-2011",
+   "titulo": "Resoluciones 2011",
+   "resumen": "Resoluciones expedidas por la Gerencia.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 200,
+   "soloSiVacia": false,
+   "fecha": "2011-12-31T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/RESOLUCION%20N%C2%B0%200477_1.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Resoluciones"
+  },
+  {
+   "paginaSlug": "normativa-aplicable",
+   "slug": "resoluciones-2010",
+   "titulo": "Resoluciones 2010",
+   "resumen": "Resoluciones expedidas por la Gerencia.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 210,
+   "soloSiVacia": false,
+   "fecha": "2010-12-31T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/RESOL%200879%20PLAT%20ESTRATEGICA%2029-10-2010%20derogado%20acuerdo%2002.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/9.%20Resolucion%20comite%20IAMI.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Resoluciones"
+  },
+  {
+   "paginaSlug": "normativa-aplicable",
+   "slug": "resoluciones-2009",
+   "titulo": "Resoluciones 2009",
+   "resumen": "Resoluciones expedidas por la Gerencia.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 220,
+   "soloSiVacia": false,
+   "fecha": "2009-12-31T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/RESOLUCION%20AMBULANCIA%20%202009.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Resoluciones"
+  },
+  {
+   "paginaSlug": "normativa-aplicable",
+   "slug": "resoluciones-2008",
+   "titulo": "Resoluciones 2008",
+   "resumen": "Resoluciones expedidas por la Gerencia.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 230,
+   "soloSiVacia": false,
+   "fecha": "2008-12-31T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/RESOLUCION%20N%C2%B0%201426_1.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Resoluciones"
+  },
+  {
+   "paginaSlug": "normativa-aplicable",
+   "slug": "resoluciones-2007",
+   "titulo": "Resoluciones 2007",
+   "resumen": "Resoluciones expedidas por la Gerencia.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 240,
+   "soloSiVacia": false,
+   "fecha": "2007-12-31T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resoluci%C3%B3n%20N%C2%BA%200356.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Resoluciones"
+  },
+  {
+   "paginaSlug": "normativa-aplicable",
+   "slug": "resoluciones-2003",
+   "titulo": "Resoluciones 2003",
+   "resumen": "Resoluciones expedidas por la Gerencia.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 250,
+   "soloSiVacia": false,
+   "fecha": "2003-12-31T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resoluci%C3%B3n%20N%C2%BA%200731.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Resoluciones"
+  },
+  {
+   "paginaSlug": "normativa-aplicable",
+   "slug": "acuerdos-2025",
+   "titulo": "Acuerdos 2025",
+   "resumen": "Acuerdos de la Junta Directiva sobre presupuesto, estatutos y manuales.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 260,
+   "soloSiVacia": false,
+   "fecha": "2025-03-07T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%2002-2025.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Acuerdos"
+  },
+  {
+   "paginaSlug": "normativa-aplicable",
+   "slug": "acuerdos-2019",
+   "titulo": "Acuerdos 2019",
+   "resumen": "Acuerdos de la Junta Directiva sobre presupuesto, estatutos y manuales.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 270,
+   "soloSiVacia": false,
+   "fecha": "2019-12-31T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%20N%C2%BA%20001%20de%202019.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Acuerdos"
+  },
+  {
+   "paginaSlug": "normativa-aplicable",
+   "slug": "acuerdos-2018",
+   "titulo": "Acuerdos 2018",
+   "resumen": "Acuerdos de la Junta Directiva sobre presupuesto, estatutos y manuales.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 280,
+   "soloSiVacia": false,
+   "fecha": "2018-12-31T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%20N%C2%BA%2001%20de%202018.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%20N%C2%BA%2002%20de%202018.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%20N%C2%BA%2003%20de%202018.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%20N%C2%BA%2004%20de%202018.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%20N%C2%BA%2005%20de%202018.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%20N%C2%BA%2006%20de%202018.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%20N%C2%BA%2007%20de%202018.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%20N%C2%BA%2009%20de%202018.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%20N%C2%BA%20010%20de%202018.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Acuerdos"
+  },
+  {
+   "paginaSlug": "normativa-aplicable",
+   "slug": "acuerdos-2017",
+   "titulo": "Acuerdos 2017",
+   "resumen": "Acuerdos de la Junta Directiva sobre presupuesto, estatutos y manuales.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 290,
+   "soloSiVacia": false,
+   "fecha": "2017-12-31T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acto%20Administrativo%20Aprobaci%C3%B3n%20Presupuesto%20Ingresos%20y%20Gastos%202018%20-%20ESE%20HSJG.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Acuerdos"
+  },
+  {
+   "paginaSlug": "normativa-aplicable",
+   "slug": "acuerdos-2016",
+   "titulo": "Acuerdos 2016",
+   "resumen": "Acuerdos de la Junta Directiva sobre presupuesto, estatutos y manuales.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 300,
+   "soloSiVacia": false,
+   "fecha": "2016-12-31T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/ESTATUTOS%20APROBADOS%202016%20(1).pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acto%20Administrativo%20Aprobaci%C3%B3n%20Presupuesto%20Ingresos%20y%20Gastos%202017%20-%20ESE%20HSJG.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/decreto306actaposecion713.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Acuerdos"
+  },
+  {
+   "paginaSlug": "normativa-aplicable",
+   "slug": "acuerdos-2014",
+   "titulo": "Acuerdos 2014",
+   "resumen": "Acuerdos de la Junta Directiva sobre presupuesto, estatutos y manuales.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 310,
+   "soloSiVacia": false,
+   "fecha": "2014-12-31T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/estatuto-contratacion-ese-hospital-san-jose-acuerdo-005-2014.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Acuerdos"
+  },
+  {
+   "paginaSlug": "normativa-aplicable",
+   "slug": "acuerdos-2008",
+   "titulo": "Acuerdos 2008",
+   "resumen": "Acuerdos de la Junta Directiva sobre presupuesto, estatutos y manuales.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 320,
+   "soloSiVacia": false,
+   "fecha": "2008-12-31T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%200015%202008-%20deroga%20el%20acuerdo%2001.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Acuerdos"
+  },
+  {
+   "paginaSlug": "normativa-aplicable",
+   "slug": "circulares-2023",
+   "titulo": "Circulares 2023",
+   "resumen": "Circulares internas.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 330,
+   "soloSiVacia": false,
+   "fecha": "2023-04-12T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/circular%20N%C2%B0%2010%20de%202023%20(1).pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/CIRCULAR%20O.7...pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/CIRCULAR%20N%C2%B0%20006%20DE%202023.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Circulares"
+  },
+  {
+   "paginaSlug": "normativa-aplicable",
+   "slug": "autos-2012",
+   "titulo": "Autos 2012",
+   "resumen": "Autos judiciales relacionados con la entidad.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 340,
+   "soloSiVacia": false,
+   "fecha": "2012-12-31T12:00:00Z",
+   "adjuntos": [
+    "https://www.corteconstitucional.gov.co/relatoria/autos/2012/a173-12.htm"
+   ],
+   "destacada": null,
+   "categoria": "Autos"
+  },
+  {
+   "paginaSlug": "normativa-aplicable",
+   "slug": "acuerdos-de-junta-directiva-2024",
+   "titulo": "Acuerdos de Junta Directiva 2024",
+   "resumen": "Acuerdos aprobados por la Junta Directiva.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 350,
+   "soloSiVacia": false,
+   "fecha": "2024-12-31T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%2005%20de%202024.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%2004%20de%202024.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%2001%20de%202024.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Acuerdos de Junta Directiva"
+  },
+  {
+   "paginaSlug": "normativa-aplicable",
+   "slug": "acuerdos-de-junta-directiva-2023",
+   "titulo": "Acuerdos de Junta Directiva 2023",
+   "resumen": "Acuerdos aprobados por la Junta Directiva.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 360,
+   "soloSiVacia": false,
+   "fecha": "2023-12-31T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%2008%20de%202023.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%2007%20de%202023.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%2006%20de%202023.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%2005%20de%202023.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%2003%20de%202023.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%2002%20de%202023.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%2001%20de%202023.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Acuerdos de Junta Directiva"
+  },
+  {
+   "paginaSlug": "normativa-aplicable",
+   "slug": "acuerdos-de-junta-directiva-2022",
+   "titulo": "Acuerdos de Junta Directiva 2022",
+   "resumen": "Acuerdos aprobados por la Junta Directiva.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 370,
+   "soloSiVacia": false,
+   "fecha": "2022-12-31T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%2005%20de%202022.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%2004%20de%202022.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%2003%20de%2020222.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%2002%20de%202022.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%2001%20de%202022.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Acuerdos de Junta Directiva"
+  },
+  {
+   "paginaSlug": "normativa-aplicable",
+   "slug": "acuerdos-de-junta-directiva-2021",
+   "titulo": "Acuerdos de Junta Directiva 2021",
+   "resumen": "Acuerdos aprobados por la Junta Directiva.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 380,
+   "soloSiVacia": false,
+   "fecha": "2021-12-31T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%2007%20de%202021.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%2006%20de%202021.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%2005%20de%202021.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%2004%20de%202021.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%2003%20de%202021.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%2002%20de%202021.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%2001%20de%202021.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Acuerdos de Junta Directiva"
+  },
+  {
+   "paginaSlug": "normativa-aplicable",
+   "slug": "acuerdos-de-junta-directiva-2020",
+   "titulo": "Acuerdos de Junta Directiva 2020",
+   "resumen": "Acuerdos aprobados por la Junta Directiva.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 390,
+   "soloSiVacia": false,
+   "fecha": "2020-12-31T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%2012%20de%202020.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%2011%20de%202020.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%2010%20de%202020.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%2009%20de%202020.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%2008%20de%202020.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%2007%20de%202020.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%2006%20de%202020.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%2005%20de%202020.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%2004%20de%202020.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%2003%20de%202020.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%2002%20de%202020.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%2001%20de%202020.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Acuerdos de Junta Directiva"
+  },
+  {
+   "paginaSlug": "normativa-aplicable",
+   "slug": "acuerdos-de-junta-directiva-2019",
+   "titulo": "Acuerdos de Junta Directiva 2019",
+   "resumen": "Acuerdos aprobados por la Junta Directiva.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 400,
+   "soloSiVacia": false,
+   "fecha": "2019-12-31T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%2009%202019.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%2008%202019.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%2007%202019.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%2006%202019.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%2005%202019.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/acuerdo%2004%202019.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%2003%202019.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%2002%202019.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%2001%202019.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Acuerdos de Junta Directiva"
+  },
+  {
+   "paginaSlug": "decreto-unico-reglamentario",
+   "slug": "decreto-780-de-2016-decreto-unico-reglamentario-del-sector-salud-y-proteccion-social",
+   "titulo": "Decreto 780 de 2016 – Decreto Único Reglamentario del Sector Salud y Protección Social",
+   "resumen": "Compila las normas reglamentarias del sector salud y protección social.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 10,
+   "soloSiVacia": false,
+   "fecha": "2025-08-13T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Decreto_780_de_2016_Sector_Salud_y_Protecci%C3%B3n_Social.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Decretos"
+  },
+  {
+   "paginaSlug": "sistema-de-busqueda-de-normas-propio-de-la-entidad",
+   "slug": "normograma-de-la-e-s-e-hospital-san-jose-del-guaviare",
+   "titulo": "Normograma de la E.S.E. Hospital San José del Guaviare",
+   "resumen": "Relación de las normas que regulan la gestión de la entidad.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 10,
+   "soloSiVacia": false,
+   "fecha": null,
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/NORMOGRAMA%20HOSPITAL.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Normograma"
+  },
+  {
+   "paginaSlug": "politicas-lineamientos-y-manuales",
+   "slug": "politica-de-gestion-de-la-tecnologia-biomedica",
+   "titulo": "Política de Gestión de la Tecnología Biomédica",
+   "resumen": "",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 10,
+   "soloSiVacia": false,
+   "fecha": "2025-12-19T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/POLITICA%20DE%20GESTION%20DE%20LA%20TECNOLOGIA%20BIOMEDICA%20V2.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/RESOLUCI%C3%93N%201351%20Pol%C3%ADtica%20de%20gesti%C3%B3n%20de%20la%20Tecnolo.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Atención en salud"
+  },
+  {
+   "paginaSlug": "politicas-lineamientos-y-manuales",
+   "slug": "politica-de-prestacion-de-servicios-de-salud",
+   "titulo": "Política de Prestación de Servicios de Salud",
+   "resumen": "",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 20,
+   "soloSiVacia": false,
+   "fecha": "2025-12-19T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/POLITICA%20DE%20PRESTACI%C3%93N%20DE%20SERVICIOS%20DE%20SALUD%20V2.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resoluci%C3%B3n%201350%20Pol%C3%ADtica%20de%20Prestaci%C3%B3n%20de%20Servicios%20de%20Salud.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Atención en salud"
+  },
+  {
+   "paginaSlug": "politicas-lineamientos-y-manuales",
+   "slug": "politica-de-planeacion-institucional",
+   "titulo": "Política de Planeación Institucional",
+   "resumen": "",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 30,
+   "soloSiVacia": false,
+   "fecha": "2024-12-31T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Politica%20de%20Planeaci%C3%B3n%20Institucional.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/RESOLUCI%C3%93N%201639%20DE%202024%20POLITICAS%20INSTITUCIONALES.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Planeación y gestión"
+  },
+  {
+   "paginaSlug": "politicas-lineamientos-y-manuales",
+   "slug": "politica-de-racionalizacion",
+   "titulo": "Política de Racionalización",
+   "resumen": "",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 40,
+   "soloSiVacia": false,
+   "fecha": "2024-12-31T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/POLITICA%20DE%20RACIONALIZACI%C3%93N.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/RESOLUCI%C3%93N%201639%20DE%202024%20POLITICAS%20INSTITUCIONALES.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Planeación y gestión"
+  },
+  {
+   "paginaSlug": "politicas-lineamientos-y-manuales",
+   "slug": "politica-de-seguimiento-y-evaluacion-institucional",
+   "titulo": "Política de Seguimiento y Evaluación Institucional",
+   "resumen": "",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 50,
+   "soloSiVacia": false,
+   "fecha": "2024-12-31T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Politica%20de%20SEGUIMIENTO%20Y%20EVALUACI%C3%93N%20INSTITUCIONAL.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/RESOLUCI%C3%93N%201639%20DE%202024%20POLITICAS%20INSTITUCIONALES.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Planeación y gestión"
+  },
+  {
+   "paginaSlug": "politicas-lineamientos-y-manuales",
+   "slug": "politicas-de-compras-y-contratacion",
+   "titulo": "Políticas de Compras y Contratación",
+   "resumen": "",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 60,
+   "soloSiVacia": false,
+   "fecha": "2024-12-31T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/POLITICAS%20DE%20COMPRAS%20Y%20CONTRATACI%C3%93N.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/RESOLUCI%C3%93N%201639%20DE%202024%20POLITICAS%20INSTITUCIONALES.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Financieras y contratación"
+  },
+  {
+   "paginaSlug": "politicas-lineamientos-y-manuales",
+   "slug": "politicas-de-gestion-presupuestal-y-eficiencia-del-gasto-publico",
+   "titulo": "Políticas de Gestión Presupuestal y Eficiencia del Gasto Público",
+   "resumen": "",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 70,
+   "soloSiVacia": false,
+   "fecha": "2024-12-31T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/POLITICAS%20GESTION%20PRESUPUESTAL%20Y%20EFICIENCIA%20DEL%20GASTO%20PUBLICO.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/RESOLUCI%C3%93N%201639%20DE%202024%20POLITICAS%20INSTITUCIONALES.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Financieras y contratación"
+  },
+  {
+   "paginaSlug": "politicas-lineamientos-y-manuales",
+   "slug": "politica-de-gestion-de-la-informacion-estadistica",
+   "titulo": "Política de Gestión de la Información Estadística",
+   "resumen": "",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 80,
+   "soloSiVacia": false,
+   "fecha": "2024-12-17T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/POLITICA%20DE%20GESTION%20DE%20LA%20INFORMACION%20ESTADISTICA.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/RESOLUCI%C3%93N%201639%20DE%202024%20POLITICAS%20INSTITUCIONALES.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Planeación y gestión"
+  },
+  {
+   "paginaSlug": "politicas-lineamientos-y-manuales",
+   "slug": "politica-de-servicio-al-ciudadano",
+   "titulo": "Política de Servicio al Ciudadano",
+   "resumen": "",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 90,
+   "soloSiVacia": false,
+   "fecha": "2024-03-01T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/POLITICA%20DE%20SERVICIO%20AL%20CIUDADANO%20(1).pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resolucion%201620%20Politicas%20MIPG.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Servicio y participación ciudadana"
+  },
+  {
+   "paginaSlug": "politicas-lineamientos-y-manuales",
+   "slug": "politica-de-fortalecimiento-organizacional-y-simplificacion-de-procesos",
+   "titulo": "Política de Fortalecimiento Organizacional y Simplificación de Procesos",
+   "resumen": "",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 100,
+   "soloSiVacia": false,
+   "fecha": "2024-05-16T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/01%20POLITICA%20DE%20FORTALECIMIENTO%20ORGANIZACIONAL%20Y%20SIMPLIFICACION%20DE%20PROCESOS.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/FORMATO%20POLITICAS-Politica%20de%20Fortalecimiento%20organizacional%20y%20Simplificaci%C3%B3n%20de%20Procesos%20-Claudia.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resoluci%C3%B3n%201107%20adopci%C3%B3n%20pol%C3%ADticas%20Mipg%20de%202022.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Planeación y gestión"
+  },
+  {
+   "paginaSlug": "politicas-lineamientos-y-manuales",
+   "slug": "politica-de-comunicaciones",
+   "titulo": "Política de Comunicaciones",
+   "resumen": "",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 110,
+   "soloSiVacia": false,
+   "fecha": "2024-12-31T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/POLITICA%20DE%20COMUNICACIONES%202024.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/RESOLUCI%C3%93N%201639%20DE%202024%20POLITICAS%20INSTITUCIONALES.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/POLITICA-DE-COMUNICACIONES-.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resolucion-politicas-2021-MIPG-1.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Información, tecnología y comunicaciones"
+  },
+  {
+   "paginaSlug": "politicas-lineamientos-y-manuales",
+   "slug": "politica-de-gestion-del-conocimiento-y-la-innovacion",
+   "titulo": "Política de Gestión del Conocimiento y la Innovación",
+   "resumen": "",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 120,
+   "soloSiVacia": false,
+   "fecha": "2026-01-30T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/POLITICA%20DE%20GESTION%20DEL%20CONOCIMIENTO%20Y%20LA%20INNOVACION.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/RESOLUCION%200099%20DE%202026.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Politica-de-Gestion-del-Conocimiento-y-la-Innvacion-ESE.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resolucion-politicas-2021-MIPG.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Planeación y gestión"
+  },
+  {
+   "paginaSlug": "politicas-lineamientos-y-manuales",
+   "slug": "politica-de-prevencion-del-dano-antijuridico",
+   "titulo": "Política de Prevención del Daño Antijurídico",
+   "resumen": "",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 130,
+   "soloSiVacia": false,
+   "fecha": "2022-08-03T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/POLITICA-DE-PREVENCION-DEL-DANO-ANTIJURIDICO.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/RESOLUCION%20ANTIJURIDICO%200520%20DE%202020.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Control y riesgo"
+  },
+  {
+   "paginaSlug": "politicas-lineamientos-y-manuales",
+   "slug": "politica-de-emergencias",
+   "titulo": "Política de Emergencias",
+   "resumen": "",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 140,
+   "soloSiVacia": false,
+   "fecha": "2022-08-03T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/POLITICA-DE-EMERGENCIAS-2020.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resolucion-0836-politicas%20(2).pdf"
+   ],
+   "destacada": null,
+   "categoria": "Atención en salud"
+  },
+  {
+   "paginaSlug": "politicas-lineamientos-y-manuales",
+   "slug": "politica-de-gobierno-digital",
+   "titulo": "Política de Gobierno Digital",
+   "resumen": "",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 150,
+   "soloSiVacia": false,
+   "fecha": "2024-12-31T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/POLITICA-DE-GOBIERNO-DIGITAL%202024.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/RESOLUCI%C3%93N%201639%20DE%202024%20POLITICAS%20INSTITUCIONALES.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/POLITICA-DE-GOBIERNO-DIGITAL-PLANEACION-2020-1.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resolucion-0836-politicas%20(2).pdf"
+   ],
+   "destacada": null,
+   "categoria": "Información, tecnología y comunicaciones"
+  },
+  {
+   "paginaSlug": "politicas-lineamientos-y-manuales",
+   "slug": "politica-de-seguridad-de-la-informacion",
+   "titulo": "Política de Seguridad de la Información",
+   "resumen": "",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 160,
+   "soloSiVacia": false,
+   "fecha": "2022-08-03T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/POLITICA-DE-SEGURIDAD-DE-LA-INFORMACION-DEF.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resolucion-0836-politicas%20(2).pdf"
+   ],
+   "destacada": null,
+   "categoria": "Información, tecnología y comunicaciones"
+  },
+  {
+   "paginaSlug": "politicas-lineamientos-y-manuales",
+   "slug": "politica-de-evaluacion-del-desempeno-laboral",
+   "titulo": "Política de Evaluación del Desempeño Laboral",
+   "resumen": "",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 170,
+   "soloSiVacia": false,
+   "fecha": "2022-08-03T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/POLITICA-EDL-2020.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resolucion-0836-politicas%20(2).pdf"
+   ],
+   "destacada": null,
+   "categoria": "Talento humano"
+  },
+  {
+   "paginaSlug": "politicas-lineamientos-y-manuales",
+   "slug": "politica-de-control-interno-de-gestion",
+   "titulo": "Política de Control Interno de Gestión",
+   "resumen": "",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 180,
+   "soloSiVacia": false,
+   "fecha": "2022-08-03T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/POLITICA-CONTROL-INTERNO.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resolucion-1463-POLITICA-CONTROL-INTERNO-2020.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Control y riesgo"
+  },
+  {
+   "paginaSlug": "politicas-lineamientos-y-manuales",
+   "slug": "politica-de-humanizacion-de-la-atencion-en-salud",
+   "titulo": "Política de Humanización de la Atención en Salud",
+   "resumen": "",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 190,
+   "soloSiVacia": false,
+   "fecha": "2025-11-27T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/POLITICA%20DE%20HUMANIZACI%C3%93N%20DE%20LA%20ATENCI%C3%93N%20EN%20SALUD%20V2.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/RESOLUCION%201230%20POLITICA%20DE%20HUMANIZACION%20.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Atención en salud"
+  },
+  {
+   "paginaSlug": "politicas-lineamientos-y-manuales",
+   "slug": "politica-de-gestion-del-riesgo",
+   "titulo": "Política de Gestión del Riesgo",
+   "resumen": "",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 200,
+   "soloSiVacia": false,
+   "fecha": "2024-03-01T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/01%20POL%C3%8DTICA%20DE%20GESTI%C3%93N%20DEL%20RIESGO.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resolucion%201620%20Politicas%20MIPG.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/POLITICA%20DE%20GESTI%C3%93N%20DEL%20RIESGO%20HSJG%201%20(3).pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Res%200303%202015%20admcion%20riesgo%20(1).pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Res%200943%202016%20admcion%20del%20riesgo%20(1).pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Red%200890%202017%20admci%C3%B3n%20del%20riesgo.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resoluci%C3%B3n%20N%C2%BA%201611%20de%202018%20Pol%C3%ADtica%20de%20Gesti%C3%B3n%20del%20Riesgo.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Control y riesgo"
+  },
+  {
+   "paginaSlug": "politicas-lineamientos-y-manuales",
+   "slug": "politica-de-gestion-del-talento-humano",
+   "titulo": "Política de Gestión del Talento Humano",
+   "resumen": "",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 210,
+   "soloSiVacia": false,
+   "fecha": "2024-12-31T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/POLITICA%20DE%20GESTION%20ESTRATEGICA%20DE%20TALENTO%20HUMANO%202024.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/RESOLUCI%C3%93N%201639%20DE%202024%20POLITICAS%20INSTITUCIONALES.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/POLITICA-GESTION-TALENTO-HUMANO.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/resolucion-politicas-2020.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Talento humano"
+  },
+  {
+   "paginaSlug": "politicas-lineamientos-y-manuales",
+   "slug": "politica-de-gestion-documental",
+   "titulo": "Política de Gestión Documental",
+   "resumen": "",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 220,
+   "soloSiVacia": false,
+   "fecha": "2025-02-12T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/POLITICA%20DE%20GESTION%20DOCUMENTAL%20-%202024.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/RESOLUCI%C3%93N%201639%20DE%202024%20POLITICAS%20INSTITUCIONALES_2024.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/RESOLUCI%C3%93N%200647%20ADOPCI%C3%93N%20DE%20POLITICA%20GESTIO%C3%93N%20DOCUMENTAL.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/POLITICA-GESTION-DOCUMENTAL-2019.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/resolucion-1388-de-2019.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Información, tecnología y comunicaciones"
+  },
+  {
+   "paginaSlug": "politicas-lineamientos-y-manuales",
+   "slug": "politica-de-transparencia-acceso-a-la-informacion-publica-y-lucha-contra-la-corrupcion",
+   "titulo": "Política de Transparencia, Acceso a la Información Pública y Lucha contra la Corrupción",
+   "resumen": "",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 230,
+   "soloSiVacia": false,
+   "fecha": "2022-08-03T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/POLITICA-DE-TRANSPARENCIA-ACCESO-A-LA-INFORMACION-PUBLICA-Y-LUCHA-CONTRA-LA-CORRUPCION.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/resolucion-politicas-2020%20(1).pdf"
+   ],
+   "destacada": null,
+   "categoria": "Servicio y participación ciudadana"
+  },
+  {
+   "paginaSlug": "politicas-lineamientos-y-manuales",
+   "slug": "politica-de-gestion-y-desempeno",
+   "titulo": "Política de Gestión y Desempeño",
+   "resumen": "",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 240,
+   "soloSiVacia": false,
+   "fecha": "2022-08-03T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/POLITICA%20DE%20GESTION%20Y%20DESEMPE%C3%91O%20ajustada.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/resolucion-politicas-2020%20(2).pdf"
+   ],
+   "destacada": null,
+   "categoria": "Planeación y gestión"
+  },
+  {
+   "paginaSlug": "politicas-lineamientos-y-manuales",
+   "slug": "politica-de-participacion-ciudadana",
+   "titulo": "Política de Participación Ciudadana",
+   "resumen": "",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 250,
+   "soloSiVacia": false,
+   "fecha": "2022-08-03T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/POLITICA-DE-PARTICIPACION-CIUDADANA.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/resolucion-politicas-2020%20(2).pdf"
+   ],
+   "destacada": null,
+   "categoria": "Servicio y participación ciudadana"
+  },
+  {
+   "paginaSlug": "politicas-lineamientos-y-manuales",
+   "slug": "politica-de-integridad",
+   "titulo": "Política de Integridad",
+   "resumen": "",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 260,
+   "soloSiVacia": false,
+   "fecha": "2024-12-31T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/POLITICA%20DE%20INTEGRIDAD%202024.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/RESOLUCI%C3%93N%201639%20DE%202024%20POLITICAS%20INSTITUCIONALES.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/POLITICA-DE-INTEGRIDAD.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/resolucion-politicas-2020%20(2).pdf"
+   ],
+   "destacada": null,
+   "categoria": "Control y riesgo"
+  },
+  {
+   "paginaSlug": "politicas-lineamientos-y-manuales",
+   "slug": "politica-del-sistema-de-gestion-de-la-seguridad-y-salud-en-el-trabajo",
+   "titulo": "Política del Sistema de Gestión de la Seguridad y Salud en el Trabajo",
+   "resumen": "",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 270,
+   "soloSiVacia": false,
+   "fecha": "2022-08-03T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Anexo%20polit%20SST.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Res%200467%20de%202017%20SST.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Talento humano"
+  },
+  {
+   "paginaSlug": "politicas-lineamientos-y-manuales",
+   "slug": "politica-y-objetivos-de-calidad",
+   "titulo": "Política y Objetivos de Calidad",
+   "resumen": "",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 280,
+   "soloSiVacia": false,
+   "fecha": "2022-08-03T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/POLITICA-DE-SIGC-2020.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/3.%20Res%200663%20de%202016%20Pol%C3%ADtca%20de%20calidad.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/RESOLUCION%20N%C2%B0%200318%20DE%202013_1%20(1).pdf"
+   ],
+   "destacada": null,
+   "categoria": "Atención en salud"
+  },
+  {
+   "paginaSlug": "politicas-lineamientos-y-manuales",
+   "slug": "politicas-de-austeridad-racionalizacion-de-costos-gastos-y-eficiencia-administrativa",
+   "titulo": "Políticas de Austeridad, Racionalización de Costos, Gastos y Eficiencia Administrativa",
+   "resumen": "",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 290,
+   "soloSiVacia": false,
+   "fecha": "2023-06-14T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/word/POL%C3%8DTICA%20DE%20AUSTERIDAD,%20RACIONALIZACION%20DE%20COSTOS%20Y%20GASTOS%20Y%20EFICIENCIA%20ADMINISTRATIVA.doc",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/RESOLUCI%C3%93N%20No.%201204%20APROBACI%C3%93N%20POLITICA%20DE%20AUSTERIDAD%20DEL%20GASTO%202021.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/4.%20Res%200448%202017%20austeridad%20y%20gasto%20p%D0%B3blico%20(1).pdf"
+   ],
+   "destacada": null,
+   "categoria": "Financieras y contratación"
+  },
+  {
+   "paginaSlug": "politicas-lineamientos-y-manuales",
+   "slug": "manual-de-politicas-contables",
+   "titulo": "Manual de Políticas Contables",
+   "resumen": "",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 300,
+   "soloSiVacia": false,
+   "fecha": "2022-08-03T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/MANUAL%20DE%20POLITICAS%20CONTABLES%20DEFINITIVO%202020.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Financieras y contratación"
+  },
+  {
+   "paginaSlug": "politicas-lineamientos-y-manuales",
+   "slug": "politica-y-objetivos-de-seguridad-del-paciente",
+   "titulo": "Política y Objetivos de Seguridad del Paciente",
+   "resumen": "",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 310,
+   "soloSiVacia": false,
+   "fecha": "2025-11-27T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/POLITICA%20DE%20SEGURIDAD%20DEL%20PACIENTE%20V3.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resoluci%C3%B3n%201209%20Politica%20de%20seguridad%20del%20paciente.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Atención en salud"
+  },
+  {
+   "paginaSlug": "politicas-lineamientos-y-manuales",
+   "slug": "politica-de-prevencion-de-consumo-de-alcohol-tabaco-y-sustancias-psicoactivas",
+   "titulo": "Política de Prevención de Consumo de Alcohol, Tabaco y Sustancias Psicoactivas",
+   "resumen": "",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 320,
+   "soloSiVacia": false,
+   "fecha": "2022-08-03T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/7.%20Res%20876%20de%202018%20Alcohol,%20tabaco,%20sust%20psicoat.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Talento humano"
+  },
+  {
+   "paginaSlug": "politicas-lineamientos-y-manuales",
+   "slug": "politica-para-la-estrategia-de-atencion-integrada-a-las-enfermedades-prevalentes-de-la-infancia-aiepi",
+   "titulo": "Política para la Estrategia de Atención Integrada a las Enfermedades Prevalentes de la Infancia (AIEPI)",
+   "resumen": "",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 330,
+   "soloSiVacia": false,
+   "fecha": "2022-08-03T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/8.%20Res%200486%20de%202013%20AIEPI.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Atención en salud"
+  },
+  {
+   "paginaSlug": "politicas-lineamientos-y-manuales",
+   "slug": "politica-institucional-de-la-iniciativa-instituciones-amigas-de-la-mujer-y-la-infancia-integral-iiami",
+   "titulo": "Política Institucional de la Iniciativa Instituciones Amigas de la Mujer y la Infancia Integral (IIAMI)",
+   "resumen": "",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 340,
+   "soloSiVacia": false,
+   "fecha": "2022-08-03T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/9.%20Resolucion%20comite%20IAMI%20(1).pdf"
+   ],
+   "destacada": null,
+   "categoria": "Atención en salud"
+  }
+ ]
+}

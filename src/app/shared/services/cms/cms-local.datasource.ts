@@ -46,6 +46,7 @@ export class CmsLocalDataSource extends CmsDataSource {
       .then(() => this.sembrarDesdeArchivo('resena-historica-semilla', 'assets/semillas/resena-historica.json'))
       .then(() => this.sembrarDesdeArchivo('portafolio-servicios-semilla', 'assets/semillas/portafolio-servicios.json'))
       .then(() => this.sembrarDesdeArchivo('organigrama-semilla', 'assets/semillas/organigrama.json'))
+      .then(() => this.sembrarDesdeArchivo('normatividad-semilla', 'assets/semillas/normatividad.json'))
       .then(() => this.clasificarPublicaciones())
       .then(() => this.clasificarDocumentosTalentoHumano());
   }
@@ -439,6 +440,7 @@ export class CmsLocalDataSource extends CmsDataSource {
    * - resena-historica.json     → api/migraciones/021-resena-historica.sql (hitos, fotos y portada)
    * - portafolio-servicios.json → api/migraciones/024-portafolio-de-servicios.sql (12 servicios del portafolio)
    * - organigrama.json          → api/migraciones/026-organigrama.sql (dependencias del organigrama)
+   * - normatividad.json         → api/migraciones/028-normatividad.sql (resoluciones, acuerdos, políticas…)
    */
   private async sembrarDesdeArchivo(nombre: string, ruta: string): Promise<void> {
     const clave = this.prefijo + nombre;

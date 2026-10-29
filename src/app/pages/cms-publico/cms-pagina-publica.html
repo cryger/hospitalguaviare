@@ -154,7 +154,7 @@
         @if (busqueda().trim()) { para «{{ busqueda().trim() }}» }
         @if (anio()) { en {{ anio() }} }
       } @else {
-        <strong>{{ conteoTotal() }}</strong> {{ nombre }}
+        <strong>{{ conteoTotal() }}</strong> {{ conteoTotal() === 1 ? (esListado ? 'publicación' : 'documento') : nombre }}
       }
     </p>
   }
