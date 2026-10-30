@@ -56,6 +56,7 @@ export class CmsLocalDataSource extends CmsDataSource {
       .then(() => this.sembrarDesdeArchivo('planeacion-semilla', 'assets/semillas/planeacion.json'))
       .then(() => this.sembrarDesdeArchivo('control-semilla', 'assets/semillas/control.json'))
       .then(() => this.sembrarDesdeArchivo('contratacion-semilla', 'assets/semillas/contratacion.json'))
+      .then(() => this.sembrarDesdeArchivo('tramites-suit-semilla', 'assets/semillas/tramites-suit.json'))
       .then(() => this.clasificarPublicaciones())
       .then(() => this.clasificarDocumentosTalentoHumano())
       .then(() => this.organizarComiteConvivencia())
@@ -635,6 +636,7 @@ export class CmsLocalDataSource extends CmsDataSource {
    * - sedes-y-horarios.json     → api/migraciones/031-sedes-y-horarios.sql (sede principal y horarios)
    * - control.json              → api/migraciones/039-control.sql (1.13 entes de control, 4.7 a 4.10)
    * - contratacion.json         → api/migraciones/040-contratacion.sql (3.1 PAA, 3.2 relación de contratos, 3.4 manuales, 3.5 formatos)
+   * - tramites-suit.json        → api/migraciones/041-tramites-suit.sql (8 trámites SUIT con ficha GOV.CO y normatividad)
    * - planeacion.json           → api/migraciones/038-planeacion.sql (4.3, 4.4, 4.5, 4.7, manuales, rendición de cuentas)
    * - directorio-institucional.json → api/migraciones/033-directorio-institucional.sql (1.4 directorio y 1.8 servicio al público)
    * - informacion-de-interes.json → api/migraciones/034-informacion-de-interes.sql (datos abiertos, preguntas frecuentes, glosario, talento humano)
@@ -670,6 +672,8 @@ export class CmsLocalDataSource extends CmsDataSource {
         entradas?: Item[];
         /** Actualiza una entrada existente si nadie la ha editado (ej. introducción de la reseña) */
         intro?: { slug: string; resumen: string; contenido: string; destacada: string | null; adjuntos: string[]; siContiene: string };
+        /** Complementa entradas existentes: agrega texto y adjuntos (si aún no tienen siNoContiene) o cambia el orden (si conserva siOrden) */
+        ampliar?: { paginaSlug: string; slug: string; agregar?: string; siNoContiene?: string; adjuntos?: string[]; orden?: number; siOrden?: number }[];
       } = await r.json();
       const items: Item[] = semilla.entradas ?? (semilla.noticias ?? []).map((n) => ({ ...n, paginaSlug: 'noticias', tipo: 'noticia' }));
 
@@ -724,6 +728,17 @@ export class CmsLocalDataSource extends CmsDataSource {
             multimediaIds: it.adjuntos.map((u) => porUrl.get(u)).filter((x): x is number => x !== undefined),
             actualizadoEn: t,
           });
+        }
+      }
+      for (const a of semilla.ampliar ?? []) {
+        const pagina = paginas.find((p) => p.slug === a.paginaSlug);
+        const e = pagina && entradas.find((x) => x.paginaId === pagina.id && x.slug === a.slug);
+        if (!e) continue;
+        if (a.agregar && a.siNoContiene && !(e.contenido ?? '').includes(a.siNoContiene)) {
+          const nuevos = (a.adjuntos ?? []).map((u) => porUrl.get(u)).filter((x): x is number => x !== undefined && !e.multimediaIds.includes(x));
+          Object.assign(e, { contenido: `${e.contenido ?? ''}\n${a.agregar}`, multimediaIds: [...e.multimediaIds, ...nuevos], orden: a.orden ?? e.orden, actualizadoEn: t });
+        } else if (a.siOrden !== undefined && e.orden === a.siOrden && a.orden !== undefined) {
+          e.orden = a.orden;
         }
       }
       this.escribir('multimedia', multimedia);

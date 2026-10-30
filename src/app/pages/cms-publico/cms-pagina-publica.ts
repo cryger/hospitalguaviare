@@ -472,6 +472,8 @@ export class CmsPaginaPublica {
       [/medicamento|farmacia|f[oó]rmula/, '💊'],
       [/vacuna/, '💉'],
       [/urgencia/, '🚑'],
+      [/radiolog|im[aá]genes diagn/, '🩻'],
+      [/terapia|rehabilit/, '🤸'],
       [/encuesta|satisfacci/, '📝'],
       [/trato digno|derechos/, '🤝'],
       [/vigilancia|veedur|observaci|procesos vigilados/, '🔎'],

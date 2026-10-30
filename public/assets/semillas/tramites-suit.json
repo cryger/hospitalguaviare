@@ -1,0 +1,492 @@
+{
+ "origen": "esehospitalguaviare.gov.co (Trámites y servicios)",
+ "multimedia": [
+  {
+   "nombre": "Ley 657 de 2001.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Ley%20657%20de%202001.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Ley 657 de 2001",
+   "alt": null
+  },
+  {
+   "nombre": "LEY 0023 DE 1981.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/LEY%200023%20DE%201981.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Ley 23 de 1981",
+   "alt": null
+  },
+  {
+   "nombre": "Resolucion 5261 de 1994.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resolucion%205261%20de%201994.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución 5261 de 1994",
+   "alt": null
+  },
+  {
+   "nombre": "ley_0009_1979.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/ley_0009_1979.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Ley 9 de 1979",
+   "alt": null
+  },
+  {
+   "nombre": "DECRETO_1171_19974011015213224133470.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/DECRETO_1171_19974011015213224133470.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Decreto 1171 de 1997",
+   "alt": null
+  },
+  {
+   "nombre": "Resolución 5194 DE 2010.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resoluci%C3%B3n%205194%20DE%202010.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución 5194 de 2010",
+   "alt": null
+  },
+  {
+   "nombre": "RESOLUCIÓN 1346 DE 1997.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/RESOLUCI%C3%93N%201346%20DE%201997.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución 1346 de 1997",
+   "alt": null
+  },
+  {
+   "nombre": "20191118-circular-unica-rc-e-identificacion-version-4-15-noviembre-2019_.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/20191118-circular-unica-rc-e-identificacion-version-4-15-noviembre-2019_.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Circular Única de Registro Civil e Identificación – Versión 4",
+   "alt": null
+  },
+  {
+   "nombre": "Circular_externa_064_de_2008.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Circular_externa_064_de_2008.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Circular Externa N° 64 de 2008",
+   "alt": null
+  },
+  {
+   "nombre": "2 CIRCULAR 019 DE 2007 cert de defuncion.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/2%20CIRCULAR%20019%20DE%202007%20cert%20de%20defuncion.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Circular Externa N° 19 de 2007",
+   "alt": null
+  },
+  {
+   "nombre": "LEY 0036 DE 1993.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/LEY%200036%20DE%201993.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Ley 36 de 1993",
+   "alt": null
+  },
+  {
+   "nombre": "Decreto 77 de 1997.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Decreto%2077%20de%201997.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Decreto 77 de 1997",
+   "alt": null
+  },
+  {
+   "nombre": "CIRCULAR N.16.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/CIRCULAR%20N.16.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Circular N° 16 de 2014",
+   "alt": null
+  },
+  {
+   "nombre": "Acuerdo 260 del 4 de febrero 2004 cuotas mo y cop.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%20260%20del%204%20de%20febrero%202004%20cuotas%20mo%20y%20cop.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Acuerdo 260 de 2004",
+   "alt": null
+  },
+  {
+   "nombre": "LEY 100 DE 1993.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/LEY%20100%20DE%201993.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Ley 100 de 1993",
+   "alt": null
+  },
+  {
+   "nombre": "Decreto 2330-2006.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Decreto%202330-2006.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Decreto 2330 de 2006",
+   "alt": null
+  },
+  {
+   "nombre": "DECRETO 2200 DE 2005.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/DECRETO%202200%20DE%202005.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Decreto 2200 de 2005",
+   "alt": null
+  },
+  {
+   "nombre": "Resolución 1604 de 2013.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resoluci%C3%B3n%201604%20de%202013.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución 1604 de 2013",
+   "alt": null
+  },
+  {
+   "nombre": "RESOLUCION 1403 DE 2007-1.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/RESOLUCION%201403%20DE%202007-1.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución 1403 de 2007",
+   "alt": null
+  },
+  {
+   "nombre": "resolucion001478de2006.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/resolucion001478de2006.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución 1478 de 2006",
+   "alt": null
+  },
+  {
+   "nombre": "ACUERDO 260 DE 2004.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/ACUERDO%20260%20DE%202004.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Acuerdo 260 de 2004",
+   "alt": null
+  },
+  {
+   "nombre": "Ley-100-de-1993.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Ley-100-de-1993.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Ley 100 de 1993",
+   "alt": null
+  },
+  {
+   "nombre": "Ley-10-de-1990.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Ley-10-de-1990.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Ley 10 de 1990",
+   "alt": null
+  },
+  {
+   "nombre": "ley_1122_200.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/ley_1122_200.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Ley 1122 de 2007",
+   "alt": null
+  },
+  {
+   "nombre": "Dec19 de 2012.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Dec19%20de%202012.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Decreto 19 de 2012",
+   "alt": null
+  },
+  {
+   "nombre": "DECRETO 0783 DE 2000.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/DECRETO%200783%20DE%202000.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Decreto 0783 de 2000",
+   "alt": null
+  },
+  {
+   "nombre": "DECRETO 1295 DE 1994.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/DECRETO%201295%20DE%201994.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Decreto 1295 de 1994",
+   "alt": null
+  },
+  {
+   "nombre": "Decreto_412_de_1992_Normas_urgencias_.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Decreto_412_de_1992_Normas_urgencias_.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Decreto 412 de 1992",
+   "alt": null
+  },
+  {
+   "nombre": "Ley 528 de 1999.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Ley%20528%20de%201999.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Ley 528 de 1999",
+   "alt": null
+  },
+  {
+   "nombre": "LEY 1438 DE 2011.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/LEY%201438%20DE%202011.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Ley 1438 de 2011",
+   "alt": null
+  },
+  {
+   "nombre": "dec 4747 2007.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/dec%204747%202007.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Decreto 4747 de 2007",
+   "alt": null
+  },
+  {
+   "nombre": "Resolucion 1552 de 2013.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resolucion%201552%20de%202013.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución 1552 de 2013",
+   "alt": null
+  },
+  {
+   "nombre": "Circular 0016 de 2014.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Circular%200016%20de%202014.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Circular 16 de 2014",
+   "alt": null
+  },
+  {
+   "nombre": "ACUERDO 000260 DE 2004.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/ACUERDO%20000260%20DE%202004.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Acuerdo 260 de 2004",
+   "alt": null
+  },
+  {
+   "nombre": "Ley 911 de 2004.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Ley%20911%20de%202004.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Ley 911 de 2004",
+   "alt": null
+  },
+  {
+   "nombre": "Resolucion No 839 de 2017.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resolucion%20No%20839%20de%202017.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución 839 de 2017",
+   "alt": null
+  },
+  {
+   "nombre": "RESOLUCION_1995_1999.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/RESOLUCION_1995_1999.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución 1995 de 1999",
+   "alt": null
+  },
+  {
+   "nombre": "Sentencia 182.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Sentencia%20182.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Sentencia 182 de 2009",
+   "alt": null
+  }
+ ],
+ "entradas": [
+  {
+   "paginaSlug": "tramites-y-otros-procedimientos",
+   "slug": "atencion-inicial-de-urgencia",
+   "titulo": "Atención inicial de urgencia",
+   "resumen": "Atención de urgencias para cualquier persona, sin autorización previa de la EPS.",
+   "contenido": "<p>La atención inicial de urgencias es obligatoria y se presta a cualquier persona, sin importar su capacidad de pago ni su afiliación al sistema de salud, y sin necesidad de contrato ni autorización previa de la EPS.</p>\n<h3>¿Cómo acceder?</h3>\n<ol>\n<li>Acérquese al servicio de Urgencias del hospital.</li>\n<li>Presente su documento de identidad si lo tiene; no tenerlo no impide la atención.</li>\n<li>Pase al triage, donde se clasifica la prioridad de atención según la gravedad.</li>\n</ol>\n<p><strong>Costo:</strong> según su régimen de afiliación pueden aplicar cuotas moderadoras o copagos (Acuerdo 260 de 2004).</p>\n<h3>Más información</h3>\n<p><a href=\"https://www.gov.co/ficha-tramites-y-servicios/T46573\" target=\"_blank\" rel=\"noopener\">Ver la ficha del trámite en GOV.CO</a> (requisitos, pasos y canales registrados en el SUIT).</p>",
+   "tipo": "servicio",
+   "orden": 0,
+   "soloSiVacia": false,
+   "fecha": null,
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Ley-100-de-1993.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Ley-10-de-1990.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/ley_1122_200.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Dec19%20de%202012.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/DECRETO%200783%20DE%202000.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/DECRETO%201295%20DE%201994.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Decreto_412_de_1992_Normas_urgencias_.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resolucion%205261%20de%201994.pdf"
+   ],
+   "destacada": null,
+   "icono": null
+  },
+  {
+   "paginaSlug": "tramites-y-otros-procedimientos",
+   "slug": "examen-de-laboratorio-clinico",
+   "titulo": "Examen de laboratorio clínico",
+   "resumen": "Toma y procesamiento de las muestras de laboratorio ordenadas por un profesional de la salud.",
+   "contenido": "<p>Realización de los exámenes de laboratorio clínico ordenados por un profesional de la salud.</p>\n<h3>¿Cómo hacerlo?</h3>\n<ol>\n<li>Tenga a mano la orden médica vigente y, si su EPS la exige, la autorización.</li>\n<li>Acérquese al Laboratorio Clínico con su documento de identidad y siga las indicaciones de preparación (por ejemplo, ayuno cuando se requiera).</li>\n<li>Consulte sus resultados en línea en la opción «Consulta y descarga de resultados de laboratorio» de esta página.</li>\n</ol>\n<p><strong>Costo:</strong> según su régimen de afiliación pueden aplicar cuotas moderadoras o copagos (Acuerdo 260 de 2004).</p>\n<h3>Más información</h3>\n<p><a href=\"https://www.gov.co/ficha-tramites-y-servicios/T60504\" target=\"_blank\" rel=\"noopener\">Ver la ficha del trámite en GOV.CO</a> (requisitos, pasos y canales registrados en el SUIT).</p>",
+   "tipo": "servicio",
+   "orden": 3,
+   "soloSiVacia": false,
+   "fecha": null,
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/LEY%200036%20DE%201993.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/LEY%200023%20DE%201981.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Decreto%2077%20de%201997.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resolucion%205261%20de%201994.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/CIRCULAR%20N.16.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%20260%20del%204%20de%20febrero%202004%20cuotas%20mo%20y%20cop.pdf"
+   ],
+   "destacada": null,
+   "icono": null
+  },
+  {
+   "paginaSlug": "tramites-y-otros-procedimientos",
+   "slug": "radiologia-e-imagenes-diagnosticas",
+   "titulo": "Radiología e imágenes diagnósticas",
+   "resumen": "Estudios de rayos X, ecografías y otras imágenes ordenadas por un profesional de la salud.",
+   "contenido": "<p>Realización de los estudios de radiología e imágenes diagnósticas ordenados por un profesional de la salud.</p>\n<h3>¿Cómo hacerlo?</h3>\n<ol>\n<li>Tenga a mano la orden médica vigente y, si su EPS la exige, la autorización.</li>\n<li>Solicite la cita por los canales de atención del hospital.</li>\n<li>Preséntese el día de la cita con su documento de identidad y la preparación indicada para el estudio.</li>\n</ol>\n<p><strong>Costo:</strong> según su régimen de afiliación pueden aplicar cuotas moderadoras o copagos (Acuerdo 260 de 2004).</p>\n<h3>Más información</h3>\n<p><a href=\"https://www.gov.co/ficha-tramites-y-servicios/T60324\" target=\"_blank\" rel=\"noopener\">Ver la ficha del trámite en GOV.CO</a> (requisitos, pasos y canales registrados en el SUIT).</p>",
+   "tipo": "servicio",
+   "orden": 5,
+   "soloSiVacia": false,
+   "fecha": null,
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Ley%20657%20de%202001.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/LEY%200023%20DE%201981.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resolucion%205261%20de%201994.pdf"
+   ],
+   "destacada": null,
+   "icono": null
+  },
+  {
+   "paginaSlug": "tramites-y-otros-procedimientos",
+   "slug": "terapia",
+   "titulo": "Terapia",
+   "resumen": "Sesiones de terapia ordenadas por un profesional de la salud, como fisioterapia.",
+   "contenido": "<p>Prestación de las sesiones de terapia ordenadas por un profesional de la salud.</p>\n<h3>¿Cómo hacerlo?</h3>\n<ol>\n<li>Tenga a mano la orden médica vigente y, si su EPS la exige, la autorización.</li>\n<li>Solicite la asignación de las sesiones por los canales de atención del hospital.</li>\n<li>Asista a cada sesión con su documento de identidad.</li>\n</ol>\n<p><strong>Costo:</strong> según su régimen de afiliación pueden aplicar cuotas moderadoras o copagos (Acuerdo 260 de 2004).</p>\n<h3>Más información</h3>\n<p><a href=\"https://www.gov.co/ficha-tramites-y-servicios/T60322\" target=\"_blank\" rel=\"noopener\">Ver la ficha del trámite en GOV.CO</a> (requisitos, pasos y canales registrados en el SUIT).</p>",
+   "tipo": "servicio",
+   "orden": 6,
+   "soloSiVacia": false,
+   "fecha": null,
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Ley%20528%20de%201999.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/LEY%200023%20DE%201981.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resolucion%205261%20de%201994.pdf"
+   ],
+   "destacada": null,
+   "icono": null
+  },
+  {
+   "paginaSlug": "tramites-y-otros-procedimientos",
+   "slug": "dispensacion-de-medicamentos-y-dispositivos-medicos",
+   "titulo": "Dispensación de medicamentos y dispositivos médicos",
+   "resumen": "Entrega de los medicamentos y dispositivos médicos formulados por un profesional de la salud.",
+   "contenido": "<p>Entrega de los medicamentos y dispositivos médicos formulados por un profesional de la salud.</p>\n<h3>¿Cómo hacerlo?</h3>\n<ol>\n<li>Tenga a mano la fórmula médica vigente y, si su EPS la exige, la autorización.</li>\n<li>Acérquese al servicio farmacéutico con su documento de identidad.</li>\n<li>Reciba los medicamentos y las indicaciones sobre su uso y conservación.</li>\n</ol>\n<p><strong>Costo:</strong> según su régimen de afiliación pueden aplicar cuotas moderadoras o copagos (Acuerdo 260 de 2004).</p>\n<h3>Más información</h3>\n<p><a href=\"https://www.gov.co/ficha-tramites-y-servicios/T46600\" target=\"_blank\" rel=\"noopener\">Ver la ficha del trámite en GOV.CO</a> (requisitos, pasos y canales registrados en el SUIT).</p>",
+   "tipo": "servicio",
+   "orden": 7,
+   "soloSiVacia": false,
+   "fecha": null,
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/LEY%20100%20DE%201993.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/LEY%200023%20DE%201981.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Decreto%202330-2006.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/DECRETO%202200%20DE%202005.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resoluci%C3%B3n%201604%20de%202013.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/RESOLUCION%201403%20DE%202007-1.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/resolucion001478de2006.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resolucion%205261%20de%201994.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/ACUERDO%20260%20DE%202004.pdf"
+   ],
+   "destacada": null,
+   "icono": null
+  },
+  {
+   "paginaSlug": "tramites-y-otros-procedimientos",
+   "slug": "certificado-de-defuncion",
+   "titulo": "Certificado de defunción",
+   "resumen": "Expedición del certificado médico de defunción, necesario para el registro civil de defunción.",
+   "contenido": "<p>Expedición del certificado médico de defunción por muerte natural ocurrida en la institución. Con este certificado los familiares tramitan el registro civil de defunción ante la Registraduría o una notaría.</p>\n<h3>¿Cómo hacerlo?</h3>\n<ol>\n<li>El médico que confirma el fallecimiento expide el certificado de defunción.</li>\n<li>El familiar o responsable presenta su documento de identidad y el del fallecido.</li>\n<li>Con el certificado, realice el registro civil de defunción.</li>\n</ol>\n<p><strong>Costo:</strong> gratuito.</p>\n<h3>Más información</h3>\n<p><a href=\"https://www.gov.co/ficha-tramites-y-servicios/T59317\" target=\"_blank\" rel=\"noopener\">Ver la ficha del trámite en GOV.CO</a> (requisitos, pasos y canales registrados en el SUIT).</p>",
+   "tipo": "servicio",
+   "orden": 8,
+   "soloSiVacia": false,
+   "fecha": null,
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/LEY%200023%20DE%201981.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/ley_0009_1979.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/DECRETO_1171_19974011015213224133470.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resoluci%C3%B3n%205194%20DE%202010.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/RESOLUCI%C3%93N%201346%20DE%201997.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/20191118-circular-unica-rc-e-identificacion-version-4-15-noviembre-2019_.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Circular_externa_064_de_2008.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/2%20CIRCULAR%20019%20DE%202007%20cert%20de%20defuncion.pdf"
+   ],
+   "destacada": null,
+   "icono": null
+  }
+ ],
+ "ampliar": [
+  {
+   "paginaSlug": "tramites-y-otros-procedimientos",
+   "slug": "solicitar-cita-consulta-externa",
+   "siNoContiene": "gov.co/ficha-tramites-y-servicios",
+   "agregar": "<h3>Más información</h3>\n<p><a href=\"https://www.gov.co/ficha-tramites-y-servicios/T46904\" target=\"_blank\" rel=\"noopener\">Ver la ficha del trámite en GOV.CO</a> (requisitos, pasos y canales registrados en el SUIT).</p>",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/LEY%201438%20DE%202011.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/ley_1122_200.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Dec19%20de%202012.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/dec%204747%202007.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resolucion%201552%20de%202013.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resolucion%205261%20de%201994.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Circular%200016%20de%202014.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/ACUERDO%20000260%20DE%202004.pdf"
+   ],
+   "orden": 1
+  },
+  {
+   "paginaSlug": "tramites-y-otros-procedimientos",
+   "slug": "copia-de-historia-clinica",
+   "siNoContiene": "gov.co/ficha-tramites-y-servicios",
+   "agregar": "<h3>Más información</h3>\n<p><a href=\"https://www.gov.co/ficha-tramites-y-servicios/T49559\" target=\"_blank\" rel=\"noopener\">Ver la ficha del trámite en GOV.CO</a> (requisitos, pasos y canales registrados en el SUIT).</p>",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/LEY%201438%20DE%202011.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Ley%20911%20de%202004.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Ley%20528%20de%201999.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/LEY%200023%20DE%201981.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Dec19%20de%202012.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resolucion%20No%20839%20de%202017.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/RESOLUCION_1995_1999.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Sentencia%20182.pdf"
+   ],
+   "orden": 2
+  },
+  {
+   "paginaSlug": "tramites-y-otros-procedimientos",
+   "slug": "resultados-de-laboratorio",
+   "siOrden": 2,
+   "orden": 4
+  },
+  {
+   "paginaSlug": "tramites-y-otros-procedimientos",
+   "slug": "radicar-pqrsf",
+   "siOrden": 3,
+   "orden": 9
+  },
+  {
+   "paginaSlug": "tramites-y-otros-procedimientos",
+   "slug": "seguimiento-solicitudes-contractuales",
+   "siOrden": 4,
+   "orden": 10
+  }
+ ]
+}

@@ -338,6 +338,7 @@ h1, h2, h3, .srv-titulo, .tarjeta-cuerpo h2, .tarjeta-cuerpo h3, .subpagina stro
 .lista-docs { grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr)); }
 .rejilla-media { grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr)); }
 .servicio, .srv-cuerpo, .srv-texto { min-width: 0; }
+.srv-cuerpo .lista-docs { grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); }
 
 /* El buscador, los desplegables, las etiquetas y los botones BDC son globales:
    ver app-buscador-govco (shared/components) y el bloque BDC GOV.CO v5 de src/styles.css */

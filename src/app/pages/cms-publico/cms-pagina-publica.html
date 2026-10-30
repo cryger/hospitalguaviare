@@ -391,7 +391,7 @@
               <div class="srv-cuerpo">
                 @if (e.contenido) { <div class="contenido-html" [innerHTML]="e.contenido"></div> }
                 @if (documentos(e).length) {
-                  <h3 class="srv-sub">Documentos</h3>
+                  <h3 class="srv-sub">Documentos y normatividad</h3>
                   <div class="lista-docs">
                     @for (m of documentos(e); track m.id) { <app-cms-media-publica [media]="m" /> }
                   </div>
