@@ -52,6 +52,7 @@ export class CmsLocalDataSource extends CmsDataSource {
       .then(() => this.sembrarDesdeArchivo('directorio-semilla', 'assets/semillas/directorio-institucional.json'))
       .then(() => this.sembrarDesdeArchivo('informacion-de-interes-semilla', 'assets/semillas/informacion-de-interes.json'))
       .then(() => this.sembrarDesdeArchivo('estructura-organica-semilla', 'assets/semillas/estructura-organica.json'))
+      .then(() => this.sembrarDesdeArchivo('presupuesto-semilla', 'assets/semillas/presupuesto.json'))
       .then(() => this.clasificarPublicaciones())
       .then(() => this.clasificarDocumentosTalentoHumano())
       .then(() => this.organizarComiteConvivencia())
@@ -349,7 +350,7 @@ export class CmsLocalDataSource extends CmsDataSource {
   }
 
   /* ===== Estructura inicial (Resolución 1519 de 2020) ===== */
-  private readonly versionSemilla = 24;
+  private readonly versionSemilla = 25;
 
   private sembrarSiVacio(): void {
     if (localStorage.getItem(this.prefijo + 'menus')) return;
@@ -574,6 +575,15 @@ export class CmsLocalDataSource extends CmsDataSource {
       for (const p of paginas) {
         if (p.slug === 'directorio-institucional' && p.plantilla === 'contenido') Object.assign(p, { plantilla: 'directorio', actualizadoEn: t });
       }
+    }
+    // Versión 25: descripciones de 4.1, 4.2 y 4.6 (presupuesto y estados financieros)
+    if (version < 25) {
+      const DESC: Record<string, string> = {
+        'presupuesto-general-de-ingresos-gastos-e-inversion': 'Presupuesto desagregado de ingresos, gastos e inversión aprobado para cada vigencia fiscal.',
+        'ejecucion-presupuestal': 'Informes mensuales de ejecución del presupuesto de ingresos (activa) y de gastos (pasiva), e informes de gestión presupuestal.',
+        'informacion-publica-yo-relevante': 'Estados financieros comparativos de la E.S.E. con sus notas y revelaciones.',
+      };
+      for (const p of paginas) if (DESC[p.slug] && !p.descripcion) Object.assign(p, { descripcion: DESC[p.slug], actualizadoEn: t });
     }
     // Versión 24: 1.3 con mapa de procesos visual; 1.6 y 1.7 como directorios con buscador
     if (version < 24) {
