@@ -1,0 +1,5 @@
+# Portal de la E.S.E. Hospital San José del Guaviare
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /login

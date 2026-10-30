@@ -1,7 +1,8 @@
 <ul class="servicios">
   @for (s of tarjetas(); track s.id) {
     <li>
-      <a class="srv" [class]="'tono-' + s.tono" [routerLink]="s.url" [attr.aria-label]="'Conocer ' + s.titulo" [attr.aria-describedby]="s.resumen ? 'srv-res-' + s.id : null">
+      <!-- Toda la tarjeta es clicable, pero el enlace es solo el título (su nombre = texto visible) -->
+      <div class="srv" [class]="'tono-' + s.tono">
         <span class="srv-media">
           @if (s.imagen) {
             <img [src]="s.imagen" [alt]="s.alt" loading="lazy" />
@@ -18,11 +19,15 @@
         </span>
         <span class="srv-cuerpo">
           @if (mostrarCategoria() && s.categoria) { <span class="srv-cat">{{ s.categoria }}</span> }
-          @if (nivel() === 2) { <h2>{{ s.titulo }}</h2> } @else { <h3>{{ s.titulo }}</h3> }
-          @if (s.resumen) { <span class="srv-resumen" [id]="'srv-res-' + s.id">{{ s.resumen }}</span> }
-          <span class="srv-ir">Conocer el servicio <span aria-hidden="true">→</span></span>
+          @if (nivel() === 2) {
+            <h2><a class="srv-enlace" [routerLink]="s.url">{{ s.titulo }}</a></h2>
+          } @else {
+            <h3><a class="srv-enlace" [routerLink]="s.url">{{ s.titulo }}</a></h3>
+          }
+          @if (s.resumen) { <span class="srv-resumen">{{ s.resumen }}</span> }
+          <span class="srv-ir" aria-hidden="true">Conocer el servicio →</span>
         </span>
-      </a>
+      </div>
     </li>
   }
 </ul>

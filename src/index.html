@@ -5,7 +5,17 @@
   <title>E.S.E. Hospital San José del Guaviare</title>
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Portal oficial de la E.S.E. Hospital San José del Guaviare: servicios de salud de mediana complejidad, citas, trámites, PQRSD, transparencia y acceso a la información pública en San José del Guaviare.">
+  <meta name="theme-color" content="#004884">
   <link rel="icon" type="image/x-icon" href="HSJG-LOGO-2.ico">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <!-- Fuentes del texto: se piden de inmediato para que no retrasen el primer pintado -->
+  <link rel="preload" href="assets/fonts/WorkSans-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/WorkSans-SemiBold.woff2" as="font" type="font/woff2" crossorigin>
+  <!-- Primera imagen del carrusel (elemento más grande del inicio): se pide antes de que arranque Angular.
+       Si en Panel › Slider se cambia la primera diapositiva, actualice estas dos rutas. -->
+  <link rel="preload" as="image" type="image/webp" href="assets/img/slider/BANNER_PLATAFORMA-2025-movil.webp" media="(max-width: 576px)" fetchpriority="high">
+  <link rel="preload" as="image" type="image/webp" href="assets/img/slider/BANNER_PLATAFORMA-2025.webp" media="(min-width: 577px)" fetchpriority="high">
 </head>
 <body>
   <app-root></app-root>

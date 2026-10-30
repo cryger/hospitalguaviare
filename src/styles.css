@@ -481,12 +481,35 @@ body.high-contrast .barra-accesbilidad-govco a:hover {
 }
 
 /* ===== Íconos nativos GOV.CO (selector de íconos del CMS: valor "govco:<nombre>") ===== */
+/* Fuentes del portal en WOFF2 (public/assets/fonts). Work Sans va recortada al alfabeto latino
+   y con font-display: swap para que el texto se vea mientras carga la fuente. */
 @font-face {
   font-family: "govco-font";
-  src: url("./app/shared/assets/icons/fonts/govco-font-icons.ttf") format("truetype");
+  src: url("/assets/fonts/govco-font-icons.woff2") format("woff2"),
+       url("./app/shared/assets/icons/fonts/govco-font-icons.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
-  font-display: block;
+  font-display: block; /* íconos: evita mostrar el nombre del ícono mientras carga */
+}
+@font-face {
+  font-family: 'WorkSans-Regular';
+  src: url('/assets/fonts/WorkSans-Regular.woff2') format('woff2');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'WorkSans-Medium';
+  src: url('/assets/fonts/WorkSans-Medium.woff2') format('woff2');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'WorkSans-SemiBold';
+  src: url('/assets/fonts/WorkSans-SemiBold.woff2') format('woff2');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Montserrat-SemiBold';
+  src: url('/assets/fonts/Montserrat-SemiBold.woff2') format('woff2');
+  font-display: swap;
 }
 .icono-govco {
   font-family: "govco-font" !important;

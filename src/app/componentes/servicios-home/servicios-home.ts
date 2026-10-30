@@ -47,6 +47,9 @@ export class ServiciosHome implements OnInit {
     return e ? this.cms.urlEntrada(e) : null;
   });
 
+  /** Si la tarjeta de Urgencias ya está en la cuadrícula, no se repite el enlace en la franja */
+  readonly urgenciasVisible = computed(() => this.servicios().some((x) => /urgencia/i.test(x.slug)));
+
   ngOnInit(): void {
     this.cms.cargar();
   }

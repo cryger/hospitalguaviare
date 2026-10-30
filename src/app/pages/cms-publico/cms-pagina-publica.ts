@@ -1,8 +1,8 @@
-import { Component, computed, effect, inject, signal, untracked } from '@angular/core';
+import { Component, DestroyRef, computed, effect, inject, signal, untracked } from '@angular/core';
 import { DatePipe, NgTemplateOutlet } from '@angular/common';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { Title } from '@angular/platform-browser';
+import { Meta, Title } from '@angular/platform-browser';
 import { map } from 'rxjs';
 import { CmsService } from '../../shared/services/cms/cms.service';
 import { CmsEntrada, CmsMultimedia, CmsPagina, TIPOS_ENTRADA } from '../../shared/models/cms/cms.models';
@@ -71,6 +71,9 @@ export class CmsPaginaPublica {
   private route = inject(ActivatedRoute);
   private router = inject(Router);
   private title = inject(Title);
+  private meta = inject(Meta);
+  /** Descripción general del portal (la misma de index.html) */
+  private readonly descripcionInicial = this.meta.getTag('name="description"')?.content ?? '';
   private visor = inject(VisorDocumentos);
   readonly sePuedeVer = sePuedeVer;
 
@@ -309,7 +312,11 @@ export class CmsPaginaPublica {
       this.title.setTitle(
         r ? `${r.entrada?.titulo ?? r.pagina.titulo} | E.S.E. Hospital San José del Guaviare` : 'Página no encontrada',
       );
+      // SEO: cada página con su propia descripción (resumen de la entrada o descripción de la página)
+      const texto = (r?.entrada?.resumen || r?.pagina.descripcion || '').replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
+      this.meta.updateTag({ name: 'description', content: texto ? texto.slice(0, 160) : this.descripcionInicial });
     });
+    inject(DestroyRef).onDestroy(() => this.meta.updateTag({ name: 'description', content: this.descripcionInicial }));
 
     // URL vieja de una página que se movió: se lleva a su dirección actual
     effect(() => {

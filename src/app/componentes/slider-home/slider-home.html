@@ -76,6 +76,8 @@
 <ng-template #imagen let-b let-i="i">
   <picture>
     @if (b.imagenMovilUrl) { <source media="(max-width: 576px)" [attr.srcset]="b.imagenMovilUrl" /> }
+    @else if (webp(b.imagenUrl); as w) { <source media="(max-width: 576px)" type="image/webp" [attr.srcset]="w.movil" /> }
+    @if (webp(b.imagenUrl); as w) { <source type="image/webp" [attr.srcset]="w.normal" /> }
     <img [src]="b.imagenUrl" [alt]="b.alt" [attr.loading]="i === 0 ? 'eager' : 'lazy'" [attr.fetchpriority]="i === 0 ? 'high' : null" draggable="false" />
   </picture>
 </ng-template>

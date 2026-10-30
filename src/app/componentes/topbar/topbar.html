@@ -8,11 +8,11 @@
         <div class="language-selector">
           <button
             class="idioma-icon-barra-superior-govco float-right"
-            [attr.aria-label]="'Cambiar idioma a ' + (idiomaActual === 'es' ? 'inglés' : 'español')"
+            [attr.aria-label]="(idiomaActual === 'es' ? 'En: cambiar idioma a inglés' : 'Es: cambiar idioma a español')"
             (click)="toggleMenuIdiomas()">
             {{ idiomaActual === 'es' ? 'En' : 'Es' }}
-            <span class="arrow-down" *ngIf="!mostrarMenuIdiomas">▼</span>
-            <span class="arrow-up" *ngIf="mostrarMenuIdiomas">▲</span>
+            <span class="arrow-down" aria-hidden="true" *ngIf="!mostrarMenuIdiomas">▼</span>
+            <span class="arrow-up" aria-hidden="true" *ngIf="mostrarMenuIdiomas">▲</span>
           </button>
 
           <!-- Menú desplegable de idiomas -->

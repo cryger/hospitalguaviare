@@ -441,26 +441,25 @@
           @let externa = esExterna(cms.urlPagina(s));
           @let num = numeroDe(s.titulo);
           <li>
-            <ng-template #tarjetaSeccion>
+            <!-- Toda la tarjeta es clicable; el enlace es el título (mismo texto que en el menú) -->
+            <div class="seccion">
               <span class="sec-icono" aria-hidden="true"><app-icono-cms [valor]="iconoPagina(s)" /></span>
               <span class="sec-cuerpo">
                 <span class="sec-titulo">
-                  @if (num) { <span class="sec-num">{{ num }}</span> }
-                  {{ sinNumero(s.titulo) }}
+                  @if (num) { <span class="sec-num" aria-hidden="true">{{ num }}</span> }
+                  @if (externa) {
+                    <a class="sec-enlace" [href]="cms.urlPagina(s)" target="_blank" rel="noopener">@if (num) {<span class="visually-hidden">{{ num }}. </span>}{{ sinNumero(s.titulo) }}</a>
+                  } @else {
+                    <a class="sec-enlace" [routerLink]="cms.urlPagina(s)">@if (num) {<span class="visually-hidden">{{ num }}. </span>}{{ sinNumero(s.titulo) }}</a>
+                  }
                 </span>
-                <span class="sec-desc" [id]="'sec-desc-' + s.id">{{ s.descripcion || ayudaPagina(s) }}</span>
-                <span class="sec-pie">
+                <span class="sec-desc">{{ s.descripcion || ayudaPagina(s) }}</span>
+                <span class="sec-pie" aria-hidden="true">
                   <span class="sec-tipo">{{ tipoPagina(s, externa) }}</span>
-                  <span class="sec-flecha" aria-hidden="true">{{ externa ? '↗' : '→' }}</span>
-                  @if (externa) { <span class="visually-hidden">(se abre en una pestaña nueva)</span> }
+                  <span class="sec-flecha">{{ externa ? '↗' : '→' }}</span>
                 </span>
               </span>
-            </ng-template>
-            @if (externa) {
-              <a class="seccion" [href]="cms.urlPagina(s)" target="_blank" rel="noopener" [attr.aria-label]="s.titulo" [attr.aria-describedby]="'sec-desc-' + s.id"><ng-container *ngTemplateOutlet="tarjetaSeccion" /></a>
-            } @else {
-              <a class="seccion" [routerLink]="cms.urlPagina(s)" [attr.aria-label]="s.titulo" [attr.aria-describedby]="'sec-desc-' + s.id"><ng-container *ngTemplateOutlet="tarjetaSeccion" /></a>
-            }
+            </div>
           </li>
         }
       </ul>

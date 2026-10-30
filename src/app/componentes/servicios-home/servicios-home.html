@@ -30,7 +30,9 @@
           316 744 0324
         </a>
         @if (urlUrgencias(); as u) {
-          <a class="sh-ver" [routerLink]="u" aria-label="Conocer Urgencias">Conocer Urgencias <span aria-hidden="true">→</span></a>
+          @if (!urgenciasVisible()) {
+          <a class="sh-ver" [routerLink]="u">Conocer Urgencias</a>
+          }
         }
       </div>
     </div>

@@ -103,6 +103,16 @@ export class SliderHomeComponent {
 
   externo = (b: Banner) => esEnlaceExterno(b.enlaceUrl);
 
+  /**
+   * Las imágenes propias del carrusel (assets/img/slider/*.jpg|png) tienen versión WebP
+   * (1920 px) y otra para celular (-movil.webp, 828 px): pesan entre 5 y 10 veces menos.
+   */
+  webp(url: string | null | undefined): { normal: string; movil: string } | null {
+    if (!url || !/^\/?assets\/img\/slider\/[^/]+\.(jpe?g|png)$/i.test(url)) return null;
+    const base = url.replace(/\.(jpe?g|png)$/i, '');
+    return { normal: base + '.webp', movil: base + '-movil.webp' };
+  }
+
   /** Nombre accesible de una imagen-enlace sin texto alternativo: título del banner o de la página de destino */
   nombreEnlace(b: Banner): string {
     if (b.titulo) return b.titulo;
