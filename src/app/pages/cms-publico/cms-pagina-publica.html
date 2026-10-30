@@ -322,7 +322,7 @@
 
     @case ('directorio') {
       <!-- Directorio institucional: líneas principales y dependencias con buscador (grupo = área en Entradas) -->
-      <app-directorio-institucional [entradas]="entradas()" [nombreLista]="p.slug.includes('agremiaciones') ? 'Agremiaciones y asociaciones' : p.slug.includes('entidades') ? 'Entidades' : 'Dependencias'" />
+      <app-directorio-institucional [entradas]="entradas()" [nombreLista]="p.slug.includes('agremiaciones') ? 'Agremiaciones y asociaciones' : p.slug.includes('entidades') ? 'Entidades' : p.slug.includes('entes-y-autoridades') ? 'Entes de control' : 'Dependencias'" />
     }
 
     @case ('procesos') {

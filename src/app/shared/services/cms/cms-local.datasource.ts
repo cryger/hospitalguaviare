@@ -54,6 +54,7 @@ export class CmsLocalDataSource extends CmsDataSource {
       .then(() => this.sembrarDesdeArchivo('estructura-organica-semilla', 'assets/semillas/estructura-organica.json'))
       .then(() => this.sembrarDesdeArchivo('presupuesto-semilla', 'assets/semillas/presupuesto.json'))
       .then(() => this.sembrarDesdeArchivo('planeacion-semilla', 'assets/semillas/planeacion.json'))
+      .then(() => this.sembrarDesdeArchivo('control-semilla', 'assets/semillas/control.json'))
       .then(() => this.clasificarPublicaciones())
       .then(() => this.clasificarDocumentosTalentoHumano())
       .then(() => this.organizarComiteConvivencia())
@@ -351,7 +352,7 @@ export class CmsLocalDataSource extends CmsDataSource {
   }
 
   /* ===== Estructura inicial (Resolución 1519 de 2020) ===== */
-  private readonly versionSemilla = 25;
+  private readonly versionSemilla = 26;
 
   private sembrarSiVacio(): void {
     if (localStorage.getItem(this.prefijo + 'menus')) return;
@@ -577,6 +578,10 @@ export class CmsLocalDataSource extends CmsDataSource {
         if (p.slug === 'directorio-institucional' && p.plantilla === 'contenido') Object.assign(p, { plantilla: 'directorio', actualizadoEn: t });
       }
     }
+    // Versión 26: 1.13 Entes de control como directorio
+    if (version < 26) {
+      for (const p of paginas) if (p.slug === 'entes-y-autoridades-que-lo-vigilan' && p.plantilla === 'contenido') Object.assign(p, { plantilla: 'directorio', actualizadoEn: t });
+    }
     // Versión 25: descripciones de 4.1, 4.2 y 4.6 (presupuesto y estados financieros)
     if (version < 25) {
       const DESC: Record<string, string> = {
@@ -627,6 +632,7 @@ export class CmsLocalDataSource extends CmsDataSource {
    * - organigrama.json          → api/migraciones/026-organigrama.sql (dependencias del organigrama)
    * - normatividad.json         → api/migraciones/028-normatividad.sql (resoluciones, acuerdos, políticas…)
    * - sedes-y-horarios.json     → api/migraciones/031-sedes-y-horarios.sql (sede principal y horarios)
+   * - control.json              → api/migraciones/039-control.sql (1.13 entes de control, 4.7 a 4.10)
    * - planeacion.json           → api/migraciones/038-planeacion.sql (4.3, 4.4, 4.5, 4.7, manuales, rendición de cuentas)
    * - directorio-institucional.json → api/migraciones/033-directorio-institucional.sql (1.4 directorio y 1.8 servicio al público)
    * - informacion-de-interes.json → api/migraciones/034-informacion-de-interes.sql (datos abiertos, preguntas frecuentes, glosario, talento humano)
@@ -780,7 +786,7 @@ const ESTRUCTURA_1519: PaginaSemilla[] = [
   { id: 12, menuId: 1, parentId: 2, titulo: "1.10 Mecanismo de presentación directa de solicitudes, quejas y reclamos", slug: 'mecanismo-pqrsd', plantilla: 'enlace', urlExterna: '/pqrsf', descripcion: "Radique en línea peticiones, quejas, reclamos, sugerencias, felicitaciones y denuncias, y consulte su estado.", orden: 9 },
   { id: 13, menuId: 1, parentId: 2, titulo: "1.11 Calendario de actividades y eventos", slug: 'calendario-de-actividades-y-eventos', plantilla: 'calendario', descripcion: "Agenda de capacitaciones, jornadas, comités y espacios de participación de la E.S.E. Hospital San José del Guaviare.", orden: 10 },
   { id: 14, menuId: 1, parentId: 2, titulo: "1.12 Información sobre decisiones que pueden afectar al público", slug: 'informacion-sobre-decisiones-que-pueden-afectar-al-publico', plantilla: 'documentos', descripcion: "Decisiones institucionales que pueden afectar a la ciudadanía y sus fundamentos.", orden: 11 },
-  { id: 15, menuId: 1, parentId: 2, titulo: "1.13 Entes y autoridades que lo vigilan", slug: 'entes-y-autoridades-que-lo-vigilan', plantilla: 'contenido', descripcion: "Organismos de control, vigilancia e inspección que supervisan la gestión de la E.S.E.", orden: 12 },
+  { id: 15, menuId: 1, parentId: 2, titulo: "1.13 Entes y autoridades que lo vigilan", slug: 'entes-y-autoridades-que-lo-vigilan', plantilla: 'directorio', descripcion: "Organismos de control, vigilancia e inspección que supervisan la gestión de la E.S.E.", orden: 12 },
   { id: 16, menuId: 1, parentId: 2, titulo: "1.14 Publicación de hojas de vida", slug: 'publicacion-de-hojas-de-vida', plantilla: 'documentos', descripcion: "Hojas de vida de aspirantes a cargos de libre nombramiento, publicadas para observaciones ciudadanas.", orden: 13 },
   { id: 17, menuId: 1, parentId: 1, titulo: "2. Normativa", slug: 'normativa', plantilla: 'contenido', orden: 1 },
   { id: 18, menuId: 1, parentId: 17, titulo: "2.1 Normativa de la entidad", slug: 'normativa-de-la-entidad', plantilla: 'contenido', orden: 0 },
