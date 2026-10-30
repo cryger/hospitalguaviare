@@ -53,6 +53,7 @@ export class CmsLocalDataSource extends CmsDataSource {
       .then(() => this.sembrarDesdeArchivo('informacion-de-interes-semilla', 'assets/semillas/informacion-de-interes.json'))
       .then(() => this.sembrarDesdeArchivo('estructura-organica-semilla', 'assets/semillas/estructura-organica.json'))
       .then(() => this.sembrarDesdeArchivo('presupuesto-semilla', 'assets/semillas/presupuesto.json'))
+      .then(() => this.sembrarDesdeArchivo('planeacion-semilla', 'assets/semillas/planeacion.json'))
       .then(() => this.clasificarPublicaciones())
       .then(() => this.clasificarDocumentosTalentoHumano())
       .then(() => this.organizarComiteConvivencia())
@@ -626,6 +627,7 @@ export class CmsLocalDataSource extends CmsDataSource {
    * - organigrama.json          → api/migraciones/026-organigrama.sql (dependencias del organigrama)
    * - normatividad.json         → api/migraciones/028-normatividad.sql (resoluciones, acuerdos, políticas…)
    * - sedes-y-horarios.json     → api/migraciones/031-sedes-y-horarios.sql (sede principal y horarios)
+   * - planeacion.json           → api/migraciones/038-planeacion.sql (4.3, 4.4, 4.5, 4.7, manuales, rendición de cuentas)
    * - directorio-institucional.json → api/migraciones/033-directorio-institucional.sql (1.4 directorio y 1.8 servicio al público)
    * - informacion-de-interes.json → api/migraciones/034-informacion-de-interes.sql (datos abiertos, preguntas frecuentes, glosario, talento humano)
    */

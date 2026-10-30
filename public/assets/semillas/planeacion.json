@@ -1,0 +1,1939 @@
+{
+ "origen": "esehospitalguaviare.gov.co (Planeación)",
+ "multimedia": [
+  {
+   "nombre": "Plan de Accion Institucional 2026.xlsx",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/excel/Plan%20de%20Accion%20Institucional%202026.xlsx",
+   "tipo": "documento",
+   "mime": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+   "titulo": "Plan de acción institucional – Vigencia 2026",
+   "alt": null
+  },
+  {
+   "nombre": "Plan de Accion 2025_V2.xlsx",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/excel/Plan%20de%20Accion%202025_V2.xlsx",
+   "tipo": "documento",
+   "mime": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+   "titulo": "Plan de acción institucional – Vigencia 2025",
+   "alt": null
+  },
+  {
+   "nombre": "Copia de Plan Accion Vg 2024.xlsx",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/excel/Copia%20de%20Plan%20Accion%20Vg%202024.xlsx",
+   "tipo": "documento",
+   "mime": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+   "titulo": "Plan de acción institucional – Vigencia 2024",
+   "alt": null
+  },
+  {
+   "nombre": "Plan de Acción Institucional-2023.xlsx",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/excel/Plan%20de%20Acci%C3%B3n%20Institucional-2023.xlsx",
+   "tipo": "documento",
+   "mime": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+   "titulo": "Plan de acción institucional – Vigencia 2023",
+   "alt": null
+  },
+  {
+   "nombre": "Plan-de-Accion-Vg-2022.xlsx",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/excel/Plan-de-Accion-Vg-2022.xlsx",
+   "tipo": "documento",
+   "mime": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+   "titulo": "Plan de acción institucional – Vigencia 2022",
+   "alt": null
+  },
+  {
+   "nombre": "PLAN-DE-ACCION-VIGENCIA-2021.xlsx",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/excel/PLAN-DE-ACCION-VIGENCIA-2021.xlsx",
+   "tipo": "documento",
+   "mime": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+   "titulo": "Plan de acción institucional – Vigencia 2021",
+   "alt": null
+  },
+  {
+   "nombre": "POA-2020-5.xlsx",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/excel/POA-2020-5.xlsx",
+   "tipo": "documento",
+   "mime": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+   "titulo": "Plan operativo anual (POA) – Vigencia 2020",
+   "alt": null
+  },
+  {
+   "nombre": "POA - PLAN DE GESTIÓN 2019.xlsx",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/excel/POA%20-%20PLAN%20DE%20GESTI%C3%93N%202019.xlsx",
+   "tipo": "documento",
+   "mime": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+   "titulo": "Plan operativo anual (POA) y plan de gestión – Vigencia 2019",
+   "alt": null
+  },
+  {
+   "nombre": "PLAN DE ACCION VIGENCIA 2018.xlsx",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/excel/PLAN%20DE%20ACCION%20VIGENCIA%202018.xlsx",
+   "tipo": "documento",
+   "mime": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+   "titulo": "Plan de acción institucional – Vigencia 2018",
+   "alt": null
+  },
+  {
+   "nombre": "POA INSTITUCIONAL 2017.xlsx",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/excel/POA%20INSTITUCIONAL%202017.xlsx",
+   "tipo": "documento",
+   "mime": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+   "titulo": "Plan operativo anual (POA) institucional – Vigencia 2017",
+   "alt": null
+  },
+  {
+   "nombre": "PLAN-DE-ACCION-INSTITUCIONAL-2016.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/PLAN-DE-ACCION-INSTITUCIONAL-2016.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Plan de acción institucional – Vigencia 2016",
+   "alt": null
+  },
+  {
+   "nombre": "PLAN DE GESTIÓN 2025-2027.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/PLAN%20DE%20GESTI%C3%93N%202025-2027.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Plan de gestión 2025-2027",
+   "alt": null
+  },
+  {
+   "nombre": "Plan de Gestión 2024-2027.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Plan%20de%20Gesti%C3%B3n%202024-2027.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Plan de gestión 2024-2027",
+   "alt": null
+  },
+  {
+   "nombre": "Plan-de-Gestion-2021-2023..pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Plan-de-Gestion-2021-2023..pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Plan de gestión gerencial 2021-2023",
+   "alt": null
+  },
+  {
+   "nombre": "PLAN-GESTION-2020-2023.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/PLAN-GESTION-2020-2023.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Plan de gestión gerencial 2020-2023",
+   "alt": null
+  },
+  {
+   "nombre": "PLAN GESTION 2018 -2019.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/PLAN%20GESTION%202018%20-2019.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Plan de gestión gerencial 2018-2019",
+   "alt": null
+  },
+  {
+   "nombre": "PLAN DE GESTION 2018 - VF.xlsx",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/excel/PLAN%20DE%20GESTION%202018%20-%20VF.xlsx",
+   "tipo": "documento",
+   "mime": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+   "titulo": "Plan de gestión 2018",
+   "alt": null
+  },
+  {
+   "nombre": "PLAN-DE-COMUNICACIONES-2022-2.xlsx",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/excel/PLAN-DE-COMUNICACIONES-2022-2.xlsx",
+   "tipo": "documento",
+   "mime": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+   "titulo": "Plan de comunicaciones 2022",
+   "alt": null
+  },
+  {
+   "nombre": "INFORME-PLAN-DE-COMUNICACIONES-ANUAL.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/INFORME-PLAN-DE-COMUNICACIONES-ANUAL.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Plan de comunicaciones 2021 (informe anual)",
+   "alt": null
+  },
+  {
+   "nombre": "Plan-de-Comunicaciones-2020.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Plan-de-Comunicaciones-2020.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Plan de comunicaciones 2020",
+   "alt": null
+  },
+  {
+   "nombre": "PLAN DE COMUNICACIONES HOSPITAL 2019.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/PLAN%20DE%20COMUNICACIONES%20HOSPITAL%202019.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Plan de comunicaciones 2019",
+   "alt": null
+  },
+  {
+   "nombre": "PLAN-DE-MANTENIMIENTO-VIGENCIA-2022.docx",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/word/PLAN-DE-MANTENIMIENTO-VIGENCIA-2022.docx",
+   "tipo": "documento",
+   "mime": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+   "titulo": "Plan de mantenimiento hospitalario 2022",
+   "alt": null
+  },
+  {
+   "nombre": "PLAN-DE-MANTENIMIENTO-VIGENCIA-2021- (1).pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/PLAN-DE-MANTENIMIENTO-VIGENCIA-2021-%20(1).pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Plan de mantenimiento hospitalario 2021",
+   "alt": null
+  },
+  {
+   "nombre": "PLAN DE MANTENIMIENTO HOSPITALARIO 2019.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/PLAN%20DE%20MANTENIMIENTO%20HOSPITALARIO%202019.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Plan de mantenimiento hospitalario 2019",
+   "alt": null
+  },
+  {
+   "nombre": "PLAN-DE-CONTINGENCIA-COVID-19-2021-V7-PDF.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/PLAN-DE-CONTINGENCIA-COVID-19-2021-V7-PDF.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Plan de contingencia COVID-19 2021 – versión 7",
+   "alt": null
+  },
+  {
+   "nombre": "RUTA CORONAVIRUS V4.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/RUTA%20CORONAVIRUS%20V4.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Ruta de atención a paciente probable o confirmado para COVID-19 – versión 4",
+   "alt": null
+  },
+  {
+   "nombre": "PLAN DE CONTINGENCIA COVID-19 V4.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/PLAN%20DE%20CONTINGENCIA%20COVID-19%20V4.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Plan de contingencia contra coronavirus COVID-19 – versión 4",
+   "alt": null
+  },
+  {
+   "nombre": "Plan de Contingencia Paro Nacional 21-11-2019.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Plan%20de%20Contingencia%20Paro%20Nacional%2021-11-2019.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Plan de contingencia Paro Nacional del 21 de noviembre de 2019",
+   "alt": null
+  },
+  {
+   "nombre": "Presentacion Hospital San Jose AGO 22.pptx",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/PTT/Presentacion%20Hospital%20San%20Jose%20AGO%2022.pptx",
+   "tipo": "documento",
+   "mime": "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+   "titulo": "Proyecto de fisioterapia – presentación (agosto de 2022)",
+   "alt": null
+  },
+  {
+   "nombre": "Presentacion Hospital San Jose AGO 22 (1).pptx",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/PTT/Presentacion%20Hospital%20San%20Jose%20AGO%2022%20(1).pptx",
+   "tipo": "documento",
+   "mime": "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+   "titulo": "Proyecto de remodelación del hospital – presentación (agosto de 2022)",
+   "alt": null
+  },
+  {
+   "nombre": "ACTA DE EMPALME YANIRA DEL PILAR SIERRA 01_06_2017 AL 30_11_2017_comprimida.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/ACTA%20DE%20EMPALME%20YANIRA%20DEL%20PILAR%20SIERRA%2001_06_2017%20AL%2030_11_2017_comprimida.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Informe de empalme del 1 de junio al 30 de noviembre de 2017",
+   "alt": null
+  },
+  {
+   "nombre": "INFORME DE EMPALME CARLOS SEPÚLVEDA 11_11_2016 AL 31_03_2017.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/INFORME%20DE%20EMPALME%20CARLOS%20SEP%C3%9ALVEDA%2011_11_2016%20AL%2031_03_2017.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Informe de empalme del 11 de noviembre de 2016 al 31 de marzo de 2017",
+   "alt": null
+  },
+  {
+   "nombre": "INFORME DE EMPALME FÉLIX CANO 18_02_2016 AL 10_11_2016.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/INFORME%20DE%20EMPALME%20F%C3%89LIX%20CANO%2018_02_2016%20AL%2010_11_2016.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Informe de empalme del 18 de febrero al 10 de noviembre de 2016",
+   "alt": null
+  },
+  {
+   "nombre": "informe-de-empalme.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/informe-de-empalme.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Informe de empalme del 1 de febrero de 2014 al 18 de febrero de 2016",
+   "alt": null
+  },
+  {
+   "nombre": "INFORME DE EMPALME AGOSTO 2011.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/INFORME%20DE%20EMPALME%20AGOSTO%202011.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Informe de empalme del 24 de agosto de 2011",
+   "alt": null
+  },
+  {
+   "nombre": "Informe segundo trimestre 2026.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Informe%20segundo%20trimestre%202026.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Informe de gestión – segundo trimestre 2026",
+   "alt": null
+  },
+  {
+   "nombre": "Informe de Gestion Primer Triemstre  26.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Informe%20de%20Gestion%20Primer%20Triemstre%20%2026.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Informe de gestión – primer trimestre 2026",
+   "alt": null
+  },
+  {
+   "nombre": "Informe de Gestión cuarto trimestre 2025.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Informe%20de%20Gesti%C3%B3n%20cuarto%20trimestre%202025.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Informe de gestión – vigencia 2025 (cuarto trimestre)",
+   "alt": null
+  },
+  {
+   "nombre": "INFORME GESTION Tercer Trimestre 2025.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/INFORME%20GESTION%20Tercer%20Trimestre%202025.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Informe de gestión – tercer trimestre 2025",
+   "alt": null
+  },
+  {
+   "nombre": "INFORME GESTION SEGUNDO TRIMESTRE 2025.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/INFORME%20GESTION%20SEGUNDO%20TRIMESTRE%202025.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Informe de gestión – segundo trimestre 2025",
+   "alt": null
+  },
+  {
+   "nombre": "INFORME DE GESTION PRIMER TRIMESTRE VIGENCIA 2025..pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/INFORME%20DE%20GESTION%20PRIMER%20TRIMESTRE%20VIGENCIA%202025..pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Informe de gestión – primer trimestre 2025",
+   "alt": null
+  },
+  {
+   "nombre": "INFORME DE GESTIÓN  2024.doc",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/word/INFORME%20DE%20GESTI%C3%93N%20%202024.doc",
+   "tipo": "documento",
+   "mime": "application/msword",
+   "titulo": "Informe de gestión 2024",
+   "alt": null
+  },
+  {
+   "nombre": "Informe de Gestiòn_Anualizado año 2023.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Informe%20de%20Gesti%C3%B2n_Anualizado%20a%C3%B1o%202023.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Informe de gestión anualizado 2023",
+   "alt": null
+  },
+  {
+   "nombre": "INFORME DE GESTION VIGENCIA 2022 .pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/INFORME%20DE%20GESTION%20VIGENCIA%202022%20.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Informe de gestión vigencia 2022",
+   "alt": null
+  },
+  {
+   "nombre": "Informe de Gestion Vg 2021-JD.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Informe%20de%20Gestion%20Vg%202021-JD.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Informe de gestión e indicadores vigencia 2021 (Junta Directiva)",
+   "alt": null
+  },
+  {
+   "nombre": "Acuerdos de Gestión - Oficina de Calidad.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdos%20de%20Gesti%C3%B3n%20-%20Oficina%20de%20Calidad.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Acuerdo de gestión – Oficina de Calidad 2025",
+   "alt": null
+  },
+  {
+   "nombre": "Acuerdos de Gestión - Administrativa.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdos%20de%20Gesti%C3%B3n%20-%20Administrativa.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Acuerdo de gestión – Subgerencia Administrativa y Financiera 2025",
+   "alt": null
+  },
+  {
+   "nombre": "acuerdos de gestion 2.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/acuerdos%20de%20gestion%202.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Acuerdo de gestión 2025 (1)",
+   "alt": null
+  },
+  {
+   "nombre": "acuerdo de gestion.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/acuerdo%20de%20gestion.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Acuerdo de gestión 2025 (2)",
+   "alt": null
+  },
+  {
+   "nombre": "ACUERDO-SUB_SERVICIOS.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/ACUERDO-SUB_SERVICIOS.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Acuerdo de gestión – Subgerencia de Servicios de Salud 2024",
+   "alt": null
+  },
+  {
+   "nombre": "Acuerdo de Gestión - Subgerencia Administrativa y Financiera.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%20de%20Gesti%C3%B3n%20-%20Subgerencia%20Administrativa%20y%20Financiera.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Acuerdo de gestión – Subgerencia Administrativa y Financiera 2024",
+   "alt": null
+  },
+  {
+   "nombre": "Acuerdo De Gestión - Oficina de Planeación .pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%20De%20Gesti%C3%B3n%20-%20Oficina%20de%20Planeaci%C3%B3n%20.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Acuerdo de gestión – Oficina de Planeación 2024",
+   "alt": null
+  },
+  {
+   "nombre": "Acuerdo De Gestión - Oficina de Control Interno Disciplinario .pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%20De%20Gesti%C3%B3n%20-%20Oficina%20de%20Control%20Interno%20Disciplinario%20.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Acuerdo de gestión – Oficina de Control Interno Disciplinario 2024",
+   "alt": null
+  },
+  {
+   "nombre": "Acuerdo de Gestión - Juridica y Contrtación .pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%20de%20Gesti%C3%B3n%20-%20Juridica%20y%20Contrtaci%C3%B3n%20.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Acuerdo de gestión – Jurídica y Contratación 2024",
+   "alt": null
+  },
+  {
+   "nombre": "Acuerdo de Gestión - Claudia Vanegas.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%20de%20Gesti%C3%B3n%20-%20Claudia%20Vanegas.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Acuerdo de gestión – Oficina de Calidad 2024",
+   "alt": null
+  },
+  {
+   "nombre": "ACUERDO DE GESTIÓN ENTRE LA GERENTE Y PLANEACION-2022.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/ACUERDO%20DE%20GESTI%C3%93N%20ENTRE%20LA%20GERENTE%20Y%20PLANEACION-2022.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Acuerdo de gestión entre la Gerencia y Planeación 2022",
+   "alt": null
+  },
+  {
+   "nombre": "ACUERDO DE GESTIÓN ENTRE LA GERENTE Y LA SUBGERENCIA ADMINISTRATIVA Y FINANCIERA-2022.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/ACUERDO%20DE%20GESTI%C3%93N%20ENTRE%20LA%20GERENTE%20Y%20LA%20SUBGERENCIA%20ADMINISTRATIVA%20Y%20FINANCIERA-2022.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Acuerdo de gestión entre la Gerencia y la Subgerencia Administrativa y Financiera 2022",
+   "alt": null
+  },
+  {
+   "nombre": "ACUERDO DE GESTIÓN ENTRE LA GERENTE Y EL SUBGERENTE DE SERVICIOS DE SALUD-2022.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/ACUERDO%20DE%20GESTI%C3%93N%20ENTRE%20LA%20GERENTE%20Y%20EL%20SUBGERENTE%20DE%20SERVICIOS%20DE%20SALUD-2022.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Acuerdo de gestión entre la Gerencia y la Subgerencia de Servicios de Salud 2022",
+   "alt": null
+  },
+  {
+   "nombre": "MANUAL DE CARACTERIZACION DE LOS GRUPOS DE VALOR 1 (1).docx",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/word/MANUAL%20DE%20CARACTERIZACION%20DE%20LOS%20GRUPOS%20DE%20VALOR%201%20(1).docx",
+   "tipo": "documento",
+   "mime": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+   "titulo": "Manual de caracterización de los grupos de valor",
+   "alt": null
+  },
+  {
+   "nombre": "MANUAL DE MANEJO DE HISTORIA CLINICA (1).pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/MANUAL%20DE%20MANEJO%20DE%20HISTORIA%20CLINICA%20(1).pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Manual de manejo de historia clínica",
+   "alt": null
+  },
+  {
+   "nombre": "manual de contratacion.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/manual%20de%20contratacion.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Manual de contratación",
+   "alt": null
+  },
+  {
+   "nombre": "MANUAL-DE-POLITICAS-CONTABLES-DEFINITIVO-2020.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/MANUAL-DE-POLITICAS-CONTABLES-DEFINITIVO-2020.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Manual de políticas contables 2020",
+   "alt": null
+  },
+  {
+   "nombre": "resolucion 026 Manual de Tarifas Institucional.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/resolucion%20026%20Manual%20de%20Tarifas%20Institucional.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Manual de tarifas institucional (Resolución 026)",
+   "alt": null
+  },
+  {
+   "nombre": "resolucion 026 Manual de Tarifas Institucional (1).pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/resolucion%20026%20Manual%20de%20Tarifas%20Institucional%20(1).pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Manual tarifario institucional de medicamentos y dispositivos médicos",
+   "alt": null
+  },
+  {
+   "nombre": "Manual de Correspondencia.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Manual%20de%20Correspondencia.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Manual de correspondencia",
+   "alt": null
+  },
+  {
+   "nombre": "01 MANUAL DE MANEJO, CONTROL, CUSTODÍA Y BAJA DE LA PROPIEDAD, PLANTA Y EQUIPO.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/01%20MANUAL%20DE%20MANEJO,%20CONTROL,%20CUSTOD%C3%8DA%20Y%20BAJA%20DE%20LA%20PROPIEDAD,%20PLANTA%20Y%20EQUIPO.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Manual de manejo, control, custodia y baja de la propiedad, planta y equipo",
+   "alt": null
+  },
+  {
+   "nombre": "Código de Integridad y Buen Gobierno ultimo 2025.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/C%C3%B3digo%20de%20Integridad%20y%20Buen%20Gobierno%20ultimo%202025.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Código de integridad y buen gobierno 2025",
+   "alt": null
+  },
+  {
+   "nombre": "Resolucion 0701 2025 Actualizacion de codigo de integridad y buen gobierno.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resolucion%200701%202025%20Actualizacion%20de%20codigo%20de%20integridad%20y%20buen%20gobierno.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución 0701 de 2025 – Actualización del código de integridad y buen gobierno",
+   "alt": null
+  },
+  {
+   "nombre": "Resolución 0701 - 2025.docx",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/word/Resoluci%C3%B3n%200701%20-%202025.docx",
+   "tipo": "documento",
+   "mime": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+   "titulo": "Resolución 0701 de 2025 (Word)",
+   "alt": null
+  },
+  {
+   "nombre": "CODIGO-DE-INTEGRIDAD.docx",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/word/CODIGO-DE-INTEGRIDAD.docx",
+   "tipo": "documento",
+   "mime": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+   "titulo": "Código de integridad y buen gobierno 2021",
+   "alt": null
+  },
+  {
+   "nombre": "Codigo-de-Integridad-y-Buen-Gobierno-2020.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Codigo-de-Integridad-y-Buen-Gobierno-2020.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Código de integridad y buen gobierno 2020",
+   "alt": null
+  },
+  {
+   "nombre": "Res-0844-integridad-y-buen-gobierno.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Res-0844-integridad-y-buen-gobierno.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución 0844 de 2020 – Adopción del código de integridad y buen gobierno",
+   "alt": null
+  },
+  {
+   "nombre": "CODIGO BUEN GOBIERNO HSJG.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/CODIGO%20BUEN%20GOBIERNO%20HSJG.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Código de buen gobierno 2019",
+   "alt": null
+  },
+  {
+   "nombre": "01 PROTOCOLO CLASIFICACION DE PACIENTES (TRIAGE).docx",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/word/01%20PROTOCOLO%20CLASIFICACION%20DE%20PACIENTES%20(TRIAGE).docx",
+   "tipo": "documento",
+   "mime": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+   "titulo": "Protocolo de clasificación de pacientes «TRIAGE»",
+   "alt": null
+  },
+  {
+   "nombre": "01 PROTO  LIMPI Y DESINFECCION DE URGENCIAS.docx",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/word/01%20PROTO%20%20LIMPI%20Y%20DESINFECCION%20DE%20URGENCIAS.docx",
+   "tipo": "documento",
+   "mime": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+   "titulo": "Protocolo de limpieza y desinfección del servicio de urgencias",
+   "alt": null
+  },
+  {
+   "nombre": "02 PROTOCOLO DE BIOSEGURIDAD DE URGENCIAS_compressed.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/02%20PROTOCOLO%20DE%20BIOSEGURIDAD%20DE%20URGENCIAS_compressed.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Protocolo de normas de bioseguridad del servicio de urgencias",
+   "alt": null
+  },
+  {
+   "nombre": "03 PROTOCOLO DE RESIDUOS HOSPITALARIOS Y SIMILARES DEL SERVICIOS DE URGENCIAS.docx",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/word/03%20PROTOCOLO%20DE%20RESIDUOS%20HOSPITALARIOS%20Y%20SIMILARES%20DEL%20SERVICIOS%20DE%20URGENCIAS.docx",
+   "tipo": "documento",
+   "mime": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+   "titulo": "Protocolo de residuos hospitalarios y similares del servicio de urgencias",
+   "alt": null
+  },
+  {
+   "nombre": "39 MODELO DE ATENCIoN INTEGRAL EN  SALUD.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/39%20MODELO%20DE%20ATENCIoN%20INTEGRAL%20EN%20%20SALUD.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Modelo de atención integral en salud",
+   "alt": null
+  },
+  {
+   "nombre": "FORMATO PARA OFICIOS, INFORMES HSJG 2025.docx",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/word/FORMATO%20PARA%20OFICIOS,%20INFORMES%20HSJG%202025.docx",
+   "tipo": "documento",
+   "mime": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+   "titulo": "Formato de Word para oficios e informes 2025",
+   "alt": null
+  },
+  {
+   "nombre": "Diapositivas HSG 2025.pptx",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/PTT/Diapositivas%20HSG%202025.pptx",
+   "tipo": "documento",
+   "mime": "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+   "titulo": "Formato de PowerPoint para presentaciones 2025",
+   "alt": null
+  },
+  {
+   "nombre": "Logo_Gerencia Hospital.png",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/img/Logo_Gerencia%20Hospital.png",
+   "tipo": "imagen",
+   "mime": "image/png",
+   "titulo": "Logo de la Gerencia",
+   "alt": "Logo de la Gerencia"
+  },
+  {
+   "nombre": "logo hospital.png",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/img/logo%20hospital.png",
+   "tipo": "imagen",
+   "mime": "image/png",
+   "titulo": "Logo del hospital",
+   "alt": "Logo del hospital"
+  },
+  {
+   "nombre": "Plan-politica-de-seguridad-de-la-informacion.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Plan-politica-de-seguridad-de-la-informacion.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Plan de seguridad y privacidad de la información 2021",
+   "alt": null
+  },
+  {
+   "nombre": "Micrositio de rendición de cuentas 2025",
+   "url": "https://www.esehospitalguaviare.gov.co/rendicion-de-cuentas-25/",
+   "tipo": "otro",
+   "mime": null,
+   "titulo": "Micrositio de rendición de cuentas 2025",
+   "alt": null
+  },
+  {
+   "nombre": "Micrositio de rendición de cuentas 2024",
+   "url": "https://www.esehospitalguaviare.gov.co/rendicion-de-cuentas-24/",
+   "tipo": "otro",
+   "mime": null,
+   "titulo": "Micrositio de rendición de cuentas 2024",
+   "alt": null
+  },
+  {
+   "nombre": "Micrositio de rendición de cuentas 2023",
+   "url": "https://www.esehospitalguaviare.gov.co/rendicion-de-cuentas-23/",
+   "tipo": "otro",
+   "mime": null,
+   "titulo": "Micrositio de rendición de cuentas 2023",
+   "alt": null
+  },
+  {
+   "nombre": "Informe Técnico - Audiencia pública de cuentas - vigencia 2022.docx",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/word/Informe%20T%C3%A9cnico%20-%20Audiencia%20p%C3%BAblica%20de%20cuentas%20-%20vigencia%202022.docx",
+   "tipo": "documento",
+   "mime": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+   "titulo": "Informe técnico de la audiencia pública de rendición de cuentas – vigencia 2022",
+   "alt": null
+  },
+  {
+   "nombre": "Micrositio de rendición de cuentas 2022",
+   "url": "https://www.esehospitalguaviare.gov.co/rendicion-de-cuentas-22/",
+   "tipo": "otro",
+   "mime": null,
+   "titulo": "Micrositio de rendición de cuentas 2022",
+   "alt": null
+  },
+  {
+   "nombre": "Informe Técnico del desarrollo del componente de rendición de Cuentas.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Informe%20T%C3%A9cnico%20del%20desarrollo%20del%20componente%20de%20rendici%C3%B3n%20de%20Cuentas.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Informe técnico del componente de rendición de cuentas – vigencia 2021",
+   "alt": null
+  },
+  {
+   "nombre": "POLITICA-DE-PARTICIPACION-CIUDADANA (1).pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/POLITICA-DE-PARTICIPACION-CIUDADANA%20(1).pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Política de participación ciudadana",
+   "alt": null
+  }
+ ],
+ "entradas": [
+  {
+   "paginaSlug": "plan-de-accion",
+   "slug": "plan-de-accion-institucional-2026",
+   "titulo": "Plan de acción institucional 2026",
+   "resumen": "Plan de acción institucional de la vigencia 2026.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 10,
+   "soloSiVacia": false,
+   "fecha": "2026-12-31T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/excel/Plan%20de%20Accion%20Institucional%202026.xlsx"
+   ],
+   "destacada": null,
+   "categoria": "Plan de acción institucional",
+   "icono": null
+  },
+  {
+   "paginaSlug": "plan-de-accion",
+   "slug": "plan-de-accion-institucional-2025",
+   "titulo": "Plan de acción institucional 2025",
+   "resumen": "Plan de acción institucional de la vigencia 2025.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 20,
+   "soloSiVacia": false,
+   "fecha": "2025-12-31T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/excel/Plan%20de%20Accion%202025_V2.xlsx"
+   ],
+   "destacada": null,
+   "categoria": "Plan de acción institucional",
+   "icono": null
+  },
+  {
+   "paginaSlug": "plan-de-accion",
+   "slug": "plan-de-accion-institucional-2024",
+   "titulo": "Plan de acción institucional 2024",
+   "resumen": "Plan de acción institucional de la vigencia 2024.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 30,
+   "soloSiVacia": false,
+   "fecha": "2024-12-31T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/excel/Copia%20de%20Plan%20Accion%20Vg%202024.xlsx"
+   ],
+   "destacada": null,
+   "categoria": "Plan de acción institucional",
+   "icono": null
+  },
+  {
+   "paginaSlug": "plan-de-accion",
+   "slug": "plan-de-accion-institucional-2023",
+   "titulo": "Plan de acción institucional 2023",
+   "resumen": "Plan de acción institucional de la vigencia 2023.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 40,
+   "soloSiVacia": false,
+   "fecha": "2023-12-31T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/excel/Plan%20de%20Acci%C3%B3n%20Institucional-2023.xlsx"
+   ],
+   "destacada": null,
+   "categoria": "Plan de acción institucional",
+   "icono": null
+  },
+  {
+   "paginaSlug": "plan-de-accion",
+   "slug": "plan-de-accion-institucional-2022",
+   "titulo": "Plan de acción institucional 2022",
+   "resumen": "Plan de acción institucional de la vigencia 2022.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 50,
+   "soloSiVacia": false,
+   "fecha": "2022-12-31T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/excel/Plan-de-Accion-Vg-2022.xlsx"
+   ],
+   "destacada": null,
+   "categoria": "Plan de acción institucional",
+   "icono": null
+  },
+  {
+   "paginaSlug": "plan-de-accion",
+   "slug": "plan-de-accion-institucional-2021",
+   "titulo": "Plan de acción institucional 2021",
+   "resumen": "Plan de acción institucional de la vigencia 2021.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 60,
+   "soloSiVacia": false,
+   "fecha": "2021-12-31T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/excel/PLAN-DE-ACCION-VIGENCIA-2021.xlsx"
+   ],
+   "destacada": null,
+   "categoria": "Plan de acción institucional",
+   "icono": null
+  },
+  {
+   "paginaSlug": "plan-de-accion",
+   "slug": "plan-de-accion-institucional-2020",
+   "titulo": "Plan de acción institucional 2020",
+   "resumen": "Plan de acción institucional de la vigencia 2020.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 70,
+   "soloSiVacia": false,
+   "fecha": "2020-12-31T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/excel/POA-2020-5.xlsx"
+   ],
+   "destacada": null,
+   "categoria": "Plan de acción institucional",
+   "icono": null
+  },
+  {
+   "paginaSlug": "plan-de-accion",
+   "slug": "plan-de-accion-institucional-2019",
+   "titulo": "Plan de acción institucional 2019",
+   "resumen": "Plan de acción institucional de la vigencia 2019.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 80,
+   "soloSiVacia": false,
+   "fecha": "2019-12-31T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/excel/POA%20-%20PLAN%20DE%20GESTI%C3%93N%202019.xlsx"
+   ],
+   "destacada": null,
+   "categoria": "Plan de acción institucional",
+   "icono": null
+  },
+  {
+   "paginaSlug": "plan-de-accion",
+   "slug": "plan-de-accion-institucional-2018",
+   "titulo": "Plan de acción institucional 2018",
+   "resumen": "Plan de acción institucional de la vigencia 2018.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 90,
+   "soloSiVacia": false,
+   "fecha": "2018-12-31T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/excel/PLAN%20DE%20ACCION%20VIGENCIA%202018.xlsx"
+   ],
+   "destacada": null,
+   "categoria": "Plan de acción institucional",
+   "icono": null
+  },
+  {
+   "paginaSlug": "plan-de-accion",
+   "slug": "plan-de-accion-institucional-2017",
+   "titulo": "Plan de acción institucional 2017",
+   "resumen": "Plan de acción institucional de la vigencia 2017.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 100,
+   "soloSiVacia": false,
+   "fecha": "2017-12-31T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/excel/POA%20INSTITUCIONAL%202017.xlsx"
+   ],
+   "destacada": null,
+   "categoria": "Plan de acción institucional",
+   "icono": null
+  },
+  {
+   "paginaSlug": "plan-de-accion",
+   "slug": "plan-de-accion-institucional-2016",
+   "titulo": "Plan de acción institucional 2016",
+   "resumen": "Plan de acción institucional de la vigencia 2016.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 110,
+   "soloSiVacia": false,
+   "fecha": "2016-12-31T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/PLAN-DE-ACCION-INSTITUCIONAL-2016.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Plan de acción institucional",
+   "icono": null
+  },
+  {
+   "paginaSlug": "plan-de-accion",
+   "slug": "plan-de-gestion-2025-2027",
+   "titulo": "Plan de gestión 2025-2027",
+   "resumen": "Plan de gestión de la gerencia aprobado por la Junta Directiva.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 120,
+   "soloSiVacia": false,
+   "fecha": "2025-12-31T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/PLAN%20DE%20GESTI%C3%93N%202025-2027.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Plan de gestión gerencial",
+   "icono": null
+  },
+  {
+   "paginaSlug": "plan-de-accion",
+   "slug": "plan-de-gestion-2024-2027",
+   "titulo": "Plan de gestión 2024-2027",
+   "resumen": "Plan de gestión de la gerencia aprobado por la Junta Directiva.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 130,
+   "soloSiVacia": false,
+   "fecha": "2024-12-31T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Plan%20de%20Gesti%C3%B3n%202024-2027.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Plan de gestión gerencial",
+   "icono": null
+  },
+  {
+   "paginaSlug": "plan-de-accion",
+   "slug": "plan-de-gestion-gerencial-2021-2023",
+   "titulo": "Plan de gestión gerencial 2021-2023",
+   "resumen": "Plan de gestión de la gerencia aprobado por la Junta Directiva.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 140,
+   "soloSiVacia": false,
+   "fecha": "2021-12-31T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Plan-de-Gestion-2021-2023..pdf"
+   ],
+   "destacada": null,
+   "categoria": "Plan de gestión gerencial",
+   "icono": null
+  },
+  {
+   "paginaSlug": "plan-de-accion",
+   "slug": "plan-de-gestion-gerencial-2020-2023",
+   "titulo": "Plan de gestión gerencial 2020-2023",
+   "resumen": "Plan de gestión de la gerencia aprobado por la Junta Directiva.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 150,
+   "soloSiVacia": false,
+   "fecha": "2020-12-31T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/PLAN-GESTION-2020-2023.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Plan de gestión gerencial",
+   "icono": null
+  },
+  {
+   "paginaSlug": "plan-de-accion",
+   "slug": "plan-de-gestion-gerencial-2018-2019",
+   "titulo": "Plan de gestión gerencial 2018-2019",
+   "resumen": "Plan de gestión de la gerencia aprobado por la Junta Directiva.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 160,
+   "soloSiVacia": false,
+   "fecha": "2018-12-31T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/PLAN%20GESTION%202018%20-2019.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Plan de gestión gerencial",
+   "icono": null
+  },
+  {
+   "paginaSlug": "plan-de-accion",
+   "slug": "plan-de-gestion-2018",
+   "titulo": "Plan de gestión 2018",
+   "resumen": "Plan de gestión de la gerencia aprobado por la Junta Directiva.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 170,
+   "soloSiVacia": false,
+   "fecha": "2018-06-30T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/excel/PLAN%20DE%20GESTION%202018%20-%20VF.xlsx"
+   ],
+   "destacada": null,
+   "categoria": "Plan de gestión gerencial",
+   "icono": null
+  },
+  {
+   "paginaSlug": "plan-de-accion",
+   "slug": "plan-de-comunicaciones-2022",
+   "titulo": "Plan de comunicaciones 2022",
+   "resumen": "Plan de comunicaciones institucional de la vigencia 2022.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 180,
+   "soloSiVacia": false,
+   "fecha": "2022-12-31T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/excel/PLAN-DE-COMUNICACIONES-2022-2.xlsx"
+   ],
+   "destacada": null,
+   "categoria": "Plan de comunicaciones",
+   "icono": null
+  },
+  {
+   "paginaSlug": "plan-de-accion",
+   "slug": "plan-de-comunicaciones-2021",
+   "titulo": "Plan de comunicaciones 2021",
+   "resumen": "Plan de comunicaciones institucional de la vigencia 2021.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 190,
+   "soloSiVacia": false,
+   "fecha": "2021-12-31T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/INFORME-PLAN-DE-COMUNICACIONES-ANUAL.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Plan de comunicaciones",
+   "icono": null
+  },
+  {
+   "paginaSlug": "plan-de-accion",
+   "slug": "plan-de-comunicaciones-2020",
+   "titulo": "Plan de comunicaciones 2020",
+   "resumen": "Plan de comunicaciones institucional de la vigencia 2020.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 200,
+   "soloSiVacia": false,
+   "fecha": "2020-12-31T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Plan-de-Comunicaciones-2020.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Plan de comunicaciones",
+   "icono": null
+  },
+  {
+   "paginaSlug": "plan-de-accion",
+   "slug": "plan-de-comunicaciones-2019",
+   "titulo": "Plan de comunicaciones 2019",
+   "resumen": "Plan de comunicaciones institucional de la vigencia 2019.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 210,
+   "soloSiVacia": false,
+   "fecha": "2019-12-31T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/PLAN%20DE%20COMUNICACIONES%20HOSPITAL%202019.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Plan de comunicaciones",
+   "icono": null
+  },
+  {
+   "paginaSlug": "plan-de-accion",
+   "slug": "plan-de-mantenimiento-hospitalario-2022",
+   "titulo": "Plan de mantenimiento hospitalario 2022",
+   "resumen": "Plan de mantenimiento de la infraestructura y la dotación hospitalaria de la vigencia 2022.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 220,
+   "soloSiVacia": false,
+   "fecha": "2022-12-31T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/word/PLAN-DE-MANTENIMIENTO-VIGENCIA-2022.docx"
+   ],
+   "destacada": null,
+   "categoria": "Plan de mantenimiento hospitalario",
+   "icono": null
+  },
+  {
+   "paginaSlug": "plan-de-accion",
+   "slug": "plan-de-mantenimiento-hospitalario-2021",
+   "titulo": "Plan de mantenimiento hospitalario 2021",
+   "resumen": "Plan de mantenimiento de la infraestructura y la dotación hospitalaria de la vigencia 2021.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 230,
+   "soloSiVacia": false,
+   "fecha": "2021-12-31T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/PLAN-DE-MANTENIMIENTO-VIGENCIA-2021-%20(1).pdf"
+   ],
+   "destacada": null,
+   "categoria": "Plan de mantenimiento hospitalario",
+   "icono": null
+  },
+  {
+   "paginaSlug": "plan-de-accion",
+   "slug": "plan-de-mantenimiento-hospitalario-2019",
+   "titulo": "Plan de mantenimiento hospitalario 2019",
+   "resumen": "Plan de mantenimiento de la infraestructura y la dotación hospitalaria de la vigencia 2019.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 240,
+   "soloSiVacia": false,
+   "fecha": "2019-12-31T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/PLAN%20DE%20MANTENIMIENTO%20HOSPITALARIO%202019.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Plan de mantenimiento hospitalario",
+   "icono": null
+  },
+  {
+   "paginaSlug": "plan-de-accion",
+   "slug": "plan-de-contingencia-covid-19-2021-version-7",
+   "titulo": "Plan de contingencia COVID-19 2021 – versión 7",
+   "resumen": "Plan de contingencia institucional.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 250,
+   "soloSiVacia": false,
+   "fecha": "2021-06-30T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/PLAN-DE-CONTINGENCIA-COVID-19-2021-V7-PDF.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Planes de contingencia",
+   "icono": null
+  },
+  {
+   "paginaSlug": "plan-de-accion",
+   "slug": "ruta-de-atencion-a-paciente-probable-o-confirmado-para-covid-19-version-4",
+   "titulo": "Ruta de atención a paciente probable o confirmado para COVID-19 – versión 4",
+   "resumen": "Plan de contingencia institucional.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 260,
+   "soloSiVacia": false,
+   "fecha": "2020-06-30T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/RUTA%20CORONAVIRUS%20V4.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Planes de contingencia",
+   "icono": null
+  },
+  {
+   "paginaSlug": "plan-de-accion",
+   "slug": "plan-de-contingencia-contra-coronavirus-covid-19-version-4",
+   "titulo": "Plan de contingencia contra coronavirus COVID-19 – versión 4",
+   "resumen": "Plan de contingencia institucional.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 270,
+   "soloSiVacia": false,
+   "fecha": "2020-06-30T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/PLAN%20DE%20CONTINGENCIA%20COVID-19%20V4.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Planes de contingencia",
+   "icono": null
+  },
+  {
+   "paginaSlug": "plan-de-accion",
+   "slug": "plan-de-contingencia-paro-nacional-del-21-de-noviembre-de-2019",
+   "titulo": "Plan de contingencia Paro Nacional del 21 de noviembre de 2019",
+   "resumen": "Plan de contingencia institucional.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 280,
+   "soloSiVacia": false,
+   "fecha": "2019-11-20T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Plan%20de%20Contingencia%20Paro%20Nacional%2021-11-2019.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Planes de contingencia",
+   "icono": null
+  },
+  {
+   "paginaSlug": "proyectos-de-inversion",
+   "slug": "proyectos-en-ejecucion-vigencia-2022",
+   "titulo": "Proyectos en ejecución – vigencia 2022",
+   "resumen": "Presentaciones de los proyectos de fisioterapia y de remodelación del hospital (agosto de 2022).",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 10,
+   "soloSiVacia": false,
+   "fecha": "2022-08-31T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/PTT/Presentacion%20Hospital%20San%20Jose%20AGO%2022.pptx",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/PTT/Presentacion%20Hospital%20San%20Jose%20AGO%2022%20(1).pptx"
+   ],
+   "destacada": null,
+   "categoria": "Programas y proyectos en ejecución",
+   "icono": null
+  },
+  {
+   "paginaSlug": "informes-de-empalme",
+   "slug": "informe-de-empalme-del-1-de-junio-al-30-de-noviembre-de-2017",
+   "titulo": "Informe de empalme del 1 de junio al 30 de noviembre de 2017",
+   "resumen": "Informe de empalme entre administraciones de la gerencia.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 10,
+   "soloSiVacia": false,
+   "fecha": "2017-11-30T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/ACTA%20DE%20EMPALME%20YANIRA%20DEL%20PILAR%20SIERRA%2001_06_2017%20AL%2030_11_2017_comprimida.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Informes de empalme",
+   "icono": null
+  },
+  {
+   "paginaSlug": "informes-de-empalme",
+   "slug": "informe-de-empalme-del-11-de-noviembre-de-2016-al-31-de-marzo-de-2017",
+   "titulo": "Informe de empalme del 11 de noviembre de 2016 al 31 de marzo de 2017",
+   "resumen": "Informe de empalme entre administraciones de la gerencia.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 20,
+   "soloSiVacia": false,
+   "fecha": "2017-03-31T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/INFORME%20DE%20EMPALME%20CARLOS%20SEP%C3%9ALVEDA%2011_11_2016%20AL%2031_03_2017.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Informes de empalme",
+   "icono": null
+  },
+  {
+   "paginaSlug": "informes-de-empalme",
+   "slug": "informe-de-empalme-del-18-de-febrero-al-10-de-noviembre-de-2016",
+   "titulo": "Informe de empalme del 18 de febrero al 10 de noviembre de 2016",
+   "resumen": "Informe de empalme entre administraciones de la gerencia.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 30,
+   "soloSiVacia": false,
+   "fecha": "2016-11-10T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/INFORME%20DE%20EMPALME%20F%C3%89LIX%20CANO%2018_02_2016%20AL%2010_11_2016.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Informes de empalme",
+   "icono": null
+  },
+  {
+   "paginaSlug": "informes-de-empalme",
+   "slug": "informe-de-empalme-del-1-de-febrero-de-2014-al-18-de-febrero-de-2016",
+   "titulo": "Informe de empalme del 1 de febrero de 2014 al 18 de febrero de 2016",
+   "resumen": "Informe de empalme entre administraciones de la gerencia.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 40,
+   "soloSiVacia": false,
+   "fecha": "2016-02-18T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/informe-de-empalme.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Informes de empalme",
+   "icono": null
+  },
+  {
+   "paginaSlug": "informes-de-empalme",
+   "slug": "informe-de-empalme-del-24-de-agosto-de-2011",
+   "titulo": "Informe de empalme del 24 de agosto de 2011",
+   "resumen": "Informe de empalme entre administraciones de la gerencia.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 50,
+   "soloSiVacia": false,
+   "fecha": "2011-08-24T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/INFORME%20DE%20EMPALME%20AGOSTO%202011.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Informes de empalme",
+   "icono": null
+  },
+  {
+   "paginaSlug": "informes-de-gestion-evaluacion-y-auditoria",
+   "slug": "informes-de-gestion-2026",
+   "titulo": "Informes de gestión 2026",
+   "resumen": "Informes de gestión institucional de la vigencia 2026.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 10,
+   "soloSiVacia": false,
+   "fecha": "2026-07-31T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Informe%20segundo%20trimestre%202026.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Informe%20de%20Gestion%20Primer%20Triemstre%20%2026.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Informes de gestión",
+   "icono": null
+  },
+  {
+   "paginaSlug": "informes-de-gestion-evaluacion-y-auditoria",
+   "slug": "informes-de-gestion-2025",
+   "titulo": "Informes de gestión 2025",
+   "resumen": "Informes de gestión institucional de la vigencia 2025.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 20,
+   "soloSiVacia": false,
+   "fecha": "2025-12-31T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Informe%20de%20Gesti%C3%B3n%20cuarto%20trimestre%202025.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/INFORME%20GESTION%20Tercer%20Trimestre%202025.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/INFORME%20GESTION%20SEGUNDO%20TRIMESTRE%202025.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/INFORME%20DE%20GESTION%20PRIMER%20TRIMESTRE%20VIGENCIA%202025..pdf"
+   ],
+   "destacada": null,
+   "categoria": "Informes de gestión",
+   "icono": null
+  },
+  {
+   "paginaSlug": "informes-de-gestion-evaluacion-y-auditoria",
+   "slug": "informe-de-gestion-2024",
+   "titulo": "Informe de gestión 2024",
+   "resumen": "Informes de gestión institucional de la vigencia 2024.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 30,
+   "soloSiVacia": false,
+   "fecha": "2024-12-31T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/word/INFORME%20DE%20GESTI%C3%93N%20%202024.doc"
+   ],
+   "destacada": null,
+   "categoria": "Informes de gestión",
+   "icono": null
+  },
+  {
+   "paginaSlug": "informes-de-gestion-evaluacion-y-auditoria",
+   "slug": "informe-de-gestion-2023",
+   "titulo": "Informe de gestión 2023",
+   "resumen": "Informes de gestión institucional de la vigencia 2023.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 40,
+   "soloSiVacia": false,
+   "fecha": "2023-12-31T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Informe%20de%20Gesti%C3%B2n_Anualizado%20a%C3%B1o%202023.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Informes de gestión",
+   "icono": null
+  },
+  {
+   "paginaSlug": "informes-de-gestion-evaluacion-y-auditoria",
+   "slug": "informe-de-gestion-2022",
+   "titulo": "Informe de gestión 2022",
+   "resumen": "Informes de gestión institucional de la vigencia 2022.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 50,
+   "soloSiVacia": false,
+   "fecha": "2022-12-31T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/INFORME%20DE%20GESTION%20VIGENCIA%202022%20.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Informes de gestión",
+   "icono": null
+  },
+  {
+   "paginaSlug": "informes-de-gestion-evaluacion-y-auditoria",
+   "slug": "informe-de-gestion-2021",
+   "titulo": "Informe de gestión 2021",
+   "resumen": "Informes de gestión institucional de la vigencia 2021.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 60,
+   "soloSiVacia": false,
+   "fecha": "2021-12-31T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Informe%20de%20Gestion%20Vg%202021-JD.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Informes de gestión",
+   "icono": null
+  },
+  {
+   "paginaSlug": "informes-de-gestion-evaluacion-y-auditoria",
+   "slug": "indicadores-de-gestion-2021",
+   "titulo": "Metas, objetivos e indicadores de gestión 2021",
+   "resumen": "Informe de indicadores de gestión y desempeño de la vigencia 2021.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 70,
+   "soloSiVacia": false,
+   "fecha": "2021-12-31T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Informe%20de%20Gestion%20Vg%202021-JD.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Metas, objetivos e indicadores",
+   "icono": null
+  },
+  {
+   "paginaSlug": "informes-de-gestion-evaluacion-y-auditoria",
+   "slug": "acuerdos-de-gestion-2025",
+   "titulo": "Acuerdos de gestión 2025",
+   "resumen": "Acuerdos de gestión suscritos entre la Gerencia y los gerentes públicos en la vigencia 2025.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 80,
+   "soloSiVacia": false,
+   "fecha": "2025-12-31T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdos%20de%20Gesti%C3%B3n%20-%20Oficina%20de%20Calidad.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdos%20de%20Gesti%C3%B3n%20-%20Administrativa.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/acuerdos%20de%20gestion%202.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/acuerdo%20de%20gestion.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Acuerdos de gestión",
+   "icono": null
+  },
+  {
+   "paginaSlug": "informes-de-gestion-evaluacion-y-auditoria",
+   "slug": "acuerdos-de-gestion-2024",
+   "titulo": "Acuerdos de gestión 2024",
+   "resumen": "Acuerdos de gestión suscritos entre la Gerencia y los gerentes públicos en la vigencia 2024.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 90,
+   "soloSiVacia": false,
+   "fecha": "2024-12-31T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/ACUERDO-SUB_SERVICIOS.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%20de%20Gesti%C3%B3n%20-%20Subgerencia%20Administrativa%20y%20Financiera.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%20De%20Gesti%C3%B3n%20-%20Oficina%20de%20Planeaci%C3%B3n%20.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%20De%20Gesti%C3%B3n%20-%20Oficina%20de%20Control%20Interno%20Disciplinario%20.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%20de%20Gesti%C3%B3n%20-%20Juridica%20y%20Contrtaci%C3%B3n%20.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Acuerdo%20de%20Gesti%C3%B3n%20-%20Claudia%20Vanegas.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Acuerdos de gestión",
+   "icono": null
+  },
+  {
+   "paginaSlug": "informes-de-gestion-evaluacion-y-auditoria",
+   "slug": "acuerdos-de-gestion-2022",
+   "titulo": "Acuerdos de gestión 2022",
+   "resumen": "Acuerdos de gestión suscritos entre la Gerencia y los gerentes públicos en la vigencia 2022.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 100,
+   "soloSiVacia": false,
+   "fecha": "2022-12-31T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/ACUERDO%20DE%20GESTI%C3%93N%20ENTRE%20LA%20GERENTE%20Y%20PLANEACION-2022.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/ACUERDO%20DE%20GESTI%C3%93N%20ENTRE%20LA%20GERENTE%20Y%20LA%20SUBGERENCIA%20ADMINISTRATIVA%20Y%20FINANCIERA-2022.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/ACUERDO%20DE%20GESTI%C3%93N%20ENTRE%20LA%20GERENTE%20Y%20EL%20SUBGERENTE%20DE%20SERVICIOS%20DE%20SALUD-2022.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Acuerdos de gestión",
+   "icono": null
+  },
+  {
+   "paginaSlug": "politicas-lineamientos-y-manuales",
+   "slug": "manual-de-caracterizacion-de-los-grupos-de-valor",
+   "titulo": "Manual de caracterización de los grupos de valor",
+   "resumen": "Manual de caracterización de los grupos de valor de la E.S.E. Hospital San José del Guaviare.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 10,
+   "soloSiVacia": false,
+   "fecha": null,
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/word/MANUAL%20DE%20CARACTERIZACION%20DE%20LOS%20GRUPOS%20DE%20VALOR%201%20(1).docx"
+   ],
+   "destacada": null,
+   "categoria": "Manuales",
+   "icono": null
+  },
+  {
+   "paginaSlug": "politicas-lineamientos-y-manuales",
+   "slug": "manual-de-manejo-de-historia-clinica",
+   "titulo": "Manual de manejo de historia clínica",
+   "resumen": "Manual de manejo de historia clínica de la E.S.E. Hospital San José del Guaviare.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 20,
+   "soloSiVacia": false,
+   "fecha": null,
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/MANUAL%20DE%20MANEJO%20DE%20HISTORIA%20CLINICA%20(1).pdf"
+   ],
+   "destacada": null,
+   "categoria": "Manuales",
+   "icono": null
+  },
+  {
+   "paginaSlug": "politicas-lineamientos-y-manuales",
+   "slug": "manual-de-contratacion",
+   "titulo": "Manual de contratación",
+   "resumen": "Manual de contratación de la E.S.E. Hospital San José del Guaviare.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 30,
+   "soloSiVacia": false,
+   "fecha": null,
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/manual%20de%20contratacion.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Manuales",
+   "icono": null
+  },
+  {
+   "paginaSlug": "politicas-lineamientos-y-manuales",
+   "slug": "manual-de-politicas-contables-2020",
+   "titulo": "Manual de políticas contables 2020",
+   "resumen": "Manual de políticas contables 2020 de la E.S.E. Hospital San José del Guaviare.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 40,
+   "soloSiVacia": false,
+   "fecha": null,
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/MANUAL-DE-POLITICAS-CONTABLES-DEFINITIVO-2020.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Manuales",
+   "icono": null
+  },
+  {
+   "paginaSlug": "politicas-lineamientos-y-manuales",
+   "slug": "manual-de-tarifas-institucional-resolucion-026",
+   "titulo": "Manual de tarifas institucional (Resolución 026)",
+   "resumen": "Manual de tarifas institucional (Resolución 026) de la E.S.E. Hospital San José del Guaviare.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 50,
+   "soloSiVacia": false,
+   "fecha": null,
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/resolucion%20026%20Manual%20de%20Tarifas%20Institucional.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Manuales",
+   "icono": null
+  },
+  {
+   "paginaSlug": "politicas-lineamientos-y-manuales",
+   "slug": "manual-tarifario-institucional-de-medicamentos-y-dispositivos-medicos",
+   "titulo": "Manual tarifario institucional de medicamentos y dispositivos médicos",
+   "resumen": "Manual tarifario institucional de medicamentos y dispositivos médicos de la E.S.E. Hospital San José del Guaviare.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 60,
+   "soloSiVacia": false,
+   "fecha": null,
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/resolucion%20026%20Manual%20de%20Tarifas%20Institucional%20(1).pdf"
+   ],
+   "destacada": null,
+   "categoria": "Manuales",
+   "icono": null
+  },
+  {
+   "paginaSlug": "politicas-lineamientos-y-manuales",
+   "slug": "manual-de-correspondencia",
+   "titulo": "Manual de correspondencia",
+   "resumen": "Manual de correspondencia de la E.S.E. Hospital San José del Guaviare.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 70,
+   "soloSiVacia": false,
+   "fecha": null,
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Manual%20de%20Correspondencia.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Manuales",
+   "icono": null
+  },
+  {
+   "paginaSlug": "politicas-lineamientos-y-manuales",
+   "slug": "manual-de-manejo-control-custodia-y-baja-de-la-propiedad-planta-y-equipo",
+   "titulo": "Manual de manejo, control, custodia y baja de la propiedad, planta y equipo",
+   "resumen": "Manual de manejo, control, custodia y baja de la propiedad, planta y equipo de la E.S.E. Hospital San José del Guaviare.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 80,
+   "soloSiVacia": false,
+   "fecha": null,
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/01%20MANUAL%20DE%20MANEJO,%20CONTROL,%20CUSTOD%C3%8DA%20Y%20BAJA%20DE%20LA%20PROPIEDAD,%20PLANTA%20Y%20EQUIPO.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Manuales",
+   "icono": null
+  },
+  {
+   "paginaSlug": "politicas-lineamientos-y-manuales",
+   "slug": "codigo-de-integridad-y-buen-gobierno-2025",
+   "titulo": "Código de integridad y buen gobierno 2025",
+   "resumen": "Código de integridad y buen gobierno actualizado y adoptado mediante la Resolución 0701 de 2025.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 90,
+   "soloSiVacia": false,
+   "fecha": "2025-12-31T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/C%C3%B3digo%20de%20Integridad%20y%20Buen%20Gobierno%20ultimo%202025.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resolucion%200701%202025%20Actualizacion%20de%20codigo%20de%20integridad%20y%20buen%20gobierno.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/word/Resoluci%C3%B3n%200701%20-%202025.docx"
+   ],
+   "destacada": null,
+   "categoria": "Código de integridad y buen gobierno",
+   "icono": null
+  },
+  {
+   "paginaSlug": "politicas-lineamientos-y-manuales",
+   "slug": "codigo-de-integridad-y-buen-gobierno-2021",
+   "titulo": "Código de integridad y buen gobierno 2021",
+   "resumen": "Código de integridad y buen gobierno de la vigencia 2021.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 100,
+   "soloSiVacia": false,
+   "fecha": "2021-12-31T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/word/CODIGO-DE-INTEGRIDAD.docx"
+   ],
+   "destacada": null,
+   "categoria": "Código de integridad y buen gobierno",
+   "icono": null
+  },
+  {
+   "paginaSlug": "politicas-lineamientos-y-manuales",
+   "slug": "codigo-de-integridad-y-buen-gobierno-2020",
+   "titulo": "Código de integridad y buen gobierno 2020",
+   "resumen": "Código de integridad y buen gobierno adoptado mediante la Resolución 0844 de 2020.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 110,
+   "soloSiVacia": false,
+   "fecha": "2020-12-31T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Codigo-de-Integridad-y-Buen-Gobierno-2020.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Res-0844-integridad-y-buen-gobierno.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Código de integridad y buen gobierno",
+   "icono": null
+  },
+  {
+   "paginaSlug": "politicas-lineamientos-y-manuales",
+   "slug": "codigo-de-buen-gobierno-2019",
+   "titulo": "Código de buen gobierno 2019",
+   "resumen": "Código de buen gobierno de la vigencia 2019.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 120,
+   "soloSiVacia": false,
+   "fecha": "2019-12-31T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/CODIGO%20BUEN%20GOBIERNO%20HSJG.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Código de integridad y buen gobierno",
+   "icono": null
+  },
+  {
+   "paginaSlug": "politicas-lineamientos-y-manuales",
+   "slug": "protocolo-de-clasificacion-de-pacientes-triage",
+   "titulo": "Protocolo de clasificación de pacientes «TRIAGE»",
+   "resumen": "Protocolo interno del servicio de urgencias.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 130,
+   "soloSiVacia": false,
+   "fecha": null,
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/word/01%20PROTOCOLO%20CLASIFICACION%20DE%20PACIENTES%20(TRIAGE).docx"
+   ],
+   "destacada": null,
+   "categoria": "Protocolos internos",
+   "icono": null
+  },
+  {
+   "paginaSlug": "politicas-lineamientos-y-manuales",
+   "slug": "protocolo-de-limpieza-y-desinfeccion-del-servicio-de-urgencias",
+   "titulo": "Protocolo de limpieza y desinfección del servicio de urgencias",
+   "resumen": "Protocolo interno del servicio de urgencias.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 140,
+   "soloSiVacia": false,
+   "fecha": null,
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/word/01%20PROTO%20%20LIMPI%20Y%20DESINFECCION%20DE%20URGENCIAS.docx"
+   ],
+   "destacada": null,
+   "categoria": "Protocolos internos",
+   "icono": null
+  },
+  {
+   "paginaSlug": "politicas-lineamientos-y-manuales",
+   "slug": "protocolo-de-normas-de-bioseguridad-del-servicio-de-urgencias",
+   "titulo": "Protocolo de normas de bioseguridad del servicio de urgencias",
+   "resumen": "Protocolo interno del servicio de urgencias.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 150,
+   "soloSiVacia": false,
+   "fecha": null,
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/02%20PROTOCOLO%20DE%20BIOSEGURIDAD%20DE%20URGENCIAS_compressed.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Protocolos internos",
+   "icono": null
+  },
+  {
+   "paginaSlug": "politicas-lineamientos-y-manuales",
+   "slug": "protocolo-de-residuos-hospitalarios-y-similares-del-servicio-de-urgencias",
+   "titulo": "Protocolo de residuos hospitalarios y similares del servicio de urgencias",
+   "resumen": "Protocolo interno del servicio de urgencias.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 160,
+   "soloSiVacia": false,
+   "fecha": null,
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/word/03%20PROTOCOLO%20DE%20RESIDUOS%20HOSPITALARIOS%20Y%20SIMILARES%20DEL%20SERVICIOS%20DE%20URGENCIAS.docx"
+   ],
+   "destacada": null,
+   "categoria": "Protocolos internos",
+   "icono": null
+  },
+  {
+   "paginaSlug": "politicas-lineamientos-y-manuales",
+   "slug": "modelo-de-atencion-integral-en-salud",
+   "titulo": "Modelo de atención integral en salud",
+   "resumen": "Modelo integrado de atención en salud de la E.S.E. Hospital San José del Guaviare.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 170,
+   "soloSiVacia": false,
+   "fecha": null,
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/39%20MODELO%20DE%20ATENCIoN%20INTEGRAL%20EN%20%20SALUD.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Atención en salud",
+   "icono": null
+  },
+  {
+   "paginaSlug": "manual-de-contratacion-adquisicion-yo-compras",
+   "slug": "manual-de-contratacion",
+   "titulo": "Manual de contratación",
+   "resumen": "Manual de contratación de la E.S.E. Hospital San José del Guaviare.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 10,
+   "soloSiVacia": false,
+   "fecha": null,
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/manual%20de%20contratacion.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Manual de contratación",
+   "icono": null
+  },
+  {
+   "paginaSlug": "talento-humano",
+   "slug": "formatos-de-word-y-powerpoint-para-documentos-institucionales",
+   "titulo": "Formatos de Word y PowerPoint para documentos institucionales",
+   "resumen": "Plantillas de oficios, informes y presentaciones, y logos de la E.S.E. para documentos institucionales.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 10100,
+   "soloSiVacia": false,
+   "fecha": "2025-01-31T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/word/FORMATO%20PARA%20OFICIOS,%20INFORMES%20HSJG%202025.docx",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/PTT/Diapositivas%20HSG%202025.pptx",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/img/Logo_Gerencia%20Hospital.png",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/img/logo%20hospital.png"
+   ],
+   "destacada": null,
+   "categoria": "Formatos",
+   "icono": null
+  },
+  {
+   "paginaSlug": "planes-decreto-612-de-2018",
+   "slug": "plan-de-seguridad-y-privacidad-de-la-informacion-2021",
+   "titulo": "Plan de Seguridad y Privacidad de la Información",
+   "resumen": "Plan de seguridad y privacidad de la información de la vigencia 2021.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 10,
+   "soloSiVacia": false,
+   "fecha": "2021-12-31T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Plan-politica-de-seguridad-de-la-informacion.pdf"
+   ],
+   "destacada": null,
+   "categoria": null,
+   "icono": null
+  },
+  {
+   "paginaSlug": "rendicion-de-cuentas",
+   "slug": "rendicion-de-cuentas-2025",
+   "titulo": "Rendición de cuentas 2025",
+   "resumen": "Micrositio de la audiencia pública de rendición de cuentas 2025.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 10,
+   "soloSiVacia": false,
+   "fecha": "2025-12-31T12:00:00Z",
+   "adjuntos": [
+    "https://www.esehospitalguaviare.gov.co/rendicion-de-cuentas-25/"
+   ],
+   "destacada": null,
+   "categoria": "Rendición de cuentas por vigencia",
+   "icono": null
+  },
+  {
+   "paginaSlug": "rendicion-de-cuentas",
+   "slug": "rendicion-de-cuentas-2024",
+   "titulo": "Rendición de cuentas 2024",
+   "resumen": "Micrositio de la audiencia pública de rendición de cuentas 2024.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 20,
+   "soloSiVacia": false,
+   "fecha": "2024-12-31T12:00:00Z",
+   "adjuntos": [
+    "https://www.esehospitalguaviare.gov.co/rendicion-de-cuentas-24/"
+   ],
+   "destacada": null,
+   "categoria": "Rendición de cuentas por vigencia",
+   "icono": null
+  },
+  {
+   "paginaSlug": "rendicion-de-cuentas",
+   "slug": "rendicion-de-cuentas-2023",
+   "titulo": "Rendición de cuentas 2023",
+   "resumen": "Micrositio de la audiencia pública de rendición de cuentas 2023.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 30,
+   "soloSiVacia": false,
+   "fecha": "2023-12-31T12:00:00Z",
+   "adjuntos": [
+    "https://www.esehospitalguaviare.gov.co/rendicion-de-cuentas-23/"
+   ],
+   "destacada": null,
+   "categoria": "Rendición de cuentas por vigencia",
+   "icono": null
+  },
+  {
+   "paginaSlug": "rendicion-de-cuentas",
+   "slug": "rendicion-de-cuentas-2022",
+   "titulo": "Rendición de cuentas 2022",
+   "resumen": "Informe técnico y micrositio de la rendición de cuentas de la vigencia 2022.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 40,
+   "soloSiVacia": false,
+   "fecha": "2022-12-31T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/word/Informe%20T%C3%A9cnico%20-%20Audiencia%20p%C3%BAblica%20de%20cuentas%20-%20vigencia%202022.docx",
+    "https://www.esehospitalguaviare.gov.co/rendicion-de-cuentas-22/"
+   ],
+   "destacada": null,
+   "categoria": "Rendición de cuentas por vigencia",
+   "icono": null
+  },
+  {
+   "paginaSlug": "rendicion-de-cuentas",
+   "slug": "rendicion-de-cuentas-2021",
+   "titulo": "Rendición de cuentas 2021",
+   "resumen": "Informe técnico de la rendición de cuentas de la vigencia 2021.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 50,
+   "soloSiVacia": false,
+   "fecha": "2021-12-31T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Informe%20T%C3%A9cnico%20del%20desarrollo%20del%20componente%20de%20rendici%C3%B3n%20de%20Cuentas.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Rendición de cuentas por vigencia",
+   "icono": null
+  },
+  {
+   "paginaSlug": "estrategia-de-participacion-ciudadana",
+   "slug": "participacion-ciudadana-en-la-formulacion-de-politicas",
+   "titulo": "Participación ciudadana en la formulación de políticas",
+   "resumen": "Quiénes pueden participar, por qué medios y qué áreas orientan y vigilan la participación en la formulación de políticas.",
+   "contenido": "<p>Mecanismos o procedimientos que deben seguir los ciudadanos, usuarios o interesados para participar en la formulación de políticas, en el control o en la evaluación de la gestión institucional.</p>\n<h3>¿Quiénes pueden participar?</h3>\n<p>Todos los ciudadanos interesados que deseen aportar en la construcción de políticas, planes y demás instrumentos, de acuerdo con la Ley 1712 de 2014 de transparencia y acceso a la información pública.</p>\n<h3>Medios presenciales y electrónicos</h3>\n<p>Puede participar de forma presencial en la sede principal y por los canales electrónicos de la entidad: el <a href=\"/pqrsf\">formulario de PQRSFD</a>, el correo <a href=\"mailto:contactenos@esehospitalguaviare.gov.co\">contactenos@esehospitalguaviare.gov.co</a> y los demás canales del <a href=\"/transparencia/informacion-de-la-entidad/directorio-institucional\">directorio institucional</a>.</p>\n<h3>Áreas responsables de la orientación y vigilancia</h3>\n<ul>\n<li><strong>Consolidación:</strong> el área de Planeación es la responsable de consolidar el Plan Anticorrupción y de Atención al Ciudadano y facilita todo el proceso de su elaboración.</li>\n<li><strong>Monitoreo:</strong> en concordancia con la cultura del autocontrol, los líderes de los procesos y sus equipos hacen seguimiento y evaluación permanente al mapa de riesgos de corrupción.</li>\n<li><strong>Seguimiento:</strong> la Oficina Asesora de Control Interno de Gestión hace seguimiento al cumplimiento de las orientaciones y obligaciones derivadas de este documento y publica en la página web las actividades realizadas.</li>\n</ul>",
+   "tipo": "articulo",
+   "orden": 10,
+   "soloSiVacia": false,
+   "fecha": null,
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/POLITICA-DE-PARTICIPACION-CIUDADANA%20(1).pdf"
+   ],
+   "destacada": null,
+   "categoria": null,
+   "icono": null
+  }
+ ]
+}
