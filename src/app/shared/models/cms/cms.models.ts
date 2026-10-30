@@ -6,7 +6,7 @@
 
 export type UbicacionMenu = 'principal' | 'superior' | 'pie' | 'lateral';
 export type EstadoPagina = 'publicada' | 'borrador' | 'oculta';
-export type PlantillaPagina = 'contenido' | 'listado' | 'documentos' | 'galeria' | 'enlace' | 'calendario' | 'historia' | 'servicios' | 'organigrama' | 'sedes' | 'plataforma' | 'directorio';
+export type PlantillaPagina = 'contenido' | 'listado' | 'documentos' | 'galeria' | 'enlace' | 'calendario' | 'historia' | 'servicios' | 'organigrama' | 'sedes' | 'plataforma' | 'directorio' | 'preguntas' | 'glosario';
 export type TipoEntrada = 'articulo' | 'noticia' | 'documento' | 'evento' | 'servicio' | 'enlace';
 export type EstadoEntrada = 'publicada' | 'borrador' | 'archivada';
 export type TipoMultimedia = 'imagen' | 'video' | 'documento' | 'audio' | 'otro';
@@ -125,6 +125,16 @@ export const PLANTILLAS_PAGINA: { valor: PlantillaPagina; etiqueta: string; ayud
     valor: 'directorio',
     etiqueta: 'Directorio institucional',
     ayuda: 'Las entradas del grupo «Líneas principales» se destacan arriba (conmutador, urgencias, PQRSFD, notificaciones judiciales). Las demás son dependencias con buscador y filtro por área (el grupo). Contenido = líneas «Correo: …», «Teléfono: …», «Celular: …» o «WhatsApp: …»; se vuelven enlaces.',
+  },
+  {
+    valor: 'preguntas',
+    etiqueta: 'Preguntas frecuentes',
+    ayuda: 'Acordeón con buscador. Cada entrada es una pregunta (título) con su respuesta (contenido); el grupo es el tema (Contacto, Citas y trámites…) y aparece como filtro.',
+  },
+  {
+    valor: 'glosario',
+    etiqueta: 'Glosario',
+    ayuda: 'Términos de la A a la Z con buscador. Cada entrada es un término (título) y su definición va en el resumen.',
   },
   { valor: 'calendario', etiqueta: 'Calendario de eventos', ayuda: 'Muestra el calendario institucional (los eventos se administran en Contenido › Calendario de eventos).' },
 ];

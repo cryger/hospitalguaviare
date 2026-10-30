@@ -1,0 +1,47 @@
+<div class="faq">
+  <div class="faq-barra">
+    <div class="buscador">
+      <label for="faq-buscar" class="visually-hidden">Buscar en las preguntas frecuentes</label>
+      <span class="b-icono" aria-hidden="true"><app-icono-cms valor="govco:search" /></span>
+      <input id="faq-buscar" type="search" autocomplete="off" placeholder="¿Qué necesita saber? Ej. cita, historia clínica, queja"
+             [value]="busqueda()" (input)="busqueda.set($any($event.target).value)" />
+    </div>
+    <button type="button" class="todas" (click)="alternarTodas()" [attr.aria-pressed]="todasAbiertas()">
+      {{ todasAbiertas() ? 'Contraer todas' : 'Expandir todas' }}
+    </button>
+  </div>
+
+  @if (temas().length > 1) {
+    <nav class="temas" aria-label="Filtrar por tema">
+      <button type="button" [class.activo]="!tema()" [attr.aria-pressed]="!tema()" (click)="tema.set('')">Todos</button>
+      @for (t of temas(); track t) {
+        <button type="button" [class.activo]="tema() === t" [attr.aria-pressed]="tema() === t" (click)="tema.set(tema() === t ? '' : t)">{{ t }}</button>
+      }
+    </nav>
+  }
+
+  <p class="visually-hidden" role="status" aria-live="polite">{{ filtradas().length }} preguntas</p>
+
+  @for (g of grupos(); track g.tema) {
+    <section class="grupo" [attr.aria-label]="g.tema || null">
+      @if (g.tema) { <h2 class="g-titulo">{{ g.tema }}</h2> }
+      @for (p of g.items; track p.entrada.id) {
+        <details class="pregunta" [open]="estaAbierta(p.entrada.id)" (toggle)="alternar(p.entrada.id, $event)">
+          <summary>
+            <span class="q-icono" aria-hidden="true">?</span>
+            <span class="q-texto">{{ p.entrada.titulo }}</span>
+            <span class="q-flecha" aria-hidden="true"><app-icono-cms valor="govco:chevron-down" /></span>
+          </summary>
+          <div class="respuesta contenido-html" [innerHTML]="p.entrada.contenido || p.entrada.resumen"></div>
+        </details>
+      }
+    </section>
+  }
+
+  @if (!filtradas().length) {
+    <div class="sin-resultados">
+      <p>No encontramos preguntas con «{{ busqueda() }}».</p>
+      <p>Escríbanos por el <a href="/pqrsf">formulario de PQRSFD</a> y con gusto le responderemos.</p>
+    </div>
+  }
+</div>

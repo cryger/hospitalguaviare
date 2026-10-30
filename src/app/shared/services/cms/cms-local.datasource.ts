@@ -50,6 +50,7 @@ export class CmsLocalDataSource extends CmsDataSource {
       .then(() => this.sembrarDesdeArchivo('normatividad-semilla', 'assets/semillas/normatividad.json'))
       .then(() => this.sembrarDesdeArchivo('sedes-semilla', 'assets/semillas/sedes-y-horarios.json'))
       .then(() => this.sembrarDesdeArchivo('directorio-semilla', 'assets/semillas/directorio-institucional.json'))
+      .then(() => this.sembrarDesdeArchivo('informacion-de-interes-semilla', 'assets/semillas/informacion-de-interes.json'))
       .then(() => this.clasificarPublicaciones())
       .then(() => this.clasificarDocumentosTalentoHumano())
       .then(() => this.organizarComiteConvivencia());
@@ -310,7 +311,7 @@ export class CmsLocalDataSource extends CmsDataSource {
   }
 
   /* ===== Estructura inicial (Resolución 1519 de 2020) ===== */
-  private readonly versionSemilla = 22;
+  private readonly versionSemilla = 23;
 
   private sembrarSiVacio(): void {
     if (localStorage.getItem(this.prefijo + 'menus')) return;
@@ -536,6 +537,19 @@ export class CmsLocalDataSource extends CmsDataSource {
         if (p.slug === 'directorio-institucional' && p.plantilla === 'contenido') Object.assign(p, { plantilla: 'directorio', actualizadoEn: t });
       }
     }
+    // Versión 23: Talento humano incluye convocatorias y comunicados del portal anterior
+    if (version < 23) {
+      const th = paginas.find((p) => p.slug === 'talento-humano' && p.descripcion === 'Manual de funciones, planes de gestión gerencial y documentos del área de Talento Humano.');
+      if (th) Object.assign(th, { descripcion: ESTRUCTURA_1519.find((x) => x.slug === 'talento-humano')?.descripcion, actualizadoEn: t });
+    }
+    // Versión 23: 7.2 Sección de datos abiertos publica los conjuntos de datos (antes era un enlace)
+    if (version < 23) {
+      for (const p of paginas) {
+        if (p.slug === 'seccion-de-datos-abiertos' && p.plantilla === 'enlace') {
+          Object.assign(p, { plantilla: 'documentos', urlExterna: undefined, descripcion: p.descripcion || 'Conjuntos de datos abiertos de la E.S.E. en formatos Excel y CSV, y enlace al portal nacional datos.gov.co.', actualizadoEn: t });
+        }
+      }
+    }
     // Versión 19: el Canal anticorrupción – SICOF lleva al formulario /sicof
     if (version < 19) {
       for (const p of paginas) {
@@ -558,6 +572,7 @@ export class CmsLocalDataSource extends CmsDataSource {
    * - normatividad.json         → api/migraciones/028-normatividad.sql (resoluciones, acuerdos, políticas…)
    * - sedes-y-horarios.json     → api/migraciones/031-sedes-y-horarios.sql (sede principal y horarios)
    * - directorio-institucional.json → api/migraciones/033-directorio-institucional.sql (1.4 directorio y 1.8 servicio al público)
+   * - informacion-de-interes.json → api/migraciones/034-informacion-de-interes.sql (datos abiertos, preguntas frecuentes, glosario, talento humano)
    */
   private async sembrarDesdeArchivo(nombre: string, ruta: string): Promise<void> {
     const clave = this.prefijo + nombre;
@@ -749,7 +764,7 @@ const ESTRUCTURA_1519: PaginaSemilla[] = [
   { id: 53, menuId: 1, parentId: 49, titulo: "7.1.4 Programa de Gestión Documental", slug: 'programa-de-gestion-documental', plantilla: 'documentos', orden: 3 },
   { id: 54, menuId: 1, parentId: 49, titulo: "7.1.5 Tablas de Retención Documental", slug: 'tablas-de-retencion-documental', plantilla: 'documentos', orden: 4 },
   { id: 55, menuId: 1, parentId: 49, titulo: "7.1.6 Costos de reproducción de la información pública", slug: 'costos-de-reproduccion-de-la-informacion-publica', plantilla: 'documentos', orden: 5 },
-  { id: 56, menuId: 1, parentId: 48, titulo: "7.2 Sección de datos abiertos", slug: 'seccion-de-datos-abiertos', plantilla: 'enlace', urlExterna: 'https://www.datos.gov.co', orden: 1 },
+  { id: 56, menuId: 1, parentId: 48, titulo: "7.2 Sección de datos abiertos", slug: 'seccion-de-datos-abiertos', plantilla: 'documentos', descripcion: "Conjuntos de datos abiertos de la E.S.E. en formatos Excel y CSV, y enlace al portal nacional datos.gov.co.", orden: 1 },
   { id: 57, menuId: 1, parentId: 1, titulo: "8. Información específica para grupos de interés", slug: 'informacion-especifica-para-grupos-de-interes', plantilla: 'contenido', descripcion: "Información dirigida a niñas, niños y adolescentes, mujeres, grupos étnicos y poblaciones de atención diferencial.", orden: 7 },
   { id: 58, menuId: 1, parentId: 57, titulo: "8.1 Información para niñas, niños y adolescentes", slug: 'informacion-para-ninas-ninos-y-adolescentes', plantilla: 'contenido', descripcion: "Enlaces seguros con información, juegos y orientación para niñas, niños y adolescentes.", orden: 0 },
   { id: 59, menuId: 1, parentId: 57, titulo: "8.2 Información para mujeres", slug: 'informacion-para-mujeres', plantilla: 'contenido', orden: 1 },
@@ -764,6 +779,8 @@ const ESTRUCTURA_1519: PaginaSemilla[] = [
   { id: 98, menuId: 1, parentId: 62, titulo: "Boletines de salud", slug: 'boletines-de-salud', plantilla: 'listado', descripcion: "Boletines epidemiológicos, infografías y piezas informativas sobre fechas conmemorativas en salud.", orden: 5 },
   { id: 99, menuId: 1, parentId: 62, titulo: "Perfil epidemiológico", slug: 'perfil-epidemiologico', plantilla: 'documentos', descripcion: "Perfil epidemiológico institucional y boletines epidemiológicos trimestrales.", orden: 6 },
   { id: 105, menuId: 1, parentId: 62, titulo: "Solicitudes contractuales", slug: 'solicitudes-contractuales', plantilla: 'enlace', urlExterna: '/solicitudes-contractuales', descripcion: "Solicite certificaciones de sus contratos con la E.S.E. y consulte el estado de su solicitud.", orden: 7 },
+  { id: 106, menuId: 1, parentId: 62, titulo: "Preguntas frecuentes", slug: 'preguntas-frecuentes', plantilla: 'preguntas', descripcion: "Respuestas a las dudas más comunes sobre contacto, citas, trámites, PQRSFD, derechos y deberes de los usuarios.", orden: 8 },
+  { id: 107, menuId: 1, parentId: 62, titulo: "Glosario", slug: 'glosario', plantilla: 'glosario', descripcion: "Términos jurídicos, administrativos y de salud que se usan en la gestión del hospital, de la A a la Z.", orden: 9 },
   { id: 67, menuId: 1, parentId: null, titulo: "Participa", slug: 'participa', plantilla: 'contenido', descripcion: "Espacios de participación ciudadana en la gestión de la E.S.E. Hospital San José del Guaviare (lineamientos del DAFP).", orden: 3 },
   { id: 68, menuId: 1, parentId: 67, titulo: "Participación para el diagnóstico de necesidades e identificación de problemas", slug: 'participacion-para-el-diagnostico-de-necesidades-e-identificacion-de-problemas', plantilla: 'contenido', descripcion: "Espacio para identificar y analizar las necesidades, expectativas y problemáticas de la comunidad en relación con los servicios de salud.", orden: 0 },
   { id: 69, menuId: 1, parentId: 67, titulo: "Planeación y presupuesto participativo", slug: 'planeacion-y-presupuesto-participativo', plantilla: 'contenido', descripcion: "La comunidad participa en la definición de prioridades, la asignación de recursos y la formulación de planes y proyectos institucionales.", orden: 1 },
@@ -785,7 +802,7 @@ const ESTRUCTURA_1519: PaginaSemilla[] = [
   { id: 88, menuId: 1, parentId: 74, titulo: "Calendario de eventos", slug: 'calendario-de-eventos', plantilla: 'enlace', urlExterna: '/transparencia/informacion-de-la-entidad/calendario-de-actividades-y-eventos', orden: 5 },
   { id: 89, menuId: 1, parentId: 74, titulo: "Alianza de usuarios", slug: 'alianza-de-usuarios', plantilla: 'contenido', descripcion: "Asociación de usuarios que representa a la comunidad ante la E.S.E. Hospital San José del Guaviare.", orden: 6 },
   { id: 90, menuId: 1, parentId: 74, titulo: "Comité de convivencia laboral", slug: 'comite-de-convivencia-laboral', plantilla: 'documentos', descripcion: "Instancia que promueve un buen ambiente laboral y previene y atiende las situaciones que pueden constituir acoso laboral (Ley 1010 de 2006). Aquí se publican su conformación, comunicados y los documentos de elección de sus integrantes.", orden: 7 },
-  { id: 91, menuId: 1, parentId: 74, titulo: "Talento humano", slug: 'talento-humano', plantilla: 'documentos', descripcion: "Manual de funciones, planes de gestión gerencial y documentos del área de Talento Humano.", orden: 8 },
+  { id: 91, menuId: 1, parentId: 74, titulo: "Talento humano", slug: 'talento-humano', plantilla: 'documentos', descripcion: "Manual de funciones, planes, convocatorias, comités, elecciones de representantes, capacitaciones y reglamento interno de trabajo del área de Talento Humano.", orden: 8 },
   { id: 92, menuId: 1, parentId: 74, titulo: "Planes Decreto 612 de 2018", slug: 'planes-decreto-612-de-2018', plantilla: 'documentos', descripcion: "Planes institucionales y estratégicos que la entidad debe publicar según el Decreto 612 de 2018.", orden: 9 },
   { id: 93, menuId: 1, parentId: 74, titulo: "Canal anticorrupción – SICOF", slug: 'canal-anticorrupcion-sicof', plantilla: 'enlace', urlExterna: '/sicof', descripcion: "Subsistema del Riesgo de Corrupción, Opacidad y Fraude: cómo reportar una conducta posiblemente irregular.", orden: 10 },
   { id: 94, menuId: 1, parentId: 74, titulo: "Sistema SARLAFT", slug: 'sistema-sarlaft', plantilla: 'enlace', urlExterna: 'https://esehospitalguaviare.gov.co/sistema-sarlaft/', orden: 11 },

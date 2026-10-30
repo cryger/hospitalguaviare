@@ -17,7 +17,7 @@
     <header class="entrada-head">
       <a class="volver" [routerLink]="cms.rutaPagina(pagina()!.id)">← {{ pagina()!.titulo }}</a>
       <h1>{{ e.titulo }}</h1>
-      @if (pagina()!.plantilla === 'servicios' || pagina()!.plantilla === 'organigrama' || pagina()!.plantilla === 'plataforma' || pagina()!.plantilla === 'directorio') {
+      @if (pagina()!.plantilla === 'servicios' || pagina()!.plantilla === 'organigrama' || pagina()!.plantilla === 'plataforma' || pagina()!.plantilla === 'directorio' || pagina()!.plantilla === 'preguntas' || pagina()!.plantilla === 'glosario') {
         <!-- Servicio del portafolio: sin fecha ni autor, solo su grupo -->
         @if (e.categoria || e.estado !== 'publicada') {
           <p class="meta">
@@ -308,6 +308,16 @@
     @case ('sedes') {
       <!-- Sedes (mapa y contactos) y horarios con estado en vivo: grupos «Sede» y «Horario» en Entradas -->
       <app-sedes-horarios [entradas]="entradas()" />
+    }
+
+    @case ('preguntas') {
+      <!-- Preguntas frecuentes en acordeón (grupo = tema en Entradas) -->
+      <app-preguntas-frecuentes [entradas]="entradas()" />
+    }
+
+    @case ('glosario') {
+      <!-- Glosario A-Z: título = término, resumen = definición -->
+      <app-glosario [entradas]="entradas()" />
     }
 
     @case ('directorio') {

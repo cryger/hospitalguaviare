@@ -1,0 +1,45 @@
+<div class="glosario">
+  <div class="g-barra">
+    <div class="buscador">
+      <label for="glosario-buscar" class="visually-hidden">Buscar un término</label>
+      <span class="b-icono" aria-hidden="true"><app-icono-cms valor="govco:search" /></span>
+      <input id="glosario-buscar" type="search" autocomplete="off" placeholder="Buscar un término, ej. copago, derecho de petición"
+             [value]="busqueda()" (input)="busqueda.set($any($event.target).value)" />
+    </div>
+    <p class="conteo">{{ total() }} términos</p>
+  </div>
+
+  <nav class="abecedario" aria-label="Ir a la letra">
+    <ul>
+      @for (l of letras; track l) {
+        <li>
+          @if (conTerminos().has(l)) {
+            <button type="button" (click)="irA(l)" [attr.aria-label]="'Términos con la letra ' + l">{{ l }}</button>
+          } @else {
+            <span aria-hidden="true">{{ l }}</span>
+          }
+        </li>
+      }
+    </ul>
+  </nav>
+
+  <p class="visually-hidden" role="status" aria-live="polite">{{ busqueda().trim() ? filtrados().length + ' términos encontrados' : '' }}</p>
+
+  @for (g of grupos(); track g.letra) {
+    <section class="letra" [attr.aria-labelledby]="g.letra ? 'glosario-' + g.letra : null">
+      @if (g.letra) { <h2 class="l-titulo" [id]="'glosario-' + g.letra" tabindex="-1">{{ g.letra }}</h2> }
+      <dl class="terminos">
+        @for (t of g.items; track t.id) {
+          <div class="termino">
+            <dt>{{ t.termino }}</dt>
+            <dd>{{ t.definicion }}</dd>
+          </div>
+        }
+      </dl>
+    </section>
+  }
+
+  @if (!filtrados().length) {
+    <p class="sin-resultados">No encontramos «{{ busqueda() }}» en el glosario.</p>
+  }
+</div>

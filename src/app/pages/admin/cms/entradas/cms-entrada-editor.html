@@ -147,6 +147,20 @@
           <small id="en-seccion-ayuda">{{ ayudaSeccion() }}</small>
         </div>
       }
+      @if (esPreguntas()) {
+        <div class="campo bloque">
+          <label for="en-tema">Tema</label>
+          <input id="en-tema" class="input" name="categoria" list="en-temas" maxlength="80" autocomplete="off"
+                 [(ngModel)]="form.categoria" placeholder="Ej. Contacto, Citas y trámites, PQRSFD" aria-describedby="en-tema-ayuda" />
+          <datalist id="en-temas">
+            @for (c of categoriasDePagina(); track c) { <option [value]="c"></option> }
+          </datalist>
+          <small id="en-tema-ayuda">El título es la pregunta y el contenido es la respuesta. El tema agrupa las preguntas y aparece como filtro.</small>
+        </div>
+      }
+      @if (esGlosario()) {
+        <p class="campo bloque ayuda-glosario">En el glosario, el <strong>título</strong> es el término y el <strong>resumen</strong> es su definición.</p>
+      }
       @if (esDirectorio()) {
         <div class="campo bloque">
           <label for="en-area-dir">Área o grupo</label>

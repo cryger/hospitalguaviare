@@ -74,6 +74,16 @@ export class CmsEntradaEditor {
     return this.cms.paginaPorId().get(Number(this.form.paginaId))?.plantilla === 'sedes';
   }
 
+  /** Preguntas frecuentes: la categoría es el tema */
+  esPreguntas(): boolean {
+    return this.cms.paginaPorId().get(Number(this.form.paginaId))?.plantilla === 'preguntas';
+  }
+
+  /** Glosario: título = término, resumen = definición */
+  esGlosario(): boolean {
+    return this.cms.paginaPorId().get(Number(this.form.paginaId))?.plantilla === 'glosario';
+  }
+
   /** Directorio institucional: la categoría es el área (o «Líneas principales») */
   esDirectorio(): boolean {
     return this.cms.paginaPorId().get(Number(this.form.paginaId))?.plantilla === 'directorio';
