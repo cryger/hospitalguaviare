@@ -48,6 +48,10 @@
 .b-icono { position: absolute; left: .95rem; top: 50%; transform: translateY(-50%); color: var(--cobalt); pointer-events: none; }
 
 .d-cuerpo { display: grid; grid-template-columns: 15.5rem minmax(0, 1fr); gap: 1.5rem; align-items: start; }
+.d-cuerpo.sin-areas { grid-template-columns: minmax(0, 1fr); }
+.dep-dato { display: flex; gap: .4rem; align-items: baseline; margin: .2rem 0 0; font-size: .85rem; color: #374151; }
+.dep-dato app-icono-cms { flex: none; color: #6b7280; font-size: .8rem; }
+.dep-dato b { font-weight: 600; color: #4b5563; }
 .areas { position: sticky; top: 1rem; padding: .75rem; border-radius: 14px; background: #F7F9FD; border: 1px solid #e3e9f3; }
 .areas-titulo { margin: .1rem .4rem .5rem; font-size: .74rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #6b7280; }
 .areas ul { list-style: none; margin: 0; padding: 0; display: grid; gap: .15rem; }

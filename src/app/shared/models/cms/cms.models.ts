@@ -6,7 +6,7 @@
 
 export type UbicacionMenu = 'principal' | 'superior' | 'pie' | 'lateral';
 export type EstadoPagina = 'publicada' | 'borrador' | 'oculta';
-export type PlantillaPagina = 'contenido' | 'listado' | 'documentos' | 'galeria' | 'enlace' | 'calendario' | 'historia' | 'servicios' | 'organigrama' | 'sedes' | 'plataforma' | 'directorio' | 'preguntas' | 'glosario';
+export type PlantillaPagina = 'contenido' | 'listado' | 'documentos' | 'galeria' | 'enlace' | 'calendario' | 'historia' | 'servicios' | 'organigrama' | 'sedes' | 'plataforma' | 'directorio' | 'preguntas' | 'glosario' | 'procesos';
 export type TipoEntrada = 'articulo' | 'noticia' | 'documento' | 'evento' | 'servicio' | 'enlace';
 export type EstadoEntrada = 'publicada' | 'borrador' | 'archivada';
 export type TipoMultimedia = 'imagen' | 'video' | 'documento' | 'audio' | 'otro';
@@ -135,6 +135,11 @@ export const PLANTILLAS_PAGINA: { valor: PlantillaPagina; etiqueta: string; ayud
     valor: 'glosario',
     etiqueta: 'Glosario',
     ayuda: 'Términos de la A a la Z con buscador. Cada entrada es un término (título) y su definición va en el resumen.',
+  },
+  {
+    valor: 'procesos',
+    etiqueta: 'Mapa de procesos',
+    ayuda: 'Mapa de procesos destacado y una tarjeta por proceso (estratégicos, misionales, de apoyo) con su objetivo (resumen) y sus documentos adjuntos (caracterización, procedimientos, formatos…). El grupo «Sistema de gestión de calidad» muestra objetivos de calidad, PAMEC e infografías al final.',
   },
   { valor: 'calendario', etiqueta: 'Calendario de eventos', ayuda: 'Muestra el calendario institucional (los eventos se administran en Contenido › Calendario de eventos).' },
 ];

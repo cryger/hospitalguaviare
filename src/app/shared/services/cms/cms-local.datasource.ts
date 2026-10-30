@@ -51,6 +51,7 @@ export class CmsLocalDataSource extends CmsDataSource {
       .then(() => this.sembrarDesdeArchivo('sedes-semilla', 'assets/semillas/sedes-y-horarios.json'))
       .then(() => this.sembrarDesdeArchivo('directorio-semilla', 'assets/semillas/directorio-institucional.json'))
       .then(() => this.sembrarDesdeArchivo('informacion-de-interes-semilla', 'assets/semillas/informacion-de-interes.json'))
+      .then(() => this.sembrarDesdeArchivo('estructura-organica-semilla', 'assets/semillas/estructura-organica.json'))
       .then(() => this.clasificarPublicaciones())
       .then(() => this.clasificarDocumentosTalentoHumano())
       .then(() => this.organizarComiteConvivencia())
@@ -348,7 +349,7 @@ export class CmsLocalDataSource extends CmsDataSource {
   }
 
   /* ===== Estructura inicial (Resolución 1519 de 2020) ===== */
-  private readonly versionSemilla = 23;
+  private readonly versionSemilla = 24;
 
   private sembrarSiVacio(): void {
     if (localStorage.getItem(this.prefijo + 'menus')) return;
@@ -574,6 +575,13 @@ export class CmsLocalDataSource extends CmsDataSource {
         if (p.slug === 'directorio-institucional' && p.plantilla === 'contenido') Object.assign(p, { plantilla: 'directorio', actualizadoEn: t });
       }
     }
+    // Versión 24: 1.3 con mapa de procesos visual; 1.6 y 1.7 como directorios con buscador
+    if (version < 24) {
+      for (const p of paginas) {
+        if (p.slug === 'mapas-y-cartas-descriptivas-de-los-procesos' && (p.plantilla === 'documentos' || p.plantilla === 'contenido')) Object.assign(p, { plantilla: 'procesos', actualizadoEn: t });
+        if (['directorio-de-entidades', 'directorio-de-agremiaciones-asociaciones-y-otros-grupos-de-interes'].includes(p.slug) && p.plantilla === 'contenido') Object.assign(p, { plantilla: 'directorio', actualizadoEn: t });
+      }
+    }
     // Versión 23: Talento humano incluye convocatorias y comunicados del portal anterior
     if (version < 23) {
       const th = paginas.find((p) => p.slug === 'talento-humano' && p.descripcion === 'Manual de funciones, planes de gestión gerencial y documentos del área de Talento Humano.');
@@ -750,11 +758,11 @@ const ESTRUCTURA_1519: PaginaSemilla[] = [
   { id: 2, menuId: 1, parentId: 1, titulo: "1. Información de la entidad", slug: 'informacion-de-la-entidad', plantilla: 'contenido', descripcion: "Conozca quiénes somos, cómo estamos organizados, cómo contactarnos, quién nos vigila y cómo tomamos las decisiones que le afectan.", orden: 0 },
   { id: 3, menuId: 1, parentId: 2, titulo: "1.1 Misión, visión, funciones y deberes", slug: 'mision-vision-funciones-y-deberes', plantilla: 'plataforma', descripcion: "Plataforma estratégica de la E.S.E. Hospital San José del Guaviare: misión, visión y valores corporativos.", orden: 0 },
   { id: 4, menuId: 1, parentId: 2, titulo: "1.2 Estructura orgánica - Organigrama", slug: 'estructura-organica-organigrama', plantilla: 'organigrama', descripcion: "Organigrama y estructura administrativa de la E.S.E. Hospital San José del Guaviare.", orden: 1 },
-  { id: 5, menuId: 1, parentId: 2, titulo: "1.3 Mapas y cartas descriptivas de los procesos", slug: 'mapas-y-cartas-descriptivas-de-los-procesos', plantilla: 'documentos', descripcion: "Mapa de procesos y caracterizaciones de los procesos institucionales.", orden: 2 },
+  { id: 5, menuId: 1, parentId: 2, titulo: "1.3 Mapas y cartas descriptivas de los procesos", slug: 'mapas-y-cartas-descriptivas-de-los-procesos', plantilla: 'procesos', descripcion: "Mapa de procesos y caracterizaciones de los procesos institucionales.", orden: 2 },
   { id: 6, menuId: 1, parentId: 2, titulo: "1.4 Directorio institucional", slug: 'directorio-institucional', plantilla: 'directorio', descripcion: "Dependencias, responsables, teléfonos y correos para comunicarse con el hospital.", orden: 3 },
   { id: 7, menuId: 1, parentId: 2, titulo: "1.5 Directorio de servidores públicos, empleados o contratistas", slug: 'directorio-de-servidores-publicos-empleados-o-contratistas', plantilla: 'documentos', descripcion: "Servidores públicos y contratistas de la entidad, con su cargo e información de contacto.", orden: 4 },
-  { id: 8, menuId: 1, parentId: 2, titulo: "1.6 Directorio de entidades", slug: 'directorio-de-entidades', plantilla: 'contenido', descripcion: "Entidades del sector salud y del Estado con las que se relaciona la E.S.E.", orden: 5 },
-  { id: 9, menuId: 1, parentId: 2, titulo: "1.7 Directorio de agremiaciones, asociaciones y otros grupos de interés", slug: 'directorio-de-agremiaciones-asociaciones-y-otros-grupos-de-interes', plantilla: 'contenido', descripcion: "Asociaciones de usuarios, agremiaciones y grupos de interés relacionados con el hospital.", orden: 6 },
+  { id: 8, menuId: 1, parentId: 2, titulo: "1.6 Directorio de entidades", slug: 'directorio-de-entidades', plantilla: 'directorio', descripcion: "Entidades del sector salud y del Estado con las que se relaciona la E.S.E.", orden: 5 },
+  { id: 9, menuId: 1, parentId: 2, titulo: "1.7 Directorio de agremiaciones, asociaciones y otros grupos de interés", slug: 'directorio-de-agremiaciones-asociaciones-y-otros-grupos-de-interes', plantilla: 'directorio', descripcion: "Asociaciones de usuarios, agremiaciones y grupos de interés relacionados con el hospital.", orden: 6 },
   { id: 10, menuId: 1, parentId: 2, titulo: "1.8 Servicio al público, normas, formularios y protocolos de atención", slug: 'servicio-al-publico-normas-formularios-y-protocolos-de-atencion', plantilla: 'documentos', descripcion: "Normas, formularios y protocolos que orientan la atención a la ciudadanía.", orden: 7 },
   { id: 11, menuId: 1, parentId: 2, titulo: "1.9 Procedimientos que se siguen para tomar decisiones en las diferentes áreas", slug: 'procedimientos-que-se-siguen-para-tomar-decisiones-en-las-diferentes-areas', plantilla: 'documentos', descripcion: "Procedimientos e instancias que intervienen en la toma de decisiones de cada área.", orden: 8 },
   { id: 12, menuId: 1, parentId: 2, titulo: "1.10 Mecanismo de presentación directa de solicitudes, quejas y reclamos", slug: 'mecanismo-pqrsd', plantilla: 'enlace', urlExterna: '/pqrsf', descripcion: "Radique en línea peticiones, quejas, reclamos, sugerencias, felicitaciones y denuncias, y consulte su estado.", orden: 9 },

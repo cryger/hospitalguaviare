@@ -1,0 +1,154 @@
+<div class="procesos">
+  <!-- ===== Mapa de procesos (destacado) ===== -->
+  @for (m of mapa(); track m.entrada.id) {
+    <section class="mapa" aria-labelledby="mp-mapa">
+      <div class="mapa-texto">
+        <p class="antetitulo">Sistema de gestión</p>
+        <h2 id="mp-mapa">{{ m.entrada.titulo }}</h2>
+        @if (m.entrada.resumen) { <p>{{ m.entrada.resumen }}</p> }
+        <div class="mapa-docs">
+          @for (d of m.docs; track d.archivo.id; let i = $index) {
+            @if (d.verEnPortal) {
+              <button type="button" [class]="i === 0 ? 'btn-mapa principal' : 'btn-mapa'" (click)="ver(d, m.docs)">
+                <app-icono-cms [valor]="i === 0 ? 'govco:sitemap' : 'govco:eye'" /> {{ d.etiqueta }}
+              </button>
+            } @else {
+              <a class="btn-mapa" [href]="d.archivo.url" download>{{ d.etiqueta }}</a>
+            }
+          }
+        </div>
+      </div>
+      <ul class="mapa-resumen" aria-label="Procesos por grupo">
+        @for (g of grupos(); track g.nombre) {
+          <li [class]="'c-' + g.color"><b>{{ g.procesos.length }}</b><span>{{ g.nombre }}</span></li>
+        }
+      </ul>
+    </section>
+  }
+
+  <!-- ===== Buscador y filtro ===== -->
+  <div class="barra">
+    <div class="buscador">
+      <label for="mp-buscar" class="visually-hidden">Buscar un proceso o documento</label>
+      <span class="b-icono" aria-hidden="true"><app-icono-cms valor="govco:search" /></span>
+      <input id="mp-buscar" type="search" autocomplete="off" placeholder="Buscar un proceso o documento. Ej. urgencias, formatos"
+             [value]="busqueda()" (input)="busqueda.set($any($event.target).value)" />
+    </div>
+    <nav class="filtros" aria-label="Filtrar por grupo de procesos">
+      <button type="button" [class.activo]="!grupo()" [attr.aria-pressed]="!grupo()" (click)="grupo.set('')">Todos <span>{{ totalProcesos() }}</span></button>
+      @for (g of grupos(); track g.nombre) {
+        <button type="button" [class]="'c-' + g.color" [class.activo]="grupo() === g.nombre" [attr.aria-pressed]="grupo() === g.nombre" (click)="elegir(g.nombre)">
+          {{ g.nombre }} <span>{{ g.procesos.length }}</span>
+        </button>
+      }
+    </nav>
+  </div>
+  <p class="estado" role="status" aria-live="polite">
+    {{ conteoVisible() }} {{ conteoVisible() === 1 ? 'proceso' : 'procesos' }} · {{ totalDocs() }} documentos en total
+    @if (busqueda().trim() || grupo()) { <button type="button" class="limpiar" (click)="limpiar()">Quitar filtros</button> }
+  </p>
+
+  <!-- ===== Procesos por grupo ===== -->
+  @for (g of visibles(); track g.nombre) {
+    <section [class]="'grupo c-' + g.color" [attr.aria-label]="g.nombre">
+      <h2 class="g-titulo"><span class="g-barra" aria-hidden="true"></span>{{ g.nombre }}</h2>
+      <ul class="tarjetas">
+        @for (p of g.procesos; track p.entrada.id) {
+          <li class="tarjeta">
+            <div class="t-top">
+              <span class="t-icono" aria-hidden="true"><app-icono-cms [valor]="p.icono" /></span>
+              <h3>{{ p.entrada.titulo }}</h3>
+            </div>
+            @if (p.entrada.resumen) {
+              <div class="objetivo">
+                <p class="obj-etq">Objetivo del proceso</p>
+                <p class="obj-texto" [id]="'obj-' + p.entrada.id" [class.abierto]="abiertos().has(p.entrada.id)">{{ p.entrada.resumen }}</p>
+                @if (p.entrada.resumen.length > 170) {
+                  <button type="button" class="leer" [attr.aria-expanded]="abiertos().has(p.entrada.id)" [attr.aria-controls]="'obj-' + p.entrada.id" (click)="alternar(p.entrada.id)">
+                    {{ abiertos().has(p.entrada.id) ? 'Leer menos' : 'Leer más' }}
+                  </button>
+                }
+              </div>
+            }
+            @if (p.docs.length) {
+              <ul class="docs" [attr.aria-label]="'Documentos de ' + p.entrada.titulo">
+                @for (d of p.docs; track d.archivo.id) {
+                  <li>
+                    @if (d.verEnPortal) {
+                      <button type="button" class="doc" (click)="ver(d, p.docs)">
+                        <span class="doc-ext" [attr.data-ext]="d.ext">{{ d.ext }}</span>
+                        <span class="doc-etq">{{ d.etiqueta }}</span>
+                      </button>
+                    } @else {
+                      <a class="doc" [href]="d.archivo.url" download>
+                        <span class="doc-ext" [attr.data-ext]="d.ext">{{ d.ext }}</span>
+                        <span class="doc-etq">{{ d.etiqueta }} <small>(descargar comprimido)</small></span>
+                      </a>
+                    }
+                  </li>
+                }
+              </ul>
+            }
+          </li>
+        }
+      </ul>
+    </section>
+  }
+
+  @if (!visibles().length) {
+    <div class="sin-resultados">
+      <p>No encontramos procesos con «{{ busqueda() }}».</p>
+      <button type="button" class="limpiar" (click)="limpiar()">Ver todos</button>
+    </div>
+  }
+
+  <!-- ===== Sistema de gestión de calidad ===== -->
+  @if (calidad().length && !busqueda().trim() && !grupo()) {
+    <section class="calidad" aria-labelledby="mp-calidad">
+      <h2 id="mp-calidad" class="g-titulo"><span class="g-barra" aria-hidden="true"></span>Sistema de gestión de calidad</h2>
+      <div class="cal-cuerpo">
+        @for (c of calidad(); track c.entrada.id) {
+          @if (lineas(c.entrada).length) {
+            <div class="cal-objetivos">
+              <h3><app-icono-cms [valor]="c.icono" /> {{ c.entrada.titulo }}</h3>
+              <ol>@for (l of lineas(c.entrada); track $index) { <li>{{ l }}</li> }</ol>
+            </div>
+          }
+        }
+        <div class="cal-lado">
+          @for (c of calidad(); track c.entrada.id) {
+            @if (c.docs.length && c.docs[0].archivo.tipo !== 'imagen') {
+              <div class="cal-docs">
+                <h3><app-icono-cms [valor]="c.icono" /> {{ c.entrada.titulo }}</h3>
+                @if (c.entrada.resumen) { <p>{{ c.entrada.resumen }}</p> }
+                <ul class="docs">
+                  @for (d of c.docs; track d.archivo.id) {
+                    <li>
+                      <button type="button" class="doc" (click)="ver(d, c.docs)">
+                        <span class="doc-ext" [attr.data-ext]="d.ext">{{ d.ext }}</span>
+                        <span class="doc-etq">{{ d.etiqueta }}</span>
+                      </button>
+                    </li>
+                  }
+                </ul>
+              </div>
+            }
+          }
+        </div>
+      </div>
+      @if (infografias().length) {
+        <h3 class="cal-sub">Cultura de la calidad</h3>
+        <ul class="galeria">
+          @for (d of infografias(); track d.archivo.id) {
+            <li>
+              <button type="button" (click)="ver(d, infografias())" [attr.aria-label]="'Ampliar infografía: ' + d.etiqueta">
+                <img [src]="d.archivo.url" [alt]="d.archivo.alt || d.etiqueta" loading="lazy" />
+                <span>{{ d.etiqueta }}</span>
+              </button>
+            </li>
+          }
+        </ul>
+      }
+    </section>
+  }
+</div>

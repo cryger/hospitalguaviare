@@ -1,0 +1,2281 @@
+{
+ "origen": "esehospitalguaviare.gov.co (Estructura orgánica y talento humano)",
+ "multimedia": [
+  {
+   "nombre": "MAPA DE PROCESOS 2024.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/MAPA%20DE%20PROCESOS%202024.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Mapa de procesos 2024",
+   "alt": null
+  },
+  {
+   "nombre": "Resolucion 1117.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resolucion%201117.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución 1117 de 2024 – Adopción del mapa de procesos",
+   "alt": null
+  },
+  {
+   "nombre": "CARACTERIZACION DEL PROCESO.docx",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/word/CARACTERIZACION%20DEL%20PROCESO.docx",
+   "tipo": "documento",
+   "mime": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+   "titulo": "Planeación estratégica – Caracterización del proceso",
+   "alt": null
+  },
+  {
+   "nombre": "procedimientos de planeacion.xls",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/excel/procedimientos%20de%20planeacion.xls",
+   "tipo": "documento",
+   "mime": "application/vnd.ms-excel",
+   "titulo": "Planeación estratégica – Procedimientos",
+   "alt": null
+  },
+  {
+   "nombre": "01 Formato Planeación Anual de Necesidades.xlsx",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/excel/01%20Formato%20Planeaci%C3%B3n%20Anual%20de%20Necesidades.xlsx",
+   "tipo": "documento",
+   "mime": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+   "titulo": "Planeación estratégica – Formatos",
+   "alt": null
+  },
+  {
+   "nombre": "CARACTERIZACION DE PROCESO ESTADISTICA.docx",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/word/CARACTERIZACION%20DE%20PROCESO%20ESTADISTICA.docx",
+   "tipo": "documento",
+   "mime": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+   "titulo": "Estadística – Caracterización del proceso",
+   "alt": null
+  },
+  {
+   "nombre": "PROCEDIMIENTOS DE ESTADISTICA.xlsx",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/excel/PROCEDIMIENTOS%20DE%20ESTADISTICA.xlsx",
+   "tipo": "documento",
+   "mime": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+   "titulo": "Estadística – Procedimientos",
+   "alt": null
+  },
+  {
+   "nombre": "MANUAL DE MANEJO DE HISTORIA CLINICA.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/MANUAL%20DE%20MANEJO%20DE%20HISTORIA%20CLINICA.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Estadística – Manual de manejo de historia clínica",
+   "alt": null
+  },
+  {
+   "nombre": "E-ET-FO-01 FORMATO DE SOLICITUD DE COPIA DE HISTORIA CLINICA.xlsx",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/excel/E-ET-FO-01%20FORMATO%20DE%20SOLICITUD%20DE%20COPIA%20DE%20HISTORIA%20CLINICA.xlsx",
+   "tipo": "documento",
+   "mime": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+   "titulo": "Estadística – Formatos",
+   "alt": null
+  },
+  {
+   "nombre": "CARACTERIZACION DEL PROCESO gbd.docx",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/word/CARACTERIZACION%20DEL%20PROCESO%20gbd.docx",
+   "tipo": "documento",
+   "mime": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+   "titulo": "Gobierno digital – Caracterización del proceso",
+   "alt": null
+  },
+  {
+   "nombre": "PROCEDIMIENTOS DE GOBIERNO EN LINEA.xlsx",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/excel/PROCEDIMIENTOS%20DE%20GOBIERNO%20EN%20LINEA.xlsx",
+   "tipo": "documento",
+   "mime": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+   "titulo": "Gobierno digital – Procedimientos",
+   "alt": null
+  },
+  {
+   "nombre": "FORMATO PARA LA INCLUSIÓN DE INFORMACION A LA PÁGINA WEB INSTITUCIONAL.xlsx",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/excel/FORMATO%20PARA%20LA%20INCLUSI%C3%93N%20DE%20INFORMACION%20A%20LA%20P%C3%81GINA%20WEB%20INSTITUCIONAL.xlsx",
+   "tipo": "documento",
+   "mime": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+   "titulo": "Gobierno digital – Formatos",
+   "alt": null
+  },
+  {
+   "nombre": "PROCEDIMIENTOS DE CALIDAD.xlsx",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/excel/PROCEDIMIENTOS%20DE%20CALIDAD.xlsx",
+   "tipo": "documento",
+   "mime": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+   "titulo": "Calidad – Procedimientos",
+   "alt": null
+  },
+  {
+   "nombre": "01 FICHA TECNICA DE INDICADORES.xlsx",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/excel/01%20FICHA%20TECNICA%20DE%20INDICADORES.xlsx",
+   "tipo": "documento",
+   "mime": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+   "titulo": "Calidad – Ficha técnica de indicadores",
+   "alt": null
+  },
+  {
+   "nombre": "001FORMATO DE PAGO PARCIAL A CONTRATISTAS.xlsx",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/excel/001FORMATO%20DE%20PAGO%20PARCIAL%20A%20CONTRATISTAS.xlsx",
+   "tipo": "documento",
+   "mime": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+   "titulo": "Calidad – Formatos",
+   "alt": null
+  },
+  {
+   "nombre": "PROCESOAMBIENTALHSJG 2018.docx",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/word/PROCESOAMBIENTALHSJG%202018.docx",
+   "tipo": "documento",
+   "mime": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+   "titulo": "Gestión ambiental – Caracterización del proceso",
+   "alt": null
+  },
+  {
+   "nombre": "PROCEDIMIENTOSHSJG.xls",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/excel/PROCEDIMIENTOSHSJG.xls",
+   "tipo": "documento",
+   "mime": "application/vnd.ms-excel",
+   "titulo": "Gestión ambiental – Procedimientos",
+   "alt": null
+  },
+  {
+   "nombre": "04-PROGRAMA-DE-RECICLAJE-7-3.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/04-PROGRAMA-DE-RECICLAJE-7-3.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Gestión ambiental – Programa de reciclaje",
+   "alt": null
+  },
+  {
+   "nombre": "02-PROGRAMA-DE-USO-EFICIENTE-Y-AHORRO-DE-ENERGIA-7.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/02-PROGRAMA-DE-USO-EFICIENTE-Y-AHORRO-DE-ENERGIA-7.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Gestión ambiental – Programa de uso eficiente y ahorro de energía",
+   "alt": null
+  },
+  {
+   "nombre": "03-PROGRAMA-PARA-EL-USO-EFICIENTE-Y-AHORRO-DE-AGUA-8.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/03-PROGRAMA-PARA-EL-USO-EFICIENTE-Y-AHORRO-DE-AGUA-8.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Gestión ambiental – Programa para el uso eficiente y ahorro de agua",
+   "alt": null
+  },
+  {
+   "nombre": "PROCEDIMIENTO PARA LA GESTION DEL CAMBIO DE SG-SST.xls",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/excel/PROCEDIMIENTO%20PARA%20LA%20GESTION%20DEL%20CAMBIO%20DE%20SG-SST.xls",
+   "tipo": "documento",
+   "mime": "application/vnd.ms-excel",
+   "titulo": "Seguridad y salud en el trabajo – Procedimientos",
+   "alt": null
+  },
+  {
+   "nombre": "01 FORMATO DE REPORTE DE INCIDENTE Y ACCIDENTE DE TRABAJO.xlsx",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/excel/01%20FORMATO%20DE%20REPORTE%20DE%20INCIDENTE%20Y%20ACCIDENTE%20DE%20TRABAJO.xlsx",
+   "tipo": "documento",
+   "mime": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+   "titulo": "Seguridad y salud en el trabajo – Formatos",
+   "alt": null
+  },
+  {
+   "nombre": "04 PROGRAMA DE ELEMENTOS DE PROTECCION PERSONAL.docx",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/word/04%20PROGRAMA%20DE%20ELEMENTOS%20DE%20PROTECCION%20PERSONAL.docx",
+   "tipo": "documento",
+   "mime": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+   "titulo": "Seguridad y salud en el trabajo – Programa de elementos de protección personal",
+   "alt": null
+  },
+  {
+   "nombre": "01 PROTOCOLO DE ACCIDENTE DE TRABAJO POR EXPOSICION AL RIESGO BIOLOGICO.docx",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/word/01%20PROTOCOLO%20DE%20ACCIDENTE%20DE%20TRABAJO%20POR%20EXPOSICION%20AL%20RIESGO%20BIOLOGICO.docx",
+   "tipo": "documento",
+   "mime": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+   "titulo": "Seguridad y salud en el trabajo – Protocolo de accidente de trabajo por riesgo biológico",
+   "alt": null
+  },
+  {
+   "nombre": "PROCEDIMIENTOS.rar",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/comprimido/PROCEDIMIENTOS.rar",
+   "tipo": "documento",
+   "mime": "application/vnd.rar",
+   "titulo": "Talento humano – Procedimientos",
+   "alt": null
+  },
+  {
+   "nombre": "02 FORMATO DE AUTORIZACION DE VERIFICACIÓN DE ANTECEDENTES.docx",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/word/02%20FORMATO%20DE%20AUTORIZACION%20DE%20VERIFICACI%C3%93N%20DE%20ANTECEDENTES.docx",
+   "tipo": "documento",
+   "mime": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+   "titulo": "Talento humano – Formatos",
+   "alt": null
+  },
+  {
+   "nombre": "PROCESOSURGENCIAS.docx",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/word/PROCESOSURGENCIAS.docx",
+   "tipo": "documento",
+   "mime": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+   "titulo": "Urgencias – Caracterización del proceso",
+   "alt": null
+  },
+  {
+   "nombre": "PROCEDIMIENTOS URGENCIAS.xls",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/excel/PROCEDIMIENTOS%20URGENCIAS.xls",
+   "tipo": "documento",
+   "mime": "application/vnd.ms-excel",
+   "titulo": "Urgencias – Procedimientos",
+   "alt": null
+  },
+  {
+   "nombre": "01 FORMATO DE VERIFICACION DE MEDICAMENTOS Y DISPOSITIVOS MEDICOS A KITS DE RESPUESTA RAPIDA.xlsx",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/excel/01%20FORMATO%20DE%20VERIFICACION%20DE%20MEDICAMENTOS%20Y%20DISPOSITIVOS%20MEDICOS%20A%20KITS%20DE%20RESPUESTA%20RAPIDA.xlsx",
+   "tipo": "documento",
+   "mime": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+   "titulo": "Urgencias – Formatos",
+   "alt": null
+  },
+  {
+   "nombre": "protocolo urgencia.rar",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/comprimido/protocolo%20urgencia.rar",
+   "tipo": "documento",
+   "mime": "application/vnd.rar",
+   "titulo": "Urgencias – Protocolos",
+   "alt": null
+  },
+  {
+   "nombre": "PROCESO UMI.docx",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/word/PROCESO%20UMI.docx",
+   "tipo": "documento",
+   "mime": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+   "titulo": "Unidad materno infantil – Caracterización del proceso",
+   "alt": null
+  },
+  {
+   "nombre": "PROCEDIMIENTOS UMI.xls",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/excel/PROCEDIMIENTOS%20UMI.xls",
+   "tipo": "documento",
+   "mime": "application/vnd.ms-excel",
+   "titulo": "Unidad materno infantil – Procedimientos",
+   "alt": null
+  },
+  {
+   "nombre": "UMI.rar",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/comprimido/UMI.rar",
+   "tipo": "documento",
+   "mime": "application/vnd.rar",
+   "titulo": "Unidad materno infantil – Formatos",
+   "alt": null
+  },
+  {
+   "nombre": "protocolos UMI.rar",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/comprimido/protocolos%20UMI.rar",
+   "tipo": "documento",
+   "mime": "application/vnd.rar",
+   "titulo": "Unidad materno infantil – Protocolos",
+   "alt": null
+  },
+  {
+   "nombre": "Listas de chequo.rar",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/comprimido/Listas%20de%20chequo.rar",
+   "tipo": "documento",
+   "mime": "application/vnd.rar",
+   "titulo": "Unidad materno infantil – Listas de chequeo",
+   "alt": null
+  },
+  {
+   "nombre": "PROCESO HOSPITALIZADOS.docx",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/word/PROCESO%20HOSPITALIZADOS.docx",
+   "tipo": "documento",
+   "mime": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+   "titulo": "Hospitalización – Caracterización del proceso",
+   "alt": null
+  },
+  {
+   "nombre": "PROCEDIMIENTOS HOSPITALIZACIÓN.xls",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/excel/PROCEDIMIENTOS%20HOSPITALIZACI%C3%93N.xls",
+   "tipo": "documento",
+   "mime": "application/vnd.ms-excel",
+   "titulo": "Hospitalización – Procedimientos",
+   "alt": null
+  },
+  {
+   "nombre": "PROCESO CIRUGIA.docx",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/word/PROCESO%20CIRUGIA.docx",
+   "tipo": "documento",
+   "mime": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+   "titulo": "Cirugía – Caracterización del proceso",
+   "alt": null
+  },
+  {
+   "nombre": "PROCEDIMIENTOS CIRUGIA.xls",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/excel/PROCEDIMIENTOS%20CIRUGIA.xls",
+   "tipo": "documento",
+   "mime": "application/vnd.ms-excel",
+   "titulo": "Cirugía – Procedimientos",
+   "alt": null
+  },
+  {
+   "nombre": "formatos ciru.rar",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/comprimido/formatos%20ciru.rar",
+   "tipo": "documento",
+   "mime": "application/vnd.rar",
+   "titulo": "Cirugía – Formatos",
+   "alt": null
+  },
+  {
+   "nombre": "protocolos ciru.rar",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/comprimido/protocolos%20ciru.rar",
+   "tipo": "documento",
+   "mime": "application/vnd.rar",
+   "titulo": "Cirugía – Protocolos",
+   "alt": null
+  },
+  {
+   "nombre": "guias ciru.rar",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/comprimido/guias%20ciru.rar",
+   "tipo": "documento",
+   "mime": "application/vnd.rar",
+   "titulo": "Cirugía – Guías",
+   "alt": null
+  },
+  {
+   "nombre": "listas de chequeo ciru.rar",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/comprimido/listas%20de%20chequeo%20ciru.rar",
+   "tipo": "documento",
+   "mime": "application/vnd.rar",
+   "titulo": "Cirugía – Listas de chequeo",
+   "alt": null
+  },
+  {
+   "nombre": "01 INSTRUCTIVO DE MANEJO DE MUESTRAS PATOLOGICAS.docx",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/word/01%20INSTRUCTIVO%20DE%20MANEJO%20DE%20MUESTRAS%20PATOLOGICAS.docx",
+   "tipo": "documento",
+   "mime": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+   "titulo": "Cirugía – Instructivo de manejo de muestras patológicas",
+   "alt": null
+  },
+  {
+   "nombre": "recomendaciones ciru.rar",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/comprimido/recomendaciones%20ciru.rar",
+   "tipo": "documento",
+   "mime": "application/vnd.rar",
+   "titulo": "Cirugía – Recomendaciones",
+   "alt": null
+  },
+  {
+   "nombre": "concentimientos informados ciru.rar",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/comprimido/concentimientos%20informados%20ciru.rar",
+   "tipo": "documento",
+   "mime": "application/vnd.rar",
+   "titulo": "Cirugía – Consentimientos informados",
+   "alt": null
+  },
+  {
+   "nombre": "PROCESOESTERILIZACIONHSJGOK2013.docx",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/word/PROCESOESTERILIZACIONHSJGOK2013.docx",
+   "tipo": "documento",
+   "mime": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+   "titulo": "Esterilización – Caracterización del proceso",
+   "alt": null
+  },
+  {
+   "nombre": "MAPAPROCESOSYPROCEDIMIENTOS ESTERILIZACIÓNJULIO2013.xlsx",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/excel/MAPAPROCESOSYPROCEDIMIENTOS%20ESTERILIZACI%C3%93NJULIO2013.xlsx",
+   "tipo": "documento",
+   "mime": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+   "titulo": "Esterilización – Procedimientos",
+   "alt": null
+  },
+  {
+   "nombre": "formatos esterilizacion.rar",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/comprimido/formatos%20esterilizacion.rar",
+   "tipo": "documento",
+   "mime": "application/vnd.rar",
+   "titulo": "Esterilización – Formatos",
+   "alt": null
+  },
+  {
+   "nombre": "Protocolos ezterilizacion.rar",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/comprimido/Protocolos%20ezterilizacion.rar",
+   "tipo": "documento",
+   "mime": "application/vnd.rar",
+   "titulo": "Esterilización – Protocolos",
+   "alt": null
+  },
+  {
+   "nombre": "01 MANUAL DE BUENAS PRACTICAS DE ESTERILIZACION.docx",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/word/01%20MANUAL%20DE%20BUENAS%20PRACTICAS%20DE%20ESTERILIZACION.docx",
+   "tipo": "documento",
+   "mime": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+   "titulo": "Esterilización – Manual de buenas prácticas de esterilización",
+   "alt": null
+  },
+  {
+   "nombre": "PROCESO CONSULTA EXTERNA.docx",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/word/PROCESO%20CONSULTA%20EXTERNA.docx",
+   "tipo": "documento",
+   "mime": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+   "titulo": "Consulta externa – Caracterización del proceso",
+   "alt": null
+  },
+  {
+   "nombre": "PROCEDIMIENTOS DE CONSULTA EXTERNA.xls",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/excel/PROCEDIMIENTOS%20DE%20CONSULTA%20EXTERNA.xls",
+   "tipo": "documento",
+   "mime": "application/vnd.ms-excel",
+   "titulo": "Consulta externa – Procedimientos",
+   "alt": null
+  },
+  {
+   "nombre": "01 FORMATO DE PRECONSULTA.xlsx",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/excel/01%20FORMATO%20DE%20PRECONSULTA.xlsx",
+   "tipo": "documento",
+   "mime": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+   "titulo": "Consulta externa – Formato de preconsulta",
+   "alt": null
+  },
+  {
+   "nombre": "protocolos consulta externa.rar",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/comprimido/protocolos%20consulta%20externa.rar",
+   "tipo": "documento",
+   "mime": "application/vnd.rar",
+   "titulo": "Consulta externa – Protocolos",
+   "alt": null
+  },
+  {
+   "nombre": "01 MANUAL DE PROCEDIMIENTOS DE ECOGRAFIA.docx",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/word/01%20MANUAL%20DE%20PROCEDIMIENTOS%20DE%20ECOGRAFIA.docx",
+   "tipo": "documento",
+   "mime": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+   "titulo": "Consulta externa – Manual de procedimientos de ecografía",
+   "alt": null
+  },
+  {
+   "nombre": "INSTRUCTIVO DE CONSTRATACION DE ESPECIALISTAS.xlsx",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/excel/INSTRUCTIVO%20DE%20CONSTRATACION%20DE%20ESPECIALISTAS.xlsx",
+   "tipo": "documento",
+   "mime": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+   "titulo": "Consulta externa – Instructivo de contratación de especialistas",
+   "alt": null
+  },
+  {
+   "nombre": "02 RECOMENDACIONES PARA TOMA DE CISTOSCOPIA.xlsx",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/excel/02%20RECOMENDACIONES%20PARA%20TOMA%20DE%20CISTOSCOPIA.xlsx",
+   "tipo": "documento",
+   "mime": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+   "titulo": "Consulta externa – Recomendaciones para toma de cistoscopia",
+   "alt": null
+  },
+  {
+   "nombre": "01 SUBPROGRMA DE SEGURIDAD DEL PACIENTE DE CONSULTA EXTERNA.docx",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/word/01%20SUBPROGRMA%20DE%20SEGURIDAD%20DEL%20PACIENTE%20DE%20CONSULTA%20EXTERNA.docx",
+   "tipo": "documento",
+   "mime": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+   "titulo": "Consulta externa – Subprograma de seguridad del paciente",
+   "alt": null
+  },
+  {
+   "nombre": "PROCESOLABORATORIOCLÍNICO10-2018.doc",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/word/PROCESOLABORATORIOCL%C3%8DNICO10-2018.doc",
+   "tipo": "documento",
+   "mime": "application/msword",
+   "titulo": "Laboratorio clínico – Caracterización del proceso",
+   "alt": null
+  },
+  {
+   "nombre": "PROCEDIMIENTOSLABORATORIOCLINICO - 2018.xls",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/excel/PROCEDIMIENTOSLABORATORIOCLINICO%20-%202018.xls",
+   "tipo": "documento",
+   "mime": "application/vnd.ms-excel",
+   "titulo": "Laboratorio clínico – Procedimientos",
+   "alt": null
+  },
+  {
+   "nombre": "gestion de laboratorio clinico.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/gestion%20de%20laboratorio%20clinico.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Laboratorio clínico – Caracterización del proceso (pdf)",
+   "alt": null
+  },
+  {
+   "nombre": "mapa de procesos laboratorio clinico.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/mapa%20de%20procesos%20laboratorio%20clinico.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Laboratorio clínico – Mapa de procedimientos",
+   "alt": null
+  },
+  {
+   "nombre": "PROCESO SERVICIO TRANSFUSIONAL2018.docx",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/word/PROCESO%20SERVICIO%20TRANSFUSIONAL2018.docx",
+   "tipo": "documento",
+   "mime": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+   "titulo": "Servicio transfusional – Caracterización del proceso",
+   "alt": null
+  },
+  {
+   "nombre": "SERVICIO TRANSFUSIONALHSJG - 2018.xls",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/excel/SERVICIO%20TRANSFUSIONALHSJG%20-%202018.xls",
+   "tipo": "documento",
+   "mime": "application/vnd.ms-excel",
+   "titulo": "Servicio transfusional – Procedimientos",
+   "alt": null
+  },
+  {
+   "nombre": "gestion de servicio transfusional.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/gestion%20de%20servicio%20transfusional.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Servicio transfusional – Caracterización del proceso (pdf)",
+   "alt": null
+  },
+  {
+   "nombre": "mapa de procesos servicio transfusional.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/mapa%20de%20procesos%20servicio%20transfusional.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Servicio transfusional – Mapa de procedimientos",
+   "alt": null
+  },
+  {
+   "nombre": "MACROPROCESO TERAPIA FÍSICA.docx",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/word/MACROPROCESO%20TERAPIA%20F%C3%8DSICA.docx",
+   "tipo": "documento",
+   "mime": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+   "titulo": "Terapia física – Caracterización del proceso",
+   "alt": null
+  },
+  {
+   "nombre": "PROCEDIMIENTOS TERAPIA FISICA ori.xls",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/excel/PROCEDIMIENTOS%20TERAPIA%20FISICA%20ori.xls",
+   "tipo": "documento",
+   "mime": "application/vnd.ms-excel",
+   "titulo": "Terapia física – Procedimientos",
+   "alt": null
+  },
+  {
+   "nombre": "protocolo terapia.rar",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/comprimido/protocolo%20terapia.rar",
+   "tipo": "documento",
+   "mime": "application/vnd.rar",
+   "titulo": "Terapia física – Protocolos",
+   "alt": null
+  },
+  {
+   "nombre": "gestion de atencion del paciente en terapia fisica.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/gestion%20de%20atencion%20del%20paciente%20en%20terapia%20fisica.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Terapia física – Caracterización del proceso (pdf)",
+   "alt": null
+  },
+  {
+   "nombre": "mapa de procesos terapia fisica.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/mapa%20de%20procesos%20terapia%20fisica.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Terapia física – Mapa de procedimientos",
+   "alt": null
+  },
+  {
+   "nombre": "PROCESO CONTABILIDAD caracterizacion ACTUAL 2018.doc",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/word/PROCESO%20CONTABILIDAD%20caracterizacion%20ACTUAL%202018.doc",
+   "tipo": "documento",
+   "mime": "application/msword",
+   "titulo": "Contabilidad – Caracterización del proceso",
+   "alt": null
+  },
+  {
+   "nombre": "PROCEDIMIENTOSCONTABILIDADHSJG ACTUALIZADO 31-10.xls",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/excel/PROCEDIMIENTOSCONTABILIDADHSJG%20ACTUALIZADO%2031-10.xls",
+   "tipo": "documento",
+   "mime": "application/vnd.ms-excel",
+   "titulo": "Contabilidad – Procedimientos",
+   "alt": null
+  },
+  {
+   "nombre": "Formatos Conta.rar",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/comprimido/Formatos%20Conta.rar",
+   "tipo": "documento",
+   "mime": "application/vnd.rar",
+   "titulo": "Contabilidad – Formatos",
+   "alt": null
+  },
+  {
+   "nombre": "PROCESO TESORERIA.docx",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/word/PROCESO%20TESORERIA.docx",
+   "tipo": "documento",
+   "mime": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+   "titulo": "Tesorería – Caracterización del proceso",
+   "alt": null
+  },
+  {
+   "nombre": "PROCEDIMIENTOS TESORERIA.xlsx",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/excel/PROCEDIMIENTOS%20TESORERIA.xlsx",
+   "tipo": "documento",
+   "mime": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+   "titulo": "Tesorería – Procedimientos",
+   "alt": null
+  },
+  {
+   "nombre": "PROCESOPRESUPUESTOHSJGOK (1).docx",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/word/PROCESOPRESUPUESTOHSJGOK%20(1).docx",
+   "tipo": "documento",
+   "mime": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+   "titulo": "Presupuesto – Caracterización del proceso",
+   "alt": null
+  },
+  {
+   "nombre": "PROCEDIMIENTOSPRESUPUESTOHSJGOK (1).xls",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/excel/PROCEDIMIENTOSPRESUPUESTOHSJGOK%20(1).xls",
+   "tipo": "documento",
+   "mime": "application/vnd.ms-excel",
+   "titulo": "Presupuesto – Procedimientos",
+   "alt": null
+  },
+  {
+   "nombre": "PROCESO DE CARTERA.docx",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/word/PROCESO%20DE%20CARTERA.docx",
+   "tipo": "documento",
+   "mime": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+   "titulo": "Cartera – Caracterización del proceso",
+   "alt": null
+  },
+  {
+   "nombre": "MAPA DE PROCESOS DE CRATERA.xlsx",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/excel/MAPA%20DE%20PROCESOS%20DE%20CRATERA.xlsx",
+   "tipo": "documento",
+   "mime": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+   "titulo": "Cartera – Procedimientos",
+   "alt": null
+  },
+  {
+   "nombre": "CARACTERIZACION DE PROCESO actual.docx",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/word/CARACTERIZACION%20DE%20PROCESO%20actual.docx",
+   "tipo": "documento",
+   "mime": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+   "titulo": "Costos – Caracterización del proceso",
+   "alt": null
+  },
+  {
+   "nombre": "Procedimientos del área de costos Carlos Javier Arias.xlsx",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/excel/Procedimientos%20del%20%C3%A1rea%20de%20costos%20Carlos%20Javier%20Arias.xlsx",
+   "tipo": "documento",
+   "mime": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+   "titulo": "Costos – Procedimientos",
+   "alt": null
+  },
+  {
+   "nombre": "CARACTERIZACION DE ACTIVOS FIJOS.docx",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/word/CARACTERIZACION%20DE%20ACTIVOS%20FIJOS.docx",
+   "tipo": "documento",
+   "mime": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+   "titulo": "Activos fijos – Caracterización del proceso",
+   "alt": null
+  },
+  {
+   "nombre": "PROCEDIMIENTOS DE ACTIVOS FIJOS.xls",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/excel/PROCEDIMIENTOS%20DE%20ACTIVOS%20FIJOS.xls",
+   "tipo": "documento",
+   "mime": "application/vnd.ms-excel",
+   "titulo": "Activos fijos – Procedimientos",
+   "alt": null
+  },
+  {
+   "nombre": "01 MANUAL DE MANEJO, CONTROL, CUSTODÍA Y BAJA DE LA PROPIEDAD, PLANTA Y EQUIPO.doc",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/word/01%20MANUAL%20DE%20MANEJO,%20CONTROL,%20CUSTOD%C3%8DA%20Y%20BAJA%20DE%20LA%20PROPIEDAD,%20PLANTA%20Y%20EQUIPO.doc",
+   "tipo": "documento",
+   "mime": "application/msword",
+   "titulo": "Activos fijos – Manual de manejo, control, custodia y baja de la propiedad, planta y equipo",
+   "alt": null
+  },
+  {
+   "nombre": "01 FORMATO UNICO PARA EL MOVIMIENTO DE ACTIVOS.xlsx",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/excel/01%20FORMATO%20UNICO%20PARA%20EL%20MOVIMIENTO%20DE%20ACTIVOS.xlsx",
+   "tipo": "documento",
+   "mime": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+   "titulo": "Activos fijos – Formatos",
+   "alt": null
+  },
+  {
+   "nombre": "CARACTERIZACION DE ALMACEN Y SUMINISTROS.docx",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/word/CARACTERIZACION%20DE%20ALMACEN%20Y%20SUMINISTROS.docx",
+   "tipo": "documento",
+   "mime": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+   "titulo": "Almacén y suministros – Caracterización del proceso",
+   "alt": null
+  },
+  {
+   "nombre": "PROCEDIMIENTOS DE ALMACEN Y SUMINISTROS.xls",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/excel/PROCEDIMIENTOS%20DE%20ALMACEN%20Y%20SUMINISTROS.xls",
+   "tipo": "documento",
+   "mime": "application/vnd.ms-excel",
+   "titulo": "Almacén y suministros – Procedimientos",
+   "alt": null
+  },
+  {
+   "nombre": "A-SA-FO-01 FORMATO DE SOLICITUD DE PEDIDO.xlsx",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/excel/A-SA-FO-01%20FORMATO%20DE%20SOLICITUD%20DE%20PEDIDO.xlsx",
+   "tipo": "documento",
+   "mime": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+   "titulo": "Almacén y suministros – Formatos",
+   "alt": null
+  },
+  {
+   "nombre": "PROCESO DE GESTION DOCUMENTAL.docx",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/word/PROCESO%20DE%20GESTION%20DOCUMENTAL.docx",
+   "tipo": "documento",
+   "mime": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+   "titulo": "Gestión documental – Caracterización del proceso",
+   "alt": null
+  },
+  {
+   "nombre": "PROCEDIMIENTOS DE GESTION DOCUMENTAL.xls",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/excel/PROCEDIMIENTOS%20DE%20GESTION%20DOCUMENTAL.xls",
+   "tipo": "documento",
+   "mime": "application/vnd.ms-excel",
+   "titulo": "Gestión documental – Procedimientos",
+   "alt": null
+  },
+  {
+   "nombre": "PROCEDIMIENTOS DE JURIDICA.xls",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/excel/PROCEDIMIENTOS%20DE%20JURIDICA.xls",
+   "tipo": "documento",
+   "mime": "application/vnd.ms-excel",
+   "titulo": "Jurídica y contratación – Procedimientos",
+   "alt": null
+  },
+  {
+   "nombre": "Formatos juri.rar",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/comprimido/Formatos%20juri.rar",
+   "tipo": "documento",
+   "mime": "application/vnd.rar",
+   "titulo": "Jurídica y contratación – Formatos",
+   "alt": null
+  },
+  {
+   "nombre": "listas juridi.rar",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/comprimido/listas%20juridi.rar",
+   "tipo": "documento",
+   "mime": "application/vnd.rar",
+   "titulo": "Jurídica y contratación – Listas de chequeo",
+   "alt": null
+  },
+  {
+   "nombre": "PROCESOS DE CID.docx",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/word/PROCESOS%20DE%20CID.docx",
+   "tipo": "documento",
+   "mime": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+   "titulo": "Control interno disciplinario – Caracterización del proceso",
+   "alt": null
+  },
+  {
+   "nombre": "PROCEDIMIENTOS DE CID.xlsx",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/excel/PROCEDIMIENTOS%20DE%20CID.xlsx",
+   "tipo": "documento",
+   "mime": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+   "titulo": "Control interno disciplinario – Procedimientos",
+   "alt": null
+  },
+  {
+   "nombre": "gestion de informacion y atencion al usuario.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/gestion%20de%20informacion%20y%20atencion%20al%20usuario.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Sistema de información y atención al usuario – Caracterización del proceso",
+   "alt": null
+  },
+  {
+   "nombre": "mapa de procesos sistema de informacion y atencion al usuario.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/mapa%20de%20procesos%20sistema%20de%20informacion%20y%20atencion%20al%20usuario.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Sistema de información y atención al usuario – Mapa de procedimientos",
+   "alt": null
+  },
+  {
+   "nombre": "gestion de epidemiologia.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/gestion%20de%20epidemiologia.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Gestión de información epidemiológica – Caracterización del proceso",
+   "alt": null
+  },
+  {
+   "nombre": "gestion de epidemiologia (1).pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/gestion%20de%20epidemiologia%20(1).pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Gestión de información epidemiológica – Procedimientos",
+   "alt": null
+  },
+  {
+   "nombre": "gestion de epidemiologia (2).pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/gestion%20de%20epidemiologia%20(2).pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Gestión de información epidemiológica – Caracterización del proceso (versión 2)",
+   "alt": null
+  },
+  {
+   "nombre": "gestion de mantenimiento hospitalario.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/gestion%20de%20mantenimiento%20hospitalario.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Gestión de mantenimiento hospitalario – Caracterización del proceso",
+   "alt": null
+  },
+  {
+   "nombre": "gestion de mantenimiento hospitalario (1).pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/gestion%20de%20mantenimiento%20hospitalario%20(1).pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Gestión de mantenimiento hospitalario – Caracterización del proceso (versión 2)",
+   "alt": null
+  },
+  {
+   "nombre": "gestion de suministros.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/gestion%20de%20suministros.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Gestión de suministros – Caracterización del proceso",
+   "alt": null
+  },
+  {
+   "nombre": "mapa de procesos suministros.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/mapa%20de%20procesos%20suministros.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Gestión de suministros – Mapa de procedimientos",
+   "alt": null
+  },
+  {
+   "nombre": "gestion de suministros (1).pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/gestion%20de%20suministros%20(1).pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Gestión de suministros – Caracterización del proceso (versión 2)",
+   "alt": null
+  },
+  {
+   "nombre": "mapa de procesos suministros (1).pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/mapa%20de%20procesos%20suministros%20(1).pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Gestión de suministros – Mapa de procedimientos (versión 2)",
+   "alt": null
+  },
+  {
+   "nombre": "gestion de recursos fisicos.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/gestion%20de%20recursos%20fisicos.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Gestión de recursos físicos – Caracterización del proceso",
+   "alt": null
+  },
+  {
+   "nombre": "mapa de procesos recursos fisicos.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/mapa%20de%20procesos%20recursos%20fisicos.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Gestión de recursos físicos – Mapa de procedimientos",
+   "alt": null
+  },
+  {
+   "nombre": "mapa de procesos recursos fisicos (1).pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/mapa%20de%20procesos%20recursos%20fisicos%20(1).pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Gestión de recursos físicos – Mapa de procedimientos (versión 2)",
+   "alt": null
+  },
+  {
+   "nombre": "gestion de auditoria, cartera y facturacion (1).pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/gestion%20de%20auditoria,%20cartera%20y%20facturacion%20(1).pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Gestión de auditoría, cartera y facturación – Caracterización del proceso",
+   "alt": null
+  },
+  {
+   "nombre": "mapa de procesos auditoria, cartera y facturacion (1).pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/mapa%20de%20procesos%20auditoria,%20cartera%20y%20facturacion%20(1).pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Gestión de auditoría, cartera y facturación – Mapa de procedimientos",
+   "alt": null
+  },
+  {
+   "nombre": "mapa de procesos auditoria, cartera y facturacion (2).pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/mapa%20de%20procesos%20auditoria,%20cartera%20y%20facturacion%20(2).pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Gestión de auditoría, cartera y facturación – Mapa de procedimientos (versión 2)",
+   "alt": null
+  },
+  {
+   "nombre": "gestion de trabajo social.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/gestion%20de%20trabajo%20social.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Gestión de trabajo social – Caracterización del proceso",
+   "alt": null
+  },
+  {
+   "nombre": "mapa de procesos trabajo social.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/mapa%20de%20procesos%20trabajo%20social.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Gestión de trabajo social – Mapa de procedimientos",
+   "alt": null
+  },
+  {
+   "nombre": "gestion de imagenes disagnosticas.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/gestion%20de%20imagenes%20disagnosticas.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Gestión de imágenes diagnósticas – Caracterización del proceso",
+   "alt": null
+  },
+  {
+   "nombre": "mapa de procesos imagenes diagnosticas.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/mapa%20de%20procesos%20imagenes%20diagnosticas.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Gestión de imágenes diagnósticas – Mapa de procedimientos",
+   "alt": null
+  },
+  {
+   "nombre": "gestion de medicamentos y dispositivos medicos.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/gestion%20de%20medicamentos%20y%20dispositivos%20medicos.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Gestión de medicamentos y dispositivos médicos – Caracterización del proceso",
+   "alt": null
+  },
+  {
+   "nombre": "mapa de procesos de medicamentos y dispositivos medicos.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/mapa%20de%20procesos%20de%20medicamentos%20y%20dispositivos%20medicos.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Gestión de medicamentos y dispositivos médicos – Mapa de procedimientos",
+   "alt": null
+  },
+  {
+   "nombre": "gestion de muestras patologicas.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/gestion%20de%20muestras%20patologicas.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Gestión de muestras patológicas – Caracterización del proceso",
+   "alt": null
+  },
+  {
+   "nombre": "mapa de procesos muestras patologicas.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/mapa%20de%20procesos%20muestras%20patologicas.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Gestión de muestras patológicas – Mapa de procedimientos",
+   "alt": null
+  },
+  {
+   "nombre": "gestion de referencia y contrarreferencia de pacientes.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/gestion%20de%20referencia%20y%20contrarreferencia%20de%20pacientes.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Gestión de referencia y contrarreferencia de pacientes – Caracterización del proceso",
+   "alt": null
+  },
+  {
+   "nombre": "gestion de atencion del paciente en terapia respiratoria.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/gestion%20de%20atencion%20del%20paciente%20en%20terapia%20respiratoria.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Atención del paciente en terapia respiratoria – Caracterización del proceso",
+   "alt": null
+  },
+  {
+   "nombre": "mapa de procesos terapia respiratoria.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/mapa%20de%20procesos%20terapia%20respiratoria.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Atención del paciente en terapia respiratoria – Mapa de procedimientos",
+   "alt": null
+  },
+  {
+   "nombre": "INFORME-APRENDIZAJE-ORGANIZACIONAL-PAMEC-2020-ok.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/INFORME-APRENDIZAJE-ORGANIZACIONAL-PAMEC-2020-ok.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Informe de aprendizaje organizacional PAMEC 2020",
+   "alt": null
+  },
+  {
+   "nombre": "RESOLUCION 335 de 2019 PAMEC.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/RESOLUCION%20335%20de%202019%20PAMEC.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución 0335 de 2019 – Metodología para la autoevaluación de los estándares de acreditación",
+   "alt": null
+  },
+  {
+   "nombre": "Atributos de la Calidad.jpg",
+   "url": "https://esehospitalguaviare.gov.co/resourses/imgCalidad/Atributos%20de%20la%20Calidad.jpg",
+   "tipo": "imagen",
+   "mime": "image/jpeg",
+   "titulo": "Atributos de la calidad",
+   "alt": "Atributos de la calidad"
+  },
+  {
+   "nombre": "principios de la calidad.png",
+   "url": "https://esehospitalguaviare.gov.co/resourses/imgCalidad/principios%20de%20la%20calidad.png",
+   "tipo": "imagen",
+   "mime": "image/png",
+   "titulo": "Principios de la calidad",
+   "alt": "Principios de la calidad"
+  },
+  {
+   "nombre": "QUE ES AUDITORIA.jpg",
+   "url": "https://esehospitalguaviare.gov.co/resourses/imgCalidad/QUE%20ES%20AUDITORIA.jpg",
+   "tipo": "imagen",
+   "mime": "image/jpeg",
+   "titulo": "Tips para el mejoramiento de la calidad: ¿qué es auditoría?",
+   "alt": "Tips para el mejoramiento de la calidad: ¿qué es auditoría?"
+  },
+  {
+   "nombre": "DESDOBLAMIENTO DE LA CALIDAD.jpg",
+   "url": "https://esehospitalguaviare.gov.co/resourses/imgCalidad/DESDOBLAMIENTO%20DE%20LA%20CALIDAD.jpg",
+   "tipo": "imagen",
+   "mime": "image/jpeg",
+   "titulo": "Desdoblamiento de la calidad",
+   "alt": "Desdoblamiento de la calidad"
+  },
+  {
+   "nombre": "EFECTOS DE NO CONTAR CON PROCESOS ESTANDARIZADOS.jpg",
+   "url": "https://esehospitalguaviare.gov.co/resourses/imgCalidad/EFECTOS%20DE%20NO%20CONTAR%20CON%20PROCESOS%20ESTANDARIZADOS.jpg",
+   "tipo": "imagen",
+   "mime": "image/jpeg",
+   "titulo": "Efectos de no contar con procesos estandarizados",
+   "alt": "Efectos de no contar con procesos estandarizados"
+  },
+  {
+   "nombre": "Directorio servidores.xlsx",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/excel/Directorio%20servidores.xlsx",
+   "tipo": "documento",
+   "mime": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+   "titulo": "Directorio de servidores públicos, empleados y contratistas (enero de 2023)",
+   "alt": null
+  }
+ ],
+ "entradas": [
+  {
+   "paginaSlug": "mision-vision-funciones-y-deberes",
+   "slug": "funciones",
+   "titulo": "Funciones",
+   "resumen": "Funciones de la E.S.E. Hospital San José del Guaviare.",
+   "contenido": "<ul><li>Contribuir al desarrollo social del país mejorando la calidad de la vida y reduciendo la morbilidad, la mortalidad, la incapacidad, el dolor y la angustia evitables en la población usuaria, en la medida en que esto esté a su alcance.</li><li>Producir servicios de salud eficientes y efectivos, que cumplan con las normas de calidad establecidas, de acuerdo con la reglamentación que se expida para tal propósito.</li><li>Prestar los servicios de salud que la población requiera y que la Empresa, de acuerdo con su desarrollo y recursos disponibles, pueda ofrecer.</li><li>Ofrecer a las Empresas Promotoras de Salud y demás personas naturales o jurídicas que lo demanden servicios y paquetes de servicios a tarifas competitivas en el mercado.</li><li>Satisfacer los requerimientos del entorno, adecuando continuamente sus servicios y funcionamiento.</li><li>Garantizar los mecanismos de participación ciudadana y comunitaria establecidos por la ley y los reglamentos.</li><li>Prestar servicios de salud que satisfagan de manera óptima las necesidades y expectativas de la población en relación con la promoción, el fomento y la conservación de la salud y la prevención, tratamiento y rehabilitación de la enfermedad.</li><li>Satisfacer las necesidades esenciales y secundarias de salud de la población usuaria a través de acciones gremiales, organizativas, técnico-científicas y técnico-administrativas.</li></ul>",
+   "tipo": "articulo",
+   "orden": 10,
+   "soloSiVacia": false,
+   "fecha": null,
+   "adjuntos": [],
+   "destacada": null,
+   "categoria": "Funciones",
+   "icono": "govco:clipboard-list"
+  },
+  {
+   "paginaSlug": "mision-vision-funciones-y-deberes",
+   "slug": "deberes",
+   "titulo": "Deberes",
+   "resumen": "Objeto y deberes de la E.S.E. Hospital San José del Guaviare.",
+   "contenido": "<ul><li>El objeto de la E.S.E. Hospital San José del Guaviare será la prestación de los servicios de salud, entendidos como un servicio público a cargo del Estado y como parte integrante del Sistema de Seguridad Social en Salud; en consecuencia, en desarrollo de este objeto, adelantará acciones de promoción, prevención, tratamiento y rehabilitación de la salud.</li></ul>",
+   "tipo": "articulo",
+   "orden": 20,
+   "soloSiVacia": false,
+   "fecha": null,
+   "adjuntos": [],
+   "destacada": null,
+   "categoria": "Deberes",
+   "icono": "govco:gavel"
+  },
+  {
+   "paginaSlug": "mapas-y-cartas-descriptivas-de-los-procesos",
+   "slug": "mapa-de-procesos-2024",
+   "titulo": "Mapa de procesos 2024",
+   "resumen": "Mapa de procesos institucional adoptado mediante la Resolución 1117 de 2024: procesos estratégicos, misionales y de apoyo.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 10,
+   "soloSiVacia": false,
+   "fecha": "2025-08-11T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/MAPA%20DE%20PROCESOS%202024.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resolucion%201117.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Mapa de procesos",
+   "icono": "govco:sitemap"
+  },
+  {
+   "paginaSlug": "mapas-y-cartas-descriptivas-de-los-procesos",
+   "slug": "proceso-planeacion-estrategica",
+   "titulo": "Planeación estratégica",
+   "resumen": "Orientar el cumplimiento de la misión, visión y objetivos estratégicos de la ESE Hospital San José del Guaviare, por medio de la formulación de herramientas y estrategias para la coordinación, medición, seguimiento y mejora continua de las metas e indicadores formulados.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 20,
+   "soloSiVacia": false,
+   "fecha": null,
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/word/CARACTERIZACION%20DEL%20PROCESO.docx",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/excel/procedimientos%20de%20planeacion.xls",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/excel/01%20Formato%20Planeaci%C3%B3n%20Anual%20de%20Necesidades.xlsx"
+   ],
+   "destacada": null,
+   "categoria": "Procesos estratégicos",
+   "icono": null
+  },
+  {
+   "paginaSlug": "mapas-y-cartas-descriptivas-de-los-procesos",
+   "slug": "proceso-estadistica",
+   "titulo": "Estadística",
+   "resumen": "Presentar información y su comportamiento con relación a la calidad del servicio, producción y operación de la entidad con base en la recolección de los datos generados por parte de herramientas informáticas y registros de la atención a los usuarios, teniendo presente la conservación y custodia de las historias clínicas generadas de forma física.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 30,
+   "soloSiVacia": false,
+   "fecha": null,
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/word/CARACTERIZACION%20DE%20PROCESO%20ESTADISTICA.docx",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/excel/PROCEDIMIENTOS%20DE%20ESTADISTICA.xlsx",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/MANUAL%20DE%20MANEJO%20DE%20HISTORIA%20CLINICA.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/excel/E-ET-FO-01%20FORMATO%20DE%20SOLICITUD%20DE%20COPIA%20DE%20HISTORIA%20CLINICA.xlsx"
+   ],
+   "destacada": null,
+   "categoria": "Procesos estratégicos",
+   "icono": null
+  },
+  {
+   "paginaSlug": "mapas-y-cartas-descriptivas-de-los-procesos",
+   "slug": "proceso-gobierno-digital",
+   "titulo": "Gobierno digital",
+   "resumen": "Promover el uso y aprovechamiento de las tecnologías de la información y las comunicaciones para consolidar una entidad y usuarios competitivos, proactivos e innovadores, que generen valor público en un entorno de confianza digital.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 40,
+   "soloSiVacia": false,
+   "fecha": null,
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/word/CARACTERIZACION%20DEL%20PROCESO%20gbd.docx",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/excel/PROCEDIMIENTOS%20DE%20GOBIERNO%20EN%20LINEA.xlsx",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/excel/FORMATO%20PARA%20LA%20INCLUSI%C3%93N%20DE%20INFORMACION%20A%20LA%20P%C3%81GINA%20WEB%20INSTITUCIONAL.xlsx"
+   ],
+   "destacada": null,
+   "categoria": "Procesos estratégicos",
+   "icono": null
+  },
+  {
+   "paginaSlug": "mapas-y-cartas-descriptivas-de-los-procesos",
+   "slug": "proceso-calidad",
+   "titulo": "Calidad",
+   "resumen": "Implementar, revisar y mantener el Sistema Integrado de Gestión de Calidad (SIGC), en función de la misión institucional, el mejoramiento continuo y la satisfacción del usuario.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 50,
+   "soloSiVacia": false,
+   "fecha": null,
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/excel/PROCEDIMIENTOS%20DE%20CALIDAD.xlsx",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/excel/01%20FICHA%20TECNICA%20DE%20INDICADORES.xlsx",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/excel/001FORMATO%20DE%20PAGO%20PARCIAL%20A%20CONTRATISTAS.xlsx"
+   ],
+   "destacada": null,
+   "categoria": "Procesos estratégicos",
+   "icono": null
+  },
+  {
+   "paginaSlug": "mapas-y-cartas-descriptivas-de-los-procesos",
+   "slug": "proceso-gestion-ambiental",
+   "titulo": "Gestión ambiental",
+   "resumen": "Utilizar eficientemente los recursos naturales, reduciendo los riesgos sobre la salud y el medio ambiente ocasionados en las diferentes actividades de la ESE Hospital San José del Guaviare, con el fin de lograr un adecuado manejo ambiental.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 60,
+   "soloSiVacia": false,
+   "fecha": null,
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/word/PROCESOAMBIENTALHSJG%202018.docx",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/excel/PROCEDIMIENTOSHSJG.xls",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/04-PROGRAMA-DE-RECICLAJE-7-3.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/02-PROGRAMA-DE-USO-EFICIENTE-Y-AHORRO-DE-ENERGIA-7.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/03-PROGRAMA-PARA-EL-USO-EFICIENTE-Y-AHORRO-DE-AGUA-8.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Procesos estratégicos",
+   "icono": null
+  },
+  {
+   "paginaSlug": "mapas-y-cartas-descriptivas-de-los-procesos",
+   "slug": "proceso-seguridad-y-salud-en-el-trabajo",
+   "titulo": "Seguridad y salud en el trabajo",
+   "resumen": "",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 70,
+   "soloSiVacia": false,
+   "fecha": null,
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/excel/PROCEDIMIENTO%20PARA%20LA%20GESTION%20DEL%20CAMBIO%20DE%20SG-SST.xls",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/excel/01%20FORMATO%20DE%20REPORTE%20DE%20INCIDENTE%20Y%20ACCIDENTE%20DE%20TRABAJO.xlsx",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/word/04%20PROGRAMA%20DE%20ELEMENTOS%20DE%20PROTECCION%20PERSONAL.docx",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/word/01%20PROTOCOLO%20DE%20ACCIDENTE%20DE%20TRABAJO%20POR%20EXPOSICION%20AL%20RIESGO%20BIOLOGICO.docx"
+   ],
+   "destacada": null,
+   "categoria": "Procesos estratégicos",
+   "icono": null
+  },
+  {
+   "paginaSlug": "mapas-y-cartas-descriptivas-de-los-procesos",
+   "slug": "proceso-talento-humano",
+   "titulo": "Talento humano",
+   "resumen": "Administrar el personal vinculado a la ESE Hospital San José del Guaviare, promoviendo y desarrollando estrategias encaminadas a la gestión y desarrollo de los funcionarios de conformidad con la ley laboral, contribuyendo a la satisfacción de sus necesidades, para el cumplimiento de la misión, visión, objetivos institucionales y el logro del bienestar personal.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 80,
+   "soloSiVacia": false,
+   "fecha": null,
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/comprimido/PROCEDIMIENTOS.rar",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/word/02%20FORMATO%20DE%20AUTORIZACION%20DE%20VERIFICACI%C3%93N%20DE%20ANTECEDENTES.docx"
+   ],
+   "destacada": null,
+   "categoria": "Procesos estratégicos",
+   "icono": null
+  },
+  {
+   "paginaSlug": "mapas-y-cartas-descriptivas-de-los-procesos",
+   "slug": "proceso-urgencias",
+   "titulo": "Urgencias",
+   "resumen": "Realizar procedimientos y/o intervenciones a las personas que requieran una atención oportuna, con el ánimo de mejorar el estado de salud, teniendo en cuenta el nivel de atención y el grado de complejidad de la ESE Hospital San José del Guaviare, basados en la evidencia científica, la ética y la normatividad vigente.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 90,
+   "soloSiVacia": false,
+   "fecha": null,
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/word/PROCESOSURGENCIAS.docx",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/excel/PROCEDIMIENTOS%20URGENCIAS.xls",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/excel/01%20FORMATO%20DE%20VERIFICACION%20DE%20MEDICAMENTOS%20Y%20DISPOSITIVOS%20MEDICOS%20A%20KITS%20DE%20RESPUESTA%20RAPIDA.xlsx",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/comprimido/protocolo%20urgencia.rar"
+   ],
+   "destacada": null,
+   "categoria": "Procesos misionales",
+   "icono": null
+  },
+  {
+   "paginaSlug": "mapas-y-cartas-descriptivas-de-los-procesos",
+   "slug": "proceso-unidad-materno-infantil",
+   "titulo": "Unidad materno infantil",
+   "resumen": "Brindar atención en salud a las pacientes gestantes y recién nacidos (as) que ingresan a la unidad materno infantil de manera oportuna y con calidad en la atención.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 100,
+   "soloSiVacia": false,
+   "fecha": null,
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/word/PROCESO%20UMI.docx",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/excel/PROCEDIMIENTOS%20UMI.xls",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/comprimido/UMI.rar",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/comprimido/protocolos%20UMI.rar",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/comprimido/Listas%20de%20chequo.rar"
+   ],
+   "destacada": null,
+   "categoria": "Procesos misionales",
+   "icono": null
+  },
+  {
+   "paginaSlug": "mapas-y-cartas-descriptivas-de-los-procesos",
+   "slug": "proceso-hospitalizacion",
+   "titulo": "Hospitalización",
+   "resumen": "Garantizar la calidad y seguridad del paciente, con una atención humanizada y confidencial, a fin de asegurar el restablecimiento de la salud a través de la definición de una conducta adecuada.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 110,
+   "soloSiVacia": false,
+   "fecha": null,
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/word/PROCESO%20HOSPITALIZADOS.docx",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/excel/PROCEDIMIENTOS%20HOSPITALIZACI%C3%93N.xls"
+   ],
+   "destacada": null,
+   "categoria": "Procesos misionales",
+   "icono": null
+  },
+  {
+   "paginaSlug": "mapas-y-cartas-descriptivas-de-los-procesos",
+   "slug": "proceso-cirugia",
+   "titulo": "Cirugía",
+   "resumen": "Realizar procedimientos e intervenciones a personas que presentan alguna patología quirúrgica programada o de urgencia que permitan mejorar el estado de salud, proporcionando calidad y humanización en la atención del usuario.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 120,
+   "soloSiVacia": false,
+   "fecha": null,
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/word/PROCESO%20CIRUGIA.docx",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/excel/PROCEDIMIENTOS%20CIRUGIA.xls",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/comprimido/formatos%20ciru.rar",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/comprimido/protocolos%20ciru.rar",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/comprimido/guias%20ciru.rar",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/comprimido/listas%20de%20chequeo%20ciru.rar",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/word/01%20INSTRUCTIVO%20DE%20MANEJO%20DE%20MUESTRAS%20PATOLOGICAS.docx",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/comprimido/recomendaciones%20ciru.rar",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/comprimido/concentimientos%20informados%20ciru.rar"
+   ],
+   "destacada": null,
+   "categoria": "Procesos misionales",
+   "icono": null
+  },
+  {
+   "paginaSlug": "mapas-y-cartas-descriptivas-de-los-procesos",
+   "slug": "proceso-esterilizacion",
+   "titulo": "Esterilización",
+   "resumen": "Garantizar la esterilidad de un producto utilizando métodos validados y controlados adecuadamente que contribuyan a prevenir el deterioro del material, ropa e instrumental y reducir la carga microbiana.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 130,
+   "soloSiVacia": false,
+   "fecha": null,
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/word/PROCESOESTERILIZACIONHSJGOK2013.docx",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/excel/MAPAPROCESOSYPROCEDIMIENTOS%20ESTERILIZACI%C3%93NJULIO2013.xlsx",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/comprimido/formatos%20esterilizacion.rar",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/comprimido/Protocolos%20ezterilizacion.rar",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/word/01%20MANUAL%20DE%20BUENAS%20PRACTICAS%20DE%20ESTERILIZACION.docx"
+   ],
+   "destacada": null,
+   "categoria": "Procesos misionales",
+   "icono": null
+  },
+  {
+   "paginaSlug": "mapas-y-cartas-descriptivas-de-los-procesos",
+   "slug": "proceso-consulta-externa",
+   "titulo": "Consulta externa",
+   "resumen": "Brindar atención a los usuarios por medio de la consulta especializada para dar solución a las necesidades en salud.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 140,
+   "soloSiVacia": false,
+   "fecha": null,
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/word/PROCESO%20CONSULTA%20EXTERNA.docx",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/excel/PROCEDIMIENTOS%20DE%20CONSULTA%20EXTERNA.xls",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/excel/01%20FORMATO%20DE%20PRECONSULTA.xlsx",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/comprimido/protocolos%20consulta%20externa.rar",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/word/01%20MANUAL%20DE%20PROCEDIMIENTOS%20DE%20ECOGRAFIA.docx",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/excel/INSTRUCTIVO%20DE%20CONSTRATACION%20DE%20ESPECIALISTAS.xlsx",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/excel/02%20RECOMENDACIONES%20PARA%20TOMA%20DE%20CISTOSCOPIA.xlsx",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/word/01%20SUBPROGRMA%20DE%20SEGURIDAD%20DEL%20PACIENTE%20DE%20CONSULTA%20EXTERNA.docx"
+   ],
+   "destacada": null,
+   "categoria": "Procesos misionales",
+   "icono": null
+  },
+  {
+   "paginaSlug": "mapas-y-cartas-descriptivas-de-los-procesos",
+   "slug": "proceso-laboratorio-clinico",
+   "titulo": "Laboratorio clínico",
+   "resumen": "Establecer la prestación de servicio de laboratorio clínico en la atención a pacientes del departamento del Guaviare y sus alrededores, utilizando los recursos tecnológicos adecuados de acuerdo a la oferta del servicio con el fin de garantizar resultados oportunos y confiables.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 150,
+   "soloSiVacia": false,
+   "fecha": null,
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/word/PROCESOLABORATORIOCL%C3%8DNICO10-2018.doc",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/excel/PROCEDIMIENTOSLABORATORIOCLINICO%20-%202018.xls",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/gestion%20de%20laboratorio%20clinico.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/mapa%20de%20procesos%20laboratorio%20clinico.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Procesos misionales",
+   "icono": null
+  },
+  {
+   "paginaSlug": "mapas-y-cartas-descriptivas-de-los-procesos",
+   "slug": "proceso-servicio-transfusional",
+   "titulo": "Servicio transfusional",
+   "resumen": "Garantizar la correcta realización de pruebas transfusionales y el adecuado almacenamiento y entrega de componentes sanguíneos con fines terapéuticos o preventivos, mediante la aplicación de técnicas estandarizadas y controles de calidad e igualmente asistir a los profesionales asistenciales de los diferentes servicios intrahospitalarios en el uso apropiado de los hemocomponentes.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 160,
+   "soloSiVacia": false,
+   "fecha": null,
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/word/PROCESO%20SERVICIO%20TRANSFUSIONAL2018.docx",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/excel/SERVICIO%20TRANSFUSIONALHSJG%20-%202018.xls",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/gestion%20de%20servicio%20transfusional.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/mapa%20de%20procesos%20servicio%20transfusional.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Procesos misionales",
+   "icono": null
+  },
+  {
+   "paginaSlug": "mapas-y-cartas-descriptivas-de-los-procesos",
+   "slug": "proceso-terapia-fisica",
+   "titulo": "Terapia física",
+   "resumen": "Brindar atención integral a pacientes con alteración de la mecánica y funcionalidad corporal, para mejorar su condición física y favorecer su desempeño tanto laboral como cotidiano contribuyendo a una mejor calidad de vida.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 170,
+   "soloSiVacia": false,
+   "fecha": null,
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/word/MACROPROCESO%20TERAPIA%20F%C3%8DSICA.docx",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/excel/PROCEDIMIENTOS%20TERAPIA%20FISICA%20ori.xls",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/comprimido/protocolo%20terapia.rar",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/gestion%20de%20atencion%20del%20paciente%20en%20terapia%20fisica.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/mapa%20de%20procesos%20terapia%20fisica.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Procesos misionales",
+   "icono": null
+  },
+  {
+   "paginaSlug": "mapas-y-cartas-descriptivas-de-los-procesos",
+   "slug": "proceso-contabilidad",
+   "titulo": "Contabilidad",
+   "resumen": "Elaborar y presentar los estados financieros de la entidad, garantizando la calidad de la información, mediante el registro, análisis, verificación, ajuste y conciliación con las áreas que alimentan la información contable para la toma de decisiones de la administración.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 180,
+   "soloSiVacia": false,
+   "fecha": null,
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/word/PROCESO%20CONTABILIDAD%20caracterizacion%20ACTUAL%202018.doc",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/excel/PROCEDIMIENTOSCONTABILIDADHSJG%20ACTUALIZADO%2031-10.xls",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/comprimido/Formatos%20Conta.rar"
+   ],
+   "destacada": null,
+   "categoria": "Procesos de apoyo",
+   "icono": null
+  },
+  {
+   "paginaSlug": "mapas-y-cartas-descriptivas-de-los-procesos",
+   "slug": "proceso-tesoreria",
+   "titulo": "Tesorería",
+   "resumen": "Optimizar el manejo de los recursos financieros, garantizando el pago de los compromisos de manera transparente, eficiente y oportuna, que permitan el cumplimiento de los objetivos misionales de la entidad.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 190,
+   "soloSiVacia": false,
+   "fecha": null,
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/word/PROCESO%20TESORERIA.docx",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/excel/PROCEDIMIENTOS%20TESORERIA.xlsx"
+   ],
+   "destacada": null,
+   "categoria": "Procesos de apoyo",
+   "icono": null
+  },
+  {
+   "paginaSlug": "mapas-y-cartas-descriptivas-de-los-procesos",
+   "slug": "proceso-presupuesto",
+   "titulo": "Presupuesto",
+   "resumen": "Planificar y controlar los recursos financieros que ingresan a la institución para el correcto control de la misma.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 200,
+   "soloSiVacia": false,
+   "fecha": null,
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/word/PROCESOPRESUPUESTOHSJGOK%20(1).docx",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/excel/PROCEDIMIENTOSPRESUPUESTOHSJGOK%20(1).xls"
+   ],
+   "destacada": null,
+   "categoria": "Procesos de apoyo",
+   "icono": null
+  },
+  {
+   "paginaSlug": "mapas-y-cartas-descriptivas-de-los-procesos",
+   "slug": "proceso-cartera",
+   "titulo": "Cartera",
+   "resumen": "Garantizar el adecuado flujo de recursos a la entidad mediante la gestión de la recuperación de los dineros invertidos por la entidad en la prestación de servicios y que son facturados a las diferentes EAPB.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 210,
+   "soloSiVacia": false,
+   "fecha": null,
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/word/PROCESO%20DE%20CARTERA.docx",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/excel/MAPA%20DE%20PROCESOS%20DE%20CRATERA.xlsx"
+   ],
+   "destacada": null,
+   "categoria": "Procesos de apoyo",
+   "icono": null
+  },
+  {
+   "paginaSlug": "mapas-y-cartas-descriptivas-de-los-procesos",
+   "slug": "proceso-costos",
+   "titulo": "Costos",
+   "resumen": "Brindar herramientas que sirvan para la planeación y toma de decisiones con eficiencia y eficacia en el gasto.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 220,
+   "soloSiVacia": false,
+   "fecha": null,
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/word/CARACTERIZACION%20DE%20PROCESO%20actual.docx",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/excel/Procedimientos%20del%20%C3%A1rea%20de%20costos%20Carlos%20Javier%20Arias.xlsx"
+   ],
+   "destacada": null,
+   "categoria": "Procesos de apoyo",
+   "icono": null
+  },
+  {
+   "paginaSlug": "mapas-y-cartas-descriptivas-de-los-procesos",
+   "slug": "proceso-activos-fijos",
+   "titulo": "Activos fijos",
+   "resumen": "Identificar los parámetros del reconocimiento de un activo fijo, costo histórico, su clasificación, creación, plaqueo, depreciación y asignación a las áreas para su uso.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 230,
+   "soloSiVacia": false,
+   "fecha": null,
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/word/CARACTERIZACION%20DE%20ACTIVOS%20FIJOS.docx",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/excel/PROCEDIMIENTOS%20DE%20ACTIVOS%20FIJOS.xls",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/word/01%20MANUAL%20DE%20MANEJO,%20CONTROL,%20CUSTOD%C3%8DA%20Y%20BAJA%20DE%20LA%20PROPIEDAD,%20PLANTA%20Y%20EQUIPO.doc",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/excel/01%20FORMATO%20UNICO%20PARA%20EL%20MOVIMIENTO%20DE%20ACTIVOS.xlsx"
+   ],
+   "destacada": null,
+   "categoria": "Procesos de apoyo",
+   "icono": null
+  },
+  {
+   "paginaSlug": "mapas-y-cartas-descriptivas-de-los-procesos",
+   "slug": "proceso-almacen-y-suministros",
+   "titulo": "Almacén y suministros",
+   "resumen": "Adquirir, distribuir y legalizar insumos y equipos biomédicos de manera efectiva mediante el plan de compras anual que permita el apoyo administrativo y correcto funcionamiento de las diferentes áreas de la institución.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 240,
+   "soloSiVacia": false,
+   "fecha": null,
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/word/CARACTERIZACION%20DE%20ALMACEN%20Y%20SUMINISTROS.docx",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/excel/PROCEDIMIENTOS%20DE%20ALMACEN%20Y%20SUMINISTROS.xls",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/excel/A-SA-FO-01%20FORMATO%20DE%20SOLICITUD%20DE%20PEDIDO.xlsx"
+   ],
+   "destacada": null,
+   "categoria": "Procesos de apoyo",
+   "icono": null
+  },
+  {
+   "paginaSlug": "mapas-y-cartas-descriptivas-de-los-procesos",
+   "slug": "proceso-gestion-documental",
+   "titulo": "Gestión documental",
+   "resumen": "Detallar las actividades administrativas y técnicas tendientes a la planificación, manejo y organización de la documentación producida y recibida en el área de archivo central de la ESE Hospital San José del Guaviare.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 250,
+   "soloSiVacia": false,
+   "fecha": null,
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/word/PROCESO%20DE%20GESTION%20DOCUMENTAL.docx",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/excel/PROCEDIMIENTOS%20DE%20GESTION%20DOCUMENTAL.xls"
+   ],
+   "destacada": null,
+   "categoria": "Procesos de apoyo",
+   "icono": null
+  },
+  {
+   "paginaSlug": "mapas-y-cartas-descriptivas-de-los-procesos",
+   "slug": "proceso-juridica-y-contratacion",
+   "titulo": "Jurídica y contratación",
+   "resumen": "Garantizar el cumplimiento de la normatividad, brindando oportuna asesoría en conceptos jurídicos y administrativos y contratar la adquisición de bienes, servicios o la ejecución de obras, con base en el estatuto de contratación de la entidad y demás normas vigentes que le sean aplicables, para así garantizar el funcionamiento y lograr los fines misionales de la institución.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 260,
+   "soloSiVacia": false,
+   "fecha": null,
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/excel/PROCEDIMIENTOS%20DE%20JURIDICA.xls",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/comprimido/Formatos%20juri.rar",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/comprimido/listas%20juridi.rar"
+   ],
+   "destacada": null,
+   "categoria": "Procesos de apoyo",
+   "icono": null
+  },
+  {
+   "paginaSlug": "mapas-y-cartas-descriptivas-de-los-procesos",
+   "slug": "proceso-control-interno-disciplinario",
+   "titulo": "Control interno disciplinario",
+   "resumen": "Garantizar la aplicación de los principios constitucionales a los servidores y exservidores públicos de la ESE Hospital San José del Guaviare, cuando se determine si la conducta es constitutiva de falta disciplinaria.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 270,
+   "soloSiVacia": false,
+   "fecha": null,
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/word/PROCESOS%20DE%20CID.docx",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/excel/PROCEDIMIENTOS%20DE%20CID.xlsx"
+   ],
+   "destacada": null,
+   "categoria": "Procesos de apoyo",
+   "icono": null
+  },
+  {
+   "paginaSlug": "mapas-y-cartas-descriptivas-de-los-procesos",
+   "slug": "proceso-sistema-de-informacion-y-atencion-al-usuario",
+   "titulo": "Sistema de información y atención al usuario",
+   "resumen": "Orientar a los usuarios mediante la solución de inquietudes para una mejor prestación del servicio y satisfacción del mismo.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 280,
+   "soloSiVacia": false,
+   "fecha": null,
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/gestion%20de%20informacion%20y%20atencion%20al%20usuario.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/mapa%20de%20procesos%20sistema%20de%20informacion%20y%20atencion%20al%20usuario.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Procesos de apoyo",
+   "icono": null
+  },
+  {
+   "paginaSlug": "mapas-y-cartas-descriptivas-de-los-procesos",
+   "slug": "proceso-gestion-de-informacion-epidemiologica",
+   "titulo": "Gestión de información epidemiológica",
+   "resumen": "Observar y analizar de forma rutinaria tanto la ocurrencia y distribución de las enfermedades, como de los factores de riesgo pertinentes y su control, para la toma oportuna de acciones.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 290,
+   "soloSiVacia": false,
+   "fecha": null,
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/gestion%20de%20epidemiologia.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/gestion%20de%20epidemiologia%20(1).pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/gestion%20de%20epidemiologia%20(2).pdf"
+   ],
+   "destacada": null,
+   "categoria": "Procesos de apoyo",
+   "icono": null
+  },
+  {
+   "paginaSlug": "mapas-y-cartas-descriptivas-de-los-procesos",
+   "slug": "proceso-gestion-de-mantenimiento-hospitalario",
+   "titulo": "Gestión de mantenimiento hospitalario",
+   "resumen": "Garantizar el adecuado funcionamiento, conservación y mantenimiento de los bienes e instalaciones de la institución, creando los mecanismos y lineamientos necesarios de acuerdo a la normatividad vigente para brindar calidad en el servicio y satisfacción al usuario.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 300,
+   "soloSiVacia": false,
+   "fecha": null,
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/gestion%20de%20mantenimiento%20hospitalario.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/gestion%20de%20mantenimiento%20hospitalario%20(1).pdf"
+   ],
+   "destacada": null,
+   "categoria": "Procesos de apoyo",
+   "icono": null
+  },
+  {
+   "paginaSlug": "mapas-y-cartas-descriptivas-de-los-procesos",
+   "slug": "proceso-gestion-de-suministros",
+   "titulo": "Gestión de suministros",
+   "resumen": "Adquirir, distribuir y legalizar insumos y equipos biomédicos de manera efectiva mediante el plan de compras anual que permita el apoyo administrativo y correcto funcionamiento de las diferentes áreas de la institución.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 310,
+   "soloSiVacia": false,
+   "fecha": null,
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/gestion%20de%20suministros.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/mapa%20de%20procesos%20suministros.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/gestion%20de%20suministros%20(1).pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/mapa%20de%20procesos%20suministros%20(1).pdf"
+   ],
+   "destacada": null,
+   "categoria": "Procesos de apoyo",
+   "icono": null
+  },
+  {
+   "paginaSlug": "mapas-y-cartas-descriptivas-de-los-procesos",
+   "slug": "proceso-gestion-de-recursos-fisicos",
+   "titulo": "Gestión de recursos físicos",
+   "resumen": "Asegurar la eficiente administración de los bienes y servicios requeridos en la operación de los procesos para su adecuado desempeño y manejo, encaminados a un desarrollo sostenible.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 320,
+   "soloSiVacia": false,
+   "fecha": null,
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/gestion%20de%20recursos%20fisicos.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/mapa%20de%20procesos%20recursos%20fisicos.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/mapa%20de%20procesos%20recursos%20fisicos%20(1).pdf"
+   ],
+   "destacada": null,
+   "categoria": "Procesos de apoyo",
+   "icono": null
+  },
+  {
+   "paginaSlug": "mapas-y-cartas-descriptivas-de-los-procesos",
+   "slug": "proceso-gestion-de-auditoria-cartera-y-facturacion",
+   "titulo": "Gestión de auditoría, cartera y facturación",
+   "resumen": "Garantizar la adecuada liquidación, revisión y recaudo de las facturas generadas por venta de servicios de salud.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 330,
+   "soloSiVacia": false,
+   "fecha": null,
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/gestion%20de%20auditoria,%20cartera%20y%20facturacion%20(1).pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/mapa%20de%20procesos%20auditoria,%20cartera%20y%20facturacion%20(1).pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/mapa%20de%20procesos%20auditoria,%20cartera%20y%20facturacion%20(2).pdf"
+   ],
+   "destacada": null,
+   "categoria": "Procesos de apoyo",
+   "icono": null
+  },
+  {
+   "paginaSlug": "mapas-y-cartas-descriptivas-de-los-procesos",
+   "slug": "proceso-gestion-de-trabajo-social",
+   "titulo": "Gestión de trabajo social",
+   "resumen": "Conocer, gestionar y promocionar los recursos existentes entre las instituciones y profesionales de otras ramas de las ciencias que puedan contribuir a la pronta solución de la problemática del paciente.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 340,
+   "soloSiVacia": false,
+   "fecha": null,
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/gestion%20de%20trabajo%20social.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/mapa%20de%20procesos%20trabajo%20social.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Procesos de apoyo",
+   "icono": null
+  },
+  {
+   "paginaSlug": "mapas-y-cartas-descriptivas-de-los-procesos",
+   "slug": "proceso-gestion-de-imagenes-diagnosticas",
+   "titulo": "Gestión de imágenes diagnósticas",
+   "resumen": "Contribuir al diagnóstico de los problemas de salud del usuario brindando calidad en el servicio y satisfacción al usuario.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 350,
+   "soloSiVacia": false,
+   "fecha": null,
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/gestion%20de%20imagenes%20disagnosticas.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/mapa%20de%20procesos%20imagenes%20diagnosticas.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Otros procesos asistenciales",
+   "icono": null
+  },
+  {
+   "paginaSlug": "mapas-y-cartas-descriptivas-de-los-procesos",
+   "slug": "proceso-gestion-de-medicamentos-y-dispositivos-medicos",
+   "titulo": "Gestión de medicamentos y dispositivos médicos",
+   "resumen": "Proveer los medicamentos y dispositivos médicos requeridos por el usuario, garantizando su adecuada conservación, así como la información y asesoría en el uso adecuado de los mismos para contribuir de manera efectiva en la satisfacción de las necesidades de los usuarios.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 360,
+   "soloSiVacia": false,
+   "fecha": null,
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/gestion%20de%20medicamentos%20y%20dispositivos%20medicos.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/mapa%20de%20procesos%20de%20medicamentos%20y%20dispositivos%20medicos.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Otros procesos asistenciales",
+   "icono": null
+  },
+  {
+   "paginaSlug": "mapas-y-cartas-descriptivas-de-los-procesos",
+   "slug": "proceso-gestion-de-muestras-patologicas",
+   "titulo": "Gestión de muestras patológicas",
+   "resumen": "Toma y recolección de las muestras patológicas mediante procedimientos de diagnóstico y/o quirúrgicos con el fin de diagnosticar y confirmar una enfermedad.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 370,
+   "soloSiVacia": false,
+   "fecha": null,
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/gestion%20de%20muestras%20patologicas.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/mapa%20de%20procesos%20muestras%20patologicas.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Otros procesos asistenciales",
+   "icono": null
+  },
+  {
+   "paginaSlug": "mapas-y-cartas-descriptivas-de-los-procesos",
+   "slug": "proceso-gestion-de-referencia-y-contrarreferencia-de-pacientes",
+   "titulo": "Gestión de referencia y contrarreferencia de pacientes",
+   "resumen": "Recepcionar y enviar las remisiones de los diferentes servicios que ameriten por criterio médico otro nivel de complejidad, enviándolos al responsable del pago y a las diferentes IPS contratadas por las EPS y secretarías de salud, y así lograr la pronta ubicación del paciente.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 380,
+   "soloSiVacia": false,
+   "fecha": null,
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/gestion%20de%20referencia%20y%20contrarreferencia%20de%20pacientes.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Otros procesos asistenciales",
+   "icono": null
+  },
+  {
+   "paginaSlug": "mapas-y-cartas-descriptivas-de-los-procesos",
+   "slug": "proceso-atencion-del-paciente-en-terapia-respiratoria",
+   "titulo": "Atención del paciente en terapia respiratoria",
+   "resumen": "Realizar atención a todos los pacientes que por su patología y/o condición clínica ameritan tratamiento por terapia respiratoria atendiendo criterios médicos para mejorar el estado de salud del paciente.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 390,
+   "soloSiVacia": false,
+   "fecha": null,
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/gestion%20de%20atencion%20del%20paciente%20en%20terapia%20respiratoria.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/mapa%20de%20procesos%20terapia%20respiratoria.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Otros procesos asistenciales",
+   "icono": null
+  },
+  {
+   "paginaSlug": "mapas-y-cartas-descriptivas-de-los-procesos",
+   "slug": "objetivos-de-calidad",
+   "titulo": "Objetivos de calidad",
+   "resumen": "Objetivos del sistema de gestión de calidad de la E.S.E.",
+   "contenido": "<ul><li>Desarrollar acciones encaminadas a implementar el Sistema Obligatorio de Garantía de la Calidad en Salud (SOGCS), enfocadas al mejoramiento continuo y la satisfacción del usuario de acuerdo con sus necesidades.</li><li>Proporcionar servicios de salud a los pacientes enfocados en la atención oportuna, humanizada y en el respeto por su dignidad e individualidad.</li><li>Establecer, documentar e implementar un sistema de gestión de calidad, mejorando la eficacia, eficiencia y efectividad de la institución.</li><li>Asegurar la eficaz planificación, operación y control de los procesos de la institución.</li><li>Optimizar los recursos humanos, físicos, tecnológicos y financieros para garantizar la prestación del servicio de salud.</li></ul>",
+   "tipo": "articulo",
+   "orden": 400,
+   "soloSiVacia": false,
+   "fecha": null,
+   "adjuntos": [],
+   "destacada": null,
+   "categoria": "Sistema de gestión de calidad",
+   "icono": "govco:award"
+  },
+  {
+   "paginaSlug": "mapas-y-cartas-descriptivas-de-los-procesos",
+   "slug": "pamec-programa-de-auditoria-para-el-mejoramiento-de-la-calidad",
+   "titulo": "PAMEC – Programa de auditoría para el mejoramiento de la calidad",
+   "resumen": "Informe de aprendizaje organizacional y metodología de autoevaluación de estándares de acreditación.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 410,
+   "soloSiVacia": false,
+   "fecha": null,
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/INFORME-APRENDIZAJE-ORGANIZACIONAL-PAMEC-2020-ok.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/RESOLUCION%20335%20de%202019%20PAMEC.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Sistema de gestión de calidad",
+   "icono": "govco:clipboard-check"
+  },
+  {
+   "paginaSlug": "mapas-y-cartas-descriptivas-de-los-procesos",
+   "slug": "cultura-de-la-calidad",
+   "titulo": "Cultura de la calidad",
+   "resumen": "Atributos, principios, tips de mejoramiento y desdoblamiento de la calidad.",
+   "contenido": "",
+   "tipo": "articulo",
+   "orden": 420,
+   "soloSiVacia": false,
+   "fecha": null,
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/imgCalidad/Atributos%20de%20la%20Calidad.jpg",
+    "https://esehospitalguaviare.gov.co/resourses/imgCalidad/principios%20de%20la%20calidad.png",
+    "https://esehospitalguaviare.gov.co/resourses/imgCalidad/QUE%20ES%20AUDITORIA.jpg",
+    "https://esehospitalguaviare.gov.co/resourses/imgCalidad/DESDOBLAMIENTO%20DE%20LA%20CALIDAD.jpg",
+    "https://esehospitalguaviare.gov.co/resourses/imgCalidad/EFECTOS%20DE%20NO%20CONTAR%20CON%20PROCESOS%20ESTANDARIZADOS.jpg"
+   ],
+   "destacada": null,
+   "categoria": "Sistema de gestión de calidad",
+   "icono": "govco:lightbulb"
+  },
+  {
+   "paginaSlug": "directorio-de-servidores-publicos-empleados-o-contratistas",
+   "slug": "directorio-de-servidores-publicos-empleados-y-contratistas",
+   "titulo": "Directorio de servidores públicos, empleados y contratistas",
+   "resumen": "Directorio publicado en el portal anterior (actualizado a enero de 2023).",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 10,
+   "soloSiVacia": false,
+   "fecha": "2023-01-23T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/excel/Directorio%20servidores.xlsx"
+   ],
+   "destacada": null,
+   "categoria": "Directorio",
+   "icono": null
+  },
+  {
+   "paginaSlug": "directorio-de-entidades",
+   "slug": "nueva-eps",
+   "titulo": "Nueva EPS",
+   "resumen": "",
+   "contenido": "<ul><li>Dirección: Carrera 23 Nº 10 – 190</li><li>Teléfono: (608) 584 9824</li><li>Sitio web: https://www.nuevaeps.com.co/</li></ul><p>Entidad encargada de la afiliación y registro de los afiliados al SGSSS, el recaudo de las cotizaciones y la responsable de organizar y garantizar directa o indirectamente la prestación del plan de beneficios a los afiliados.</p>",
+   "tipo": "articulo",
+   "orden": 10,
+   "soloSiVacia": false,
+   "fecha": null,
+   "adjuntos": [],
+   "destacada": null,
+   "categoria": "EPS",
+   "icono": "govco:id-card"
+  },
+  {
+   "paginaSlug": "directorio-de-entidades",
+   "slug": "fisiomed-ips-e-u",
+   "titulo": "Fisiomed IPS E.U.",
+   "resumen": "",
+   "contenido": "<ul><li>Dirección: Calle 12 N° 20 - 115, barrio La Esperanza</li><li>Correo: fisiomedzgv@yahoo.es</li></ul><p>Terapia física, respiratoria, ocupacional y de lenguaje; valoración por fonoaudiología, micronebulización, audiometría y rehabilitación funcional.</p>",
+   "tipo": "articulo",
+   "orden": 20,
+   "soloSiVacia": false,
+   "fecha": null,
+   "adjuntos": [],
+   "destacada": null,
+   "categoria": "IPS",
+   "icono": "govco:hospital"
+  },
+  {
+   "paginaSlug": "directorio-de-entidades",
+   "slug": "medicenter-ips",
+   "titulo": "Medicenter IPS",
+   "resumen": "",
+   "contenido": "<ul><li>Dirección: Carrera 23 Nº 10 - 163</li><li>Teléfono: (608) 584 1739</li><li>Correo: medicenterips@hotmail.com</li></ul><p>Servicios de baja complejidad, como ecografías y actividades ambulatorias de promoción, prevención y asistenciales.</p>",
+   "tipo": "articulo",
+   "orden": 30,
+   "soloSiVacia": false,
+   "fecha": null,
+   "adjuntos": [],
+   "destacada": null,
+   "categoria": "IPS",
+   "icono": "govco:hospital"
+  },
+  {
+   "paginaSlug": "directorio-de-entidades",
+   "slug": "medicos-asociados",
+   "titulo": "Médicos Asociados",
+   "resumen": "",
+   "contenido": "<ul><li>Dirección: Calle 12 N° 20 - 51</li><li>Teléfono: 311 572 2129</li><li>Teléfono: 313 499 5448</li></ul><p>Centro médico y de diagnóstico privado que presta atención médica a los usuarios del régimen especial.</p>",
+   "tipo": "articulo",
+   "orden": 40,
+   "soloSiVacia": false,
+   "fecha": null,
+   "adjuntos": [],
+   "destacada": null,
+   "categoria": "IPS",
+   "icono": "govco:hospital"
+  },
+  {
+   "paginaSlug": "directorio-de-entidades",
+   "slug": "odontomedic-ips",
+   "titulo": "Odontomedic IPS",
+   "resumen": "",
+   "contenido": "<ul><li>Dirección: Carrera 22 Nº 19 - 20, barrio Bello Horizonte</li><li>Teléfono: (608) 584 0702</li><li>Teléfono: 314 250 7053</li><li>Correo: odontomedicips@gmail.com</li></ul><p>Centro médico y de diagnóstico privado que presta atención médica a los usuarios del régimen contributivo.</p>",
+   "tipo": "articulo",
+   "orden": 50,
+   "soloSiVacia": false,
+   "fecha": null,
+   "adjuntos": [],
+   "destacada": null,
+   "categoria": "IPS",
+   "icono": "govco:hospital"
+  },
+  {
+   "paginaSlug": "directorio-de-entidades",
+   "slug": "r-r-sersalud-ips-s-a-s",
+   "titulo": "R&R Sersalud IPS S.A.S.",
+   "resumen": "",
+   "contenido": "<ul><li>Dirección: Carrera 19 Nº 12B - 13</li><li>Teléfono: 310 866 1413</li></ul><p>Transporte en ambulancia básico y medicalizado.</p>",
+   "tipo": "articulo",
+   "orden": 60,
+   "soloSiVacia": false,
+   "fecha": null,
+   "adjuntos": [],
+   "destacada": null,
+   "categoria": "IPS",
+   "icono": "govco:hospital"
+  },
+  {
+   "paginaSlug": "directorio-de-entidades",
+   "slug": "e-s-e-hospital-san-jose-del-guaviare",
+   "titulo": "E.S.E. Hospital San José del Guaviare",
+   "resumen": "",
+   "contenido": "<ul><li>Dirección: Calle 12 con Carrera 20 esquina, barrio La Esperanza</li><li>Teléfono: (608) 584 0045</li><li>Teléfono: (608) 584 0168</li><li>Correo: contactenos@esehospitalguaviare.gov.co</li><li>Sitio web: https://esehospitalguaviare.gov.co/</li></ul><p>IPS pública de segundo nivel que presta atención médica a los usuarios a través de sus servicios y centros de diagnóstico.</p>",
+   "tipo": "articulo",
+   "orden": 70,
+   "soloSiVacia": false,
+   "fecha": null,
+   "adjuntos": [],
+   "destacada": null,
+   "categoria": "IPS",
+   "icono": "govco:hospital"
+  },
+  {
+   "paginaSlug": "directorio-de-agremiaciones-asociaciones-y-otros-grupos-de-interes",
+   "slug": "asociacion-agropecuaria-turistica-y-del-medio-ambiente-de-sabanas-de-la-fuga",
+   "titulo": "Asociación Agropecuaria Turística y del Medio Ambiente de Sabanas de La Fuga",
+   "resumen": "",
+   "contenido": "<ul><li>Representante legal: Pablo Omar Vergara Garzón</li><li>Dirección: Vereda Sabanas de la Fuga</li><li>Celular: 314 718 6868</li><li>Correo: asociacionasofuga@gmail.com</li></ul>",
+   "tipo": "articulo",
+   "orden": 10,
+   "soloSiVacia": false,
+   "fecha": null,
+   "adjuntos": [],
+   "destacada": null,
+   "categoria": "Asociaciones",
+   "icono": "govco:users"
+  },
+  {
+   "paginaSlug": "directorio-de-agremiaciones-asociaciones-y-otros-grupos-de-interes",
+   "slug": "asociacion-artistico-cultural-nuevos-vientos",
+   "titulo": "Asociación Artístico Cultural Nuevos Vientos",
+   "resumen": "",
+   "contenido": "<ul><li>Representante legal: Oscar Augusto Zuluaga Muñoz</li><li>Dirección: Carrera 24A N° 13 - 30</li><li>Celular: 318 254 4546</li><li>Correo: nuevosvientosguaviare@gmail.com</li></ul>",
+   "tipo": "articulo",
+   "orden": 20,
+   "soloSiVacia": false,
+   "fecha": null,
+   "adjuntos": [],
+   "destacada": null,
+   "categoria": "Asociaciones",
+   "icono": "govco:users"
+  },
+  {
+   "paginaSlug": "directorio-de-agremiaciones-asociaciones-y-otros-grupos-de-interes",
+   "slug": "asociacion-biapora-andantes-del-guaviare",
+   "titulo": "Asociación Biapora Andantes del Guaviare",
+   "resumen": "",
+   "contenido": "<ul><li>Representante legal: María Gilma Barbosa Corredor</li><li>Dirección: Calle 7 N° 23 - 07, barrio El Centro - Casa Grande</li><li>Celular: 313 384 0797</li><li>Correo: gilmilla46@hotmail.com</li></ul>",
+   "tipo": "articulo",
+   "orden": 30,
+   "soloSiVacia": false,
+   "fecha": null,
+   "adjuntos": [],
+   "destacada": null,
+   "categoria": "Asociaciones",
+   "icono": "govco:users"
+  },
+  {
+   "paginaSlug": "directorio-de-agremiaciones-asociaciones-y-otros-grupos-de-interes",
+   "slug": "asociacion-agropecuaria-y-turistica-del-guaviare",
+   "titulo": "Asociación Agropecuaria y Turística del Guaviare",
+   "resumen": "",
+   "contenido": "<ul><li>Representante legal: Victor Miguel Niampira Pacheco</li><li>Dirección: Vereda Puerto Arturo</li><li>Celular: 321 286 0806</li><li>Correo: agrotug@hotmail.com</li></ul>",
+   "tipo": "articulo",
+   "orden": 40,
+   "soloSiVacia": false,
+   "fecha": null,
+   "adjuntos": [],
+   "destacada": null,
+   "categoria": "Asociaciones",
+   "icono": "govco:users"
+  },
+  {
+   "paginaSlug": "directorio-de-agremiaciones-asociaciones-y-otros-grupos-de-interes",
+   "slug": "asociacion-el-colectivo-de-mujeres-victimas-del-conflicto-interno-de-san-jose-del-guaviare",
+   "titulo": "Asociación El Colectivo de Mujeres Víctimas del Conflicto Interno de San José del Guaviare",
+   "resumen": "",
+   "contenido": "<ul><li>Representante legal: Rosa Ceima Castaño Ospina</li><li>Dirección: MZ 6 CA 7, barrio La Victoria</li><li>Celular: 312 465 4220</li><li>Correo: rosaospina1981@gmail.com</li></ul>",
+   "tipo": "articulo",
+   "orden": 50,
+   "soloSiVacia": false,
+   "fecha": null,
+   "adjuntos": [],
+   "destacada": null,
+   "categoria": "Asociaciones",
+   "icono": "govco:users"
+  },
+  {
+   "paginaSlug": "directorio-de-agremiaciones-asociaciones-y-otros-grupos-de-interes",
+   "slug": "asociacion-campesina-granja-los-girasoles",
+   "titulo": "Asociación Campesina Granja Los Girasoles",
+   "resumen": "",
+   "contenido": "<ul><li>Representante legal: Pedro Emilio Fonseca Paez</li><li>Dirección: Vereda Colinas AETCR</li><li>Celular: 320 390 4396</li><li>Correo: pemfopa399@gmail.com</li></ul>",
+   "tipo": "articulo",
+   "orden": 60,
+   "soloSiVacia": false,
+   "fecha": null,
+   "adjuntos": [],
+   "destacada": null,
+   "categoria": "Asociaciones",
+   "icono": "govco:users"
+  },
+  {
+   "paginaSlug": "directorio-de-agremiaciones-asociaciones-y-otros-grupos-de-interes",
+   "slug": "asociacion-agricola-cambulos-del-guaviare",
+   "titulo": "Asociación Agrícola Cámbulos del Guaviare",
+   "resumen": "",
+   "contenido": "<ul><li>Representante legal: Alexander Morales Ariza</li><li>Dirección: Vereda Los Cámbulos - Tienda El Desbare</li><li>Celular: 318 326 9586</li><li>Correo: yinethrojas93@gmail.com</li></ul>",
+   "tipo": "articulo",
+   "orden": 70,
+   "soloSiVacia": false,
+   "fecha": null,
+   "adjuntos": [],
+   "destacada": null,
+   "categoria": "Asociaciones",
+   "icono": "govco:users"
+  },
+  {
+   "paginaSlug": "directorio-de-agremiaciones-asociaciones-y-otros-grupos-de-interes",
+   "slug": "asociacion-amigos-del-camino-guaviare",
+   "titulo": "Asociación Amigos del Camino Guaviare",
+   "resumen": "",
+   "contenido": "<ul><li>Representante legal: Jimy Julián Casallas Cardona</li><li>Dirección: MZ B 2 TO A AP 110, barrio Villa Andrea</li><li>Celular: 318 841 4774</li><li>Celular: 312 867 3230</li><li>Correo: jimmy-pac@hotmail.com</li></ul>",
+   "tipo": "articulo",
+   "orden": 80,
+   "soloSiVacia": false,
+   "fecha": null,
+   "adjuntos": [],
+   "destacada": null,
+   "categoria": "Asociaciones",
+   "icono": "govco:users"
+  },
+  {
+   "paginaSlug": "directorio-de-agremiaciones-asociaciones-y-otros-grupos-de-interes",
+   "slug": "asociacion-jovenes-emprendedores-del-campo-rp",
+   "titulo": "Asociación Jóvenes Emprendedores del Campo RP",
+   "resumen": "",
+   "contenido": "<ul><li>Representante legal: Edison Javier Romero Peralta</li><li>Dirección: Calle 6 N° 17 - 101, barrio Primero de Octubre</li><li>Celular: 317 815 9804</li><li>Correo: enelcampogv@gmail.com</li></ul>",
+   "tipo": "articulo",
+   "orden": 90,
+   "soloSiVacia": false,
+   "fecha": null,
+   "adjuntos": [],
+   "destacada": null,
+   "categoria": "Asociaciones",
+   "icono": "govco:users"
+  },
+  {
+   "paginaSlug": "directorio-de-agremiaciones-asociaciones-y-otros-grupos-de-interes",
+   "slug": "asociacion-apoyo-y-refugio",
+   "titulo": "Asociación Apoyo y Refugio",
+   "resumen": "",
+   "contenido": "<ul><li>Representante legal: José Jesús Muñoz Quiceno</li><li>Dirección: Barrio Bicentenario 1 MZ H CA 6</li><li>Celular: 315 272 1486</li><li>Celular: 321 942 0958</li><li>Correo: tazmo371@gmail.com</li></ul>",
+   "tipo": "articulo",
+   "orden": 100,
+   "soloSiVacia": false,
+   "fecha": null,
+   "adjuntos": [],
+   "destacada": null,
+   "categoria": "Asociaciones",
+   "icono": "govco:users"
+  },
+  {
+   "paginaSlug": "directorio-de-agremiaciones-asociaciones-y-otros-grupos-de-interes",
+   "slug": "asociacion-brisas-del-yurupary",
+   "titulo": "Asociación Brisas del Yurupary",
+   "resumen": "",
+   "contenido": "<ul><li>Representante legal: Olga Lucía Cardonelly Cardona</li><li>Dirección: MZ K CA 19, barrio Brisas del Yurupari</li><li>Celular: 321 970 1830</li><li>Correo: ocarbonelly@gmail.com</li></ul>",
+   "tipo": "articulo",
+   "orden": 110,
+   "soloSiVacia": false,
+   "fecha": null,
+   "adjuntos": [],
+   "destacada": null,
+   "categoria": "Asociaciones",
+   "icono": "govco:users"
+  },
+  {
+   "paginaSlug": "directorio-de-agremiaciones-asociaciones-y-otros-grupos-de-interes",
+   "slug": "asociacion-academia-de-historia-del-departamento-del-guaviare",
+   "titulo": "Asociación Academia de Historia del Departamento del Guaviare",
+   "resumen": "",
+   "contenido": "<ul><li>Representante legal: Gustavo Amado López</li><li>Dirección: Calle 19 A N° 22 - 95, barrio Bello Horizonte</li><li>Celular: 310 552 9642</li><li>Correo: amadogus57@gmail.com</li></ul>",
+   "tipo": "articulo",
+   "orden": 120,
+   "soloSiVacia": false,
+   "fecha": null,
+   "adjuntos": [],
+   "destacada": null,
+   "categoria": "Asociaciones",
+   "icono": "govco:users"
+  },
+  {
+   "paginaSlug": "directorio-de-agremiaciones-asociaciones-y-otros-grupos-de-interes",
+   "slug": "asociacion-centro-agroecoturistico-laguna-damas-de-nare-econare",
+   "titulo": "Asociación Centro Agroecoturístico Laguna Damas de Nare – ECONARE",
+   "resumen": "",
+   "contenido": "<ul><li>Representante legal: Francisco Amaya Sarmiento</li><li>Dirección: Corregimiento Charras - Boquerón</li><li>Celular: 322 237 7125</li><li>Celular: 320 244 8022</li><li>Correo: econareguaviare@gmail.com</li></ul>",
+   "tipo": "articulo",
+   "orden": 130,
+   "soloSiVacia": false,
+   "fecha": null,
+   "adjuntos": [],
+   "destacada": null,
+   "categoria": "Asociaciones",
+   "icono": "govco:users"
+  },
+  {
+   "paginaSlug": "directorio-de-agremiaciones-asociaciones-y-otros-grupos-de-interes",
+   "slug": "asociacion-capital-de-la-esperanza-asofamilia",
+   "titulo": "Asociación Capital de la Esperanza – ASOFAMILIA",
+   "resumen": "",
+   "contenido": "<ul><li>Representante legal: Luis Enrique Castaño Muñoz</li><li>Dirección: Calle 19 N° 19A - 28, barrio La Granja</li><li>Celular: 320 812 5834</li><li>Correo: lcastanom@gmail.com</li></ul>",
+   "tipo": "articulo",
+   "orden": 140,
+   "soloSiVacia": false,
+   "fecha": null,
+   "adjuntos": [],
+   "destacada": null,
+   "categoria": "Asociaciones",
+   "icono": "govco:users"
+  },
+  {
+   "paginaSlug": "directorio-de-agremiaciones-asociaciones-y-otros-grupos-de-interes",
+   "slug": "asociacion-ciudadela-araza",
+   "titulo": "Asociación Ciudadela Arazá",
+   "resumen": "",
+   "contenido": "<ul><li>Representante legal: Carlos Mario Ramírez Ayala</li><li>Dirección: Barrio Ciudadela Arazá</li><li>Celular: 318 352 3211</li><li>Correo: jacke0730.car@gmail.com</li></ul>",
+   "tipo": "articulo",
+   "orden": 150,
+   "soloSiVacia": false,
+   "fecha": null,
+   "adjuntos": [],
+   "destacada": null,
+   "categoria": "Asociaciones",
+   "icono": "govco:users"
+  },
+  {
+   "paginaSlug": "directorio-de-agremiaciones-asociaciones-y-otros-grupos-de-interes",
+   "slug": "asociacion-chagra-estudios",
+   "titulo": "Asociación Chagra Estudios",
+   "resumen": "",
+   "contenido": "<ul><li>Representante legal: Juan Carlos Montaña Jiménez</li><li>Dirección: Calle 24 N° 19E - 54, barrio El Triunfo</li><li>Celular: 316 889 5770</li><li>Correo: lachagraestudios@gmail.com</li></ul>",
+   "tipo": "articulo",
+   "orden": 160,
+   "soloSiVacia": false,
+   "fecha": null,
+   "adjuntos": [],
+   "destacada": null,
+   "categoria": "Asociaciones",
+   "icono": "govco:users"
+  },
+  {
+   "paginaSlug": "directorio-de-agremiaciones-asociaciones-y-otros-grupos-de-interes",
+   "slug": "fuente",
+   "titulo": "Fuente",
+   "resumen": "",
+   "contenido": "<p>Asociaciones registradas en el directorio de organizaciones sociales de la Alcaldía de San José del Guaviare.</p>",
+   "tipo": "articulo",
+   "orden": 170,
+   "soloSiVacia": false,
+   "fecha": null,
+   "adjuntos": [],
+   "destacada": null,
+   "categoria": null,
+   "icono": null
+  }
+ ]
+}

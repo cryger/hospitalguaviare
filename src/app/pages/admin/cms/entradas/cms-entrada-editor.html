@@ -173,7 +173,17 @@
           <small id="en-area-dir-ayuda">«Líneas principales» se destaca arriba de la página. En el contenido escriba una línea por dato: «Correo: …», «Teléfono: …», «Celular: …» o «WhatsApp: …».</small>
         </div>
       }
-      @if (esServicios() || esOrganigrama() || esSedes() || esPlataforma() || esDirectorio()) {
+      @if (esProcesos()) {
+        <div class="campo bloque">
+          <label for="en-grupo-proc">Grupo del proceso</label>
+          <select id="en-grupo-proc" class="select" name="categoria" [(ngModel)]="form.categoria" aria-describedby="en-grupo-proc-ayuda">
+            <option [ngValue]="null">— Elija un grupo —</option>
+            @for (g of gruposProcesos; track g.clave) { <option [ngValue]="g.clave">{{ g.clave }}</option> }
+          </select>
+          <small id="en-grupo-proc-ayuda">{{ ayudaGrupoProceso() }}</small>
+        </div>
+      }
+      @if (esServicios() || esOrganigrama() || esSedes() || esPlataforma() || esDirectorio() || esProcesos()) {
         <div class="campo bloque">
           <label for="en-icono">Ícono</label>
           <app-selector-icono idCampo="en-icono" [(valor)]="form.icono" />

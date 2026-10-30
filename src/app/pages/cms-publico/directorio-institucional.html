@@ -4,7 +4,7 @@
   }
 
   <!-- ===== Líneas principales ===== -->
-  @if (principales().length || sedes()) {
+  @if (principales().length) {
     <section aria-labelledby="dir-principales">
       <h2 id="dir-principales" class="h-dir">Líneas principales de contacto</h2>
       <ul class="principales">
@@ -17,7 +17,7 @@
                 <p class="l-dato">
                   @if (d.contactos.length > 1 || c.tipo === 'whatsapp') { <span class="l-etiqueta">{{ c.etiqueta }}</span> }
                   @if (c.href) {
-                    <a [href]="c.href" [class.correo]="c.tipo === 'correo'" [attr.target]="c.tipo === 'whatsapp' ? '_blank' : null" [attr.rel]="c.tipo === 'whatsapp' ? 'noopener' : null">
+                    <a [href]="c.href" [class.correo]="c.tipo === 'correo'" [attr.target]="(c.tipo === 'whatsapp' || c.tipo === 'web') ? '_blank' : null" [attr.rel]="(c.tipo === 'whatsapp' || c.tipo === 'web') ? 'noopener' : null">
                       {{ c.valor }}@if (c.tipo === 'whatsapp') { <span class="visually-hidden"> (WhatsApp, abre en una pestaña nueva)</span> }
                     </a>
                   } @else { {{ c.valor }} }
@@ -46,18 +46,22 @@
     <section class="dependencias" aria-labelledby="dir-dependencias">
       <div class="d-cabecera">
         <div>
-          <h2 id="dir-dependencias" class="h-dir">Dependencias</h2>
-          <p class="d-sub">{{ total() }} dependencias con su correo institucional y teléfonos.</p>
+          <h2 id="dir-dependencias" class="h-dir">{{ nombreLista() }}</h2>
+          <p class="d-sub">
+            @if (nombreLista() === 'Dependencias') { {{ total() }} dependencias con su correo institucional y teléfonos. }
+            @else { {{ total() }} registros con sus datos de contacto. }
+          </p>
         </div>
         <div class="buscador">
-          <label for="dir-buscar" class="visually-hidden">Buscar dependencia, correo o teléfono</label>
+          <label for="dir-buscar" class="visually-hidden">Buscar por nombre, correo o teléfono</label>
           <span class="b-icono" aria-hidden="true"><app-icono-cms valor="govco:search" /></span>
-          <input id="dir-buscar" type="search" autocomplete="off" placeholder="Buscar dependencia, correo o teléfono"
+          <input id="dir-buscar" type="search" autocomplete="off" [placeholder]="nombreLista() === 'Dependencias' ? 'Buscar dependencia, correo o teléfono' : 'Buscar por nombre, correo o teléfono'"
                  [value]="busqueda()" (input)="busqueda.set($any($event.target).value)" />
         </div>
       </div>
 
-      <div class="d-cuerpo">
+      <div class="d-cuerpo" [class.sin-areas]="areas().length < 2">
+        @if (areas().length > 1) {
         <nav class="areas" aria-label="Filtrar por área">
           <p class="areas-titulo" aria-hidden="true">Área</p>
           <ul>
@@ -77,6 +81,7 @@
             }
           </ul>
         </nav>
+        }
 
         <div class="resultados">
           <p class="estado" role="status" aria-live="polite">
@@ -97,14 +102,20 @@
                     <div class="dep-info">
                       <p class="dep-nombre">{{ d.entrada.titulo }}</p>
                       @if (!g.nombre) { <p class="dep-area">{{ d.area }}</p> }
+                      @for (c of d.contactos; track $index) {
+                        @if (c.tipo === 'texto') {
+                          <p class="dep-dato"><app-icono-cms [valor]="iconoContacto(c)" /><span><b>{{ c.etiqueta }}:</b> {{ c.valor }}</span></p>
+                        }
+                      }
                       @for (n of d.notas; track $index) { <p class="dep-nota">{{ n }}</p> }
                     </div>
                     <ul class="dep-contactos">
                       @for (c of d.contactos; track $index) {
+                        @if (c.tipo !== 'texto') {
                         <li [class]="'c-' + c.tipo">
                           <span class="c-icono" aria-hidden="true"><app-icono-cms [valor]="iconoContacto(c)" /></span>
                           @if (c.href) {
-                            <a [href]="c.href" [attr.title]="c.etiqueta" [attr.target]="c.tipo === 'whatsapp' ? '_blank' : null" [attr.rel]="c.tipo === 'whatsapp' ? 'noopener' : null">
+                            <a [href]="c.href" [attr.title]="c.etiqueta" [attr.target]="(c.tipo === 'whatsapp' || c.tipo === 'web') ? '_blank' : null" [attr.rel]="(c.tipo === 'whatsapp' || c.tipo === 'web') ? 'noopener' : null">
                               <span class="visually-hidden">{{ c.etiqueta }}: </span>{{ c.valor }}
                             </a>
                           } @else { <span>{{ c.etiqueta }}: {{ c.valor }}</span> }
@@ -114,6 +125,7 @@
                             </button>
                           }
                         </li>
+                        }
                       }
                     </ul>
                   </li>
@@ -124,7 +136,7 @@
 
           @if (!filtradas().length) {
             <div class="sin-resultados">
-              <p>No encontramos dependencias con «{{ busqueda() }}».</p>
+              <p>No encontramos resultados con «{{ busqueda() }}».</p>
               <button type="button" class="limpiar" (click)="limpiar()">Ver todas</button>
             </div>
           }

@@ -9,6 +9,7 @@ import { RichEditor } from '../shared/rich-editor';
 import { SelectorIcono } from '../../../../shared/components/selector-icono/selector-icono';
 import { NIVELES_ORGANIGRAMA } from '../../../cms-publico/organigrama';
 import { SECCIONES_PLATAFORMA } from '../../../cms-publico/plataforma-estrategica';
+import { GRUPOS_PROCESOS } from '../../../cms-publico/mapa-procesos';
 import { CATEGORIAS_SUGERIDAS, categoriaSugerida } from '../../../../shared/utils/categorias';
 
 @Component({
@@ -82,6 +83,15 @@ export class CmsEntradaEditor {
   /** Glosario: título = término, resumen = definición */
   esGlosario(): boolean {
     return this.cms.paginaPorId().get(Number(this.form.paginaId))?.plantilla === 'glosario';
+  }
+
+  /** Mapa de procesos: la categoría es el grupo (estratégicos, misionales, apoyo…) */
+  readonly gruposProcesos = GRUPOS_PROCESOS;
+  esProcesos(): boolean {
+    return this.cms.paginaPorId().get(Number(this.form.paginaId))?.plantilla === 'procesos';
+  }
+  ayudaGrupoProceso(): string {
+    return GRUPOS_PROCESOS.find((g) => g.clave === this.form.categoria)?.ayuda ?? 'Elija el grupo del proceso. El resumen es el objetivo; los archivos adjuntos son sus documentos (escriba el título del archivo como «Proceso – Caracterización del proceso»).';
   }
 
   /** Directorio institucional: la categoría es el área (o «Líneas principales») */

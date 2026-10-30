@@ -17,6 +17,7 @@ import { Organigrama } from './organigrama';
 import { SedesHorarios } from './sedes-horarios';
 import { PlataformaEstrategica } from './plataforma-estrategica';
 import { DirectorioInstitucional } from './directorio-institucional';
+import { MapaProcesos } from './mapa-procesos';
 import { PreguntasFrecuentes } from './preguntas-frecuentes';
 import { Glosario } from './glosario';
 import { VisorDocumentos, sePuedeVer } from '../../shared/components/visor-documentos/visor-documentos.service';
@@ -61,7 +62,7 @@ type Orden = 'predeterminado' | 'recientes' | 'antiguas' | 'az';
 
 @Component({
   selector: 'app-cms-pagina-publica',
-  imports: [RouterLink, DatePipe, NgTemplateOutlet, CmsMediaPublica, BuscadorGovco, CalendarioEventos, ResenaHistorica, ServiciosTarjetas, IconoCms, Organigrama, SedesHorarios, PlataformaEstrategica, DirectorioInstitucional, PreguntasFrecuentes, Glosario],
+  imports: [RouterLink, DatePipe, NgTemplateOutlet, CmsMediaPublica, BuscadorGovco, CalendarioEventos, ResenaHistorica, ServiciosTarjetas, IconoCms, Organigrama, SedesHorarios, PlataformaEstrategica, DirectorioInstitucional, MapaProcesos, PreguntasFrecuentes, Glosario],
   templateUrl: './cms-pagina-publica.html',
   styleUrls: ['./cms-pagina-publica.css', './cms-listados.css'],
 })
@@ -535,6 +536,7 @@ export class CmsPaginaPublica {
       case 'directorio': return 'Directorio';
       case 'preguntas': return 'Preguntas frecuentes';
       case 'glosario': return 'Glosario';
+      case 'procesos': return 'Mapa de procesos';
       case 'enlace': return 'Ir al servicio';
       default: return 'Información';
     }

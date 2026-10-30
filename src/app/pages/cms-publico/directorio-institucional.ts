@@ -55,6 +55,8 @@ const ICONOS_AREA: [RegExp, string][] = [
 export class DirectorioInstitucional {
   readonly cms = inject(CmsService);
   readonly entradas = input.required<CmsEntrada[]>();
+  /** Nombre del listado: «Dependencias», «Entidades», «Agremiaciones y asociaciones»… */
+  readonly nombreLista = input('Dependencias');
 
   readonly busqueda = signal('');
   readonly area = signal('');
@@ -137,6 +139,9 @@ export class DirectorioInstitucional {
   iconoContacto(c: Contacto): string {
     if (c.tipo === 'correo') return 'govco:envelope';
     if (c.tipo === 'whatsapp') return 'govco:whatsapp';
+    if (c.tipo === 'web') return 'govco:globe';
+    if (/representante|responsable|contacto/.test(normalizar(c.etiqueta))) return 'govco:user-tie';
+    if (/direccion/.test(normalizar(c.etiqueta))) return 'govco:map-marker-alt';
     if (c.tipo === 'tel') return /cel|movil/.test(normalizar(c.etiqueta)) ? 'govco:mobile-alt' : 'govco:phone-alt';
     return 'govco:info-circle';
   }

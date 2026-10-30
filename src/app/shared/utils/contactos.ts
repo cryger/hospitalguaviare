@@ -6,7 +6,7 @@
  *   Coordenadas: 2.5661592, -72.6450748
  * Teléfonos, WhatsApp y correos se vuelven enlaces. Las líneas sin «:» son notas.
  */
-export type TipoContacto = 'tel' | 'whatsapp' | 'correo' | 'texto';
+export type TipoContacto = 'tel' | 'whatsapp' | 'correo' | 'web' | 'texto';
 
 export interface Contacto {
   etiqueta: string;
@@ -47,7 +47,9 @@ export function leerContactos(html: string | null | undefined): DatosContacto {
       if (c) datos.coordenadas = `${c[1]},${c[2]}`;
       continue;
     }
-    if (/^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i.test(valor)) {
+    if (/^https?:\/\/\S+$/i.test(valor)) {
+      datos.contactos.push({ etiqueta, valor: valor.replace(/^https?:\/\/(www\.)?/i, '').replace(/\/$/, ''), href: valor, tipo: 'web' });
+    } else if (/^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i.test(valor)) {
       datos.contactos.push({ etiqueta, valor, href: 'mailto:' + valor, tipo: 'correo' });
     } else if (/^[+()\d\s-]{7,}$/.test(valor)) {
       const num = telefonoInternacional(valor);
