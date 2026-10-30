@@ -1,8 +1,15 @@
 /* Preguntas frecuentes — BDC GOV.CO v5 */
 :host { --cobalt: #0943B5; --marino: #004884; --solitude: #E5ECF8; display: block; color: #1f2937; }
-.faq { display: grid; gap: 1rem; max-width: 60rem; }
+.faq { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1rem 1.75rem; align-items: start; }
+.faq.con-temas { grid-template-columns: 15.5rem minmax(0, 1fr); grid-template-areas: "barra barra" "lateral cuerpo"; }
+.faq.con-temas .faq-barra { grid-area: barra; }
+.faq.con-temas .lateral { grid-area: lateral; }
+.faq.con-temas .cuerpo { grid-area: cuerpo; }
+.cuerpo { display: grid; gap: 1rem; min-width: 0; }
+.lateral { position: sticky; top: 1rem; display: grid; gap: 1rem; }
 .faq-barra { display: flex; flex-wrap: wrap; gap: .75rem; align-items: center; }
 .buscador { position: relative; flex: 1 1 20rem; }
+.faq-barra .todas { flex: none; }
 .buscador input { width: 100%; box-sizing: border-box; padding: .75rem 1rem .75rem 2.7rem; border-radius: 999px; font: inherit; border: 1px solid #b9c7e0; background: #fff; }
 .buscador input:focus { outline: .19rem solid #000; outline-offset: .1rem; border-color: var(--cobalt); }
 .b-icono { position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: var(--cobalt); pointer-events: none; }
@@ -10,9 +17,20 @@
 .todas:hover { background: var(--solitude); }
 .todas:focus-visible, .temas button:focus-visible, summary:focus-visible { outline: .19rem solid #000; outline-offset: .15rem; }
 
-.temas { display: flex; flex-wrap: wrap; gap: .45rem; }
-.temas button { padding: .4rem .9rem; border-radius: 999px; font: inherit; font-size: .9rem; color: var(--marino); background: var(--solitude); border: 1px solid transparent; cursor: pointer; }
+.temas { padding: .75rem; border-radius: 14px; background: #F7F9FD; border: 1px solid #e3e9f3; }
+.temas-titulo { margin: .1rem .4rem .5rem; font-size: .74rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #6b7280; }
+.temas ul { list-style: none; margin: 0; padding: 0; display: grid; gap: .15rem; }
+.temas button {
+  width: 100%; display: flex; align-items: center; justify-content: space-between; gap: .5rem; padding: .5rem .65rem;
+  border: 0; border-radius: 9px; font: inherit; font-size: .92rem; text-align: left; color: #1f2937; background: transparent; cursor: pointer;
+}
+.temas button:hover { background: #fff; }
 .temas button.activo { color: #fff; background: var(--cobalt); }
+.conteo { font-size: .76rem; font-weight: 700; padding: .05rem .45rem; border-radius: 999px; color: var(--marino); background: var(--solitude); }
+.activo .conteo { background: #fff; }
+.ayuda { display: flex; gap: .7rem; padding: 1rem; border-radius: 14px; background: #fff; border: 1px solid #e3e9f3; border-left: 4px solid #069169; }
+.ayuda p { margin: 0; font-size: .9rem; line-height: 1.5; }
+.ayuda-icono { flex: none; display: grid; place-items: center; width: 2.2rem; height: 2.2rem; border-radius: 50%; color: #05694c; background: #E2F4EF; }
 
 .grupo { display: grid; gap: .55rem; }
 .g-titulo { margin: .75rem 0 .1rem; font-size: 1.1rem; color: var(--marino); }
@@ -31,5 +49,15 @@ summary:hover { background: #F7F9FD; }
 .sin-resultados { padding: 1.5rem; border-radius: 12px; background: #F7F9FD; text-align: center; color: #4b5563; }
 .sin-resultados p { margin: .25rem 0; }
 .visually-hidden { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; }
+@media (max-width: 900px) {
+  .faq.con-temas { grid-template-columns: minmax(0, 1fr); grid-template-areas: "barra" "lateral" "cuerpo"; }
+  .lateral { position: static; }
+  .temas { padding: .5rem; }
+  .temas-titulo { display: none; }
+  .temas ul { display: flex; gap: .4rem; overflow-x: auto; padding-bottom: .2rem; }
+  .temas li { flex: none; }
+  .temas button { white-space: nowrap; background: #fff; border: 1px solid #e3e9f3; }
+  .ayuda { display: none; }
+}
 @media (max-width: 560px) { .respuesta { padding-left: 1.15rem; } }
 @media (prefers-reduced-motion: reduce) { .q-flecha { transition: none; } }

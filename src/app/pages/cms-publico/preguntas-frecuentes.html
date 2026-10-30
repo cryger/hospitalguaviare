@@ -1,4 +1,4 @@
-<div class="faq">
+<div class="faq" [class.con-temas]="temas().length > 1">
   <div class="faq-barra">
     <div class="buscador">
       <label for="faq-buscar" class="visually-hidden">Buscar en las preguntas frecuentes</label>
@@ -12,14 +12,32 @@
   </div>
 
   @if (temas().length > 1) {
-    <nav class="temas" aria-label="Filtrar por tema">
-      <button type="button" [class.activo]="!tema()" [attr.aria-pressed]="!tema()" (click)="tema.set('')">Todos</button>
-      @for (t of temas(); track t) {
-        <button type="button" [class.activo]="tema() === t" [attr.aria-pressed]="tema() === t" (click)="tema.set(tema() === t ? '' : t)">{{ t }}</button>
-      }
-    </nav>
+    <aside class="lateral">
+      <nav class="temas" aria-label="Filtrar por tema">
+        <p class="temas-titulo" aria-hidden="true">Temas</p>
+        <ul>
+          <li>
+            <button type="button" [class.activo]="!tema()" [attr.aria-pressed]="!tema()" (click)="tema.set('')">
+              <span>Todos</span><span class="conteo">{{ entradas().length }}</span>
+            </button>
+          </li>
+          @for (t of temas(); track t) {
+            <li>
+              <button type="button" [class.activo]="tema() === t" [attr.aria-pressed]="tema() === t" (click)="tema.set(tema() === t ? '' : t)">
+                <span>{{ t }}</span><span class="conteo">{{ conteo(t) }}</span>
+              </button>
+            </li>
+          }
+        </ul>
+      </nav>
+      <div class="ayuda">
+        <span class="ayuda-icono" aria-hidden="true"><app-icono-cms valor="govco:comments" /></span>
+        <p><b>¿No encontró su respuesta?</b> Escríbanos por el <a href="/pqrsf">formulario de PQRSFD</a>.</p>
+      </div>
+    </aside>
   }
 
+  <div class="cuerpo">
   <p class="visually-hidden" role="status" aria-live="polite">{{ filtradas().length }} preguntas</p>
 
   @for (g of grupos(); track g.tema) {
@@ -44,4 +62,5 @@
       <p>Escríbanos por el <a href="/pqrsf">formulario de PQRSFD</a> y con gusto le responderemos.</p>
     </div>
   }
+  </div>
 </div>

@@ -33,6 +33,10 @@ export class PreguntasFrecuentes {
 
   readonly temas = computed(() => [...new Set(this.todas().map((p) => p.tema).filter(Boolean))]);
 
+  conteo(tema: string): number {
+    return this.todas().filter((p) => p.tema === tema).length;
+  }
+
   readonly filtradas = computed(() => {
     const palabras = normalizar(this.busqueda()).split(/\s+/).filter(Boolean);
     return this.todas().filter((p) => (!this.tema() || p.tema === this.tema()) && palabras.every((w) => p.clave.includes(w)));

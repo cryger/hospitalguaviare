@@ -53,7 +53,44 @@ export class CmsLocalDataSource extends CmsDataSource {
       .then(() => this.sembrarDesdeArchivo('informacion-de-interes-semilla', 'assets/semillas/informacion-de-interes.json'))
       .then(() => this.clasificarPublicaciones())
       .then(() => this.clasificarDocumentosTalentoHumano())
-      .then(() => this.organizarComiteConvivencia());
+      .then(() => this.organizarComiteConvivencia())
+      .then(() => this.ordenarTalentoHumano());
+  }
+
+  /**
+   * Una sola vez (igual que api/migraciones/035-orden-talento-humano.sql): tipos de documento de
+   * Talento humano en orden lógico y reglamento interno de trabajo también en 2.1.5 Políticas.
+   */
+  private ordenarTalentoHumano(): void {
+    const clave = this.prefijo + 'orden-talento-humano-v1';
+    if (localStorage.getItem(clave) === '1') return;
+    const paginas = this.leer<CmsPagina>('paginas');
+    const th = paginas.find((p) => p.slug === 'talento-humano');
+    const politicas = paginas.find((p) => p.slug === 'politicas-lineamientos-y-manuales');
+    if (!th) return;
+    const ORDEN = ['Manual de funciones', 'Reglamento interno de trabajo', 'Planes', 'Comités y grupos', 'Elecciones y representantes',
+      'Convocatorias internas', 'Convocatorias de contratación', 'Acuerdo colectivo', 'Capacitaciones', 'Formatos'];
+    const entradas = this.leer<CmsEntrada>('entradas');
+    const t = this.ahora();
+    for (const e of entradas) {
+      if (e.paginaId !== th.id || e.orden >= 1000) continue;
+      const i = ORDEN.indexOf(e.categoria ?? '');
+      e.orden += 1000 * (i < 0 ? ORDEN.length + 1 : i + 1);
+    }
+    const slug = 'reglamento-interno-de-trabajo-acuerdo-08-de-2020';
+    const url = 'https://esehospitalguaviare.gov.co/resourses/archivos/pdf/ACUERDO%2008%20DEL%2027%20DE%20OCTUBRE%20DE%202020-%20REGLAMENTO%20INTERNO%20DE%20TRABAJO%20(2).pdf';
+    const archivo = this.leer<CmsMultimedia>('multimedia').find((m) => m.url === url);
+    if (politicas && archivo && !entradas.some((e) => e.paginaId === politicas.id && e.slug === slug)) {
+      entradas.push({
+        id: this.nuevoId(entradas), paginaId: politicas.id, titulo: 'Reglamento interno de trabajo – Acuerdo 08 de 2020', slug,
+        resumen: 'Acuerdo 08 del 27 de octubre de 2020 de la Junta Directiva, por el cual se adopta el reglamento interno de trabajo.',
+        contenido: '', tipo: 'documento', categoria: 'Talento humano', icono: null, estado: 'publicada', destacada: false,
+        imagenDestacadaId: null, multimediaIds: [archivo.id], autor: 'E.S.E. Hospital San José del Guaviare',
+        fechaPublicacion: '2020-10-27T12:00:00.000Z', orden: 5, migradoDe: 'esehospitalguaviare.gov.co (Información de interés)', creadoEn: t, actualizadoEn: t,
+      });
+    }
+    this.escribir('entradas', entradas);
+    localStorage.setItem(clave, '1');
   }
 
   /**
