@@ -1,8 +1,10 @@
+<!-- WCAG 2.4.1: primer elemento enfocable, visible solo al usar Tab -->
+<a class="saltar-contenido" href="#contenido-principal" (click)="irAlContenido($event)">Saltar al contenido principal</a>
 <app-topbar></app-topbar>
 <app-accesibilidad></app-accesibilidad>
 <app-cabecera></app-cabecera>
 <app-navbar></app-navbar>
-<main class="container-main-govco" id="contenido-principal">
+<main class="container-main-govco" id="contenido-principal" tabindex="-1">
   <app-contenido>
     <!-- Miga de pan (BDC GOV.CO v5): siempre arriba a la izquierda del contenido -->
     <app-breadcrumb />

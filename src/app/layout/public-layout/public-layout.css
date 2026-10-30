@@ -1,0 +1,11 @@
+
+/* Enlace «Saltar al contenido principal» (WCAG 2.4.1): oculto hasta recibir el foco */
+.saltar-contenido {
+  position: absolute; left: 1rem; top: -100px; z-index: 10000;
+  padding: .75rem 1.25rem; border-radius: 0 0 8px 8px;
+  background: #3366cc; color: #fff; font-weight: 600; text-decoration: none;
+  font-family: 'Work Sans', 'Montserrat', system-ui, sans-serif; font-size: 1rem;
+  transition: top .15s;
+}
+.saltar-contenido:focus { top: 0; outline: 3px solid #ffab00; outline-offset: 2px; }
+#contenido-principal:focus { outline: none; }

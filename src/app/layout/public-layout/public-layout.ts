@@ -21,5 +21,11 @@ import { Contenido } from '../../componentes/contenido/contenido';
   styleUrl: './public-layout.css',
 })
 export class PublicLayout {
-
+  /** Lleva el foco al contenido sin cambiar la ruta (el enlace con # solo funcionaría en el inicio) */
+  irAlContenido(ev: Event): void {
+    ev.preventDefault();
+    const main = document.getElementById('contenido-principal');
+    main?.focus();
+    main?.scrollIntoView();
+  }
 }

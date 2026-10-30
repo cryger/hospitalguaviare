@@ -171,8 +171,13 @@ export class CmsService {
   }
 
   /** URL a la que debe llevar un ítem de menú */
+  /**
+   * Dirección pública de una página. Un acceso directo (plantilla «enlace») a un sitio externo
+   * usa esa dirección; uno interno usa su propia ruta, que redirige al destino. Así dos enlaces
+   * con distinto texto no comparten la misma dirección (WCAG 3.2.4, identificación coherente).
+   */
   urlPagina(p: CmsPagina): string {
-    return p.plantilla === 'enlace' && p.urlExterna ? p.urlExterna : this.rutaPagina(p.id);
+    return p.plantilla === 'enlace' && p.urlExterna && this.esExterna(p.urlExterna) ? p.urlExterna : this.rutaPagina(p.id);
   }
 
   urlEntrada(e: CmsEntrada): string {

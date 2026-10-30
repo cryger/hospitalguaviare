@@ -382,7 +382,7 @@
               <summary>
                 <span class="srv-icono" aria-hidden="true">{{ iconoServicio(e) }}</span>
                 <span class="srv-texto">
-                  <span class="srv-titulo">{{ e.titulo }}</span>
+                  <span class="srv-titulo" role="heading" aria-level="2">{{ e.titulo }}</span>
                   @if (e.resumen) { <span class="srv-resumen">{{ e.resumen }}</span> }
                 </span>
                 @if (e.estado !== 'publicada') { <span class="chip-borrador">{{ e.estado }}</span> }
@@ -448,7 +448,7 @@
                   @if (num) { <span class="sec-num">{{ num }}</span> }
                   {{ sinNumero(s.titulo) }}
                 </span>
-                <span class="sec-desc">{{ s.descripcion || ayudaPagina(s) }}</span>
+                <span class="sec-desc" [id]="'sec-desc-' + s.id">{{ s.descripcion || ayudaPagina(s) }}</span>
                 <span class="sec-pie">
                   <span class="sec-tipo">{{ tipoPagina(s, externa) }}</span>
                   <span class="sec-flecha" aria-hidden="true">{{ externa ? '↗' : '→' }}</span>
@@ -457,9 +457,9 @@
               </span>
             </ng-template>
             @if (externa) {
-              <a class="seccion" [href]="cms.urlPagina(s)" target="_blank" rel="noopener"><ng-container *ngTemplateOutlet="tarjetaSeccion" /></a>
+              <a class="seccion" [href]="cms.urlPagina(s)" target="_blank" rel="noopener" [attr.aria-label]="s.titulo" [attr.aria-describedby]="'sec-desc-' + s.id"><ng-container *ngTemplateOutlet="tarjetaSeccion" /></a>
             } @else {
-              <a class="seccion" [routerLink]="cms.urlPagina(s)"><ng-container *ngTemplateOutlet="tarjetaSeccion" /></a>
+              <a class="seccion" [routerLink]="cms.urlPagina(s)" [attr.aria-label]="s.titulo" [attr.aria-describedby]="'sec-desc-' + s.id"><ng-container *ngTemplateOutlet="tarjetaSeccion" /></a>
             }
           </li>
         }

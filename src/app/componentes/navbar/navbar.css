@@ -954,6 +954,13 @@ html {
 }
 
 .cms-submenu .submenu-todo { font-weight: 700; border-bottom: 1px solid #e5e7eb; }
+/* Rótulo visual «Ver toda la sección»: el nombre accesible del enlace es el de la sección
+   (igual al de la miga de pan y demás enlaces a esa página) */
+.cms-submenu .submenu-todo::before {
+  content: "Ver toda la sección" / "";
+  display: block; font-size: .72rem; font-weight: 600; letter-spacing: .04em;
+  text-transform: uppercase; color: #4b4b4b; margin-bottom: .1rem;
+}
 
 /* Ítems del submenú: alto automático para que los títulos largos (ej. numerales
    de Transparencia) se acomoden en varias líneas sin montarse unos sobre otros */

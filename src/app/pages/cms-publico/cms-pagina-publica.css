@@ -217,7 +217,7 @@ h1, h2, h3, .srv-titulo, .tarjeta-cuerpo h2, .tarjeta-cuerpo h3, .subpagina stro
   background: linear-gradient(135deg, #e8f0fb, #d6e4f8);
 }
 .srv-texto { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 0.2rem; }
-.srv-titulo { font-size: 1.1rem; color: var(--azul); line-height: 1.3; }
+.srv-titulo { font-size: 1.1rem; color: var(--azul); line-height: 1.3; margin: 0; display: block; }
 .srv-resumen { font-size: 0.92rem; color: var(--texto-2); line-height: 1.45; }
 
 .srv-flecha {

@@ -2,6 +2,7 @@ import { Component, DestroyRef, computed, effect, inject, signal } from '@angula
 import { RouterLink } from '@angular/router';
 import { NgTemplateOutlet } from '@angular/common';
 import { SliderService } from '../../shared/services/slider/slider.service';
+import { CmsService } from '../../shared/services/cms/cms.service';
 import { Banner, esEnlaceExterno } from '../../shared/models/slider/banner';
 
 const INTERVALO_MS = 6000;
@@ -21,6 +22,7 @@ const INTERVALO_MS = 6000;
 })
 export class SliderHomeComponent {
   readonly svc = inject(SliderService);
+  private readonly cms = inject(CmsService);
 
   readonly slides = this.svc.vigentes;
   readonly actual = signal(0);
@@ -100,5 +102,13 @@ export class SliderHomeComponent {
   }
 
   externo = (b: Banner) => esEnlaceExterno(b.enlaceUrl);
+
+  /** Nombre accesible de una imagen-enlace sin texto alternativo: título del banner o de la página de destino */
+  nombreEnlace(b: Banner): string {
+    if (b.titulo) return b.titulo;
+    const destino = (b.enlaceUrl ?? '').split(/[?#]/)[0];
+    const p = this.cms.paginas().find((x) => this.cms.urlPagina(x) === destino || this.cms.rutaPagina(x.id) === destino);
+    return p ? p.titulo.replace(/^\s*\d+(?:\.\d+)*\.?\s+/, '') : 'Ver más información';
+  }
   conTexto = (b: Banner) => !!(b.titulo || b.descripcion || (b.textoBoton && b.enlaceUrl));
 }

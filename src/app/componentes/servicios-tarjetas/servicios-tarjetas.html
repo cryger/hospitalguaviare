@@ -1,7 +1,7 @@
 <ul class="servicios">
   @for (s of tarjetas(); track s.id) {
     <li>
-      <a class="srv" [class]="'tono-' + s.tono" [routerLink]="s.url">
+      <a class="srv" [class]="'tono-' + s.tono" [routerLink]="s.url" [attr.aria-label]="'Conocer ' + s.titulo" [attr.aria-describedby]="s.resumen ? 'srv-res-' + s.id : null">
         <span class="srv-media">
           @if (s.imagen) {
             <img [src]="s.imagen" [alt]="s.alt" loading="lazy" />
@@ -19,7 +19,7 @@
         <span class="srv-cuerpo">
           @if (mostrarCategoria() && s.categoria) { <span class="srv-cat">{{ s.categoria }}</span> }
           @if (nivel() === 2) { <h2>{{ s.titulo }}</h2> } @else { <h3>{{ s.titulo }}</h3> }
-          @if (s.resumen) { <span class="srv-resumen">{{ s.resumen }}</span> }
+          @if (s.resumen) { <span class="srv-resumen" [id]="'srv-res-' + s.id">{{ s.resumen }}</span> }
           <span class="srv-ir">Conocer el servicio <span aria-hidden="true">→</span></span>
         </span>
       </a>

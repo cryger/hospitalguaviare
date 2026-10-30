@@ -8,16 +8,16 @@
       @for (b of slides(); track b.id; let i = $index) {
         @let activa = i === indice();
         <div class="carousel-item" [class.active]="activa" [class.con-texto]="conTexto(b)" role="group" aria-roledescription="diapositiva"
-             [attr.aria-label]="(i + 1) + ' de ' + total()" [attr.aria-hidden]="!activa" [attr.inert]="activa ? null : ''">
+             [attr.aria-label]="(i + 1) + ' de ' + total()" [attr.inert]="activa ? null : ''">
           <!-- Imagen (si no hay botón, toda la imagen es el enlace) -->
           @if (b.enlaceUrl && !b.textoBoton) {
             @if (externo(b)) {
-              <a class="enlace-imagen" [href]="b.enlaceUrl" [attr.target]="b.nuevaPestana ? '_blank' : null" [attr.rel]="b.nuevaPestana ? 'noopener' : null">
+              <a class="enlace-imagen" [href]="b.enlaceUrl" [attr.aria-label]="b.alt ? null : nombreEnlace(b)" [attr.target]="b.nuevaPestana ? '_blank' : null" [attr.rel]="b.nuevaPestana ? 'noopener' : null">
                 <ng-container *ngTemplateOutlet="imagen; context: { $implicit: b, i }" />
                 @if (b.nuevaPestana) { <span class="visually-hidden">(abre en otra pestaña)</span> }
               </a>
             } @else {
-              <a class="enlace-imagen" [routerLink]="b.enlaceUrl"><ng-container *ngTemplateOutlet="imagen; context: { $implicit: b, i }" /></a>
+              <a class="enlace-imagen" [routerLink]="b.enlaceUrl" [attr.aria-label]="b.alt ? null : nombreEnlace(b)"><ng-container *ngTemplateOutlet="imagen; context: { $implicit: b, i }" /></a>
             }
           } @else {
             <ng-container *ngTemplateOutlet="imagen; context: { $implicit: b, i }" />

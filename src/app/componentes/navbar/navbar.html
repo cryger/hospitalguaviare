@@ -37,9 +37,9 @@
               <ul class="submenu-govco cms-submenu" [id]="'submenu-' + item.id">
                 <li>
                   @if (item.externo) {
-                    <a class="submenu-link-govco" [href]="item.url" target="_blank" rel="noopener" (click)="cerrarMenu()">Ver toda la sección</a>
+                    <a class="submenu-link-govco submenu-todo" [href]="item.url" target="_blank" rel="noopener" (click)="cerrarMenu()">{{ item.titulo }}</a>
                   } @else {
-                    <a class="submenu-link-govco submenu-todo" [routerLink]="item.url" (click)="cerrarMenu()">Ver toda la sección</a>
+                    <a class="submenu-link-govco submenu-todo" [routerLink]="item.url" (click)="cerrarMenu()">{{ item.titulo }}</a>
                   }
                 </li>
                 @for (h of item.hijos; track h.id) {
