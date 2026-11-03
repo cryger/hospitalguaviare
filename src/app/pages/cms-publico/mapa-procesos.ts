@@ -4,6 +4,7 @@ import { CmsEntrada, CmsMultimedia } from '../../shared/models/cms/cms.models';
 import { normalizar } from '../../shared/utils/busqueda';
 import { IconoCms } from '../../shared/components/icono-cms/icono-cms';
 import { VisorDocumentos, extensionDe, sePuedeVer } from '../../shared/components/visor-documentos/visor-documentos.service';
+import { ImagenOptimizada } from '../../shared/directives/imagen-optimizada.directive';
 
 /** Grupos del mapa de procesos en el orden en que se muestran (campo «Grupo» de la entrada) */
 export const GRUPOS_PROCESOS = [
@@ -52,7 +53,7 @@ const ICONOS: [RegExp, string][] = [
  */
 @Component({
   selector: 'app-mapa-procesos',
-  imports: [IconoCms],
+  imports: [ImagenOptimizada, IconoCms],
   templateUrl: './mapa-procesos.html',
   styleUrl: './mapa-procesos.css',
 })

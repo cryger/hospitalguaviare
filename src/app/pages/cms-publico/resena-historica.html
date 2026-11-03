@@ -4,7 +4,7 @@
     <section class="portada" [class.sin-foto]="!portada()">
       @if (portada(); as img) {
         <button type="button" class="portada-img" (click)="ampliar.emit(img)" [attr.aria-label]="'Ampliar imagen: ' + (img.alt || img.titulo)">
-          <img [src]="img.url" [alt]="img.alt || ''" fetchpriority="high" />
+          <img [appImagen]="img.url" [anchoMaximo]="1920" sizes="100vw" [alt]="img.alt || ''" fetchpriority="high" />
         </button>
       } @else {
         <div class="portada-img placeholder" aria-hidden="true">
@@ -46,7 +46,7 @@
               <figure class="hito-foto" [class.vacia]="!h.imagen">
                 @if (h.imagen; as img) {
                   <button type="button" (click)="ampliar.emit(img)" [attr.aria-label]="'Ampliar imagen: ' + (img.alt || img.titulo)">
-                    <img [src]="img.url" [alt]="img.alt || ''" loading="lazy" />
+                    <img [appImagen]="img.url" [anchoMaximo]="828" sizes="(max-width: 576px) 100vw, 400px" [alt]="img.alt || ''" loading="lazy" />
                   </button>
                 } @else {
                   <div class="foto-pendiente" aria-hidden="true">
@@ -79,7 +79,7 @@
         @for (m of galeria(); track m.id) {
           <li>
             <button type="button" (click)="ampliar.emit(m)" [attr.aria-label]="'Ampliar imagen: ' + (m.alt || m.titulo)">
-              <img [src]="m.url" [alt]="m.alt || ''" loading="lazy" />
+              <img [appImagen]="m.url" [anchoMaximo]="640" sizes="(max-width: 576px) 50vw, 300px" [alt]="m.alt || ''" loading="lazy" />
             </button>
             @if (m.descripcion || m.titulo) { <span class="pie">{{ m.descripcion || m.titulo }}</span> }
           </li>

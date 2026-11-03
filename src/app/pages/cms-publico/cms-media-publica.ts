@@ -2,16 +2,18 @@ import { Component, computed, inject, input } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { CmsMultimedia, ICONOS_MULTIMEDIA } from '../../shared/models/cms/cms.models';
 import { VisorDocumentos, sePuedeVer } from '../../shared/components/visor-documentos/visor-documentos.service';
+import { ImagenOptimizada } from '../../shared/directives/imagen-optimizada.directive';
 
 /** Muestra un archivo multimedia en el sitio público según su tipo */
 @Component({
+  imports: [ImagenOptimizada],
   selector: 'app-cms-media-publica',
   template: `
     @if (media(); as m) {
       @switch (m.tipo) {
         @case ('imagen') {
           <figure class="figura">
-            <img [src]="m.url" [alt]="m.alt || m.titulo || ''" loading="lazy" />
+            <img [appImagen]="m.url" [anchoMaximo]="1200" sizes="(max-width: 576px) 100vw, 800px" [alt]="m.alt || m.titulo || ''" loading="lazy" />
             @if (m.descripcion) { <figcaption>{{ m.descripcion }}</figcaption> }
           </figure>
         }

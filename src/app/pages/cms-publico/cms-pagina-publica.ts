@@ -23,6 +23,7 @@ import { Glosario } from './glosario';
 import { VisorDocumentos, sePuedeVer } from '../../shared/components/visor-documentos/visor-documentos.service';
 import { normalizar, resaltar as resaltarTexto, terminosDe } from '../../shared/utils/busqueda';
 import { slugCategoria } from '../../shared/utils/categorias';
+import { ImagenOptimizada } from '../../shared/directives/imagen-optimizada.directive';
 
 const POR_PAGINA = 9;
 
@@ -62,7 +63,7 @@ type Orden = 'predeterminado' | 'recientes' | 'antiguas' | 'az';
 
 @Component({
   selector: 'app-cms-pagina-publica',
-  imports: [RouterLink, DatePipe, NgTemplateOutlet, CmsMediaPublica, BuscadorGovco, CalendarioEventos, ResenaHistorica, ServiciosTarjetas, IconoCms, Organigrama, SedesHorarios, PlataformaEstrategica, DirectorioInstitucional, MapaProcesos, PreguntasFrecuentes, Glosario],
+  imports: [ImagenOptimizada, RouterLink, DatePipe, NgTemplateOutlet, CmsMediaPublica, BuscadorGovco, CalendarioEventos, ResenaHistorica, ServiciosTarjetas, IconoCms, Organigrama, SedesHorarios, PlataformaEstrategica, DirectorioInstitucional, MapaProcesos, PreguntasFrecuentes, Glosario],
   templateUrl: './cms-pagina-publica.html',
   styleUrls: ['./cms-pagina-publica.css', './cms-listados.css'],
 })

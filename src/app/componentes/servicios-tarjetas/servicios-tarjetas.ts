@@ -4,6 +4,7 @@ import { CmsService } from '../../shared/services/cms/cms.service';
 import { CmsEntrada } from '../../shared/models/cms/cms.models';
 import { normalizar } from '../../shared/utils/busqueda';
 import { leerIcono } from '../../shared/iconos/iconos';
+import { ImagenOptimizada } from '../../shared/directives/imagen-optimizada.directive';
 
 /** Íconos de línea (24×24) por servicio; si no hay uno propio se usa el de su categoría */
 const ICONOS: Record<string, string> = {
@@ -80,7 +81,7 @@ export function aspectoServicio(e: Pick<CmsEntrada, 'slug' | 'titulo' | 'categor
  */
 @Component({
   selector: 'app-servicios-tarjetas',
-  imports: [RouterLink],
+  imports: [ImagenOptimizada, RouterLink],
   templateUrl: './servicios-tarjetas.html',
   styleUrl: './servicios-tarjetas.css',
 })

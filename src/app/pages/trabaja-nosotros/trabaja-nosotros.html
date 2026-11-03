@@ -44,7 +44,7 @@
   <article class="vacante" [class.sin-img]="!v.imagenUrl" [class.cerrada]="v.estado === 'cerrada'">
     @if (v.imagenUrl) {
       <a class="vacante-img" [href]="v.imagenUrl" target="_blank" rel="noopener" [attr.aria-label]="'Ver imagen completa: ' + v.titulo">
-        <img [src]="v.imagenUrl" [alt]="'Pieza gráfica de la convocatoria ' + v.titulo" loading="lazy">
+        <img [appImagen]="v.imagenUrl" [anchoMaximo]="828" sizes="(max-width: 576px) 100vw, 400px" [alt]="'Pieza gráfica de la convocatoria ' + v.titulo" loading="lazy">
       </a>
     }
     <div class="vacante-cuerpo">

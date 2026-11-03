@@ -142,7 +142,7 @@
           @for (d of infografias(); track d.archivo.id) {
             <li>
               <button type="button" (click)="ver(d, infografias())" [attr.aria-label]="'Ampliar infografía: ' + d.etiqueta">
-                <img [src]="d.archivo.url" [alt]="d.archivo.alt || d.etiqueta" loading="lazy" />
+                <img [appImagen]="d.archivo.url" [anchoMaximo]="828" sizes="(max-width: 576px) 100vw, 400px" [alt]="d.archivo.alt || d.etiqueta" loading="lazy" />
                 <span>{{ d.etiqueta }}</span>
               </button>
             </li>

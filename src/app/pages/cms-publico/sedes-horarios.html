@@ -37,7 +37,7 @@
 
       <div class="sede-mapa">
         @if (s.foto; as f) {
-          <img class="sede-foto" [src]="f.url" [alt]="f.alt || ''" loading="lazy" />
+          <img class="sede-foto" [appImagen]="f.url" [anchoMaximo]="1200" sizes="(max-width: 576px) 100vw, 600px" [alt]="f.alt || ''" loading="lazy" />
         }
         <iframe [src]="s.mapa" [title]="'Mapa de ubicación: ' + s.entrada.titulo" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
       </div>

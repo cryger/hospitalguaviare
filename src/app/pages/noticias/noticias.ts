@@ -2,6 +2,7 @@ import { Component, computed, inject, OnInit, signal } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { CmsService } from '../../shared/services/cms/cms.service';
+import { ImagenOptimizada } from '../../shared/directives/imagen-optimizada.directive';
 
 interface NoticiaTarjeta {
   id: number;
@@ -21,7 +22,7 @@ interface NoticiaTarjeta {
 @Component({
   selector: 'app-noticias',
   standalone: true,
-  imports: [DatePipe, RouterLink],
+  imports: [ImagenOptimizada, DatePipe, RouterLink],
   templateUrl: './noticias.html',
   styleUrls: ['./noticias.css'],
 })

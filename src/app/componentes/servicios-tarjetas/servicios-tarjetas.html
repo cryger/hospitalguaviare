@@ -5,7 +5,7 @@
       <div class="srv" [class]="'tono-' + s.tono">
         <span class="srv-media">
           @if (s.imagen) {
-            <img [src]="s.imagen" [alt]="s.alt" loading="lazy" />
+            <img [appImagen]="s.imagen" [anchoMaximo]="640" sizes="(max-width: 576px) 100vw, 320px" [alt]="s.alt" loading="lazy" />
           } @else {
             <span class="srv-fondo" aria-hidden="true">
               @if (s.govco) { <span class="icono-govco srv-glifo">{{ s.govco }}</span> }

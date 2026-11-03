@@ -6,6 +6,7 @@ import { normalizar } from '../../shared/utils/busqueda';
 import { EstadoHorario, TramoHorario, ahoraColombia, estadoHorario, horaLegible, leerHorario } from '../../shared/utils/horarios';
 import { IconoCms } from '../../shared/components/icono-cms/icono-cms';
 import { Contacto, leerContactos } from '../../shared/utils/contactos';
+import { ImagenOptimizada } from '../../shared/directives/imagen-optimizada.directive';
 
 interface Sede {
   entrada: CmsEntrada;
@@ -43,7 +44,7 @@ const ICONOS: [RegExp, string][] = [
  */
 @Component({
   selector: 'app-sedes-horarios',
-  imports: [IconoCms],
+  imports: [ImagenOptimizada, IconoCms],
   templateUrl: './sedes-horarios.html',
   styleUrl: './sedes-horarios.css',
 })

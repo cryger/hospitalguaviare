@@ -22,7 +22,7 @@
     @for (noticia of noticiasPaginadas(); track noticia.id) {
       <article class="noticia-card">
         <div class="noticia-imagen">
-          <img [src]="noticia.imagen || 'assets/noticias/noticias_1.jpg'" [alt]="noticia.alt" loading="lazy">
+          <img [appImagen]="noticia.imagen || 'assets/noticias/noticias_1.jpg'" [anchoMaximo]="828" sizes="(max-width: 576px) 100vw, 400px" [alt]="noticia.alt" loading="lazy">
         </div>
 
         <div class="noticia-contenido">

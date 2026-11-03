@@ -3,6 +3,7 @@ import { RouterLink } from '@angular/router';
 import { NgTemplateOutlet } from '@angular/common';
 import { SliderService } from '../../shared/services/slider/slider.service';
 import { CmsService } from '../../shared/services/cms/cms.service';
+import { ImagenOptimizada } from '../../shared/directives/imagen-optimizada.directive';
 import { Banner, esEnlaceExterno } from '../../shared/models/slider/banner';
 
 const INTERVALO_MS = 6000;
@@ -16,7 +17,7 @@ const INTERVALO_MS = 6000;
  */
 @Component({
   selector: 'app-slider-home',
-  imports: [RouterLink, NgTemplateOutlet],
+  imports: [RouterLink, NgTemplateOutlet, ImagenOptimizada],
   templateUrl: './slider-home.html',
   styleUrls: ['./slider-home.css'],
 })

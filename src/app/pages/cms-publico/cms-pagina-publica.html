@@ -72,7 +72,7 @@
       <div class="tarjetas">
         @for (r of relacionadas(); track r.id) {
           <a class="tarjeta" [routerLink]="url(r)">
-            @if (imagenDe(r); as img) { <img [src]="img.url" [alt]="img.alt || ''" loading="lazy" /> }
+            @if (imagenDe(r); as img) { <img [appImagen]="img.url" [anchoMaximo]="640" sizes="(max-width: 576px) 100vw, 320px" [alt]="img.alt || ''" loading="lazy" /> }
             <div class="tarjeta-cuerpo"><h3>{{ r.titulo }}</h3></div>
           </a>
         }
@@ -172,7 +172,7 @@
               <a class="pub" [routerLink]="url(e)">
                 <span class="pub-img">
                   @if (imagenDe(e); as img) {
-                    <img [src]="img.url" [alt]="img.alt || ''" loading="lazy" />
+                    <img [appImagen]="img.url" [anchoMaximo]="828" sizes="(max-width: 576px) 100vw, 400px" [alt]="img.alt || ''" loading="lazy" />
                   } @else {
                     <span class="pub-sin-img" aria-hidden="true">
                       <svg viewBox="0 0 24 24"><path d="M5 4h11a1 1 0 0 1 1 1v14a1 1 0 0 0 1 1H6a2 2 0 0 1-2-2V5a1 1 0 0 1 1-1Zm12 4h2a1 1 0 0 1 1 1v9a2 2 0 0 1-2 2M8 8h6M8 12h6M8 16h4" /></svg>
@@ -352,7 +352,7 @@
             <li>
               @if (m.tipo === 'imagen') {
                 <button type="button" class="galeria-item" (click)="lightbox.set(m)" [attr.aria-label]="'Ampliar ' + (m.alt || m.titulo || 'imagen')">
-                  <img [src]="m.url" [alt]="m.alt || ''" loading="lazy" />
+                  <img [appImagen]="m.url" [anchoMaximo]="640" sizes="(max-width: 576px) 50vw, 300px" [alt]="m.alt || ''" loading="lazy" />
                 </button>
               } @else {
                 <app-cms-media-publica [media]="m" />

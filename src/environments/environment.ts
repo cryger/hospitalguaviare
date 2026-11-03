@@ -13,4 +13,8 @@ export const environment = {
     apiUrl: API_URL,
     maxArchivoMb: 20,
   },
+  imagenes: {
+    /** Optimizador de imágenes de Vercel (vercel.json › images). Vacío = imágenes originales */
+    optimizador: '/_vercel/image',
+  },
 };

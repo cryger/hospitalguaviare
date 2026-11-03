@@ -10,4 +10,8 @@ export const environment = {
     apiUrl: 'http://localhost:3000/api',
     maxArchivoMb: 20,
   },
+  imagenes: {
+    /** En ng serve no existe el optimizador de Vercel: se usan las imágenes originales */
+    optimizador: '',
+  },
 };

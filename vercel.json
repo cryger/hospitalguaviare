@@ -5,7 +5,7 @@
   "outputDirectory": "dist/hospitalguaviare/browser",
   "rewrites": [
     {
-      "source": "/((?!\\.well-known/)(?!.*\\.[A-Za-z0-9]{2,5}$).*)",
+      "source": "/((?!\\.well-known/)(?!_vercel/)(?!.*\\.[A-Za-z0-9]{2,5}$).*)",
       "destination": "/index.html"
     }
   ],
@@ -38,13 +38,62 @@
       ]
     },
     {
-      "source": "/assets/(fonts|img)/(.*)",
+      "source": "/assets/fonts/(.*)",
       "headers": [
         {
           "key": "Cache-Control",
-          "value": "public, max-age=604800"
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/assets/(img|noticias|senas|vacantes)/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=2592000, stale-while-revalidate=604800"
+        }
+      ]
+    },
+    {
+      "source": "/(HSJG-LOGO-2.ico|HSJG-LOGO_POSITIVO.png|apple-touch-icon.png)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=2592000, stale-while-revalidate=604800"
+        }
+      ]
+    },
+    {
+      "source": "/assets/semillas/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600, stale-while-revalidate=86400"
         }
       ]
     }
-  ]
+  ],
+  "images": {
+    "sizes": [
+      256,
+      384,
+      640,
+      828,
+      1080,
+      1200,
+      1920
+    ],
+    "domains": [
+      "esehospitalguaviare.gov.co",
+      "www.esehospitalguaviare.gov.co"
+    ],
+    "minimumCacheTTL": 2678400,
+    "formats": [
+      "image/webp"
+    ],
+    "qualities": [
+      75
+    ]
+  }
 }

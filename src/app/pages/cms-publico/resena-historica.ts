@@ -1,6 +1,7 @@
 import { Component, computed, inject, input, output } from '@angular/core';
 import { CmsService } from '../../shared/services/cms/cms.service';
 import { CmsEntrada, CmsMultimedia } from '../../shared/models/cms/cms.models';
+import { ImagenOptimizada } from '../../shared/directives/imagen-optimizada.directive';
 
 /** "1990 · Abre sus puertas…", "2004-2005: …", "Hoy — …" */
 const PATRON_HITO = /^\s*((?:\d{4})(?:\s*[-–]\s*\d{4})?|hoy)\s*[·:\-–—|]?\s*/i;
@@ -22,6 +23,7 @@ export interface Hito {
  * - Las demás entradas se muestran como texto al final.
  */
 @Component({
+  imports: [ImagenOptimizada],
   selector: 'app-resena-historica',
   templateUrl: './resena-historica.html',
   styleUrl: './resena-historica.css',
