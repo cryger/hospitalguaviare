@@ -18,6 +18,37 @@
   <link rel="preload" as="image" type="image/webp" href="assets/img/slider/BANNER_PLATAFORMA-2025.webp" media="(min-width: 577px)" fetchpriority="high">
 </head>
 <body>
-  <app-root></app-root>
+  <app-root>
+    <!-- Vista previa instantánea: se pinta antes de que arranque Angular y Angular la reemplaza
+         al iniciar. Imita la barra GOV.CO, el encabezado, el menú y la primera imagen del carrusel
+         (mismas medidas que el sitio) para que el inicio se vea en cuanto llega el HTML. -->
+    <div class="pv" aria-hidden="true">
+      <div class="pv-govco"></div>
+      <div class="pv-cabecera"><img src="assets/img/logo-vista-previa.png" alt="" width="56" height="58"></div>
+      <div class="pv-menu"></div>
+      <div class="pv-main">
+        <picture>
+          <source media="(max-width: 576px)" type="image/webp" srcset="assets/img/slider/BANNER_PLATAFORMA-2025-movil.webp">
+          <source type="image/webp" srcset="assets/img/slider/BANNER_PLATAFORMA-2025.webp">
+          <img class="pv-banner" src="assets/img/slider/BANNER_PLATAFORMA-2025.jpg" alt="" fetchpriority="high">
+        </picture>
+      </div>
+    </div>
+  </app-root>
+  <style>
+    .pv { font-family: system-ui, sans-serif; background: #f6f8f9; min-height: 100vh; }
+    .pv-govco { height: 48px; background: #3366cc; }
+    .pv-cabecera { height: 179px; background: #fff; display: flex; align-items: center; padding: 0 9%; box-sizing: border-box; }
+    .pv-cabecera img { width: 56px; height: auto; }
+    .pv-menu { height: 69px; background: #fff; border-bottom: 3px solid #004884; }
+    .pv-main { padding: 67px 56px 0; }
+    .pv-banner { display: block; width: 100%; aspect-ratio: 1238 / 322; object-fit: cover; border-radius: 8px; background: #0b2a5b; }
+    @media (max-width: 576px) {
+      .pv-cabecera { height: 218px; padding: 0 16px; align-items: flex-start; padding-top: 60px; }
+      .pv-menu { height: 57px; }
+      .pv-main { padding: 39px 28px 0; }
+      .pv-banner { aspect-ratio: 356 / 200; border-radius: 6px 6px 0 0; }
+    }
+  </style>
 </body>
 </html>

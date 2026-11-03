@@ -4,7 +4,7 @@
     <span class="logo-header-govco"></span>
     <div class="container-search-header-govco">
       <!-- Buscador general del portal (BDC GOV.CO v5 · buscador predictivo) -->
-      <app-buscador-govco idCampo="buscador-portal" etiqueta="Buscar en el portal" [etiquetaOculta]="true" [compacto]="true" [limpiarAlIr]="true"
+      <app-buscador-govco class="compacto etiqueta-oculta" idCampo="buscador-portal" etiqueta="Buscar en el portal" [etiquetaOculta]="true" [compacto]="true" [limpiarAlIr]="true"
           placeholder="Buscar en el portal" etiquetaBoton="Buscar en el portal"
           [sugerencias]="sugerencias()" [(valor)]="consulta" (enviar)="irAResultados($event)" (focusin)="preparar()" />
     </div>

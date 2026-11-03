@@ -1,4 +1,4 @@
-import { Component, DestroyRef, computed, effect, inject, signal } from '@angular/core';
+import { Component, DestroyRef, afterNextRender, computed, effect, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { NgTemplateOutlet } from '@angular/common';
 import { SliderService } from '../../shared/services/slider/slider.service';
@@ -34,6 +34,12 @@ export class SliderHomeComponent {
   readonly total = computed(() => this.slides().length);
   readonly indice = computed(() => (this.total() ? this.actual() % this.total() : 0));
 
+  /**
+   * Las imágenes de las demás diapositivas se piden cuando la página ya cargó (o al cambiar de
+   * diapositiva): así no compiten con la primera, que es el elemento principal del inicio (LCP).
+   */
+  readonly cargarResto = signal(false);
+
   private temporizador: ReturnType<typeof setInterval> | null = null;
   private inicioToque: number | null = null;
 
@@ -47,6 +53,17 @@ export class SliderHomeComponent {
       if (activo) this.temporizador = setInterval(() => this.siguiente(), INTERVALO_MS);
     });
     inject(DestroyRef).onDestroy(() => this.detener());
+
+    // Resto de imágenes: un momento después de terminar de cargar la página
+    afterNextRender(() => {
+      const despues = () => setTimeout(() => this.cargarResto.set(true), 1500);
+      if (document.readyState === 'complete') despues();
+      else window.addEventListener('load', despues, { once: true });
+    });
+    // Si el usuario o el avance automático cambian de diapositiva, se cargan ya
+    effect(() => {
+      if (this.actual() !== 0) this.cargarResto.set(true);
+    });
   }
 
   private detener(): void {

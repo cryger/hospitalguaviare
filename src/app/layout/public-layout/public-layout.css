@@ -9,3 +9,7 @@
 }
 .saltar-contenido:focus { top: 0; outline: 3px solid #ffab00; outline-offset: 2px; }
 #contenido-principal:focus { outline: none; }
+
+/* El contenido ocupa al menos la pantalla: mientras la página se dibuja, el pie no aparece
+   arriba para luego saltar hacia abajo (CLS) */
+#contenido-principal { display: block; min-height: 100vh; }

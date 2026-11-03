@@ -32,6 +32,7 @@ export class CmsLocalDataSource extends CmsDataSource {
 
   constructor() {
     super();
+    this.abrirLote();
     this.sembrarSiVacio();
     this.sembrarModulos();
     this.sembrarEventos();
@@ -60,7 +61,8 @@ export class CmsLocalDataSource extends CmsDataSource {
       .then(() => this.clasificarPublicaciones())
       .then(() => this.clasificarDocumentosTalentoHumano())
       .then(() => this.organizarComiteConvivencia())
-      .then(() => this.ordenarTalentoHumano());
+      .then(() => this.ordenarTalentoHumano())
+      .finally(() => this.guardarLotePorPartes());
   }
 
   /**
@@ -69,7 +71,7 @@ export class CmsLocalDataSource extends CmsDataSource {
    */
   private ordenarTalentoHumano(): void {
     const clave = this.prefijo + 'orden-talento-humano-v1';
-    if (localStorage.getItem(clave) === '1') return;
+    if (this.almacen.getItem(clave) === '1') return;
     const paginas = this.leer<CmsPagina>('paginas');
     const th = paginas.find((p) => p.slug === 'talento-humano');
     const politicas = paginas.find((p) => p.slug === 'politicas-lineamientos-y-manuales');
@@ -96,7 +98,7 @@ export class CmsLocalDataSource extends CmsDataSource {
       });
     }
     this.escribir('entradas', entradas);
-    localStorage.setItem(clave, '1');
+    this.almacen.setItem(clave, '1');
   }
 
   /**
@@ -109,7 +111,7 @@ export class CmsLocalDataSource extends CmsDataSource {
    */
   private organizarPlataformaEstrategica(): void {
     const clave = this.prefijo + 'plataforma-estrategica-v1';
-    if (localStorage.getItem(clave) === '1') return;
+    if (this.almacen.getItem(clave) === '1') return;
     const pagina = this.leer<CmsPagina>('paginas').find((p) => p.slug === 'mision-vision-funciones-y-deberes');
     if (!pagina) return;
     const ejes: Record<string, { categoria: string; icono: string | null; lista: string[] }> = {
@@ -136,12 +138,12 @@ export class CmsLocalDataSource extends CmsDataSource {
       e.actualizadoEn = t;
     }
     this.escribir('entradas', entradas);
-    localStorage.setItem(clave, '1');
+    this.almacen.setItem(clave, '1');
   }
 
   private organizarComiteConvivencia(): void {
     const clave = this.prefijo + 'comite-convivencia-v2';
-    if (localStorage.getItem(clave) === '1') return;
+    if (this.almacen.getItem(clave) === '1') return;
     const paginas = this.leer<CmsPagina>('paginas');
     const pagina = paginas.find((p) => p.slug === 'comite-de-convivencia-laboral');
     const entradas = this.leer<CmsEntrada>('entradas');
@@ -182,7 +184,7 @@ export class CmsLocalDataSource extends CmsDataSource {
       creadoEn: t,
     });
     this.escribir('entradas', entradas);
-    localStorage.setItem(clave, '1');
+    this.almacen.setItem(clave, '1');
   }
 
   /**
@@ -191,7 +193,7 @@ export class CmsLocalDataSource extends CmsDataSource {
    */
   private clasificarDocumentosTalentoHumano(): void {
     const clave = this.prefijo + 'tipos-talento-humano';
-    if (localStorage.getItem(clave) === '1') return;
+    if (this.almacen.getItem(clave) === '1') return;
     const pagina = this.leer<CmsPagina>('paginas').find((p) => p.slug === 'talento-humano');
     if (!pagina) return;
     const tipos: Record<string, string> = {
@@ -206,7 +208,7 @@ export class CmsLocalDataSource extends CmsDataSource {
       if (e.paginaId === pagina.id && !e.categoria && tipos[e.slug]) e.categoria = tipos[e.slug];
     }
     this.escribir('entradas', entradas);
-    localStorage.setItem(clave, '1');
+    this.almacen.setItem(clave, '1');
   }
 
   /**
@@ -215,31 +217,112 @@ export class CmsLocalDataSource extends CmsDataSource {
    */
   private clasificarPublicaciones(): void {
     const clave = this.prefijo + 'categorias-publicaciones';
-    if (localStorage.getItem(clave) === '1') return;
+    if (this.almacen.getItem(clave) === '1') return;
     const listados = new Set(this.leer<CmsPagina>('paginas').filter((p) => p.plantilla === 'listado').map((p) => p.id));
     const entradas = this.leer<CmsEntrada>('entradas');
     for (const e of entradas) {
       if (listados.has(e.paginaId) && !e.categoria) e.categoria = categoriaSugerida(e.titulo);
     }
     this.escribir('entradas', entradas);
-    localStorage.setItem(clave, '1');
+    this.almacen.setItem(clave, '1');
   }
 
   /** Contenido migrado del portal anterior (se descarga una sola vez desde /assets/semillas) */
   private semillaNoticias: Promise<void>;
 
   /* ===== Helpers de almacenamiento ===== */
-  private leer<T>(c: CmsColeccion): T[] {
+  /**
+   * Lote de escritura: mientras se siembra el contenido inicial (primera visita) las colecciones
+   * se leen y escriben en memoria y se guardan en localStorage UNA sola vez al terminar.
+   * Antes cada semilla volvía a serializar y guardar todas las entradas y la multimedia
+   * (~18 MB escritos en la primera visita, más de 1 s de bloqueo en un celular).
+   */
+  private lote: { valores: Map<string, unknown>; sucios: Set<string> } | null = null;
+
+  /** localStorage, o el lote en memoria mientras está abierto */
+  private readonly almacen = {
+    getItem: (k: string): string | null => {
+      const v = this.lote?.valores.get(k);
+      if (v !== undefined) return typeof v === 'string' ? v : JSON.stringify(v);
+      return localStorage.getItem(k);
+    },
+    setItem: (k: string, v: string): void => {
+      if (this.lote) {
+        this.lote.valores.set(k, v);
+        this.lote.sucios.add(k);
+      } else {
+        localStorage.setItem(k, v);
+      }
+    },
+  };
+
+  private abrirLote(): void {
+    if (this.lote) return;
+    this.lote = { valores: new Map(), sucios: new Set() };
+    // Si la persona cierra o cambia de pestaña antes de terminar, se guarda lo que haya
+    if (typeof window !== 'undefined') window.addEventListener('pagehide', () => this.guardarLote(false));
+  }
+
+  /** Guarda en localStorage lo que cambió en el lote; si cerrar, vuelve a escribir directo */
+  private guardarLote(cerrar = true): void {
+    const lote = this.lote;
+    if (!lote) return;
     try {
-      return JSON.parse(localStorage.getItem(this.prefijo + c) || '[]');
+      for (const k of lote.sucios) {
+        const v = lote.valores.get(k);
+        localStorage.setItem(k, typeof v === 'string' ? v : JSON.stringify(v));
+      }
+      lote.sucios.clear();
+    } catch {
+      console.warn('No se pudo guardar el contenido inicial: el almacenamiento local del navegador está lleno.');
+    }
+    if (cerrar) this.lote = null;
+  }
+
+  /** Como guardarLote, pero una colección por tarea para no bloquear el navegador */
+  private async guardarLotePorPartes(): Promise<void> {
+    const lote = this.lote;
+    if (!lote) return;
+    for (const k of [...lote.sucios]) {
+      await new Promise((r) => setTimeout(r, 0));
+      try {
+        const v = lote.valores.get(k);
+        localStorage.setItem(k, typeof v === 'string' ? v : JSON.stringify(v));
+        lote.sucios.delete(k);
+      } catch {
+        console.warn('No se pudo guardar el contenido inicial: el almacenamiento local del navegador está lleno.');
+        break;
+      }
+    }
+    this.lote = null;
+  }
+
+  private leer<T>(c: CmsColeccion): T[] {
+    const k = this.prefijo + c;
+    try {
+      if (this.lote) {
+        let v = this.lote.valores.get(k);
+        if (typeof v === 'string' || v === undefined) {
+          v = JSON.parse((v as string | undefined) ?? localStorage.getItem(k) ?? '[]');
+          this.lote.valores.set(k, v);
+        }
+        return v as T[];
+      }
+      return JSON.parse(localStorage.getItem(k) || '[]');
     } catch {
       return [];
     }
   }
 
   private escribir<T>(c: CmsColeccion, data: T[]): void {
+    const k = this.prefijo + c;
+    if (this.lote) {
+      this.lote.valores.set(k, data);
+      this.lote.sucios.add(k);
+      return;
+    }
     try {
-      localStorage.setItem(this.prefijo + c, JSON.stringify(data));
+      localStorage.setItem(k, JSON.stringify(data));
     } catch (e) {
       throw new Error(
         'Se llenó el almacenamiento local del navegador. Elimine archivos de la biblioteca o conecte la API.',
@@ -357,7 +440,7 @@ export class CmsLocalDataSource extends CmsDataSource {
   private readonly versionSemilla = 26;
 
   private sembrarSiVacio(): void {
-    if (localStorage.getItem(this.prefijo + 'menus')) return;
+    if (this.almacen.getItem(this.prefijo + 'menus')) return;
     this.cargarSemilla();
   }
 
@@ -374,17 +457,17 @@ export class CmsLocalDataSource extends CmsDataSource {
       actualizadoEn: t,
       ...p,
     }));
-    localStorage.setItem(this.prefijo + 'menus', JSON.stringify(menus));
-    localStorage.setItem(this.prefijo + 'paginas', JSON.stringify(paginas));
-    localStorage.setItem(this.prefijo + 'entradas', '[]');
-    if (!localStorage.getItem(this.prefijo + 'multimedia')) localStorage.setItem(this.prefijo + 'multimedia', '[]');
-    localStorage.setItem(this.prefijo + 'version', String(this.versionSemilla));
+    this.almacen.setItem(this.prefijo + 'menus', JSON.stringify(menus));
+    this.almacen.setItem(this.prefijo + 'paginas', JSON.stringify(paginas));
+    this.almacen.setItem(this.prefijo + 'entradas', '[]');
+    if (!this.almacen.getItem(this.prefijo + 'multimedia')) this.almacen.setItem(this.prefijo + 'multimedia', '[]');
+    this.almacen.setItem(this.prefijo + 'version', String(this.versionSemilla));
   }
 
   /** Vacantes e invitaciones a cotizar migradas del portal anterior (solo si están vacías) */
   private sembrarModulos(): void {
     const clave = this.prefijo + 'modulos-semilla';
-    if (localStorage.getItem(clave) === '1') return;
+    if (this.almacen.getItem(clave) === '1') return;
     const t = this.ahora();
     const sembrar = (c: CmsColeccion, datos: object[]) => {
       if (this.leer(c).length) return;
@@ -392,29 +475,29 @@ export class CmsLocalDataSource extends CmsDataSource {
     };
     sembrar('vacantes', VACANTES_SEMILLA);
     sembrar('cotizaciones', COTIZACIONES_SEMILLA);
-    localStorage.setItem(clave, '1');
+    this.almacen.setItem(clave, '1');
   }
 
   /** Siembra una colección una sola vez (si está vacía) */
   private sembrarColeccion(c: CmsColeccion, nombre: string, datos: object[]): void {
     const clave = this.prefijo + nombre;
-    if (localStorage.getItem(clave) === '1') return;
+    if (this.almacen.getItem(clave) === '1') return;
     if (!this.leer(c).length) {
       const t = this.ahora();
       this.escribir(c, datos.map((d, i) => ({ ...d, id: i + 1, creadoEn: t, actualizadoEn: t })));
     }
-    localStorage.setItem(clave, '1');
+    this.almacen.setItem(clave, '1');
   }
 
   /** Eventos del calendario migrados del portal anterior (una sola vez) */
   private sembrarEventos(): void {
     const clave = this.prefijo + 'eventos-semilla';
-    if (localStorage.getItem(clave) === '1') return;
+    if (this.almacen.getItem(clave) === '1') return;
     if (!this.leer('eventos').length) {
       const t = this.ahora();
       this.escribir('eventos', EVENTOS_SEMILLA.map((e, i) => ({ ...e, id: i + 1, creadoEn: t, actualizadoEn: t })));
     }
-    localStorage.setItem(clave, '1');
+    this.almacen.setItem(clave, '1');
   }
 
   /**
@@ -424,7 +507,7 @@ export class CmsLocalDataSource extends CmsDataSource {
    *   sin borrar ni modificar lo que ya existe.
    */
   private actualizarSemilla(): void {
-    const version = Number(localStorage.getItem(this.prefijo + 'version') || 1);
+    const version = Number(this.almacen.getItem(this.prefijo + 'version') || 1);
     if (version >= this.versionSemilla) return;
     if (version < 3) {
       this.cargarSemilla();
@@ -620,7 +703,7 @@ export class CmsLocalDataSource extends CmsDataSource {
       }
     }
     this.escribir('paginas', paginas);
-    localStorage.setItem(this.prefijo + 'version', String(this.versionSemilla));
+    this.almacen.setItem(this.prefijo + 'version', String(this.versionSemilla));
   }
 
   /**
@@ -643,7 +726,7 @@ export class CmsLocalDataSource extends CmsDataSource {
    */
   private async sembrarDesdeArchivo(nombre: string, ruta: string): Promise<void> {
     const clave = this.prefijo + nombre;
-    if (localStorage.getItem(clave) === '1') return;
+    if (this.almacen.getItem(clave) === '1') return;
     try {
       const r = await fetch(ruta);
       if (!r.ok) return;
@@ -743,7 +826,7 @@ export class CmsLocalDataSource extends CmsDataSource {
       }
       this.escribir('multimedia', multimedia);
       this.escribir('entradas', entradas);
-      localStorage.setItem(clave, '1');
+      this.almacen.setItem(clave, '1');
     } catch {
       /* sin conexión o almacenamiento lleno: el portal sigue funcionando sin este contenido */
     }
@@ -752,7 +835,7 @@ export class CmsLocalDataSource extends CmsDataSource {
   /** Contenido inicial fijo (pie de página, misión y visión…). Se siembra una sola vez por lista */
   private sembrarEntradasFijas(nombre: string, lista: (EntradaPieSemilla & { orden?: number })[]): void {
     const clave = this.prefijo + nombre;
-    if (localStorage.getItem(clave) === '1') return;
+    if (this.almacen.getItem(clave) === '1') return;
     const paginas = this.leer<CmsPagina>('paginas');
     const entradas = this.leer<CmsEntrada>('entradas');
     const t = this.ahora();
@@ -780,7 +863,7 @@ export class CmsLocalDataSource extends CmsDataSource {
       });
     }
     this.escribir('entradas', entradas);
-    localStorage.setItem(clave, '1');
+    this.almacen.setItem(clave, '1');
   }
 }
 

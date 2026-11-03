@@ -1,27 +1,12 @@
 import { Routes } from '@angular/router';
 import { rutaCmsComodin } from './pages/cms-publico/cms-publico.routes';
 import { PublicLayout } from './layout/public-layout/public-layout';
-import { DashboardLayout } from './layout/dashboard-layout/dashboard-layout';
 import { Home } from './componentes/home/home';
-import { CotizacionesPropuestas } from './pages/cotizaciones-propuestas/cotizaciones-propuestas';
-import { TrabajaNosotros } from './pages/trabaja-nosotros/trabaja-nosotros';
-import { InformacionInteres } from './pages/informacion-interes/informacion-interes';
-import { MapaDelSitio } from './pages/mapa-del-sitio/mapa-del-sitio';
-import { Buscar } from './pages/buscar/buscar';
-import { EventosAdmin } from './pages/admin/eventos-admin/eventos-admin';
-import { SliderAdmin } from './pages/admin/slider-admin/slider-admin';
-import { PqrsfComponent } from './pages/pqrsf/pqrsf';
-import { Login } from './pages/login/login';
-import { DashboardHomeComponent } from './pages/dashboardhome/dashboardhome';
-import { Usuarios } from './pages/admin/usuarios/usuarios';
-import { Configuracion } from './pages/admin/configuracion/configuracion';
-import { PqrsfAdminComponent as AdminPqrsf } from './pages/admin/pqrsf-admin/pqrsf-admin';
 import { AuthGuard } from './shared/guards/auth/auth-guard';
 import { moduloGuard } from './shared/guards/modulo/modulo-guard';
-import { CotizacionesPropuestasAdminComponent } from './pages/admin/cotizaciones-propuestas-admin/cotizaciones-propuestas-admin/cotizaciones-propuestas-admin';
-import { AccesibilidadAdmin } from './pages/admin/accesibilidad-admin/accesibilidad-admin';
-import { TrabajaNosotrosAdminComponent } from './pages/admin/trabaja-nosotros-admin/trabaja-nosotros-admin/trabaja-nosotros-admin';
 
+// Solo el inicio y el marco público van en el paquete inicial; el resto de páginas y todo
+// el panel de administración se descargan al entrar a ellos (carga diferida)
 export const routes: Routes = [
 
   // 🌍 SITIO PÚBLICO
@@ -38,19 +23,19 @@ export const routes: Routes = [
         path: 'informacion-de-interes',
         data: { breadcrumb: 'Información de interés' },
         children: [
-          { path: '', component: InformacionInteres, data: { breadcrumb: '' } },
-          { path: 'invitaciones-a-cotizar', component: CotizacionesPropuestas, data: { breadcrumb: 'Invitaciones a cotizar' } },
-          { path: 'trabaja-con-nosotros', component: TrabajaNosotros, data: { breadcrumb: 'Trabaja con nosotros' } },
+          { path: '', loadComponent: () => import('./pages/informacion-interes/informacion-interes').then(m => m.InformacionInteres), data: { breadcrumb: '' } },
+          { path: 'invitaciones-a-cotizar', loadComponent: () => import('./pages/cotizaciones-propuestas/cotizaciones-propuestas').then(m => m.CotizacionesPropuestas), data: { breadcrumb: 'Invitaciones a cotizar' } },
+          { path: 'trabaja-con-nosotros', loadComponent: () => import('./pages/trabaja-nosotros/trabaja-nosotros').then(m => m.TrabajaNosotros), data: { breadcrumb: 'Trabaja con nosotros' } },
         ],
       },
-      { path: 'pqrsf', component: PqrsfComponent, data: { breadcrumb: 'PQRSFD' } },
+      { path: 'pqrsf', loadComponent: () => import('./pages/pqrsf/pqrsf').then(m => m.PqrsfComponent), data: { breadcrumb: 'PQRSFD' } },
       { path: 'sicof', data: { breadcrumb: 'Canal anticorrupción – SICOF' },
         loadComponent: () => import('./pages/sicof/sicof').then(m => m.Sicof) },
       { path: 'solicitudes-contractuales', data: { breadcrumb: 'Solicitudes contractuales' },
         loadComponent: () => import('./pages/solicitudes-contractuales/solicitudes-contractuales').then(m => m.SolicitudesContractuales) },
-      { path: 'mapa-del-sitio', component: MapaDelSitio, data: { breadcrumb: 'Mapa del sitio' } },
-      { path: 'buscar', component: Buscar, data: { breadcrumb: 'Buscar en el portal' } },
-      { path: 'login', component: Login, data: { breadcrumb: 'Iniciar sesión' } },
+      { path: 'mapa-del-sitio', loadComponent: () => import('./pages/mapa-del-sitio/mapa-del-sitio').then(m => m.MapaDelSitio), data: { breadcrumb: 'Mapa del sitio' } },
+      { path: 'buscar', loadComponent: () => import('./pages/buscar/buscar').then(m => m.Buscar), data: { breadcrumb: 'Buscar en el portal' } },
+      { path: 'login', loadComponent: () => import('./pages/login/login').then(m => m.Login), data: { breadcrumb: 'Iniciar sesión' } },
 
       // Direcciones anteriores → nueva estructura (Res. 1519 de 2020)
       // URL del portal anterior
@@ -72,23 +57,23 @@ export const routes: Routes = [
   // 🔐 DASHBOARD ADMIN
   {
     path: 'admin',
-    component: DashboardLayout,
+    loadComponent: () => import('./layout/dashboard-layout/dashboard-layout').then(m => m.DashboardLayout),
     canActivate: [AuthGuard],
     children: [
       // Cada ruta exige su módulo (permisos por rol); si no lo tiene, va a su primera página permitida
-      { path: '', component: DashboardHomeComponent, canActivate: [moduloGuard], data: { breadcrumb: 'Dashboard', modulo: 'resumen' } },
-      { path: 'pqrsf', component: AdminPqrsf, canActivate: [moduloGuard], data: { breadcrumb: 'PQRSFD', modulo: 'pqrsfd' } },
+      { path: '', loadComponent: () => import('./pages/dashboardhome/dashboardhome').then(m => m.DashboardHomeComponent), canActivate: [moduloGuard], data: { breadcrumb: 'Dashboard', modulo: 'resumen' } },
+      { path: 'pqrsf', loadComponent: () => import('./pages/admin/pqrsf-admin/pqrsf-admin').then(m => m.PqrsfAdminComponent), canActivate: [moduloGuard], data: { breadcrumb: 'PQRSFD', modulo: 'pqrsfd' } },
       { path: 'solicitudes-contractuales', canActivate: [moduloGuard], data: { breadcrumb: 'Solicitudes contractuales', modulo: 'contratacion' },
         loadComponent: () => import('./pages/admin/contratacion-admin/contratacion-admin').then(m => m.ContratacionAdmin) },
-      { path: 'cotizaciones', component: CotizacionesPropuestasAdminComponent, canActivate: [moduloGuard], data: { breadcrumb: 'Invitaciones a cotizar', modulo: 'cotizaciones' } },
-      { path: 'vacantes', component: TrabajaNosotrosAdminComponent, canActivate: [moduloGuard], data: { breadcrumb: 'Trabaja con nosotros', modulo: 'vacantes' } },
-      { path: 'eventos', component: EventosAdmin, canActivate: [moduloGuard], data: { breadcrumb: 'Calendario de eventos', modulo: 'eventos' } },
-      { path: 'slider', component: SliderAdmin, canActivate: [moduloGuard], data: { breadcrumb: 'Slider del inicio', modulo: 'slider' } },
-      { path: 'usuarios', component: Usuarios, canActivate: [moduloGuard], data: { breadcrumb: 'Usuarios y permisos', modulo: 'usuarios' } },
-      { path: 'accesibilidad-admin', component: AccesibilidadAdmin, canActivate: [moduloGuard], data: { breadcrumb: 'Administrar Accesibilidad', modulo: 'accesibilidad' } },
-      { path: 'configuracion', component: Configuracion, canActivate: [moduloGuard], data: { breadcrumb: 'Configuración', modulo: 'configuracion' } },
+      { path: 'cotizaciones', loadComponent: () => import('./pages/admin/cotizaciones-propuestas-admin/cotizaciones-propuestas-admin/cotizaciones-propuestas-admin').then(m => m.CotizacionesPropuestasAdminComponent), canActivate: [moduloGuard], data: { breadcrumb: 'Invitaciones a cotizar', modulo: 'cotizaciones' } },
+      { path: 'vacantes', loadComponent: () => import('./pages/admin/trabaja-nosotros-admin/trabaja-nosotros-admin/trabaja-nosotros-admin').then(m => m.TrabajaNosotrosAdminComponent), canActivate: [moduloGuard], data: { breadcrumb: 'Trabaja con nosotros', modulo: 'vacantes' } },
+      { path: 'eventos', loadComponent: () => import('./pages/admin/eventos-admin/eventos-admin').then(m => m.EventosAdmin), canActivate: [moduloGuard], data: { breadcrumb: 'Calendario de eventos', modulo: 'eventos' } },
+      { path: 'slider', loadComponent: () => import('./pages/admin/slider-admin/slider-admin').then(m => m.SliderAdmin), canActivate: [moduloGuard], data: { breadcrumb: 'Slider del inicio', modulo: 'slider' } },
+      { path: 'usuarios', loadComponent: () => import('./pages/admin/usuarios/usuarios').then(m => m.Usuarios), canActivate: [moduloGuard], data: { breadcrumb: 'Usuarios y permisos', modulo: 'usuarios' } },
+      { path: 'accesibilidad-admin', loadComponent: () => import('./pages/admin/accesibilidad-admin/accesibilidad-admin').then(m => m.AccesibilidadAdmin), canActivate: [moduloGuard], data: { breadcrumb: 'Administrar Accesibilidad', modulo: 'accesibilidad' } },
+      { path: 'configuracion', loadComponent: () => import('./pages/admin/configuracion/configuracion').then(m => m.Configuracion), canActivate: [moduloGuard], data: { breadcrumb: 'Configuración', modulo: 'configuracion' } },
       // Cualquier usuario: sus datos y cambio de contraseña
-      { path: 'mi-cuenta', component: Configuracion, data: { breadcrumb: 'Mi cuenta', soloCuenta: true } },
+      { path: 'mi-cuenta', loadComponent: () => import('./pages/admin/configuracion/configuracion').then(m => m.Configuracion), data: { breadcrumb: 'Mi cuenta', soloCuenta: true } },
 
       // 🧩 CMS: Menú → Páginas → Entradas → Multimedia
       {
