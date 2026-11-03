@@ -1,0 +1,43 @@
+# E.S.E. Hospital San José del Guaviare
+
+> Empresa Social del Estado de Colombia, hospital de II nivel de complejidad en San José del Guaviare y centro de referencia del departamento del Guaviare. Este portal ofrece información de los servicios de salud, trámites, atención a la ciudadanía y la información pública obligatoria de la Ley 1712 de 2014 y la Resolución 1519 de 2020 (MinTIC).
+
+El portal está en español. Los documentos (PDF, Word y Excel) se publican en cada sección. Para radicar solicitudes use siempre los formularios oficiales enlazados abajo; no se aceptan solicitudes por otros medios automatizados.
+
+## Servicios y atención
+
+- [Portafolio de servicios](https://hospitalguaviare.vercel.app/nuestro-hospital/portafolio-de-servicios): urgencias 24 horas, consulta externa, hospitalización, cirugía, laboratorio, imágenes diagnósticas y demás servicios.
+- [Sedes y horarios de atención](https://hospitalguaviare.vercel.app/nuestro-hospital/sedes-y-horarios): dirección, teléfonos y horarios.
+- [Canales de atención y citas](https://hospitalguaviare.vercel.app/atencion-y-servicios-a-la-ciudadania/canales-de-atencion): cómo pedir una cita, consultar resultados y comunicarse con el hospital.
+- [Trámites y otros procedimientos](https://hospitalguaviare.vercel.app/atencion-y-servicios-a-la-ciudadania/tramites-y-otros-procedimientos): trámites inscritos en el SUIT (urgencias, citas, copia de historia clínica, laboratorio, imágenes, terapia, medicamentos y certificado de defunción), con requisitos y normatividad.
+- [PQRSFD](https://hospitalguaviare.vercel.app/pqrsf): radicar y consultar peticiones, quejas, reclamos, sugerencias, felicitaciones y denuncias.
+- [Preguntas frecuentes](https://hospitalguaviare.vercel.app/atencion-y-servicios-a-la-ciudadania/preguntas-frecuentes)
+- [Glosario](https://hospitalguaviare.vercel.app/atencion-y-servicios-a-la-ciudadania/glosario)
+
+## Transparencia y acceso a la información pública (Res. 1519 de 2020)
+
+- [Transparencia](https://hospitalguaviare.vercel.app/transparencia): índice de la información pública obligatoria.
+- [1. Información de la entidad](https://hospitalguaviare.vercel.app/transparencia/informacion-de-la-entidad): misión, visión, funciones, estructura, directorio y entes de control.
+- [2. Normativa](https://hospitalguaviare.vercel.app/transparencia/normativa): resoluciones, acuerdos, políticas y manuales.
+- [3. Contratación](https://hospitalguaviare.vercel.app/transparencia/contratacion): plan anual de adquisiciones, contratos y manual de contratación.
+- [4. Planeación, presupuesto e informes](https://hospitalguaviare.vercel.app/transparencia/planeacion-presupuesto-e-informes): presupuesto, estados financieros, planes e informes de gestión y control.
+- [7. Datos abiertos](https://hospitalguaviare.vercel.app/transparencia/datos-abiertos)
+- [8. Información para grupos de interés](https://hospitalguaviare.vercel.app/transparencia/informacion-especifica-para-grupos-de-interes)
+
+## Participación ciudadana
+
+- [Participa](https://hospitalguaviare.vercel.app/participa): rendición de cuentas, control social, Plan Anticorrupción y consultas ciudadanas.
+- [Rendición de cuentas](https://hospitalguaviare.vercel.app/participa/rendicion-de-cuentas)
+
+## Institucional
+
+- [Nuestro hospital](https://hospitalguaviare.vercel.app/nuestro-hospital): misión, visión, reseña histórica y estructura orgánica.
+- [Noticias](https://hospitalguaviare.vercel.app/noticias)
+- [Trabaja con nosotros](https://hospitalguaviare.vercel.app/informacion-de-interes/trabaja-con-nosotros)
+- [Invitaciones a cotizar](https://hospitalguaviare.vercel.app/informacion-de-interes/invitaciones-a-cotizar)
+
+## Optional
+
+- [Mapa del sitio](https://hospitalguaviare.vercel.app/mapa-del-sitio): todas las páginas del portal.
+- [Políticas de privacidad y tratamiento de datos](https://hospitalguaviare.vercel.app/politicas-de-privacidad)
+- [Accesibilidad](https://hospitalguaviare.vercel.app/accesibilidad)

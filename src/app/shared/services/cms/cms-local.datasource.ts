@@ -16,6 +16,27 @@ import { BANNERS_SEMILLA } from './cms-semilla-slider';
 import { ENTRADAS_ENTIDAD } from './cms-semilla-entidad';
 import { categoriaSugerida } from '../../utils/categorias';
 
+/** Contenido migrado del portal anterior (public/assets/semillas), en el orden en que se aplica */
+const SEMILLAS_ARCHIVO: [clave: string, ruta: string][] = [
+  ['noticias-semilla', 'assets/semillas/noticias.json'],
+  ['nuestro-hospital-semilla', 'assets/semillas/nuestro-hospital.json'],
+  ['atencion-participa-semilla', 'assets/semillas/atencion-y-participa.json'],
+  ['tramites-semilla', 'assets/semillas/tramites.json'],
+  ['resena-historica-semilla', 'assets/semillas/resena-historica.json'],
+  ['portafolio-servicios-semilla', 'assets/semillas/portafolio-servicios.json'],
+  ['organigrama-semilla', 'assets/semillas/organigrama.json'],
+  ['normatividad-semilla', 'assets/semillas/normatividad.json'],
+  ['sedes-semilla', 'assets/semillas/sedes-y-horarios.json'],
+  ['directorio-semilla', 'assets/semillas/directorio-institucional.json'],
+  ['informacion-de-interes-semilla', 'assets/semillas/informacion-de-interes.json'],
+  ['estructura-organica-semilla', 'assets/semillas/estructura-organica.json'],
+  ['presupuesto-semilla', 'assets/semillas/presupuesto.json'],
+  ['planeacion-semilla', 'assets/semillas/planeacion.json'],
+  ['control-semilla', 'assets/semillas/control.json'],
+  ['contratacion-semilla', 'assets/semillas/contratacion.json'],
+  ['tramites-suit-semilla', 'assets/semillas/tramites-suit.json'],
+];
+
 /**
  * Implementación en localStorage para trabajar el admin sin backend.
  * Emula las reglas de la BD (cascadas y SET NULL) para que el
@@ -41,23 +62,12 @@ export class CmsLocalDataSource extends CmsDataSource {
     this.sembrarEntradasFijas('pie-semilla', ENTRADAS_PIE);
     this.sembrarEntradasFijas('entidad-semilla', ENTRADAS_ENTIDAD);
     this.organizarPlataformaEstrategica();
-    this.semillaNoticias = this.sembrarDesdeArchivo('noticias-semilla', 'assets/semillas/noticias.json').then(() =>
-      this.sembrarDesdeArchivo('nuestro-hospital-semilla', 'assets/semillas/nuestro-hospital.json'),
-    ).then(() => this.sembrarDesdeArchivo('atencion-participa-semilla', 'assets/semillas/atencion-y-participa.json'))
-      .then(() => this.sembrarDesdeArchivo('tramites-semilla', 'assets/semillas/tramites.json'))
-      .then(() => this.sembrarDesdeArchivo('resena-historica-semilla', 'assets/semillas/resena-historica.json'))
-      .then(() => this.sembrarDesdeArchivo('portafolio-servicios-semilla', 'assets/semillas/portafolio-servicios.json'))
-      .then(() => this.sembrarDesdeArchivo('organigrama-semilla', 'assets/semillas/organigrama.json'))
-      .then(() => this.sembrarDesdeArchivo('normatividad-semilla', 'assets/semillas/normatividad.json'))
-      .then(() => this.sembrarDesdeArchivo('sedes-semilla', 'assets/semillas/sedes-y-horarios.json'))
-      .then(() => this.sembrarDesdeArchivo('directorio-semilla', 'assets/semillas/directorio-institucional.json'))
-      .then(() => this.sembrarDesdeArchivo('informacion-de-interes-semilla', 'assets/semillas/informacion-de-interes.json'))
-      .then(() => this.sembrarDesdeArchivo('estructura-organica-semilla', 'assets/semillas/estructura-organica.json'))
-      .then(() => this.sembrarDesdeArchivo('presupuesto-semilla', 'assets/semillas/presupuesto.json'))
-      .then(() => this.sembrarDesdeArchivo('planeacion-semilla', 'assets/semillas/planeacion.json'))
-      .then(() => this.sembrarDesdeArchivo('control-semilla', 'assets/semillas/control.json'))
-      .then(() => this.sembrarDesdeArchivo('contratacion-semilla', 'assets/semillas/contratacion.json'))
-      .then(() => this.sembrarDesdeArchivo('tramites-suit-semilla', 'assets/semillas/tramites-suit.json'))
+    // Las semillas se piden una tras otra y con prioridad baja: en un celular con red lenta,
+    // pedirlas todas a la vez compite con la página y empeora la carga (probado con Lighthouse)
+    this.semillaNoticias = SEMILLAS_ARCHIVO.reduce<Promise<void>>(
+      (previa, [clave, ruta]) => previa.then(() => this.sembrarDesdeArchivo(clave, ruta)),
+      Promise.resolve(),
+    )
       .then(() => this.clasificarPublicaciones())
       .then(() => this.clasificarDocumentosTalentoHumano())
       .then(() => this.organizarComiteConvivencia())
@@ -229,6 +239,11 @@ export class CmsLocalDataSource extends CmsDataSource {
 
   /** Contenido migrado del portal anterior (se descarga una sola vez desde /assets/semillas) */
   private semillaNoticias: Promise<void>;
+  private pedirSemilla(ruta: string): Promise<any> {
+    return fetch(ruta, { priority: 'low' } as RequestInit)
+      .then((r) => (r.ok ? r.json() : null))
+      .catch(() => null);
+  }
 
   /* ===== Helpers de almacenamiento ===== */
   /**
@@ -728,8 +743,8 @@ export class CmsLocalDataSource extends CmsDataSource {
     const clave = this.prefijo + nombre;
     if (this.almacen.getItem(clave) === '1') return;
     try {
-      const r = await fetch(ruta);
-      if (!r.ok) return;
+      const datos = await this.pedirSemilla(ruta);
+      if (!datos) return;
       type Item = {
         paginaSlug?: string;
         titulo: string;
@@ -757,7 +772,7 @@ export class CmsLocalDataSource extends CmsDataSource {
         intro?: { slug: string; resumen: string; contenido: string; destacada: string | null; adjuntos: string[]; siContiene: string };
         /** Complementa entradas existentes: agrega texto y adjuntos (si aún no tienen siNoContiene) o cambia el orden (si conserva siOrden) */
         ampliar?: { paginaSlug: string; slug: string; agregar?: string; siNoContiene?: string; adjuntos?: string[]; orden?: number; siOrden?: number }[];
-      } = await r.json();
+      } = datos;
       const items: Item[] = semilla.entradas ?? (semilla.noticias ?? []).map((n) => ({ ...n, paginaSlug: 'noticias', tipo: 'noticia' }));
 
       const paginas = this.leer<CmsPagina>('paginas');

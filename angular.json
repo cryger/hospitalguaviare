@@ -18,11 +18,7 @@
           "builder": "@angular/build:application",
           "options": {
             "scripts": [
-              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
-              "src/app/shared/assets/js/topbar.js",
-              "src/app/shared/assets/js/accesibilidad.js",
-              "src/app/shared/assets/js/navbar.js",
-              "src/app/shared/assets/js/cabecera.js"
+              "src/app/shared/assets/js/accesibilidad.js"
             ],
             "browser": "src/main.ts",
             "tsConfig": "tsconfig.app.json",

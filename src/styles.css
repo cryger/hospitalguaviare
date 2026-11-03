@@ -489,7 +489,7 @@ body.high-contrast .barra-accesbilidad-govco a:hover {
        url("./app/shared/assets/icons/fonts/govco-font-icons.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
-  font-display: block; /* íconos: evita mostrar el nombre del ícono mientras carga */
+  font-display: swap;
 }
 @font-face {
   font-family: 'WorkSans-Regular';

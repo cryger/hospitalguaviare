@@ -32,9 +32,8 @@ export class SenasDirective implements OnDestroy {
 
   private temporizador: ReturnType<typeof setTimeout> | null = null;
 
-  constructor() {
-    this.svc.cargar();
-  }
+  // El catálogo de videos se pide al primer «hover» (entrar), no al cargar la página:
+  // así no queda en la cadena de solicitudes del inicio
 
   entrar(ev: Event): void {
     if (!this.svc.activo()) return;
