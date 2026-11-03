@@ -1,0 +1,232 @@
+{
+ "origen": "esehospitalguaviare.gov.co (Instrumentos de gestión de la información)",
+ "multimedia": [
+  {
+   "nombre": "PROGRAMA-DE-GESTION-DOCUMENTAL.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/PROGRAMA-DE-GESTION-DOCUMENTAL.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Programa de Gestión Documental (PGD)",
+   "alt": null
+  },
+  {
+   "nombre": "INFORME IMPLEMENTACIÓN- PGD - 2022.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/INFORME%20IMPLEMENTACI%C3%93N-%20PGD%20-%202022.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Informe de implementación del PGD – 2022",
+   "alt": null
+  },
+  {
+   "nombre": "PLAN DE CONSERVACIÓN DOCUMENTAL - 2022 - (SIC).pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/PLAN%20DE%20CONSERVACI%C3%93N%20DOCUMENTAL%20-%202022%20-%20(SIC).pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Plan de conservación documental – 2022 (SIC)",
+   "alt": null
+  },
+  {
+   "nombre": "PLAN DE TRABAJO ARCHIVÍSTICO INTEGRAL INTERVENCIÓN FONDOS ACUMULADOS - 2022.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/PLAN%20DE%20TRABAJO%20ARCHIV%C3%8DSTICO%20INTEGRAL%20INTERVENCI%C3%93N%20FONDOS%20ACUMULADOS%20-%202022.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Plan de trabajo archivístico integral – intervención de fondos acumulados 2022",
+   "alt": null
+  },
+  {
+   "nombre": "INFORME DIAGNÓSTICO INTEGRAL DE ARCHIVOS HOSPITAL - 2022.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/INFORME%20DIAGN%C3%93STICO%20INTEGRAL%20DE%20ARCHIVOS%20HOSPITAL%20-%202022.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Diagnóstico integral de archivos – 2022 (informe)",
+   "alt": null
+  },
+  {
+   "nombre": "DIAGNÓSTICO INTEGRAL HOSPITAL SAN JOSE DEL GUAVIARE - 2022.xlsx",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/excel/DIAGN%C3%93STICO%20INTEGRAL%20HOSPITAL%20SAN%20JOSE%20DEL%20GUAVIARE%20-%202022.xlsx",
+   "tipo": "documento",
+   "mime": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+   "titulo": "Diagnóstico integral de archivos – 2022 (matriz)",
+   "alt": null
+  },
+  {
+   "nombre": "FUID FONDO ACUMULADO TESORERÍA..xlsx",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/excel/FUID%20FONDO%20ACUMULADO%20TESORER%C3%8DA..xlsx",
+   "tipo": "documento",
+   "mime": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+   "titulo": "FUID fondo acumulado Tesorería – 2022",
+   "alt": null
+  },
+  {
+   "nombre": "FUID FONDO ACUMULADO JURIDICA..xlsx",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/excel/FUID%20FONDO%20ACUMULADO%20JURIDICA..xlsx",
+   "tipo": "documento",
+   "mime": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+   "titulo": "FUID fondo acumulado Jurídica – 2022",
+   "alt": null
+  },
+  {
+   "nombre": "ACTA TRANSFERENCIA N.1 - 2023.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/ACTA%20TRANSFERENCIA%20N.1%20-%202023.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Acta de transferencia documental N.° 1 – 2023",
+   "alt": null
+  },
+  {
+   "nombre": "Tabla-Retencion-Documental-Hospital-San-Jose-Guaviare.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Tabla-Retencion-Documental-Hospital-San-Jose-Guaviare.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Tablas de Retención Documental (TRD)",
+   "alt": null
+  },
+  {
+   "nombre": "ACTOS ADMINISTRATIVOS APROBACIÓN TRD 2013.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/ACTOS%20ADMINISTRATIVOS%20APROBACI%C3%93N%20TRD%202013.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Actos administrativos de aprobación de las TRD – 2013",
+   "alt": null
+  },
+  {
+   "nombre": "Anexo_Tecnico 1._Certificado_de_Accesibilidad.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Anexo_Tecnico%201._Certificado_de_Accesibilidad.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Certificado de cumplimiento de accesibilidad – Anexo técnico 1, Res. 1519 de 2020",
+   "alt": null
+  }
+ ],
+ "entradas": [
+  {
+   "paginaSlug": "programa-de-gestion-documental",
+   "slug": "pgd-programa-de-gestion-documental",
+   "titulo": "Programa de Gestión Documental (PGD)",
+   "resumen": "Programa de Gestión Documental de la E.S.E. y su informe de implementación.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 10,
+   "soloSiVacia": false,
+   "fecha": "2022-12-31T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/PROGRAMA-DE-GESTION-DOCUMENTAL.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/INFORME%20IMPLEMENTACI%C3%93N-%20PGD%20-%202022.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Programa de Gestión Documental",
+   "icono": null
+  },
+  {
+   "paginaSlug": "programa-de-gestion-documental",
+   "slug": "pgd-instrumentos-archivisticos-2022",
+   "titulo": "Instrumentos archivísticos 2022",
+   "resumen": "Plan de conservación documental (SIC), plan de trabajo archivístico integral y diagnóstico integral de archivos.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 20,
+   "soloSiVacia": false,
+   "fecha": "2022-12-31T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/PLAN%20DE%20CONSERVACI%C3%93N%20DOCUMENTAL%20-%202022%20-%20(SIC).pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/PLAN%20DE%20TRABAJO%20ARCHIV%C3%8DSTICO%20INTEGRAL%20INTERVENCI%C3%93N%20FONDOS%20ACUMULADOS%20-%202022.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/INFORME%20DIAGN%C3%93STICO%20INTEGRAL%20DE%20ARCHIVOS%20HOSPITAL%20-%202022.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/excel/DIAGN%C3%93STICO%20INTEGRAL%20HOSPITAL%20SAN%20JOSE%20DEL%20GUAVIARE%20-%202022.xlsx"
+   ],
+   "destacada": null,
+   "categoria": "Instrumentos archivísticos",
+   "icono": null
+  },
+  {
+   "paginaSlug": "programa-de-gestion-documental",
+   "slug": "pgd-fondos-acumulados-2022",
+   "titulo": "Inventario de fondos documentales acumulados 2022 (FUID)",
+   "resumen": "Formato Único de Inventario Documental de los fondos acumulados de Tesorería y Jurídica.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 30,
+   "soloSiVacia": false,
+   "fecha": "2022-12-31T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/excel/FUID%20FONDO%20ACUMULADO%20TESORER%C3%8DA..xlsx",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/excel/FUID%20FONDO%20ACUMULADO%20JURIDICA..xlsx"
+   ],
+   "destacada": null,
+   "categoria": "Fondos acumulados y transferencias",
+   "icono": null
+  },
+  {
+   "paginaSlug": "programa-de-gestion-documental",
+   "slug": "pgd-transferencias-documentales-2023",
+   "titulo": "Transferencias documentales 2023",
+   "resumen": "Actas de transferencia documental al archivo central.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 40,
+   "soloSiVacia": false,
+   "fecha": "2023-12-31T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/ACTA%20TRANSFERENCIA%20N.1%20-%202023.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Fondos acumulados y transferencias",
+   "icono": null
+  },
+  {
+   "paginaSlug": "tablas-de-retencion-documental",
+   "slug": "trd-tablas-de-retencion-documental",
+   "titulo": "Tablas de Retención Documental (TRD)",
+   "resumen": "Tablas de Retención Documental de la E.S.E. y actos administrativos de aprobación.",
+   "contenido": "",
+   "tipo": "documento",
+   "orden": 10,
+   "soloSiVacia": false,
+   "fecha": "2013-12-31T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Tabla-Retencion-Documental-Hospital-San-Jose-Guaviare.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/ACTOS%20ADMINISTRATIVOS%20APROBACI%C3%93N%20TRD%202013.pdf"
+   ],
+   "destacada": null,
+   "categoria": "Tablas de Retención Documental",
+   "icono": null
+  },
+  {
+   "paginaSlug": "esquema-de-publicacion-de-la-informacion",
+   "slug": "esquema-de-publicacion",
+   "titulo": "Esquema de publicación de la información",
+   "resumen": "Qué información publica la E.S.E., quién la produce, en qué formato y cada cuánto se actualiza.",
+   "contenido": "<p>La E.S.E. Hospital San José del Guaviare, en cumplimiento de los principios de transparencia, acceso a la información pública y rendición de cuentas, pone a disposición de la ciudadanía el Esquema de Publicación de Información: el instrumento con el que la entidad identifica, organiza y facilita el acceso a la información pública que genera, administra y custodia.</p>\n<h3>Objetivos</h3>\n<ul>\n<li><strong>Transparencia:</strong> facilitar el acceso de la ciudadanía a la información pública de la institución.</li>\n<li><strong>Accesibilidad:</strong> organizar la información para facilitar su búsqueda y consulta.</li>\n<li><strong>Participación:</strong> fortalecer la participación ciudadana y el control social sobre la gestión institucional.</li>\n<li><strong>Rendición de cuentas:</strong> facilitar el seguimiento ciudadano a los resultados y actuaciones de la entidad.</li>\n</ul>\n<h3>Información publicada</h3>\n<table>\n<thead><tr><th scope=\"col\">Información</th><th scope=\"col\">Responsable</th><th scope=\"col\">Formato</th><th scope=\"col\">Periodicidad</th></tr></thead>\n<tbody>\n<tr><td><a href=\"/transparencia/informacion-de-la-entidad\">Información institucional</a></td><td>Planeación</td><td>PDF / HTML</td><td>Cuando se modifique</td></tr>\n<tr><td><a href=\"/transparencia/planeacion-presupuesto-e-informes\">Planes institucionales</a></td><td>Planeación</td><td>PDF</td><td>Anual</td></tr>\n<tr><td><a href=\"/transparencia/planeacion-presupuesto-e-informes\">Presupuesto y ejecución</a></td><td>Área Financiera</td><td>PDF / XLSX</td><td>Periódica</td></tr>\n<tr><td><a href=\"/transparencia/contratacion\">Procesos contractuales</a></td><td>Contratación</td><td>PDF / HTML</td><td>Permanente</td></tr>\n<tr><td><a href=\"/nuestro-hospital/talento-humano\">Talento humano</a></td><td>Talento Humano</td><td>PDF / HTML</td><td>Según actualización</td></tr>\n<tr><td><a href=\"/pqrsf\">PQRSD</a></td><td>Atención al Usuario</td><td>HTML / PDF</td><td>Permanente</td></tr>\n<tr><td><a href=\"/transparencia/planeacion-presupuesto-e-informes\">Informes de control</a></td><td>Control Interno</td><td>PDF</td><td>Según programación</td></tr>\n<tr><td><a href=\"/transparencia/datos-abiertos/seccion-de-datos-abiertos\">Datos abiertos</a></td><td>Gobierno Digital</td><td>CSV / XLSX</td><td>Según actualización</td></tr>\n</tbody>\n</table>\n<h3>Formatos de publicación</h3>\n<ul>\n<li><strong>HTML:</strong> información disponible directamente en el portal institucional.</li>\n<li><strong>PDF:</strong> documentos e informes institucionales para consulta.</li>\n<li><strong>XLSX:</strong> información estructurada para consulta y análisis.</li>\n<li><strong>CSV:</strong> datos estructurados para procesamiento y reutilización.</li>\n</ul>\n<h3>Periodicidad de actualización</h3>\n<ul>\n<li><strong>Permanente:</strong> información disponible de manera continua.</li>\n<li><strong>Mensual:</strong> información actualizada periódicamente durante la vigencia.</li>\n<li><strong>Trimestral:</strong> información que se actualiza cada trimestre.</li>\n<li><strong>Anual:</strong> instrumentos de planeación y gestión anual.</li>\n<li><strong>Cuando se modifique:</strong> información que cambia cuando hay una modificación institucional.</li>\n</ul>\n<h3>Responsables de la información</h3>\n<ul>\n<li><strong>Oficina de Planeación:</strong> planeación institucional, seguimiento, indicadores y gestión.</li>\n<li><strong>Gobierno Digital / TIC:</strong> contenidos digitales, portal web, datos abiertos y Gobierno Digital.</li>\n<li><strong>Contratación:</strong> procesos y gestión contractual.</li>\n<li><strong>Área Financiera:</strong> información presupuestal, financiera y contable.</li>\n<li><strong>Talento Humano:</strong> personal y estructura de cargos.</li>\n<li><strong>Control Interno:</strong> informes de auditoría, evaluación y seguimiento.</li>\n</ul>\n<p>Para solicitar información que no encuentre publicada, use el <a href=\"/pqrsf\">formulario de PQRSFD</a>.</p>",
+   "tipo": "articulo",
+   "orden": 0,
+   "soloSiVacia": false,
+   "fecha": null,
+   "adjuntos": [],
+   "destacada": null,
+   "icono": null
+  },
+  {
+   "paginaSlug": "accesibilidad",
+   "slug": "certificado-de-accesibilidad",
+   "titulo": "Certificado de cumplimiento de accesibilidad",
+   "resumen": "Certificado de cumplimiento del Anexo técnico 1 (accesibilidad web) de la Resolución 1519 de 2020 de MinTIC.",
+   "contenido": "<p>Certificado de cumplimiento de los criterios de accesibilidad web del Anexo técnico 1 de la Resolución 1519 de 2020 del Ministerio de Tecnologías de la Información y las Comunicaciones.</p>",
+   "tipo": "articulo",
+   "orden": 20,
+   "soloSiVacia": false,
+   "fecha": null,
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Anexo_Tecnico%201._Certificado_de_Accesibilidad.pdf"
+   ],
+   "destacada": null,
+   "icono": null
+  }
+ ],
+ "ampliar": [
+  {
+   "paginaSlug": "esquema-de-publicacion-de-la-informacion",
+   "slug": "esquema-de-publicacion-de-la-informacion-datos-abiertos",
+   "siOrden": 0,
+   "orden": 10
+  }
+ ]
+}
