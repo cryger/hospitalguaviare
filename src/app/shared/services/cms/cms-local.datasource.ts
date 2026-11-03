@@ -9,6 +9,7 @@ import {
   tipoDesdeMime,
 } from './cms-datasource';
 import { CmsEntrada, CmsMenu, CmsMultimedia, CmsPagina } from '../../models/cms/cms.models';
+import { Cotizacion } from '../../models/cotizacion/cotizacion/cotizacion-module';
 import { COTIZACIONES_SEMILLA, VACANTES_SEMILLA } from './cms-semilla-modulos';
 import { ENTRADAS_PIE, EntradaPieSemilla } from './cms-semilla-pie';
 import { EVENTOS_SEMILLA } from './cms-semilla-eventos';
@@ -361,6 +362,10 @@ export class CmsLocalDataSource extends CmsDataSource {
     if (c === 'entradas' || c === 'multimedia') {
       return defer(() => this.semillaNoticias.then(() => this.leer<T>(c)));
     }
+    // El histórico de invitaciones a cotizar se descarga solo cuando alguien las consulta
+    if (c === 'cotizaciones') {
+      return defer(() => (this.semillaCotizaciones ??= this.sembrarCotizaciones()).then(() => this.leer<T>(c)));
+    }
     return of(this.leer<T>(c));
   }
 
@@ -493,6 +498,42 @@ export class CmsLocalDataSource extends CmsDataSource {
     sembrar('vacantes', VACANTES_SEMILLA);
     sembrar('cotizaciones', COTIZACIONES_SEMILLA);
     this.almacen.setItem(clave, '1');
+  }
+
+  /**
+   * Invitaciones a cotizar del portal anterior (assets/semillas/cotizaciones.json, una sola vez).
+   * Cada una se identifica con migradoDe = «url anterior#id»: no se duplican ni se reemplazan las
+   * que ya existen. Las 3 sembradas antes (sin #id) se marcan con su id y se cierran.
+   */
+  private semillaCotizaciones?: Promise<void>;
+  private async sembrarCotizaciones(): Promise<void> {
+    const clave = this.prefijo + 'cotizaciones-historico-semilla';
+    if (localStorage.getItem(clave) === '1' || this.almacen.getItem(clave) === '1') return;
+    const datos: { base: string; existentes: Record<string, string>; cotizaciones: Omit<Cotizacion, 'id'>[] } | null =
+      await this.pedirSemilla('assets/semillas/cotizaciones.json');
+    if (!datos?.cotizaciones?.length) return;
+    const lista = this.leer<Cotizacion>('cotizaciones');
+    const t = this.ahora();
+    for (const [idAnterior, fecha] of Object.entries(datos.existentes)) {
+      const c = lista.find((x) => x.migradoDe === datos.base && String(x.fechaPublicacion).slice(0, 10) === fecha);
+      if (c) Object.assign(c, { migradoDe: `${datos.base}#${idAnterior}`, estado: c.estado === 'publicada' ? 'cerrada' : c.estado });
+    }
+    const ya = new Set(lista.map((x) => x.migradoDe));
+    let id = this.nuevoId(lista);
+    // De la más antigua a la más reciente, para que los id sigan el orden de publicación
+    for (const c of [...datos.cotizaciones].reverse()) {
+      if (ya.has(c.migradoDe)) continue;
+      lista.push({ ...c, id: id++, creadoEn: t, actualizadoEn: t } as Cotizacion);
+    }
+    // Se guarda directo (no en el lote): esta semilla puede terminar después de cerrarlo
+    const k = this.prefijo + 'cotizaciones';
+    this.lote?.valores.set(k, lista);
+    try {
+      localStorage.setItem(k, JSON.stringify(lista));
+      localStorage.setItem(clave, '1');
+    } catch {
+      console.warn('No se pudieron guardar las invitaciones a cotizar: el almacenamiento local del navegador está lleno.');
+    }
   }
 
   /** Siembra una colección una sola vez (si está vacía) */

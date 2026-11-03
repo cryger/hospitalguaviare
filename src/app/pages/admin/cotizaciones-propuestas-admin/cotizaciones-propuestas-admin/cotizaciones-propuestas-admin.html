@@ -7,6 +7,10 @@
     <button type="button" [class.on]="filtro() === 'borrador'" (click)="filtro.set('borrador')">Borradores ({{ contar('borrador') }})</button>
     <button type="button" [class.on]="filtro() === 'cerrada'" (click)="filtro.set('cerrada')">Cerradas ({{ contar('cerrada') }})</button>
   </div>
+  <label class="buscar-admin">
+    <span class="visually-hidden">Buscar invitaciones</span>
+    <input type="search" placeholder="Buscar por objeto, documento o fecha…" [value]="busqueda()" (input)="busqueda.set($any($event.target).value)" />
+  </label>
   <button class="gov-btn-primary" (click)="abrirCrear()">➕ Nueva invitación</button>
 </div>
 

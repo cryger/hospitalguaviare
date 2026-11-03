@@ -26,12 +26,67 @@
     }
 
     @if (anteriores().length) {
-      <h2 class="h-seccion h-anteriores">Invitaciones anteriores <small>{{ anteriores().length }}</small></h2>
+      <h2 class="h-seccion h-anteriores" id="invitaciones-anteriores" tabindex="-1">Invitaciones anteriores <small>{{ anteriores().length }}</small></h2>
+
+      <app-buscador-govco idCampo="buscar-cotizaciones" titulo="Buscar invitaciones anteriores"
+          ayuda="Busque por objeto, servicio o nombre del documento; la lista se actualiza mientras escribe."
+          placeholder="Ej. radiología, osteosíntesis, vigilancia…" etiquetaBoton="Buscar invitaciones"
+          [valor]="busqueda()" (valorChange)="busqueda.set($event)">
+        <div filtros class="desplegable-govco">
+          <label for="cot-anio">Año de publicación</label>
+          <select id="cot-anio" class="btn-dropdown" [value]="anio()" (change)="anio.set($any($event.target).value)">
+            <option value="">Todos los años</option>
+            @for (a of anios(); track a) { <option [value]="a" [selected]="a === anio()">{{ a }}</option> }
+          </select>
+        </div>
+        @if (hayFiltros()) {
+          <div class="bn-activos">
+            <span class="bn-activos-txt">Filtros aplicados:</span>
+            <ul class="etiquetas-govco">
+              @if (busqueda().trim()) {
+                <li><span class="etiqueta-govco">«{{ busqueda().trim() }}»
+                  <button type="button" (click)="busqueda.set('')" [attr.aria-label]="'Quitar búsqueda ' + busqueda().trim()">
+                    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18"/></svg></button></span></li>
+              }
+              @if (anio()) {
+                <li><span class="etiqueta-govco">Año {{ anio() }}
+                  <button type="button" (click)="anio.set('')" aria-label="Quitar filtro de año">
+                    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18"/></svg></button></span></li>
+              }
+            </ul>
+            <button type="button" class="btn-bdc outline-btn-govco limpiar" (click)="limpiarFiltros()">Limpiar filtros</button>
+          </div>
+        }
+      </app-buscador-govco>
+
+      <p class="resultado" role="status" aria-live="polite">
+        @if (filtradas().length) {
+          Mostrando {{ (pagina() - 1) * porPagina + 1 }}–{{ (pagina() - 1) * porPagina + visibles().length }} de {{ filtradas().length }} invitaciones
+        } @else {
+          No se encontraron invitaciones con los filtros aplicados.
+        }
+      </p>
+
       <div class="lista">
-        @for (c of anteriores(); track c.id) {
+        @for (c of visibles(); track c.id) {
           <ng-container *ngTemplateOutlet="tarjeta; context: { $implicit: c }" />
         }
       </div>
+
+      @if (totalPaginas() > 1) {
+        <nav class="paginacion" aria-label="Paginación de invitaciones anteriores">
+          <button type="button" (click)="irPagina(pagina() - 1)" [disabled]="pagina() === 1" aria-label="Página anterior">‹</button>
+          @for (p of paginas(); track $index) {
+            @if (p === null) {
+              <span class="puntos" aria-hidden="true">…</span>
+            } @else {
+              <button type="button" [class.activa]="pagina() === p" [attr.aria-current]="pagina() === p ? 'page' : null"
+                      [attr.aria-label]="'Página ' + p" (click)="irPagina(p)">{{ p }}</button>
+            }
+          }
+          <button type="button" (click)="irPagina(pagina() + 1)" [disabled]="pagina() === totalPaginas()" aria-label="Página siguiente">›</button>
+        </nav>
+      }
     }
 
     <aside class="nota">
@@ -75,11 +130,13 @@
         }
       </ul>
 
-      @if (c.descripcion) { <p class="desc">{{ c.descripcion }}</p> }
+      @if (c.descripcion) {
+        <p class="desc">@for (p of partes(c.descripcion); track $index) {@if (p.url) {<a [href]="p.url" target="_blank" rel="noopener">{{ p.texto }}</a>} @else {{{ p.texto }}}}</p>
+      }
 
       @if (c.documentoUrl) {
         <a class="btn-govco" [class.btn-sec]="c.estado === 'cerrada'" [href]="c.documentoUrl" target="_blank" rel="noopener">
-          📄 {{ c.estado === 'cerrada' ? 'Ver documento' : 'Descargar invitación' }}
+          📄 {{ c.documentoUrl.endsWith('.zip') ? 'Descargar archivos (ZIP)' : c.estado === 'cerrada' ? 'Ver documento' : 'Descargar invitación' }}
         </a>
       }
     </div>

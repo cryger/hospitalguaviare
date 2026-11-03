@@ -24,6 +24,8 @@ export class CotizacionesPropuestasAdminComponent implements OnInit {
   readonly subiendo = signal(false);
   readonly mensaje = signal<string | null>(null);
   readonly filtro = signal<'todas' | EstadoCotizacion>('todas');
+  /** Texto a buscar en el objeto o el nombre del documento */
+  readonly busqueda = signal('');
 
   ngOnInit(): void {
     this.form = this.fb.group({
@@ -41,7 +43,13 @@ export class CotizacionesPropuestasAdminComponent implements OnInit {
 
   filtradas(): Cotizacion[] {
     const f = this.filtro();
-    return this.service.cotizaciones().filter((c) => f === 'todas' || c.estado === f);
+    const sinTildes = (t: string) => t.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+    const palabras = sinTildes(this.busqueda().trim()).split(/\s+/).filter(Boolean);
+    return this.service.cotizaciones().filter((c) => {
+      if (f !== 'todas' && c.estado !== f) return false;
+      const texto = sinTildes(`${c.titulo} ${c.documentoNombre ?? ''} ${String(c.fechaPublicacion).slice(0, 10)}`);
+      return palabras.every((p) => texto.includes(p));
+    });
   }
 
   contar(estado: EstadoCotizacion): number {

@@ -51,7 +51,7 @@ h1, h2, h3 { font-family: 'WorkSans-SemiBold', 'Work Sans', 'Montserrat', system
 .item h3 { margin: 0; color: var(--azul); font-size: 1.15rem; line-height: 1.35; }
 .chips { display: flex; flex-wrap: wrap; align-items: center; gap: .4rem; }
 .chip { display: inline-block; font-size: .72rem; font-weight: 700; padding: .2rem .6rem; border-radius: 999px; background: #f1f5f9; color: #6b7280; }
-.chip-vigente { background: #e6f6f0; color: #069169; }
+.chip-vigente { background: #e6f6f0; color: #04694b; }
 .chip-cerrada { background: #fdecea; color: #a8271b; }
 .chip-plazo { background: #fff4e0; color: #9a5b00; }
 .tipo { font-size: .78rem; color: var(--texto-2); }
@@ -92,3 +92,18 @@ a:focus-visible { outline: 3px solid #ffab00; outline-offset: 2px; }
   .item-fecha .dia { font-size: 1.25rem; }
   .item-cuerpo { padding: 1rem 1.1rem; }
 }
+
+/* Buscador, resultado y paginación de las invitaciones anteriores */
+.h-anteriores:focus { outline: none; }
+.resultado { margin: 1rem 0 .75rem; color: var(--texto-2); font-size: .92rem; }
+.desc a { color: var(--azul-2); font-weight: 600; }
+.paginacion { display: flex; flex-wrap: wrap; justify-content: center; gap: .35rem; margin-top: 1.5rem; }
+.paginacion button {
+  min-width: 2.75rem; min-height: 2.75rem; padding: 0 .6rem; border-radius: 8px; cursor: pointer;
+  border: 1px solid var(--borde); background: #fff; color: var(--azul); font-weight: 600; font-size: 1rem;
+}
+.paginacion button:hover:not(:disabled) { background: #eef4fc; }
+.paginacion button.activa { background: var(--azul-2); border-color: var(--azul-2); color: #fff; }
+.paginacion button:disabled { opacity: .4; cursor: default; }
+.paginacion button:focus-visible { outline: 3px solid #ffab00; outline-offset: 2px; }
+.paginacion .puntos { align-self: center; padding: 0 .25rem; color: var(--texto-2); }

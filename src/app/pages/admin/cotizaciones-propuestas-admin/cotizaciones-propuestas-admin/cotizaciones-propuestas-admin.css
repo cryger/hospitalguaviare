@@ -342,3 +342,9 @@
 .subir { display: inline-block; margin-top: 0.4rem; font-size: 0.8rem; color: #3366cc; cursor: pointer; font-weight: 600; }
 .subir input { position: absolute; width: 1px; height: 1px; opacity: 0; }
 .subir:focus-within { outline: 3px solid #ffab00; outline-offset: 2px; }
+
+/* Buscador de la tabla (más de 200 invitaciones migradas) */
+.buscar-admin { flex: 1 1 16rem; max-width: 26rem; }
+.buscar-admin input { width: 100%; padding: .5rem .8rem; border: 1px solid #d0d7de; border-radius: 8px; font: inherit; font-size: .9rem; }
+.buscar-admin input:focus-visible { outline: 3px solid #ffab00; outline-offset: 1px; }
+.visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
