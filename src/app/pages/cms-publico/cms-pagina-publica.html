@@ -2,7 +2,7 @@
   <div class="aviso-previa" role="status">👁️ Vista previa: se muestran también los borradores.</div>
 }
 
-@if (!cargado()) {
+@if (!cargado() && !estructuraVisible()) {
   <p class="cargando">Cargando…</p>
 } @else if (!pagina()) {
   <!-- ===== 404 ===== -->
@@ -17,7 +17,7 @@
     <header class="entrada-head">
       <a class="volver" [routerLink]="cms.rutaPagina(pagina()!.id)">← {{ pagina()!.titulo }}</a>
       <h1>{{ e.titulo }}</h1>
-      @if (pagina()!.plantilla === 'servicios' || pagina()!.plantilla === 'organigrama' || pagina()!.plantilla === 'plataforma' || pagina()!.plantilla === 'directorio' || pagina()!.plantilla === 'preguntas' || pagina()!.plantilla === 'glosario' || pagina()!.plantilla === 'procesos') {
+      @if (pagina()!.plantilla === 'servicios' || pagina()!.plantilla === 'organigrama' || pagina()!.plantilla === 'plataforma' || pagina()!.plantilla === 'directorio' || pagina()!.plantilla === 'preguntas' || pagina()!.plantilla === 'glosario' || pagina()!.plantilla === 'procesos' || pagina()!.plantilla === 'esquema') {
         <!-- Servicio del portafolio: sin fecha ni autor, solo su grupo -->
         @if (e.categoria || e.estado !== 'publicada') {
           <p class="meta">
@@ -82,6 +82,8 @@
 } @else {
   <!-- ===== PÁGINA ===== -->
   @let p = pagina()!;
+  <!-- El esquema de publicación dibuja su propio encabezado destacado -->
+  @if (p.plantilla !== 'esquema') {
   <header class="pagina-head">
     @if (padre(); as pa) {
       <a class="antetitulo" [routerLink]="cms.rutaPagina(pa.id)">{{ pa.titulo }}</a>
@@ -89,7 +91,16 @@
     <h1>@if (p.icono) { <app-icono-cms class="h1-icono" [valor]="p.icono" /> }{{ p.titulo }}</h1>
     @if (p.descripcion) { <p class="lead">{{ p.descripcion }}</p> }
   </header>
+  }
 
+  <!-- El contenido espera a las entradas; encabezado y subpáginas ya se ven -->
+  @if (!cargado()) {
+    @if (p.plantilla === 'esquema') {
+      <!-- Encabezado del esquema mientras llega el contenido -->
+      <app-esquema-publicacion [pagina]="p" [entradas]="[]" [antetitulo]="padre()?.titulo ?? ''" />
+    }
+    <p class="cargando">Cargando contenido…</p>
+  } @else {
   @if (p.plantilla === 'enlace') {
     <p>Redirigiendo… Si no ocurre automáticamente, <a [href]="p.urlExterna">haga clic aquí</a>.</p>
   }
@@ -330,6 +341,10 @@
       <app-mapa-procesos [entradas]="entradas()" />
     }
 
+    @case ('esquema') {
+      <!-- Esquema de publicación: secciones numeradas, tarjetas, categorías y tabla a partir del texto de la entrada -->
+      <app-esquema-publicacion [pagina]="p" [entradas]="entradas()" [antetitulo]="padre()?.titulo ?? ''" />
+    }
     @case ('plataforma') {
       <!-- Plataforma estratégica: misión, visión, valores, objetivos, funciones y deberes (campo «Sección» en Entradas) -->
       <app-plataforma-estrategica [entradas]="entradas()" />
@@ -431,6 +446,7 @@
 
   @if (!entradas().length && !subpaginas().length && p.plantilla !== 'enlace' && p.plantilla !== 'calendario') {
     <p class="vacio">Esta sección se encuentra en construcción. Pronto encontrará aquí la información.</p>
+  }
   }
 
   @if (subpaginas().length) {

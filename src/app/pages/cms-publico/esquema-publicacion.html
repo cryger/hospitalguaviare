@@ -1,0 +1,163 @@
+@let est = estructura();
+
+<!-- Encabezado destacado -->
+<header class="es-hero">
+  <div class="es-hero-contenido">
+    @if (antetitulo()) { <span class="es-rotulo">{{ antetitulo() }}</span> }
+    <h1>{{ pagina().titulo }}</h1>
+    @if (pagina().descripcion) { <p>{{ pagina().descripcion }}</p> }
+  </div>
+  <span class="es-hero-icono" aria-hidden="true"><app-icono-cms valor="govco:clipboard-list" /></span>
+</header>
+
+<div class="es-contenedor">
+  <!-- Presentación -->
+  @if (est.intro.length) {
+    <section class="es-intro" aria-labelledby="es-presentacion">
+      <span class="es-intro-icono" aria-hidden="true"><app-icono-cms valor="govco:clipboard-check" /></span>
+      <div>
+        <span class="es-antetitulo">Información pública</span>
+        <h2 id="es-presentacion">Presentación</h2>
+        @for (p of est.intro; track $index) { <p>{{ p }}</p> }
+      </div>
+    </section>
+  }
+
+  <!-- Secciones numeradas -->
+  @for (s of est.secciones; track $index; let i = $index) {
+    <section class="es-seccion" [attr.aria-labelledby]="'es-sec-' + i">
+      <div class="es-titulo">
+        <span class="es-numero" aria-hidden="true">{{ numero(i) }}</span>
+        <div>
+          <h2 [id]="'es-sec-' + i">{{ s.titulo }}</h2>
+          @if (s.subtitulo) { <p>{{ s.subtitulo }}</p> }
+        </div>
+      </div>
+
+      @for (b of s.bloques; track $index) {
+        @switch (b.tipo) {
+          @case ('texto') {
+            <div class="es-texto">
+              @for (p of b.parrafos; track $index) {
+                <p>
+                  @for (seg of p; track $index) {
+                    @if (seg.url) {
+                      @if (seg.externo) { <a [href]="seg.url" target="_blank" rel="noopener">{{ seg.texto }}</a> }
+                      @else { <a [routerLink]="seg.url">{{ seg.texto }}</a> }
+                    } @else { {{ seg.texto }} }
+                  }
+                </p>
+              }
+            </div>
+          }
+          @case ('lista') {
+            <ul class="es-lista">
+              @for (p of b.items; track $index) { <li>@for (seg of p; track $index) { {{ seg.texto }} }</li> }
+            </ul>
+          }
+          @case ('tarjetas') {
+            <ul class="es-tarjetas" [class]="'es-' + b.variante">
+              @for (it of b.items; track it.nombre) {
+                <li class="es-tarjeta">
+                  <span class="es-tarjeta-icono" aria-hidden="true"><app-icono-cms [valor]="it.icono" /></span>
+                  <div>
+                    <h3>{{ it.nombre }}</h3>
+                    @if (it.texto) { <p>{{ it.texto }}</p> }
+                  </div>
+                </li>
+              }
+            </ul>
+          }
+          @case ('enlaces') {
+            <ul class="es-categorias">
+              @for (it of b.items; track it.nombre; let n = $index) {
+                <li class="es-categoria">
+                  <span class="es-cat-numero" aria-hidden="true">{{ numero(n) }}</span>
+                  <span class="es-cat-icono" aria-hidden="true"><app-icono-cms [valor]="it.icono" /></span>
+                  <div class="es-cat-cuerpo">
+                    <h3>
+                      @if (it.externo) { <a class="es-cat-enlace" [href]="it.url" target="_blank" rel="noopener">{{ it.nombre }}</a> }
+                      @else { <a class="es-cat-enlace" [routerLink]="it.url">{{ it.nombre }}</a> }
+                    </h3>
+                    @if (it.texto) { <p>{{ it.texto }}</p> }
+                  </div>
+                  <span class="es-cat-flecha" aria-hidden="true"><app-icono-cms valor="govco:arrow-right" /></span>
+                </li>
+              }
+            </ul>
+          }
+          @case ('tabla') {
+            <div class="es-tabla-marco" tabindex="0" role="region" [attr.aria-label]="s.titulo">
+              <table class="es-tabla">
+                <thead>
+                  <tr>
+                    @for (h of b.encabezados; track $index) { <th scope="col">{{ h }}</th> }
+                    @if (b.filas[0]?.url) { <th scope="col">Consulta</th> }
+                  </tr>
+                </thead>
+                <tbody>
+                  @for (f of b.filas; track $index) {
+                    <tr>
+                      @for (c of f.celdas; track $index; let primera = $first) {
+                        @if (primera) { <th scope="row">{{ c }}</th> } @else { <td [attr.data-col]="b.encabezados[$index]">{{ c }}</td> }
+                      }
+                      @if (f.url) {
+                        <td class="es-consultar">
+                          @if (f.externo) { <a [href]="f.url" target="_blank" rel="noopener">Consultar<span class="visually-hidden"> {{ f.celdas[0] }}</span></a> }
+                          @else { <a [routerLink]="f.url">Consultar<span class="visually-hidden"> {{ f.celdas[0] }}</span></a> }
+                        </td>
+                      }
+                    </tr>
+                  }
+                </tbody>
+              </table>
+            </div>
+          }
+        }
+      }
+    </section>
+  }
+
+  <!-- Otras entradas de la página (conjuntos de datos, anexos…) con sus archivos -->
+  @for (e of otras(); track e.id; let j = $index) {
+    <section class="es-seccion" [attr.aria-labelledby]="'es-otra-' + e.id">
+      <div class="es-titulo">
+        <span class="es-numero" aria-hidden="true">{{ numero(est.secciones.length + j) }}</span>
+        <div>
+          <h2 [id]="'es-otra-' + e.id">{{ e.titulo }}</h2>
+          @if (e.resumen) { <p>{{ e.resumen }}</p> }
+        </div>
+      </div>
+      <div class="es-archivos">
+        @for (m of documentos(e); track m.id) { <app-cms-media-publica [media]="m" /> }
+      </div>
+    </section>
+  }
+
+  <!-- Llamado a la acción -->
+  @if (est.llamado; as ll) {
+    <section class="es-llamado" aria-labelledby="es-llamado">
+      <div>
+        <span class="es-antetitulo">Acceso a la información</span>
+        <h2 id="es-llamado">{{ ll.titulo }}</h2>
+        @for (p of ll.parrafos; track $index) { <p>{{ p }}</p> }
+      </div>
+      @if (ll.boton; as bt) {
+        @if (bt.externo) { <a class="es-boton" [href]="bt.url" target="_blank" rel="noopener">{{ bt.texto }}</a> }
+        @else { <a class="es-boton" [routerLink]="bt.url">{{ bt.texto }}</a> }
+      }
+    </section>
+    @if (ll.correo) {
+      <section class="es-contacto" aria-label="Contacto">
+        <div>
+          <strong>E.S.E. Hospital San José del Guaviare</strong>
+          <span>Para consultas sobre la publicación de información institucional, utilice los canales oficiales de atención.</span>
+        </div>
+        <a class="es-correo" [href]="'mailto:' + ll.correo">
+          <span class="es-correo-icono" aria-hidden="true"><app-icono-cms valor="govco:envelope" /></span>
+          <span><small>Correo institucional</small>{{ ll.correo }}</span>
+        </a>
+      </section>
+    }
+  }
+</div>

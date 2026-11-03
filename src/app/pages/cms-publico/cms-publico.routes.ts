@@ -21,12 +21,16 @@ export function esVistaPrevia(): boolean {
   }
 }
 
-/** Título dinámico para las migas de pan */
-export const cmsTitulo: ResolveFn<string> = async (route) => {
+/**
+ * Empieza a cargar el CMS al entrar a la ruta, SIN esperar: así el marco del portal (barra,
+ * menú, pie) se pinta de inmediato. Las migas de pan y la página se actualizan solas con las
+ * señales del CmsService cuando llega el contenido.
+ */
+export const cmsTitulo: ResolveFn<string> = (route) => {
   const cms = inject(CmsService);
-  await cms.cargar();
+  void cms.cargar();
   const r = cms.resolverRuta(segmentosDe(route.url), esVistaPrevia());
-  return r ? (r.entrada?.titulo ?? r.pagina.titulo) : 'Página no encontrada';
+  return r ? (r.entrada?.titulo ?? r.pagina.titulo) : '';
 };
 
 const cargarVista = () => import('./cms-pagina-publica').then((m) => m.CmsPaginaPublica);

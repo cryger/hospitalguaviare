@@ -13,7 +13,8 @@
   <link rel="preload" href="assets/fonts/WorkSans-Regular.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/WorkSans-SemiBold.woff2" as="font" type="font/woff2" crossorigin>
   <!-- Primera imagen del carrusel (elemento más grande del inicio): se pide antes de que arranque Angular.
-       Si en Panel › Slider se cambia la primera diapositiva, actualice estas dos rutas. -->
+       Si en Panel › Slider cambia la primera diapositiva, actualice estas rutas aquí y en la vista
+       previa (plantilla «pv-banner» más abajo). Las páginas internas no la muestran. -->
   <link rel="preload" as="image" type="image/webp" href="assets/img/slider/BANNER_PLATAFORMA-2025-movil.webp" media="(max-width: 576px)" fetchpriority="high">
   <link rel="preload" as="image" type="image/webp" href="assets/img/slider/BANNER_PLATAFORMA-2025.webp" media="(min-width: 577px)" fetchpriority="high">
 </head>
@@ -26,13 +27,20 @@
       <div class="pv-govco"></div>
       <div class="pv-cabecera"><img src="assets/img/logo-vista-previa.png" alt="" width="56" height="58"></div>
       <div class="pv-menu"></div>
-      <div class="pv-main">
+      <div class="pv-main"></div>
+      <!-- La imagen del carrusel solo se agrega (y se descarga) en el inicio -->
+      <template id="pv-banner">
         <picture>
           <source media="(max-width: 576px)" type="image/webp" srcset="assets/img/slider/BANNER_PLATAFORMA-2025-movil.webp">
           <source type="image/webp" srcset="assets/img/slider/BANNER_PLATAFORMA-2025.webp">
           <img class="pv-banner" src="assets/img/slider/BANNER_PLATAFORMA-2025.jpg" alt="" fetchpriority="high">
         </picture>
-      </div>
+      </template>
+      <script>
+        if (location.pathname === '/') {
+          document.querySelector('.pv-main').appendChild(document.getElementById('pv-banner').content.cloneNode(true));
+        }
+      </script>
     </div>
   </app-root>
   <style>

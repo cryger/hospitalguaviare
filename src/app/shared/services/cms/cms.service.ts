@@ -41,7 +41,10 @@ export class CmsService {
   readonly multimedia = signal<CmsMultimedia[]>([]);
   readonly cargando = signal(false);
   readonly error = signal<string | null>(null);
+  /** Menús y páginas ya están (las entradas pueden seguir cargando): sirve para pintar antes */
+  readonly estructuraLista = signal(false);
   private cargado = false;
+  private enCurso: Promise<void> | null = null;
 
   constructor() {
     // Modo local: si el admin guarda en otra pestaña, el sitio público se actualiza solo
@@ -78,19 +81,27 @@ export class CmsService {
   /* ===== Carga ===== */
   async cargar(forzar = false): Promise<void> {
     if (this.cargado && !forzar) return;
+    // Varias partes del portal piden cargar a la vez: se comparte la misma carga
+    if (this.enCurso && !forzar) return this.enCurso;
+    this.enCurso = this.cargarTodo().finally(() => (this.enCurso = null));
+    return this.enCurso;
+  }
+
+  private async cargarTodo(): Promise<void> {
     this.cargando.set(true);
     this.error.set(null);
     try {
-      const r = await firstValueFrom(
-        forkJoin({
-          menus: this.ds.listar<CmsMenu>('menus'),
-          paginas: this.ds.listar<CmsPagina>('paginas'),
-          entradas: this.ds.listar<CmsEntrada>('entradas'),
-          multimedia: this.ds.listar<CmsMultimedia>('multimedia'),
-        }),
+      // 1) Estructura (menús y páginas): con ella ya se pintan menú, migas, encabezados y subpáginas
+      const estructura = await firstValueFrom(
+        forkJoin({ menus: this.ds.listar<CmsMenu>('menus'), paginas: this.ds.listar<CmsPagina>('paginas') }),
       );
-      this.menus.set(r.menus);
-      this.paginas.set(r.paginas);
+      this.menus.set(estructura.menus);
+      this.paginas.set(estructura.paginas);
+      this.estructuraLista.set(true);
+      // 2) Contenido (en modo local, la primera visita espera la siembra del contenido migrado)
+      const r = await firstValueFrom(
+        forkJoin({ entradas: this.ds.listar<CmsEntrada>('entradas'), multimedia: this.ds.listar<CmsMultimedia>('multimedia') }),
+      );
       this.entradas.set(r.entradas.map((e) => ({ ...e, multimediaIds: e.multimediaIds || [] })));
       this.multimedia.set(r.multimedia);
       this.cargado = true;

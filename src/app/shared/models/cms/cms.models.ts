@@ -6,7 +6,7 @@
 
 export type UbicacionMenu = 'principal' | 'superior' | 'pie' | 'lateral';
 export type EstadoPagina = 'publicada' | 'borrador' | 'oculta';
-export type PlantillaPagina = 'contenido' | 'listado' | 'documentos' | 'galeria' | 'enlace' | 'calendario' | 'historia' | 'servicios' | 'organigrama' | 'sedes' | 'plataforma' | 'directorio' | 'preguntas' | 'glosario' | 'procesos';
+export type PlantillaPagina = 'contenido' | 'listado' | 'documentos' | 'galeria' | 'enlace' | 'calendario' | 'historia' | 'servicios' | 'organigrama' | 'sedes' | 'plataforma' | 'directorio' | 'preguntas' | 'glosario' | 'procesos' | 'esquema';
 export type TipoEntrada = 'articulo' | 'noticia' | 'documento' | 'evento' | 'servicio' | 'enlace';
 export type EstadoEntrada = 'publicada' | 'borrador' | 'archivada';
 export type TipoMultimedia = 'imagen' | 'video' | 'documento' | 'audio' | 'otro';
@@ -140,6 +140,11 @@ export const PLANTILLAS_PAGINA: { valor: PlantillaPagina; etiqueta: string; ayud
     valor: 'procesos',
     etiqueta: 'Mapa de procesos',
     ayuda: 'Mapa de procesos destacado y una tarjeta por proceso (estratégicos, misionales, de apoyo) con su objetivo (resumen) y sus documentos adjuntos (caracterización, procedimientos, formatos…). El grupo «Sistema de gestión de calidad» muestra objetivos de calidad, PAMEC e infografías al final.',
+  },
+  {
+    valor: 'esquema',
+    etiqueta: 'Esquema de publicación',
+    ayuda: 'Encabezado destacado y secciones numeradas. En una entrada: los párrafos iniciales son la «Presentación»; cada subtítulo (H3) abre una sección y un párrafo en cursiva debajo es su descripción; las viñetas «Nombre: descripción» se vuelven tarjetas con ícono y las viñetas que empiezan con un enlace, tarjetas de categoría; una tabla con enlace en la primera columna agrega el botón «Consultar». Un último subtítulo con «¿…?» y un párrafo que sea solo un enlace se muestra como botón de llamado (un enlace de correo, como tarjeta de contacto). Las demás entradas de la página se listan al final con sus archivos.',
   },
   { valor: 'calendario', etiqueta: 'Calendario de eventos', ayuda: 'Muestra el calendario institucional (los eventos se administran en Contenido › Calendario de eventos).' },
 ];

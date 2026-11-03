@@ -36,6 +36,7 @@ const SEMILLAS_ARCHIVO: [clave: string, ruta: string][] = [
   ['contratacion-semilla', 'assets/semillas/contratacion.json'],
   ['tramites-suit-semilla', 'assets/semillas/tramites-suit.json'],
   ['instrumentos-gestion-semilla', 'assets/semillas/instrumentos-gestion.json'],
+  ['esquema-publicacion-semilla', 'assets/semillas/esquema-publicacion.json'],
 ];
 
 /**
@@ -453,7 +454,7 @@ export class CmsLocalDataSource extends CmsDataSource {
   }
 
   /* ===== Estructura inicial (Resolución 1519 de 2020) ===== */
-  private readonly versionSemilla = 27;
+  private readonly versionSemilla = 28;
 
   private sembrarSiVacio(): void {
     if (this.almacen.getItem(this.prefijo + 'menus')) return;
@@ -680,6 +681,15 @@ export class CmsLocalDataSource extends CmsDataSource {
       }
     }
     // Versión 26: 1.13 Entes de control como directorio
+    // Versión 28: 7.1.3 con la plantilla «esquema» (estructura del portal anterior)
+    if (version < 28) {
+      for (const p of paginas) {
+        if (p.slug !== 'esquema-de-publicacion-de-la-informacion') continue;
+        if (p.plantilla === 'documentos' || p.plantilla === 'contenido') Object.assign(p, { plantilla: 'esquema', actualizadoEn: t });
+        if (!p.descripcion || p.descripcion.startsWith('Instrumento que organiza la información pública'))
+          Object.assign(p, { descripcion: 'Instrumento para facilitar el acceso organizado, oportuno y transparente a la información pública de la E.S.E. Hospital San José del Guaviare.' });
+      }
+    }
     // Versión 27: 7.1.3 Esquema de publicación muestra el texto del esquema (plantilla contenido)
     if (version < 27) {
       const DESC: Record<string, string> = {
@@ -749,6 +759,7 @@ export class CmsLocalDataSource extends CmsDataSource {
    * - contratacion.json         → api/migraciones/040-contratacion.sql (3.1 PAA, 3.2 relación de contratos, 3.4 manuales, 3.5 formatos)
    * - tramites-suit.json        → api/migraciones/041-tramites-suit.sql (8 trámites SUIT con ficha GOV.CO y normatividad)
    * - instrumentos-gestion.json → api/migraciones/042-instrumentos-gestion.sql (7.1.3 esquema, 7.1.4 PGD, 7.1.5 TRD, certificado de accesibilidad)
+   * - esquema-publicacion.json  → api/migraciones/043-esquema-publicacion.sql (7.1.3 con la estructura del portal anterior)
    * - planeacion.json           → api/migraciones/038-planeacion.sql (4.3, 4.4, 4.5, 4.7, manuales, rendición de cuentas)
    * - directorio-institucional.json → api/migraciones/033-directorio-institucional.sql (1.4 directorio y 1.8 servicio al público)
    * - informacion-de-interes.json → api/migraciones/034-informacion-de-interes.sql (datos abiertos, preguntas frecuentes, glosario, talento humano)
@@ -952,7 +963,7 @@ const ESTRUCTURA_1519: PaginaSemilla[] = [
   { id: 49, menuId: 1, parentId: 48, titulo: "7.1 Instrumentos de gestión de la información", slug: 'instrumentos-de-gestion-de-la-informacion', plantilla: 'contenido', orden: 0 },
   { id: 50, menuId: 1, parentId: 49, titulo: "7.1.1 Registro de activos de información", slug: 'registro-de-activos-de-informacion', plantilla: 'documentos', orden: 0 },
   { id: 51, menuId: 1, parentId: 49, titulo: "7.1.2 Índice de información clasificada y reservada", slug: 'indice-de-informacion-clasificada-y-reservada', plantilla: 'documentos', orden: 1 },
-  { id: 52, menuId: 1, parentId: 49, titulo: "7.1.3 Esquema de publicación de la información", slug: 'esquema-de-publicacion-de-la-informacion', plantilla: 'contenido', descripcion: "Instrumento que organiza la información pública que publica la E.S.E.: responsable, formato y periodicidad.", orden: 2 },
+  { id: 52, menuId: 1, parentId: 49, titulo: "7.1.3 Esquema de publicación de la información", slug: 'esquema-de-publicacion-de-la-informacion', plantilla: 'esquema', descripcion: "Instrumento para facilitar el acceso organizado, oportuno y transparente a la información pública de la E.S.E. Hospital San José del Guaviare.", orden: 2 },
   { id: 53, menuId: 1, parentId: 49, titulo: "7.1.4 Programa de Gestión Documental", slug: 'programa-de-gestion-documental', plantilla: 'documentos', descripcion: "Programa de Gestión Documental (PGD), instrumentos archivísticos, inventarios de fondos acumulados y transferencias documentales.", orden: 3 },
   { id: 54, menuId: 1, parentId: 49, titulo: "7.1.5 Tablas de Retención Documental", slug: 'tablas-de-retencion-documental', plantilla: 'documentos', descripcion: "Tablas de Retención Documental (TRD) de la E.S.E. y actos administrativos de aprobación.", orden: 4 },
   { id: 55, menuId: 1, parentId: 49, titulo: "7.1.6 Costos de reproducción de la información pública", slug: 'costos-de-reproduccion-de-la-informacion-publica', plantilla: 'documentos', orden: 5 },
