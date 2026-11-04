@@ -14,30 +14,17 @@
   isolation: isolate;
 }
 
-/* Fondo tipo hero: degradado azul institucional con anillos suaves */
-.login-cc-fondo {
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  background:
-    radial-gradient(120% 120% at 18% 12%, #0B50C9 0%, #0943B5 42%, #04337F 100%);
-}
-.login-cc-ring {
-  position: absolute;
-  border-radius: 50%;
-  border: 2px solid rgba(255, 255, 255, 0.12);
-}
-.login-cc-ring.r1 { width: 32rem; height: 32rem; right: -8rem; top: -10rem; }
-.login-cc-ring.r2 { width: 22rem; height: 22rem; right: -2rem; bottom: -8rem; border-color: rgba(255, 255, 255, 0.1); }
-.login-cc-ring.r3 { width: 13rem; height: 13rem; right: 7rem; top: 40%; border-color: rgba(255, 214, 102, 0.22); }
+/* Fondo blanco (los anillos decorativos quedan ocultos) */
+.login-cc-fondo { display: none; }
 
-/* Panel blanco del formulario */
+/* Panel del formulario sobre fondo blanco */
 .login-cc-panel {
   width: 100%;
   max-width: 27rem;
   background: #fff;
+  border: 1px solid #E3E9F3;
   border-radius: 1rem;
-  box-shadow: 0 1.5rem 3.5rem rgba(3, 25, 70, 0.28);
+  box-shadow: 0 0.75rem 2rem rgba(16, 24, 40, 0.08);
   padding: 2.25rem 2.25rem 1.75rem;
 }
 
@@ -151,7 +138,7 @@
 /* Botón enviar: pastilla GOV.CO a ancho completo */
 .login-enviar-govco { width: 100%; margin-top: 0.25rem; font-size: 1rem; padding-top: 0.8rem; padding-bottom: 0.8rem; }
 
-.login-cc-pie { margin: 1.25rem 0 0; text-align: center; font-size: 0.8rem; color: var(--govcolor-grey, #7E7E7E); }
+.login-cc-pie { margin: 1.25rem 0 0; text-align: center; font-size: 0.8rem; color: #616161; }
 
 @media (max-width: 480px) {
   .login-cc-panel { padding: 1.75rem 1.4rem 1.5rem; }
