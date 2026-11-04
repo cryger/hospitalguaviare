@@ -1,40 +1,85 @@
 /* =====================================================================
-   Login alineado a BDC_GOV.CO v5
-   - Entradas de texto: alto 40px, borde 1px #C8C8C8, radio 5px, 15px
-   - Botón: .btn-bdc.fill-btn-govco (global, tokens GOV.CO)
-   - Foco visible: contorno negro 0.125rem (WCAG 2.1 / Res. 1519)
+   Login al estilo de Carpeta Ciudadana Digital (panel blanco sobre un
+   fondo tipo hero azul), con tokens y accesibilidad GOV.CO v5 / Res. 1519.
 ===================================================================== */
 
-.login-govco {
+.login-cc {
+  position: relative;
   min-height: calc(100vh - 220px);
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 2.5rem 1rem;
-  background: var(--govcolor-solitude, #E5ECF8);
+  padding: 3rem 1rem;
+  overflow: hidden;
+  isolation: isolate;
 }
 
-.login-caja-govco {
+/* Fondo tipo hero: degradado azul institucional con anillos suaves */
+.login-cc-fondo {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(120% 120% at 18% 12%, #0B50C9 0%, #0943B5 42%, #04337F 100%);
+}
+.login-cc-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.12);
+}
+.login-cc-ring.r1 { width: 32rem; height: 32rem; right: -8rem; top: -10rem; }
+.login-cc-ring.r2 { width: 22rem; height: 22rem; right: -2rem; bottom: -8rem; border-color: rgba(255, 255, 255, 0.1); }
+.login-cc-ring.r3 { width: 13rem; height: 13rem; right: 7rem; top: 40%; border-color: rgba(255, 214, 102, 0.22); }
+
+/* Panel blanco del formulario */
+.login-cc-panel {
   width: 100%;
-  max-width: 26rem;
+  max-width: 27rem;
   background: #fff;
-  border: 1px solid #E3E9F3;
-  border-top: 0.25rem solid var(--govcolor-cobalt, #0943B5);
-  border-radius: 0.75rem;
-  box-shadow: 0 0.75rem 2rem rgba(16, 24, 40, 0.1);
-  padding: 2rem 2rem 2.25rem;
+  border-radius: 1rem;
+  box-shadow: 0 1.5rem 3.5rem rgba(3, 25, 70, 0.28);
+  padding: 2.25rem 2.25rem 1.75rem;
 }
 
-/* Cabecera */
-.login-cabecera-govco { text-align: center; margin-bottom: 1.5rem; }
-.login-logo-govco { width: 4.5rem; height: 4.5rem; object-fit: contain; margin-bottom: 0.75rem; }
-#login-titulo { margin: 0; color: var(--govcolor-cobalt, #0943B5); font-size: 1.5rem; font-weight: 700; }
-.login-sub-govco { margin: 0.35rem 0 0; color: #616161; font-size: 0.9rem; }
+/* Cabecera: logo + título */
+.login-cc-cabecera { text-align: center; margin-bottom: 1.1rem; }
+.login-cc-logo { width: 4.75rem; height: 4.75rem; object-fit: contain; margin-bottom: 0.5rem; }
+#login-titulo {
+  margin: 0;
+  color: var(--govcolor-cobalt, #0943B5);
+  font-size: 1.75rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+/* Insignia informativa (estilo Carpeta Ciudadana) */
+.login-cc-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  margin-bottom: 1.4rem;
+  padding: 0.85rem 1rem;
+  background: var(--govcolor-solitude, #E5ECF8);
+  border-radius: 0.75rem;
+}
+.login-cc-badge-ico {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background: var(--govcolor-cobalt, #0943B5);
+  color: #fff;
+}
+.login-cc-badge-txt strong { display: block; color: var(--govcolor-marino, #004884); font-size: 0.95rem; }
+.login-cc-badge-txt p { margin: 0.1rem 0 0; color: #455066; font-size: 0.85rem; line-height: 1.35; }
 
 .login-obligatorios { margin: 0 0 1rem; font-size: 0.85rem; color: var(--govcolor-matterhorn, #4C4C4C); }
 .req { color: #A80521; font-weight: 700; }
 
-/* ===== BDC · Entradas de texto ===== */
+/* ===== Entradas de texto (BDC, un poco más suaves al estilo Carpeta) ===== */
 .entradas-de-texto-govco { display: flex; flex-direction: column; margin-bottom: 1.1rem; }
 .entradas-de-texto-govco > label {
   display: block;
@@ -45,10 +90,10 @@
 }
 .entradas-de-texto-govco input {
   width: 100%;
-  height: 2.5rem;
-  padding: 0.625rem 0.75rem;
-  border: 1px solid var(--govcolor-silver-dis, #C8C8C8);
-  border-radius: 0.3125rem;
+  height: 2.75rem;
+  padding: 0.7rem 0.85rem;
+  border: 1px solid #CED4DA;
+  border-radius: 0.5rem;
   font: inherit;
   font-size: 0.938rem;
   color: var(--govcolor-matterhorn, #4C4C4C);
@@ -56,8 +101,8 @@
   transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
 .entradas-de-texto-govco input::placeholder { color: var(--govcolor-grey, #7E7E7E); }
-.entradas-de-texto-govco input:hover { border-color: var(--govcolor-cobalt, #0943B5); }
-.entradas-de-texto-govco input:focus { outline: none; border-color: var(--govcolor-cobalt, #0943B5); }
+.entradas-de-texto-govco input:hover { border-color: var(--govcolor-havelock-blue, #4672C8); }
+.entradas-de-texto-govco input:focus { outline: none; border-color: var(--govcolor-cobalt, #0943B5); box-shadow: 0 0 0 3px rgba(9, 67, 181, 0.12); }
 .entradas-de-texto-govco input:focus-visible {
   outline: 0.125rem solid #000;
   outline-offset: 0.125rem;
@@ -65,12 +110,12 @@
 }
 .entradas-de-texto-govco input[aria-invalid='true'] { border-color: #A80521; }
 
-/* Contenedor del campo de contraseña con el botón de ver/ocultar */
+/* Campo de contraseña con botón de ver/ocultar */
 .input-container-govco { position: relative; display: flex; align-items: center; }
-.input-container-govco input { padding-right: 2.75rem; }
+.input-container-govco input { padding-right: 2.9rem; }
 .ver-clave-govco {
   position: absolute;
-  right: 0.35rem;
+  right: 0.4rem;
   top: 50%;
   transform: translateY(-50%);
   display: inline-flex;
@@ -82,19 +127,19 @@
   background: transparent;
   color: var(--govcolor-matterhorn, #4C4C4C);
   cursor: pointer;
-  border-radius: 0.3125rem;
+  border-radius: 0.4rem;
 }
 .ver-clave-govco:hover { color: var(--govcolor-cobalt, #0943B5); }
 .ver-clave-govco:focus-visible { outline: 0.125rem solid #000; outline-offset: 0.063rem; color: var(--govcolor-cobalt, #0943B5); }
 
-/* Mensaje de error (BDC error-text) */
+/* Mensaje de error */
 .login-error-govco {
   display: flex;
   align-items: flex-start;
   gap: 0.5rem;
   margin: 0 0 1.1rem;
   padding: 0.65rem 0.8rem;
-  border-radius: 0.3125rem;
+  border-radius: 0.5rem;
   background: #FCEBEE;
   border: 1px solid #F3C6CF;
   color: #A80521;
@@ -103,9 +148,15 @@
 }
 .login-error-govco svg { flex: none; margin-top: 0.05rem; }
 
-/* Botón enviar: pastilla BDC a ancho completo */
-.login-enviar-govco { width: 100%; margin-top: 0.25rem; }
+/* Botón enviar: pastilla GOV.CO a ancho completo */
+.login-enviar-govco { width: 100%; margin-top: 0.25rem; font-size: 1rem; padding-top: 0.8rem; padding-bottom: 0.8rem; }
 
+.login-cc-pie { margin: 1.25rem 0 0; text-align: center; font-size: 0.8rem; color: var(--govcolor-grey, #7E7E7E); }
+
+@media (max-width: 480px) {
+  .login-cc-panel { padding: 1.75rem 1.4rem 1.5rem; }
+  #login-titulo { font-size: 1.5rem; }
+}
 @media (prefers-reduced-motion: reduce) {
   .entradas-de-texto-govco input { transition: none; }
 }

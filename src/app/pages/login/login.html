@@ -1,15 +1,36 @@
-<div class="login-govco">
-  <main class="login-caja-govco" aria-labelledby="login-titulo">
-    <div class="login-cabecera-govco">
-      <img class="login-logo-govco" src="HSJG-LOGO-2.ico" alt="E.S.E. Hospital San José del Guaviare" />
+<div class="login-cc">
+  <!-- Fondo tipo hero (decorativo) -->
+  <div class="login-cc-fondo" aria-hidden="true">
+    <span class="login-cc-ring r1"></span>
+    <span class="login-cc-ring r2"></span>
+    <span class="login-cc-ring r3"></span>
+  </div>
+
+  <main class="login-cc-panel" aria-labelledby="login-titulo">
+    <div class="login-cc-cabecera">
+      <img class="login-cc-logo" src="HSJG-LOGO.png" alt="E.S.E. Hospital San José del Guaviare" />
       <h1 id="login-titulo">Iniciar sesión</h1>
-      <p class="login-sub-govco">Acceso al panel de administración del portal.</p>
+    </div>
+
+    <!-- Insignia informativa (estilo Carpeta Ciudadana) -->
+    <div class="login-cc-badge">
+      <span class="login-cc-badge-ico" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="26" height="26" focusable="false">
+          <rect x="4" y="4" width="16" height="16" rx="4" fill="none" stroke="currentColor" stroke-width="1.7" />
+          <circle cx="12" cy="10" r="2.6" fill="none" stroke="currentColor" stroke-width="1.7" />
+          <path d="M7.5 17.2c.6-2 2.4-3 4.5-3s3.9 1 4.5 3" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" />
+        </svg>
+      </span>
+      <div class="login-cc-badge-txt">
+        <strong>Acceso al panel de administración</strong>
+        <p>Ingresa con tu usuario y contraseña institucionales.</p>
+      </div>
     </div>
 
     <form [formGroup]="loginForm" (ngSubmit)="login()" novalidate>
       <p class="login-obligatorios">Los campos marcados con <span class="req" aria-hidden="true">*</span><span class="visually-hidden">asterisco</span> son obligatorios.</p>
 
-      <!-- Usuario (BDC · entradas de texto) -->
+      <!-- Usuario -->
       <div class="entradas-de-texto-govco">
         <label for="username">Usuario <span class="req" aria-hidden="true">*</span></label>
         <input
@@ -20,11 +41,11 @@
           autocapitalize="none"
           spellcheck="false"
           [attr.aria-invalid]="!!error()"
-          placeholder="Escriba su usuario"
+          placeholder="Escribe tu usuario"
         />
       </div>
 
-      <!-- Contraseña (BDC · con botón mostrar/ocultar) -->
+      <!-- Contraseña con botón mostrar/ocultar -->
       <div class="entradas-de-texto-govco">
         <label for="password">Contraseña <span class="req" aria-hidden="true">*</span></label>
         <div class="input-container-govco">
@@ -34,7 +55,7 @@
             formControlName="password"
             autocomplete="current-password"
             [attr.aria-invalid]="!!error()"
-            placeholder="Escriba su contraseña"
+            placeholder="Escribe tu contraseña"
           />
           <button
             type="button"
@@ -73,5 +94,7 @@
         {{ enviando() ? 'Ingresando…' : 'Iniciar sesión' }}
       </button>
     </form>
+
+    <p class="login-cc-pie">Portal de la E.S.E. Hospital San José del Guaviare</p>
   </main>
 </div>
