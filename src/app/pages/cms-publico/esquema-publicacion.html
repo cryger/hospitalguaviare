@@ -7,7 +7,7 @@
     <h1>{{ pagina().titulo }}</h1>
     @if (pagina().descripcion) { <p>{{ pagina().descripcion }}</p> }
   </div>
-  <span class="es-hero-icono" aria-hidden="true"><app-icono-cms valor="govco:clipboard-list" /></span>
+  <span class="es-hero-icono" aria-hidden="true"><app-icono-cms [valor]="pagina().icono || 'govco:clipboard-list'" /></span>
 </header>
 
 <div class="es-contenedor">
@@ -16,7 +16,7 @@
     <section class="es-intro" aria-labelledby="es-presentacion">
       <span class="es-intro-icono" aria-hidden="true"><app-icono-cms valor="govco:clipboard-check" /></span>
       <div>
-        <span class="es-antetitulo">Información pública</span>
+        <span class="es-antetitulo">{{ esEsquema() ? 'Información pública' : 'E.S.E. Hospital San José del Guaviare' }}</span>
         <h2 id="es-presentacion">Presentación</h2>
         @for (p of est.intro; track $index) { <p>{{ p }}</p> }
       </div>
@@ -138,7 +138,7 @@
   @if (est.llamado; as ll) {
     <section class="es-llamado" aria-labelledby="es-llamado">
       <div>
-        <span class="es-antetitulo">Acceso a la información</span>
+        <span class="es-antetitulo">{{ esEsquema() ? 'Acceso a la información' : pagina().titulo }}</span>
         <h2 id="es-llamado">{{ ll.titulo }}</h2>
         @for (p of ll.parrafos; track $index) { <p>{{ p }}</p> }
       </div>
@@ -151,7 +151,7 @@
       <section class="es-contacto" aria-label="Contacto">
         <div>
           <strong>E.S.E. Hospital San José del Guaviare</strong>
-          <span>Para consultas sobre la publicación de información institucional, utilice los canales oficiales de atención.</span>
+          <span>{{ esEsquema() ? 'Para consultas sobre la publicación de información institucional, utilice los canales oficiales de atención.' : 'Escríbanos para recibir información, orientación o presentar una propuesta.' }}</span>
         </div>
         <a class="es-correo" [href]="'mailto:' + ll.correo">
           <span class="es-correo-icono" aria-hidden="true"><app-icono-cms valor="govco:envelope" /></span>

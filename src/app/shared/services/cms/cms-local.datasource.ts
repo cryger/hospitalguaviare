@@ -38,6 +38,7 @@ const SEMILLAS_ARCHIVO: [clave: string, ruta: string][] = [
   ['tramites-suit-semilla', 'assets/semillas/tramites-suit.json'],
   ['instrumentos-gestion-semilla', 'assets/semillas/instrumentos-gestion.json'],
   ['esquema-publicacion-semilla', 'assets/semillas/esquema-publicacion.json'],
+  ['grupos-gobierno-digital-semilla', 'assets/semillas/grupos-gobierno-digital.json'],
 ];
 
 /**
@@ -459,7 +460,7 @@ export class CmsLocalDataSource extends CmsDataSource {
   }
 
   /* ===== Estructura inicial (Resolución 1519 de 2020) ===== */
-  private readonly versionSemilla = 28;
+  private readonly versionSemilla = 29;
 
   private sembrarSiVacio(): void {
     if (this.almacen.getItem(this.prefijo + 'menus')) return;
@@ -838,6 +839,10 @@ export class CmsLocalDataSource extends CmsDataSource {
         intro?: { slug: string; resumen: string; contenido: string; destacada: string | null; adjuntos: string[]; siContiene: string };
         /** Complementa entradas existentes: agrega texto y adjuntos (si aún no tienen siNoContiene) o cambia el orden (si conserva siOrden) */
         ampliar?: { paginaSlug: string; slug: string; agregar?: string; siNoContiene?: string; adjuntos?: string[]; orden?: number; siOrden?: number }[];
+        /** Cambia la URL de archivos ya registrados (ej. versión nueva de un formato) */
+        reemplazarUrls?: Record<string, string>;
+        /** Corrige un texto de una entrada existente (ej. un enlace a una página nueva) */
+        reemplazarTexto?: { paginaSlug: string; slug: string; buscar: string; reemplazo: string }[];
       } = datos;
       const items: Item[] = semilla.entradas ?? (semilla.noticias ?? []).map((n) => ({ ...n, paginaSlug: 'noticias', tipo: 'noticia' }));
 
@@ -903,7 +908,20 @@ export class CmsLocalDataSource extends CmsDataSource {
           Object.assign(e, { contenido: `${e.contenido ?? ''}\n${a.agregar}`, multimediaIds: [...e.multimediaIds, ...nuevos], orden: a.orden ?? e.orden, actualizadoEn: t });
         } else if (a.siOrden !== undefined && e.orden === a.siOrden && a.orden !== undefined) {
           e.orden = a.orden;
+        } else if (!a.agregar && a.adjuntos?.length) {
+          // Solo agrega archivos nuevos a la entrada (ej. el informe de un trimestre más)
+          const nuevos = a.adjuntos.map((u) => porUrl.get(u)).filter((x): x is number => x !== undefined && !e.multimediaIds.includes(x));
+          if (nuevos.length) Object.assign(e, { multimediaIds: [...e.multimediaIds, ...nuevos], actualizadoEn: t });
         }
+      }
+      for (const m of multimedia) {
+        const nueva = semilla.reemplazarUrls?.[m.url];
+        if (nueva && !porUrl.has(nueva)) m.url = nueva;
+      }
+      for (const r of semilla.reemplazarTexto ?? []) {
+        const pagina = paginas.find((p) => p.slug === r.paginaSlug);
+        const e = pagina && entradas.find((x) => x.paginaId === pagina.id && x.slug === r.slug);
+        if (e?.contenido?.includes(r.buscar)) Object.assign(e, { contenido: e.contenido.replace(r.buscar, r.reemplazo), actualizadoEn: t });
       }
       this.escribir('multimedia', multimedia);
       this.escribir('entradas', entradas);
@@ -1013,6 +1031,8 @@ const ESTRUCTURA_1519: PaginaSemilla[] = [
   { id: 58, menuId: 1, parentId: 57, titulo: "8.1 Información para niñas, niños y adolescentes", slug: 'informacion-para-ninas-ninos-y-adolescentes', plantilla: 'contenido', descripcion: "Enlaces seguros con información, juegos y orientación para niñas, niños y adolescentes.", orden: 0 },
   { id: 59, menuId: 1, parentId: 57, titulo: "8.2 Información para mujeres", slug: 'informacion-para-mujeres', plantilla: 'contenido', orden: 1 },
   { id: 60, menuId: 1, parentId: 57, titulo: "8.3 Otros grupos de interés", slug: 'otros-grupos-de-interes', plantilla: 'contenido', descripcion: "Atención con enfoque diferencial para grupos étnicos, personas con discapacidad, personas adultas mayores y víctimas del conflicto armado.", orden: 2 },
+  { id: 108, menuId: 1, parentId: 60, titulo: "Grupos étnicos", slug: 'grupos-etnicos', plantilla: 'esquema', icono: 'govco:globe-americas', descripcion: "Atención integral en salud con enfoque diferencial, intercultural y de respeto por la diversidad étnica y cultural del territorio.", orden: 0 },
+  { id: 109, menuId: 1, parentId: 60, titulo: "Atención con enfoque diferencial", slug: 'atencion-con-enfoque-diferencial', plantilla: 'esquema', icono: 'govco:universal-access', descripcion: "La E.S.E. Hospital San José del Guaviare reconoce la diversidad de las personas y las diferentes condiciones sociales, físicas, culturales y territoriales que pueden influir en el acceso a los servicios de salud.", orden: 1 },
   { id: 61, menuId: 1, parentId: 1, titulo: "9. Obligación de reporte de información específica por parte de la entidad", slug: 'reporte-de-informacion-especifica', plantilla: 'documentos', orden: 8 },
   { id: 62, menuId: 1, parentId: null, titulo: "Atención y servicios a la ciudadanía", slug: 'atencion-y-servicios-a-la-ciudadania', plantilla: 'contenido', descripcion: "Trámites, canales de atención y mecanismos para presentar peticiones, quejas, reclamos, sugerencias y denuncias.", orden: 2 },
   { id: 63, menuId: 1, parentId: 62, titulo: "Trámites y otros procedimientos", slug: 'tramites-y-otros-procedimientos', plantilla: 'contenido', orden: 0 },
@@ -1050,6 +1070,7 @@ const ESTRUCTURA_1519: PaginaSemilla[] = [
   { id: 92, menuId: 1, parentId: 74, titulo: "Planes Decreto 612 de 2018", slug: 'planes-decreto-612-de-2018', plantilla: 'documentos', descripcion: "Planes institucionales y estratégicos que la entidad debe publicar según el Decreto 612 de 2018.", orden: 9 },
   { id: 93, menuId: 1, parentId: 74, titulo: "Canal anticorrupción – SICOF", slug: 'canal-anticorrupcion-sicof', plantilla: 'enlace', urlExterna: '/sicof', descripcion: "Subsistema del Riesgo de Corrupción, Opacidad y Fraude: cómo reportar una conducta posiblemente irregular.", orden: 10 },
   { id: 94, menuId: 1, parentId: 74, titulo: "Sistema SARLAFT", slug: 'sistema-sarlaft', plantilla: 'enlace', urlExterna: 'https://esehospitalguaviare.gov.co/sistema-sarlaft/', orden: 11 },
+  { id: 110, menuId: 1, parentId: 74, titulo: "Gobierno Digital", slug: 'gobierno-digital', plantilla: 'esquema', icono: 'govco:laptop-code', descripcion: "La E.S.E. Hospital San José del Guaviare desarrolla y promueve iniciativas de transformación digital orientadas a fortalecer los procesos institucionales, facilitar el acceso a la información, optimizar la gestión administrativa y mejorar la experiencia de los usuarios.", orden: 11 },
   { id: 95, menuId: 1, parentId: 74, titulo: "Acceso ALMERA", slug: 'acceso-almera', plantilla: 'enlace', urlExterna: 'https://sgi.almeraim.com/sgi/index.php?conid=sgiesehospitalguaviare', orden: 12 },
   { id: 96, menuId: 1, parentId: 74, titulo: "Acceso Outlook", slug: 'acceso-outlook', plantilla: 'enlace', urlExterna: 'https://outlook.office.com/mail/', orden: 13 },
   { id: 83, menuId: 1, parentId: null, titulo: "Información de interés", slug: 'informacion-de-interes', plantilla: 'contenido', descripcion: "Invitaciones a cotizar y convocatorias laborales de la E.S.E. Hospital San José del Guaviare.", orden: 4 },

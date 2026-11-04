@@ -6,7 +6,8 @@ import { IconoCms } from '../../shared/components/icono-cms/icono-cms';
 import { CmsMediaPublica } from './cms-media-publica';
 
 /**
- * Plantilla «esquema»: Esquema de publicación de la información (Res. 1519 de 2020).
+ * Plantilla «esquema»: página por secciones con la estructura del portal anterior (Esquema de
+ * publicación de la información, Grupos étnicos, Enfoque diferencial, Gobierno Digital…).
  *
  * El contenido se escribe como una entrada normal en el editor y esta plantilla lo dibuja
  * con la estructura del portal anterior:
@@ -39,7 +40,57 @@ const esExterna = (u: string) => /^(https?:)?\/\//i.test(u) || u.startsWith('mai
 
 /** Ícono GOV.CO según el nombre de la tarjeta (mismos íconos del portal anterior) */
 const REGLAS_ICONO: [RegExp, string][] = [
-  [/oficina de planeacion/, 'sitemap'],
+  // Grupos étnicos, enfoque diferencial y Gobierno Digital
+  [/automatizacion/, 'cogs'],
+  [/^digitalizacion/, 'file-alt'],
+  [/gestion de informacion|gestion y consulta de informacion|uso estrategico/, 'database'],
+  [/servicios digitales|aplicaciones/, 'mobile-alt'],
+  [/inventario web/, 'clipboard-list'],
+  [/laboratorio/, 'microscope'],
+  [/transformacion/, 'rocket'],
+  [/seguridad de la informacion/, 'lock'],
+  [/innovacion/, 'lightbulb'],
+  [/portal web/, 'desktop'],
+  [/sistemas de informacion/, 'server'],
+  [/diversidad/, 'globe-americas'],
+  [/humaniz/, 'hand-holding-heart'],
+  [/^equidad/, 'balance-scale'],
+  [/intercultural|dialogo/, 'comments'],
+  [/^territorio|entidades territoriales/, 'map-marker-alt'],
+  [/^comunidad/, 'users'],
+  [/saberes/, 'book-open'],
+  [/institucion de salud/, 'hospital'],
+  [/autoridades tradicionales/, 'landmark'],
+  [/acceso/, 'universal-access'],
+  [/^reconocimiento/, 'award'],
+  [/caracterizacion|diagnostico/, 'chart-bar'],
+  [/promocion/, 'heartbeat'],
+  [/formacion|capacitaciones/, 'user-graduate'],
+  [/valoraciones/, 'stethoscope'],
+  [/educacion/, 'book-open'],
+  [/vacunacion/, 'syringe'],
+  [/salud oral/, 'tooth'],
+  [/enfermeria/, 'user-nurse'],
+  [/orientacion de rutas|protocolos/, 'route'],
+  [/^identificacion/, 'user-check'],
+  [/^orientacion/, 'map-signs'],
+  [/^atencion$/, 'user-md'],
+  [/^articulacion/, 'people-arrows'],
+  [/^seguimiento/, 'tasks'],
+  [/^respeto/, 'hands'],
+  [/^dignidad|trato digno/, 'user-shield'],
+  [/^inclusion/, 'universal-access'],
+  [/no discriminacion/, 'hands'],
+  [/^normatividad/, 'balance-scale'],
+  [/^lineamientos/, 'compass'],
+  [/planes y programas/, 'tasks'],
+  [/asistencias tecnicas/, 'hands-helping'],
+  [/jornadas/, 'calendar-check'],
+  [/tu participacion/, 'comment-dots'],
+  [/discapacidad/, 'wheelchair'],
+  [/adultas mayores/, 'walking'],
+  [/victimas/, 'dove'],
+  [/^oficina de planeacion/, 'sitemap'],
   [/transparencia activa/, 'landmark'],
   [/transparencia/, 'eye'],
   [/accesibilidad/, 'search'],
@@ -185,7 +236,7 @@ export class EsquemaPublicacion {
     // Llamado a la acción: «¿…?» con un párrafo que es solo un enlace
     const ultima = secciones[secciones.length - 1];
     if (ultima && /^¿/.test(ultima.titulo)) {
-      const parrafos: string[] = [];
+      const parrafos: string[] = ultima.subtitulo ? [ultima.subtitulo] : [];
       let boton: Llamado['boton'];
       let correo: string | undefined;
       for (const b of ultima.bloques) {
@@ -211,6 +262,9 @@ export class EsquemaPublicacion {
     const mapa = this.cms.multimediaPorId();
     return e.multimediaIds.map((id) => mapa.get(id)).filter((m): m is CmsMultimedia => !!m && m.tipo !== 'imagen');
   }
+
+  /** El esquema de publicación conserva sus textos; las demás páginas usan textos generales */
+  readonly esEsquema = computed(() => this.pagina().slug === 'esquema-de-publicacion-de-la-informacion');
 
   numero(i: number): string {
     return String(i + 1).padStart(2, '0');
