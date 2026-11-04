@@ -47,8 +47,8 @@ SELECT p.id, 'Grupos étnicos', 'grupos-etnicos', 'Atención integral en salud c
 <p><em>Acciones orientadas al fortalecimiento de la atención diferencial e intercultural.</em></p>
 <ul>
 <li><strong>Caracterización y diagnóstico:</strong> Identificación de las principales necesidades y condiciones de salud de las comunidades étnicas del territorio, teniendo en cuenta aspectos sociales, culturales, territoriales y ambientales.</li>
-<li><strong>Promoción de la salud y prevención de la enfermedad:</strong> Desarrollo de acciones de promoción de la salud y gestión del riesgo dirigidas a las comunidades étnicas, teniendo en cuenta sus características culturales y territoriales. Incluye: educación para la salud; prevención de enfermedades; salud sexual y reproductiva; salud materno-infantil; vacunación; nutrición; salud mental; prevención de enfermedades transmisibles; hábitos y estilos de vida saludables; gestión del riesgo en salud.</li>
-<li><strong>Formación del talento humano:</strong> Fortalecimiento de las competencias del talento humano de la institución para brindar una atención con enfoque diferencial e intercultural. Incluye: enfoque diferencial étnico; derechos de las comunidades étnicas; atención intercultural; comunicación intercultural; prevención de la discriminación; respeto por los saberes tradicionales; participación comunitaria; atención humanizada y diferencial.</li>
+<li><strong>Promoción de la salud y prevención de la enfermedad:</strong> Desarrollo de acciones de promoción de la salud y gestión del riesgo dirigidas a las comunidades étnicas, teniendo en cuenta sus características culturales y territoriales.<ul><li>Educación para la salud</li><li>Prevención de enfermedades</li><li>Salud sexual y reproductiva</li><li>Salud materno-infantil</li><li>Vacunación</li><li>Nutrición</li><li>Salud mental</li><li>Prevención de enfermedades transmisibles</li><li>Hábitos y estilos de vida saludables</li><li>Gestión del riesgo en salud</li></ul></li>
+<li><strong>Formación del talento humano:</strong> Fortalecimiento de las competencias del talento humano de la institución para brindar una atención con enfoque diferencial e intercultural.<ul><li>Enfoque diferencial étnico</li><li>Derechos de las comunidades étnicas</li><li>Atención intercultural</li><li>Comunicación intercultural</li><li>Prevención de la discriminación</li><li>Respeto por los saberes tradicionales</li><li>Participación comunitaria</li><li>Atención humanizada y diferencial</li></ul></li>
 <li><strong>Participación de las comunidades:</strong> Promoción de espacios de participación y diálogo con autoridades tradicionales, líderes indígenas, organizaciones comunitarias, representantes de las comunidades y demás actores relacionados con la atención en salud.</li>
 </ul>
 <h3>Articulación con las autoridades tradicionales</h3>
@@ -153,17 +153,17 @@ SELECT p.id, 'Atención con enfoque diferencial', 'atencion-con-enfoque-diferenc
 <h3>Personas en situación de discapacidad</h3>
 <ul>
 <li><strong>Acceso y atención:</strong> La E.S.E. promueve condiciones de atención que contribuyan a disminuir las barreras de acceso a los servicios de salud y a la información institucional. Se busca fortalecer la accesibilidad física, comunicacional y tecnológica, de acuerdo con las capacidades institucionales y las necesidades de las personas usuarias.</li>
-<li><strong>Orientaciones:</strong> Atención con trato digno y respetuoso; orientación para acceder a los servicios; identificación de barreras de acceso; fortalecimiento progresivo de la accesibilidad.</li>
+<li><strong>Orientaciones:</strong> <ul><li>Atención con trato digno y respetuoso</li><li>Orientación para acceder a los servicios</li><li>Identificación de barreras de acceso</li><li>Fortalecimiento progresivo de la accesibilidad</li></ul></li>
 </ul>
 <h3>Personas adultas mayores</h3>
 <ul>
 <li><strong>Atención humanizada:</strong> La atención a las personas adultas mayores debe considerar sus necesidades particulares, condiciones de movilidad, comunicación y acceso a los servicios. La institución promueve acciones orientadas al trato digno, la orientación clara y el acompañamiento durante el acceso a los servicios institucionales.</li>
-<li><strong>Orientaciones:</strong> Información clara y comprensible; orientación sobre servicios disponibles; trato digno y respetuoso; identificación de necesidades de apoyo.</li>
+<li><strong>Orientaciones:</strong> <ul><li>Información clara y comprensible</li><li>Orientación sobre servicios disponibles</li><li>Trato digno y respetuoso</li><li>Identificación de necesidades de apoyo</li></ul></li>
 </ul>
 <h3>Personas víctimas del conflicto armado</h3>
 <ul>
 <li><strong>Orientación institucional:</strong> La E.S.E. reconoce las condiciones particulares de las personas que han sido afectadas por situaciones relacionadas con el conflicto armado y promueve una atención respetuosa, humanizada y libre de discriminación. La información disponible busca facilitar el acceso a los servicios de salud y orientar a la ciudadanía hacia los canales institucionales correspondientes.</li>
-<li><strong>Acciones de atención:</strong> Orientación para el acceso a los servicios; atención con enfoque diferencial; trato digno y libre de discriminación; orientación hacia los canales institucionales.</li>
+<li><strong>Acciones de atención:</strong> <ul><li>Orientación para el acceso a los servicios</li><li>Atención con enfoque diferencial</li><li>Trato digno y libre de discriminación</li><li>Orientación hacia los canales institucionales</li></ul></li>
 </ul>
 <h3>Principios de atención</h3>
 <p><em>Principios que orientan la relación con los usuarios.</em></p>

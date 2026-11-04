@@ -44,3 +44,7 @@ Thumbs.db
 
 # Paquetes de git temporales
 *.bundle
+
+# Archivos que la app de Claude guarda en el proyecto (Excel, capturas): no van al repositorio
+/Claude outputs/
+*.xlsx

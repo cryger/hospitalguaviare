@@ -39,6 +39,7 @@ const SEMILLAS_ARCHIVO: [clave: string, ruta: string][] = [
   ['instrumentos-gestion-semilla', 'assets/semillas/instrumentos-gestion.json'],
   ['esquema-publicacion-semilla', 'assets/semillas/esquema-publicacion.json'],
   ['grupos-gobierno-digital-semilla', 'assets/semillas/grupos-gobierno-digital.json'],
+  ['grupos-ordenados-semilla', 'assets/semillas/grupos-gobierno-digital-2.json'],
 ];
 
 /**
@@ -843,6 +844,8 @@ export class CmsLocalDataSource extends CmsDataSource {
         reemplazarUrls?: Record<string, string>;
         /** Corrige un texto de una entrada existente (ej. un enlace a una página nueva) */
         reemplazarTexto?: { paginaSlug: string; slug: string; buscar: string; reemplazo: string }[];
+        /** Reemplaza el contenido de una entrada si nadie lo ha editado (aún contiene siContiene) */
+        actualizar?: { paginaSlug: string; slug: string; contenido: string; siContiene: string }[];
       } = datos;
       const items: Item[] = semilla.entradas ?? (semilla.noticias ?? []).map((n) => ({ ...n, paginaSlug: 'noticias', tipo: 'noticia' }));
 
@@ -922,6 +925,11 @@ export class CmsLocalDataSource extends CmsDataSource {
         const pagina = paginas.find((p) => p.slug === r.paginaSlug);
         const e = pagina && entradas.find((x) => x.paginaId === pagina.id && x.slug === r.slug);
         if (e?.contenido?.includes(r.buscar)) Object.assign(e, { contenido: e.contenido.replace(r.buscar, r.reemplazo), actualizadoEn: t });
+      }
+      for (const u of semilla.actualizar ?? []) {
+        const pagina = paginas.find((p) => p.slug === u.paginaSlug);
+        const e = pagina && entradas.find((x) => x.paginaId === pagina.id && x.slug === u.slug);
+        if (e?.contenido?.includes(u.siContiene)) Object.assign(e, { contenido: u.contenido, actualizadoEn: t });
       }
       this.escribir('multimedia', multimedia);
       this.escribir('entradas', entradas);

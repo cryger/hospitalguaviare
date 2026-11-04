@@ -24,14 +24,15 @@ import { CmsMediaPublica } from './cms-media-publica';
  */
 
 interface Segmento { texto: string; url?: string; externo?: boolean }
-interface Item { nombre: string; texto: string; icono: string; url?: string; externo?: boolean }
-type Variante = 'objetivos' | 'formatos' | 'periodicidad' | 'responsables' | 'tarjetas';
+interface Item { nombre: string; texto: string; icono: string; url?: string; externo?: boolean; subitems: string[] }
+type Variante = 'objetivos' | 'formatos' | 'periodicidad' | 'responsables' | 'tarjetas' | 'chips' | 'pasos' | 'compacta' | 'amplia';
 type Bloque =
   | { tipo: 'texto'; parrafos: Segmento[][] }
   | { tipo: 'tarjetas'; variante: Variante; items: Item[] }
   | { tipo: 'enlaces'; items: Item[] }
   | { tipo: 'tabla'; encabezados: string[]; filas: { celdas: string[]; url?: string; externo?: boolean }[] }
-  | { tipo: 'lista'; items: Segmento[][] };
+  | { tipo: 'lista'; items: Segmento[][] }
+  | { tipo: 'contacto'; correo: string };
 interface Seccion { titulo: string; subtitulo: string; bloques: Bloque[] }
 interface Llamado { titulo: string; parrafos: string[]; boton?: { texto: string; url: string; externo: boolean }; correo?: string }
 
@@ -138,24 +139,40 @@ function leerItem(li: Element): Item | null {
   const enlace = li.querySelector(':scope > a');
   const cabeza = enlace ?? fuerte;
   if (!cabeza) return null;
+  // Una sublista dentro de la viñeta se muestra como etiquetas debajo del texto
+  const subitems = [...li.querySelectorAll(':scope > ul > li, :scope > ol > li')].map((x) => (x.textContent ?? '').trim().replace(/\.$/, ''));
+  const copia = li.cloneNode(true) as Element;
+  copia.querySelectorAll(':scope > ul, :scope > ol').forEach((x) => x.remove());
   const nombre = (cabeza.textContent ?? '').replace(/:\s*$/, '').trim();
-  const texto = (li.textContent ?? '').replace(cabeza.textContent ?? '', '').replace(/^\s*[:–—-]\s*/, '').trim();
+  const texto = (copia.textContent ?? '').replace(cabeza.textContent ?? '', '').replace(/^\s*[:–—-]\s*/, '').trim();
   const url = enlace?.getAttribute('href') ?? undefined;
-  return { nombre, texto, icono: iconoDe(nombre), url, externo: url ? esExterna(url) : undefined };
+  return { nombre, texto, icono: iconoDe(nombre), url, externo: url ? esExterna(url) : undefined, subitems };
 }
 
-function variante(titulo: string): Variante {
+function variante(titulo: string, items: Item[]): Variante {
   const t = sinTildes(titulo);
   if (/objetivo/.test(t)) return 'objetivos';
   if (/formato/.test(t)) return 'formatos';
   if (/periodicidad/.test(t)) return 'periodicidad';
   if (/responsable/.test(t)) return 'responsables';
+  // Solo nombres (sin descripción) → etiquetas compactas
+  if (items.every((i) => !i.texto && !i.subitems.length)) return 'chips';
+  // Ruta o pasos → línea de pasos numerados
+  if (/\bruta\b|pasos/.test(t)) return 'pasos';
+  const largo = Math.max(...items.map((i) => i.texto.length));
+  if (largo > 180) return 'amplia';
+  if (items.length >= 4 && largo <= 170 && items.every((i) => !i.subitems.length)) return 'compacta';
   return 'tarjetas';
 }
 
 function bloqueDe(el: Element, titulo: string): Bloque | null {
   const tag = el.tagName;
-  if (tag === 'P') return { tipo: 'texto', parrafos: [segmentos(el)] };
+  if (tag === 'P') {
+    // Párrafo que es solo un correo → tarjeta de contacto
+    const a = el.querySelector(':scope > a[href^="mailto:"]');
+    if (a && el.textContent?.trim() === a.textContent?.trim()) return { tipo: 'contacto', correo: a.getAttribute('href')!.slice(7) };
+    return { tipo: 'texto', parrafos: [segmentos(el)] };
+  }
   if (tag === 'TABLE') {
     const filasHtml = [...el.querySelectorAll('tr')];
     const encabezados = [...(filasHtml[0]?.children ?? [])].map((c) => (c.textContent ?? '').trim());
@@ -170,7 +187,7 @@ function bloqueDe(el: Element, titulo: string): Bloque | null {
     const lis = [...el.querySelectorAll(':scope > li')];
     const items = lis.map(leerItem);
     if (items.length && items.every((i): i is Item => !!i)) {
-      return items.every((i) => i.url) ? { tipo: 'enlaces', items } : { tipo: 'tarjetas', variante: variante(titulo), items };
+      return items.every((i) => i.url) ? { tipo: 'enlaces', items } : { tipo: 'tarjetas', variante: variante(titulo, items), items };
     }
     return { tipo: 'lista', items: lis.map(segmentos) };
   }
@@ -240,6 +257,7 @@ export class EsquemaPublicacion {
       let boton: Llamado['boton'];
       let correo: string | undefined;
       for (const b of ultima.bloques) {
+        if (b.tipo === 'contacto') { correo = b.correo; continue; }
         if (b.tipo !== 'texto') continue;
         for (const p of b.parrafos) {
           const enlaces = p.filter((s) => s.url);
@@ -265,6 +283,19 @@ export class EsquemaPublicacion {
 
   /** El esquema de publicación conserva sus textos; las demás páginas usan textos generales */
   readonly esEsquema = computed(() => this.pagina().slug === 'esquema-de-publicacion-de-la-informacion');
+
+  /** Índice de secciones para páginas largas (no en el esquema, que replica el portal anterior) */
+  readonly indice = computed(() => {
+    const s = this.estructura().secciones;
+    return !this.esEsquema() && s.length >= 5 ? s.map((x, i) => ({ id: 'es-sec-' + i, titulo: x.titulo })) : [];
+  });
+
+  irA(evento: Event, id: string): void {
+    evento.preventDefault();
+    const destino = document.getElementById(id);
+    destino?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    destino?.focus({ preventScroll: true });
+  }
 
   numero(i: number): string {
     return String(i + 1).padStart(2, '0');

@@ -10,7 +10,7 @@
   <span class="es-hero-icono" aria-hidden="true"><app-icono-cms [valor]="pagina().icono || 'govco:clipboard-list'" /></span>
 </header>
 
-<div class="es-contenedor">
+<div class="es-contenedor" [class.es-general]="!esEsquema()">
   <!-- Presentación -->
   @if (est.intro.length) {
     <section class="es-intro" aria-labelledby="es-presentacion">
@@ -23,13 +23,25 @@
     </section>
   }
 
+  <!-- Índice de la página (páginas largas) -->
+  @if (indice().length) {
+    <nav class="es-indice" aria-label="En esta página">
+      <span class="es-indice-titulo">En esta página</span>
+      <ol>
+        @for (x of indice(); track x.id; let i = $index) {
+          <li><a [href]="'#' + x.id" (click)="irA($event, x.id)"><span aria-hidden="true">{{ numero(i) }}</span>{{ x.titulo }}</a></li>
+        }
+      </ol>
+    </nav>
+  }
+
   <!-- Secciones numeradas -->
   @for (s of est.secciones; track $index; let i = $index) {
     <section class="es-seccion" [attr.aria-labelledby]="'es-sec-' + i">
       <div class="es-titulo">
         <span class="es-numero" aria-hidden="true">{{ numero(i) }}</span>
         <div>
-          <h2 [id]="'es-sec-' + i">{{ s.titulo }}</h2>
+          <h2 [id]="'es-sec-' + i" tabindex="-1">{{ s.titulo }}</h2>
           @if (s.subtitulo) { <p>{{ s.subtitulo }}</p> }
         </div>
       </div>
@@ -50,23 +62,52 @@
               }
             </div>
           }
+          @case ('contacto') {
+            <a class="es-correo es-correo-bloque" [href]="'mailto:' + b.correo">
+              <span class="es-correo-icono" aria-hidden="true"><app-icono-cms valor="govco:envelope" /></span>
+              <span><small>Correo institucional</small>{{ b.correo }}</span>
+            </a>
+          }
           @case ('lista') {
             <ul class="es-lista">
               @for (p of b.items; track $index) { <li>@for (seg of p; track $index) { {{ seg.texto }} }</li> }
             </ul>
           }
           @case ('tarjetas') {
-            <ul class="es-tarjetas" [class]="'es-' + b.variante">
-              @for (it of b.items; track it.nombre) {
-                <li class="es-tarjeta">
-                  <span class="es-tarjeta-icono" aria-hidden="true"><app-icono-cms [valor]="it.icono" /></span>
-                  <div>
-                    <h3>{{ it.nombre }}</h3>
-                    @if (it.texto) { <p>{{ it.texto }}</p> }
-                  </div>
-                </li>
-              }
-            </ul>
+            @if (b.variante === 'chips') {
+              <ul class="es-chips">
+                @for (it of b.items; track it.nombre) {
+                  <li><span class="es-chip-icono" aria-hidden="true"><app-icono-cms [valor]="it.icono" /></span>{{ it.nombre }}</li>
+                }
+              </ul>
+            } @else if (b.variante === 'pasos') {
+              <ol class="es-pasos">
+                @for (it of b.items; track it.nombre; let n = $index) {
+                  <li>
+                    <span class="es-paso-numero" aria-hidden="true">{{ n + 1 }}</span>
+                    <div>
+                      <h3>{{ it.nombre }}</h3>
+                      @if (it.texto) { <p>{{ it.texto }}</p> }
+                    </div>
+                  </li>
+                }
+              </ol>
+            } @else {
+              <ul class="es-tarjetas" [class]="'es-' + b.variante" [style.--columnas]="b.items.length % 3 === 1 && b.items.length % 2 === 0 ? 2 : 3">
+                @for (it of b.items; track it.nombre) {
+                  <li class="es-tarjeta">
+                    <span class="es-tarjeta-icono" aria-hidden="true"><app-icono-cms [valor]="it.icono" /></span>
+                    <div>
+                      <h3>{{ it.nombre }}</h3>
+                      @if (it.texto) { <p>{{ it.texto }}</p> }
+                      @if (it.subitems.length) {
+                        <ul class="es-sub">@for (x of it.subitems; track $index) { <li>{{ x }}</li> }</ul>
+                      }
+                    </div>
+                  </li>
+                }
+              </ul>
+            }
           }
           @case ('enlaces') {
             <ul class="es-categorias">
