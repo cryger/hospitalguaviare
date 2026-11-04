@@ -5,7 +5,7 @@ import { RouterLink } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
 
 import { CotizacionesService } from '../../shared/services/cotizaciones/cotizaciones';
-import { ContratacionService, PqrsfdService } from '../../shared/services/solicitudes/solicitudes.service';
+import { ContratacionService, HistoriaClinicaService, PqrsfdService } from '../../shared/services/solicitudes/solicitudes.service';
 import { TrabajaNosotrosService } from '../../shared/services/trabaja-nosotros/trabaja-nosotros-service';
 import { CmsService } from '../../shared/services/cms/cms.service';
 import { UsuariosApiService } from '../../shared/services/usuarios/usuarios-api.service';
@@ -74,6 +74,7 @@ export class DashboardHomeComponent implements OnDestroy {
   private cotizacionesService = inject(CotizacionesService);
   private pqrsfdService = inject(PqrsfdService);
   private contratacionService = inject(ContratacionService);
+  private historiaService = inject(HistoriaClinicaService);
   private permisos = inject(PermisosService);
   private vacantesService = inject(TrabajaNosotrosService);
   private cms = inject(CmsService);
@@ -109,6 +110,10 @@ export class DashboardHomeComponent implements OnDestroy {
       vencidas: abiertas.filter((s) => semaforoDe(s.fechaVencimiento, true, this.ahora()).estado === 'vencida').length,
       total: this.contratacionService.total(),
     };
+  });
+  readonly kpiHistorias = computed(() => {
+    const abiertas = this.historiaService.lista().filter((s) => s.estado === 'radicada' || s.estado === 'en_tramite');
+    return { vencidas: abiertas.filter((s) => semaforoDe(s.fechaVencimiento, true, this.ahora()).estado === 'vencida').length };
   });
   readonly vacantes = toSignal(this.vacantesService.vacantesObservable(), { initialValue: [] });
 
@@ -364,6 +369,15 @@ export class DashboardHomeComponent implements OnDestroy {
         accion: 'Responder',
       });
     }
+    const kh = this.kpiHistorias();
+    if (this.ver('historias') && kh.vencidas > 0) {
+      a.push({
+        nivel: 'danger',
+        texto: `${kh.vencidas} solicitud(es) de copia de historia clínica superan el plazo de 10 días hábiles.`,
+        ruta: '/admin/historias-clinicas',
+        accion: 'Responder',
+      });
+    }
     // Las alertas de contenido solo para quien administra el contenido
     if (!this.ver('contenido')) return a;
 
@@ -430,6 +444,7 @@ export class DashboardHomeComponent implements OnDestroy {
       { icono: '📰', texto: 'Nueva entrada', ruta: '/admin/contenido/entradas/nueva', modulo: 'contenido' },
       { icono: '📬', texto: 'Gestionar PQRSFD', ruta: '/admin/pqrsf', modulo: 'pqrsfd' },
       { icono: '📄', texto: 'Solicitudes contractuales', ruta: '/admin/solicitudes-contractuales', modulo: 'contratacion' },
+      { icono: '🗂️', texto: 'Copias de historia clínica', ruta: '/admin/historias-clinicas', modulo: 'historias' },
       { icono: '🧭', texto: 'Menús y páginas', ruta: '/admin/contenido/menus', modulo: 'contenido' },
       { icono: '🖼️', texto: 'Multimedia', ruta: '/admin/contenido/multimedia', modulo: 'contenido' },
       { icono: '💼', texto: 'Nueva cotización', ruta: '/admin/cotizaciones', modulo: 'cotizaciones' },
@@ -450,6 +465,7 @@ export class DashboardHomeComponent implements OnDestroy {
     this.cms.cargar();
     if (this.ver('pqrsfd')) this.pqrsfdService.cargar(true);
     if (this.ver('contratacion')) this.contratacionService.cargar(true);
+    if (this.ver('historias')) this.historiaService.cargar(true);
     if (this.ver('usuarios')) this.usuariosService.cargar().catch(() => {});
   }
 

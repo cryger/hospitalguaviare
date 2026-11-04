@@ -1,0 +1,30 @@
+.sub { border: 0; padding: 0; margin: 1rem 0 0; }
+.sub legend { font-weight: 600; font-size: .938rem; padding: 0; color: var(--matterhorn); }
+
+/* Requisitos antes de empezar: tono cálido, como los avisos del portal */
+.hc-requisitos {
+  margin: 1rem 0 1.25rem; padding: 1rem 1.25rem; border-radius: .5rem;
+  background: #FFF7E6; border: 1px solid #F5D98B; border-left: .35rem solid #E0A800;
+}
+.hc-requisitos h2 { margin: 0 0 .4rem; font-size: 1.05rem; color: #004884; }
+.hc-requisitos ul { margin: 0; padding-left: 1.15rem; display: grid; gap: .3rem; font-size: .93rem; line-height: 1.5; }
+
+/* Servicios: casillas en forma de pastilla */
+.hc-chips { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .5rem; }
+.hc-chip {
+  display: inline-flex; align-items: center; gap: .4rem; border: 1px solid var(--tropical); border-radius: 1.5rem;
+  padding: .4rem .9rem; cursor: pointer; font-weight: 600; font-size: .9rem; background: #fff; min-height: 2.5rem;
+}
+.hc-chip.on { border-color: var(--cobalt); background: var(--solitude); color: var(--cobalt); }
+.hc-chip input { width: 1.05rem; height: 1.05rem; accent-color: var(--cobalt); }
+.hc-chip:has(input:focus-visible) { outline: .125rem solid #000; outline-offset: .125rem; }
+
+/* Soportes que debe adjuntar según quién solicita */
+.hc-soportes { background: #F2F6FC; border-radius: .5rem; padding: .75rem 1rem; margin-bottom: .75rem; font-size: .93rem; }
+.hc-soportes p { margin: 0 0 .25rem; }
+.hc-soportes ul { margin: 0; padding-left: 1.15rem; display: grid; gap: .2rem; }
+
+#archivos input[aria-invalid='true'] { outline: .125rem solid var(--error); outline-offset: .125rem; }
+.hc-consulta { grid-template-columns: 1fr 1fr 1fr auto; }
+@media (max-width: 760px) { .hc-consulta { grid-template-columns: 1fr; } }
+.alerta-govco, .hc-requisitos { overflow-wrap: anywhere; }

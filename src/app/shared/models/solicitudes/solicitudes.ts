@@ -200,3 +200,125 @@ export function tamanoLegible(bytes: number): string {
   if (bytes < 1024 * 1024) return `${Math.round(bytes / 1024)} KB`;
   return `${(bytes / 1024 / 1024).toFixed(1)} MB`;
 }
+
+/* ===================== Copia de historia clínica ===================== */
+
+export type EstadoHistoria = 'radicada' | 'en_tramite' | 'respondida' | 'rechazada';
+export type CalidadSolicitante = 'paciente' | 'representante' | 'autorizado' | 'familiar';
+export type AlcanceHistoria = 'completa' | 'epicrisis' | 'resultados' | 'otro';
+
+export const PLAZO_HISTORIA = 10;
+export const DIAS_DESCARGA_HISTORIA = 30;
+/** Soportes: solo PDF o imagen (la API valida lo mismo) */
+export const EXTENSIONES_SOPORTE = '.pdf,.jpg,.jpeg,.png';
+
+export const ESTADOS_HISTORIA: { valor: EstadoHistoria; nombre: string; abierta: boolean }[] = [
+  { valor: 'radicada', nombre: 'Radicada', abierta: true },
+  { valor: 'en_tramite', nombre: 'En trámite', abierta: true },
+  { valor: 'respondida', nombre: 'Entregada', abierta: false },
+  { valor: 'rechazada', nombre: 'No procede', abierta: false },
+];
+export const nombreEstadoHistoria = (e: string) => ESTADOS_HISTORIA.find((x) => x.valor === e)?.nombre ?? e;
+
+/** Quién puede solicitarla (Res. 1995 de 1999, art. 14) y qué soportes debe adjuntar */
+export const CALIDADES_SOLICITANTE: { valor: CalidadSolicitante; nombre: string; ayuda: string; soportes: string[] }[] = [
+  {
+    valor: 'paciente', nombre: 'Soy el paciente', ayuda: 'Usted es la persona atendida y es mayor de edad.',
+    soportes: ['Copia de su documento de identidad por ambas caras.'],
+  },
+  {
+    valor: 'representante', nombre: 'Soy el representante legal', ayuda: 'Madre, padre o representante de un menor de edad, o apoyo designado judicialmente.',
+    soportes: ['Copia de su documento de identidad.', 'Copia del documento del paciente.', 'Registro civil de nacimiento del menor o documento que acredite la representación.'],
+  },
+  {
+    valor: 'autorizado', nombre: 'Estoy autorizado por el paciente', ayuda: 'El paciente lo autorizó por escrito para recibir la copia.',
+    soportes: ['Copia de su documento de identidad.', 'Copia del documento del paciente.', 'Autorización escrita y firmada por el paciente.'],
+  },
+  {
+    valor: 'familiar', nombre: 'Soy familiar de un paciente fallecido', ayuda: 'Cónyuge, compañero(a) permanente, hijo(a), padre o madre del paciente.',
+    soportes: ['Copia de su documento de identidad.', 'Certificado o registro civil de defunción.', 'Documento que pruebe el parentesco (registro civil de nacimiento o de matrimonio, declaración de unión marital).'],
+  },
+];
+export const nombreCalidad = (c: string) => CALIDADES_SOLICITANTE.find((x) => x.valor === c)?.nombre ?? c;
+
+export const ALCANCES_HISTORIA: { valor: AlcanceHistoria; nombre: string; ayuda: string }[] = [
+  { valor: 'completa', nombre: 'Historia clínica completa', ayuda: 'Todos los registros de las atenciones del periodo indicado.' },
+  { valor: 'epicrisis', nombre: 'Epicrisis o resumen de egreso', ayuda: 'Resumen de una hospitalización o de una atención de urgencias.' },
+  { valor: 'resultados', nombre: 'Resultados de laboratorio o imágenes', ayuda: 'Reportes de exámenes, ecografías, rayos X u otros estudios.' },
+  { valor: 'otro', nombre: 'Otros documentos', ayuda: 'Indique en observaciones cuáles necesita.' },
+];
+export const nombreAlcance = (a: string) => ALCANCES_HISTORIA.find((x) => x.valor === a)?.nombre ?? a;
+
+export const SERVICIOS_HISTORIA: { valor: string; nombre: string }[] = [
+  { valor: 'urgencias', nombre: 'Urgencias' },
+  { valor: 'hospitalizacion', nombre: 'Hospitalización' },
+  { valor: 'consulta_externa', nombre: 'Consulta externa' },
+  { valor: 'cirugia', nombre: 'Cirugía' },
+  { valor: 'materno_infantil', nombre: 'Materno infantil / partos' },
+  { valor: 'uci', nombre: 'Cuidado intermedio o intensivo' },
+  { valor: 'apoyo_diagnostico', nombre: 'Laboratorio e imágenes' },
+];
+export const nombreServicio = (s: string) => SERVICIOS_HISTORIA.find((x) => x.valor === s)?.nombre ?? s;
+
+/** Documentos de identidad de personas naturales (sin NIT) */
+export const TIPOS_DOCUMENTO_PERSONA = TIPOS_DOCUMENTO.filter((t) => t.valor !== 'NIT');
+
+export interface SolicitudHistoria {
+  id: number;
+  radicado: string;
+  calidad: CalidadSolicitante;
+  tipoDocumento: string;
+  numeroDocumento: string;
+  nombre: string;
+  correo: string;
+  telefono: string;
+  direccion: string;
+  pacienteTipoDoc: string;
+  pacienteDocumento: string;
+  pacienteNombre: string;
+  parentesco: string;
+  alcance: AlcanceHistoria;
+  servicios: string[];
+  fechaDesde: string | null;
+  fechaHasta: string | null;
+  observaciones: string;
+  tipoEntrega: 'digital' | 'fisica';
+  canal: 'web' | 'correo' | 'presencial';
+  estado: EstadoHistoria;
+  asignadoA: number | null;
+  asignadoNombre: string;
+  plazoDias: number;
+  fechaRadicacion: string;
+  fechaVencimiento: string;
+  respuesta: string;
+  fechaRespuesta: string | null;
+  respondidoPor: string;
+  adjuntos: number;
+  actualizadoEn?: string;
+}
+
+export interface SolicitudHistoriaDetalle extends SolicitudHistoria {
+  codigoConsulta: string;
+  archivos: ArchivoSolicitud[];
+  historial: MovimientoHistorial[];
+}
+
+/** Consulta pública de una copia de historia clínica */
+export interface ConsultaHistoria extends ConsultaPublica {
+  alcance: AlcanceHistoria;
+  alcanceNombre: string;
+  descargaHasta: string | null;
+  descargaVencida: boolean;
+}
+
+/** Valida soportes (PDF o imagen) antes de enviarlos */
+export function validarSoportes(archivos: File[]): string {
+  if (archivos.length > MAX_ARCHIVOS) return `Puede adjuntar máximo ${MAX_ARCHIVOS} archivos.`;
+  const permitidas = EXTENSIONES_SOPORTE.split(',');
+  for (const f of archivos) {
+    const ext = '.' + (f.name.split('.').pop() || '').toLowerCase();
+    if (!permitidas.includes(ext)) return `El archivo "${f.name}" debe ser PDF, JPG o PNG.`;
+    if (f.size > MAX_MB * 1024 * 1024) return `El archivo "${f.name}" supera ${MAX_MB} MB.`;
+  }
+  return '';
+}

@@ -15,6 +15,7 @@ const { rutasConfiguracion } = require('./src/configuracion');
 const { rutasUsuarios } = require('./src/usuarios');
 const { rutasPqrsfd } = require('./src/pqrsfd');
 const { rutasContratacion } = require('./src/contratacion');
+const { rutasHistoriaClinica } = require('./src/historia-clinica');
 const { rutasSicof, iniciarReintentos } = require('./src/sicof');
 const { manejarErrores } = require('./src/errores');
 const { aplicarMigraciones } = require('./src/migraciones');
@@ -47,6 +48,7 @@ router.use('/', rutasConfiguracion);
 router.use('/', rutasUsuarios);
 router.use('/', rutasPqrsfd);
 router.use('/', rutasContratacion);
+router.use('/', rutasHistoriaClinica);
 router.use('/', rutasSicof);
 router.use(
   '/uploads',

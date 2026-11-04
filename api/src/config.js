@@ -19,7 +19,7 @@ const config = {
   corsOrigins: (process.env.CORS_ORIGINS || '').split(',').map((s) => s.trim()).filter(Boolean),
   publicUrl: (process.env.PUBLIC_URL || '').replace(/\/+$/, ''),
   uploadDir: path.resolve(process.env.UPLOAD_DIR || './uploads'),
-  /** Adjuntos con datos personales (PQRSFD, solicitudes contractuales): NO se publican */
+  /** Adjuntos con datos personales (PQRSFD, solicitudes contractuales, historias clínicas): NO se publican */
   privadoDir: path.resolve(process.env.PRIVADO_DIR || './privado'),
   maxArchivoMb: Number(process.env.MAX_ARCHIVO_MB || 20),
   /** Correo saliente (SMTP). Si falta SMTP_HOST, los mensajes quedan pendientes y se reintentan */
@@ -33,6 +33,8 @@ const config = {
   },
   /** Destino de los reportes del canal anticorrupción (SICOF) */
   sicofCorreo: process.env.SICOF_CORREO || 'oficialdecumplimiento@esehospitalguaviare.gov.co',
+  /** Archivo de historias clínicas: recibe el aviso de cada solicitud de copia (sin datos clínicos) */
+  hcCorreo: process.env.HC_CORREO || 'historiaclinica@esehospitalguaviare.gov.co',
 };
 
 if (config.jwtSecret.length < 32) {

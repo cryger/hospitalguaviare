@@ -42,7 +42,7 @@
 
 .obligatorios { font-size: .875rem; margin: 0 0 1rem; }
 .req { color: var(--error); font-weight: 700; }
-.opc { font-weight: 400; color: var(--gris); font-size: .85em; }
+.opc { font-weight: 400; color: #616161; font-size: .85em; } /* contraste 6:1 (WCAG AA) */
 
 /* Secciones del formulario */
 .seccion { border: 1px solid var(--tropical); border-radius: .5rem; padding: 1.1rem 1.25rem 1.25rem; margin: 0 0 1.25rem; background: #fff; }

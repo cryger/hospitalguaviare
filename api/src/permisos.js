@@ -16,6 +16,7 @@ const MODULOS = [
   'vacantes',
   'pqrsfd',
   'contratacion',
+  'historias',      // Copias de historia clínica (información reservada)
   'accesibilidad',
   'usuarios',
   'configuracion',
@@ -28,6 +29,7 @@ const ROLES = {
   editor: ['resumen', 'contenido', 'slider', 'eventos', 'cotizaciones', 'vacantes', 'accesibilidad'],
   pqrsfd: ['pqrsfd'],
   contratacion: ['contratacion'],
+  historia_clinica: ['historias'],
   personalizado: null, // se toman de la columna modulos
 };
 

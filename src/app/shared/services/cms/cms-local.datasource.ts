@@ -41,6 +41,7 @@ const SEMILLAS_ARCHIVO: [clave: string, ruta: string][] = [
   ['grupos-gobierno-digital-semilla', 'assets/semillas/grupos-gobierno-digital.json'],
   ['grupos-ordenados-semilla', 'assets/semillas/grupos-gobierno-digital-2.json'],
   ['paginas-por-secciones-semilla', 'assets/semillas/grupos-gobierno-digital-3.json'],
+  ['historia-clinica-en-linea-semilla', 'assets/semillas/historia-clinica-en-linea.json'],
 ];
 
 /**
@@ -462,7 +463,7 @@ export class CmsLocalDataSource extends CmsDataSource {
   }
 
   /* ===== Estructura inicial (Resolución 1519 de 2020) ===== */
-  private readonly versionSemilla = 29;
+  private readonly versionSemilla = 30;
 
   private sembrarSiVacio(): void {
     if (this.almacen.getItem(this.prefijo + 'menus')) return;
@@ -1063,6 +1064,7 @@ const ESTRUCTURA_1519: PaginaSemilla[] = [
   { id: 98, menuId: 1, parentId: 62, titulo: "Boletines de salud", slug: 'boletines-de-salud', plantilla: 'listado', descripcion: "Boletines epidemiológicos, infografías y piezas informativas sobre fechas conmemorativas en salud.", orden: 5 },
   { id: 99, menuId: 1, parentId: 62, titulo: "Perfil epidemiológico", slug: 'perfil-epidemiologico', plantilla: 'documentos', descripcion: "Perfil epidemiológico institucional y boletines epidemiológicos trimestrales.", orden: 6 },
   { id: 105, menuId: 1, parentId: 62, titulo: "Solicitudes contractuales", slug: 'solicitudes-contractuales', plantilla: 'enlace', urlExterna: '/solicitudes-contractuales', descripcion: "Solicite certificaciones de sus contratos con la E.S.E. y consulte el estado de su solicitud.", orden: 7 },
+  { id: 111, menuId: 1, parentId: 62, titulo: "Copia de historia clínica", slug: 'copia-historia-clinica-en-linea', plantilla: 'enlace', urlExterna: '/solicitud-historia-clinica', descripcion: "Solicite en línea la copia de su historia clínica y consulte el estado con su número de radicado.", orden: 7 },
   { id: 106, menuId: 1, parentId: 62, titulo: "Preguntas frecuentes", slug: 'preguntas-frecuentes', plantilla: 'preguntas', descripcion: "Respuestas a las dudas más comunes sobre contacto, citas, trámites, PQRSFD, derechos y deberes de los usuarios.", orden: 8 },
   { id: 107, menuId: 1, parentId: 62, titulo: "Glosario", slug: 'glosario', plantilla: 'glosario', descripcion: "Términos jurídicos, administrativos y de salud que se usan en la gestión del hospital, de la A a la Z.", orden: 9 },
   { id: 67, menuId: 1, parentId: null, titulo: "Participa", slug: 'participa', plantilla: 'contenido', descripcion: "Espacios de participación ciudadana en la gestión de la E.S.E. Hospital San José del Guaviare (lineamientos del DAFP).", orden: 3 },

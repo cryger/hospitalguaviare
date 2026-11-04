@@ -1,0 +1,323 @@
+<section class="tramite">
+  <header class="tramite-head">
+    <h1>Solicitud de copia de historia clínica</h1>
+    <p class="lead">Solicite en línea la copia de su historia clínica, sin desplazarse ni enviar formatos por correo. Recibirá un número de
+      radicado y un código para consultar el estado y descargar la copia. Respuesta en máximo {{ plazo }} días hábiles.</p>
+  </header>
+
+  <div class="tabs-govco" role="tablist" aria-label="Opciones de copia de historia clínica">
+    <button type="button" role="tab" id="tab-hc-radicar" [attr.aria-selected]="pestana() === 'radicar'" aria-controls="panel-hc-radicar"
+            [class.activa]="pestana() === 'radicar'" (click)="pestana.set('radicar')">Nueva solicitud</button>
+    <button type="button" role="tab" id="tab-hc-consultar" [attr.aria-selected]="pestana() === 'consultar'" aria-controls="panel-hc-consultar"
+            [class.activa]="pestana() === 'consultar'" (click)="pestana.set('consultar')">Consultar y descargar</button>
+  </div>
+
+  @if (!svc.disponible) {
+    <div class="alerta-govco info" role="status">
+      <strong>La solicitud en línea aún no está habilitada en esta versión del portal.</strong>
+      Mientras tanto, envíe el formato de solicitud diligenciado y la copia de su documento al correo
+      <a href="mailto:historiaclinica@esehospitalguaviare.gov.co">historiaclinica&#64;esehospitalguaviare.gov.co</a>.
+    </div>
+  }
+
+  @if (pestana() === 'radicar') {
+    <div id="panel-hc-radicar" role="tabpanel" aria-labelledby="tab-hc-radicar">
+      @if (radicacion(); as r) {
+        <div class="constancia" tabindex="-1" #constancia role="status">
+          <span class="constancia-ico" aria-hidden="true">✓</span>
+          <h2>Su solicitud quedó radicada</h2>
+          <dl>
+            <dt>Número de radicado</dt><dd class="mono grande">{{ r.radicado }}</dd>
+            <dt>Código de consulta</dt><dd class="mono grande">{{ r.codigo }}</dd>
+            <dt>Fecha de radicación</dt><dd>{{ r.fechaRadicacion | date: "d 'de' MMMM 'de' y, h:mm a" : '-0500' : 'es-CO' }}</dd>
+            <dt>Respuesta a más tardar</dt><dd><b>{{ r.fechaVencimiento | date: "EEEE d 'de' MMMM 'de' y" : '-0500' : 'es-CO' }}</b> ({{ r.plazoDias }} días hábiles)</dd>
+          </dl>
+          <p class="importante">Guarde el radicado y el código de consulta: con ellos y su número de documento verá el estado y descargará la copia.
+            También se los enviamos a su correo electrónico.</p>
+          <div class="acciones-govco">
+            <button type="button" class="btn-bdc fill-btn-govco" (click)="irAConsulta(r)">Consultar mi solicitud</button>
+            <button type="button" class="btn-bdc outline-btn-govco" (click)="imprimir()">Imprimir constancia</button>
+            <button type="button" class="btn-bdc outline-btn-govco" (click)="nuevaSolicitud()">Hacer otra solicitud</button>
+          </div>
+        </div>
+      } @else {
+        <aside class="hc-requisitos" aria-labelledby="hc-req-titulo">
+          <h2 id="hc-req-titulo">Antes de empezar</h2>
+          <ul>
+            <li>La historia clínica es <b>reservada</b>: solo la pueden pedir el paciente, su representante legal, un tercero que el paciente
+              autorice por escrito o, si el paciente falleció, sus familiares (Ley 23 de 1981 y Resolución 1995 de 1999).</li>
+            <li>Tenga a mano, en PDF o foto (JPG o PNG), los documentos que se piden según quién solicita.</li>
+            <li>Si elige entrega digital, descargará la copia en esta página durante {{ diasDescarga }} días después de la respuesta.</li>
+          </ul>
+        </aside>
+
+        <p class="obligatorios">Los campos marcados con <span class="req" aria-hidden="true">*</span><span class="visually-hidden">asterisco</span> son obligatorios.</p>
+
+        @if (intentado() && errores().length) {
+          <div class="alerta-govco error" tabindex="-1" #resumenErrores role="alert">
+            <strong>Revise {{ errores().length === 1 ? 'el siguiente dato' : 'los siguientes ' + errores().length + ' datos' }}:</strong>
+            <ul>
+              @for (e of errores(); track e.id + e.texto) { <li><a [href]="'#' + e.id" (click)="irACampo($event, e.id)">{{ e.texto }}</a></li> }
+            </ul>
+          </div>
+        }
+
+        <form [formGroup]="form" (ngSubmit)="enviar()" novalidate>
+          <div class="trampa" aria-hidden="true">
+            <label for="hc-sitioWeb">No llene este campo</label>
+            <input id="hc-sitioWeb" formControlName="sitioWeb" tabindex="-1" autocomplete="off" />
+          </div>
+
+          <!-- 1. Quién solicita -->
+          <fieldset class="seccion">
+            <legend><span class="num">1</span> ¿Quién solicita la copia? <span class="req" aria-hidden="true">*</span></legend>
+            <div class="tipos" role="radiogroup" id="calidad">
+              @for (q of calidades; track q.valor) {
+                <label class="tipo-opcion" [class.on]="calidad() === q.valor">
+                  <input type="radio" formControlName="calidad" [value]="q.valor" />
+                  <span><b>{{ q.nombre }}</b><small>{{ q.ayuda }}</small></span>
+                </label>
+              }
+            </div>
+          </fieldset>
+
+          <!-- 2. Solicitante -->
+          <fieldset class="seccion">
+            <legend><span class="num">2</span> {{ esTercero() ? 'Sus datos (quien solicita)' : 'Sus datos' }}</legend>
+            <div class="rejilla">
+              <div class="campo">
+                <label for="tipoDocumento">Tipo de documento <span class="req" aria-hidden="true">*</span></label>
+                <select id="tipoDocumento" formControlName="tipoDocumento">
+                  @for (d of documentos; track d.valor) { <option [value]="d.valor">{{ d.nombre }}</option> }
+                </select>
+              </div>
+              <div class="campo">
+                <label for="numeroDocumento">Número de documento <span class="req" aria-hidden="true">*</span></label>
+                <input id="numeroDocumento" formControlName="numeroDocumento" inputmode="numeric" maxlength="20" autocomplete="off"
+                       [attr.aria-invalid]="!!error('numeroDocumento')" [attr.aria-describedby]="error('numeroDocumento') ? 'error-numeroDocumento' : null" />
+                @if (error('numeroDocumento')) { <p class="error-campo" id="error-numeroDocumento">{{ error('numeroDocumento') }}</p> }
+              </div>
+              <div class="campo ancho">
+                <label for="nombre">Nombre completo <span class="req" aria-hidden="true">*</span></label>
+                <input id="nombre" formControlName="nombre" maxlength="150" autocomplete="name"
+                       [attr.aria-invalid]="!!error('nombre')" [attr.aria-describedby]="error('nombre') ? 'error-nombre' : null" />
+                @if (error('nombre')) { <p class="error-campo" id="error-nombre">{{ error('nombre') }}</p> }
+              </div>
+              <div class="campo">
+                <label for="correo">Correo electrónico <span class="req" aria-hidden="true">*</span></label>
+                <input id="correo" type="email" formControlName="correo" maxlength="150" autocomplete="email"
+                       [attr.aria-invalid]="!!error('correo')" [attr.aria-describedby]="error('correo') ? 'error-correo' : 'ayuda-correo'" />
+                <p class="ayuda" id="ayuda-correo">Le enviaremos el radicado y el aviso cuando la copia esté lista.</p>
+                @if (error('correo')) { <p class="error-campo" id="error-correo">{{ error('correo') }}</p> }
+              </div>
+              <div class="campo">
+                <label for="telefono">Teléfono o celular <span class="req" aria-hidden="true">*</span></label>
+                <input id="telefono" type="tel" formControlName="telefono" maxlength="30" autocomplete="tel"
+                       [attr.aria-invalid]="!!error('telefono')" [attr.aria-describedby]="error('telefono') ? 'error-telefono' : null" />
+                @if (error('telefono')) { <p class="error-campo" id="error-telefono">{{ error('telefono') }}</p> }
+              </div>
+              <div class="campo">
+                <label for="direccion">Dirección <span class="opc">(opcional)</span></label>
+                <input id="direccion" formControlName="direccion" maxlength="200" autocomplete="street-address" />
+              </div>
+            </div>
+          </fieldset>
+
+          <!-- 3. Paciente (solo si solicita otra persona) -->
+          @if (esTercero()) {
+            <fieldset class="seccion">
+              <legend><span class="num">3</span> Datos del paciente</legend>
+              <div class="rejilla">
+                <div class="campo">
+                  <label for="pacienteTipoDoc">Tipo de documento del paciente <span class="req" aria-hidden="true">*</span></label>
+                  <select id="pacienteTipoDoc" formControlName="pacienteTipoDoc">
+                    @for (d of documentos; track d.valor) { <option [value]="d.valor">{{ d.nombre }}</option> }
+                  </select>
+                </div>
+                <div class="campo">
+                  <label for="pacienteDocumento">Número de documento del paciente <span class="req" aria-hidden="true">*</span></label>
+                  <input id="pacienteDocumento" formControlName="pacienteDocumento" inputmode="numeric" maxlength="20" autocomplete="off"
+                         [attr.aria-invalid]="!!error('pacienteDocumento')" [attr.aria-describedby]="error('pacienteDocumento') ? 'error-pacienteDocumento' : null" />
+                  @if (error('pacienteDocumento')) { <p class="error-campo" id="error-pacienteDocumento">{{ error('pacienteDocumento') }}</p> }
+                </div>
+                <div class="campo ancho">
+                  <label for="pacienteNombre">Nombre completo del paciente <span class="req" aria-hidden="true">*</span></label>
+                  <input id="pacienteNombre" formControlName="pacienteNombre" maxlength="150" autocomplete="off"
+                         [attr.aria-invalid]="!!error('pacienteNombre')" [attr.aria-describedby]="error('pacienteNombre') ? 'error-pacienteNombre' : null" />
+                  @if (error('pacienteNombre')) { <p class="error-campo" id="error-pacienteNombre">{{ error('pacienteNombre') }}</p> }
+                </div>
+                <div class="campo">
+                  <label for="parentesco">Parentesco o relación con el paciente <span class="req" aria-hidden="true">*</span></label>
+                  <input id="parentesco" formControlName="parentesco" maxlength="80" placeholder="Ej. madre, hijo, cónyuge, apoderado"
+                         [attr.aria-invalid]="!!error('parentesco')" [attr.aria-describedby]="error('parentesco') ? 'error-parentesco' : null" />
+                  @if (error('parentesco')) { <p class="error-campo" id="error-parentesco">{{ error('parentesco') }}</p> }
+                </div>
+              </div>
+            </fieldset>
+          }
+
+          <!-- 4. Qué necesita -->
+          <fieldset class="seccion">
+            <legend><span class="num">{{ esTercero() ? 4 : 3 }}</span> Documentos que necesita</legend>
+            <div class="tipos" role="radiogroup" aria-label="Documentos que necesita">
+              @for (a of alcances; track a.valor) {
+                <label class="tipo-opcion" [class.on]="valoresAlcance() === a.valor">
+                  <input type="radio" formControlName="alcance" [value]="a.valor" />
+                  <span><b>{{ a.nombre }}</b><small>{{ a.ayuda }}</small></span>
+                </label>
+              }
+            </div>
+
+            <fieldset class="sub">
+              <legend>Servicios donde fue atendido <span class="opc">(opcional)</span></legend>
+              <div class="hc-chips">
+                @for (s of servicios; track s.valor) {
+                  <label class="hc-chip" [class.on]="elegidos().includes(s.valor)">
+                    <input type="checkbox" [checked]="elegidos().includes(s.valor)" (change)="alternarServicio(s.valor, $any($event.target).checked)" />
+                    {{ s.nombre }}
+                  </label>
+                }
+              </div>
+            </fieldset>
+
+            <div class="rejilla">
+              <div class="campo">
+                <label for="fechaDesde">Atenciones desde <span class="opc">(opcional)</span></label>
+                <input id="fechaDesde" type="date" formControlName="fechaDesde" [max]="hoy"
+                       [attr.aria-invalid]="!!error('fechaDesde')" [attr.aria-describedby]="error('fechaDesde') ? 'error-fechaDesde' : null" />
+                @if (error('fechaDesde')) { <p class="error-campo" id="error-fechaDesde">{{ error('fechaDesde') }}</p> }
+              </div>
+              <div class="campo">
+                <label for="fechaHasta">Hasta <span class="opc">(opcional)</span></label>
+                <input id="fechaHasta" type="date" formControlName="fechaHasta" [max]="hoy"
+                       [attr.aria-invalid]="!!error('fechaHasta')" [attr.aria-describedby]="error('fechaHasta') ? 'error-fechaHasta' : null" />
+                @if (error('fechaHasta')) { <p class="error-campo" id="error-fechaHasta">{{ error('fechaHasta') }}</p> }
+              </div>
+            </div>
+            <div class="campo">
+              <label for="observaciones">Observaciones @if (valoresAlcance() === 'otro') { <span class="req" aria-hidden="true">*</span> } @else { <span class="opc">(opcional)</span> }</label>
+              <textarea id="observaciones" formControlName="observaciones" rows="3" maxlength="2000"
+                        placeholder="Ej. hospitalización por cirugía en mayo de 2026; necesito también el reporte de la ecografía."
+                        [attr.aria-invalid]="!!error('observaciones')" [attr.aria-describedby]="(error('observaciones') ? 'error-observaciones ' : '') + 'contador-obs'"></textarea>
+              <p class="ayuda" id="contador-obs">{{ caracteres() }} de 2000 caracteres. No escriba diagnósticos: basta con la fecha o el servicio.</p>
+              @if (error('observaciones')) { <p class="error-campo" id="error-observaciones">{{ error('observaciones') }}</p> }
+            </div>
+
+            <fieldset class="sub">
+              <legend>¿Cómo quiere recibirla? <span class="req" aria-hidden="true">*</span></legend>
+              <div class="radios">
+                <label class="check-govco"><input type="radio" formControlName="tipoEntrega" value="digital" /> Digital: la descargo en este portal (PDF)</label>
+                <label class="check-govco"><input type="radio" formControlName="tipoEntrega" value="fisica" /> Física: la recojo en el Archivo de historias clínicas con mi documento original</label>
+              </div>
+            </fieldset>
+          </fieldset>
+
+          <!-- 5. Soportes -->
+          <fieldset class="seccion">
+            <legend><span class="num">{{ esTercero() ? 5 : 4 }}</span> Documentos de soporte <span class="req" aria-hidden="true">*</span></legend>
+            <div class="hc-soportes">
+              <p><b>{{ calidadElegida().nombre }}:</b> adjunte</p>
+              <ul>@for (s of calidadElegida().soportes; track s) { <li>{{ s }}</li> }</ul>
+            </div>
+            <div class="campo" id="archivos">
+              <label for="hc-archivos">Archivos (PDF, JPG o PNG)</label>
+              <input id="hc-archivos" type="file" multiple [accept]="extensiones" (change)="agregarArchivos($event)"
+                     [attr.aria-invalid]="!!error('archivos')" [attr.aria-describedby]="(error('archivos') ? 'error-archivos ' : '') + 'ayuda-archivos'" />
+              <p class="ayuda" id="ayuda-archivos">Hasta {{ maxArchivos }} archivos de máximo {{ maxMb }} MB cada uno. Las fotos deben verse completas y legibles.</p>
+              @if (errorArchivos()) { <p class="error-campo" role="alert">{{ errorArchivos() }}</p> }
+              @if (error('archivos')) { <p class="error-campo" id="error-archivos">{{ error('archivos') }}</p> }
+              @if (archivos().length) {
+                <ul class="lista-archivos">
+                  @for (f of archivos(); track $index) {
+                    <li><span>📎 {{ f.name }} <small>{{ tamano(f.size) }}</small></span>
+                      <button type="button" class="btn-quitar" (click)="quitarArchivo($index)" [attr.aria-label]="'Quitar ' + f.name">Quitar</button></li>
+                  }
+                </ul>
+              }
+            </div>
+          </fieldset>
+
+          <div class="autorizacion" id="declaraVeracidad">
+            <label class="check-govco">
+              <input type="checkbox" formControlName="declaraVeracidad" [attr.aria-invalid]="!!error('declaraVeracidad')"
+                     [attr.aria-describedby]="error('declaraVeracidad') ? 'error-declaraVeracidad' : null" />
+              <span>Declaro que la información y los documentos que adjunto son verídicos y que estoy facultado para solicitar esta historia clínica.</span>
+            </label>
+            @if (error('declaraVeracidad')) { <p class="error-campo" id="error-declaraVeracidad">{{ error('declaraVeracidad') }}</p> }
+          </div>
+          <div class="autorizacion" id="aceptaDatos">
+            <label class="check-govco">
+              <input type="checkbox" formControlName="aceptaDatos" [attr.aria-invalid]="!!error('aceptaDatos')"
+                     [attr.aria-describedby]="error('aceptaDatos') ? 'error-aceptaDatos' : null" />
+              <span>Autorizo el tratamiento de mis datos personales para atender esta solicitud, según la
+                <a routerLink="/politicas-de-privacidad" target="_blank">política de privacidad y tratamiento de datos</a> (Ley 1581 de 2012).</span>
+            </label>
+            @if (error('aceptaDatos')) { <p class="error-campo" id="error-aceptaDatos">{{ error('aceptaDatos') }}</p> }
+          </div>
+
+          @if (errorEnvio()) { <div class="alerta-govco error" role="alert">{{ errorEnvio() }}</div> }
+
+          <div class="acciones-govco">
+            <button type="submit" class="btn-bdc fill-btn-govco" [disabled]="enviando() || !svc.disponible">{{ enviando() ? 'Radicando…' : 'Radicar solicitud' }}</button>
+          </div>
+        </form>
+      }
+    </div>
+  }
+
+  @if (pestana() === 'consultar') {
+    <div id="panel-hc-consultar" role="tabpanel" aria-labelledby="tab-hc-consultar">
+      <p class="ayuda">Escriba el número de documento de quien hizo la solicitud, el radicado y el código de consulta que recibió al radicar.</p>
+      <form class="consulta hc-consulta" [formGroup]="consulta" (ngSubmit)="consultar()" novalidate>
+        <div class="campo">
+          <label for="c-doc-hc">Número de documento</label>
+          <input id="c-doc-hc" formControlName="numeroDocumento" inputmode="numeric" maxlength="20" autocomplete="off" />
+        </div>
+        <div class="campo">
+          <label for="c-radicado-hc">Número de radicado</label>
+          <input id="c-radicado-hc" formControlName="radicado" placeholder="HC-2026-000123" autocapitalize="characters" autocomplete="off" />
+        </div>
+        <div class="campo">
+          <label for="c-codigo-hc">Código de consulta</label>
+          <input id="c-codigo-hc" formControlName="codigo" maxlength="12" autocapitalize="characters" autocomplete="off" />
+        </div>
+        <button type="submit" class="btn-bdc fill-btn-govco" [disabled]="consultando() || !svc.disponible">{{ consultando() ? 'Consultando…' : 'Consultar' }}</button>
+      </form>
+
+      @if (errorConsulta()) { <div class="alerta-govco error" role="alert">{{ errorConsulta() }}</div> }
+
+      @if (resultado(); as c) {
+        <article class="resultado" aria-live="polite">
+          <header>
+            <h2><span class="mono">{{ c.radicado }}</span></h2>
+            <p>{{ c.alcanceNombre }} · entrega {{ c.tipoEntrega === 'fisica' ? 'física' : 'digital' }}</p>
+          </header>
+          <ol class="pasos">
+            <li [class.hecho]="paso(c.estado) >= 1"><b>Radicada</b><small>{{ c.fechaRadicacion | date: 'd MMM y' : '-0500' : 'es-CO' }}</small></li>
+            <li [class.hecho]="paso(c.estado) >= 2"><b>En trámite</b></li>
+            <li [class.hecho]="paso(c.estado) >= 3"><b>{{ c.estado === 'rechazada' ? 'No procede' : 'Entregada' }}</b>
+              @if (c.fechaRespuesta) { <small>{{ c.fechaRespuesta | date: 'd MMM y' : '-0500' : 'es-CO' }}</small> }</li>
+          </ol>
+          <p>Estado actual: <b>{{ nombreEstado(c.estado) }}</b>.
+            @if (!c.respuesta) { Respuesta a más tardar el <b>{{ c.fechaVencimiento | date: "d 'de' MMMM 'de' y" : '-0500' : 'es-CO' }}</b>. }
+          </p>
+          @if (c.respuesta) {
+            <h3>Respuesta</h3>
+            <div class="respuesta">{{ c.respuesta }}</div>
+            @if (c.adjuntos.length) {
+              <ul class="lista-archivos">
+                @for (a of c.adjuntos; track a.id) {
+                  <li><button type="button" class="btn-link-govco" (click)="descargar(a)">📄 Descargar {{ a.nombre }}</button> <small>{{ tamano(a.tamano) }}</small></li>
+                }
+              </ul>
+              <p class="ayuda">Disponible para descarga hasta el {{ c.descargaHasta | date: "d 'de' MMMM 'de' y" : '-0500' : 'es-CO' }}. Guárdela en un lugar seguro:
+                contiene información reservada.</p>
+            } @else if (c.descargaVencida) {
+              <div class="alerta-govco info" role="status">El plazo de {{ diasDescarga }} días para descargar la copia terminó. Si la necesita de nuevo, haga una nueva solicitud.</div>
+            }
+          }
+        </article>
+      }
+    </div>
+  }
+</section>

@@ -10,6 +10,8 @@ import {
   Responsable,
   SolicitudContractual,
   SolicitudContractualDetalle,
+  SolicitudHistoria,
+  SolicitudHistoriaDetalle,
 } from '../../models/solicitudes/solicitudes';
 
 /** Mensaje legible de un error de la API */
@@ -28,7 +30,11 @@ export function mensajeError(e: unknown, porDefecto = 'No se pudo completar la o
 abstract class ServicioSolicitudes<L extends { id: number }, D extends L> {
   protected http = inject(HttpClient);
   private config = inject(CMS_CONFIG);
-  protected abstract readonly recurso: 'pqrsfd' | 'contratacion';
+  protected abstract readonly recurso: 'pqrsfd' | 'contratacion' | 'historia-clinica';
+  /** Módulo de permisos (para la lista de responsables); por defecto igual al recurso */
+  protected get modulo(): string {
+    return this.recurso;
+  }
 
   /** false en modo local (demo sin API) */
   readonly disponible = this.config.modo === 'api';
@@ -93,7 +99,7 @@ abstract class ServicioSolicitudes<L extends { id: number }, D extends L> {
   }
 
   responsables(): Promise<Responsable[]> {
-    return firstValueFrom(this.http.get<Responsable[]>(`${this.config.apiUrl}/usuarios/opciones`, { params: { modulo: this.recurso } }));
+    return firstValueFrom(this.http.get<Responsable[]>(`${this.config.apiUrl}/usuarios/opciones`, { params: { modulo: this.modulo } }));
   }
 
   /* ===== Portal (público) ===== */
@@ -131,6 +137,15 @@ export class PqrsfdService extends ServicioSolicitudes<Pqrsfd, PqrsfdDetalle> {
 @Injectable({ providedIn: 'root' })
 export class ContratacionService extends ServicioSolicitudes<SolicitudContractual, SolicitudContractualDetalle> {
   protected readonly recurso = 'contratacion' as const;
+}
+
+/** Copias de historia clínica (módulo «historias»; consulta con documento + radicado + código) */
+@Injectable({ providedIn: 'root' })
+export class HistoriaClinicaService extends ServicioSolicitudes<SolicitudHistoria, SolicitudHistoriaDetalle> {
+  protected readonly recurso = 'historia-clinica' as const;
+  protected override get modulo(): string {
+    return 'historias';
+  }
 }
 
 /** Respuesta del canal anticorrupción al enviar un reporte */
