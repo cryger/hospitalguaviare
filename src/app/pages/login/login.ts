@@ -37,6 +37,8 @@ export class Login {
         : '',
   );
   readonly enviando = signal(false);
+  /** Mostrar u ocultar la contraseña (botón del ojo, patrón BDC) */
+  readonly verClave = signal(false);
 
   async login(): Promise<void> {
     if (this.loginForm.invalid || this.enviando()) return;

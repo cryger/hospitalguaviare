@@ -1,41 +1,77 @@
-<div class="gov-login-page">
-  <div class="gov-login-card">
+<div class="login-govco">
+  <main class="login-caja-govco" aria-labelledby="login-titulo">
+    <div class="login-cabecera-govco">
+      <img class="login-logo-govco" src="HSJG-LOGO-2.ico" alt="E.S.E. Hospital San José del Guaviare" />
+      <h1 id="login-titulo">Iniciar sesión</h1>
+      <p class="login-sub-govco">Acceso al panel de administración del portal.</p>
+    </div>
 
-    <section class="logo-centered">
-      <img src="HSJG-LOGO-2.ico" alt="Hospital San Jose del Guaviare">
-    </section>
+    <form [formGroup]="loginForm" (ngSubmit)="login()" novalidate>
+      <p class="login-obligatorios">Los campos marcados con <span class="req" aria-hidden="true">*</span><span class="visually-hidden">asterisco</span> son obligatorios.</p>
 
-    <h1 class="gov-title">Iniciar sesión</h1>
-
-    <form [formGroup]="loginForm" (ngSubmit)="login()">
-
-      <div class="gov-field">
-        <label for="username">Usuario</label>
+      <!-- Usuario (BDC · entradas de texto) -->
+      <div class="entradas-de-texto-govco">
+        <label for="username">Usuario <span class="req" aria-hidden="true">*</span></label>
         <input
           id="username"
           type="text"
           formControlName="username"
+          autocomplete="username"
+          autocapitalize="none"
+          spellcheck="false"
+          [attr.aria-invalid]="!!error()"
+          placeholder="Escriba su usuario"
         />
       </div>
 
-      <div class="gov-field">
-        <label for="password">Contraseña</label>
-        <input
-          id="password"
-          type="password"
-          formControlName="password"
-        />
+      <!-- Contraseña (BDC · con botón mostrar/ocultar) -->
+      <div class="entradas-de-texto-govco">
+        <label for="password">Contraseña <span class="req" aria-hidden="true">*</span></label>
+        <div class="input-container-govco">
+          <input
+            id="password"
+            [type]="verClave() ? 'text' : 'password'"
+            formControlName="password"
+            autocomplete="current-password"
+            [attr.aria-invalid]="!!error()"
+            placeholder="Escriba su contraseña"
+          />
+          <button
+            type="button"
+            class="ver-clave-govco"
+            (click)="verClave.set(!verClave())"
+            [attr.aria-label]="verClave() ? 'Ocultar contraseña' : 'Mostrar contraseña'"
+            [attr.aria-pressed]="verClave()"
+          >
+            @if (verClave()) {
+              <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false">
+                <path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"
+                  d="M3 3l18 18M10.6 10.6a2 2 0 002.8 2.8M9.4 5.2A9.5 9.5 0 0112 5c5 0 9 4.5 10 7-0.5 1.2-1.6 2.8-3.2 4.1M6.1 6.1C4 7.4 2.6 9.3 2 12c1 2.5 5 7 10 7 1.4 0 2.7-0.3 3.9-0.8" />
+              </svg>
+            } @else {
+              <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false">
+                <path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"
+                  d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7-10-7-10-7z" />
+                <circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.8" />
+              </svg>
+            }
+          </button>
+        </div>
       </div>
 
-      <button type="submit" [disabled]="loginForm.invalid || enviando()">
-        {{ enviando() ? 'Ingresando…' : 'Entrar' }}
+      @if (error()) {
+        <div class="login-error-govco" role="alert">
+          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false">
+            <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8" />
+            <path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M12 7.5v5.5M12 16.2v.2" />
+          </svg>
+          <span>{{ error() }}</span>
+        </div>
+      }
+
+      <button type="submit" class="btn-bdc fill-btn-govco login-enviar-govco" [disabled]="loginForm.invalid || enviando()">
+        {{ enviando() ? 'Ingresando…' : 'Iniciar sesión' }}
       </button>
-
-      <p class="gov-error" *ngIf="error()" role="alert">
-        {{ error() }}
-      </p>
-
     </form>
-
-  </div>
+  </main>
 </div>
