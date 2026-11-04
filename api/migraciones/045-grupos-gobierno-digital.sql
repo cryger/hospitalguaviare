@@ -11,7 +11,8 @@ INSERT INTO cms_paginas (menu_id, parent_id, titulo, slug, descripcion, plantill
 SELECT a.menu_id, a.id, 'Grupos étnicos', 'grupos-etnicos', 'Atención integral en salud con enfoque diferencial, intercultural y de respeto por la diversidad étnica y cultural del territorio.', 'esquema', 'govco:globe-americas', 0, 1, 'publicada'
   FROM cms_paginas a WHERE a.slug = 'otros-grupos-de-interes' AND NOT EXISTS (SELECT 1 FROM cms_paginas x WHERE x.slug = 'grupos-etnicos');
 INSERT INTO cms_entradas (pagina_id, titulo, slug, resumen, contenido, tipo, estado, destacada, autor, fecha_publicacion, orden, migrado_de)
-SELECT p.id, 'Grupos étnicos', 'grupos-etnicos', 'Atención integral en salud con enfoque diferencial, intercultural y de respeto por la diversidad étnica y cultural del territorio.', '<p>La E.S.E. Hospital San José del Guaviare reconoce la diversidad étnica y cultural del departamento del Guaviare y promueve acciones orientadas a garantizar el acceso a los servicios de salud bajo principios de equidad, respeto por la diversidad cultural, participación comunitaria, interculturalidad y reconocimiento de los saberes propios.</p>
+SELECT p.id, 'Grupos étnicos', 'grupos-etnicos', 'Atención integral en salud con enfoque diferencial, intercultural y de respeto por la diversidad étnica y cultural del territorio.', '<h2>Enfoque diferencial étnico e intercultural</h2>
+<p>La E.S.E. Hospital San José del Guaviare reconoce la diversidad étnica y cultural del departamento del Guaviare y promueve acciones orientadas a garantizar el acceso a los servicios de salud bajo principios de equidad, respeto por la diversidad cultural, participación comunitaria, interculturalidad y reconocimiento de los saberes propios.</p>
 <p>El enfoque diferencial étnico busca que las acciones de promoción de la salud, prevención de la enfermedad, atención, rehabilitación y gestión del riesgo respondan a las características culturales, territoriales, sociales y comunitarias de los pueblos indígenas y demás grupos étnicos presentes en el territorio.</p>
 <p>La institución trabaja para fortalecer una atención que reconozca las particularidades de cada comunidad y promueva el diálogo entre los conocimientos y prácticas propias de los pueblos y el sistema de salud.</p>
 <h3>¿Qué entendemos por enfoque diferencial étnico?</h3>
@@ -139,10 +140,13 @@ SELECT p.id, 'Grupos étnicos', 'grupos-etnicos', 'Atención integral en salud c
   FROM cms_paginas p WHERE p.slug = 'grupos-etnicos' AND NOT EXISTS (SELECT 1 FROM cms_entradas x WHERE x.pagina_id = p.id AND x.slug = 'grupos-etnicos');
 
 INSERT INTO cms_paginas (menu_id, parent_id, titulo, slug, descripcion, plantilla, icono, orden, visible_en_menu, estado)
-SELECT a.menu_id, a.id, 'Atención con enfoque diferencial', 'atencion-con-enfoque-diferencial', 'La E.S.E. Hospital San José del Guaviare reconoce la diversidad de las personas y las diferentes condiciones sociales, físicas, culturales y territoriales que pueden influir en el acceso a los servicios de salud.', 'esquema', 'govco:universal-access', 1, 1, 'publicada'
+SELECT a.menu_id, a.id, 'Atención con enfoque diferencial', 'atencion-con-enfoque-diferencial', 'Información y orientación para personas en situación de discapacidad, personas adultas mayores y víctimas del conflicto armado.', 'esquema', 'govco:universal-access', 1, 1, 'publicada'
   FROM cms_paginas a WHERE a.slug = 'otros-grupos-de-interes' AND NOT EXISTS (SELECT 1 FROM cms_paginas x WHERE x.slug = 'atencion-con-enfoque-diferencial');
 INSERT INTO cms_entradas (pagina_id, titulo, slug, resumen, contenido, tipo, estado, destacada, autor, fecha_publicacion, orden, migrado_de)
-SELECT p.id, 'Atención con enfoque diferencial', 'atencion-con-enfoque-diferencial', 'La E.S.E. Hospital San José del Guaviare reconoce la diversidad de las personas y las diferentes condiciones sociales, físicas, culturales y territoriales que pueden influir en el acceso a los servicios de salud.', '<p>Por esta razón, se promueven acciones orientadas a facilitar el acceso a la información, la atención humanizada, la orientación y la eliminación de barreras para las personas que requieren medidas de atención diferencial.</p>
+SELECT p.id, 'Atención con enfoque diferencial', 'atencion-con-enfoque-diferencial', 'Información y orientación para personas en situación de discapacidad, personas adultas mayores y víctimas del conflicto armado.', '<h2>Una atención cercana, incluyente y humanizada</h2>
+<p>La E.S.E. Hospital San José del Guaviare reconoce la diversidad de las personas y las diferentes condiciones sociales, físicas, culturales y territoriales que pueden influir en el acceso a los servicios de salud.</p>
+<p>Por esta razón, se promueven acciones orientadas a facilitar el acceso a la información, la atención humanizada, la orientación y la eliminación de barreras para las personas que requieren medidas de atención diferencial.</p>
+<p>Trabajamos para fortalecer el acceso a la información y a los servicios institucionales, reconociendo las particularidades y necesidades de las personas y comunidades del territorio.</p>
 <h3>Poblaciones de atención diferencial</h3>
 <p><em>Seleccione el grupo de interés para consultar información relacionada.</em></p>
 <ul>
@@ -182,16 +186,16 @@ SELECT p.id, 'Atención con enfoque diferencial', 'atencion-con-enfoque-diferenc
 <li><a href="/pqrsf">PQRSFD</a>: Peticiones, quejas, reclamos, sugerencias y felicitaciones.</li>
 <li><a href="/transparencia/informacion-de-la-entidad/directorio-institucional">Correos institucionales</a>: Directorio de dependencias, teléfonos y correos de la E.S.E.</li>
 <li><a href="/atencion-y-servicios-a-la-ciudadania/canales-de-atencion">Canales de atención al ciudadano</a>: Canales para solicitar orientación, citas e información.</li>
-</ul>
-<h3>Una atención cercana, incluyente y humanizada</h3>
-<p><em>Trabajamos para fortalecer el acceso a la información y a los servicios institucionales, reconociendo las particularidades y necesidades de las personas y comunidades del territorio.</em></p>', 'articulo', 'publicada', 0, 'E.S.E. Hospital San José del Guaviare', '2026-11-01 12:00:00', 0, 'esehospitalguaviare.gov.co (Grupos étnicos, enfoque diferencial y Gobierno Digital)'
+</ul>', 'articulo', 'publicada', 0, 'E.S.E. Hospital San José del Guaviare', '2026-11-01 12:00:00', 0, 'esehospitalguaviare.gov.co (Grupos étnicos, enfoque diferencial y Gobierno Digital)'
   FROM cms_paginas p WHERE p.slug = 'atencion-con-enfoque-diferencial' AND NOT EXISTS (SELECT 1 FROM cms_entradas x WHERE x.pagina_id = p.id AND x.slug = 'atencion-con-enfoque-diferencial');
 
 INSERT INTO cms_paginas (menu_id, parent_id, titulo, slug, descripcion, plantilla, icono, orden, visible_en_menu, estado)
-SELECT a.menu_id, a.id, 'Gobierno Digital', 'gobierno-digital', 'La E.S.E. Hospital San José del Guaviare desarrolla y promueve iniciativas de transformación digital orientadas a fortalecer los procesos institucionales, facilitar el acceso a la información, optimizar la gestión administrativa y mejorar la experiencia de los usuarios.', 'esquema', 'govco:laptop-code', 11, 1, 'publicada'
+SELECT a.menu_id, a.id, 'Gobierno Digital', 'gobierno-digital', 'Proyectos, aplicativos, plataformas y soluciones tecnológicas de la E.S.E. en el marco de Gobierno Digital e innovación tecnológica.', 'esquema', 'govco:laptop-code', 11, 1, 'publicada'
   FROM cms_paginas a WHERE a.slug = 'nuestro-hospital' AND NOT EXISTS (SELECT 1 FROM cms_paginas x WHERE x.slug = 'gobierno-digital');
 INSERT INTO cms_entradas (pagina_id, titulo, slug, resumen, contenido, tipo, estado, destacada, autor, fecha_publicacion, orden, migrado_de)
-SELECT p.id, 'Gobierno Digital', 'gobierno-digital', 'La E.S.E. Hospital San José del Guaviare desarrolla y promueve iniciativas de transformación digital orientadas a fortalecer los procesos institucionales, facilitar el acceso a la información, optimizar la gestión administrativa y mejorar la experiencia de los usuarios.', '<p>En este espacio se presentan los principales proyectos, aplicativos, plataformas y soluciones tecnológicas desarrolladas o implementadas por la institución en el marco de Gobierno Digital e innovación tecnológica.</p>
+SELECT p.id, 'Gobierno Digital', 'gobierno-digital', 'Proyectos, aplicativos, plataformas y soluciones tecnológicas de la E.S.E. en el marco de Gobierno Digital e innovación tecnológica.', '<h2>Tecnología al servicio de la salud</h2>
+<p>La E.S.E. Hospital San José del Guaviare desarrolla y promueve iniciativas de transformación digital orientadas a fortalecer los procesos institucionales, facilitar el acceso a la información, optimizar la gestión administrativa y mejorar la experiencia de los usuarios.</p>
+<p>En este espacio se presentan los principales proyectos, aplicativos, plataformas y soluciones tecnológicas desarrolladas o implementadas por la institución en el marco de Gobierno Digital e innovación tecnológica.</p>
 <h3>Innovación tecnológica</h3>
 <p><em>Soluciones orientadas a transformar y optimizar los procesos institucionales.</em></p>
 <ul>

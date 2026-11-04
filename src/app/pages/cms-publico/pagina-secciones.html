@@ -1,0 +1,155 @@
+@let est = estructura();
+
+<div class="ps">
+  <!-- Presentación destacada -->
+  @if (est.intro.length) {
+    <section class="ps-destacado" aria-labelledby="ps-presentacion">
+      <header class="ps-destacado-cabecera">
+        <p class="antetitulo">{{ pagina().titulo }}</p>
+        <h2 id="ps-presentacion">{{ est.introTitulo || 'Presentación' }}</h2>
+      </header>
+      <div class="ps-presentacion">
+        <span class="ps-presentacion-icono" aria-hidden="true"><app-icono-cms [valor]="pagina().icono || 'govco:hand-holding-heart'" /></span>
+        <div class="ps-presentacion-texto">
+          @for (p of est.intro; track $index; let primero = $first) { <p [class.ps-lead]="primero">{{ p }}</p> }
+        </div>
+      </div>
+    </section>
+  }
+
+  <!-- Secciones numeradas -->
+  @for (s of est.secciones; track $index; let i = $index) {
+    <section class="ps-seccion" [attr.aria-labelledby]="'ps-sec-' + i">
+      <header class="ps-cabecera">
+        <span class="ps-num" aria-hidden="true">{{ i + 1 }}</span>
+        <div>
+          <h2 [id]="'ps-sec-' + i">{{ s.titulo }}</h2>
+          @if (s.subtitulo) { <p>{{ s.subtitulo }}</p> }
+        </div>
+      </header>
+
+      @for (b of s.bloques; track $index) {
+        @switch (b.tipo) {
+          @case ('texto') {
+            <div class="ps-texto">
+              @for (p of b.parrafos; track $index) {
+                <p>
+                  @for (seg of p; track $index) {
+                    @if (seg.url) {
+                      @if (seg.externo) { <a [href]="seg.url" target="_blank" rel="noopener">{{ seg.texto }}</a> }
+                      @else { <a [routerLink]="seg.url">{{ seg.texto }}</a> }
+                    } @else { {{ seg.texto }} }
+                  }
+                </p>
+              }
+            </div>
+          }
+          @case ('lista') {
+            <ul class="ps-lista">
+              @for (p of b.items; track $index) { <li>@for (seg of p; track $index) { {{ seg.texto }} }</li> }
+            </ul>
+          }
+          @case ('contacto') {
+            <a class="ps-correo" [href]="'mailto:' + b.correo">
+              <span class="ps-correo-icono" aria-hidden="true"><app-icono-cms valor="govco:envelope" /></span>
+              <span><small>Correo institucional</small>{{ b.correo }}</span>
+            </a>
+          }
+          @case ('enlaces') {
+            <ul class="ps-grilla">
+              @for (it of b.items; track it.nombre; let n = $index) {
+                <li class="ps-tarjeta ps-enlace" [style.--i]="n">
+                  <span class="ps-icono" aria-hidden="true"><app-icono-cms [valor]="it.icono" /></span>
+                  <h3>
+                    @if (it.externo) { <a [href]="it.url" target="_blank" rel="noopener">{{ it.nombre }}</a> }
+                    @else { <a [routerLink]="it.url">{{ it.nombre }}</a> }
+                  </h3>
+                  @if (it.texto) { <p>{{ it.texto }}</p> }
+                </li>
+              }
+            </ul>
+          }
+          @case ('tarjetas') {
+            @if (b.variante === 'chips') {
+              <ul class="ps-ejes">
+                @for (it of b.items; track it.nombre) {
+                  <li><span class="ps-eje-icono" aria-hidden="true"><app-icono-cms [valor]="it.icono" /></span>{{ it.nombre }}</li>
+                }
+              </ul>
+            } @else if (b.variante === 'pasos') {
+              <ol class="ps-pasos">
+                @for (it of b.items; track it.nombre; let n = $index) {
+                  <li [style.--i]="n">
+                    <span class="ps-paso-num" aria-hidden="true">{{ n + 1 }}</span>
+                    <h3>{{ it.nombre }}</h3>
+                    @if (it.texto) { <p>{{ it.texto }}</p> }
+                  </li>
+                }
+              </ol>
+            } @else {
+              <ul class="ps-grilla" [class.ps-amplia]="b.variante === 'amplia'" [class.ps-par]="b.items.length === 2 || (b.items.length === 4 && b.variante === 'amplia')" [class.ps-unica]="b.items.length === 1">
+                @for (it of b.items; track it.nombre; let n = $index) {
+                  <li class="ps-tarjeta" [style.--i]="n">
+                    <span class="ps-icono" aria-hidden="true"><app-icono-cms [valor]="it.icono" /></span>
+                    <h3>{{ it.nombre }}</h3>
+                    @if (it.texto) { <p>{{ it.texto }}</p> }
+                    @if (it.subitems.length) {
+                      <ul class="ps-etiquetas">@for (x of it.subitems; track $index) { <li>{{ x }}</li> }</ul>
+                    }
+                  </li>
+                }
+              </ul>
+            }
+          }
+          @case ('tabla') {
+            <div class="ps-tabla" tabindex="0" role="region" [attr.aria-label]="s.titulo">
+              <table>
+                <thead><tr>@for (h of b.encabezados; track $index) { <th scope="col">{{ h }}</th> }</tr></thead>
+                <tbody>
+                  @for (f of b.filas; track $index) {
+                    <tr>@for (c of f.celdas; track $index; let primera = $first) { @if (primera) { <th scope="row">{{ c }}</th> } @else { <td>{{ c }}</td> } }</tr>
+                  }
+                </tbody>
+              </table>
+            </div>
+          }
+        }
+      }
+    </section>
+  }
+
+  <!-- Otras entradas de la página con sus archivos -->
+  @for (e of otras(); track e.id) {
+    <section class="ps-seccion" [attr.aria-labelledby]="'ps-otra-' + e.id">
+      <header class="ps-cabecera">
+        <span class="ps-num" aria-hidden="true"><app-icono-cms valor="govco:folder-open" /></span>
+        <div><h2 [id]="'ps-otra-' + e.id">{{ e.titulo }}</h2>@if (e.resumen) { <p>{{ e.resumen }}</p> }</div>
+      </header>
+      <div class="ps-archivos">@for (m of documentos(e); track m.id) { <app-cms-media-publica [media]="m" /> }</div>
+    </section>
+  }
+
+  <!-- Llamado final -->
+  @if (est.llamado; as ll) {
+    <section class="ps-llamado" aria-labelledby="ps-llamado">
+      <span class="ps-llamado-icono" aria-hidden="true"><app-icono-cms valor="govco:comment-dots" /></span>
+      <div class="ps-llamado-texto">
+        <p class="antetitulo">{{ pagina().titulo }}</p>
+        <h2 id="ps-llamado">{{ ll.titulo }}</h2>
+        @for (p of ll.parrafos; track $index) { <p>{{ p }}</p> }
+      </div>
+      <div class="ps-llamado-acciones">
+        @if (ll.boton; as bt) {
+          @if (bt.externo) { <a class="ps-boton" [href]="bt.url" target="_blank" rel="noopener">{{ bt.texto }}</a> }
+          @else { <a class="ps-boton" [routerLink]="bt.url">{{ bt.texto }}</a> }
+        }
+        @if (ll.correo) {
+          <a class="ps-correo" [href]="'mailto:' + ll.correo">
+            <span class="ps-correo-icono" aria-hidden="true"><app-icono-cms valor="govco:envelope" /></span>
+            <span><small>Escríbanos</small>{{ ll.correo }}</span>
+          </a>
+        }
+      </div>
+    </section>
+  }
+</div>

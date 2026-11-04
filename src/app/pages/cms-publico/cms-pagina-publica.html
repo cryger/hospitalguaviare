@@ -17,7 +17,7 @@
     <header class="entrada-head">
       <a class="volver" [routerLink]="cms.rutaPagina(pagina()!.id)">← {{ pagina()!.titulo }}</a>
       <h1>{{ e.titulo }}</h1>
-      @if (pagina()!.plantilla === 'servicios' || pagina()!.plantilla === 'organigrama' || pagina()!.plantilla === 'plataforma' || pagina()!.plantilla === 'directorio' || pagina()!.plantilla === 'preguntas' || pagina()!.plantilla === 'glosario' || pagina()!.plantilla === 'procesos' || pagina()!.plantilla === 'esquema') {
+      @if (pagina()!.plantilla === 'servicios' || pagina()!.plantilla === 'organigrama' || pagina()!.plantilla === 'plataforma' || pagina()!.plantilla === 'directorio' || pagina()!.plantilla === 'preguntas' || pagina()!.plantilla === 'glosario' || pagina()!.plantilla === 'procesos' || pagina()!.plantilla === 'esquema' || pagina()!.plantilla === 'secciones') {
         <!-- Servicio del portafolio: sin fecha ni autor, solo su grupo -->
         @if (e.categoria || e.estado !== 'publicada') {
           <p class="meta">
@@ -341,6 +341,10 @@
       <app-mapa-procesos [entradas]="entradas()" />
     }
 
+    @case ('secciones') {
+      <!-- Página por secciones: presentación destacada, secciones numeradas, tarjetas y etiquetas (estilo de Misión y visión) -->
+      <app-pagina-secciones [pagina]="p" [entradas]="entradas()" />
+    }
     @case ('esquema') {
       <!-- Esquema de publicación: secciones numeradas, tarjetas, categorías y tabla a partir del texto de la entrada -->
       <app-esquema-publicacion [pagina]="p" [entradas]="entradas()" [antetitulo]="padre()?.titulo ?? ''" />

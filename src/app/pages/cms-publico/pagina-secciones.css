@@ -1,0 +1,183 @@
+/* Página por secciones — mismo lenguaje visual de Misión y visión (BDC GOV.CO v5), en tonos cálidos */
+:host {
+  --cobalt: #0943B5; --marino: #004884; --havelock: #4672C8; --solitude: #E5ECF8; --verde: #069169;
+  --oro: #FFD965; --arena: #FFF7E6; --coral: #F3561F; --vino: #A80521;
+  display: block; color: #1f2937;
+}
+.ps { display: grid; gap: 2.4rem; }
+.antetitulo { margin: 0 0 .25rem; font-size: .76rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+
+/* ===== Presentación destacada (como «Lo que somos y hacia dónde vamos») ===== */
+.ps-destacado {
+  position: relative; overflow: hidden; padding: clamp(1.25rem, 3.5vw, 2.4rem); border-radius: 22px; color: #fff;
+  background:
+    radial-gradient(circle at 100% 0, rgba(255, 217, 101, .22), transparent 38%),
+    radial-gradient(circle at 0 100%, rgba(70, 114, 200, .45), transparent 45%),
+    linear-gradient(125deg, #002f5c, var(--marino) 45%, var(--cobalt));
+  box-shadow: 0 14px 34px rgba(0, 72, 132, .25);
+}
+.ps-destacado::after {
+  content: ''; position: absolute; inset: 0; pointer-events: none; opacity: .08;
+  background-image: radial-gradient(#fff 1px, transparent 1px); background-size: 18px 18px;
+}
+.ps-destacado-cabecera { position: relative; z-index: 1; margin-bottom: 1.25rem; }
+.ps-destacado .antetitulo { color: var(--oro); }
+.ps-destacado h2 { margin: 0; font-size: clamp(1.35rem, 2.6vw, 1.85rem); line-height: 1.25; color: #fff; }
+.ps-presentacion {
+  position: relative; z-index: 1; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 1.2rem; align-items: start;
+  padding: clamp(1.1rem, 2.5vw, 1.6rem); border-radius: 18px; background: #fff; color: #1f2937; box-shadow: 0 10px 24px rgba(0, 0, 0, .15);
+  animation: subir .5s ease-out both;
+}
+.ps-presentacion-icono {
+  display: grid; place-items: center; width: 3.4rem; height: 3.4rem; border-radius: 16px; font-size: 1.6rem;
+  color: var(--marino); background: var(--oro); box-shadow: 0 0 0 6px rgba(255, 217, 101, .25);
+}
+.ps-presentacion-texto { padding-left: 1.1rem; border-left: 4px solid var(--oro); }
+.ps-presentacion-texto p { margin: 0 0 .75rem; line-height: 1.65; color: #374151; }
+.ps-presentacion-texto p:last-child { margin-bottom: 0; }
+.ps-presentacion-texto .ps-lead { font-size: 1.08rem; color: #1f2937; }
+
+/* ===== Cabecera de sección (como «10 Valores corporativos») ===== */
+.ps-seccion { display: grid; gap: 1.1rem; animation: subir .45s ease-out both; }
+.ps-cabecera { display: flex; align-items: center; gap: 1rem; }
+.ps-num {
+  flex: none; display: grid; place-items: center; width: 3.1rem; height: 3.1rem; border-radius: 50%;
+  font-size: 1.3rem; font-weight: 800; color: #fff; background: var(--cobalt); box-shadow: 0 0 0 6px var(--solitude);
+}
+.ps-seccion:nth-of-type(3n + 2) .ps-num { background: var(--verde); box-shadow: 0 0 0 6px #E2F4EF; }
+.ps-seccion:nth-of-type(3n + 3) .ps-num { background: var(--coral); box-shadow: 0 0 0 6px #FDEBE4; }
+.ps-cabecera h2 { margin: 0; font-size: 1.4rem; line-height: 1.25; color: var(--marino); }
+.ps-cabecera p { margin: .2rem 0 0; color: #4b5563; font-size: .95rem; }
+
+/* ===== Texto ===== */
+.ps-texto p { margin: 0 0 .8rem; max-width: 80ch; line-height: 1.7; color: #374151; }
+.ps-texto p:last-child { margin-bottom: 0; }
+.ps-texto a { color: #3366CC; font-weight: 600; }
+
+/* ===== Tarjetas (como los valores corporativos) ===== */
+.ps-grilla { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 14.5rem), 1fr)); gap: 1rem; }
+.ps-grilla.ps-amplia { grid-template-columns: repeat(auto-fill, minmax(min(100%, 22rem), 1fr)); }
+/* Dos tarjetas, o cuatro amplias: dos por fila, sin una suelta al final */
+.ps-grilla.ps-par { grid-template-columns: repeat(auto-fill, minmax(min(100%, 26rem), 1fr)); }
+/* Una sola tarjeta: banda horizontal destacada */
+.ps-grilla.ps-unica { grid-template-columns: 1fr; }
+.ps-unica .ps-tarjeta { display: grid; grid-template-columns: auto 1fr; column-gap: 1rem; align-items: center; background: linear-gradient(120deg, #fff 55%, var(--arena)); }
+.ps-unica .ps-tarjeta .ps-icono { grid-row: span 2; margin: 0; }
+.ps-unica .ps-tarjeta h3, .ps-unica .ps-tarjeta p { grid-column: 2; margin-block: 0 .25rem; }
+.ps-tarjeta {
+  position: relative; display: flex; flex-direction: column; gap: .5rem; padding: 1.25rem 1.2rem 1.3rem; border-radius: 16px;
+  background: #fff; border: 1px solid #e3e9f3; box-shadow: 0 4px 14px rgba(16, 24, 40, .05); overflow: hidden;
+  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+  animation: subir .45s ease-out both; animation-delay: calc(var(--i, 0) * 45ms);
+}
+.ps-tarjeta::before { content: ''; position: absolute; inset: 0 0 auto; height: 4px; background: linear-gradient(90deg, var(--havelock), var(--cobalt)); }
+.ps-tarjeta:nth-child(3n + 2)::before { background: linear-gradient(90deg, #0aa67a, var(--verde)); }
+.ps-tarjeta:nth-child(3n + 3)::before { background: linear-gradient(90deg, var(--oro), var(--coral)); }
+.ps-tarjeta:hover { transform: translateY(-3px); box-shadow: 0 12px 26px rgba(16, 24, 40, .1); border-color: #B5C7E9; }
+.ps-icono {
+  display: grid; place-items: center; width: 2.9rem; height: 2.9rem; border-radius: 12px; font-size: 1.3rem;
+  color: var(--cobalt); background: var(--solitude); transition: background .2s, color .2s;
+}
+.ps-tarjeta:nth-child(3n + 2) .ps-icono { color: #05694c; background: #E2F4EF; }
+.ps-tarjeta:nth-child(3n + 3) .ps-icono { color: #B23A0E; background: #FDEBE4; }
+.ps-tarjeta:hover .ps-icono { color: #fff; background: var(--cobalt); }
+.ps-tarjeta:nth-child(3n + 2):hover .ps-icono { background: var(--verde); }
+.ps-tarjeta:nth-child(3n + 3):hover .ps-icono { background: var(--coral); }
+.ps-tarjeta h3 { margin: .15rem 0 0; font-size: 1.06rem; line-height: 1.3; color: var(--marino); }
+.ps-tarjeta p { margin: 0; font-size: .93rem; line-height: 1.55; color: #4b5563; }
+.ps-enlace h3 a { color: inherit; text-decoration: none; }
+.ps-enlace h3 a::after { content: ''; position: absolute; inset: 0; }
+.ps-enlace:focus-within { outline: .19rem solid #000; outline-offset: .19rem; }
+
+/* Etiquetas dentro de una tarjeta (como «Nuestros ejes») */
+.ps-etiquetas { list-style: none; margin: auto 0 0; padding: .8rem 0 0; display: flex; flex-wrap: wrap; gap: .4rem; border-top: 1px dashed #d6e2f5; }
+/* Tarjeta sin descripción: las etiquetas van justo bajo el título */
+.ps-tarjeta h3 + .ps-etiquetas { margin-top: .2rem; padding-top: 0; border-top: 0; flex-direction: column; align-items: flex-start; }
+.ps-etiquetas li {
+  display: inline-flex; align-items: center; gap: .35rem; padding: .28rem .65rem; border-radius: 999px;
+  font-size: .82rem; font-weight: 600; color: var(--marino); background: var(--solitude);
+}
+.ps-etiquetas li::before { content: ''; width: .4rem; height: .4rem; border-radius: 50%; background: var(--havelock); }
+.ps-tarjeta:nth-child(3n + 2) .ps-etiquetas li { color: #05473a; background: #E2F4EF; }
+.ps-tarjeta:nth-child(3n + 2) .ps-etiquetas li::before { background: var(--verde); }
+
+/* Etiquetas sueltas: franja cálida con píldoras */
+.ps-ejes {
+  list-style: none; margin: 0; padding: 1rem 1.1rem; display: flex; flex-wrap: wrap; gap: .55rem;
+  border-radius: 16px; background: var(--arena); border: 1px solid #F6E3BA;
+}
+.ps-ejes li {
+  display: inline-flex; align-items: center; gap: .5rem; padding: .4rem .9rem .4rem .45rem; border-radius: 999px;
+  font-size: .92rem; font-weight: 700; color: var(--marino); background: #fff; border: 1px solid #F1DDB0;
+}
+.ps-eje-icono { display: grid; place-items: center; width: 1.9rem; height: 1.9rem; border-radius: 50%; font-size: .95rem; color: var(--marino); background: var(--oro); }
+
+/* Pasos numerados (ruta de atención) */
+.ps-pasos { list-style: none; margin: 0; padding: 0; display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 11.5rem), 1fr)); position: relative; }
+.ps-pasos li {
+  position: relative; padding: 1.3rem 1.1rem 1.2rem; border-radius: 16px; background: #F7F9FD; border: 1px solid #e3e9f3;
+  animation: subir .45s ease-out both; animation-delay: calc(var(--i, 0) * 60ms);
+}
+.ps-paso-num {
+  display: grid; place-items: center; width: 2.4rem; height: 2.4rem; margin-bottom: .7rem; border-radius: 50%;
+  font-weight: 800; color: var(--marino); background: var(--oro); box-shadow: 0 0 0 5px rgba(255, 217, 101, .3);
+}
+.ps-pasos h3 { margin: 0 0 .3rem; font-size: 1.02rem; color: var(--marino); }
+.ps-pasos p { margin: 0; font-size: .9rem; line-height: 1.5; color: #4b5563; }
+
+/* Lista con marcas (como «Funciones») */
+.ps-lista {
+  list-style: none; margin: 0; padding: 1.1rem 1.2rem; display: grid; gap: .55rem; grid-template-columns: repeat(auto-fill, minmax(min(100%, 19rem), 1fr));
+  border-radius: 16px; background: #F7F9FD; border: 1px solid #e3e9f3;
+}
+.ps-lista li {
+  position: relative; padding: .6rem .8rem .6rem 2.8rem; border-radius: 10px; background: #fff; border: 1px solid #e8eef8; line-height: 1.5; font-size: .95rem;
+}
+.ps-lista li::before {
+  content: '✓'; position: absolute; left: .7rem; top: .55rem; display: grid; place-items: center; width: 1.6rem; height: 1.6rem;
+  border-radius: 50%; font-size: .8rem; font-weight: 800; color: #05694c; background: #E2F4EF;
+}
+
+/* Correo */
+.ps-correo {
+  display: inline-flex; align-items: center; gap: .8rem; width: fit-content; max-width: 100%; padding: .8rem 1.1rem; border-radius: 14px;
+  background: #fff; border: 1px solid #e3e9f3; color: var(--marino); font-weight: 700; text-decoration: none; word-break: break-all;
+  box-shadow: 0 4px 14px rgba(16, 24, 40, .05);
+}
+.ps-correo small { display: block; font-weight: 600; color: #6b7280; }
+.ps-correo:hover { border-color: #3366CC; }
+.ps-correo:focus-visible, .ps-boton:focus-visible { outline: .19rem solid #000; outline-offset: .19rem; }
+.ps-correo-icono { flex: none; display: grid; place-items: center; width: 2.6rem; height: 2.6rem; border-radius: 12px; color: var(--marino); background: var(--oro); }
+
+/* Llamado final cálido */
+.ps-llamado {
+  display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 1.2rem; align-items: center;
+  padding: clamp(1.2rem, 3vw, 2rem); border-radius: 20px;
+  background: linear-gradient(120deg, #FFF7E6, #FFFDF7 55%, #EAF1FB); border: 1px solid #F3DFB2;
+}
+.ps-llamado-icono { display: grid; place-items: center; width: 3.4rem; height: 3.4rem; border-radius: 16px; font-size: 1.5rem; color: var(--marino); background: var(--oro); }
+.ps-llamado .antetitulo { color: #B45309; }
+.ps-llamado h2 { margin: 0 0 .4rem; font-size: 1.35rem; color: var(--marino); }
+.ps-llamado-texto p:not(.antetitulo) { margin: 0; color: #4b5563; line-height: 1.6; }
+.ps-llamado-acciones { display: flex; flex-direction: column; gap: .6rem; align-items: flex-start; }
+.ps-boton { display: inline-block; padding: .8rem 1.5rem; border-radius: 30px; background: #3366CC; color: #fff; font-weight: 700; text-decoration: none; }
+.ps-boton:hover { background: var(--marino); }
+
+.ps-archivos { display: grid; gap: .75rem; grid-template-columns: repeat(auto-fill, minmax(min(100%, 360px), 1fr)); }
+.ps-tabla { overflow-x: auto; border-radius: 12px; border: 1px solid #e3e9f3; }
+.ps-tabla table { width: 100%; border-collapse: collapse; background: #fff; }
+.ps-tabla th, .ps-tabla td { padding: .7rem .9rem; border-top: 1px solid #e3e9f3; text-align: left; }
+.ps-tabla thead th { background: var(--marino); color: #fff; border-top: 0; }
+
+@keyframes subir { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+@media (max-width: 720px) {
+  .ps-presentacion { grid-template-columns: minmax(0, 1fr); }
+  .ps-presentacion-texto { padding-left: .9rem; }
+  .ps-llamado { grid-template-columns: minmax(0, 1fr); }
+  .ps-llamado-icono { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ps-seccion, .ps-tarjeta, .ps-presentacion, .ps-pasos li { animation: none; }
+  .ps-tarjeta { transition: none; }
+  .ps-tarjeta:hover { transform: none; }
+}

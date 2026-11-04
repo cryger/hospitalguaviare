@@ -25,6 +25,7 @@ import { normalizar, resaltar as resaltarTexto, terminosDe } from '../../shared/
 import { slugCategoria } from '../../shared/utils/categorias';
 import { ImagenOptimizada } from '../../shared/directives/imagen-optimizada.directive';
 import { EsquemaPublicacion } from './esquema-publicacion';
+import { PaginaSecciones } from './pagina-secciones';
 
 const POR_PAGINA = 9;
 
@@ -64,7 +65,7 @@ type Orden = 'predeterminado' | 'recientes' | 'antiguas' | 'az';
 
 @Component({
   selector: 'app-cms-pagina-publica',
-  imports: [EsquemaPublicacion, ImagenOptimizada, RouterLink, DatePipe, NgTemplateOutlet, CmsMediaPublica, BuscadorGovco, CalendarioEventos, ResenaHistorica, ServiciosTarjetas, IconoCms, Organigrama, SedesHorarios, PlataformaEstrategica, DirectorioInstitucional, MapaProcesos, PreguntasFrecuentes, Glosario],
+  imports: [EsquemaPublicacion, PaginaSecciones, ImagenOptimizada, RouterLink, DatePipe, NgTemplateOutlet, CmsMediaPublica, BuscadorGovco, CalendarioEventos, ResenaHistorica, ServiciosTarjetas, IconoCms, Organigrama, SedesHorarios, PlataformaEstrategica, DirectorioInstitucional, MapaProcesos, PreguntasFrecuentes, Glosario],
   templateUrl: './cms-pagina-publica.html',
   styleUrls: ['./cms-pagina-publica.css', './cms-listados.css'],
 })
@@ -551,6 +552,7 @@ export class CmsPaginaPublica {
       case 'glosario': return 'Glosario';
       case 'procesos': return 'Mapa de procesos';
       case 'esquema': return 'Esquema de publicación';
+      case 'secciones': return 'Página por secciones';
       case 'enlace': return 'Ir al servicio';
       default: return 'Información';
     }
