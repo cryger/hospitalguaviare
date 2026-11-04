@@ -1,0 +1,304 @@
+<section class="tramite">
+  @if (!svc.disponible) {
+    <header class="tramite-head">
+      <h1>Consultas ciudadanas</h1>
+    </header>
+    <div class="alerta-govco info" role="status">
+      <strong>Las consultas ciudadanas en línea aún no están habilitadas en esta versión del portal.</strong>
+      Esta copia está en modo local (sin servidor). Cuando esté conectada, aquí podrá ver las consultas abiertas y enviar sus aportes.
+    </div>
+  }
+
+  <!-- ============================ DETALLE ============================ -->
+  @else if (slug()) {
+    <p class="volver"><a routerLink="/participacion">← Volver a las consultas</a></p>
+
+    @if (cargandoDetalle()) { <p class="vacio" role="status">Abriendo la consulta…</p> }
+    @if (errorDetalle()) { <div class="alerta-govco error" role="alert">{{ errorDetalle() }}</div> }
+
+    @if (consulta(); as c) {
+      <header class="tramite-head">
+        @if (c.categoria) { <p class="pc-categoria">{{ c.categoria }}</p> }
+        <h1>{{ c.titulo }}</h1>
+        <div class="pc-meta">
+          <span class="pc-estado" [class]="'pc-estado-' + c.estado">{{ c.abierta ? 'Abierta' : c.estadoNombre }}</span>
+          @if (c.abierta) {
+            @let d = dias(c.fechaFin);
+            <span class="pc-plazo">{{ d > 0 ? 'Cierra en ' + d + (d === 1 ? ' día' : ' días') : 'Cierra hoy' }}
+              ({{ c.fechaFin | date: "d 'de' MMMM 'de' y" : '-0500' : 'es-CO' }})</span>
+          } @else {
+            <span class="pc-plazo">Cerró el {{ c.fechaFin | date: "d 'de' MMMM 'de' y" : '-0500' : 'es-CO' }}</span>
+          }
+        </div>
+      </header>
+
+      <div class="contenido-html pc-descripcion" [innerHTML]="c.descripcion"></div>
+
+      @if (c.documentoUrl) {
+        <p class="pc-documento">
+          <a [href]="c.documentoUrl" target="_blank" rel="noopener">📄 {{ c.documentoNombre || 'Documento de la consulta' }}</a>
+        </p>
+      }
+
+      <!-- Resultados publicados -->
+      @if (c.estado === 'con_resultados' && c.resultado) {
+        <section class="pc-resultados" aria-labelledby="pc-res-tit">
+          <h2 id="pc-res-tit">Resultados de la consulta</h2>
+          @if (c.fechaResultado) { <p class="ayuda">Publicados el {{ c.fechaResultado | date: "d 'de' MMMM 'de' y" : '-0500' : 'es-CO' }}.</p> }
+          <div class="contenido-html" [innerHTML]="c.resultado"></div>
+        </section>
+      }
+
+      <!-- Aportes públicos (los que la persona autorizó publicar) -->
+      @if (aportesPublicos().length) {
+        <section class="pc-aportes" aria-labelledby="pc-ap-tit">
+          <h2 id="pc-ap-tit">Aportes de la ciudadanía <span class="pc-cuenta">{{ aportesPublicos().length }}</span></h2>
+          <ul class="pc-lista-aportes">
+            @for (a of aportesPublicos(); track $index) {
+              <li class="pc-aporte">
+                <div class="pc-aporte-cab">
+                  @if (a.postura) { <span class="pc-postura" [class]="'pc-postura-' + (a.postura || 'neutral')">{{ nombrePostura(a.postura) }}</span> }
+                  @if (a.organizacion) { <span class="pc-org">{{ a.organizacion }}</span> }
+                  <span class="pc-aporte-estado" [class.incorporado]="a.estado === 'incorporado'">{{ a.estadoNombre }}</span>
+                </div>
+                <p class="pc-aporte-texto">{{ a.aporte }}</p>
+                @if (a.respuesta) { <p class="pc-aporte-resp"><b>Respuesta de la E.S.E.:</b> {{ a.respuesta }}</p> }
+              </li>
+            }
+          </ul>
+        </section>
+      }
+
+      <!-- Formulario de aporte (solo si está abierta) -->
+      @if (c.abierta) {
+        <section class="pc-enviar" aria-labelledby="pc-form-tit">
+          <h2 id="pc-form-tit">Envíe su aporte</h2>
+
+          @if (radicacion(); as r) {
+            <div class="constancia" tabindex="-1" #constancia role="status">
+              <span class="constancia-ico" aria-hidden="true">✓</span>
+              <h2>Recibimos su aporte</h2>
+              <dl>
+                <dt>Número de radicado</dt><dd class="mono grande">{{ r.radicado }}</dd>
+                <dt>Consulta</dt><dd>{{ r.consulta }}</dd>
+              </dl>
+              <p class="importante">Guarde el radicado. Con él y su número de documento puede consultar si su aporte fue incorporado.</p>
+              <div class="acciones-govco">
+                <button type="button" class="btn-bdc fill-btn-govco" (click)="irAEstado(r)">Consultar mi aporte</button>
+              </div>
+            </div>
+          } @else {
+            <p class="obligatorios">Los campos marcados con <span class="req" aria-hidden="true">*</span><span class="visually-hidden">asterisco</span> son obligatorios.</p>
+
+            @if (intentado() && errores().length) {
+              <div class="alerta-govco error" tabindex="-1" #resumenErrores role="alert">
+                <strong>Revise {{ errores().length === 1 ? 'el siguiente dato' : 'los siguientes ' + errores().length + ' datos' }}:</strong>
+                <ul>@for (e of errores(); track e.id + e.texto) { <li><a [href]="'#' + e.id" (click)="irACampo($event, e.id)">{{ e.texto }}</a></li> }</ul>
+              </div>
+            }
+
+            <form [formGroup]="form" (ngSubmit)="enviar()" novalidate>
+              <div class="trampa" aria-hidden="true">
+                <label for="pc-sitioWeb">No llene este campo</label>
+                <input id="pc-sitioWeb" formControlName="sitioWeb" tabindex="-1" autocomplete="off" />
+              </div>
+
+              <fieldset class="seccion">
+                <legend><span class="num">1</span> ¿Quién aporta?</legend>
+                <div class="rejilla">
+                  <div class="campo">
+                    <label for="tipoPersona">Tipo de persona</label>
+                    <select id="tipoPersona" formControlName="tipoPersona">
+                      <option value="natural">Persona natural</option>
+                      <option value="juridica">Persona jurídica / organización</option>
+                    </select>
+                  </div>
+                  <div class="campo">
+                    <label for="tipoDocumento">Tipo de documento <span class="req" aria-hidden="true">*</span></label>
+                    <select id="tipoDocumento" formControlName="tipoDocumento">
+                      @for (d of documentos; track d.valor) { <option [value]="d.valor">{{ d.nombre }}</option> }
+                    </select>
+                  </div>
+                  <div class="campo">
+                    <label for="numeroDocumento">Número de documento <span class="req" aria-hidden="true">*</span></label>
+                    <input id="numeroDocumento" formControlName="numeroDocumento" inputmode="numeric" maxlength="20" autocomplete="off"
+                           [attr.aria-invalid]="!!error('numeroDocumento')" [attr.aria-describedby]="error('numeroDocumento') ? 'error-numeroDocumento' : null" />
+                    @if (error('numeroDocumento')) { <p class="error-campo" id="error-numeroDocumento">{{ error('numeroDocumento') }}</p> }
+                  </div>
+                  <div class="campo ancho">
+                    <label for="nombre">{{ esJuridica() ? 'Razón social' : 'Nombre completo' }} <span class="req" aria-hidden="true">*</span></label>
+                    <input id="nombre" formControlName="nombre" maxlength="150" autocomplete="name"
+                           [attr.aria-invalid]="!!error('nombre')" [attr.aria-describedby]="error('nombre') ? 'error-nombre' : null" />
+                    @if (error('nombre')) { <p class="error-campo" id="error-nombre">{{ error('nombre') }}</p> }
+                  </div>
+                  <div class="campo">
+                    <label for="organizacion">Organización que representa <span class="opc">(opcional)</span></label>
+                    <input id="organizacion" formControlName="organizacion" maxlength="150" placeholder="Veeduría, junta, asociación…" />
+                  </div>
+                  <div class="campo">
+                    <label for="correo">Correo electrónico <span class="opc">(opcional)</span></label>
+                    <input id="correo" type="email" formControlName="correo" maxlength="150" autocomplete="email"
+                           [attr.aria-invalid]="!!error('correo')" [attr.aria-describedby]="error('correo') ? 'error-correo' : null" />
+                    @if (error('correo')) { <p class="error-campo" id="error-correo">{{ error('correo') }}</p> }
+                  </div>
+                  <div class="campo">
+                    <label for="telefono">Teléfono <span class="opc">(opcional)</span></label>
+                    <input id="telefono" type="tel" formControlName="telefono" maxlength="30" autocomplete="tel"
+                           [attr.aria-invalid]="!!error('telefono')" [attr.aria-describedby]="error('telefono') ? 'error-telefono' : null" />
+                    @if (error('telefono')) { <p class="error-campo" id="error-telefono">{{ error('telefono') }}</p> }
+                  </div>
+                </div>
+              </fieldset>
+
+              <fieldset class="seccion">
+                <legend><span class="num">2</span> Su aporte</legend>
+                <div class="campo">
+                  <label for="postura">¿Cuál es su postura? <span class="opc">(opcional)</span></label>
+                  <select id="postura" formControlName="postura">
+                    <option value="">Sin especificar</option>
+                    @for (p of posturas; track p.valor) { <option [value]="p.valor">{{ p.nombre }}</option> }
+                  </select>
+                </div>
+                <div class="campo">
+                  <label for="aporte">Comentario, observación o propuesta <span class="req" aria-hidden="true">*</span></label>
+                  <textarea id="aporte" formControlName="aporte" rows="6" maxlength="6000"
+                            placeholder="Escriba su aporte sobre el tema en consulta."
+                            [attr.aria-invalid]="!!error('aporte')" [attr.aria-describedby]="(error('aporte') ? 'error-aporte ' : '') + 'contador-aporte'"></textarea>
+                  <p class="ayuda" id="contador-aporte">{{ caracteres() }} de 6000 caracteres.</p>
+                  @if (error('aporte')) { <p class="error-campo" id="error-aporte">{{ error('aporte') }}</p> }
+                </div>
+                <label class="check-govco">
+                  <input type="checkbox" formControlName="publicar" />
+                  <span>Autorizo que mi aporte se publique en el portal (sin mis datos personales) junto con los resultados de la consulta.</span>
+                </label>
+              </fieldset>
+
+              <div class="autorizacion" id="aceptaDatos">
+                <label class="check-govco">
+                  <input type="checkbox" formControlName="aceptaDatos" [attr.aria-invalid]="!!error('aceptaDatos')"
+                         [attr.aria-describedby]="error('aceptaDatos') ? 'error-aceptaDatos' : null" />
+                  <span>Autorizo el tratamiento de mis datos personales para atender este aporte, según la
+                    <a routerLink="/politicas-de-privacidad" target="_blank">política de privacidad y tratamiento de datos</a> (Ley 1581 de 2012).</span>
+                </label>
+                @if (error('aceptaDatos')) { <p class="error-campo" id="error-aceptaDatos">{{ error('aceptaDatos') }}</p> }
+              </div>
+
+              @if (errorEnvio()) { <div class="alerta-govco error" role="alert">{{ errorEnvio() }}</div> }
+
+              <div class="acciones-govco">
+                <button type="submit" class="btn-bdc fill-btn-govco" [disabled]="enviando()">{{ enviando() ? 'Enviando…' : 'Enviar aporte' }}</button>
+              </div>
+            </form>
+          }
+        </section>
+      } @else if (c.estado !== 'con_resultados') {
+        <div class="alerta-govco info" role="status">Esta consulta ya cerró y no está recibiendo aportes. Si publicamos resultados, aparecerán en esta página.</div>
+      }
+    }
+  }
+
+  <!-- ============================ LISTADO ============================ -->
+  @else {
+    <header class="tramite-head">
+      <h1>Consultas ciudadanas</h1>
+      <p class="lead">La E.S.E. Hospital San José del Guaviare abre a consulta sus proyectos, planes y políticas para que usted
+        aporte. Participe en las consultas abiertas y consulte si su aporte fue incorporado.</p>
+    </header>
+
+    <div class="tabs-govco" role="tablist" aria-label="Opciones de participación">
+      <button type="button" role="tab" id="tab-pc-consultas" [attr.aria-selected]="pestana() === 'consultas'" aria-controls="panel-pc-consultas"
+              [class.activa]="pestana() === 'consultas'" (click)="pestana.set('consultas')">Consultas</button>
+      <button type="button" role="tab" id="tab-pc-estado" [attr.aria-selected]="pestana() === 'estado'" aria-controls="panel-pc-estado"
+              [class.activa]="pestana() === 'estado'" (click)="pestana.set('estado')">Consultar mi aporte</button>
+    </div>
+
+    @if (pestana() === 'consultas') {
+      <div id="panel-pc-consultas" role="tabpanel" aria-labelledby="tab-pc-consultas">
+        @if (cargandoLista()) { <p class="vacio" role="status">Cargando consultas…</p> }
+        @if (errorLista()) { <div class="alerta-govco error" role="alert">{{ errorLista() }}</div> }
+
+        @if (!cargandoLista() && !consultas().length && !errorLista()) {
+          <p class="vacio">En este momento no hay consultas publicadas. Vuelva pronto.</p>
+        }
+
+        @if (abiertas().length) {
+          <h2 class="pc-grupo">Abiertas para aportes <span class="pc-cuenta">{{ abiertas().length }}</span></h2>
+          <ul class="pc-tarjetas">
+            @for (c of abiertas(); track c.slug) {
+              @let d = dias(c.fechaFin);
+              <li class="pc-tarjeta abierta">
+                <a [routerLink]="['/participacion', c.slug]">
+                  @if (c.categoria) { <span class="pc-tarjeta-cat">{{ c.categoria }}</span> }
+                  <h3>{{ c.titulo }}</h3>
+                  <p>{{ c.resumen }}</p>
+                  <div class="pc-tarjeta-pie">
+                    <span class="pc-estado pc-estado-abierta">Abierta</span>
+                    <span class="pc-tarjeta-plazo">{{ d > 0 ? 'Cierra en ' + d + (d === 1 ? ' día' : ' días') : 'Cierra hoy' }}</span>
+                  </div>
+                </a>
+              </li>
+            }
+          </ul>
+        }
+
+        @if (cerradas().length) {
+          <h2 class="pc-grupo">Cerradas y con resultados</h2>
+          <ul class="pc-tarjetas">
+            @for (c of cerradas(); track c.slug) {
+              <li class="pc-tarjeta">
+                <a [routerLink]="['/participacion', c.slug]">
+                  @if (c.categoria) { <span class="pc-tarjeta-cat">{{ c.categoria }}</span> }
+                  <h3>{{ c.titulo }}</h3>
+                  <p>{{ c.resumen }}</p>
+                  <div class="pc-tarjeta-pie">
+                    <span class="pc-estado" [class]="'pc-estado-' + c.estado">{{ c.estadoNombre }}</span>
+                    @if (c.tieneResultados) { <span class="pc-tarjeta-plazo">Ver resultados</span> }
+                    @else { <span class="pc-tarjeta-plazo">{{ c.aportes }} aporte(s)</span> }
+                  </div>
+                </a>
+              </li>
+            }
+          </ul>
+        }
+      </div>
+    }
+
+    @if (pestana() === 'estado') {
+      <div id="panel-pc-estado" role="tabpanel" aria-labelledby="tab-pc-estado">
+        <p class="ayuda">Escriba el número de documento con el que envió su aporte y el radicado que recibió.</p>
+        <form class="consulta" [formGroup]="estado" (ngSubmit)="consultarEstado()" novalidate>
+          <div class="campo">
+            <label for="pc-c-doc">Número de documento</label>
+            <input id="pc-c-doc" formControlName="numeroDocumento" inputmode="numeric" maxlength="20" autocomplete="off" />
+          </div>
+          <div class="campo">
+            <label for="pc-c-rad">Número de radicado</label>
+            <input id="pc-c-rad" formControlName="radicado" placeholder="PC-2026-000123" autocapitalize="characters" autocomplete="off" />
+          </div>
+          <button type="submit" class="btn-bdc fill-btn-govco" [disabled]="consultandoEstado()">{{ consultandoEstado() ? 'Consultando…' : 'Consultar' }}</button>
+        </form>
+
+        @if (errorEstado()) { <div class="alerta-govco error" role="alert">{{ errorEstado() }}</div> }
+
+        @if (resultadoEstado(); as r) {
+          <article class="resultado" aria-live="polite">
+            <header>
+              <h2><span class="mono">{{ r.radicado }}</span></h2>
+              <p>Aporte a: <a [routerLink]="['/participacion', r.consultaSlug]">{{ r.consulta }}</a></p>
+            </header>
+            <ol class="pasos">
+              <li [class.hecho]="paso(r.estado) >= 1"><b>Recibido</b><small>{{ r.fechaRadicacion | date: 'd MMM y' : '-0500' : 'es-CO' }}</small></li>
+              <li [class.hecho]="paso(r.estado) >= 2"><b>En análisis</b></li>
+              <li [class.hecho]="paso(r.estado) >= 3"><b>{{ r.estado === 'no_incorporado' ? 'No incorporado' : 'Incorporado' }}</b></li>
+            </ol>
+            <p>Estado actual: <b>{{ r.estadoNombre }}</b>.</p>
+            @if (r.respuesta) {
+              <h3>Respuesta de la E.S.E.</h3>
+              <div class="respuesta">{{ r.respuesta }}</div>
+            }
+          </article>
+        }
+      </div>
+    }
+  }
+</section>

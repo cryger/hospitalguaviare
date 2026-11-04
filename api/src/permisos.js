@@ -17,6 +17,7 @@ const MODULOS = [
   'pqrsfd',
   'contratacion',
   'historias',      // Copias de historia clínica (información reservada)
+  'participacion',  // Consultas ciudadanas en línea
   'accesibilidad',
   'usuarios',
   'configuracion',
@@ -30,6 +31,7 @@ const ROLES = {
   pqrsfd: ['pqrsfd'],
   contratacion: ['contratacion'],
   historia_clinica: ['historias'],
+  participacion: ['participacion'],
   personalizado: null, // se toman de la columna modulos
 };
 

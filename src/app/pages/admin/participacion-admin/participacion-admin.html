@@ -1,0 +1,255 @@
+<div class="cms-head">
+  <div>
+    <h1>Consultas ciudadanas</h1>
+    <p>Publique temas a consulta, reciba los aportes de la ciudadanía en línea y publique los resultados (Ley 1757 de 2015, gobierno abierto).</p>
+  </div>
+  @if (svc.disponible) {
+    <div class="cms-head-actions">
+      <a class="btn" href="/participacion" target="_blank" rel="noopener">Ver en el portal ↗</a>
+      <button type="button" class="btn btn-primario" (click)="abrirCrear()">+ Nueva consulta</button>
+    </div>
+  }
+</div>
+
+@if (!svc.disponible) {
+  <div class="aviso aviso-info" role="status">
+    Las consultas ciudadanas usan la base de datos. Esta copia del portal está en <b>modo local</b> (sin API): conecte la API para publicar consultas y recibir aportes.
+  </div>
+} @else {
+
+  @if (aviso(); as a) {
+    <div class="aviso" [class.aviso-ok]="a.tipo === 'ok'" [class.aviso-error]="a.tipo === 'error'" role="status">
+      {{ a.texto }}
+      <button type="button" class="btn-link" (click)="aviso.set(null)" aria-label="Cerrar aviso">✕</button>
+    </div>
+  }
+  @if (svc.error()) { <div class="aviso aviso-error" role="alert">{{ svc.error() }}</div> }
+
+  <div class="kpis">
+    <div class="kpi"><b>{{ kpis().abiertas }}</b>Abiertas</div>
+    <div class="kpi" [class.kpi-warn]="kpis().pendientes" [class.activo]="kpis().pendientes"><b>{{ kpis().pendientes }}</b>Aportes por revisar</div>
+    <div class="kpi"><b>{{ kpis().conResultados }}</b>Con resultados</div>
+    <div class="kpi"><b>{{ kpis().aportes }}</b>Aportes recibidos</div>
+  </div>
+
+  <section class="panel">
+    <app-buscador-govco idCampo="buscar-pc" etiqueta="Buscar consulta" [compacto]="true"
+        placeholder="Título, categoría o resumen…" etiquetaBoton="Buscar consultas"
+        [valor]="busqueda()" (valorChange)="busqueda.set($event)">
+      <div filtros class="desplegable-govco">
+        <label for="f-estado-pc">Estado</label>
+        <select id="f-estado-pc" class="btn-dropdown" [ngModel]="filtroEstado()" (ngModelChange)="filtroEstado.set($event)">
+          <option value="">Todos</option>
+          @for (e of estadosConsulta; track e.valor) { <option [value]="e.valor">{{ e.nombre }}</option> }
+        </select>
+      </div>
+    </app-buscador-govco>
+    <p class="resultado-busqueda admin" role="status" aria-live="polite">
+      <strong>{{ lista().length }}</strong> de {{ svc.total() }} consultas
+      @if (hayFiltros()) { <button type="button" class="btn-bdc outline-btn-govco limpiar-admin" (click)="limpiarFiltros()">Limpiar filtros</button> }
+    </p>
+
+    @if (lista().length) {
+      <div class="table-wrap">
+        <table class="tabla">
+          <thead>
+            <tr>
+              <th>Consulta</th>
+              <th class="ocultar-movil">Cierre</th>
+              <th>Aportes</th>
+              <th>Estado</th>
+              <th class="acciones"><span class="visually-hidden">Acciones</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (c of lista(); track c.id) {
+              <tr>
+                <td>
+                  <button type="button" class="btn-link asunto" (click)="abrir(c)">{{ c.titulo }}</button>
+                  <span class="sub-celda">{{ c.categoria || 'Sin categoría' }}</span>
+                </td>
+                <td class="ocultar-movil nowrap">
+                  <span class="sub-celda">{{ c.fechaFin | date: 'd MMM y' : '-0500' : 'es-CO' }}</span>
+                  @if (c.abierta) { @let d = dias(c.fechaFin); <span class="pc-mini abierta">{{ d > 0 ? 'quedan ' + d + ' d' : 'cierra hoy' }}</span> }
+                </td>
+                <td class="nowrap">
+                  <span class="titulo-celda">{{ c.nAportes }}</span>
+                  @if (c.nPendientes) { <span class="badge badge-warn">{{ c.nPendientes }} por revisar</span> }
+                </td>
+                <td><span class="badge" [class]="'badge pc-badge-' + c.estado">{{ c.abierta ? 'Abierta' : c.estadoNombre }}</span></td>
+                <td class="acciones"><button type="button" class="btn btn-sm btn-primario" (click)="abrir(c)">Gestionar</button></td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    } @else {
+      <p class="vacio">{{ svc.cargando() ? 'Cargando consultas…' : svc.total() ? 'No hay consultas con estos filtros.' : 'Aún no se han creado consultas ciudadanas.' }}</p>
+    }
+  </section>
+}
+
+<!-- ===================== Detalle ===================== -->
+@if (detalle(); as d) {
+  <div class="modal-fondo" (click)="cerrarDetalle()">
+    <div class="modal-caja grande detalle" role="dialog" aria-modal="true" aria-labelledby="titulo-detalle-pc" (click)="$event.stopPropagation()" (keydown.escape)="cerrarDetalle()">
+      <div class="modal-head">
+        <h2 id="titulo-detalle-pc">{{ d.titulo }}</h2>
+        <button type="button" class="btn btn-icono" (click)="cerrarDetalle()" aria-label="Cerrar">✕</button>
+      </div>
+      <div class="modal-body">
+        @if (errorDetalle()) { <div class="aviso aviso-error" role="alert">{{ errorDetalle() }}</div> }
+
+        <div class="resumen">
+          <span class="badge" [class]="'badge pc-badge-' + d.estado">{{ d.estadoNombre }}</span>
+          <span>{{ d.listaAportes.length }} aporte(s)</span>
+          @if (aportesPendientes(d)) { <span class="badge badge-warn">{{ aportesPendientes(d) }} por revisar</span> }
+          <a class="btn btn-sm" [href]="enlacePublico(d)" target="_blank" rel="noopener">Ver en el portal ↗</a>
+          <button type="button" class="btn btn-sm" (click)="exportar(d)" [disabled]="!d.listaAportes.length">Exportar aportes (CSV)</button>
+        </div>
+
+        <!-- Edición de la consulta -->
+        <form class="caja" (ngSubmit)="guardarConsulta()">
+          <h3>Configuración de la consulta</h3>
+          <div class="form-grid">
+            <div class="campo">
+              <label for="e-estado">Estado</label>
+              <select id="e-estado" class="select" name="estado" [(ngModel)]="edicion.estado">
+                @for (e of estadosConsulta; track e.valor) { <option [value]="e.valor">{{ e.nombre }}</option> }
+              </select>
+            </div>
+            <div class="campo">
+              <label for="e-fin">Cierre de aportes</label>
+              <input id="e-fin" type="datetime-local" class="input" name="fechaFin" [(ngModel)]="edicion.fechaFin" />
+            </div>
+            <div class="campo">
+              <label for="e-cat">Categoría</label>
+              <input id="e-cat" class="input" name="categoria" [(ngModel)]="edicion.categoria" maxlength="80" />
+            </div>
+            <div class="campo full">
+              <label for="e-resumen">Resumen <span class="opc">(se ve en el listado)</span></label>
+              <input id="e-resumen" class="input" name="resumen" [(ngModel)]="edicion.resumen" maxlength="300" />
+            </div>
+            <div class="campo full">
+              <label for="e-desc">Descripción <span class="opc">(acepta HTML: contexto y qué se consulta)</span></label>
+              <textarea id="e-desc" class="textarea" rows="5" name="descripcion" [(ngModel)]="edicion.descripcion"></textarea>
+            </div>
+            <div class="campo">
+              <label for="e-docurl">Documento de soporte (URL)</label>
+              <input id="e-docurl" class="input" name="documentoUrl" [(ngModel)]="edicion.documentoUrl" maxlength="500" placeholder="https://…" />
+            </div>
+            <div class="campo">
+              <label for="e-docnom">Nombre del documento</label>
+              <input id="e-docnom" class="input" name="documentoNombre" [(ngModel)]="edicion.documentoNombre" maxlength="200" />
+            </div>
+            <div class="campo full">
+              <label for="e-result">Consolidado de resultados <span class="opc">(acepta HTML; requerido para el estado «Con resultados»)</span></label>
+              <textarea id="e-result" class="textarea" rows="4" name="resultado" [(ngModel)]="edicion.resultado"></textarea>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primario" [disabled]="guardando()">{{ guardando() ? 'Guardando…' : 'Guardar consulta' }}</button>
+        </form>
+
+        <!-- Aportes -->
+        <h3 class="pc-aportes-tit">Aportes recibidos <span class="pc-cuenta">{{ d.listaAportes.length }}</span></h3>
+        @if (!d.listaAportes.length) {
+          <p class="nota">Aún no se han recibido aportes a esta consulta.</p>
+        }
+        <ul class="pc-admin-aportes">
+          @for (a of d.listaAportes; track a.id) {
+            <li class="caja">
+              <div class="pc-admin-cab">
+                <span class="mono">{{ a.radicado }}</span>
+                <span class="sub-celda">{{ a.fechaRadicacion | date: 'd MMM y, h:mm a' : '-0500' : 'es-CO' }}</span>
+                <span class="badge" [class]="'badge estado-' + (a.estado === 'incorporado' ? 'respondida' : a.estado === 'no_incorporado' ? 'rechazada' : 'radicada')">{{ a.estadoNombre }}</span>
+              </div>
+              <p class="pc-admin-persona">
+                {{ a.nombre }} · {{ a.tipoDocumento }} {{ a.numeroDocumento }}
+                @if (a.organizacion) { · {{ a.organizacion }} }
+                @if (a.postura) { · <b>{{ nombrePostura(a.postura) }}</b> }
+                @if (a.correo) { · <a [href]="'mailto:' + a.correo">{{ a.correo }}</a> }
+              </p>
+              <p class="pc-admin-texto">{{ a.aporte }}</p>
+              @if (aporteEdit[a.id]; as ed) {
+                <div class="pc-admin-gestion">
+                  <div class="campo">
+                    <label [attr.for]="'ap-est-' + a.id">Estado</label>
+                    <select [id]="'ap-est-' + a.id" class="select" [(ngModel)]="ed.estado">
+                      @for (e of estadosAporte; track e.valor) { <option [value]="e.valor">{{ e.nombre }}</option> }
+                    </select>
+                  </div>
+                  <div class="campo full">
+                    <label [attr.for]="'ap-resp-' + a.id">Respuesta / motivación <span class="opc">(requerida para incorporar o no incorporar)</span></label>
+                    <textarea [id]="'ap-resp-' + a.id" class="textarea" rows="2" [(ngModel)]="ed.respuesta" maxlength="10000"></textarea>
+                  </div>
+                  <label class="check"><input type="checkbox" [(ngModel)]="ed.publicar" /> Publicar este aporte en el portal (sin datos personales) @if (!a.publicar && ed.publicar) { <span class="opc">· el ciudadano {{ a.publicar ? 'lo autorizó' : 'no marcó autorización' }}</span> }</label>
+                  <button type="button" class="btn btn-sm btn-primario" (click)="guardarAporte(a)" [disabled]="guardando()">Guardar aporte</button>
+                </div>
+              }
+            </li>
+          }
+        </ul>
+      </div>
+    </div>
+  </div>
+}
+
+<!-- ===================== Crear ===================== -->
+@if (crearAbierto()) {
+  <div class="modal-fondo" (click)="crearAbierto.set(false)">
+    <div class="modal-caja grande" role="dialog" aria-modal="true" aria-labelledby="titulo-crear-pc" (click)="$event.stopPropagation()" (keydown.escape)="crearAbierto.set(false)">
+      <div class="modal-head">
+        <h2 id="titulo-crear-pc">Nueva consulta ciudadana</h2>
+        <button type="button" class="btn btn-icono" (click)="crearAbierto.set(false)" aria-label="Cerrar">✕</button>
+      </div>
+      <form (ngSubmit)="crear()" novalidate>
+        <div class="modal-body">
+          <div class="form-grid">
+            <div class="campo full">
+              <label for="n-titulo">Título *</label>
+              <input id="n-titulo" class="input" name="titulo" [(ngModel)]="nueva.titulo" maxlength="200" />
+            </div>
+            <div class="campo full">
+              <label for="n-resumen">Resumen * <span class="opc">(una línea para el listado)</span></label>
+              <input id="n-resumen" class="input" name="resumen" [(ngModel)]="nueva.resumen" maxlength="300" />
+            </div>
+            <div class="campo full">
+              <label for="n-desc">Descripción * <span class="opc">(acepta HTML)</span></label>
+              <textarea id="n-desc" class="textarea" rows="5" name="descripcion" [(ngModel)]="nueva.descripcion"></textarea>
+            </div>
+            <div class="campo">
+              <label for="n-cat">Categoría</label>
+              <input id="n-cat" class="input" name="categoria" [(ngModel)]="nueva.categoria" maxlength="80" placeholder="Ej. Plan de desarrollo" />
+            </div>
+            <div class="campo">
+              <label for="n-fin">Cierre de aportes *</label>
+              <input id="n-fin" type="datetime-local" class="input" name="fechaFin" [(ngModel)]="nueva.fechaFin" />
+            </div>
+            <div class="campo">
+              <label for="n-docurl">Documento de soporte (URL)</label>
+              <input id="n-docurl" class="input" name="documentoUrl" [(ngModel)]="nueva.documentoUrl" maxlength="500" placeholder="https://…" />
+            </div>
+            <div class="campo">
+              <label for="n-docnom">Nombre del documento</label>
+              <input id="n-docnom" class="input" name="documentoNombre" [(ngModel)]="nueva.documentoNombre" maxlength="200" />
+            </div>
+            <div class="campo">
+              <label for="n-estado">Publicar como</label>
+              <select id="n-estado" class="select" name="estado" [(ngModel)]="nueva.estado">
+                <option value="borrador">Borrador (no visible)</option>
+                <option value="abierta">Abierta (recibe aportes)</option>
+              </select>
+            </div>
+            @if (errorCrear()) { <p class="full err" role="alert">{{ errorCrear() }}</p> }
+          </div>
+        </div>
+        <div class="modal-foot">
+          <button type="button" class="btn" (click)="crearAbierto.set(false)">Cancelar</button>
+          <button type="submit" class="btn btn-primario" [disabled]="guardando()">{{ guardando() ? 'Creando…' : 'Crear consulta' }}</button>
+        </div>
+      </form>
+    </div>
+  </div>
+}
+
+@if (cargandoDetalle()) { <div class="cargando-capa" role="status">Abriendo consulta…</div> }

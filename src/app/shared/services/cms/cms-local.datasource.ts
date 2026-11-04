@@ -463,7 +463,7 @@ export class CmsLocalDataSource extends CmsDataSource {
   }
 
   /* ===== Estructura inicial (Resolución 1519 de 2020) ===== */
-  private readonly versionSemilla = 30;
+  private readonly versionSemilla = 31;
 
   private sembrarSiVacio(): void {
     if (this.almacen.getItem(this.prefijo + 'menus')) return;
@@ -1079,6 +1079,7 @@ const ESTRUCTURA_1519: PaginaSemilla[] = [
   { id: 102, menuId: 1, parentId: 67, titulo: "Calendario de eventos", slug: 'calendario-de-participacion', plantilla: 'enlace', urlExterna: '/transparencia/informacion-de-la-entidad/calendario-de-actividades-y-eventos', orden: 8 },
   { id: 103, menuId: 1, parentId: 67, titulo: "Normativas institucionales", slug: 'normativas-institucionales', plantilla: 'enlace', urlExterna: '/transparencia/normativa/normativa-de-la-entidad', orden: 9 },
   { id: 104, menuId: 1, parentId: 67, titulo: "Divulgación de resultados", slug: 'divulgacion-de-resultados', plantilla: 'contenido', descripcion: "Avances y resultados de la gestión en el marco de la participación ciudadana.", orden: 10 },
+  { id: 112, menuId: 1, parentId: 67, titulo: "Consultas ciudadanas en línea", slug: 'consultas-ciudadanas-en-linea', plantilla: 'enlace', urlExterna: '/participacion', descripcion: "Participe en las consultas abiertas de la E.S.E.: conozca los temas, envíe sus aportes en línea y consulte los resultados.", orden: 11 },
   { id: 74, menuId: 1, parentId: null, titulo: "Nuestro Hospital", slug: 'nuestro-hospital', plantilla: 'contenido', orden: 0 },
   { id: 86, menuId: 1, parentId: 74, titulo: "Misión y visión", slug: 'mision-vision', plantilla: 'enlace', urlExterna: '/transparencia/informacion-de-la-entidad/mision-vision-funciones-y-deberes', orden: 0 },
   { id: 75, menuId: 1, parentId: 74, titulo: "Reseña histórica", slug: 'resena-historica', plantilla: 'historia', orden: 1 },

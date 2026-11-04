@@ -1,0 +1,78 @@
+:host {
+  --cobalt: #0943B5;
+  --marino: #004884;
+  --solitude: #E5ECF8;
+  --verde: #069169;
+  --oro: #FFD965;
+  --arena: #FFF7E6;
+  --coral: #F3561F;
+  --gris-txt: #4a4a4a;
+}
+
+.volver { margin: 0 0 1rem; }
+.volver a { color: var(--cobalt); font-weight: 600; text-decoration: none; }
+.volver a:hover { text-decoration: underline; }
+
+/* Contenido HTML redactado por la entidad */
+.contenido-html { font-size: 1rem; line-height: 1.7; color: #1f2430; }
+.contenido-html ::ng-deep h2 { color: var(--marino); font-size: 1.3rem; margin: 1.5rem 0 .6rem; }
+.contenido-html ::ng-deep h3 { font-size: 1.1rem; margin: 1.2rem 0 .5rem; }
+.contenido-html ::ng-deep a { color: var(--cobalt); }
+.contenido-html ::ng-deep ul, .contenido-html ::ng-deep ol { padding-left: 1.3rem; }
+.contenido-html ::ng-deep img { max-width: 100%; height: auto; border-radius: 8px; }
+
+/* Cabecera del detalle */
+.pc-categoria { margin: 0 0 .25rem; font-size: .8rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: #B23A0E; }
+.pc-meta { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem 1rem; margin-top: .5rem; }
+.pc-plazo { font-size: .9rem; color: var(--gris-txt); }
+
+/* Insignias de estado */
+.pc-estado { font-size: .78rem; font-weight: 700; border-radius: 999px; padding: .15rem .7rem; background: #EDF0F5; color: #45506b; }
+.pc-estado-abierta { background: #E2F4EF; color: #05694c; }
+.pc-estado-con_resultados { background: var(--solitude); color: var(--cobalt); }
+.pc-estado-cerrada, .pc-estado-archivada { background: #F1E9E6; color: #8a4b35; }
+
+.pc-descripcion { margin-top: 1rem; }
+.pc-documento { margin: 1rem 0; }
+.pc-documento a { display: inline-flex; align-items: center; gap: .4rem; font-weight: 600; color: var(--cobalt); background: var(--arena); border: 1px solid #F3D98E; border-radius: 8px; padding: .55rem .9rem; text-decoration: none; }
+
+/* Resultados */
+.pc-resultados { margin-top: 1.75rem; padding: 1.25rem 1.4rem; border-radius: 14px; background: var(--solitude); border: 1px solid #C9D8F2; }
+.pc-resultados h2 { margin: 0 0 .25rem; color: var(--marino); font-size: 1.25rem; }
+
+/* Aportes públicos */
+.pc-aportes { margin-top: 1.75rem; }
+.pc-aportes h2 { color: var(--marino); font-size: 1.25rem; display: flex; align-items: center; gap: .5rem; }
+.pc-cuenta { font-size: .8rem; background: var(--cobalt); color: #fff; border-radius: 999px; padding: .1rem .55rem; font-weight: 700; }
+.pc-lista-aportes { list-style: none; margin: 1rem 0 0; padding: 0; display: grid; gap: .9rem; }
+.pc-aporte { border: 1px solid #e3e9f3; border-left: .3rem solid var(--havelock, #4672C8); border-radius: 10px; padding: .9rem 1.1rem; background: #fff; }
+.pc-aporte-cab { display: flex; flex-wrap: wrap; align-items: center; gap: .4rem .6rem; margin-bottom: .4rem; }
+.pc-postura { font-size: .72rem; font-weight: 700; border-radius: 999px; padding: .1rem .55rem; background: var(--solitude); color: var(--cobalt); }
+.pc-postura-a_favor { background: #E2F4EF; color: #05694c; }
+.pc-postura-en_contra { background: #FDEBE4; color: #B23A0E; }
+.pc-postura-propuesta { background: #FFF1D6; color: #7A4B00; }
+.pc-org { font-size: .82rem; font-weight: 600; color: var(--gris-txt); }
+.pc-aporte-estado { margin-left: auto; font-size: .74rem; font-weight: 700; color: #6b7280; }
+.pc-aporte-estado.incorporado { color: var(--verde); }
+.pc-aporte-texto { margin: 0; line-height: 1.55; }
+.pc-aporte-resp { margin: .55rem 0 0; padding: .5rem .75rem; background: var(--arena); border-radius: 8px; font-size: .92rem; }
+
+/* Formulario */
+.pc-enviar { margin-top: 2rem; padding-top: 1.5rem; border-top: 2px solid var(--solitude); }
+.pc-enviar h2 { color: var(--marino); font-size: 1.3rem; }
+
+/* Listado: agrupaciones y tarjetas */
+.pc-grupo { color: var(--marino); font-size: 1.2rem; margin: 1.75rem 0 .75rem; display: flex; align-items: center; gap: .5rem; }
+.pc-tarjetas { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 20rem), 1fr)); gap: 1rem; }
+.pc-tarjeta { border: 1px solid #e3e9f3; border-radius: 14px; background: #fff; box-shadow: 0 4px 14px rgba(16, 24, 40, .05); overflow: hidden; transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease; }
+.pc-tarjeta::before { content: ''; display: block; height: 4px; background: linear-gradient(90deg, var(--marino), var(--cobalt)); }
+.pc-tarjeta.abierta::before { background: linear-gradient(90deg, #0aa67a, var(--verde)); }
+.pc-tarjeta:hover { transform: translateY(-3px); box-shadow: 0 12px 26px rgba(16, 24, 40, .1); border-color: #B5C7E9; }
+.pc-tarjeta a { display: flex; flex-direction: column; gap: .5rem; height: 100%; padding: 1.1rem 1.2rem 1.2rem; text-decoration: none; color: inherit; }
+.pc-tarjeta-cat { font-size: .72rem; font-weight: 700; letter-spacing: .03em; text-transform: uppercase; color: #B23A0E; }
+.pc-tarjeta h3 { margin: 0; font-size: 1.05rem; color: var(--marino); }
+.pc-tarjeta p { margin: 0; font-size: .92rem; line-height: 1.5; color: var(--gris-txt); flex: 1; }
+.pc-tarjeta-pie { display: flex; align-items: center; justify-content: space-between; gap: .5rem; margin-top: .3rem; }
+.pc-tarjeta-plazo { font-size: .82rem; font-weight: 600; color: var(--cobalt); }
+
+@media (prefers-reduced-motion: reduce) { .pc-tarjeta { transition: none; } }

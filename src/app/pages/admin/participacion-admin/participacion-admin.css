@@ -1,0 +1,18 @@
+.pc-badge-abierta { background: var(--c-ok-bg, #E2F4EF); color: var(--c-ok, #05694c); }
+.pc-badge-con_resultados { background: #E5ECF8; color: #0943B5; }
+.pc-badge-cerrada, .pc-badge-archivada { background: #F1E9E6; color: #8a4b35; }
+.pc-badge-borrador { background: #ECEEF2; color: #55607a; }
+.pc-mini { display: inline-block; margin-left: .4rem; font-size: .72rem; font-weight: 700; color: #05694c; }
+.pc-cuenta { font-size: .78rem; background: #0943B5; color: #fff; border-radius: 999px; padding: .1rem .55rem; font-weight: 700; }
+
+.pc-aportes-tit { margin-top: 1.5rem; display: flex; align-items: center; gap: .5rem; }
+.pc-admin-aportes { list-style: none; margin: .75rem 0 0; padding: 0; display: grid; gap: .85rem; }
+.pc-admin-aportes .caja { padding: .9rem 1.05rem; }
+.pc-admin-cab { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem .8rem; }
+.pc-admin-persona { margin: .5rem 0 .35rem; font-size: .88rem; color: #45506b; }
+.pc-admin-texto { margin: 0 0 .6rem; line-height: 1.5; white-space: pre-wrap; }
+.pc-admin-gestion { display: grid; grid-template-columns: repeat(2, 1fr); gap: .6rem 1rem; align-items: end; }
+.pc-admin-gestion .full { grid-column: 1 / -1; }
+.pc-admin-gestion .check { grid-column: 1 / -1; }
+@media (max-width: 640px) { .pc-admin-gestion { grid-template-columns: 1fr; } }
+.badge-warn { background: var(--c-warn-bg, #FFF4E0); color: var(--c-warn, #9a6700); }

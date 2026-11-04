@@ -9,11 +9,12 @@ export type Modulo =
   | 'pqrsfd'
   | 'contratacion'
   | 'historias'
+  | 'participacion'
   | 'accesibilidad'
   | 'usuarios'
   | 'configuracion';
 
-export type Rol = 'admin' | 'editor' | 'pqrsfd' | 'contratacion' | 'historia_clinica' | 'personalizado';
+export type Rol = 'admin' | 'editor' | 'pqrsfd' | 'contratacion' | 'historia_clinica' | 'participacion' | 'personalizado';
 
 export interface EnlaceModulo {
   ruta: string;
@@ -73,6 +74,11 @@ export const MODULOS: DefinicionModulo[] = [
     enlaces: [{ ruta: '/admin/historias-clinicas', texto: 'Copias de historia clínica', icono: '🗂️' }],
   },
   {
+    clave: 'participacion', nombre: 'Consultas ciudadanas', grupo: 'Atención a la ciudadanía',
+    descripcion: 'Consultas ciudadanas en línea y los aportes de la ciudadanía.',
+    enlaces: [{ ruta: '/admin/participacion', texto: 'Consultas ciudadanas', icono: '🗳️' }],
+  },
+  {
     clave: 'cotizaciones', nombre: 'Invitaciones a cotizar', grupo: 'Información de interés', descripcion: 'Procesos de cotización.',
     enlaces: [{ ruta: '/admin/cotizaciones', texto: 'Invitaciones a cotizar', icono: '💼' }],
   },
@@ -105,6 +111,7 @@ export const ROLES: { valor: Rol; nombre: string; descripcion: string; modulos: 
   { valor: 'pqrsfd', nombre: 'PQRSFD', descripcion: 'Solo el módulo de PQRSFD.', modulos: ['pqrsfd'] },
   { valor: 'contratacion', nombre: 'Contratación', descripcion: 'Solo las solicitudes contractuales.', modulos: ['contratacion'] },
   { valor: 'historia_clinica', nombre: 'Archivo de historias clínicas', descripcion: 'Solo las solicitudes de copia de historia clínica.', modulos: ['historias'] },
+  { valor: 'participacion', nombre: 'Participación ciudadana', descripcion: 'Solo las consultas ciudadanas y sus aportes.', modulos: ['participacion'] },
   { valor: 'personalizado', nombre: 'Personalizado', descripcion: 'Los módulos que usted marque.', modulos: null },
 ];
 

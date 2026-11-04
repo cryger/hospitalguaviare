@@ -6,6 +6,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
 
 import { CotizacionesService } from '../../shared/services/cotizaciones/cotizaciones';
 import { ContratacionService, HistoriaClinicaService, PqrsfdService } from '../../shared/services/solicitudes/solicitudes.service';
+import { ParticipacionService } from '../../shared/services/participacion/participacion.service';
 import { TrabajaNosotrosService } from '../../shared/services/trabaja-nosotros/trabaja-nosotros-service';
 import { CmsService } from '../../shared/services/cms/cms.service';
 import { UsuariosApiService } from '../../shared/services/usuarios/usuarios-api.service';
@@ -75,6 +76,7 @@ export class DashboardHomeComponent implements OnDestroy {
   private pqrsfdService = inject(PqrsfdService);
   private contratacionService = inject(ContratacionService);
   private historiaService = inject(HistoriaClinicaService);
+  private participacionService = inject(ParticipacionService);
   private permisos = inject(PermisosService);
   private vacantesService = inject(TrabajaNosotrosService);
   private cms = inject(CmsService);
@@ -114,6 +116,10 @@ export class DashboardHomeComponent implements OnDestroy {
   readonly kpiHistorias = computed(() => {
     const abiertas = this.historiaService.lista().filter((s) => s.estado === 'radicada' || s.estado === 'en_tramite');
     return { vencidas: abiertas.filter((s) => semaforoDe(s.fechaVencimiento, true, this.ahora()).estado === 'vencida').length };
+  });
+  readonly kpiParticipacion = computed(() => {
+    const c = this.participacionService.consultas();
+    return { pendientes: c.reduce((n, x) => n + x.nPendientes, 0), abiertas: c.filter((x) => x.abierta).length };
   });
   readonly vacantes = toSignal(this.vacantesService.vacantesObservable(), { initialValue: [] });
 
@@ -378,6 +384,15 @@ export class DashboardHomeComponent implements OnDestroy {
         accion: 'Responder',
       });
     }
+    const kpa = this.kpiParticipacion();
+    if (this.ver('participacion') && kpa.pendientes > 0) {
+      a.push({
+        nivel: 'info',
+        texto: `${kpa.pendientes} aporte(s) ciudadano(s) por revisar en las consultas.`,
+        ruta: '/admin/participacion',
+        accion: 'Revisar',
+      });
+    }
     // Las alertas de contenido solo para quien administra el contenido
     if (!this.ver('contenido')) return a;
 
@@ -445,6 +460,7 @@ export class DashboardHomeComponent implements OnDestroy {
       { icono: '📬', texto: 'Gestionar PQRSFD', ruta: '/admin/pqrsf', modulo: 'pqrsfd' },
       { icono: '📄', texto: 'Solicitudes contractuales', ruta: '/admin/solicitudes-contractuales', modulo: 'contratacion' },
       { icono: '🗂️', texto: 'Copias de historia clínica', ruta: '/admin/historias-clinicas', modulo: 'historias' },
+      { icono: '🗳️', texto: 'Consultas ciudadanas', ruta: '/admin/participacion', modulo: 'participacion' },
       { icono: '🧭', texto: 'Menús y páginas', ruta: '/admin/contenido/menus', modulo: 'contenido' },
       { icono: '🖼️', texto: 'Multimedia', ruta: '/admin/contenido/multimedia', modulo: 'contenido' },
       { icono: '💼', texto: 'Nueva cotización', ruta: '/admin/cotizaciones', modulo: 'cotizaciones' },
@@ -466,6 +482,7 @@ export class DashboardHomeComponent implements OnDestroy {
     if (this.ver('pqrsfd')) this.pqrsfdService.cargar(true);
     if (this.ver('contratacion')) this.contratacionService.cargar(true);
     if (this.ver('historias')) this.historiaService.cargar(true);
+    if (this.ver('participacion')) this.participacionService.cargar(true);
     if (this.ver('usuarios')) this.usuariosService.cargar().catch(() => {});
   }
 
