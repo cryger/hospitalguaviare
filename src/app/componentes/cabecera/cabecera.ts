@@ -11,6 +11,8 @@ import { resaltar, terminosDe } from '../../shared/utils/busqueda';
   styleUrl: './cabecera.css',
 })
 export class Cabecera {
+  /** Carpeta Ciudadana Digital (Servicios Ciudadanos Digitales – MinTIC) */
+  readonly carpetaCiudadana = 'https://carpetaciudadana.and.gov.co/';
   private busqueda = inject(BusquedaSitioService);
   private router = inject(Router);
 

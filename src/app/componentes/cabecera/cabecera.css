@@ -7,15 +7,28 @@ html {
   margin-bottom: 2rem;
 }
 
+/* Carpeta Ciudadana Digital e Iniciar sesión, juntos arriba a la derecha */
+.logo-aut-header-govco .enlaces-cuenta-header-govco {
+  position: absolute;
+  right: 5.375rem;
+  margin-top: 2rem;
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+}
+
 .logo-aut-header-govco .link-login-header-govco {
   color: #3366CC;
   font-family: WorkSans-Regular;
   font-size: 14px;
-  display: block;
-  right: 5.375rem;
-  position: absolute;
-  margin-top: 2rem;
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
+  padding: 0;
 }
+
+.logo-aut-header-govco .icono-carpeta { flex: none; }
+.logo-aut-header-govco .separador-cuenta { width: 1px; height: 1rem; background: #D0D0D0; }
 
 .logo-aut-header-govco .link-login-header-govco:hover {
   color: #004884;
@@ -555,11 +568,16 @@ html {
     position: relative;
   }
 
-  .logo-aut-header-govco .link-login-header-govco {
+  .logo-aut-header-govco .enlaces-cuenta-header-govco {
     position: static;
-    display: block;
-    text-align: right;
+    margin: 0;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: .25rem .75rem;
     padding: 0.5rem 1rem 0;
+  }
+
+  .logo-aut-header-govco .link-login-header-govco {
     font-size: 0.85rem;
   }
 

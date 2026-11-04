@@ -1,5 +1,15 @@
 <div class="logo-aut-header-govco">
-  <a href="/login" routerLink="/login" class="link-login-header-govco nav-link">Iniciar sesión</a>
+  <!-- Accesos de la ciudadanía: Carpeta Ciudadana Digital (Servicios Ciudadanos Digitales, MinTIC) e inicio de sesión -->
+  <nav class="enlaces-cuenta-header-govco" aria-label="Acceso ciudadano">
+    <a [href]="carpetaCiudadana" target="_blank" rel="noopener" class="link-login-header-govco link-carpeta-header-govco nav-link">
+      <svg class="icono-carpeta" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false">
+        <path fill="currentColor" d="M10 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-8l-2-2Zm2 6a2 2 0 1 1 0 4 2 2 0 0 1 0-4Zm4 8H8v-1c0-1.33 2.67-2 4-2s4 .67 4 2v1Z"/>
+      </svg>
+      Carpeta Ciudadana Digital<span class="visually-hidden"> (abre en una nueva pestaña)</span>
+    </a>
+    <span class="separador-cuenta" aria-hidden="true"></span>
+    <a href="/login" routerLink="/login" class="link-login-header-govco nav-link">Iniciar sesión</a>
+  </nav>
   <div class="container-logo-header-govco">
     <span class="logo-header-govco"></span>
     <div class="container-search-header-govco">
