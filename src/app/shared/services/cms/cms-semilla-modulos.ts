@@ -5,6 +5,23 @@ import { Cotizacion } from '../../models/cotizacion/cotizacion/cotizacion-module
 
 export const VACANTES_SEMILLA: Omit<Vacante, 'id'>[] = [
   {
+    "titulo": "Enfermería (4 vacantes)",
+    "tipoContrato": "Prestación de servicios",
+    "vacantes": 4,
+    "salario": "$3.500.000",
+    "horario": "Turnos rotativos - 192 horas",
+    "ubicacion": "ESE Hospital San José del Guaviare.",
+    "descripcion": "La ESE Hospital San José del Guaviare se complace en extender la invitación a participar de la convocatoria de las cuatro (04) vacantes disponibles para el área de enfermería. Para su postulación, tenga en cuenta las condiciones del contrato.",
+    "requisitos": [
+      "Personal del área de enfermería. Consulte las condiciones de la convocatoria."
+    ],
+    "imagenUrl": "https://esehospitalguaviare.gov.co/resourses/imgTrabajos/1.png",
+    "documentoUrl": "",
+    "fechaPublicacion": "2024-09-18T12:00:00.000Z",
+    "estado": "cerrada",
+    "migradoDe": "esehospitalguaviare.gov.co/trabaja-con-nosotros"
+  },
+  {
     "titulo": "Bacteriólogo (Laboratorio Clínico)",
     "tipoContrato": "Prestación de servicios",
     "vacantes": 2,
