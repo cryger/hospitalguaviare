@@ -467,7 +467,7 @@ export class CmsLocalDataSource extends CmsDataSource {
   }
 
   /* ===== Estructura inicial (Resolución 1519 de 2020) ===== */
-  private readonly versionSemilla = 35;
+  private readonly versionSemilla = 36;
 
   private sembrarSiVacio(): void {
     if (this.almacen.getItem(this.prefijo + 'menus')) return;
@@ -808,6 +808,20 @@ export class CmsLocalDataSource extends CmsDataSource {
       const aYs = porSlug.get('atencion-y-servicios-a-la-ciudadania');
       for (const p of paginas) if (aYs && p.parentId === aYs.id && p.slug in orden && p.orden !== orden[p.slug]) Object.assign(p, { orden: orden[p.slug], actualizadoEn: t });
     }
+    // Versión 36: páginas de participación y grupos de interés pasan a la plantilla «secciones»
+    if (version < 36) {
+      const aSecciones = new Set([
+        'estrategia-de-participacion-ciudadana',
+        'planeacion-y-presupuesto-participativo',
+        'consulta-ciudadana',
+        'alianza-de-usuarios',
+        'colaboracion-e-innovacion-abierta',
+        'divulgacion-de-resultados',
+        'informacion-especifica-para-grupos-de-interes',
+        'informacion-para-ninas-ninos-y-adolescentes',
+      ]);
+      for (const p of paginas) if (aSecciones.has(p.slug) && p.plantilla === 'contenido') Object.assign(p, { plantilla: 'secciones', actualizadoEn: t });
+    }
     this.escribir('paginas', paginas);
     this.almacen.setItem(this.prefijo + 'version', String(this.versionSemilla));
   }
@@ -1071,8 +1085,8 @@ const ESTRUCTURA_1519: PaginaSemilla[] = [
   { id: 54, menuId: 1, parentId: 49, titulo: "7.1.5 Tablas de Retención Documental", slug: 'tablas-de-retencion-documental', plantilla: 'documentos', descripcion: "Tablas de Retención Documental (TRD) de la E.S.E. y actos administrativos de aprobación.", orden: 4 },
   { id: 55, menuId: 1, parentId: 49, titulo: "7.1.6 Costos de reproducción de la información pública", slug: 'costos-de-reproduccion-de-la-informacion-publica', plantilla: 'documentos', orden: 5 },
   { id: 56, menuId: 1, parentId: 48, titulo: "7.2 Sección de datos abiertos", slug: 'seccion-de-datos-abiertos', plantilla: 'documentos', descripcion: "Conjuntos de datos abiertos de la E.S.E. en formatos Excel y CSV, y enlace al portal nacional datos.gov.co.", orden: 1 },
-  { id: 57, menuId: 1, parentId: 1, titulo: "8. Información específica para grupos de interés", slug: 'informacion-especifica-para-grupos-de-interes', plantilla: 'contenido', descripcion: "Información dirigida a niñas, niños y adolescentes, mujeres, grupos étnicos y poblaciones de atención diferencial.", orden: 7 },
-  { id: 58, menuId: 1, parentId: 57, titulo: "8.1 Información para niñas, niños y adolescentes", slug: 'informacion-para-ninas-ninos-y-adolescentes', plantilla: 'contenido', descripcion: "Enlaces seguros con información, juegos y orientación para niñas, niños y adolescentes.", orden: 0 },
+  { id: 57, menuId: 1, parentId: 1, titulo: "8. Información específica para grupos de interés", slug: 'informacion-especifica-para-grupos-de-interes', plantilla: 'secciones', descripcion: "Información dirigida a niñas, niños y adolescentes, mujeres, grupos étnicos y poblaciones de atención diferencial.", orden: 7 },
+  { id: 58, menuId: 1, parentId: 57, titulo: "8.1 Información para niñas, niños y adolescentes", slug: 'informacion-para-ninas-ninos-y-adolescentes', plantilla: 'secciones', descripcion: "Enlaces seguros con información, juegos y orientación para niñas, niños y adolescentes.", orden: 0 },
   { id: 59, menuId: 1, parentId: 57, titulo: "8.2 Información para mujeres", slug: 'informacion-para-mujeres', plantilla: 'contenido', orden: 1 },
   { id: 60, menuId: 1, parentId: 57, titulo: "8.3 Otros grupos de interés", slug: 'otros-grupos-de-interes', plantilla: 'contenido', descripcion: "Atención con enfoque diferencial para grupos étnicos, personas con discapacidad, personas adultas mayores y víctimas del conflicto armado.", orden: 2 },
   { id: 108, menuId: 1, parentId: 60, titulo: "Grupos étnicos", slug: 'grupos-etnicos', plantilla: 'secciones', icono: 'govco:globe-americas', descripcion: "Atención integral en salud con enfoque diferencial, intercultural y de respeto por la diversidad étnica y cultural del territorio.", orden: 0 },
@@ -1093,16 +1107,16 @@ const ESTRUCTURA_1519: PaginaSemilla[] = [
   { id: 107, menuId: 1, parentId: 62, titulo: "Glosario", slug: 'glosario', plantilla: 'glosario', descripcion: "Términos jurídicos, administrativos y de salud que se usan en la gestión del hospital, de la A a la Z.", orden: 10 },
   { id: 67, menuId: 1, parentId: null, titulo: "Participa", slug: 'participa', plantilla: 'contenido', descripcion: "Espacios de participación ciudadana en la gestión de la E.S.E. Hospital San José del Guaviare (lineamientos del DAFP).", orden: 3 },
   { id: 68, menuId: 1, parentId: 67, titulo: "Participación para el diagnóstico de necesidades e identificación de problemas", slug: 'participacion-para-el-diagnostico-de-necesidades-e-identificacion-de-problemas', plantilla: 'contenido', descripcion: "Espacio para identificar y analizar las necesidades, expectativas y problemáticas de la comunidad en relación con los servicios de salud.", orden: 0 },
-  { id: 69, menuId: 1, parentId: 67, titulo: "Planeación y presupuesto participativo", slug: 'planeacion-y-presupuesto-participativo', plantilla: 'contenido', descripcion: "La comunidad participa en la definición de prioridades, la asignación de recursos y la formulación de planes y proyectos institucionales.", orden: 1 },
-  { id: 70, menuId: 1, parentId: 67, titulo: "Consulta ciudadana", slug: 'consulta-ciudadana', plantilla: 'contenido', descripcion: "Temas abiertos a consulta para que la comunidad aporte a las decisiones y políticas institucionales.", orden: 2 },
-  { id: 71, menuId: 1, parentId: 67, titulo: "Colaboración e innovación abierta", slug: 'colaboracion-e-innovacion-abierta', plantilla: 'contenido', descripcion: "Co-creación de soluciones innovadoras a problemáticas de salud entre la institución, la comunidad y otros actores.", orden: 3 },
+  { id: 69, menuId: 1, parentId: 67, titulo: "Planeación y presupuesto participativo", slug: 'planeacion-y-presupuesto-participativo', plantilla: 'secciones', descripcion: "La comunidad participa en la definición de prioridades, la asignación de recursos y la formulación de planes y proyectos institucionales.", orden: 1 },
+  { id: 70, menuId: 1, parentId: 67, titulo: "Consulta ciudadana", slug: 'consulta-ciudadana', plantilla: 'secciones', descripcion: "Temas abiertos a consulta para que la comunidad aporte a las decisiones y políticas institucionales.", orden: 2 },
+  { id: 71, menuId: 1, parentId: 67, titulo: "Colaboración e innovación abierta", slug: 'colaboracion-e-innovacion-abierta', plantilla: 'secciones', descripcion: "Co-creación de soluciones innovadoras a problemáticas de salud entre la institución, la comunidad y otros actores.", orden: 3 },
   { id: 72, menuId: 1, parentId: 67, titulo: "Rendición de cuentas", slug: 'rendicion-de-cuentas', plantilla: 'documentos', descripcion: "Informes, audiencias públicas y mecanismos con los que la E.S.E. informa sobre su gestión, resultados y uso de recursos.", orden: 4 },
   { id: 73, menuId: 1, parentId: 67, titulo: "Control social", slug: 'control-social', plantilla: 'contenido', descripcion: "Espacios para que la comunidad conozca, vigile y evalúe la gestión institucional y el uso de los recursos públicos (Ley 850 de 2003 y Ley 1757 de 2015).", orden: 5 },
-  { id: 100, menuId: 1, parentId: 67, titulo: "Estrategia de participación ciudadana", slug: 'estrategia-de-participacion-ciudadana', plantilla: 'contenido', descripcion: "Cómo la E.S.E. articula a usuarios, familias, líderes y organizaciones en la planeación, el seguimiento y el control social.", orden: 6 },
+  { id: 100, menuId: 1, parentId: 67, titulo: "Estrategia de participación ciudadana", slug: 'estrategia-de-participacion-ciudadana', plantilla: 'secciones', descripcion: "Cómo la E.S.E. articula a usuarios, familias, líderes y organizaciones en la planeación, el seguimiento y el control social.", orden: 6 },
   { id: 101, menuId: 1, parentId: 67, titulo: "Plan Anticorrupción y de Atención al Ciudadano (PAAC)", slug: 'plan-anticorrupcion-y-de-atencion-al-ciudadano', plantilla: 'contenido', descripcion: "Acciones para prevenir la corrupción y mejorar la atención y el servicio a la ciudadanía.", orden: 7 },
   { id: 102, menuId: 1, parentId: 67, titulo: "Calendario de eventos", slug: 'calendario-de-participacion', plantilla: 'enlace', urlExterna: '/transparencia/informacion-de-la-entidad/calendario-de-actividades-y-eventos', orden: 8 },
   { id: 103, menuId: 1, parentId: 67, titulo: "Normativas institucionales", slug: 'normativas-institucionales', plantilla: 'enlace', urlExterna: '/transparencia/normativa/normativa-de-la-entidad', orden: 9 },
-  { id: 104, menuId: 1, parentId: 67, titulo: "Divulgación de resultados", slug: 'divulgacion-de-resultados', plantilla: 'contenido', descripcion: "Avances y resultados de la gestión en el marco de la participación ciudadana.", orden: 10 },
+  { id: 104, menuId: 1, parentId: 67, titulo: "Divulgación de resultados", slug: 'divulgacion-de-resultados', plantilla: 'secciones', descripcion: "Avances y resultados de la gestión en el marco de la participación ciudadana.", orden: 10 },
   { id: 112, menuId: 1, parentId: 67, titulo: "Consultas ciudadanas en línea", slug: 'consultas-ciudadanas-en-linea', plantilla: 'enlace', urlExterna: '/participacion', descripcion: "Participe en las consultas abiertas de la E.S.E.: conozca los temas, envíe sus aportes en línea y consulte los resultados.", orden: 11 },
   { id: 74, menuId: 1, parentId: null, titulo: "Nuestro Hospital", slug: 'nuestro-hospital', plantilla: 'contenido', orden: 0 },
   { id: 86, menuId: 1, parentId: 74, titulo: "Misión y visión", slug: 'mision-vision', plantilla: 'enlace', urlExterna: '/transparencia/informacion-de-la-entidad/mision-vision-funciones-y-deberes', orden: 0 },
@@ -1111,7 +1125,7 @@ const ESTRUCTURA_1519: PaginaSemilla[] = [
   { id: 76, menuId: 1, parentId: 74, titulo: "Portafolio de servicios", slug: 'portafolio-de-servicios', plantilla: 'servicios', descripcion: "Conozca los servicios de salud que presta la E.S.E. Hospital San José del Guaviare, hospital de II nivel de complejidad y centro de referencia del departamento.", orden: 3 },
   { id: 77, menuId: 1, parentId: 74, titulo: "Sedes y horarios de atención", slug: 'sedes-y-horarios', plantilla: 'sedes', descripcion: "Dirección, teléfonos, ubicación en el mapa y horarios de atención de la E.S.E. Hospital San José del Guaviare.", orden: 4 },
   { id: 88, menuId: 1, parentId: 74, titulo: "Calendario de eventos", slug: 'calendario-de-eventos', plantilla: 'enlace', urlExterna: '/transparencia/informacion-de-la-entidad/calendario-de-actividades-y-eventos', orden: 5 },
-  { id: 89, menuId: 1, parentId: 74, titulo: "Alianza de usuarios", slug: 'alianza-de-usuarios', plantilla: 'contenido', descripcion: "Asociación de usuarios que representa a la comunidad ante la E.S.E. Hospital San José del Guaviare.", orden: 6 },
+  { id: 89, menuId: 1, parentId: 74, titulo: "Alianza de usuarios", slug: 'alianza-de-usuarios', plantilla: 'secciones', descripcion: "Asociación de usuarios que representa a la comunidad ante la E.S.E. Hospital San José del Guaviare.", orden: 6 },
   { id: 90, menuId: 1, parentId: 74, titulo: "Comité de convivencia laboral", slug: 'comite-de-convivencia-laboral', plantilla: 'documentos', descripcion: "Instancia que promueve un buen ambiente laboral y previene y atiende las situaciones que pueden constituir acoso laboral (Ley 1010 de 2006). Aquí se publican su conformación, comunicados y los documentos de elección de sus integrantes.", orden: 7 },
   { id: 91, menuId: 1, parentId: 74, titulo: "Talento humano", slug: 'talento-humano', plantilla: 'documentos', descripcion: "Manual de funciones, planes, convocatorias, comités, elecciones de representantes, capacitaciones y reglamento interno de trabajo del área de Talento Humano.", orden: 8 },
   { id: 92, menuId: 1, parentId: 74, titulo: "Planes Decreto 612 de 2018", slug: 'planes-decreto-612-de-2018', plantilla: 'documentos', descripcion: "Planes institucionales y estratégicos que la entidad debe publicar según el Decreto 612 de 2018.", orden: 9 },
