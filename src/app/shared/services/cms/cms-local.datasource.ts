@@ -45,6 +45,7 @@ const SEMILLAS_ARCHIVO: [clave: string, ruta: string][] = [
   ['transparencia-ley1712-semilla', 'assets/semillas/transparencia-ley1712.json'],
   ['racionalizacion-tramites-semilla', 'assets/semillas/racionalizacion-tramites.json'],
   ['informacion-mujeres-semilla', 'assets/semillas/informacion-para-mujeres.json'],
+  ['transparencia-secciones-semilla', 'assets/semillas/transparencia-secciones.json'],
 ];
 
 /**
@@ -466,7 +467,7 @@ export class CmsLocalDataSource extends CmsDataSource {
   }
 
   /* ===== Estructura inicial (Resolución 1519 de 2020) ===== */
-  private readonly versionSemilla = 34;
+  private readonly versionSemilla = 35;
 
   private sembrarSiVacio(): void {
     if (this.almacen.getItem(this.prefijo + 'menus')) return;

@@ -1,0 +1,173 @@
+{
+ "origen": "Presentación «secciones» de las páginas de transparencia",
+ "multimedia": [],
+ "paginas": [
+  {
+   "slug": "agenda-regulatoria",
+   "plantillaAnterior": "contenido",
+   "plantilla": "secciones",
+   "descripcion": "__no_cambiar_descripcion__",
+   "siDescripcion": "__no_cambiar_descripcion__"
+  },
+  {
+   "slug": "costos-de-reproduccion-de-la-informacion-publica",
+   "plantillaAnterior": "contenido",
+   "plantilla": "secciones",
+   "descripcion": "__no_cambiar_descripcion__",
+   "siDescripcion": "__no_cambiar_descripcion__"
+  },
+  {
+   "slug": "informacion-para-mujeres",
+   "plantillaAnterior": "contenido",
+   "plantilla": "secciones",
+   "descripcion": "__no_cambiar_descripcion__",
+   "siDescripcion": "__no_cambiar_descripcion__"
+  },
+  {
+   "slug": "informacion-sobre-decisiones-que-pueden-afectar-al-publico",
+   "plantillaAnterior": "contenido",
+   "plantilla": "secciones",
+   "descripcion": "__no_cambiar_descripcion__",
+   "siDescripcion": "__no_cambiar_descripcion__"
+  },
+  {
+   "slug": "leyes",
+   "plantillaAnterior": "contenido",
+   "plantilla": "secciones",
+   "descripcion": "__no_cambiar_descripcion__",
+   "siDescripcion": "__no_cambiar_descripcion__"
+  },
+  {
+   "slug": "procedimientos-que-se-siguen-para-tomar-decisiones-en-las-diferentes-areas",
+   "plantillaAnterior": "contenido",
+   "plantilla": "secciones",
+   "descripcion": "__no_cambiar_descripcion__",
+   "siDescripcion": "__no_cambiar_descripcion__"
+  },
+  {
+   "slug": "proyectos-de-normas-para-comentarios",
+   "plantillaAnterior": "contenido",
+   "plantilla": "secciones",
+   "descripcion": "__no_cambiar_descripcion__",
+   "siDescripcion": "__no_cambiar_descripcion__"
+  },
+  {
+   "slug": "publicacion-de-hojas-de-vida",
+   "plantillaAnterior": "contenido",
+   "plantilla": "secciones",
+   "descripcion": "__no_cambiar_descripcion__",
+   "siDescripcion": "__no_cambiar_descripcion__"
+  },
+  {
+   "slug": "publicacion-de-la-ejecucion-de-los-contratos",
+   "plantillaAnterior": "contenido",
+   "plantilla": "secciones",
+   "descripcion": "__no_cambiar_descripcion__",
+   "siDescripcion": "__no_cambiar_descripcion__"
+  },
+  {
+   "slug": "racionalizacion-de-tramites",
+   "plantillaAnterior": "contenido",
+   "plantilla": "secciones",
+   "descripcion": "__no_cambiar_descripcion__",
+   "siDescripcion": "__no_cambiar_descripcion__"
+  },
+  {
+   "slug": "reporte-de-informacion-especifica",
+   "plantillaAnterior": "contenido",
+   "plantilla": "secciones",
+   "descripcion": "__no_cambiar_descripcion__",
+   "siDescripcion": "__no_cambiar_descripcion__"
+  }
+ ],
+ "actualizar": [
+  {
+   "paginaSlug": "agenda-regulatoria",
+   "slug": "agenda-regulatoria-info",
+   "contenido": "<h2>Agenda regulatoria</h2><p>La agenda regulatoria es el instrumento donde las entidades que expiden normas de carácter general publican los proyectos de regulación que prevén elaborar durante el año, conforme al Decreto 1081 de 2015.</p><h3>Aplicación en la E.S.E.</h3><p><em>Alcance de este deber para el hospital.</em></p><p>La E.S.E. Hospital San José del Guaviare, por su naturaleza de Empresa Social del Estado prestadora de servicios de salud, no expide de manera ordinaria normas de carácter general con efectos regulatorios externos a la ciudadanía. Por tanto, para la vigencia en curso no se cuenta con una agenda regulatoria de proyectos normativos de carácter general.</p><h3>¿Quiere consultar los proyectos de normas?</h3><p>Si la entidad proyecta expedir actos administrativos de carácter general, se publicarán para comentarios de la ciudadanía.</p><p><a href=\"/proyectos-de-normas-para-comentarios\">Ver proyectos de normas para comentarios</a></p>",
+   "siIgualA": [
+    "<p>De conformidad con el <strong>Decreto 1081 de 2015</strong> (modificado por el Decreto 270 de 2017), las entidades y organismos de la Rama Ejecutiva que expiden actos administrativos de carácter general deben publicar una agenda regulatoria con los proyectos de regulación que prevén elaborar durante el año.</p><h2>Aplicación en la E.S.E.</h2><p>La E.S.E. Hospital San José del Guaviare, por su naturaleza de Empresa Social del Estado prestadora de servicios de salud, no expide de manera ordinaria normas de carácter general con efectos regulatorios externos a la ciudadanía. Por tanto, para la vigencia en curso no se cuenta con una agenda regulatoria de proyectos normativos de carácter general.</p><p>En caso de que la entidad proyecte expedir actos administrativos de carácter general sujetos a este deber, se publicarán en esta sección y en <a href=\"/proyectos-de-normas-para-comentarios\">Proyectos de normas para comentarios</a>.</p>"
+   ]
+  },
+  {
+   "paginaSlug": "costos-de-reproduccion-de-la-informacion-publica",
+   "slug": "costos-reproduccion-info",
+   "contenido": "<h2>Costos de reproducción de la información pública</h2><p>De acuerdo con el artículo 26 de la Ley 1712 de 2012 y el Decreto 1081 de 2015, el acceso a la información pública es gratuito y no puede cobrarse valor alguno por permitir el acceso ni por su entrega a través de medios electrónicos.</p><h3>Reproducción en físico</h3><p><em>Cuándo aplica un costo y cómo se calcula.</em></p><p>Únicamente cuando la persona solicite la información en medio físico o requiera su reproducción (fotocopias, impresiones o medios magnéticos), la entidad podrá cobrar el costo de reproducción, que no superará el valor de los insumos y del tiempo requerido, sin generar lucro. Los valores se fijan mediante acto administrativo motivado de la E.S.E.; la entrega por medios digitales seguirá siendo gratuita.</p><h3>¿Necesita solicitar información?</h3><p>Presente su solicitud de información a través del canal de PQRSFD.</p><p><a href=\"/pqrsf\">Ir a PQRSFD</a></p>",
+   "siIgualA": [
+    "<p>De acuerdo con el <strong>artículo 26 de la Ley 1712 de 2012</strong> y el <strong>Decreto 1081 de 2015</strong>, el acceso a la información pública es <strong>gratuito</strong> y no puede cobrarse valor alguno por permitir el acceso ni por su entrega a través de medios electrónicos.</p><h2>Reproducción en físico</h2><p>Únicamente cuando la persona solicite la información en medio físico o requiera su reproducción (fotocopias, impresiones o medios magnéticos), la entidad podrá cobrar el <strong>costo de reproducción</strong>, el cual no superará el valor de los insumos y del tiempo requerido, sin generar lucro, conforme lo establece la ley.</p><p>Los valores aplicables se fijan mediante acto administrativo motivado de la E.S.E. Cuando este se expida o actualice, se publicará en esta sección. La entrega por correo electrónico o por medios digitales seguirá siendo gratuita.</p><p>Las solicitudes de información pueden presentarse a través del canal de <a href=\"/pqrsf\">PQRSFD</a>.</p>"
+   ]
+  },
+  {
+   "paginaSlug": "informacion-sobre-decisiones-que-pueden-afectar-al-publico",
+   "slug": "decisiones-afectan-publico-info",
+   "contenido": "<h2>Información sobre decisiones que pueden afectar al público</h2><p>La E.S.E. Hospital San José del Guaviare informa de manera oportuna a la ciudadanía las decisiones de carácter general que puedan afectar al público, como cambios en la prestación de servicios, horarios, sedes, tarifas o programas.</p><h3>Canales de información y participación</h3><ul><li><a href=\"/noticias\">Noticias y avisos del portal institucional</a></li><li><a href=\"/normativa\">Normativa: acuerdos, resoluciones y circulares</a></li><li><a href=\"/participacion\">Participación ciudadana: consultas y convocatorias</a></li></ul><h3>¿Necesita presentar una petición o queja?</h3><p>Radique peticiones, quejas, reclamos, sugerencias, felicitaciones o denuncias ante la E.S.E.</p><p><a href=\"/pqrsf\">Ir a PQRSFD</a></p>",
+   "siIgualA": [
+    "<p>La E.S.E. Hospital San José del Guaviare informa de manera oportuna a la ciudadanía las decisiones de carácter general que puedan afectar al público —cambios en la prestación de servicios, horarios, sedes, tarifas o programas— a través de los siguientes canales:</p><ul><li><a href=\"/noticias\">Noticias y avisos</a> del portal institucional.</li><li><a href=\"/normativa\">Normativa</a>: acuerdos, resoluciones y circulares de la entidad.</li><li><a href=\"/participacion\">Participación ciudadana</a>: consultas y convocatorias para aportar a las decisiones.</li><li>Rendición de cuentas y audiencias públicas de la entidad.</li></ul><p>Para presentar peticiones, quejas, reclamos, sugerencias, felicitaciones o denuncias, la ciudadanía dispone del canal de <a href=\"/pqrsf\">PQRSFD</a>.</p>"
+   ]
+  },
+  {
+   "paginaSlug": "publicacion-de-la-ejecucion-de-los-contratos",
+   "slug": "ejecucion-contratos-info",
+   "contenido": "<h2>Publicación de la ejecución de los contratos</h2><p>La E.S.E. Hospital San José del Guaviare publica su actividad contractual, desde la planeación hasta la ejecución y liquidación, en el Sistema Electrónico de Contratación Pública (SECOP), conforme a la Ley 1150 de 2007, la Ley 1712 de 2012 y las circulares de Colombia Compra Eficiente.</p><h3>Consulta de la ejecución contractual</h3><ul><li><a href=\"https://www.colombiacompra.gov.co/secop/secop-ii\" target=\"_blank\" rel=\"noopener\">SECOP II — contratación en línea</a></li><li><a href=\"https://consultaprocesos.colombiacompra.gov.co\" target=\"_blank\" rel=\"noopener\">Consulta pública de procesos de contratación</a></li><li><a href=\"https://www.contratos.gov.co\" target=\"_blank\" rel=\"noopener\">SECOP I — procesos históricos</a></li></ul><h3>¿Busca el plan anual de adquisiciones?</h3><p>El plan anual de adquisiciones y demás información del proceso contractual están en la sección Contratación.</p><p><a href=\"/contratacion\">Ir a Contratación</a></p>",
+   "siIgualA": [
+    "<p>La E.S.E. Hospital San José del Guaviare publica su actividad contractual —desde la planeación hasta la ejecución y liquidación— en el <strong>Sistema Electrónico de Contratación Pública (SECOP)</strong>, conforme a la Ley 1150 de 2007, la Ley 1712 de 2012 y las circulares de Colombia Compra Eficiente sobre el uso obligatorio del SECOP II.</p><h2>Consulta de la ejecución contractual</h2><ul><li><a href=\"https://www.colombiacompra.gov.co/secop/secop-ii\" target=\"_blank\" rel=\"noopener\">SECOP II — Colombia Compra Eficiente</a> (contratación transaccional en línea).</li><li><a href=\"https://consultaprocesos.colombiacompra.gov.co\" target=\"_blank\" rel=\"noopener\">Consulta pública de procesos de contratación</a>.</li><li><a href=\"https://www.contratos.gov.co\" target=\"_blank\" rel=\"noopener\">SECOP I — contratos.gov.co</a> (procesos históricos).</li></ul><p>El plan anual de adquisiciones y demás información del proceso contractual se encuentran en la sección <a href=\"/contratacion\">Contratación</a> de este portal.</p>"
+   ]
+  },
+  {
+   "paginaSlug": "informacion-para-mujeres",
+   "slug": "informacion-para-mujeres-salud-y-derechos",
+   "contenido": "<h2>Salud y derechos de las mujeres</h2><p>La E.S.E. Hospital San José del Guaviare reconoce a las mujeres como sujetos de especial protección y pone a su disposición servicios de salud y canales de orientación para el cuidado de su bienestar y la garantía de sus derechos.</p><h3>Salud de la mujer</h3><p><em>Servicios para el cuidado de la mujer en todas las etapas de su vida.</em></p><p>A través de su portafolio, la E.S.E. presta servicios orientados a la salud de la mujer:</p><ul><li><strong>Control prenatal:</strong> atención materno-perinatal y seguimiento del embarazo.</li><li><strong>Planificación familiar:</strong> asesoría y métodos anticonceptivos.</li><li><strong>Tamizaje de cáncer:</strong> citología, prueba de VPH y examen de mama.</li><li><strong>Salud sexual y reproductiva:</strong> atención con enfoque de derechos.</li><li><strong>Atención del parto:</strong> parto, puerperio y cuidado del recién nacido.</li></ul><h3>Atención a víctimas de violencia</h3><p><em>Atención urgente, gratuita y sin denuncia previa, las 24 horas.</em></p><p>La atención en salud a víctimas de violencia sexual se presta de forma prioritaria en el servicio de urgencias, conforme a la Resolución 459 de 2012 del Ministerio de Salud y la Ley 1257 de 2008.</p><ul><li><strong>Línea 155:</strong> orientación a mujeres víctimas de violencia, gratuita y nacional.</li><li><strong>Línea 122:</strong> Fiscalía General de la Nación, para denuncias.</li><li><strong>Línea 123:</strong> emergencias.</li></ul><h3>Enlaces oficiales</h3><ul><li><a href=\"https://www.minigualdad.gov.co/\" target=\"_blank\" rel=\"noopener\">Ministerio de Igualdad y Equidad</a></li><li><a href=\"https://www.minsalud.gov.co/salud/publica/ssr/Paginas/Salud-sexual-y-reproductiva.aspx\" target=\"_blank\" rel=\"noopener\">Ministerio de Salud — Salud sexual y reproductiva</a></li></ul><h3>¿Necesita atención o quiere radicar una PQRSFD?</h3><p>Solicite su cita médica o presente sus peticiones, quejas, reclamos, sugerencias y denuncias ante la E.S.E.</p><p><a href=\"/pqrsf\">Ir a PQRSFD</a></p>",
+   "siIgualA": [
+    "<p>La E.S.E. Hospital San José del Guaviare reconoce a las mujeres como sujetos de especial protección y pone a su disposición servicios de salud y canales de orientación para el cuidado de su bienestar y la garantía de sus derechos.</p><h2>Salud de la mujer</h2><p>A través de su portafolio, la E.S.E. presta servicios orientados a la salud de la mujer en todas las etapas de su vida:</p><ul><li>Control prenatal y atención materno-perinatal.</li><li>Planificación familiar y asesoría en métodos anticonceptivos.</li><li>Tamizaje de cáncer de cuello uterino (citología y prueba de VPH) y de mama.</li><li>Salud sexual y reproductiva con enfoque de derechos.</li><li>Atención del parto, puerperio y del recién nacido.</li></ul><p>Consulte el <a href=\"/portafolio-de-servicios\">portafolio de servicios</a> y <a href=\"/atencion-y-servicios-a-la-ciudadania/canales-de-atencion\">solicite su cita</a>.</p><h2>Atención a mujeres víctimas de violencia</h2><p>La atención en salud a víctimas de violencia sexual es urgente y prioritaria: se presta las 24 horas en el servicio de urgencias, es gratuita y <strong>no requiere denuncia previa</strong>, conforme a la <strong>Resolución 459 de 2012</strong> del Ministerio de Salud (Protocolo de atención integral en salud para víctimas de violencia sexual) y la <strong>Ley 1257 de 2008</strong>.</p><p>Líneas nacionales de orientación y denuncia:</p><ul><li><strong>Línea 155</strong> — orientación a mujeres víctimas de violencia (gratuita y nacional).</li><li><strong>Línea 122</strong> — Fiscalía General de la Nación (denuncias).</li><li><strong>Línea 123</strong> — emergencias.</li></ul><h2>Derechos y enlaces oficiales</h2><ul><li><a href=\"https://www.minigualdad.gov.co/\" target=\"_blank\" rel=\"noopener\">Ministerio de Igualdad y Equidad</a></li><li><a href=\"https://www.minsalud.gov.co/salud/publica/ssr/Paginas/Salud-sexual-y-reproductiva.aspx\" target=\"_blank\" rel=\"noopener\">Ministerio de Salud — Salud sexual y reproductiva</a></li></ul><p>Para presentar peticiones, quejas, reclamos o denuncias ante la E.S.E., utilice el canal de <a href=\"/pqrsf\">PQRSFD</a>.</p>"
+   ]
+  },
+  {
+   "paginaSlug": "leyes",
+   "slug": "leyes-normatividad-aplicable",
+   "contenido": "<h2>Leyes y normatividad aplicable</h2><p>La E.S.E. Hospital San José del Guaviare, como Empresa Social del Estado del orden departamental, se rige por la Constitución Política y por la normatividad nacional vigente en materia de salud, transparencia y gestión pública.</p><h3>Normas principales</h3><p><em>Marco legal que rige la gestión de la E.S.E.</em></p><ul><li><strong>Ley 100 de 1993:</strong> Sistema General de Seguridad Social en Salud.</li><li><strong>Ley 1438 de 2011:</strong> fortalecimiento del Sistema General de Seguridad Social en Salud.</li><li><strong>Decreto-Ley 1298 de 1994:</strong> Estatuto Orgánico del Sistema de Salud.</li><li><strong>Ley 1712 de 2012:</strong> transparencia y acceso a la información pública.</li></ul><h3>Consulta de la normatividad</h3><ul><li><a href=\"https://www.suin-juriscol.gov.co/\" target=\"_blank\" rel=\"noopener\">SUIN-Juriscol — Sistema Único de Información Normativa</a></li><li><a href=\"https://www.funcionpublica.gov.co/eva/gestornormativo/\" target=\"_blank\" rel=\"noopener\">Gestor Normativo — Función Pública</a></li></ul><h3>¿Busca la normatividad propia de la entidad?</h3><p>Las resoluciones, acuerdos de junta directiva y demás actos administrativos de la E.S.E. están en la sección Normativa.</p><p><a href=\"/normativa\">Ir a Normativa</a></p>",
+   "siIgualA": [
+    "<p>La E.S.E. Hospital San José del Guaviare, como Empresa Social del Estado del orden departamental, se rige por la Constitución Política de Colombia y por la normatividad nacional vigente, en especial la <strong>Ley 100 de 1993</strong> (Sistema General de Seguridad Social en Salud), la <strong>Ley 1438 de 2011</strong>, el <strong>Decreto-Ley 1298 de 1994</strong>, la <strong>Ley 1712 de 2012</strong> (transparencia y acceso a la información pública) y sus decretos reglamentarios.</p><h2>Consulta de la normatividad</h2><p>Las leyes, decretos, resoluciones y demás normas de carácter nacional pueden consultarse de manera oficial y actualizada en el <strong>Sistema Único de Información Normativa — SUIN-Juriscol</strong> del Ministerio de Justicia y del Derecho:</p><ul><li><a href=\"https://www.suin-juriscol.gov.co/\" target=\"_blank\" rel=\"noopener\">SUIN-Juriscol — Sistema Único de Información Normativa</a></li><li><a href=\"https://www.funcionpublica.gov.co/eva/gestornormativo/\" target=\"_blank\" rel=\"noopener\">Gestor Normativo — Función Pública</a></li></ul><p>La normatividad propia de la entidad (resoluciones, acuerdos de junta directiva y demás actos administrativos) se encuentra en la sección <a href=\"/normativa\">Normativa</a> de este portal.</p>"
+   ]
+  },
+  {
+   "paginaSlug": "procedimientos-que-se-siguen-para-tomar-decisiones-en-las-diferentes-areas",
+   "slug": "procedimientos-toma-decisiones-info",
+   "contenido": "<h2>Procedimientos para la toma de decisiones</h2><p>Las decisiones de la E.S.E. Hospital San José del Guaviare se adoptan con sujeción al Sistema Integrado de Gestión y al Modelo Integrado de Planeación y Gestión (MIPG), a través de sus procesos estratégicos, misionales, de apoyo y de evaluación.</p><h3>Dónde consultar los procedimientos</h3><ul><li><a href=\"/mapas-y-cartas-descriptivas-de-los-procesos\">Mapa de procesos de la entidad</a></li><li><a href=\"/estructura-organica-organigrama\">Estructura orgánica y funciones</a></li><li><a href=\"/instrumentos-de-gestion-de-la-informacion\">Instrumentos de gestión de la información</a></li></ul><h3>¿Busca los actos administrativos?</h3><p>La junta directiva y la gerencia adoptan sus decisiones mediante acuerdos y resoluciones publicados en la sección Normativa.</p><p><a href=\"/normativa\">Ir a Normativa</a></p>",
+   "siIgualA": [
+    "<p>Las decisiones de la E.S.E. Hospital San José del Guaviare se adoptan con sujeción al Sistema Integrado de Gestión y al Modelo Integrado de Planeación y Gestión (MIPG), a través de sus procesos estratégicos, misionales, de apoyo y de evaluación.</p><h2>Dónde consultar los procedimientos</h2><ul><li><a href=\"/mapas-y-cartas-descriptivas-de-los-procesos\">Mapa de procesos</a> de la entidad, con el objetivo y los documentos de cada proceso.</li><li><a href=\"/estructura-organica-organigrama\">Estructura orgánica</a> y funciones de las dependencias.</li><li><a href=\"/instrumentos-de-gestion-de-la-informacion\">Instrumentos de gestión de la información</a>, incluidas las Tablas de Retención Documental.</li></ul><p>La junta directiva y la gerencia adoptan sus decisiones mediante acuerdos y resoluciones, publicados en la sección <a href=\"/normativa\">Normativa</a>.</p>"
+   ]
+  },
+  {
+   "paginaSlug": "proyectos-de-normas-para-comentarios",
+   "slug": "proyectos-de-normas-info",
+   "contenido": "<h2>Proyectos de normas para comentarios</h2><p>En cumplimiento del numeral 8 del artículo 8 de la Ley 1437 de 2011 (CPACA) y de la Ley 1712 de 2012, los proyectos de actos administrativos de carácter general que elabore la E.S.E. se ponen a disposición de la ciudadanía para presentar opiniones, sugerencias o propuestas antes de su expedición.</p><h3>Proyectos vigentes</h3><p><em>Estado actual de los proyectos normativos.</em></p><p>Actualmente la E.S.E. Hospital San José del Guaviare no tiene proyectos de normas de carácter general publicados para comentarios. Cuando existan, se publicarán aquí indicando el plazo y el canal para remitir las observaciones.</p><h3>¿Quiere participar de las decisiones de la entidad?</h3><p>La ciudadanía puede aportar a las decisiones de la E.S.E. a través del módulo de participación ciudadana.</p><p><a href=\"/participacion\">Ir a Participación ciudadana</a></p>",
+   "siIgualA": [
+    "<p>En cumplimiento del <strong>numeral 8 del artículo 8 de la Ley 1437 de 2011</strong> (CPACA) y de la <strong>Ley 1712 de 2012</strong>, los proyectos de actos administrativos de carácter general que elabore la E.S.E. se ponen a disposición de la ciudadanía para que presente opiniones, sugerencias o propuestas alternativas antes de su expedición.</p><h2>Proyectos vigentes</h2><p>Actualmente la E.S.E. Hospital San José del Guaviare no tiene proyectos de normas de carácter general publicados para comentarios. Cuando existan, se publicarán en esta sección indicando el plazo y el canal para remitir las observaciones.</p><p>La ciudadanía también puede participar de las decisiones de la entidad a través del módulo de <a href=\"/participacion\">Participación ciudadana</a>.</p>"
+   ]
+  },
+  {
+   "paginaSlug": "publicacion-de-hojas-de-vida",
+   "slug": "publicacion-hojas-de-vida-info",
+   "contenido": "<h2>Publicación de hojas de vida</h2><p>En cumplimiento de la Ley 190 de 1995, la Ley 909 de 2004 y el Decreto 1083 de 2015, las hojas de vida de los servidores públicos, directivos y contratistas de la E.S.E. se registran y publican en el SIGEP II, administrado por el Departamento Administrativo de la Función Pública.</p><h3>Consulta ciudadana</h3><ul><li><a href=\"https://www.funcionpublica.gov.co/web/sigep2\" target=\"_blank\" rel=\"noopener\">SIGEP II — Función Pública</a></li></ul><h3>¿Busca la planta de personal?</h3><p>La información sobre la planta de personal, el directorio de servidores y la escala salarial está en la sección de estructura orgánica.</p><p><a href=\"/estructura-organica-organigrama\">Ir a Estructura orgánica</a></p>",
+   "siIgualA": [
+    "<p>En cumplimiento de la <strong>Ley 190 de 1995</strong>, la <strong>Ley 909 de 2004</strong> y el <strong>Decreto 1083 de 2015</strong>, las hojas de vida de los servidores públicos, directivos y contratistas de la E.S.E. Hospital San José del Guaviare se registran y publican en el <strong>Sistema de Información y Gestión del Empleo Público — SIGEP II</strong>, administrado por el Departamento Administrativo de la Función Pública.</p><h2>Consulta ciudadana</h2><p>Las hojas de vida pueden consultarse de forma pública en:</p><ul><li><a href=\"https://www.funcionpublica.gov.co/web/sigep2\" target=\"_blank\" rel=\"noopener\">SIGEP II — Función Pública</a></li></ul><p>La información sobre la planta de personal, el directorio de servidores y la escala salarial se encuentra además en la sección <a href=\"/estructura-organica-organigrama\">Estructura orgánica</a>.</p>"
+   ]
+  },
+  {
+   "paginaSlug": "racionalizacion-de-tramites",
+   "slug": "racionalizacion-de-tramites-marco",
+   "contenido": "<h2>Estrategia de racionalización de trámites</h2><p>La racionalización de trámites es el conjunto de acciones que la E.S.E. Hospital San José del Guaviare adelanta para simplificar, estandarizar, optimizar o automatizar sus trámites, en el marco de la política de Racionalización de Trámites del Modelo Integrado de Planeación y Gestión (MIPG).</p><h3>Marco normativo</h3><p><em>Normas que rigen la racionalización de trámites.</em></p><ul><li><strong>Ley 962 de 2005:</strong> racionalización de trámites y procedimientos administrativos.</li><li><strong>Decreto Ley 019 de 2012:</strong> supresión y reforma de trámites (antitrámites).</li><li><strong>Decreto Ley 2106 de 2019:</strong> simplificación y digitalización de trámites.</li><li><strong>Ley 2052 de 2020:</strong> racionalización, interoperabilidad y uso de medios digitales.</li></ul><h3>Trámites inscritos en el SUIT</h3><ul><li><a href=\"https://www.funcionpublica.gov.co/web/suit\" target=\"_blank\" rel=\"noopener\">SUIT — Sistema Único de Información de Trámites</a></li><li><a href=\"https://www.gov.co/\" target=\"_blank\" rel=\"noopener\">GOV.CO — Portal Único del Estado</a></li><li><a href=\"/atencion-y-servicios-a-la-ciudadania/tramites-y-otros-procedimientos\">Trámites y otros procedimientos de la E.S.E.</a></li></ul><h3>Estrategia de la vigencia</h3><p><em>Parte del Plan Anticorrupción y de Atención al Ciudadano.</em></p><p>Cada vigencia la E.S.E. formula su estrategia de racionalización de trámites. Aquí se publicará la estrategia vigente con los trámites a racionalizar, el tipo de racionalización (normativa, administrativa o tecnológica), las acciones, los responsables, las fechas y el beneficio para la ciudadanía.</p><h3>Avances del hospital</h3><p><em>Trámites y servicios que ya puede realizar en línea.</em></p><ul><li><a href=\"/atencion-y-servicios-a-la-ciudadania/canales-de-atencion\">Citas y copia de historia clínica en línea</a></li><li><a href=\"/pqrsf\">Radicación y seguimiento de PQRSFD</a></li><li><a href=\"/participacion\">Participación ciudadana y consulta por radicado</a></li></ul>",
+   "siIgualA": [
+    "<p>La racionalización de trámites es el conjunto de acciones que la E.S.E. Hospital San José del Guaviare adelanta para simplificar, estandarizar, optimizar o automatizar sus trámites, con el fin de facilitar el acceso de la ciudadanía a los servicios y reducir costos, tiempos y pasos. Hace parte de la política de <strong>Racionalización de Trámites</strong> del Modelo Integrado de Planeación y Gestión (MIPG).</p><h2>Marco normativo</h2><ul><li><strong>Ley 962 de 2005</strong> y <strong>Decreto Ley 019 de 2012</strong> — racionalización y supresión de trámites (antitrámites).</li><li><strong>Decreto Ley 2106 de 2019</strong> — simplificación y digitalización de trámites.</li><li><strong>Ley 2052 de 2020</strong> — racionalización, interoperabilidad y uso de medios digitales.</li><li><strong>Decreto 1081 de 2015</strong> — componente de racionalización dentro del Plan Anticorrupción y de Atención al Ciudadano (PAAC).</li></ul><h2>Trámites inscritos en el SUIT</h2><p>Los trámites y otros procedimientos administrativos (OPA) de la entidad se registran en el <strong>Sistema Único de Información de Trámites — SUIT</strong>, administrado por el Departamento Administrativo de la Función Pública, y se ofrecen a la ciudadanía a través del portal <strong>GOV.CO</strong>:</p><ul><li><a href=\"https://www.funcionpublica.gov.co/web/suit\" target=\"_blank\" rel=\"noopener\">SUIT — Sistema Único de Información de Trámites</a></li><li><a href=\"https://www.gov.co/\" target=\"_blank\" rel=\"noopener\">GOV.CO — Portal Único del Estado colombiano</a></li><li><a href=\"/atencion-y-servicios-a-la-ciudadania/tramites-y-otros-procedimientos\">Trámites y otros procedimientos</a> de la E.S.E. publicados en este portal.</li></ul><h2>Estrategia de racionalización de la vigencia</h2><p>Cada vigencia la E.S.E. formula su estrategia de racionalización de trámites, que forma parte del <strong>componente de racionalización de trámites del Plan Anticorrupción y de Atención al Ciudadano</strong>. En esta sección se publicará la estrategia vigente con: los trámites a racionalizar, el tipo de racionalización (normativa, administrativa o tecnológica), las acciones previstas, los responsables, las fechas y el beneficio para la ciudadanía, junto con los informes de seguimiento registrados en el SUIT.</p><h2>Avances del hospital</h2><p>La E.S.E. ha avanzado en la racionalización tecnológica de varios trámites y servicios, que hoy pueden realizarse en línea desde este portal:</p><ul><li><a href=\"/atencion-y-servicios-a-la-ciudadania/canales-de-atencion\">Solicitud de citas y copia de historia clínica en línea</a>.</li><li><a href=\"/pqrsf\">Radicación y seguimiento de PQRSFD en línea</a>.</li><li><a href=\"/participacion\">Participación ciudadana</a> y consulta de aportes por radicado.</li></ul>"
+   ]
+  },
+  {
+   "paginaSlug": "reporte-de-informacion-especifica",
+   "slug": "reporte-informacion-especifica-info",
+   "contenido": "<h2>Obligación de reporte de información específica</h2><p>Como Empresa Social del Estado del sector salud, la E.S.E. Hospital San José del Guaviare reporta periódicamente información específica a los organismos de inspección, vigilancia y control, a través de los sistemas oficiales del Estado.</p><h3>Sistemas de reporte</h3><ul><li><a href=\"https://www.minsalud.gov.co/\" target=\"_blank\" rel=\"noopener\">Ministerio de Salud — Decreto 2193 (SIHO) y SISPRO</a></li><li><a href=\"https://www.supersalud.gov.co/\" target=\"_blank\" rel=\"noopener\">Superintendencia Nacional de Salud — circular única</a></li><li><a href=\"https://www.adres.gov.co/\" target=\"_blank\" rel=\"noopener\">ADRES — recursos del aseguramiento</a></li><li><a href=\"https://www.chip.gov.co/\" target=\"_blank\" rel=\"noopener\">CHIP — Contaduría General de la Nación</a></li><li><a href=\"https://www.contraloria.gov.co/\" target=\"_blank\" rel=\"noopener\">Contraloría General de la República — SIRECI</a></li></ul><h3>¿Busca los informes de gestión?</h3><p>Los informes de gestión, financieros y presupuestales están en las secciones de Presupuesto y Planeación.</p><p><a href=\"/presupuesto\">Ir a Presupuesto</a></p>",
+   "siIgualA": [
+    "<p>Como Empresa Social del Estado del sector salud, la E.S.E. Hospital San José del Guaviare está obligada a reportar periódicamente información específica a los organismos de inspección, vigilancia y control, a través de los sistemas oficiales del Estado:</p><ul><li><a href=\"https://www.minsalud.gov.co/\" target=\"_blank\" rel=\"noopener\">Ministerio de Salud y Protección Social</a> — Decreto 2193 de 2004 (SIHO) y registros del SISPRO.</li><li><a href=\"https://www.supersalud.gov.co/\" target=\"_blank\" rel=\"noopener\">Superintendencia Nacional de Salud</a> — reportes de la circular única (SNS).</li><li><a href=\"https://www.adres.gov.co/\" target=\"_blank\" rel=\"noopener\">ADRES</a> — información de recursos del aseguramiento en salud.</li><li><a href=\"https://www.chip.gov.co/\" target=\"_blank\" rel=\"noopener\">CHIP — Contaduría General de la Nación</a> — información financiera y presupuestal.</li><li><a href=\"https://www.contraloria.gov.co/\" target=\"_blank\" rel=\"noopener\">Contraloría General de la República</a> — SIRECI.</li></ul><p>Los informes de gestión, financieros y presupuestales de la entidad se encuentran también en las secciones <a href=\"/presupuesto\">Presupuesto</a> y <a href=\"/planeacion\">Planeación</a>.</p>"
+   ]
+  }
+ ]
+}
