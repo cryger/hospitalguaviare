@@ -1,0 +1,20 @@
+{
+ "origen": "Cumplimiento MIPG / FURAG — Racionalización de trámites (Ley 2052 de 2020)",
+ "multimedia": [],
+ "entradas": [
+  {
+   "paginaSlug": "racionalizacion-de-tramites",
+   "slug": "racionalizacion-de-tramites-marco",
+   "titulo": "Estrategia de racionalización de trámites",
+   "resumen": "Marco normativo, trámites inscritos en el SUIT y estrategia de racionalización de la E.S.E.",
+   "contenido": "<p>La racionalización de trámites es el conjunto de acciones que la E.S.E. Hospital San José del Guaviare adelanta para simplificar, estandarizar, optimizar o automatizar sus trámites, con el fin de facilitar el acceso de la ciudadanía a los servicios y reducir costos, tiempos y pasos. Hace parte de la política de <strong>Racionalización de Trámites</strong> del Modelo Integrado de Planeación y Gestión (MIPG).</p><h2>Marco normativo</h2><ul><li><strong>Ley 962 de 2005</strong> y <strong>Decreto Ley 019 de 2012</strong> — racionalización y supresión de trámites (antitrámites).</li><li><strong>Decreto Ley 2106 de 2019</strong> — simplificación y digitalización de trámites.</li><li><strong>Ley 2052 de 2020</strong> — racionalización, interoperabilidad y uso de medios digitales.</li><li><strong>Decreto 1081 de 2015</strong> — componente de racionalización dentro del Plan Anticorrupción y de Atención al Ciudadano (PAAC).</li></ul><h2>Trámites inscritos en el SUIT</h2><p>Los trámites y otros procedimientos administrativos (OPA) de la entidad se registran en el <strong>Sistema Único de Información de Trámites — SUIT</strong>, administrado por el Departamento Administrativo de la Función Pública, y se ofrecen a la ciudadanía a través del portal <strong>GOV.CO</strong>:</p><ul><li><a href=\"https://www.funcionpublica.gov.co/web/suit\" target=\"_blank\" rel=\"noopener\">SUIT — Sistema Único de Información de Trámites</a></li><li><a href=\"https://www.gov.co/\" target=\"_blank\" rel=\"noopener\">GOV.CO — Portal Único del Estado colombiano</a></li><li><a href=\"/atencion-y-servicios-a-la-ciudadania/tramites-y-otros-procedimientos\">Trámites y otros procedimientos</a> de la E.S.E. publicados en este portal.</li></ul><h2>Estrategia de racionalización de la vigencia</h2><p>Cada vigencia la E.S.E. formula su estrategia de racionalización de trámites, que forma parte del <strong>componente de racionalización de trámites del Plan Anticorrupción y de Atención al Ciudadano</strong>. En esta sección se publicará la estrategia vigente con: los trámites a racionalizar, el tipo de racionalización (normativa, administrativa o tecnológica), las acciones previstas, los responsables, las fechas y el beneficio para la ciudadanía, junto con los informes de seguimiento registrados en el SUIT.</p><h2>Avances del hospital</h2><p>La E.S.E. ha avanzado en la racionalización tecnológica de varios trámites y servicios, que hoy pueden realizarse en línea desde este portal:</p><ul><li><a href=\"/atencion-y-servicios-a-la-ciudadania/canales-de-atencion\">Solicitud de citas y copia de historia clínica en línea</a>.</li><li><a href=\"/pqrsf\">Radicación y seguimiento de PQRSFD en línea</a>.</li><li><a href=\"/participacion\">Participación ciudadana</a> y consulta de aportes por radicado.</li></ul>",
+   "tipo": "articulo",
+   "categoria": "Trámites",
+   "orden": 0,
+   "soloSiVacia": true,
+   "fecha": "2026-11-05T12:00:00Z",
+   "adjuntos": [],
+   "destacada": null
+  }
+ ]
+}

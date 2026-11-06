@@ -43,6 +43,7 @@ const SEMILLAS_ARCHIVO: [clave: string, ruta: string][] = [
   ['paginas-por-secciones-semilla', 'assets/semillas/grupos-gobierno-digital-3.json'],
   ['historia-clinica-en-linea-semilla', 'assets/semillas/historia-clinica-en-linea.json'],
   ['transparencia-ley1712-semilla', 'assets/semillas/transparencia-ley1712.json'],
+  ['racionalizacion-tramites-semilla', 'assets/semillas/racionalizacion-tramites.json'],
 ];
 
 /**
@@ -464,7 +465,7 @@ export class CmsLocalDataSource extends CmsDataSource {
   }
 
   /* ===== Estructura inicial (Resolución 1519 de 2020) ===== */
-  private readonly versionSemilla = 32;
+  private readonly versionSemilla = 33;
 
   private sembrarSiVacio(): void {
     if (this.almacen.getItem(this.prefijo + 'menus')) return;
@@ -786,6 +787,25 @@ export class CmsLocalDataSource extends CmsDataSource {
         if (p.slug === 'canal-anticorrupcion-sicof' && p.plantilla === 'contenido') Object.assign(p, { plantilla: 'enlace', urlExterna: '/sicof', actualizadoEn: t });
       }
     }
+    // Versión 33: nueva página «Racionalización de trámites» tras «Trámites y otros procedimientos»; reordena «Atención y servicios»
+    if (version < 33) {
+      const orden: Record<string, number> = {
+        'tramites-y-otros-procedimientos': 0,
+        'racionalizacion-de-tramites': 1,
+        'canales-de-atencion': 2,
+        pqrsd: 3,
+        'carpeta-ciudadana-digital': 4,
+        'informacion-para-poblacion-vulnerable': 5,
+        'boletines-de-salud': 6,
+        'perfil-epidemiologico': 7,
+        'copia-historia-clinica-en-linea': 8,
+        'solicitudes-contractuales': 8,
+        'preguntas-frecuentes': 9,
+        glosario: 10,
+      };
+      const aYs = porSlug.get('atencion-y-servicios-a-la-ciudadania');
+      for (const p of paginas) if (aYs && p.parentId === aYs.id && p.slug in orden && p.orden !== orden[p.slug]) Object.assign(p, { orden: orden[p.slug], actualizadoEn: t });
+    }
     this.escribir('paginas', paginas);
     this.almacen.setItem(this.prefijo + 'version', String(this.versionSemilla));
   }
@@ -1058,16 +1078,17 @@ const ESTRUCTURA_1519: PaginaSemilla[] = [
   { id: 61, menuId: 1, parentId: 1, titulo: "9. Obligación de reporte de información específica por parte de la entidad", slug: 'reporte-de-informacion-especifica', plantilla: 'documentos', orden: 8 },
   { id: 62, menuId: 1, parentId: null, titulo: "Atención y servicios a la ciudadanía", slug: 'atencion-y-servicios-a-la-ciudadania', plantilla: 'contenido', descripcion: "Trámites, canales de atención y mecanismos para presentar peticiones, quejas, reclamos, sugerencias y denuncias.", orden: 2 },
   { id: 63, menuId: 1, parentId: 62, titulo: "Trámites y otros procedimientos", slug: 'tramites-y-otros-procedimientos', plantilla: 'contenido', orden: 0 },
-  { id: 64, menuId: 1, parentId: 62, titulo: "Canales de atención y pida una cita", slug: 'canales-de-atencion', plantilla: 'contenido', descripcion: "Solicite su cita, radique PQRSFD, pida copia de su historia clínica y consulte sus resultados de laboratorio.", orden: 1 },
-  { id: 65, menuId: 1, parentId: 62, titulo: "PQRSD - Peticiones, quejas, reclamos, sugerencias y denuncias", slug: 'pqrsd', plantilla: 'enlace', urlExterna: '/pqrsf', orden: 2 },
-  { id: 66, menuId: 1, parentId: 62, titulo: "Carpeta Ciudadana Digital", slug: 'carpeta-ciudadana-digital', plantilla: 'enlace', urlExterna: 'https://carpetaciudadana.and.gov.co/', descripcion: "Consulte en un solo lugar sus documentos e información en poder del Estado colombiano.", orden: 3 },
-  { id: 97, menuId: 1, parentId: 62, titulo: "Información para población vulnerable", slug: 'informacion-para-poblacion-vulnerable', plantilla: 'enlace', urlExterna: '/transparencia/informacion-especifica-para-grupos-de-interes', orden: 4 },
-  { id: 98, menuId: 1, parentId: 62, titulo: "Boletines de salud", slug: 'boletines-de-salud', plantilla: 'listado', descripcion: "Boletines epidemiológicos, infografías y piezas informativas sobre fechas conmemorativas en salud.", orden: 5 },
-  { id: 99, menuId: 1, parentId: 62, titulo: "Perfil epidemiológico", slug: 'perfil-epidemiologico', plantilla: 'documentos', descripcion: "Perfil epidemiológico institucional y boletines epidemiológicos trimestrales.", orden: 6 },
-  { id: 105, menuId: 1, parentId: 62, titulo: "Solicitudes contractuales", slug: 'solicitudes-contractuales', plantilla: 'enlace', urlExterna: '/solicitudes-contractuales', descripcion: "Solicite certificaciones de sus contratos con la E.S.E. y consulte el estado de su solicitud.", orden: 7 },
-  { id: 111, menuId: 1, parentId: 62, titulo: "Copia de historia clínica", slug: 'copia-historia-clinica-en-linea', plantilla: 'enlace', urlExterna: '/solicitud-historia-clinica', descripcion: "Solicite en línea la copia de su historia clínica y consulte el estado con su número de radicado.", orden: 7 },
-  { id: 106, menuId: 1, parentId: 62, titulo: "Preguntas frecuentes", slug: 'preguntas-frecuentes', plantilla: 'preguntas', descripcion: "Respuestas a las dudas más comunes sobre contacto, citas, trámites, PQRSFD, derechos y deberes de los usuarios.", orden: 8 },
-  { id: 107, menuId: 1, parentId: 62, titulo: "Glosario", slug: 'glosario', plantilla: 'glosario', descripcion: "Términos jurídicos, administrativos y de salud que se usan en la gestión del hospital, de la A a la Z.", orden: 9 },
+  { id: 113, menuId: 1, parentId: 62, titulo: "Racionalización de trámites", slug: 'racionalizacion-de-tramites', plantilla: 'contenido', descripcion: "Estrategia de racionalización de trámites de la E.S.E. conforme a la Ley 2052 de 2020 y la política de racionalización del DAFP, con los trámites inscritos en el SUIT.", orden: 1 },
+  { id: 64, menuId: 1, parentId: 62, titulo: "Canales de atención y pida una cita", slug: 'canales-de-atencion', plantilla: 'contenido', descripcion: "Solicite su cita, radique PQRSFD, pida copia de su historia clínica y consulte sus resultados de laboratorio.", orden: 2 },
+  { id: 65, menuId: 1, parentId: 62, titulo: "PQRSD - Peticiones, quejas, reclamos, sugerencias y denuncias", slug: 'pqrsd', plantilla: 'enlace', urlExterna: '/pqrsf', orden: 3 },
+  { id: 66, menuId: 1, parentId: 62, titulo: "Carpeta Ciudadana Digital", slug: 'carpeta-ciudadana-digital', plantilla: 'enlace', urlExterna: 'https://carpetaciudadana.and.gov.co/', descripcion: "Consulte en un solo lugar sus documentos e información en poder del Estado colombiano.", orden: 4 },
+  { id: 97, menuId: 1, parentId: 62, titulo: "Información para población vulnerable", slug: 'informacion-para-poblacion-vulnerable', plantilla: 'enlace', urlExterna: '/transparencia/informacion-especifica-para-grupos-de-interes', orden: 5 },
+  { id: 98, menuId: 1, parentId: 62, titulo: "Boletines de salud", slug: 'boletines-de-salud', plantilla: 'listado', descripcion: "Boletines epidemiológicos, infografías y piezas informativas sobre fechas conmemorativas en salud.", orden: 6 },
+  { id: 99, menuId: 1, parentId: 62, titulo: "Perfil epidemiológico", slug: 'perfil-epidemiologico', plantilla: 'documentos', descripcion: "Perfil epidemiológico institucional y boletines epidemiológicos trimestrales.", orden: 7 },
+  { id: 105, menuId: 1, parentId: 62, titulo: "Solicitudes contractuales", slug: 'solicitudes-contractuales', plantilla: 'enlace', urlExterna: '/solicitudes-contractuales', descripcion: "Solicite certificaciones de sus contratos con la E.S.E. y consulte el estado de su solicitud.", orden: 8 },
+  { id: 111, menuId: 1, parentId: 62, titulo: "Copia de historia clínica", slug: 'copia-historia-clinica-en-linea', plantilla: 'enlace', urlExterna: '/solicitud-historia-clinica', descripcion: "Solicite en línea la copia de su historia clínica y consulte el estado con su número de radicado.", orden: 8 },
+  { id: 106, menuId: 1, parentId: 62, titulo: "Preguntas frecuentes", slug: 'preguntas-frecuentes', plantilla: 'preguntas', descripcion: "Respuestas a las dudas más comunes sobre contacto, citas, trámites, PQRSFD, derechos y deberes de los usuarios.", orden: 9 },
+  { id: 107, menuId: 1, parentId: 62, titulo: "Glosario", slug: 'glosario', plantilla: 'glosario', descripcion: "Términos jurídicos, administrativos y de salud que se usan en la gestión del hospital, de la A a la Z.", orden: 10 },
   { id: 67, menuId: 1, parentId: null, titulo: "Participa", slug: 'participa', plantilla: 'contenido', descripcion: "Espacios de participación ciudadana en la gestión de la E.S.E. Hospital San José del Guaviare (lineamientos del DAFP).", orden: 3 },
   { id: 68, menuId: 1, parentId: 67, titulo: "Participación para el diagnóstico de necesidades e identificación de problemas", slug: 'participacion-para-el-diagnostico-de-necesidades-e-identificacion-de-problemas', plantilla: 'contenido', descripcion: "Espacio para identificar y analizar las necesidades, expectativas y problemáticas de la comunidad en relación con los servicios de salud.", orden: 0 },
   { id: 69, menuId: 1, parentId: 67, titulo: "Planeación y presupuesto participativo", slug: 'planeacion-y-presupuesto-participativo', plantilla: 'contenido', descripcion: "La comunidad participa en la definición de prioridades, la asignación de recursos y la formulación de planes y proyectos institucionales.", orden: 1 },
