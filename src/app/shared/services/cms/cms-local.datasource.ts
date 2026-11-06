@@ -42,6 +42,7 @@ const SEMILLAS_ARCHIVO: [clave: string, ruta: string][] = [
   ['grupos-ordenados-semilla', 'assets/semillas/grupos-gobierno-digital-2.json'],
   ['paginas-por-secciones-semilla', 'assets/semillas/grupos-gobierno-digital-3.json'],
   ['historia-clinica-en-linea-semilla', 'assets/semillas/historia-clinica-en-linea.json'],
+  ['transparencia-ley1712-semilla', 'assets/semillas/transparencia-ley1712.json'],
 ];
 
 /**
@@ -463,7 +464,7 @@ export class CmsLocalDataSource extends CmsDataSource {
   }
 
   /* ===== Estructura inicial (Resolución 1519 de 2020) ===== */
-  private readonly versionSemilla = 31;
+  private readonly versionSemilla = 32;
 
   private sembrarSiVacio(): void {
     if (this.almacen.getItem(this.prefijo + 'menus')) return;
