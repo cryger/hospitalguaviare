@@ -44,6 +44,7 @@ const SEMILLAS_ARCHIVO: [clave: string, ruta: string][] = [
   ['historia-clinica-en-linea-semilla', 'assets/semillas/historia-clinica-en-linea.json'],
   ['transparencia-ley1712-semilla', 'assets/semillas/transparencia-ley1712.json'],
   ['racionalizacion-tramites-semilla', 'assets/semillas/racionalizacion-tramites.json'],
+  ['informacion-mujeres-semilla', 'assets/semillas/informacion-para-mujeres.json'],
 ];
 
 /**
@@ -465,7 +466,7 @@ export class CmsLocalDataSource extends CmsDataSource {
   }
 
   /* ===== Estructura inicial (Resolución 1519 de 2020) ===== */
-  private readonly versionSemilla = 33;
+  private readonly versionSemilla = 34;
 
   private sembrarSiVacio(): void {
     if (this.almacen.getItem(this.prefijo + 'menus')) return;
