@@ -46,6 +46,7 @@ const SEMILLAS_ARCHIVO: [clave: string, ruta: string][] = [
   ['racionalizacion-tramites-semilla', 'assets/semillas/racionalizacion-tramites.json'],
   ['informacion-mujeres-semilla', 'assets/semillas/informacion-para-mujeres.json'],
   ['transparencia-secciones-semilla', 'assets/semillas/transparencia-secciones.json'],
+  ['etica-y-transparencia-semilla', 'assets/semillas/etica-y-transparencia.json'],
 ];
 
 /**
@@ -467,7 +468,7 @@ export class CmsLocalDataSource extends CmsDataSource {
   }
 
   /* ===== Estructura inicial (Resolución 1519 de 2020) ===== */
-  private readonly versionSemilla = 38;
+  private readonly versionSemilla = 39;
 
   private sembrarSiVacio(): void {
     if (this.almacen.getItem(this.prefijo + 'menus')) return;
@@ -1095,6 +1096,7 @@ const ESTRUCTURA_1519: PaginaSemilla[] = [
   { id: 108, menuId: 1, parentId: 60, titulo: "Grupos étnicos", slug: 'grupos-etnicos', plantilla: 'secciones', icono: 'govco:globe-americas', descripcion: "Atención integral en salud con enfoque diferencial, intercultural y de respeto por la diversidad étnica y cultural del territorio.", orden: 0 },
   { id: 109, menuId: 1, parentId: 60, titulo: "Atención con enfoque diferencial", slug: 'atencion-con-enfoque-diferencial', plantilla: 'secciones', icono: 'govco:universal-access', descripcion: "Información y orientación para personas en situación de discapacidad, personas adultas mayores y víctimas del conflicto armado.", orden: 1 },
   { id: 61, menuId: 1, parentId: 1, titulo: "9. Obligación de reporte de información específica por parte de la entidad", slug: 'reporte-de-informacion-especifica', plantilla: 'documentos', orden: 8 },
+  { id: 115, menuId: 1, parentId: 1, titulo: "Ética y transparencia", slug: 'etica-y-transparencia', plantilla: 'secciones', icono: 'govco:balance-scale', descripcion: "Programa de Transparencia y Ética Empresarial de la E.S.E.: integridad, código de valores, canal de denuncias, conflictos de interés y gestión del riesgo de corrupción.", orden: 9 },
   { id: 62, menuId: 1, parentId: null, titulo: "Atención y servicios a la ciudadanía", slug: 'atencion-y-servicios-a-la-ciudadania', plantilla: 'contenido', descripcion: "Trámites, canales de atención y mecanismos para presentar peticiones, quejas, reclamos, sugerencias y denuncias.", orden: 2 },
   { id: 63, menuId: 1, parentId: 62, titulo: "Trámites y otros procedimientos", slug: 'tramites-y-otros-procedimientos', plantilla: 'contenido', orden: 0 },
   { id: 113, menuId: 1, parentId: 62, titulo: "Racionalización de trámites", slug: 'racionalizacion-de-tramites', plantilla: 'contenido', descripcion: "Estrategia de racionalización de trámites de la E.S.E. conforme a la Ley 2052 de 2020 y la política de racionalización del DAFP, con los trámites inscritos en el SUIT.", orden: 1 },
