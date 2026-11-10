@@ -84,7 +84,45 @@ export class CmsLocalDataSource extends CmsDataSource {
       .then(() => this.clasificarDocumentosTalentoHumano())
       .then(() => this.organizarComiteConvivencia())
       .then(() => this.ordenarTalentoHumano())
+      .then(() => this.sobriasContenido())
       .finally(() => this.guardarLotePorPartes());
+  }
+
+  /**
+   * Páginas informativas de transparencia en estilo sobrio (texto): vuelven de
+   * «secciones» a «contenido» y se les quita el <h2> inicial (banner duplicado).
+   * Corre después de las semillas (tienen la última palabra) y una sola vez.
+   * Equivale a api/migraciones/062-transparencia-sobria.sql.
+   */
+  private sobriasContenido(): void {
+    const clave = this.prefijo + 'sobrias-contenido';
+    if (this.almacen.getItem(clave) === '1') return;
+    const SLUGS = new Set([
+      'leyes', 'agenda-regulatoria', 'proyectos-de-normas-para-comentarios',
+      'procedimientos-que-se-siguen-para-tomar-decisiones-en-las-diferentes-areas',
+      'informacion-sobre-decisiones-que-pueden-afectar-al-publico', 'publicacion-de-hojas-de-vida',
+      'publicacion-de-la-ejecucion-de-los-contratos', 'costos-de-reproduccion-de-la-informacion-publica',
+      'reporte-de-informacion-especifica', 'racionalizacion-de-tramites', 'informacion-para-mujeres',
+    ]);
+    const t = this.ahora();
+    const paginas = this.leer<CmsPagina>('paginas');
+    const ids = new Set<number>();
+    let cambioP = false;
+    for (const p of paginas) {
+      if (!SLUGS.has(p.slug)) continue;
+      ids.add(p.id);
+      if (p.plantilla === 'secciones') { Object.assign(p, { plantilla: 'contenido', actualizadoEn: t }); cambioP = true; }
+    }
+    if (cambioP) this.escribir('paginas', paginas);
+    const entradas = this.leer<CmsEntrada>('entradas');
+    let cambioE = false;
+    for (const e of entradas) {
+      if (!ids.has(e.paginaId) || !e.contenido?.startsWith('<h2>')) continue;
+      const i = e.contenido.indexOf('</h2>');
+      if (i >= 0) { Object.assign(e, { contenido: e.contenido.slice(i + 5).trim(), actualizadoEn: t }); cambioE = true; }
+    }
+    if (cambioE) this.escribir('entradas', entradas);
+    this.almacen.setItem(clave, '1');
   }
 
   /**
