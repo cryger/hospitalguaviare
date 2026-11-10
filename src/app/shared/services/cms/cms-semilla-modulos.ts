@@ -15,7 +15,7 @@ export const VACANTES_SEMILLA: Omit<Vacante, 'id'>[] = [
     "requisitos": [
       "Personal del área de enfermería. Consulte las condiciones de la convocatoria."
     ],
-    "imagenUrl": "https://esehospitalguaviare.gov.co/resourses/imgTrabajos/1.png",
+    "imagenUrl": "/assets/vacantes/enfermeria.jpg",
     "documentoUrl": "",
     "fechaPublicacion": "2024-09-18T12:00:00.000Z",
     "estado": "cerrada",
@@ -33,7 +33,7 @@ export const VACANTES_SEMILLA: Omit<Vacante, 'id'>[] = [
       "Profesional en Bacteriología.",
       "Consulte los requisitos completos en el documento de la convocatoria."
     ],
-    "imagenUrl": "https://esehospitalguaviare.gov.co/resourses/imgTrabajos/7.png",
+    "imagenUrl": "/assets/vacantes/bacteriologo.jpg",
     "documentoUrl": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/REQUISITOS%20PROFESIONAL%20EN%20BACTERIOLOG%C3%8DA.pdf",
     "fechaPublicacion": "2025-01-07T12:00:00.000Z",
     "estado": "cerrada",
@@ -52,7 +52,7 @@ export const VACANTES_SEMILLA: Omit<Vacante, 'id'>[] = [
       "Cumplir los requisitos de los artículos 24 y 25 de la Ley 909 de 2004, el Decreto 1083 de 2015 y la Ley 1960 de 2019.",
       "Consulte el comunicado y las funciones del cargo en el documento adjunto."
     ],
-    "imagenUrl": "https://esehospitalguaviare.gov.co/resourses/imgTrabajos/1111.png",
+    "imagenUrl": "/assets/vacantes/tecnico-administrativo.jpg",
     "documentoUrl": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/COMUNICADO%20INTERNO%2004%20TECNICO%20ADMINISTRATIVO%20Y%20FUNCIONES%20DEL%20CARGO.pdf",
     "fechaPublicacion": "2023-10-04T12:00:00.000Z",
     "estado": "cerrada",
@@ -70,7 +70,7 @@ export const VACANTES_SEMILLA: Omit<Vacante, 'id'>[] = [
       "Líder o lideresa comunitario/a.",
       "Consulte los requisitos completos en el documento de la convocatoria."
     ],
-    "imagenUrl": "https://esehospitalguaviare.gov.co/resourses/imgTrabajos/2%20(2).png",
+    "imagenUrl": "/assets/vacantes/promotor-salud.jpg",
     "documentoUrl": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Promotora%20de%20Salud_12312123.pdf",
     "fechaPublicacion": "2024-10-02T12:00:00.000Z",
     "estado": "cerrada",

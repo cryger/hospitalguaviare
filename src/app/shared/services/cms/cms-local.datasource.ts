@@ -468,7 +468,7 @@ export class CmsLocalDataSource extends CmsDataSource {
   }
 
   /* ===== Estructura inicial (Resolución 1519 de 2020) ===== */
-  private readonly versionSemilla = 40;
+  private readonly versionSemilla = 41;
 
   private sembrarSiVacio(): void {
     if (this.almacen.getItem(this.prefijo + 'menus')) return;
@@ -832,6 +832,19 @@ export class CmsLocalDataSource extends CmsDataSource {
       let cambio = false;
       for (const e of entradas) if (e.slug === 'etica-y-transparencia-ptee' && e.estado === 'publicada') { Object.assign(e, { estado: 'archivada', actualizadoEn: t }); cambio = true; }
       if (cambio) this.escribir('entradas', entradas);
+    }
+    // Versión 41: flyers de vacantes servidos desde assets locales (antes apuntaban al servidor anterior)
+    if (version < 41) {
+      const flyers: Record<string, string> = {
+        'https://esehospitalguaviare.gov.co/resourses/imgTrabajos/1.png': '/assets/vacantes/enfermeria.jpg',
+        'https://esehospitalguaviare.gov.co/resourses/imgTrabajos/7.png': '/assets/vacantes/bacteriologo.jpg',
+        'https://esehospitalguaviare.gov.co/resourses/imgTrabajos/1111.png': '/assets/vacantes/tecnico-administrativo.jpg',
+        'https://esehospitalguaviare.gov.co/resourses/imgTrabajos/2%20(2).png': '/assets/vacantes/promotor-salud.jpg',
+      };
+      const vacantes = this.leer<{ imagenUrl?: string }>('vacantes');
+      let cambio = false;
+      for (const v of vacantes) if (v.imagenUrl && flyers[v.imagenUrl]) { v.imagenUrl = flyers[v.imagenUrl]; cambio = true; }
+      if (cambio) this.escribir('vacantes', vacantes);
     }
     this.escribir('paginas', paginas);
     this.almacen.setItem(this.prefijo + 'version', String(this.versionSemilla));
