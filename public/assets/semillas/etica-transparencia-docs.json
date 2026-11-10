@@ -1,0 +1,235 @@
+{
+ "origen": "Micrositio de ética y transparencia (documentos institucionales)",
+ "multimedia": [
+  {
+   "nombre": "Código de Integridad y Buen Gobierno ultimo 2025.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/C%C3%B3digo%20de%20Integridad%20y%20Buen%20Gobierno%20ultimo%202025.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Código de Integridad y Buen Gobierno 2025",
+   "alt": null
+  },
+  {
+   "nombre": "Resolucion 0701 2025 Actualizacion de codigo de integridad y buen gobierno.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resolucion%200701%202025%20Actualizacion%20de%20codigo%20de%20integridad%20y%20buen%20gobierno.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución 0701 de 2025 (adopción)",
+   "alt": null
+  },
+  {
+   "nombre": "CODIGO-DE-INTEGRIDAD.docx",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/word/CODIGO-DE-INTEGRIDAD.docx",
+   "tipo": "documento",
+   "mime": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+   "titulo": "Código de Integridad y Buen Gobierno 2021",
+   "alt": null
+  },
+  {
+   "nombre": "Codigo-de-Integridad-y-Buen-Gobierno-2020.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Codigo-de-Integridad-y-Buen-Gobierno-2020.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Código de Integridad y Buen Gobierno 2020",
+   "alt": null
+  },
+  {
+   "nombre": "Res-0844-integridad-y-buen-gobierno.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Res-0844-integridad-y-buen-gobierno.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Resolución 0844 (adopción)",
+   "alt": null
+  },
+  {
+   "nombre": "CODIGO BUEN GOBIERNO HSJG.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/CODIGO%20BUEN%20GOBIERNO%20HSJG.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Código de Buen Gobierno 2019",
+   "alt": null
+  },
+  {
+   "nombre": "POLITICA-DE-INTEGRIDAD.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/POLITICA-DE-INTEGRIDAD.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Política de Integridad",
+   "alt": null
+  },
+  {
+   "nombre": "POLITICA DE INTEGRIDAD 2024.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/POLITICA%20DE%20INTEGRIDAD%202024.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Política de Integridad 2024",
+   "alt": null
+  },
+  {
+   "nombre": "POLITICA-DE-TRANSPARENCIA-ACCESO-A-LA-INFORMACION-PUBLICA-Y-LUCHA-CONTRA-LA-CORRUPCION.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/POLITICA-DE-TRANSPARENCIA-ACCESO-A-LA-INFORMACION-PUBLICA-Y-LUCHA-CONTRA-LA-CORRUPCION.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Política de Transparencia y Lucha contra la Corrupción",
+   "alt": null
+  },
+  {
+   "nombre": "PROTOCOLO PARA LA DECLARACIÓN Y GESTIÓN DE CONFLICTO DE INTERES E IMPEDIMENTOS Y REACUSACIONES V2 (1).pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/PROTOCOLO%20PARA%20LA%20DECLARACI%C3%93N%20Y%20GESTI%C3%93N%20DE%20CONFLICTO%20DE%20INTERES%20E%20IMPEDIMENTOS%20Y%20REACUSACIONES%20V2%20(1).pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Protocolo de conflictos de intereses V2",
+   "alt": null
+  },
+  {
+   "nombre": "05 FORMATO DE DECLARACIÓN DE SITUACIONES DE CONFLICTO DE INTERESES V1 (1).pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/05%20FORMATO%20DE%20DECLARACI%C3%93N%20DE%20SITUACIONES%20DE%20CONFLICTO%20DE%20INTERESES%20V1%20(1).pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Formato de declaración de conflicto de intereses V1",
+   "alt": null
+  }
+ ],
+ "entradas": [
+  {
+   "paginaSlug": "etica-y-transparencia",
+   "slug": "codigo-integridad-buen-gobierno-2025",
+   "titulo": "Código de Integridad y Buen Gobierno 2025",
+   "resumen": "Versión vigente del Código de Integridad y Buen Gobierno de la E.S.E.",
+   "contenido": "",
+   "tipo": "documento",
+   "categoria": "Código de integridad y buen gobierno",
+   "orden": 0,
+   "soloSiVacia": false,
+   "fecha": "2025-06-01T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/C%C3%B3digo%20de%20Integridad%20y%20Buen%20Gobierno%20ultimo%202025.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Resolucion%200701%202025%20Actualizacion%20de%20codigo%20de%20integridad%20y%20buen%20gobierno.pdf"
+   ],
+   "destacada": null
+  },
+  {
+   "paginaSlug": "etica-y-transparencia",
+   "slug": "codigo-integridad-buen-gobierno-2021",
+   "titulo": "Código de Integridad y Buen Gobierno 2021",
+   "resumen": "Código de Integridad y Buen Gobierno – versión 2021.",
+   "contenido": "",
+   "tipo": "documento",
+   "categoria": "Código de integridad y buen gobierno",
+   "orden": 1,
+   "soloSiVacia": false,
+   "fecha": "2021-01-01T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/word/CODIGO-DE-INTEGRIDAD.docx"
+   ],
+   "destacada": null
+  },
+  {
+   "paginaSlug": "etica-y-transparencia",
+   "slug": "codigo-integridad-buen-gobierno-2020",
+   "titulo": "Código de Integridad y Buen Gobierno 2020",
+   "resumen": "Código de Integridad y Buen Gobierno – versión 2020 y su acto de adopción.",
+   "contenido": "",
+   "tipo": "documento",
+   "categoria": "Código de integridad y buen gobierno",
+   "orden": 2,
+   "soloSiVacia": false,
+   "fecha": "2020-01-01T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Codigo-de-Integridad-y-Buen-Gobierno-2020.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Res-0844-integridad-y-buen-gobierno.pdf"
+   ],
+   "destacada": null
+  },
+  {
+   "paginaSlug": "etica-y-transparencia",
+   "slug": "codigo-buen-gobierno-2019",
+   "titulo": "Código de Buen Gobierno 2019",
+   "resumen": "Código de Buen Gobierno – versión 2019.",
+   "contenido": "",
+   "tipo": "documento",
+   "categoria": "Código de integridad y buen gobierno",
+   "orden": 3,
+   "soloSiVacia": false,
+   "fecha": "2019-01-01T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/CODIGO%20BUEN%20GOBIERNO%20HSJG.pdf"
+   ],
+   "destacada": null
+  },
+  {
+   "paginaSlug": "etica-y-transparencia",
+   "slug": "politica-de-integridad",
+   "titulo": "Política de Integridad",
+   "resumen": "Política de Integridad de la E.S.E. Hospital San José del Guaviare.",
+   "contenido": "",
+   "tipo": "documento",
+   "categoria": "Políticas",
+   "orden": 4,
+   "soloSiVacia": false,
+   "fecha": "2024-01-01T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/POLITICA-DE-INTEGRIDAD.pdf",
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/POLITICA%20DE%20INTEGRIDAD%202024.pdf"
+   ],
+   "destacada": null
+  },
+  {
+   "paginaSlug": "etica-y-transparencia",
+   "slug": "politica-transparencia-lucha-corrupcion",
+   "titulo": "Política de Transparencia, Acceso a la Información Pública y Lucha contra la Corrupción",
+   "resumen": "Política institucional de transparencia, acceso a la información y lucha contra la corrupción.",
+   "contenido": "",
+   "tipo": "documento",
+   "categoria": "Políticas",
+   "orden": 5,
+   "soloSiVacia": false,
+   "fecha": "2020-01-01T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/POLITICA-DE-TRANSPARENCIA-ACCESO-A-LA-INFORMACION-PUBLICA-Y-LUCHA-CONTRA-LA-CORRUPCION.pdf"
+   ],
+   "destacada": null
+  },
+  {
+   "paginaSlug": "etica-y-transparencia",
+   "slug": "protocolo-conflictos-de-interes",
+   "titulo": "Protocolo para la declaración y gestión de conflictos de intereses, impedimentos y recusaciones",
+   "resumen": "Protocolo para declarar y gestionar conflictos de intereses, impedimentos y recusaciones.",
+   "contenido": "",
+   "tipo": "documento",
+   "categoria": "Conflictos de interés",
+   "orden": 6,
+   "soloSiVacia": false,
+   "fecha": "2024-01-01T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/PROTOCOLO%20PARA%20LA%20DECLARACI%C3%93N%20Y%20GESTI%C3%93N%20DE%20CONFLICTO%20DE%20INTERES%20E%20IMPEDIMENTOS%20Y%20REACUSACIONES%20V2%20(1).pdf"
+   ],
+   "destacada": null
+  },
+  {
+   "paginaSlug": "etica-y-transparencia",
+   "slug": "formato-declaracion-conflicto-interes",
+   "titulo": "Formato de declaración de situaciones de conflicto de intereses",
+   "resumen": "Formato para declarar situaciones de conflicto de intereses.",
+   "contenido": "",
+   "tipo": "documento",
+   "categoria": "Conflictos de interés",
+   "orden": 7,
+   "soloSiVacia": false,
+   "fecha": "2024-01-01T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/05%20FORMATO%20DE%20DECLARACI%C3%93N%20DE%20SITUACIONES%20DE%20CONFLICTO%20DE%20INTERESES%20V1%20(1).pdf"
+   ],
+   "destacada": null
+  }
+ ],
+ "paginas": [
+  {
+   "slug": "etica-y-transparencia",
+   "plantillaAnterior": "secciones",
+   "plantilla": "documentos",
+   "descripcion": "__no__",
+   "siDescripcion": "__no__"
+  }
+ ]
+}
