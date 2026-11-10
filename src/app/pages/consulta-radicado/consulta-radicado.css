@@ -1,0 +1,37 @@
+:host {
+  --cobalt: #0943B5;
+  --marino: #004884;
+  --solitude: #E5ECF8;
+  --verde: #069169;
+  --gris-txt: #4a4a4a;
+}
+
+.cr { max-width: 46rem; margin: 0 auto; }
+
+.cr-cab { margin-bottom: 1.4rem; }
+.cr-cab h1 { color: var(--marino); font-size: 1.9rem; margin: 0 0 .5rem; }
+.cr-cab .lead { color: var(--gris-txt); font-size: 1.02rem; line-height: 1.6; margin: 0; }
+
+/* Tipos admitidos */
+.cr-tipos { list-style: none; margin: 0 0 1.75rem; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 11rem), 1fr)); gap: .75rem; }
+.cr-tipos li { border: 1px solid #E3E9F3; border-left: .25rem solid #C9D8F2; border-radius: .6rem; padding: .7rem .9rem; background: #fff; transition: border-color .15s ease, background .15s ease, box-shadow .15s ease; }
+.cr-tipos li.activo { border-color: var(--cobalt); border-left-color: var(--cobalt); background: var(--solitude); box-shadow: 0 .25rem .75rem rgba(9, 67, 181, .1); }
+.cr-prefijo { display: block; font-family: ui-monospace, "Cascadia Code", "Source Code Pro", monospace; font-weight: 700; color: var(--cobalt); font-size: .9rem; }
+.cr-nombre { display: block; font-size: .85rem; color: var(--gris-txt); margin-top: .15rem; }
+
+/* Resultado */
+.cr-sistema { margin: 0 0 .15rem; font-size: .78rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--cobalt); }
+.cr-detalle { margin: .35rem 0 0; color: var(--gris-txt); }
+
+.cr-estado-actual { margin: 1rem 0 .25rem; }
+
+.cr-datos { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr)); gap: .5rem 1.5rem; margin: 1rem 0 0; }
+.cr-datos div { border-top: 1px solid #EDF1F8; padding-top: .5rem; }
+.cr-datos dt { font-size: .8rem; color: #6b7280; }
+.cr-datos dd { margin: .1rem 0 0; font-weight: 600; color: #1f2430; }
+
+.cr-tamano { font-size: .8rem; color: #6b7280; margin-left: .5rem; }
+
+@media (prefers-reduced-motion: reduce) {
+  .cr-tipos li { transition: none; }
+}

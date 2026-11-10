@@ -1,0 +1,100 @@
+<section class="cr">
+  <header class="cr-cab">
+    <h1>Consulta tu radicado</h1>
+    <p class="lead">Consulta en un solo lugar el estado de tu PQRSFD, tu solicitud de copia de historia clínica, tu aporte a una consulta ciudadana o tu solicitud contractual. Escribe el número de radicado y detectaremos el trámite.</p>
+  </header>
+
+  <!-- Tipos que admite la ventanilla -->
+  <ul class="cr-tipos" aria-label="Trámites que puedes consultar">
+    @for (s of sistemas; track s.prefijo) {
+      <li [class.activo]="sistema()?.prefijo === s.prefijo">
+        <span class="cr-prefijo">{{ s.prefijo }}</span>
+        <span class="cr-nombre">{{ s.nombre }}</span>
+      </li>
+    }
+  </ul>
+
+  <form class="consulta" [formGroup]="form" (ngSubmit)="consultar()" novalidate>
+    <div class="campo">
+      <label for="cr-rad">Número de radicado <span class="req" aria-hidden="true">*</span></label>
+      <input id="cr-rad" formControlName="radicado" autocapitalize="characters" autocomplete="off" spellcheck="false"
+             [placeholder]="sistema()?.ejemplo || 'PQRSFD-2026-000123'" />
+      @if (sistema(); as s) {
+        <p class="ayuda" role="status">Trámite detectado: <b>{{ s.nombre }}</b>.</p>
+      } @else if (form.controls.radicado.value) {
+        <p class="ayuda">El radicado debe empezar por PQRSFD-, HC-, PC- o SC-.</p>
+      }
+    </div>
+
+    @if (sistema()?.pideDocumento) {
+      <div class="campo">
+        <label for="cr-doc">Número de documento <span class="req" aria-hidden="true">*</span></label>
+        <input id="cr-doc" formControlName="numeroDocumento" inputmode="numeric" maxlength="20" autocomplete="off" />
+        <p class="ayuda">El documento con el que hiciste la solicitud.</p>
+      </div>
+    }
+
+    @if (sistema()?.pideCodigo) {
+      <div class="campo">
+        <label for="cr-cod">Código de consulta <span class="req" aria-hidden="true">*</span></label>
+        <input id="cr-cod" formControlName="codigo" maxlength="12" autocapitalize="characters" autocomplete="off" spellcheck="false" />
+        <p class="ayuda">El código que recibiste junto con el radicado.</p>
+      </div>
+    }
+
+    <button type="submit" class="btn-bdc fill-btn-govco" [disabled]="consultando()">
+      {{ consultando() ? 'Consultando…' : 'Consultar estado' }}
+    </button>
+  </form>
+
+  @if (error()) { <div class="alerta-govco error" role="alert">{{ error() }}</div> }
+
+  @if (resultado(); as r) {
+    <article class="resultado" aria-live="polite">
+      <header>
+        <p class="cr-sistema">{{ r.sistemaNombre }}</p>
+        <h2><span class="mono grande">{{ r.radicado }}</span></h2>
+        @if (r.detalle) { <p class="cr-detalle">{{ r.detalle }}</p> }
+      </header>
+
+      <ol class="pasos" [attr.aria-label]="'Estado: ' + r.estadoNombre">
+        @for (p of r.pasos; track $index) {
+          <li [class.hecho]="r.paso >= $index + 1">
+            <b>{{ p }}</b>
+            @if ($index === 0 && r.fechaRadicacion) { <small>{{ r.fechaRadicacion | date: 'd MMM y' : '-0500' : 'es-CO' }}</small> }
+          </li>
+        }
+      </ol>
+
+      <p class="cr-estado-actual">Estado actual: <b>{{ r.estadoNombre }}</b>.</p>
+
+      <dl class="cr-datos">
+        @if (r.fechaRadicacion) { <div><dt>Radicado el</dt><dd>{{ r.fechaRadicacion | date: 'd MMM y' : '-0500' : 'es-CO' }}</dd></div> }
+        @if (r.fechaVencimiento) { <div><dt>Respuesta estimada</dt><dd>{{ r.fechaVencimiento | date: 'd MMM y' : '-0500' : 'es-CO' }}</dd></div> }
+        @if (r.fechaRespuesta) { <div><dt>Respondido el</dt><dd>{{ r.fechaRespuesta | date: 'd MMM y' : '-0500' : 'es-CO' }}</dd></div> }
+      </dl>
+
+      @if (r.respuesta) {
+        <h3>Respuesta de la E.S.E.</h3>
+        <div class="respuesta">{{ r.respuesta }}</div>
+      }
+
+      @if (r.adjuntos.length) {
+        <h3>Documentos de la respuesta</h3>
+        <ul class="lista-archivos">
+          @for (a of r.adjuntos; track a.id) {
+            <li>
+              <button type="button" class="btn-link-govco" (click)="descargar(a)">{{ a.nombre }}</button>
+              <span class="cr-tamano">{{ nombreTamano(a.tamano) }}</span>
+            </li>
+          }
+        </ul>
+        @if (errorDescarga()) { <div class="alerta-govco error" role="alert">{{ errorDescarga() }}</div> }
+      }
+
+      @if (r.enlaceRuta) {
+        <p><a class="btn-bdc outline-btn-govco" [routerLink]="r.enlaceRuta">{{ r.enlaceTexto }}</a></p>
+      }
+    </article>
+  }
+</section>

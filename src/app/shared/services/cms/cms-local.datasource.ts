@@ -467,7 +467,7 @@ export class CmsLocalDataSource extends CmsDataSource {
   }
 
   /* ===== Estructura inicial (Resolución 1519 de 2020) ===== */
-  private readonly versionSemilla = 37;
+  private readonly versionSemilla = 38;
 
   private sembrarSiVacio(): void {
     if (this.almacen.getItem(this.prefijo + 'menus')) return;
@@ -1100,6 +1100,7 @@ const ESTRUCTURA_1519: PaginaSemilla[] = [
   { id: 113, menuId: 1, parentId: 62, titulo: "Racionalización de trámites", slug: 'racionalizacion-de-tramites', plantilla: 'contenido', descripcion: "Estrategia de racionalización de trámites de la E.S.E. conforme a la Ley 2052 de 2020 y la política de racionalización del DAFP, con los trámites inscritos en el SUIT.", orden: 1 },
   { id: 64, menuId: 1, parentId: 62, titulo: "Canales de atención y pida una cita", slug: 'canales-de-atencion', plantilla: 'contenido', descripcion: "Solicite su cita, radique PQRSFD, pida copia de su historia clínica y consulte sus resultados de laboratorio.", orden: 2 },
   { id: 65, menuId: 1, parentId: 62, titulo: "PQRSD - Peticiones, quejas, reclamos, sugerencias y denuncias", slug: 'pqrsd', plantilla: 'enlace', urlExterna: '/pqrsf', orden: 3 },
+  { id: 114, menuId: 1, parentId: 62, titulo: "Consulta tu radicado", slug: 'consulta-radicado', plantilla: 'enlace', urlExterna: '/consulta-radicado', descripcion: "Consulta el estado de tu PQRSFD, copia de historia clínica, aporte ciudadano o solicitud contractual con el número de radicado.", orden: 3 },
   { id: 66, menuId: 1, parentId: 62, titulo: "Carpeta Ciudadana Digital", slug: 'carpeta-ciudadana-digital', plantilla: 'enlace', urlExterna: 'https://carpetaciudadana.and.gov.co/', descripcion: "Consulte en un solo lugar sus documentos e información en poder del Estado colombiano.", orden: 4 },
   { id: 97, menuId: 1, parentId: 62, titulo: "Información para población vulnerable", slug: 'informacion-para-poblacion-vulnerable', plantilla: 'enlace', urlExterna: '/transparencia/informacion-especifica-para-grupos-de-interes', orden: 5 },
   { id: 98, menuId: 1, parentId: 62, titulo: "Boletines de salud", slug: 'boletines-de-salud', plantilla: 'listado', descripcion: "Boletines epidemiológicos, infografías y piezas informativas sobre fechas conmemorativas en salud.", orden: 6 },

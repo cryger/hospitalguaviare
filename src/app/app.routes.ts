@@ -29,6 +29,8 @@ export const routes: Routes = [
         ],
       },
       { path: 'pqrsf', loadComponent: () => import('./pages/pqrsf/pqrsf').then(m => m.PqrsfComponent), data: { breadcrumb: 'PQRSFD' } },
+      { path: 'consulta-radicado', data: { breadcrumb: 'Consulta tu radicado' },
+        loadComponent: () => import('./pages/consulta-radicado/consulta-radicado').then(m => m.ConsultaRadicado) },
       { path: 'sicof', data: { breadcrumb: 'Canal anticorrupción – SICOF' },
         loadComponent: () => import('./pages/sicof/sicof').then(m => m.Sicof) },
       { path: 'solicitudes-contractuales', data: { breadcrumb: 'Solicitudes contractuales' },
