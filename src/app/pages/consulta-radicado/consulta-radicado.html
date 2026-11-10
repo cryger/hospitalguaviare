@@ -1,26 +1,35 @@
 <section class="cr">
-  <header class="cr-cab">
-    <h1>Consulta tu radicado</h1>
-    <p class="lead">Consulta en un solo lugar el estado de tu PQRSFD, tu solicitud de copia de historia clínica, tu aporte a una consulta ciudadana o tu solicitud contractual. Escribe el número de radicado y detectaremos el trámite.</p>
-  </header>
+  <!-- Encabezado tipo hero -->
+  <div class="cr-hero">
+    <span class="cr-hero-ico" aria-hidden="true"><app-icono-cms valor="govco:search" /></span>
+    <div class="cr-hero-txt">
+      <h1>Consulta tu radicado</h1>
+      <p>Una sola ventanilla para conocer el estado de tu PQRSFD, tu copia de historia clínica, tu aporte ciudadano o tu solicitud contractual. Escribe el radicado y detectamos el trámite.</p>
+    </div>
+  </div>
 
-  <!-- Tipos que admite la ventanilla -->
+  <!-- Tarjetas de tipo (clic para empezar con ese prefijo) -->
   <ul class="cr-tipos" aria-label="Trámites que puedes consultar">
     @for (s of sistemas; track s.prefijo) {
-      <li [class.activo]="sistema()?.prefijo === s.prefijo">
-        <span class="cr-prefijo">{{ s.prefijo }}</span>
-        <span class="cr-nombre">{{ s.nombre }}</span>
+      <li>
+        <button type="button" class="cr-tipo" [class.activo]="sistema()?.prefijo === s.prefijo" (click)="elegirSistema(s)">
+          <span class="cr-tipo-ico" aria-hidden="true"><app-icono-cms [valor]="s.icono" /></span>
+          <span class="cr-tipo-nombre">{{ s.nombre }}</span>
+          <span class="cr-tipo-resumen">{{ s.resumen }}</span>
+          <span class="cr-tipo-prefijo">{{ s.prefijo }}</span>
+        </button>
       </li>
     }
   </ul>
 
-  <form class="consulta" [formGroup]="form" (ngSubmit)="consultar()" novalidate>
-    <div class="campo">
+  <!-- Buscador -->
+  <form class="cr-buscador" [formGroup]="form" (ngSubmit)="consultar()" novalidate>
+    <div class="campo cr-campo-rad">
       <label for="cr-rad">Número de radicado <span class="req" aria-hidden="true">*</span></label>
       <input id="cr-rad" formControlName="radicado" autocapitalize="characters" autocomplete="off" spellcheck="false"
              [placeholder]="sistema()?.ejemplo || 'PQRSFD-2026-000123'" />
       @if (sistema(); as s) {
-        <p class="ayuda" role="status">Trámite detectado: <b>{{ s.nombre }}</b>.</p>
+        <p class="ayuda cr-detectado" role="status"><span class="cr-chip-ico" aria-hidden="true"><app-icono-cms [valor]="s.icono" /></span> Trámite detectado: <b>{{ s.nombre }}</b></p>
       } @else if (form.controls.radicado.value) {
         <p class="ayuda">El radicado debe empezar por PQRSFD-, HC-, PC- o SC-.</p>
       }
@@ -42,7 +51,8 @@
       </div>
     }
 
-    <button type="submit" class="btn-bdc fill-btn-govco" [disabled]="consultando()">
+    <button type="submit" class="btn-bdc fill-btn-govco cr-enviar" [disabled]="consultando()">
+      <span class="cr-enviar-ico" aria-hidden="true"><app-icono-cms valor="govco:search" /></span>
       {{ consultando() ? 'Consultando…' : 'Consultar estado' }}
     </button>
   </form>
@@ -50,14 +60,18 @@
   @if (error()) { <div class="alerta-govco error" role="alert">{{ error() }}</div> }
 
   @if (resultado(); as r) {
-    <article class="resultado" aria-live="polite">
-      <header>
-        <p class="cr-sistema">{{ r.sistemaNombre }}</p>
-        <h2><span class="mono grande">{{ r.radicado }}</span></h2>
-        @if (r.detalle) { <p class="cr-detalle">{{ r.detalle }}</p> }
+    <article class="cr-resultado" [attr.data-tono]="r.tono" aria-live="polite">
+      <header class="cr-res-cab">
+        <span class="cr-res-ico" aria-hidden="true"><app-icono-cms [valor]="r.icono" /></span>
+        <div>
+          <p class="cr-res-sistema">{{ r.sistemaNombre }}</p>
+          <p class="cr-res-radicado mono">{{ r.radicado }}</p>
+          @if (r.detalle) { <p class="cr-res-detalle">{{ r.detalle }}</p> }
+        </div>
+        <span class="cr-badge">{{ r.estadoNombre }}</span>
       </header>
 
-      <ol class="pasos" [attr.aria-label]="'Estado: ' + r.estadoNombre">
+      <ol class="pasos cr-pasos" [attr.aria-label]="'Estado: ' + r.estadoNombre">
         @for (p of r.pasos; track $index) {
           <li [class.hecho]="r.paso >= $index + 1">
             <b>{{ p }}</b>
@@ -66,8 +80,6 @@
         }
       </ol>
 
-      <p class="cr-estado-actual">Estado actual: <b>{{ r.estadoNombre }}</b>.</p>
-
       <dl class="cr-datos">
         @if (r.fechaRadicacion) { <div><dt>Radicado el</dt><dd>{{ r.fechaRadicacion | date: 'd MMM y' : '-0500' : 'es-CO' }}</dd></div> }
         @if (r.fechaVencimiento) { <div><dt>Respuesta estimada</dt><dd>{{ r.fechaVencimiento | date: 'd MMM y' : '-0500' : 'es-CO' }}</dd></div> }
@@ -75,17 +87,23 @@
       </dl>
 
       @if (r.respuesta) {
-        <h3>Respuesta de la E.S.E.</h3>
-        <div class="respuesta">{{ r.respuesta }}</div>
+        <div class="cr-respuesta">
+          <h3>Respuesta de la E.S.E.</h3>
+          <p>{{ r.respuesta }}</p>
+        </div>
       }
 
       @if (r.adjuntos.length) {
-        <h3>Documentos de la respuesta</h3>
-        <ul class="lista-archivos">
+        <h3 class="cr-h-docs">Documentos de la respuesta</h3>
+        <ul class="cr-docs">
           @for (a of r.adjuntos; track a.id) {
             <li>
-              <button type="button" class="btn-link-govco" (click)="descargar(a)">{{ a.nombre }}</button>
-              <span class="cr-tamano">{{ nombreTamano(a.tamano) }}</span>
+              <button type="button" class="cr-doc" (click)="descargar(a)">
+                <span class="cr-doc-ico" aria-hidden="true"><app-icono-cms valor="govco:file-alt" /></span>
+                <span class="cr-doc-nombre">{{ a.nombre }}</span>
+                <span class="cr-doc-tamano">{{ nombreTamano(a.tamano) }}</span>
+                <span class="cr-doc-bajar" aria-hidden="true"><app-icono-cms valor="govco:download" /></span>
+              </button>
             </li>
           }
         </ul>
@@ -93,7 +111,7 @@
       }
 
       @if (r.enlaceRuta) {
-        <p><a class="btn-bdc outline-btn-govco" [routerLink]="r.enlaceRuta">{{ r.enlaceTexto }}</a></p>
+        <p class="cr-res-enlace"><a class="btn-bdc outline-btn-govco" [routerLink]="r.enlaceRuta">{{ r.enlaceTexto }}</a></p>
       }
     </article>
   }

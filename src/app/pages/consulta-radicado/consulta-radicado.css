@@ -1,37 +1,104 @@
 :host {
   --cobalt: #0943B5;
   --marino: #004884;
+  --havelock: #4672C8;
   --solitude: #E5ECF8;
   --verde: #069169;
+  --verde-bg: #E2F4EF;
+  --ambar: #B23A0E;
+  --ambar-bg: #FDEBE4;
   --gris-txt: #4a4a4a;
+  --borde: #E3E9F3;
 }
 
-.cr { max-width: 46rem; margin: 0 auto; }
+.cr { max-width: 52rem; margin: 0 auto; }
+.cr .icono-govco { font-family: 'govco-font-icons', sans-serif; font-style: normal; }
 
-.cr-cab { margin-bottom: 1.4rem; }
-.cr-cab h1 { color: var(--marino); font-size: 1.9rem; margin: 0 0 .5rem; }
-.cr-cab .lead { color: var(--gris-txt); font-size: 1.02rem; line-height: 1.6; margin: 0; }
+/* ===== Hero ===== */
+.cr-hero {
+  display: flex; align-items: center; gap: 1.1rem;
+  background: linear-gradient(135deg, var(--marino), var(--cobalt));
+  color: #fff; border-radius: 1rem; padding: 1.6rem 1.75rem; margin-bottom: 1.5rem;
+}
+.cr-hero-ico {
+  flex: none; display: inline-flex; align-items: center; justify-content: center;
+  width: 3.4rem; height: 3.4rem; border-radius: .9rem; background: rgba(255, 255, 255, .16);
+  font-size: 1.5rem;
+}
+.cr-hero-txt h1 { margin: 0 0 .25rem; font-size: 1.7rem; }
+.cr-hero-txt p { margin: 0; font-size: .98rem; line-height: 1.55; color: #EAF1FF; }
 
-/* Tipos admitidos */
-.cr-tipos { list-style: none; margin: 0 0 1.75rem; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 11rem), 1fr)); gap: .75rem; }
-.cr-tipos li { border: 1px solid #E3E9F3; border-left: .25rem solid #C9D8F2; border-radius: .6rem; padding: .7rem .9rem; background: #fff; transition: border-color .15s ease, background .15s ease, box-shadow .15s ease; }
-.cr-tipos li.activo { border-color: var(--cobalt); border-left-color: var(--cobalt); background: var(--solitude); box-shadow: 0 .25rem .75rem rgba(9, 67, 181, .1); }
-.cr-prefijo { display: block; font-family: ui-monospace, "Cascadia Code", "Source Code Pro", monospace; font-weight: 700; color: var(--cobalt); font-size: .9rem; }
-.cr-nombre { display: block; font-size: .85rem; color: var(--gris-txt); margin-top: .15rem; }
+/* ===== Tarjetas de tipo ===== */
+.cr-tipos { list-style: none; margin: 0 0 1.5rem; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr)); gap: .8rem; }
+.cr-tipo {
+  width: 100%; height: 100%; text-align: left; cursor: pointer;
+  display: grid; grid-template-columns: auto 1fr; grid-template-areas: "ico nombre" "ico resumen" "prefijo prefijo"; gap: .1rem .7rem;
+  border: 1px solid var(--borde); border-radius: .85rem; background: #fff; padding: .9rem 1rem;
+  transition: border-color .15s ease, box-shadow .15s ease, transform .15s ease;
+}
+.cr-tipo:hover { border-color: var(--havelock); box-shadow: 0 .5rem 1rem rgba(16, 24, 40, .08); transform: translateY(-2px); }
+.cr-tipo:focus-visible { outline: .125rem solid #000; outline-offset: .125rem; }
+.cr-tipo.activo { border-color: var(--cobalt); background: var(--solitude); box-shadow: 0 .4rem .9rem rgba(9, 67, 181, .12); }
+.cr-tipo-ico { grid-area: ico; align-self: center; display: inline-flex; align-items: center; justify-content: center; width: 2.6rem; height: 2.6rem; border-radius: 50%; background: var(--solitude); color: var(--cobalt); font-size: 1.15rem; }
+.cr-tipo.activo .cr-tipo-ico { background: var(--cobalt); color: #fff; }
+.cr-tipo-nombre { grid-area: nombre; align-self: end; font-weight: 700; color: var(--marino); font-size: 1rem; }
+.cr-tipo-resumen { grid-area: resumen; align-self: start; font-size: .82rem; color: var(--gris-txt); line-height: 1.35; }
+.cr-tipo-prefijo { grid-area: prefijo; margin-top: .55rem; font-family: ui-monospace, "Cascadia Code", monospace; font-size: .78rem; font-weight: 700; color: var(--cobalt); }
 
-/* Resultado */
-.cr-sistema { margin: 0 0 .15rem; font-size: .78rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--cobalt); }
-.cr-detalle { margin: .35rem 0 0; color: var(--gris-txt); }
+/* ===== Buscador ===== */
+.cr-buscador { background: #fff; border: 1px solid var(--borde); border-radius: 1rem; padding: 1.5rem 1.6rem 1.6rem; box-shadow: 0 .5rem 1.5rem rgba(16, 24, 40, .05); }
+.cr-buscador .campo { margin-bottom: 1rem; }
+.cr-detectado { display: inline-flex; align-items: center; gap: .4rem; color: var(--marino); }
+.cr-chip-ico { color: var(--cobalt); }
+.cr-enviar { display: inline-flex; align-items: center; gap: .5rem; margin-top: .25rem; }
+.cr-enviar-ico { font-size: 1rem; }
 
-.cr-estado-actual { margin: 1rem 0 .25rem; }
+/* ===== Resultado ===== */
+.cr-resultado {
+  margin-top: 1.5rem; background: #fff; border: 1px solid var(--borde); border-radius: 1rem; overflow: hidden;
+  box-shadow: 0 .75rem 2rem rgba(16, 24, 40, .08); border-top: .35rem solid var(--havelock);
+}
+.cr-resultado[data-tono="ok"] { border-top-color: var(--verde); }
+.cr-resultado[data-tono="alerta"] { border-top-color: var(--ambar); }
+.cr-resultado[data-tono="proceso"] { border-top-color: var(--cobalt); }
 
-.cr-datos { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr)); gap: .5rem 1.5rem; margin: 1rem 0 0; }
+.cr-res-cab { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 1rem; padding: 1.3rem 1.5rem; background: #FAFBFE; border-bottom: 1px solid #EEF2F9; }
+.cr-res-ico { display: inline-flex; align-items: center; justify-content: center; width: 3rem; height: 3rem; border-radius: .8rem; background: var(--solitude); color: var(--cobalt); font-size: 1.4rem; }
+.cr-res-sistema { margin: 0; font-size: .74rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--cobalt); }
+.cr-res-radicado { margin: .1rem 0 0; font-size: 1.3rem; font-weight: 700; color: #1f2430; letter-spacing: .02em; }
+.cr-res-detalle { margin: .2rem 0 0; color: var(--gris-txt); font-size: .9rem; }
+.cr-badge { justify-self: end; font-size: .82rem; font-weight: 700; border-radius: 999px; padding: .3rem .85rem; background: var(--solitude); color: var(--cobalt); white-space: nowrap; }
+.cr-resultado[data-tono="ok"] .cr-badge { background: var(--verde-bg); color: var(--verde); }
+.cr-resultado[data-tono="alerta"] .cr-badge { background: var(--ambar-bg); color: var(--ambar); }
+
+.cr-pasos { margin: 1.4rem 1.5rem 0; }
+
+.cr-datos { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 11rem), 1fr)); gap: .6rem 1.5rem; margin: 1.3rem 1.5rem 0; }
 .cr-datos div { border-top: 1px solid #EDF1F8; padding-top: .5rem; }
-.cr-datos dt { font-size: .8rem; color: #6b7280; }
+.cr-datos dt { font-size: .78rem; color: #6b7280; }
 .cr-datos dd { margin: .1rem 0 0; font-weight: 600; color: #1f2430; }
 
-.cr-tamano { font-size: .8rem; color: #6b7280; margin-left: .5rem; }
+.cr-respuesta { margin: 1.3rem 1.5rem 0; padding: 1rem 1.1rem; background: var(--solitude); border-radius: .7rem; }
+.cr-respuesta h3 { margin: 0 0 .35rem; font-size: .95rem; color: var(--marino); }
+.cr-respuesta p { margin: 0; line-height: 1.55; color: #1f2430; }
 
+.cr-h-docs { margin: 1.3rem 1.5rem .5rem; font-size: .95rem; color: var(--marino); }
+.cr-docs { list-style: none; margin: 0 1.5rem; padding: 0; display: grid; gap: .5rem; }
+.cr-doc { width: 100%; display: flex; align-items: center; gap: .7rem; cursor: pointer; text-align: left; border: 1px solid var(--borde); border-radius: .6rem; background: #fff; padding: .65rem .85rem; transition: border-color .15s ease, background .15s ease; }
+.cr-doc:hover { border-color: var(--cobalt); background: #F6F9FF; }
+.cr-doc:focus-visible { outline: .125rem solid #000; outline-offset: .125rem; }
+.cr-doc-ico { color: var(--cobalt); font-size: 1.05rem; }
+.cr-doc-nombre { flex: 1; font-weight: 600; color: var(--cobalt); }
+.cr-doc-tamano { font-size: .8rem; color: #6b7280; }
+.cr-doc-bajar { color: var(--cobalt); }
+
+.cr-res-enlace { margin: 1.3rem 1.5rem; }
+.cr-resultado .alerta-govco { margin: 1rem 1.5rem; }
+
+@media (max-width: 560px) {
+  .cr-res-cab { grid-template-columns: auto 1fr; }
+  .cr-badge { grid-column: 1 / -1; justself: start; justify-self: start; }
+}
 @media (prefers-reduced-motion: reduce) {
-  .cr-tipos li { transition: none; }
+  .cr-tipo, .cr-doc { transition: none; }
 }

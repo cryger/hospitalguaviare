@@ -18,12 +18,16 @@ import {
 } from '../../shared/models/solicitudes/solicitudes';
 import { AporteEstado, nombreEstadoAporte } from '../../shared/models/participacion/participacion';
 import { CMS_CONFIG } from '../../shared/services/cms/cms-config';
+import { IconoCms } from '../../shared/components/icono-cms/icono-cms';
 
 type Sistema = 'pqrsfd' | 'historia' | 'participacion' | 'contratacion';
+type Tono = 'ok' | 'alerta' | 'proceso';
 
 interface DefSistema {
   prefijo: string;
   nombre: string;
+  resumen: string;
+  icono: string;
   ejemplo: string;
   pideDocumento: boolean;
   pideCodigo: boolean;
@@ -31,10 +35,17 @@ interface DefSistema {
 }
 
 const SISTEMAS: Record<Sistema, DefSistema> = {
-  pqrsfd: { prefijo: 'PQRSFD-', nombre: 'PQRSFD', ejemplo: 'PQRSFD-2026-000123', pideDocumento: false, pideCodigo: true, ruta: '/pqrsf' },
-  historia: { prefijo: 'HC-', nombre: 'Copia de historia clínica', ejemplo: 'HC-2026-000123', pideDocumento: true, pideCodigo: true, ruta: '/solicitud-historia-clinica' },
-  participacion: { prefijo: 'PC-', nombre: 'Aporte a consulta ciudadana', ejemplo: 'PC-2026-000123', pideDocumento: true, pideCodigo: false, ruta: '/participacion' },
-  contratacion: { prefijo: 'SC-', nombre: 'Solicitud contractual', ejemplo: 'SC-2026-000123', pideDocumento: true, pideCodigo: false, ruta: '/solicitudes-contractuales' },
+  pqrsfd: { prefijo: 'PQRSFD-', nombre: 'PQRSFD', resumen: 'Peticiones, quejas, reclamos y denuncias', icono: 'govco:headset', ejemplo: 'PQRSFD-2026-000123', pideDocumento: false, pideCodigo: true, ruta: '/pqrsf' },
+  historia: { prefijo: 'HC-', nombre: 'Copia de historia clínica', resumen: 'Solicitud de copia de historia clínica', icono: 'govco:notes-medical', ejemplo: 'HC-2026-000123', pideDocumento: true, pideCodigo: true, ruta: '/solicitud-historia-clinica' },
+  participacion: { prefijo: 'PC-', nombre: 'Aporte ciudadano', resumen: 'Aporte a una consulta ciudadana', icono: 'govco:comments', ejemplo: 'PC-2026-000123', pideDocumento: true, pideCodigo: false, ruta: '/participacion' },
+  contratacion: { prefijo: 'SC-', nombre: 'Solicitud contractual', resumen: 'Certificaciones y solicitudes contractuales', icono: 'govco:file-signature', ejemplo: 'SC-2026-000123', pideDocumento: true, pideCodigo: false, ruta: '/solicitudes-contractuales' },
+};
+
+/** Color del estado: verde (resuelto), ámbar (no procede), azul (en curso) */
+const TONO: Record<string, Tono> = {
+  respondida: 'ok', cerrada: 'ok', incorporado: 'ok',
+  rechazada: 'alerta', no_incorporado: 'alerta',
+  radicada: 'proceso', en_tramite: 'proceso', trasladada: 'proceso', recibido: 'proceso', en_analisis: 'proceso',
 };
 
 /** Pasos (3) comunes a PQRSFD, historia clínica y solicitudes contractuales */
@@ -56,6 +67,8 @@ interface Resultado {
   detalle?: string; // asunto / alcance / título de la consulta
   respuesta?: string;
   adjuntos: Adjunto[];
+  icono: string;
+  tono: Tono;
   enlaceRuta?: unknown[]; // participación: ir a la consulta
   enlaceTexto?: string;
 }
@@ -68,7 +81,7 @@ interface Resultado {
  */
 @Component({
   selector: 'app-consulta-radicado',
-  imports: [ReactiveFormsModule, DatePipe, RouterLink],
+  imports: [ReactiveFormsModule, DatePipe, RouterLink, IconoCms],
   templateUrl: './consulta-radicado.html',
   styleUrls: ['../../shared/styles/formulario-govco.css', './consulta-radicado.css'],
 })
@@ -106,6 +119,14 @@ export class ConsultaRadicado {
     this.form.controls.radicado.valueChanges.subscribe((v) => this.radicado.set(v ?? ''));
   }
 
+  /** Clic en una tarjeta de tipo: deja el prefijo listo para escribir el número */
+  elegirSistema(def: DefSistema): void {
+    const actual = this.form.controls.radicado.value.trim().toUpperCase();
+    const base = this.sistema() && actual.includes('-') ? actual.slice(actual.indexOf('-') + 1) : '';
+    this.form.controls.radicado.setValue(def.prefijo + base);
+    document.getElementById('cr-rad')?.focus();
+  }
+
   async consultar(): Promise<void> {
     this.intentado.set(true);
     this.error.set('');
@@ -130,11 +151,11 @@ export class ConsultaRadicado {
     try {
       const sistema = this.sistemaDe(def);
       if (sistema === 'pqrsfd') {
-        this.resultado.set(this.deSolicitud('pqrsfd', 'PQRSFD', await this.pqrsfd.consultar({ radicado, codigo }), nombreEstadoPqrsfd, ['Radicada', 'En trámite', 'Respondida']));
+        this.resultado.set(this.deSolicitud('pqrsfd', def, await this.pqrsfd.consultar({ radicado, codigo }), nombreEstadoPqrsfd, ['Radicada', 'En trámite', 'Respondida']));
       } else if (sistema === 'contratacion') {
-        this.resultado.set(this.deSolicitud('contratacion', 'Solicitud contractual', await this.contratacion.consultar({ cedula: documento, radicado }), nombreEstadoContractual, ['Radicada', 'En trámite', 'Respondida']));
+        this.resultado.set(this.deSolicitud('contratacion', def, await this.contratacion.consultar({ cedula: documento, radicado }), nombreEstadoContractual, ['Radicada', 'En trámite', 'Respondida']));
       } else if (sistema === 'historia') {
-        this.resultado.set(this.deSolicitud('historia', 'Copia de historia clínica', await this.historia.consultar({ numeroDocumento: documento, radicado, codigo }), nombreEstadoHistoria, ['Radicada', 'En trámite', 'Entregada']));
+        this.resultado.set(this.deSolicitud('historia', def, await this.historia.consultar({ numeroDocumento: documento, radicado, codigo }), nombreEstadoHistoria, ['Radicada', 'En trámite', 'Entregada']));
       } else {
         this.resultado.set(this.deAporte(await this.participacion.estadoAporte({ numeroDocumento: documento, radicado })));
       }
@@ -149,10 +170,10 @@ export class ConsultaRadicado {
     return (Object.keys(SISTEMAS) as Sistema[]).find((k) => SISTEMAS[k] === def)!;
   }
 
-  private deSolicitud(sistema: Sistema, nombre: string, c: ConsultaPublica, nombreEstado: (e: string) => string, pasos: string[]): Resultado {
+  private deSolicitud(sistema: Sistema, def: DefSistema, c: ConsultaPublica, nombreEstado: (e: string) => string, pasos: string[]): Resultado {
     return {
       sistema,
-      sistemaNombre: nombre,
+      sistemaNombre: def.nombre,
       radicado: c.radicado,
       estado: c.estado,
       estadoNombre: nombreEstado(c.estado),
@@ -164,6 +185,8 @@ export class ConsultaRadicado {
       detalle: c.asunto || (c.vigencias?.length ? `Vigencias: ${c.vigencias.join(', ')}` : ''),
       respuesta: c.respuesta,
       adjuntos: c.adjuntos ?? [],
+      icono: def.icono,
+      tono: TONO[c.estado] ?? 'proceso',
     };
   }
 
@@ -171,7 +194,7 @@ export class ConsultaRadicado {
     const paso = ({ recibido: 1, en_analisis: 2, incorporado: 3, no_incorporado: 3 } as Record<string, number>)[a.estado] ?? 1;
     return {
       sistema: 'participacion',
-      sistemaNombre: 'Aporte a consulta ciudadana',
+      sistemaNombre: 'Aporte ciudadano',
       radicado: a.radicado,
       estado: a.estado,
       estadoNombre: nombreEstadoAporte(a.estado),
@@ -181,6 +204,8 @@ export class ConsultaRadicado {
       detalle: a.consulta,
       respuesta: a.respuesta,
       adjuntos: [],
+      icono: SISTEMAS.participacion.icono,
+      tono: TONO[a.estado] ?? 'proceso',
       enlaceRuta: ['/participacion', a.consultaSlug],
       enlaceTexto: 'Ver la consulta ciudadana',
     };
