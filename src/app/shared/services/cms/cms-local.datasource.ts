@@ -87,7 +87,51 @@ export class CmsLocalDataSource extends CmsDataSource {
       .then(() => this.ordenarTalentoHumano())
       .then(() => this.sobriasContenido())
       .then(() => this.leyesRepositorio())
+      .then(() => this.gruposAtractivos())
       .finally(() => this.guardarLotePorPartes());
+  }
+
+  /**
+   * «8.2 Información para mujeres» y «8.3 Otros grupos de interés» en estilo de
+   * tarjetas (plantilla «secciones»). Mujeres vuelve de «contenido» a «secciones»;
+   * la landing de «Otros grupos» reemplaza sus dos entradas de contenido redundantes
+   * por una presentación con enlaces a las subpáginas (que ya están en secciones).
+   * Corre una sola vez, tras las semillas. Equivale a
+   * api/migraciones/064-grupos-interes-atractivos.sql.
+   */
+  private gruposAtractivos(): void {
+    const clave = this.prefijo + 'grupos-atractivos';
+    if (this.almacen.getItem(clave) === '1') return;
+    const t = this.ahora();
+    const paginas = this.leer<CmsPagina>('paginas');
+    const mujeres = paginas.find((p) => p.slug === 'informacion-para-mujeres');
+    const otros = paginas.find((p) => p.slug === 'otros-grupos-de-interes');
+    let cambioP = false;
+    if (mujeres && mujeres.plantilla === 'contenido') { Object.assign(mujeres, { plantilla: 'secciones', actualizadoEn: t }); cambioP = true; }
+    if (otros && otros.plantilla === 'contenido') { Object.assign(otros, { plantilla: 'secciones', actualizadoEn: t }); cambioP = true; }
+    if (cambioP) this.escribir('paginas', paginas);
+    if (otros) {
+      const entradas = this.leer<CmsEntrada>('entradas');
+      let cambioE = false;
+      for (const e of entradas) {
+        if (e.paginaId === otros.id && ['grupos-etnicos', 'atencion-con-enfoque-diferencial'].includes(e.slug) && e.estado === 'publicada') {
+          Object.assign(e, { estado: 'archivada', actualizadoEn: t }); cambioE = true;
+        }
+      }
+      if (!entradas.some((e) => e.paginaId === otros.id && e.slug === 'otros-grupos-landing')) {
+        entradas.push({
+          id: this.nuevoId(entradas), paginaId: otros.id, titulo: 'Otros grupos de interés', slug: 'otros-grupos-landing',
+          resumen: 'Grupos de interés con atención diferencial: grupos étnicos y atención a personas con discapacidad, adultas mayores y víctimas del conflicto armado.',
+          contenido: '<h2>Otros grupos de interés</h2>\n<p>La E.S.E. Hospital San José del Guaviare reconoce la diversidad de las personas y comunidades del territorio y promueve una atención humanizada, equitativa y libre de discriminación.</p>\n<h3>Enfoque diferencial en la atención</h3>\n<p>El enfoque diferencial busca eliminar las barreras de acceso y garantizar una atención con calidad, respeto y pertinencia cultural. En esta sección encontrará la información y las rutas de atención dirigidas a los grupos étnicos del territorio y a las personas en situación de discapacidad, personas adultas mayores y personas víctimas del conflicto armado.</p>',
+          tipo: 'articulo', categoria: null, icono: null, estado: 'publicada', destacada: false,
+          imagenDestacadaId: null, multimediaIds: [], autor: 'E.S.E. Hospital San José del Guaviare',
+          fechaPublicacion: '2024-01-01T12:00:00.000Z', orden: 0, migradoDe: 'Portal E.S.E. (reorganización grupos de interés)', creadoEn: t, actualizadoEn: t,
+        });
+        cambioE = true;
+      }
+      if (cambioE) this.escribir('entradas', entradas);
+    }
+    this.almacen.setItem(clave, '1');
   }
 
   /**
@@ -124,7 +168,7 @@ export class CmsLocalDataSource extends CmsDataSource {
       'procedimientos-que-se-siguen-para-tomar-decisiones-en-las-diferentes-areas',
       'informacion-sobre-decisiones-que-pueden-afectar-al-publico', 'publicacion-de-hojas-de-vida',
       'publicacion-de-la-ejecucion-de-los-contratos', 'costos-de-reproduccion-de-la-informacion-publica',
-      'reporte-de-informacion-especifica', 'racionalizacion-de-tramites', 'informacion-para-mujeres',
+      'reporte-de-informacion-especifica', 'racionalizacion-de-tramites',
     ]);
     const t = this.ahora();
     const paginas = this.leer<CmsPagina>('paginas');
