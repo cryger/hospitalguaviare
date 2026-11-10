@@ -1,0 +1,247 @@
+{
+ "origen": "Leyes aplicables (documentos institucionales)",
+ "multimedia": [
+  {
+   "nombre": "ley_0009_1979.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/ley_0009_1979.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Ley 9 de 1979",
+   "alt": null
+  },
+  {
+   "nombre": "Ley-10-de-1990.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Ley-10-de-1990.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Ley 10 de 1990",
+   "alt": null
+  },
+  {
+   "nombre": "Ley-100-de-1993.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Ley-100-de-1993.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Ley 100 de 1993",
+   "alt": null
+  },
+  {
+   "nombre": "ley_1122_200.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/ley_1122_200.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Ley 1122 de 2007",
+   "alt": null
+  },
+  {
+   "nombre": "LEY 1438 DE 2011.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/LEY%201438%20DE%202011.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Ley 1438 de 2011",
+   "alt": null
+  },
+  {
+   "nombre": "LEY 0023 DE 1981.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/LEY%200023%20DE%201981.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Ley 23 de 1981",
+   "alt": null
+  },
+  {
+   "nombre": "LEY 0036 DE 1993.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/LEY%200036%20DE%201993.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Ley 36 de 1993",
+   "alt": null
+  },
+  {
+   "nombre": "Ley 528 de 1999.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Ley%20528%20de%201999.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Ley 528 de 1999",
+   "alt": null
+  },
+  {
+   "nombre": "Ley 657 de 2001.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Ley%20657%20de%202001.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Ley 657 de 2001",
+   "alt": null
+  },
+  {
+   "nombre": "Ley 911 de 2004.pdf",
+   "url": "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Ley%20911%20de%202004.pdf",
+   "tipo": "documento",
+   "mime": "application/pdf",
+   "titulo": "Ley 911 de 2004",
+   "alt": null
+  }
+ ],
+ "entradas": [
+  {
+   "paginaSlug": "leyes",
+   "slug": "ley-9-de-1979",
+   "titulo": "Ley 9 de 1979",
+   "resumen": "Código Sanitario Nacional: medidas sanitarias para la protección del medio ambiente y la salud.",
+   "contenido": "",
+   "tipo": "documento",
+   "categoria": "Salud y seguridad social",
+   "orden": 0,
+   "soloSiVacia": false,
+   "fecha": "2024-01-01T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/ley_0009_1979.pdf"
+   ],
+   "destacada": null
+  },
+  {
+   "paginaSlug": "leyes",
+   "slug": "ley-10-de-1990",
+   "titulo": "Ley 10 de 1990",
+   "resumen": "Reorganiza el Sistema Nacional de Salud.",
+   "contenido": "",
+   "tipo": "documento",
+   "categoria": "Salud y seguridad social",
+   "orden": 1,
+   "soloSiVacia": false,
+   "fecha": "2024-01-01T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Ley-10-de-1990.pdf"
+   ],
+   "destacada": null
+  },
+  {
+   "paginaSlug": "leyes",
+   "slug": "ley-100-de-1993",
+   "titulo": "Ley 100 de 1993",
+   "resumen": "Crea el Sistema General de Seguridad Social en Salud.",
+   "contenido": "",
+   "tipo": "documento",
+   "categoria": "Salud y seguridad social",
+   "orden": 2,
+   "soloSiVacia": false,
+   "fecha": "2024-01-01T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Ley-100-de-1993.pdf"
+   ],
+   "destacada": null
+  },
+  {
+   "paginaSlug": "leyes",
+   "slug": "ley-1122-de-2007",
+   "titulo": "Ley 1122 de 2007",
+   "resumen": "Modificaciones al Sistema General de Seguridad Social en Salud.",
+   "contenido": "",
+   "tipo": "documento",
+   "categoria": "Salud y seguridad social",
+   "orden": 3,
+   "soloSiVacia": false,
+   "fecha": "2024-01-01T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/ley_1122_200.pdf"
+   ],
+   "destacada": null
+  },
+  {
+   "paginaSlug": "leyes",
+   "slug": "ley-1438-de-2011",
+   "titulo": "Ley 1438 de 2011",
+   "resumen": "Fortalecimiento del Sistema General de Seguridad Social en Salud.",
+   "contenido": "",
+   "tipo": "documento",
+   "categoria": "Salud y seguridad social",
+   "orden": 4,
+   "soloSiVacia": false,
+   "fecha": "2024-01-01T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/LEY%201438%20DE%202011.pdf"
+   ],
+   "destacada": null
+  },
+  {
+   "paginaSlug": "leyes",
+   "slug": "ley-23-de-1981",
+   "titulo": "Ley 23 de 1981",
+   "resumen": "Normas en materia de ética médica.",
+   "contenido": "",
+   "tipo": "documento",
+   "categoria": "Ejercicio de las profesiones",
+   "orden": 5,
+   "soloSiVacia": false,
+   "fecha": "2024-01-01T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/LEY%200023%20DE%201981.pdf"
+   ],
+   "destacada": null
+  },
+  {
+   "paginaSlug": "leyes",
+   "slug": "ley-36-de-1993",
+   "titulo": "Ley 36 de 1993",
+   "resumen": "Ejercicio de la profesión de bacteriología.",
+   "contenido": "",
+   "tipo": "documento",
+   "categoria": "Ejercicio de las profesiones",
+   "orden": 6,
+   "soloSiVacia": false,
+   "fecha": "2024-01-01T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/LEY%200036%20DE%201993.pdf"
+   ],
+   "destacada": null
+  },
+  {
+   "paginaSlug": "leyes",
+   "slug": "ley-528-de-1999",
+   "titulo": "Ley 528 de 1999",
+   "resumen": "Ejercicio de la profesión de fisioterapia.",
+   "contenido": "",
+   "tipo": "documento",
+   "categoria": "Ejercicio de las profesiones",
+   "orden": 7,
+   "soloSiVacia": false,
+   "fecha": "2024-01-01T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Ley%20528%20de%201999.pdf"
+   ],
+   "destacada": null
+  },
+  {
+   "paginaSlug": "leyes",
+   "slug": "ley-657-de-2001",
+   "titulo": "Ley 657 de 2001",
+   "resumen": "Reglamenta la especialidad médica de anestesiología.",
+   "contenido": "",
+   "tipo": "documento",
+   "categoria": "Ejercicio de las profesiones",
+   "orden": 8,
+   "soloSiVacia": false,
+   "fecha": "2024-01-01T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Ley%20657%20de%202001.pdf"
+   ],
+   "destacada": null
+  },
+  {
+   "paginaSlug": "leyes",
+   "slug": "ley-911-de-2004",
+   "titulo": "Ley 911 de 2004",
+   "resumen": "Responsabilidad deontológica para el ejercicio de la enfermería.",
+   "contenido": "",
+   "tipo": "documento",
+   "categoria": "Ejercicio de las profesiones",
+   "orden": 9,
+   "soloSiVacia": false,
+   "fecha": "2024-01-01T12:00:00Z",
+   "adjuntos": [
+    "https://esehospitalguaviare.gov.co/resourses/archivos/pdf/Ley%20911%20de%202004.pdf"
+   ],
+   "destacada": null
+  }
+ ]
+}

@@ -47,6 +47,7 @@ const SEMILLAS_ARCHIVO: [clave: string, ruta: string][] = [
   ['informacion-mujeres-semilla', 'assets/semillas/informacion-para-mujeres.json'],
   ['transparencia-secciones-semilla', 'assets/semillas/transparencia-secciones.json'],
   ['etica-transparencia-docs-semilla', 'assets/semillas/etica-transparencia-docs.json'],
+  ['leyes-documentos-semilla', 'assets/semillas/leyes-documentos.json'],
 ];
 
 /**
@@ -85,7 +86,28 @@ export class CmsLocalDataSource extends CmsDataSource {
       .then(() => this.organizarComiteConvivencia())
       .then(() => this.ordenarTalentoHumano())
       .then(() => this.sobriasContenido())
+      .then(() => this.leyesRepositorio())
       .finally(() => this.guardarLotePorPartes());
+  }
+
+  /**
+   * «2.1.1 Leyes» como repositorio de documentos: la página queda en plantilla
+   * «documentos» (las leyes las aporta assets/semillas/leyes-documentos.json) y
+   * se archiva la entrada informativa anterior. Corre una sola vez, tras las semillas.
+   * Equivale a api/migraciones/063-leyes-documentos.sql.
+   */
+  private leyesRepositorio(): void {
+    const clave = this.prefijo + 'leyes-repositorio';
+    if (this.almacen.getItem(clave) === '1') return;
+    const t = this.ahora();
+    const paginas = this.leer<CmsPagina>('paginas');
+    const leyes = paginas.find((p) => p.slug === 'leyes');
+    if (leyes && leyes.plantilla !== 'documentos') { Object.assign(leyes, { plantilla: 'documentos', actualizadoEn: t }); this.escribir('paginas', paginas); }
+    const entradas = this.leer<CmsEntrada>('entradas');
+    let cambio = false;
+    for (const e of entradas) if (e.slug === 'leyes-normatividad-aplicable' && e.estado === 'publicada') { Object.assign(e, { estado: 'archivada', actualizadoEn: t }); cambio = true; }
+    if (cambio) this.escribir('entradas', entradas);
+    this.almacen.setItem(clave, '1');
   }
 
   /**
@@ -98,7 +120,7 @@ export class CmsLocalDataSource extends CmsDataSource {
     const clave = this.prefijo + 'sobrias-contenido';
     if (this.almacen.getItem(clave) === '1') return;
     const SLUGS = new Set([
-      'leyes', 'agenda-regulatoria', 'proyectos-de-normas-para-comentarios',
+      'agenda-regulatoria', 'proyectos-de-normas-para-comentarios',
       'procedimientos-que-se-siguen-para-tomar-decisiones-en-las-diferentes-areas',
       'informacion-sobre-decisiones-que-pueden-afectar-al-publico', 'publicacion-de-hojas-de-vida',
       'publicacion-de-la-ejecucion-de-los-contratos', 'costos-de-reproduccion-de-la-informacion-publica',
