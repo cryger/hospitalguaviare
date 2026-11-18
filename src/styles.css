@@ -378,12 +378,86 @@ body.high-contrast .barra-accesbilidad-govco a:hover {
   color: #ffdd00 !important;
 }
 
+/* ============================================================
+   ALTO CONTRASTE · ARREGLOS (submenú y encabezados/banners)
+   Van al final del bloque para tener la última palabra.
+============================================================ */
 
-body.high-contrast .barra-accesbilidad-govco button:hover,
-body.high-contrast .barra-accesbilidad-govco a:hover {
+/* 1) Submenú desplegable del menú principal (clases reales del portal:
+      .submenu-govco / .cms-submenu / .submenu-link-govco): fondo negro,
+      texto amarillo y resaltado al pasar el mouse. */
+body.high-contrast .submenu-govco,
+body.high-contrast .cms-submenu,
+body.high-contrast .navbar-menu-govco ul.navbar-nav li ul {
   background-color: #000000 !important;
-  color: #ffdd00 !important;
+  border: 2px solid #ffff00 !important;
 }
+body.high-contrast .container-navbar-menu-govco .cms-submenu *,
+body.high-contrast .container-navbar-menu-govco .submenu-govco *,
+body.high-contrast .container-navbar-menu-govco .cms-submenu a.submenu-link-govco,
+body.high-contrast .container-navbar-menu-govco .submenu-govco a.submenu-link-govco,
+body.high-contrast .submenu-govco *,
+body.high-contrast .cms-submenu *,
+body.high-contrast .submenu-link-govco,
+body.high-contrast .submenu-link-govco *,
+body.high-contrast .submenu-todo,
+body.high-contrast .navbar-menu-govco .text-item-menu-govco {
+  color: #ffff00 !important;
+  fill: #ffff00 !important;
+}
+
+/* Resaltado al pasar el mouse por un ítem del menú o del submenú */
+body.high-contrast .submenu-govco a:hover,
+body.high-contrast .submenu-link-govco:hover,
+body.high-contrast .navbar-menu-govco ul.navbar-nav li a:hover {
+  background-color: #ffff00 !important;
+}
+body.high-contrast .submenu-govco a:hover,
+body.high-contrast .submenu-govco a:hover *,
+body.high-contrast .submenu-link-govco:hover,
+body.high-contrast .submenu-link-govco:hover *,
+body.high-contrast .navbar-menu-govco ul.navbar-nav li a:hover,
+body.high-contrast .navbar-menu-govco ul.navbar-nav li a:hover * {
+  color: #000000 !important;
+  fill: #000000 !important;
+}
+
+/* 2) Encabezados y banners con degradado/fondo claro: se quita el
+      degradado para que el texto amarillo se lea sobre fondo negro */
+body.high-contrast .pagina-head,
+body.high-contrast .entrada-head,
+body.high-contrast .ps-destacado,
+body.high-contrast .ps-seccion,
+body.high-contrast .ps-llamado,
+body.high-contrast .ps-presentacion,
+body.high-contrast .ps-tarjeta,
+body.high-contrast .ps-enlace,
+body.high-contrast .ps-icono,
+body.high-contrast .ps-num,
+body.high-contrast .ps-presentacion-icono,
+body.high-contrast .ps-llamado-icono,
+body.high-contrast .ps-eje-icono,
+body.high-contrast .card,
+body.high-contrast .doc-grupo,
+body.high-contrast [class*="cabecera"],
+body.high-contrast [class*="-head"],
+body.high-contrast [class*="destacado"],
+body.high-contrast [class*="banner"],
+body.high-contrast [class*="hero"] {
+  background-image: none !important;
+  background-color: #000000 !important;
+  border: 2px solid #ffff00 !important;
+}
+body.high-contrast .pagina-head *,
+body.high-contrast .entrada-head *,
+body.high-contrast .ps-destacado *,
+body.high-contrast .ps-seccion *,
+body.high-contrast .ps-llamado *,
+body.high-contrast .card * {
+  color: #ffff00 !important;
+}
+/* Quita la textura de puntos del banner destacado */
+body.high-contrast .ps-destacado::after { background-image: none !important; }
 
 
 

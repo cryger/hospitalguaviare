@@ -1010,3 +1010,36 @@ html {
     display: none !important;
   }
 }
+
+/* ============================================================
+   ALTO CONTRASTE · menú principal y submenú
+   (van en el componente para superar las reglas con !important
+   de arriba, que por los atributos [_ngcontent] tienen prioridad)
+============================================================ */
+:host-context(body.high-contrast) .navbar-menu-govco ul.navbar-nav li,
+:host-context(body.high-contrast) .navbar-menu-govco ul.navbar-nav li .cms-submenu,
+:host-context(body.high-contrast) .cms-submenu {
+  background-color: #000000 !important;
+  border-color: #ffff00 !important;
+}
+:host-context(body.high-contrast) .navbar-menu-govco ul.navbar-nav li a,
+:host-context(body.high-contrast) .navbar-menu-govco ul.navbar-nav li button.cms-dropdown-toggle,
+:host-context(body.high-contrast) .navbar-menu-govco ul.navbar-nav li .cms-submenu a.submenu-link-govco,
+:host-context(body.high-contrast) .cms-submenu .submenu-link-govco,
+:host-context(body.high-contrast) .cms-submenu .submenu-todo {
+  color: #ffff00 !important;
+}
+:host-context(body.high-contrast) .cms-submenu .submenu-todo::before {
+  color: #ffff00 !important;
+}
+/* Resaltado al pasar el mouse por un ítem del menú o del submenú */
+:host-context(body.high-contrast) .navbar-menu-govco ul.navbar-nav li a:hover,
+:host-context(body.high-contrast) .navbar-menu-govco ul.navbar-nav li button.cms-dropdown-toggle:hover,
+:host-context(body.high-contrast) .navbar-menu-govco ul.navbar-nav li .cms-submenu a.submenu-link-govco:hover,
+:host-context(body.high-contrast) .cms-submenu .submenu-link-govco:hover {
+  background-color: #ffff00 !important;
+  color: #000000 !important;
+}
+:host-context(body.high-contrast) .cms-submenu .submenu-link-govco:hover::before {
+  color: #000000 !important;
+}
