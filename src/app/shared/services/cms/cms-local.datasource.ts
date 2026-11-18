@@ -88,7 +88,57 @@ export class CmsLocalDataSource extends CmsDataSource {
       .then(() => this.sobriasContenido())
       .then(() => this.leyesRepositorio())
       .then(() => this.gruposAtractivos())
+      .then(() => this.contenidoNuevoNov2026())
       .finally(() => this.guardarLotePorPartes());
+  }
+
+  /**
+   * Contenido nuevo migrado del portal anterior (noviembre 2026): 3 invitaciones
+   * a cotizar vigentes y los meses de agosto y septiembre 2026 de la ejecución
+   * presupuestal (gastos e ingresos), que se agregan a las entradas anuales ya
+   * existentes. Corre una sola vez, tras las semillas. Equivale a
+   * api/migraciones/065-contenido-nuevo-nov-2026.sql.
+   */
+  private contenidoNuevoNov2026(): void {
+    const clave = this.prefijo + 'contenido-nov-2026';
+    if (this.almacen.getItem(clave) === '1') return;
+    const t = this.ahora();
+
+    // 3 invitaciones a cotizar vigentes
+    const COTS: Omit<Cotizacion, 'id'>[] = [
+      { titulo: 'Servicio de validación, mediciones y calibraciones de los equipos biomédicos', descripcion: 'La E.S.E. Hospital San José del Guaviare requiere contratar el servicio de validación, mediciones y calibraciones de los equipos biomédicos. Consulte en el documento las especificaciones técnicas, los requisitos habilitantes y las condiciones para presentar su cotización.', dependencia: 'Subgerencia Administrativa y Financiera', documentoUrl: 'https://esehospitalguaviare.gov.co/resourses/archivos/pdf/3.%20INVITACION%20A%20COTIZARvalidacion.pdf', documentoNombre: 'Invitación a presentar cotización - Validación y calibración de equipos biomédicos.pdf', fechaPublicacion: '2026-11-17T12:00:00.000Z', estado: 'publicada', migradoDe: 'esehospitalguaviare.gov.co/invitaciones-a-presentar-propuestas-cotizacion' },
+      { titulo: 'Mantenimiento preventivo y correctivo al instrumental quirúrgico del servicio de cirugía y la central de esterilización', descripcion: 'La E.S.E. Hospital San José del Guaviare requiere contratar el mantenimiento preventivo y correctivo al instrumental quirúrgico del servicio de cirugía y la central de esterilización. Consulte en el documento las especificaciones técnicas, los requisitos habilitantes y las condiciones para presentar su cotización.', dependencia: 'Subgerencia Administrativa y Financiera', documentoUrl: 'https://esehospitalguaviare.gov.co/resourses/archivos/pdf/COT%20MANTO%20PRE%20Y%20COR%20SERVICIO%20DE%20CIRUGIA.pdf', documentoNombre: 'Invitación a presentar cotización - Mantenimiento del instrumental quirúrgico.pdf', fechaPublicacion: '2026-11-10T12:00:00.000Z', estado: 'publicada', migradoDe: 'esehospitalguaviare.gov.co/invitaciones-a-presentar-propuestas-cotizacion' },
+      { titulo: 'Prestación de servicios especializados en cirugía laparoscópica urológica', descripcion: 'La E.S.E. Hospital San José del Guaviare requiere contratar la prestación de servicios especializados en cirugía laparoscópica urológica. Consulte en el documento las especificaciones técnicas, los requisitos habilitantes y las condiciones para presentar su cotización.', dependencia: 'Subgerencia Administrativa y Financiera', documentoUrl: 'https://esehospitalguaviare.gov.co/resourses/archivos/pdf/COT%20PRESTACION%20DE%20SERVICIOS%20ESPECIALIZADOS%20EN%20CIRUGIA%20LAPAROSCOPICA.pdf', documentoNombre: 'Invitación a presentar cotización - Cirugía laparoscópica urológica.pdf', fechaPublicacion: '2026-11-04T12:00:00.000Z', estado: 'publicada', migradoDe: 'esehospitalguaviare.gov.co/invitaciones-a-presentar-propuestas-cotizacion' },
+    ];
+    const cots = this.leer<Cotizacion>('cotizaciones');
+    let cambioC = false;
+    for (const c of COTS) {
+      if (!cots.some((x) => x.documentoUrl === c.documentoUrl)) { cots.push({ ...c, id: this.nuevoId(cots), creadoEn: t, actualizadoEn: t } as Cotizacion); cambioC = true; }
+    }
+    if (cambioC) this.escribir('cotizaciones', cots);
+
+    // Ejecución presupuestal 2026: agosto y septiembre (gastos e ingresos)
+    const B = 'https://esehospitalguaviare.gov.co/resourses/archivos/pdf/presupuesto/';
+    const EJEC: { slug: string; nombre: string; url: string }[] = [
+      { slug: 'ejecucion-presupuestal-de-gastos-2026', nombre: 'EJECUCION PASIVA AGOSTO 2026.pdf', url: B + 'EJECUCION%20PASIVA%202026/EJECUCION%20PASIVA%20AGOSTO%202026.pdf' },
+      { slug: 'ejecucion-presupuestal-de-gastos-2026', nombre: 'EJECUCION PASIVA SEPTIEMBRE 2026.pdf', url: B + 'EJECUCION%20PASIVA%202026/EJECUCION%20PASIVA%20SEPTIEMBRE%202026.pdf' },
+      { slug: 'ejecucion-presupuestal-de-ingresos-2026', nombre: 'EJECUCION ACTIVA AGOSTO 2026.pdf', url: B + 'EJECUCION%20ACTIVA%202026/EJECUCION%20ACTIVA%20AGOSTO%202026.pdf' },
+      { slug: 'ejecucion-presupuestal-de-ingresos-2026', nombre: 'EJECUCION ACTIVA SEPTIEMBRE 2026.pdf', url: B + 'EJECUCION%20ACTIVA%202026/EJECUCION%20ACTIVA%20SEPTIEMBRE%202026.pdf' },
+    ];
+    const entradas = this.leer<CmsEntrada>('entradas');
+    const media = this.leer<CmsMultimedia>('multimedia');
+    let cambioE = false, cambioM = false;
+    for (const d of EJEC) {
+      const ent = entradas.find((e) => e.slug === d.slug);
+      if (!ent) continue;
+      let m = media.find((x) => x.url === d.url);
+      if (!m) { m = { id: this.nuevoId(media), nombre: d.nombre, url: d.url, tipo: 'documento', mime: 'application/pdf', titulo: d.nombre.replace(/\.pdf$/i, ''), migradoDe: 'esehospitalguaviare.gov.co/presupuesto (ejecución 2026)', creadoEn: t } as CmsMultimedia; media.push(m); cambioM = true; }
+      if (!ent.multimediaIds.includes(m.id)) { ent.multimediaIds.push(m.id); ent.actualizadoEn = t; cambioE = true; }
+    }
+    if (cambioM) this.escribir('multimedia', media);
+    if (cambioE) this.escribir('entradas', entradas);
+
+    this.almacen.setItem(clave, '1');
   }
 
   /**
